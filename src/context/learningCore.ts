@@ -26,6 +26,7 @@ export interface LearningContextValue {
   getUserCertificates: (userId: string) => Certificate[];
   addMember: (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => void;
   createScholarship: () => Scholarship;
+  createOrganization: (payload: { name: string; country?: string; industry?: string; seatsTotal?: number }) => Organization;
   redeemScholarship: (code: string) => Promise<RedeemScholarshipResult>;
   resetDemoData: () => void;
 }

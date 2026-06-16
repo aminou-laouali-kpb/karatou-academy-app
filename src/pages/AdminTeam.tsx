@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { AlertCircle, CheckCircle2, UserPlus } from 'lucide-react';
+import { AlertCircle, Building2, CheckCircle2, UserPlus } from 'lucide-react';
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import { useLearning } from '../hooks/useLearning';
@@ -11,7 +11,7 @@ const inputClass =
   'mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
 
 export function AdminTeam() {
-  const { organizations } = useLearning();
+  const { organizations, createOrganization } = useLearning();
   const { authMode } = useAuth();
   const { t } = useLanguage();
   const [orgId, setOrgId] = useState(organizations[0]?.id || '');
@@ -20,8 +20,17 @@ export function AdminTeam() {
   const [password, setPassword] = useState('');
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<{ tone: 'success' | 'error'; message: string } | null>(null);
+  const [orgName, setOrgName] = useState('');
 
   const isSupabase = authMode === 'supabase';
+
+  const handleCreateOrg = (event: FormEvent) => {
+    event.preventDefault();
+    const created = createOrganization({ name: orgName });
+    setOrgId(created.id);
+    setOrgName('');
+    setNotice({ tone: 'success', message: `${t('teamOrgCreated')}: ${created.name}` });
+  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -74,6 +83,19 @@ export function AdminTeam() {
             <span>{notice.message}</span>
           </div>
         )}
+
+        <form onSubmit={handleCreateOrg} className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-4 mb-6">
+          <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+            <Building2 size={18} className="text-blue-600" aria-hidden="true" /> {t('teamCreateOrgTitle')}
+          </h2>
+          <label className="block">
+            <span className="text-sm font-medium text-gray-700">{t('teamOrgNameLabel')}</span>
+            <input value={orgName} onChange={(event) => setOrgName(event.target.value)} required className={inputClass} />
+          </label>
+          <Button type="submit" variant="outline" size="md" disabled={!orgName.trim()}>
+            {t('teamCreateOrgBtn')}
+          </Button>
+        </form>
 
         <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-4">
           <h2 className="font-semibold text-gray-900 flex items-center gap-2">

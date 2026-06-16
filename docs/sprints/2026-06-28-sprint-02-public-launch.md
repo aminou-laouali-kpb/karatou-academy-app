@@ -306,7 +306,9 @@ Implementation:
 - Demo mode shows a notice that a real Supabase platform-admin session is required.
 - E2E: the team page loads with the create-admin form.
 
-Remaining: in-app organization creation; learner self-registration already exists.
+- In-app **organization creation** added to `/admin/team` (platform-admin RLS allows the
+  insert directly; demo mode keeps it local). The org then appears in the enterprise-admin
+  form's org picker. Learner self-registration already exists.
 Why this matters: this is the production-grade replacement for the `seed:enterprise-admin`
 script (which stays only for the very first bootstrap).
 

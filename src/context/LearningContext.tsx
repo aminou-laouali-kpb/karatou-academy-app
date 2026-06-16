@@ -24,6 +24,7 @@ import {
   loadEnterpriseSnapshot,
   redeemScholarshipRecord,
   saveEnterpriseMemberRecord,
+  saveOrganizationRecord,
   saveScholarshipRecord,
 } from '../services/enterpriseRepository';
 
@@ -887,6 +888,32 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return scholarship;
   };
 
+  const createOrganization = (payload: { name: string; country?: string; industry?: string; seatsTotal?: number }) => {
+    const name = payload.name.trim();
+    const slug = slugify(name) || `org-${Date.now()}`;
+    const organization: Organization = {
+      id: `org-${slug}-${Math.random().toString(36).slice(2, 6)}`,
+      slug,
+      name,
+      industry: payload.industry?.trim() || 'Organisation',
+      country: payload.country?.trim() || 'NE',
+      plan: 'Enterprise',
+      seatsTotal: payload.seatsTotal && payload.seatsTotal > 0 ? payload.seatsTotal : 50,
+      status: 'active',
+    };
+
+    commit((current) => ({
+      ...current,
+      organizations: [
+        ...current.organizations.filter((candidate) => candidate.id !== organization.id),
+        organization,
+      ],
+    }));
+    syncEnterprise(saveOrganizationRecord(organization), `Organisation synchronisee: ${organization.name}`);
+
+    return organization;
+  };
+
   const resetDemoData = () => {
     commit(() => defaultState);
   };
@@ -916,6 +943,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     getUserCertificates,
     addMember,
     createScholarship,
+    createOrganization,
     redeemScholarship,
     resetDemoData,
   };

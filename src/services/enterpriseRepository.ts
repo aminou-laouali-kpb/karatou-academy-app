@@ -248,6 +248,30 @@ export async function saveScholarshipRecord(scholarship: Scholarship) {
   if (error) throw error;
 }
 
+function organizationToRow(org: Organization) {
+  return {
+    id: org.id,
+    slug: org.slug,
+    name: org.name,
+    industry: org.industry,
+    country: org.country,
+    plan: org.plan,
+    seats_total: org.seatsTotal,
+    status: org.status,
+  };
+}
+
+export async function saveOrganizationRecord(org: Organization) {
+  if (!isSupabaseConfigured) return;
+
+  const { error } = await requireClient()
+    .from(TABLES.organizations)
+    .upsert(organizationToRow(org), { onConflict: 'id' });
+
+  if (isEnterpriseSchemaPending(error)) return;
+  if (error) throw error;
+}
+
 export async function redeemScholarshipRecord(code: string): Promise<RedeemScholarshipResult | null> {
   if (!isSupabaseConfigured) return null;
 
