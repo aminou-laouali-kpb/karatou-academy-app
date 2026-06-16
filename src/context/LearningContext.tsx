@@ -174,6 +174,11 @@ function createRedeemResult(
 
 export function LearningProvider({ children }: { children: ReactNode }) {
   const { user, authReady, authMode } = useAuth();
+  // Stable identity fields: sync effects key on these instead of the whole
+  // `user` object, which gets a new identity on every auth event (token refresh).
+  const userId = user?.id;
+  const userRole = user?.role;
+  const userOrgId = user?.orgId;
   const [state, setState] = useState<StoredLearningState>(() => readStoredState());
   const [contentSyncStatus, setContentSyncStatus] = useState(
     getContentBackend() === 'supabase' ? 'Connexion Supabase en attente...' : 'Mode demo local'
@@ -222,13 +227,13 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (authMode !== 'supabase' || !authReady || !user) {
+    if (authMode !== 'supabase' || !authReady || !userId) {
       return;
     }
 
     let active = true;
 
-    loadLearnerActivity(user.id)
+    loadLearnerActivity(userId)
       .then((snapshot) => {
         if (!active || !snapshot) {
           return;
@@ -253,10 +258,10 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
-  }, [authMode, authReady, user]);
+  }, [authMode, authReady, userId]);
 
   useEffect(() => {
-    if (authMode !== 'supabase' || !authReady || !canAccessEnterprise(user?.role)) {
+    if (authMode !== 'supabase' || !authReady || !canAccessEnterprise(userRole)) {
       return;
     }
 
@@ -308,7 +313,10 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
-  }, [authMode, authReady, user]);
+    // `user` is read inside loadEnterpriseSnapshot, but we only need to re-run
+    // when the admin's identity fields change, not on every token refresh.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authMode, authReady, userId, userRole, userOrgId]);
 
   const commit = (updater: (current: StoredLearningState) => StoredLearningState) => {
     setState((current) => {

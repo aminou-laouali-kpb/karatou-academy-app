@@ -78,6 +78,15 @@ function requireClient() {
   return supabase;
 }
 
+// True when the error means the content schema/RLS isn't ready yet (missing
+// table or permission denied), so callers can fall back to seeded content
+// instead of surfacing a raw error.
+function isSchemaPendingError(error: { code?: string; message?: string } | null): boolean {
+  if (!error) return false;
+  if (error.code === '42P01' || error.code === '42501') return true;
+  return /relation .* does not exist|permission denied/i.test(error.message || '');
+}
+
 function mapRubrique(row: RubriqueRow): Rubrique {
   return {
     id: row.id,
@@ -209,9 +218,20 @@ export async function loadContentSnapshot(): Promise<ContentSnapshot | null> {
     client.from(TABLES.contentImports).select('*').order('created_at', { ascending: false }).limit(20),
   ]);
 
-  if (rubriquesResult.error) throw rubriquesResult.error;
-  if (modulesResult.error) throw modulesResult.error;
-  if (coursesResult.error) throw coursesResult.error;
+  // If the content schema/RLS isn't applied yet, fall back to seeded content
+  // (return null) rather than throwing a raw error to the UI.
+  if (rubriquesResult.error) {
+    if (isSchemaPendingError(rubriquesResult.error)) return null;
+    throw rubriquesResult.error;
+  }
+  if (modulesResult.error) {
+    if (isSchemaPendingError(modulesResult.error)) return null;
+    throw modulesResult.error;
+  }
+  if (coursesResult.error) {
+    if (isSchemaPendingError(coursesResult.error)) return null;
+    throw coursesResult.error;
+  }
   const contentImports = importsResult.error
     ? []
     : ((importsResult.data || []) as ContentImportRow[]).map(mapImport);
@@ -272,7 +292,13 @@ export async function saveModuleRecord(module: LearningModule) {
 export async function removeModuleRecord(moduleId: string) {
   if (!isSupabaseConfigured) return;
 
-  const { error } = await requireClient().from(TABLES.modules).delete().eq('id', moduleId);
+  const client = requireClient();
+  // Delete the module's courses first to avoid orphaned rows (in case the FK
+  // has no ON DELETE CASCADE).
+  const { error: courseError } = await client.from(TABLES.courses).delete().eq('module_id', moduleId);
+  if (courseError) throw courseError;
+
+  const { error } = await client.from(TABLES.modules).delete().eq('id', moduleId);
   if (error) throw error;
 }
 

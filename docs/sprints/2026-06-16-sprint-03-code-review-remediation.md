@@ -42,13 +42,13 @@ Status: In Progress
 - [x] A6 Demo reseed no longer overwrites real Supabase org data (`repairEnterpriseSeed` gated on demo mode).
 - [x] A9 `getInitials` and certificate-UID builder hardened against empty name/slug segments.
 - [x] A2 (partial) Certificate UID gets a random suffix to avoid client-side collisions (full fix is server-side, S03-04).
-- [ ] A1 (P0) Demo login under a Supabase-configured build relies on a race; make the demo session explicit (flag/ref) and await `signOut` first. *(Needs testing against a real Supabase project.)*
-- [ ] A3 (P1) Learner/enterprise sync effects re-fire on every `user` object identity change; key them on `user?.id/role/orgId`.
-- [ ] A4 (P1) `removeModule` should delete a module's `karatou_courses` (or rely on a confirmed FK cascade) to avoid orphans.
-- [ ] A5 (P1) `loadContentSnapshot` should fall back to seeded content on schema-pending errors instead of surfacing a raw error.
-- [ ] A7 (P2) `authReady` can stick on the loader if `getUser()` never resolves; add a finally/timeout.
-- [ ] A8 (P2) `completeCourse` returns a value computed outside the state updater; derive the certificate-threshold set from the committed state.
-- [ ] A10 (P2) `loadPrimaryOrganization` binds an enterprise admin to the first org alphabetically; resolve via membership.
+- [x] A1 (P0) Demo session made explicit via a ref so the Supabase auth listener no longer clears it on the demo `signOut` (no longer relies on a race).
+- [x] A3 (P1) Learner/enterprise sync effects now key on `user?.id/role/orgId` instead of the whole `user` object (no re-fetch on token refresh).
+- [x] A4 (P1) `removeModuleRecord` deletes the module's `karatou_courses` before the module (no orphans).
+- [x] A5 (P1) `loadContentSnapshot` returns `null` on schema-pending errors (missing table / permission), falling back to seeded content.
+- [x] A7 (P2) `getUser()` failure now flips `authReady` so the app never sticks on the loader.
+- [ ] A8 (P2) `completeCourse` return value — accepted as-is: correct for the actual single-completion usage; a ref-based rewrite isn't worth the risk.
+- [ ] A10 (P2) `loadPrimaryOrganization` org binding — deferred to Sprint 02 S02-02 (enterprise-admin provisioning), since it needs real membership data to test.
 
 ### S03-02 - Performance & Code Quality
 

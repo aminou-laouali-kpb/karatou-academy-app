@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { User as SupabaseAuthUser } from '@supabase/supabase-js';
 import { demoUsers } from '../data/mockData';
 import { isDemoEnabled } from '../lib/demoMode';
@@ -132,6 +132,10 @@ async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<DemoUser | null>(() => readStoredUser());
   const [authReady, setAuthReady] = useState(() => !isSupabaseConfigured || Boolean(readStoredUser()));
+  // Tracks whether a local demo session is active so the Supabase auth listener
+  // (which fires on the demo sign-out) doesn't clear it. Initialized from a
+  // stored demo user so a page reload preserves it.
+  const demoSessionActive = useRef<boolean>(Boolean(readStoredUser()?.password));
 
   const setLocalSession = (nextUser: DemoUser | null) => {
     setUser(nextUser);
@@ -148,7 +152,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const hydrate = async (authUser: SupabaseAuthUser | null) => {
       if (!authUser) {
         if (active) {
-          setUser((current) => (current?.password ? current : null));
+          // Preserve an active local demo session (it has no Supabase JWT).
+          if (!demoSessionActive.current) {
+            setUser(null);
+          }
           setAuthReady(true);
         }
         return;
@@ -157,6 +164,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const mappedUser = await buildSupabaseUser(authUser);
         if (active) {
+          demoSessionActive.current = false;
           persistUser(null);
           setUser(mappedUser);
           setAuthReady(true);
@@ -169,7 +177,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    supabase.auth.getUser().then(({ data }) => hydrate(data.user));
+    supabase.auth
+      .getUser()
+      .then(({ data }) => hydrate(data.user))
+      .catch(() => {
+        if (active) setAuthReady(true);
+      });
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       hydrate(session?.user || null);
     });
@@ -197,6 +210,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return false;
       }
 
+      demoSessionActive.current = true;
       setLocalSession(found);
       setAuthReady(true);
       return true;
@@ -220,6 +234,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         };
       }
 
+      demoSessionActive.current = false;
       persistUser(null);
       setUser(await buildSupabaseUser(data.user));
       setAuthReady(true);
@@ -250,6 +265,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return login(found.email, found.password);
     }
 
+    demoSessionActive.current = true;
     setLocalSession(found);
     return { ok: true };
   };
@@ -322,6 +338,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       country: 'NE',
     };
 
+    demoSessionActive.current = true;
     setLocalSession(newUser);
     return { ok: true };
   };
@@ -331,6 +348,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await supabase.auth.signOut().catch(() => undefined);
     }
 
+    demoSessionActive.current = false;
     setLocalSession(null);
     setAuthReady(true);
   };
