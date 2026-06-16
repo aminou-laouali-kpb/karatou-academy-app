@@ -43,13 +43,17 @@ export function StudentNav() {
             <DemoSwitcher />
           </div>
           <LanguageSwitcher />
-          <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors relative">
-            <Bell size={18} className="text-gray-600" />
+          <button
+            aria-label={t('notifications')}
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors relative"
+          >
+            <Bell size={18} className="text-gray-600" aria-hidden="true" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-gold-400 rounded-full" />
           </button>
           <button
             onClick={() => navigate('/certificates')}
             className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-sm font-semibold"
+            aria-label={`${t('profile')}: ${user?.name ?? ''}`.trim()}
             title={user?.name}
           >
             {user?.initials || 'AK'}
@@ -60,9 +64,10 @@ export function StudentNav() {
               navigate('/login');
             }}
             className="hidden sm:flex w-8 h-8 items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            aria-label={t('logout')}
             title={t('logout')}
           >
-            <LogOut size={17} className="text-gray-600" />
+            <LogOut size={17} className="text-gray-600" aria-hidden="true" />
           </button>
         </div>
       </div>

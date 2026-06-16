@@ -5,7 +5,7 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { LessonContent } from '../data/lessonContent';
-import { getLessonOne, localizeModule } from '../data/localizedContent';
+import { getAuthoredLesson, localizeModule } from '../data/localizedContent';
 import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
@@ -235,9 +235,8 @@ export function LessonPlayer() {
   const progress = getProgress(module.slug);
   const lesson = useMemo(
     () =>
-      module.slug === 'intelligence-artificielle' && course.id === 'c1'
-        ? getLessonOne(lang)
-        : buildLesson(module.title, course.title, courseIndex, course.description, lang),
+      getAuthoredLesson(module.slug, course.id, lang) ||
+      buildLesson(module.title, course.title, courseIndex, course.description, lang),
     [course.description, course.id, course.title, courseIndex, lang, module.slug, module.title]
   );
   const userCertificates = user ? getUserCertificates(user.id) : [];
@@ -281,9 +280,11 @@ export function LessonPlayer() {
       <div className="flex">
         <button
           onClick={() => setSidebarOpen(true)}
+          aria-label={t('lessonsList')}
+          aria-expanded={sidebarOpen}
           className="lg:hidden fixed bottom-20 left-4 z-30 bg-blue-600 text-white w-10 h-10 rounded-full shadow-blue-lg flex items-center justify-center"
         >
-          <Menu size={18} />
+          <Menu size={18} aria-hidden="true" />
         </button>
 
         <aside className={`
@@ -297,8 +298,8 @@ export function LessonPlayer() {
                 <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider">{t('module')}</p>
                 <h2 className="font-playfair text-lg font-bold text-gray-900">{module.title}</h2>
               </div>
-              <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
-                <X size={20} className="text-gray-500" />
+              <button onClick={() => setSidebarOpen(false)} className="lg:hidden" aria-label={t('closeMenu')}>
+                <X size={20} className="text-gray-500" aria-hidden="true" />
               </button>
             </div>
 
@@ -594,8 +595,8 @@ export function LessonPlayer() {
                   </span>
                 </div>
 
-                <p className="font-semibold text-gray-900 mb-5 text-lg">{lesson.quiz[currentQuiz].question}</p>
-                <div className="space-y-3 mb-6">
+                <p id="quiz-question" className="font-semibold text-gray-900 mb-5 text-lg">{lesson.quiz[currentQuiz].question}</p>
+                <div className="space-y-3 mb-6" role="radiogroup" aria-labelledby="quiz-question">
                   {lesson.quiz[currentQuiz].options.map((option) => {
                     const isCorrect = option.key === lesson.quiz[currentQuiz].answer;
                     const isSelected = quizAnswers[currentQuiz] === option.key;

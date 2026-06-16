@@ -148,9 +148,10 @@ export function EnterpriseMembers() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true" />
               <input
                 type="text"
+                aria-label={t('search')}
                 placeholder={t('search')}
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
@@ -158,8 +159,9 @@ export function EnterpriseMembers() {
               />
             </div>
             <div className="relative">
-              <Filter size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Filter size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true" />
               <select
+                aria-label={t('filterByStatus')}
                 value={statusFilter}
                 onChange={(event) => setStatusFilter(event.target.value)}
                 className="pl-9 pr-8 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"

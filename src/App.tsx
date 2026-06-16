@@ -1,21 +1,36 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
 import { LearningProvider } from './context/LearningContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { DemoBadge } from './components/DemoBadge';
+// Landing and Login are the most common entry points — keep them eager for a
+// fast first paint. Everything else is code-split so first-time visitors don't
+// download the admin CMS, lesson player, and all lesson copy up front.
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
-import { Register } from './pages/Register';
-import { Dashboard } from './pages/Dashboard';
-import { LessonPlayer } from './pages/LessonPlayer';
-import { Certificates } from './pages/Certificates';
-import { Verify } from './pages/Verify';
-import { RedeemScholarship } from './pages/RedeemScholarship';
-import { EnterpriseDashboard } from './pages/EnterpriseDashboard';
-import { EnterpriseMembers } from './pages/EnterpriseMembers';
-import { AdminContent } from './pages/AdminContent';
-import { NotFound } from './pages/NotFound';
+
+const Register = lazy(() => import('./pages/Register').then((m) => ({ default: m.Register })));
+const Dashboard = lazy(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })));
+const LessonPlayer = lazy(() => import('./pages/LessonPlayer').then((m) => ({ default: m.LessonPlayer })));
+const Certificates = lazy(() => import('./pages/Certificates').then((m) => ({ default: m.Certificates })));
+const Verify = lazy(() => import('./pages/Verify').then((m) => ({ default: m.Verify })));
+const RedeemScholarship = lazy(() => import('./pages/RedeemScholarship').then((m) => ({ default: m.RedeemScholarship })));
+const EnterpriseDashboard = lazy(() => import('./pages/EnterpriseDashboard').then((m) => ({ default: m.EnterpriseDashboard })));
+const EnterpriseMembers = lazy(() => import('./pages/EnterpriseMembers').then((m) => ({ default: m.EnterpriseMembers })));
+const AdminContent = lazy(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
+
+function RouteFallback() {
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="rounded-2xl border border-blue-100 bg-white px-5 py-4 text-sm font-medium text-blue-700 shadow-blue-sm">
+        Chargement...
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -23,6 +38,7 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <LearningProvider>
+            <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
@@ -96,6 +112,7 @@ function App() {
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
             <DemoBadge />
           </LearningProvider>
         </AuthProvider>

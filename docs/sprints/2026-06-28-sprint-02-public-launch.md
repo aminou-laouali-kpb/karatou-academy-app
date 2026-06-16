@@ -236,6 +236,42 @@ Acceptance criteria:
 - Initial route loads a meaningfully smaller bundle.
 - `npm run build` and `npm run test:e2e` still pass.
 
+### S02-11 - Certificate And Cross-Org RLS Hardening (from code review)
+
+Status: Not started
+Priority: P0
+Estimate: 8 pts
+
+User story:
+As Karatou, I want certificates to be confidential and unforgeable, and organization
+data strictly isolated, so the credential and multi-tenant model can be trusted publicly.
+
+Context: a June 2026 code review found these server-side (RLS/migration) issues. They do
+not affect local-demo mode but must be fixed before any real-data launch.
+
+Tasks:
+- Certificate confidentiality: the verification SELECT policy currently allows any anon/
+  authenticated user to read the entire `karatou_certificates` table (PII leak). Replace
+  the blanket read with a `SECURITY DEFINER` RPC that returns only the single matching
+  UID's minimal fields; restrict the table SELECT to owner + org admins.
+- Certificate integrity: `INSERT/UPDATE` only check `user_id = auth.uid()`, so a user can
+  self-issue a certificate with arbitrary name/module/dates and a guessable UID. Move
+  issuance to a server-authoritative RPC that verifies module completion and generates the
+  UID with a random component; revoke direct client INSERT/UPDATE.
+- Cross-org isolation: scope the `karatou_learner_progress` read policy to the admin's
+  organization (currently any enterprise admin can read all orgs' progress). Re-harden the
+  `karatou_content_imports` policy to platform-admin only.
+- Redemption: generate bourse codes server-side with a CSPRNG and adequate length; add
+  rate limiting on the redeem RPC.
+- Demo gate: source demo-login availability from `import.meta.env.DEV` so demo accounts are
+  physically impossible in a production bundle.
+
+Acceptance criteria:
+- Anonymous/authenticated REST cannot dump the certificate table; only single-UID verify works.
+- A user cannot create or alter a certificate directly; issuance requires real completion.
+- An enterprise admin cannot read another organization's progress/members/scholarships.
+- New migrations applied and re-verified with rollback-wrapped SQL + the S02-05 cross-org test.
+
 ## Definition Of Done
 
 Every completed item must:

@@ -259,3 +259,21 @@ export function localizeModules(modules: LearningModule[], lang: Language) {
 export function getLessonOne(lang: Language) {
   return lesson1ByLanguage[lang];
 }
+
+// Registry of hand-authored lessons, keyed by `${moduleSlug}/${courseId}`.
+// To publish real content for a course (video URLs + rich sections + quiz),
+// author a `Record<Language, LessonContent>` (see `lesson1ByLanguage` above for
+// a complete trilingual example) and add an entry here. Courses without an entry
+// fall back to the auto-generated template in LessonPlayer's `buildLesson`.
+// See docs/authoring-lessons.md.
+const authoredLessons: Record<string, Record<Language, LessonContent>> = {
+  'intelligence-artificielle/c1': lesson1ByLanguage,
+};
+
+export function getAuthoredLesson(
+  moduleSlug: string,
+  courseId: string,
+  lang: Language
+): LessonContent | null {
+  return authoredLessons[`${moduleSlug}/${courseId}`]?.[lang] ?? null;
+}

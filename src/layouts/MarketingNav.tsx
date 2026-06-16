@@ -32,8 +32,13 @@ export function MarketingNav() {
           </Button>
         </div>
 
-        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
-          {open ? <X size={24} /> : <Menu size={24} />}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? t('closeMenu') : t('openMenu')}
+          aria-expanded={open}
+        >
+          {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
 
