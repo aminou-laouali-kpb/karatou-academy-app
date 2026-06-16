@@ -16,6 +16,7 @@ import { AdminNav } from '../layouts/AdminNav';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { useLearning } from '../hooks/useLearning';
+import { useLanguage } from '../hooks/useLanguage';
 import { slugify } from '../lib/strings';
 import { Course, LearningModule, Rubrique } from '../types';
 
@@ -203,27 +204,32 @@ function normalizeModuleDraft(module: LearningModule): LearningModule {
   };
 }
 
-function validateModuleDraft(module: LearningModule, rubriques: Rubrique[], modules: LearningModule[]) {
+function validateModuleDraft(
+  module: LearningModule,
+  rubriques: Rubrique[],
+  modules: LearningModule[],
+  t: (key: string) => string
+) {
   const issues: string[] = [];
 
-  if (!module.title) issues.push('Le titre FR est obligatoire.');
-  if (!module.slug) issues.push('Le slug est obligatoire.');
-  if (!module.description) issues.push('La description FR est obligatoire.');
+  if (!module.title) issues.push(t('cmsValTitle'));
+  if (!module.slug) issues.push(t('cmsValSlug'));
+  if (!module.description) issues.push(t('cmsValDescription'));
   if (!module.rubriqueId || !rubriques.some((rubrique) => rubrique.id === module.rubriqueId)) {
-    issues.push('Selectionnez une rubrique valide.');
+    issues.push(t('cmsValRubrique'));
   }
   if (modules.some((candidate) => candidate.id !== module.id && candidate.slug === module.slug)) {
-    issues.push('Ce slug est deja utilise par un autre module.');
+    issues.push(t('cmsValSlugDup'));
   }
   if (module.status === 'published' && module.courses.length === 0) {
-    issues.push('Un module publie doit contenir au moins une lecon.');
+    issues.push(t('cmsValPublishedNoLesson'));
   }
 
   module.courses.forEach((course, index) => {
-    const prefix = `Lecon ${index + 1}`;
-    if (!course.title) issues.push(`${prefix}: titre obligatoire.`);
-    if (!course.duration) issues.push(`${prefix}: duree obligatoire.`);
-    if (!course.description) issues.push(`${prefix}: description obligatoire.`);
+    const prefix = `${t('cmsLesson')} ${index + 1}`;
+    if (!course.title) issues.push(`${prefix}: ${t('cmsValLessonTitle')}`);
+    if (!course.duration) issues.push(`${prefix}: ${t('cmsValLessonDuration')}`);
+    if (!course.description) issues.push(`${prefix}: ${t('cmsValLessonDescription')}`);
   });
 
   return issues;
@@ -242,6 +248,7 @@ export function AdminContent() {
     importContentJson,
     registerSourceImport,
   } = useLearning();
+  const { t } = useLanguage();
   const sortedRubriques = useMemo(
     () => [...rubriques].sort((a, b) => a.order - b.order),
     [rubriques]
@@ -316,7 +323,7 @@ export function AdminContent() {
 
   const handleSaveModule = async () => {
     const next = normalizeModuleDraft(draft);
-    const issues = validateModuleDraft(next, sortedRubriques, sortedModules);
+    const issues = validateModuleDraft(next, sortedRubriques, sortedModules, t);
 
     if (issues.length > 0) {
       setNotice({ tone: 'error', message: issues.join(' ') });
@@ -337,10 +344,7 @@ export function AdminContent() {
     setSelectedModuleId(next.id);
     setNotice({
       tone: 'success',
-      message:
-        result.persisted === 'supabase'
-          ? `Module sauvegarde dans Supabase: ${next.title}`
-          : `Module sauvegarde localement: ${next.title}`,
+      message: `${result.persisted === 'supabase' ? t('cmsModuleSavedSupabase') : t('cmsModuleSavedLocal')}: ${next.title}`,
     });
   };
 
@@ -355,7 +359,7 @@ export function AdminContent() {
     setDraft(next);
     setSelectedModuleId(next.id);
     setDeleteRequested(false);
-    setNotice({ tone: 'warning', message: 'Nouveau module en brouillon. Completez les champs requis avant de sauvegarder.' });
+    setNotice({ tone: 'warning', message: t('cmsNewModuleNotice') });
   };
 
   const handleRequestRemoveModule = () => {
@@ -365,12 +369,12 @@ export function AdminContent() {
       setDraft(next);
       setSelectedModuleId(next.id);
       setDeleteRequested(false);
-      setNotice({ tone: 'warning', message: 'Brouillon non sauvegarde abandonne.' });
+      setNotice({ tone: 'warning', message: t('cmsDraftDiscarded') });
       return;
     }
 
     setDeleteRequested(true);
-    setNotice({ tone: 'warning', message: `Confirmez la suppression definitive du module: ${draft.title}` });
+    setNotice({ tone: 'warning', message: `${t('cmsConfirmDeleteNotice')} ${draft.title}` });
   };
 
   const handleConfirmRemoveModule = async () => {
@@ -389,10 +393,7 @@ export function AdminContent() {
     setDeleteRequested(false);
     setNotice({
       tone: 'success',
-      message:
-        result.persisted === 'supabase'
-          ? `Module supprime dans Supabase: ${draft.title}`
-          : `Module supprime localement: ${draft.title}`,
+      message: `${result.persisted === 'supabase' ? t('cmsModuleDeletedSupabase') : t('cmsModuleDeletedLocal')}: ${draft.title}`,
     });
   };
 
@@ -413,11 +414,11 @@ export function AdminContent() {
   const handleCreateRubrique = async () => {
     const name = newRubrique.trim();
     if (!name) {
-      setNotice({ tone: 'error', message: 'Le nom de la rubrique est obligatoire.' });
+      setNotice({ tone: 'error', message: t('cmsRubriqueNameRequired') });
       return;
     }
     if (sortedRubriques.some((rubrique) => rubrique.slug === slugify(name))) {
-      setNotice({ tone: 'error', message: 'Cette rubrique existe deja.' });
+      setNotice({ tone: 'error', message: t('cmsRubriqueExists') });
       return;
     }
 
@@ -443,10 +444,7 @@ export function AdminContent() {
     setNewRubrique('');
     setNotice({
       tone: 'success',
-      message:
-        result.persisted === 'supabase'
-          ? `Rubrique creee dans Supabase: ${rubrique.name}`
-          : `Rubrique creee localement: ${rubrique.name}`,
+      message: `${result.persisted === 'supabase' ? t('cmsRubriqueCreatedSupabase') : t('cmsRubriqueCreatedLocal')}: ${rubrique.name}`,
     });
   };
 
@@ -478,22 +476,22 @@ export function AdminContent() {
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-7">
           <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou CMS</p>
-          <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Admin contenus</h1>
+          <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">{t('cmsTitle')}</h1>
           <p className="text-sm text-gray-500 mt-2 max-w-2xl">
-            Creez des rubriques, modules et lecons sans redeploiement. Cette surface prepare le passage production vers Supabase.
+            {t('cmsIntro')}
           </p>
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700">
             <span className="h-2 w-2 rounded-full bg-blue-500" />
-            Stockage {contentBackend === 'supabase' ? 'Supabase' : 'local demo'} - {contentSyncStatus}
+            {t('cmsStorage')} {contentBackend === 'supabase' ? 'Supabase' : t('cmsStorageLocal')} - {contentSyncStatus}
           </div>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
           {[
-            { icon: <Layers3 size={18} />, value: sortedRubriques.length, label: 'Rubriques' },
-            { icon: <BookOpen size={18} />, value: moduleCount, label: 'Modules' },
-            { icon: <CheckCircle2 size={18} />, value: publishedCount, label: 'Publies' },
-            { icon: <Globe2 size={18} />, value: courseCount, label: 'Lecons' },
+            { icon: <Layers3 size={18} />, value: sortedRubriques.length, label: t('cmsRubriques') },
+            { icon: <BookOpen size={18} />, value: moduleCount, label: t('cmsModules') },
+            { icon: <CheckCircle2 size={18} />, value: publishedCount, label: t('cmsPublished') },
+            { icon: <Globe2 size={18} />, value: courseCount, label: t('cmsLessonsStat') },
           ].map((item) => (
             <div key={item.label} className="bg-white border border-gray-200 rounded-2xl p-4 shadow-blue-sm">
               <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
@@ -520,8 +518,8 @@ export function AdminContent() {
           <aside className="space-y-5">
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-gray-900">Rubriques</h2>
-                <Badge variant="blue">{draftCount} brouillons</Badge>
+                <h2 className="font-semibold text-gray-900">{t('cmsRubriques')}</h2>
+                <Badge variant="blue">{draftCount} {t('cmsDrafts')}</Badge>
               </div>
               <div className="space-y-2 mb-4">
                 {sortedRubriques.map((rubrique) => (
@@ -529,7 +527,7 @@ export function AdminContent() {
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-medium text-gray-900">{rubrique.icon} {rubrique.name}</span>
                       <Badge variant={rubrique.status === 'published' ? 'green' : 'gold'}>
-                        {rubrique.status === 'published' ? 'Publie' : 'Brouillon'}
+                        {rubrique.status === 'published' ? t('cmsStatusPublished') : t('cmsStatusDraft')}
                       </Badge>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">{rubrique.description}</p>
@@ -540,7 +538,7 @@ export function AdminContent() {
                 <input
                   value={newRubrique}
                   onChange={(event) => setNewRubrique(event.target.value)}
-                  placeholder="Nouvelle rubrique"
+                  placeholder={t('cmsNewRubrique')}
                   className="min-w-0 flex-1 rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 />
                 <Button variant="primary" size="sm" onClick={handleCreateRubrique}>
@@ -552,9 +550,9 @@ export function AdminContent() {
 
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-gray-900">Modules</h2>
+                <h2 className="font-semibold text-gray-900">{t('cmsModules')}</h2>
                 <Button variant="outline" size="sm" onClick={handleNewModule}>
-                  <Plus size={14} /> Nouveau
+                  <Plus size={14} /> {t('cmsNew')}
                 </Button>
               </div>
               <div className="space-y-2">
@@ -569,10 +567,10 @@ export function AdminContent() {
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-semibold text-gray-900">{module.emoji} {module.title}</span>
                       <Badge variant={module.status === 'published' ? 'green' : 'gold'}>
-                        {module.status === 'published' ? 'Publie' : 'Brouillon'}
+                        {module.status === 'published' ? t('cmsStatusPublished') : t('cmsStatusDraft')}
                       </Badge>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">{module.courses.length} lecons - EN {translationCompleteness(module, 'en')}% - HA {translationCompleteness(module, 'ha')}%</p>
+                    <p className="text-xs text-gray-500 mt-1">{module.courses.length} {t('cmsLessonsStat').toLowerCase()} - EN {translationCompleteness(module, 'en')}% - HA {translationCompleteness(module, 'ha')}%</p>
                   </button>
                 ))}
               </div>
@@ -583,8 +581,8 @@ export function AdminContent() {
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
                 <div>
-                  <h2 className="font-playfair text-xl font-bold text-gray-900">Editeur module</h2>
-                  <p className="text-sm text-gray-500">FR est la source de verite. EN et HA restent des adaptations.</p>
+                  <h2 className="font-playfair text-xl font-bold text-gray-900">{t('cmsEditorTitle')}</h2>
+                  <p className="text-sm text-gray-500">{t('cmsEditorSubtitle')}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <Button
@@ -593,7 +591,7 @@ export function AdminContent() {
                     onClick={handleRequestRemoveModule}
                     disabled={pendingAction !== null}
                   >
-                    <Trash2 size={15} /> Supprimer
+                    <Trash2 size={15} /> {t('cmsDelete')}
                   </Button>
                   <Button
                     variant="primary"
@@ -601,7 +599,7 @@ export function AdminContent() {
                     onClick={handleSaveModule}
                     disabled={pendingAction !== null}
                   >
-                    <Save size={15} /> {pendingAction === 'save' ? 'Sauvegarde...' : 'Sauvegarder'}
+                    <Save size={15} /> {pendingAction === 'save' ? t('cmsSaving') : t('cmsSave')}
                   </Button>
                 </div>
               </div>
@@ -610,7 +608,7 @@ export function AdminContent() {
                 <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-sm font-medium text-red-700">
-                      Suppression definitive de {draft.title}. Les lecons associees seront aussi supprimees.
+                      {t('cmsDeleteConfirm1')} {draft.title}. {t('cmsDeleteConfirm2')}
                     </p>
                     <div className="flex gap-2">
                       <Button
@@ -619,7 +617,7 @@ export function AdminContent() {
                         onClick={() => setDeleteRequested(false)}
                         disabled={pendingAction !== null}
                       >
-                        Annuler
+                        {t('cmsCancel')}
                       </Button>
                       <Button
                         variant="danger"
@@ -627,7 +625,7 @@ export function AdminContent() {
                         onClick={handleConfirmRemoveModule}
                         disabled={pendingAction !== null}
                       >
-                        {pendingAction === 'delete' ? 'Suppression...' : 'Confirmer'}
+                        {pendingAction === 'delete' ? t('cmsDeleting') : t('cmsConfirm')}
                       </Button>
                     </div>
                   </div>
@@ -636,7 +634,7 @@ export function AdminContent() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Titre FR</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsTitleFr')}</span>
                   <input
                     value={draft.title}
                     onChange={(event) => patchDraft({ title: event.target.value })}
@@ -644,7 +642,7 @@ export function AdminContent() {
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Slug</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsSlug')}</span>
                   <input
                     value={draft.slug}
                     onChange={(event) => patchDraft({ slug: slugify(event.target.value) })}
@@ -652,7 +650,7 @@ export function AdminContent() {
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Rubrique</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsRubrique')}</span>
                   <select
                     value={draft.rubriqueId || ''}
                     onChange={(event) => patchDraft({ rubriqueId: event.target.value })}
@@ -664,18 +662,18 @@ export function AdminContent() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Statut</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsStatusLabel')}</span>
                   <select
                     value={draft.status || 'draft'}
                     onChange={(event) => patchDraft({ status: event.target.value as LearningModule['status'] })}
                     className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   >
-                    <option value="draft">Brouillon</option>
-                    <option value="published">Publie</option>
+                    <option value="draft">{t('cmsStatusDraft')}</option>
+                    <option value="published">{t('cmsStatusPublished')}</option>
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Sous-titre FR</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsSubtitleFr')}</span>
                   <input
                     value={draft.subtitle}
                     onChange={(event) => patchDraft({ subtitle: event.target.value })}
@@ -683,7 +681,7 @@ export function AdminContent() {
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">Niveau</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsLevel')}</span>
                   <input
                     value={draft.level}
                     onChange={(event) => patchDraft({ level: event.target.value })}
@@ -691,7 +689,7 @@ export function AdminContent() {
                   />
                 </label>
                 <label className="block md:col-span-2">
-                  <span className="text-sm font-medium text-gray-700">Description FR</span>
+                  <span className="text-sm font-medium text-gray-700">{t('cmsDescriptionFr')}</span>
                   <textarea
                     value={draft.description}
                     onChange={(event) => patchDraft({ description: event.target.value })}
@@ -704,7 +702,7 @@ export function AdminContent() {
                 {(['en', 'ha'] as const).map((lang) => (
                   <div key={lang} className="rounded-2xl border border-gray-200 p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-semibold text-gray-900">{lang.toUpperCase()} adaptation</h3>
+                      <h3 className="font-semibold text-gray-900">{lang.toUpperCase()} {t('cmsAdaptation')}</h3>
                       <Badge variant={translationCompleteness(draft, lang) >= 80 ? 'green' : 'gold'}>
                         {translationCompleteness(draft, lang)}%
                       </Badge>
@@ -737,11 +735,11 @@ export function AdminContent() {
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="font-playfair text-xl font-bold text-gray-900">Lecons du module</h2>
-                  <p className="text-sm text-gray-500">Chaque ligne deviendra une lecon editable dans la base.</p>
+                  <h2 className="font-playfair text-xl font-bold text-gray-900">{t('cmsLessonsTitle')}</h2>
+                  <p className="text-sm text-gray-500">{t('cmsLessonsSubtitle')}</p>
                 </div>
                 <Button variant="gold" size="sm" onClick={handleAddCourse}>
-                  <Plus size={15} /> Ajouter lecon
+                  <Plus size={15} /> {t('cmsAddLesson')}
                 </Button>
               </div>
 
@@ -749,9 +747,9 @@ export function AdminContent() {
                 {draft.courses.map((course, index) => (
                   <div key={course.id} className="rounded-2xl border border-gray-200 p-4">
                     <div className="flex items-center justify-between gap-3 mb-3">
-                      <p className="text-sm font-semibold text-gray-900">Lecon {index + 1}</p>
+                      <p className="text-sm font-semibold text-gray-900">{t('cmsLesson')} {index + 1}</p>
                       <Button variant="ghost" size="sm" onClick={() => handleRemoveCourse(course.id)}>
-                        <Trash2 size={14} /> Retirer
+                        <Trash2 size={14} /> {t('cmsRemoveLesson')}
                       </Button>
                     </div>
                     <div className="grid md:grid-cols-[1fr_120px] gap-3">
@@ -795,7 +793,7 @@ export function AdminContent() {
                 {draft.courses.length === 0 && (
                   <div className="rounded-2xl border border-dashed border-gray-300 p-8 text-center">
                     <BookOpen size={24} className="text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">Aucune lecon. Ajoutez une premiere lecon pour rendre ce module testable.</p>
+                    <p className="text-sm text-gray-500">{t('cmsNoLessons')}</p>
                   </div>
                 )}
               </div>
@@ -805,7 +803,7 @@ export function AdminContent() {
               <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <FileJson size={18} className="text-blue-600" />
-                  <h2 className="font-semibold text-gray-900">Import JSON</h2>
+                  <h2 className="font-semibold text-gray-900">{t('cmsImportJson')}</h2>
                 </div>
                 <textarea
                   value={jsonText}
@@ -814,10 +812,10 @@ export function AdminContent() {
                 />
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Button variant="primary" size="sm" onClick={handleJsonImport}>
-                    <Upload size={15} /> Importer JSON
+                    <Upload size={15} /> {t('cmsImportJsonBtn')}
                   </Button>
                   <label className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
-                    <FileJson size={15} /> Fichier JSON/PDF/DOCX
+                    <FileJson size={15} /> {t('cmsFilePicker')}
                     <input type="file" accept=".json,.pdf,.docx" className="hidden" onChange={handleFileImport} />
                   </label>
                 </div>
@@ -826,13 +824,13 @@ export function AdminContent() {
               <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <FileText size={18} className="text-gold-500" />
-                  <h2 className="font-semibold text-gray-900">Sources PDF / DOCX</h2>
+                  <h2 className="font-semibold text-gray-900">{t('cmsSources')}</h2>
                 </div>
                 <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 mb-4">
                   <div className="flex items-start gap-3">
                     <AlertCircle size={18} className="text-blue-600 mt-0.5" />
                     <p className="text-sm text-blue-800">
-                      Les fichiers PDF/DOCX sont acceptes comme sources. En production, l extraction automatique doit passer par une Edge Function Supabase pour creer les blocs de lecon a valider.
+                      {t('cmsSourcesInfo')}
                     </p>
                   </div>
                 </div>
@@ -849,7 +847,7 @@ export function AdminContent() {
                     </div>
                   ))}
                   {contentImports.length === 0 && (
-                    <p className="text-sm text-gray-500">Aucune source importee pour le moment.</p>
+                    <p className="text-sm text-gray-500">{t('cmsNoSources')}</p>
                   )}
                 </div>
               </section>

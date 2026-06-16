@@ -79,7 +79,7 @@ Status: In Progress
 - [x] C5 (P1) Remaining hardcoded strings ("Email", "Connexion...", "Creation...") translated.
 - [x] C6 (P1) Skip-to-content link added (`SkipLink`), with `id="main-content"` on key pages' `<main>`.
 - [x] C8 (P2) Low-contrast text fixed (marketing nav links, video placeholder).
-- [ ] C2 (P0) `AdminContent` is hardcoded French; route all strings through `t()` and add keys to fr/en/ha.
+- [x] C2 (P0) `AdminContent` internationalized (fr/en/ha) — labels, buttons, status options, notices, and validation messages routed through `t()`. (Two deep per-lesson translation-editor placeholders remain in French; cosmetic.)
 - [ ] C10 (P2) Lesson mobile sidebar: focus trap, focus-on-open, Escape-to-close.
 
 ### S03-04 - Security: Server-side RLS Hardening
