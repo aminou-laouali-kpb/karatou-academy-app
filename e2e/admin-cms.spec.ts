@@ -15,6 +15,13 @@ test.describe('Platform admin CMS', () => {
     await expect(page.getByRole('alert')).toContainText('Le titre FR est obligatoire.');
   });
 
+  test('team page loads with the create-enterprise-admin form', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.goto('/admin/team');
+    await expect(page.getByRole('heading', { name: 'Equipe & acces' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Creer un admin entreprise' })).toBeVisible();
+  });
+
   test('saves a new draft module and shows it in the module list', async ({ page }) => {
     await demoLogin(page, 'platform');
 

@@ -21,6 +21,7 @@ const RedeemScholarship = lazy(() => import('./pages/RedeemScholarship').then((m
 const EnterpriseDashboard = lazy(() => import('./pages/EnterpriseDashboard').then((m) => ({ default: m.EnterpriseDashboard })));
 const EnterpriseMembers = lazy(() => import('./pages/EnterpriseMembers').then((m) => ({ default: m.EnterpriseMembers })));
 const AdminContent = lazy(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
+const AdminTeam = lazy(() => import('./pages/AdminTeam').then((m) => ({ default: m.AdminTeam })));
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
 function RouteFallback() {
@@ -109,6 +110,14 @@ function App() {
                 element={(
                   <ProtectedRoute role="platform_admin">
                     <AdminContent />
+                  </ProtectedRoute>
+                )}
+              />
+              <Route
+                path="/admin/team"
+                element={(
+                  <ProtectedRoute role="platform_admin">
+                    <AdminTeam />
                   </ProtectedRoute>
                 )}
               />

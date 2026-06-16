@@ -286,6 +286,30 @@ Acceptance criteria:
 - An enterprise admin cannot read another organization's progress/members/scholarships.
 - New migrations applied and re-verified with rollback-wrapped SQL + the S02-05 cross-org test.
 
+### S02-12 - In-app Admin Provisioning (Edge Function)
+
+Status: Core done (create enterprise admin from `/admin`). Function deployed to prod.
+Priority: P1
+Estimate: 5 pts
+
+User story:
+As a platform admin, I want to create enterprise admins from the admin UI in
+production, without running scripts or sharing the service-role key.
+
+Implementation:
+- Deployed Edge Function `admin-provision-enterprise-admin` (holds the service-role
+  key server-side; `verify_jwt` on; re-checks the caller is a platform admin via
+  their JWT) that creates/updates the Auth user, sets `app_metadata.role`, and links
+  org membership + enterprise member. Verified: unauthenticated call returns 401.
+- Added `/admin/team` page (lazy) + AdminNav tab + `provisionEnterpriseAdmin` service
+  (`supabase.functions.invoke`, JWT attached automatically) + FR/EN/HA copy.
+- Demo mode shows a notice that a real Supabase platform-admin session is required.
+- E2E: the team page loads with the create-admin form.
+
+Remaining: in-app organization creation; learner self-registration already exists.
+Why this matters: this is the production-grade replacement for the `seed:enterprise-admin`
+script (which stays only for the very first bootstrap).
+
 ## Definition Of Done
 
 Every completed item must:
