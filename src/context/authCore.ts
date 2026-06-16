@@ -9,6 +9,8 @@ export interface AuthContextValue {
   login: (email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
   loginAs: (role: UserRole) => Promise<{ ok: boolean; error?: string }>;
   register: (payload: { name: string; email: string; password: string }) => Promise<{ ok: boolean; error?: string }>;
+  requestPasswordReset: (email: string) => Promise<{ ok: boolean; error?: string }>;
+  updatePassword: (password: string) => Promise<{ ok: boolean; error?: string }>;
   logout: () => Promise<void>;
 }
 

@@ -22,6 +22,13 @@ test.describe('Auth and role-based routing', () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
+  test('forgot-password page is reachable from login', async ({ page }) => {
+    await page.goto('/login');
+    await page.getByRole('link', { name: 'Mot de passe oublie ?' }).click();
+    await expect(page).toHaveURL(/\/forgot-password$/);
+    await expect(page.getByRole('heading', { name: 'Mot de passe oublie' })).toBeVisible();
+  });
+
   test('learner cannot access the platform admin portal', async ({ page }) => {
     await demoLogin(page, 'learner');
     await page.goto('/admin');

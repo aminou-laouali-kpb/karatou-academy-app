@@ -177,9 +177,20 @@ Acceptance criteria:
 
 ### S02-07 - Auth UX Completeness
 
-Status: Not started
+Status: Core done (password reset). Remaining = Supabase dashboard config (email templates + redirect URLs).
 Priority: P1
 Estimate: 5 pts
+
+Implementation:
+- Added `requestPasswordReset` / `updatePassword` to AuthContext (Supabase
+  `resetPasswordForEmail` with a `${origin}/reset-password` redirect, and `updateUser`).
+- Added `/forgot-password` (request a reset link) and `/reset-password` (set a new
+  password from the recovery session) pages, both lazy + trilingual (fr/en/ha), with a
+  "Forgot password?" link on `/login`. E2E covers reaching the page.
+- Email confirmation is already handled in `register` (returns "confirm your email"
+  when no session), and auth error states are surfaced on Login/Register.
+- Remaining (operator, no code): set Supabase Auth email templates + add the production
+  domain to the allowed redirect URLs so reset/confirmation links resolve.
 
 User story:
 As a real user, I want email confirmation and password reset so account management works

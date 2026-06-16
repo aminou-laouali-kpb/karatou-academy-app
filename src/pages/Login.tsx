@@ -156,7 +156,11 @@ export function Login() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-gray-500 mt-4">
+            <Link to="/forgot-password" className="text-blue-600 font-medium hover:underline">{t('forgotLink')}</Link>
+          </p>
+
+          <p className="text-center text-sm text-gray-500 mt-2">
             {t('newTester')}{' '}
             <Link to="/register" className="text-blue-600 font-medium hover:underline">
               {t('createLearnerAccount')}

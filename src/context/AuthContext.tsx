@@ -345,6 +345,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   };
 
+  const requestPasswordReset = async (email: string) => {
+    if (!supabase) {
+      return {
+        ok: false,
+        error: isDemoEnabled ? 'Reinitialisation indisponible en mode demo.' : 'Service indisponible.',
+      };
+    }
+
+    const redirectTo =
+      typeof window !== 'undefined' ? `${window.location.origin}/reset-password` : undefined;
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo });
+    if (error) {
+      return { ok: false, error: error.message };
+    }
+    return { ok: true };
+  };
+
+  const updatePassword = async (password: string) => {
+    if (!supabase) {
+      return { ok: false, error: 'Service indisponible.' };
+    }
+
+    const { error } = await supabase.auth.updateUser({ password });
+    if (error) {
+      return { ok: false, error: error.message };
+    }
+    return { ok: true };
+  };
+
   const logout = async () => {
     if (supabase) {
       await supabase.auth.signOut().catch(() => undefined);
@@ -363,6 +392,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     login,
     loginAs,
     register,
+    requestPasswordReset,
+    updatePassword,
     logout,
   };
 
