@@ -16,8 +16,6 @@ export interface LearningContextValue {
   saveRubrique: (rubrique: Rubrique) => Promise<ContentMutationResult>;
   saveModule: (module: LearningModule) => Promise<ContentMutationResult>;
   removeModule: (moduleId: string) => Promise<ContentMutationResult>;
-  addCourseToModule: (moduleId: string, course: Omit<LearningModule['courses'][number], 'id'> & { id?: string }) => void;
-  updateCourseInModule: (moduleId: string, courseId: string, course: Partial<LearningModule['courses'][number]>) => void;
   importContentJson: (jsonText: string) => { ok: boolean; message: string; imported: number };
   registerSourceImport: (fileName: string, fileType: ContentImportRecord['fileType']) => ContentImportRecord;
   getCompletedCourseIds: (moduleSlug: string) => string[];

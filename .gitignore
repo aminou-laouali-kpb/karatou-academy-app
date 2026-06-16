@@ -28,4 +28,8 @@ supabase/.temp/
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# Env files: ignore everything except the safe, intentionally-tracked ones.
+.env*
+!.env.example
+!.env.e2e

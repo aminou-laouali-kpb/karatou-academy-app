@@ -16,6 +16,7 @@ import { AdminNav } from '../layouts/AdminNav';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { useLearning } from '../hooks/useLearning';
+import { slugify } from '../lib/strings';
 import { Course, LearningModule, Rubrique } from '../types';
 
 const colors = [
@@ -102,17 +103,6 @@ const sampleJson = JSON.stringify(
   null,
   2
 );
-
-function slugify(value: string) {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 64);
-}
 
 function createEmptyModule(rubriqueId?: string): LearningModule {
   const now = Date.now();

@@ -227,8 +227,10 @@ export function LessonPlayer() {
   const [expandedBloc, setExpandedBloc] = useState<number | null>(0);
   const [issuedUid, setIssuedUid] = useState('');
 
-  const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
-  const module = localizeModule(sourceModule, lang);
+  const module = useMemo(() => {
+    const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
+    return localizeModule(sourceModule, lang);
+  }, [modules, moduleSlug, lang]);
   const courseIndex = Math.max(0, module.courses.findIndex((candidate) => candidate.id === courseId));
   const course = module.courses[courseIndex] || module.courses[0];
   const completedIds = getCompletedCourseIds(module.slug);

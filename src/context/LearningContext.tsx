@@ -1,9 +1,11 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { certificates as seedCertificates, enterpriseData, modules as seedModules, rubriques as seedRubriques } from '../data/mockData';
-import { Certificate, ContentImportRecord, ContentMutationResult, Course, DemoUser, EnterpriseMember, LearningModule, Organization, RedeemScholarshipResult, Rubrique, Scholarship } from '../types';
+import { Certificate, ContentImportRecord, ContentMutationResult, DemoUser, EnterpriseMember, LearningModule, Organization, RedeemScholarshipResult, Rubrique, Scholarship } from '../types';
 import { LearningContext } from './learningCore';
 import { useAuth } from '../hooks/useAuth';
 import { canAccessEnterprise } from '../lib/roles';
+import { isDemoEnabled } from '../lib/demoMode';
+import { slugify } from '../lib/strings';
 import {
   getContentBackend,
   loadContentSnapshot,
@@ -94,7 +96,10 @@ function repairEnterpriseSeed(state: StoredLearningState): StoredLearningState {
     state.organization?.id === enterpriseData.org.id ||
     state.organizations.some((organization) => organization.id === enterpriseData.org.id) ||
     state.scholarships.some((scholarship) => scholarship.code.startsWith('KA-SCH-PNUD-'));
-  const lostSeedMembers = isPnudSeed && state.members.length === 0 && enterpriseData.members.length > 0;
+  // Only re-seed demo data in demo mode; never overwrite a real (possibly
+  // empty) organization's data fetched from Supabase.
+  const lostSeedMembers =
+    isDemoEnabled && isPnudSeed && state.members.length === 0 && enterpriseData.members.length > 0;
 
   if (!lostSeedMembers) {
     return state;
@@ -127,26 +132,20 @@ function daysBetween(from: Date, to: Date) {
   return Math.max(0, Math.ceil((to.getTime() - from.getTime()) / 86_400_000));
 }
 
-function slugify(value: string) {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 64);
-}
-
 function buildCertificateUid(moduleSlug: string, userId: string) {
-  const moduleCode = moduleSlug
-    .split('-')
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 3)
-    .toUpperCase();
+  const moduleCode =
+    moduleSlug
+      .split('-')
+      .map((part) => part[0])
+      .filter(Boolean)
+      .join('')
+      .slice(0, 3)
+      .toUpperCase() || 'GEN';
   const userCode = userId.replace(/[^a-z0-9]/gi, '').slice(-4).toUpperCase().padStart(4, '0');
-  return `KA-2026-${moduleCode}-${userCode}`;
+  // Random suffix to avoid UID collisions between users whose id tails match.
+  // (A server-authoritative UID + DB unique index is the full fix \u2014 see Sprint 03 S03-03.)
+  const random = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `KA-2026-${moduleCode}-${userCode}-${random}`;
 }
 
 function normalizeScholarshipCode(code: string) {
@@ -467,48 +466,6 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     });
 
     return result;
-  };
-
-  const addCourseToModule = (moduleId: string, course: Omit<Course, 'id'> & { id?: string }) => {
-    commit((current) => ({
-      ...current,
-      modules: current.modules.map((module) => {
-        if (module.id !== moduleId) {
-          return module;
-        }
-
-        const nextCourse: Course = {
-          ...course,
-          id: course.id || `course-${Date.now()}`,
-          order: course.order || module.courses.length + 1,
-          status: course.status || 'published',
-        };
-        const courses = [...module.courses, nextCourse];
-
-        return {
-          ...module,
-          lessons: courses.length,
-          duration: module.duration || `${courses.length * 10} min`,
-          courses,
-        };
-      }),
-    }));
-  };
-
-  const updateCourseInModule = (moduleId: string, courseId: string, course: Partial<Course>) => {
-    commit((current) => ({
-      ...current,
-      modules: current.modules.map((module) =>
-        module.id === moduleId
-          ? {
-              ...module,
-              courses: module.courses.map((candidate) =>
-                candidate.id === courseId ? { ...candidate, ...course } : candidate
-              ),
-            }
-          : module
-      ),
-    }));
   };
 
   const importContentJson = (jsonText: string) => {
@@ -912,8 +869,6 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     saveRubrique,
     saveModule,
     removeModule,
-    addCourseToModule,
-    updateCourseInModule,
     importContentJson,
     registerSourceImport,
     getCompletedCourseIds,
