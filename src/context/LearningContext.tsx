@@ -67,7 +67,14 @@ function readStoredState() {
 
   try {
     const raw = window.localStorage.getItem(LEARNING_STORAGE_KEY);
-    return raw ? repairStoredState({ ...defaultState, ...JSON.parse(raw) } as StoredLearningState) : defaultState;
+    if (!raw) {
+      return defaultState;
+    }
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return defaultState;
+    }
+    return repairStoredState({ ...defaultState, ...(parsed as Partial<StoredLearningState>) } as StoredLearningState);
   } catch {
     return defaultState;
   }

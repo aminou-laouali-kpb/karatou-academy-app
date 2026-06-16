@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
 import { ProgressBar } from '../components/ProgressBar';
@@ -226,6 +226,28 @@ export function LessonPlayer() {
   const [videoLang, setVideoLang] = useState<Language>(lang);
   const [expandedBloc, setExpandedBloc] = useState<number | null>(0);
   const [issuedUid, setIssuedUid] = useState('');
+  const openSidebarBtnRef = useRef<HTMLButtonElement>(null);
+  const closeSidebarBtnRef = useRef<HTMLButtonElement>(null);
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+    openSidebarBtnRef.current?.focus();
+  };
+
+  // Mobile sidebar a11y: move focus into the panel on open, close on Escape,
+  // and restore focus to the toggle on close.
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    closeSidebarBtnRef.current?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSidebarOpen(false);
+        openSidebarBtnRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [sidebarOpen]);
 
   const module = useMemo(() => {
     const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
@@ -281,6 +303,7 @@ export function LessonPlayer() {
 
       <div className="flex">
         <button
+          ref={openSidebarBtnRef}
           onClick={() => setSidebarOpen(true)}
           aria-label={t('lessonsList')}
           aria-expanded={sidebarOpen}
@@ -300,7 +323,7 @@ export function LessonPlayer() {
                 <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider">{t('module')}</p>
                 <h2 className="font-playfair text-lg font-bold text-gray-900">{module.title}</h2>
               </div>
-              <button onClick={() => setSidebarOpen(false)} className="lg:hidden" aria-label={t('closeMenu')}>
+              <button ref={closeSidebarBtnRef} onClick={closeSidebar} className="lg:hidden" aria-label={t('closeMenu')}>
                 <X size={20} className="text-gray-500" aria-hidden="true" />
               </button>
             </div>

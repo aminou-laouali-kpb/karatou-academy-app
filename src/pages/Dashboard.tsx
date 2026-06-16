@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
 import { ModuleCard } from '../components/ModuleCard';
@@ -15,7 +16,11 @@ export function Dashboard() {
   const { user } = useAuth();
   const { lang, t } = useLanguage();
   const { modules, getProgress, getCompletedCourseIds, getUserCertificates } = useLearning();
-  const modulesWithProgress = localizeModules(modules.filter((module) => module.status !== 'draft'), lang).map((module) => ({
+  const localizedModules = useMemo(
+    () => localizeModules(modules.filter((module) => module.status !== 'draft'), lang),
+    [modules, lang]
+  );
+  const modulesWithProgress = localizedModules.map((module) => ({
     ...module,
     progress: getProgress(module.slug),
   }));

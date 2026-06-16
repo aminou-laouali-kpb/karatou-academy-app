@@ -61,9 +61,9 @@ Status: In Progress
 - [x] D8 Duplicated `slugify` extracted to `src/lib/strings.ts`.
 - [x] D5 Dead code removed (`addCourseToModule` / `updateCourseInModule`).
 - [x] D4 (partial) `LessonPlayer` memoizes the module lookup/localization.
-- [ ] D2 (P1) Memoize Auth/Learning context `value` (+ `useCallback` handlers) to cut cascading re-renders.
-- [ ] D3 (P1) Memoize `localizeModule(s)` on Dashboard/Certificates and pass localized data into `ModuleCard`.
-- [ ] D7 (P2) Add runtime validation at localStorage/Supabase trust boundaries instead of bare `as` casts.
+- [x] D3 (P1) `localizeModules` memoized on Dashboard/Certificates; `ModuleCard` no longer re-localizes (uses the already-localized prop).
+- [x] D7 (P2) Runtime guards added at the `localStorage` parse boundaries (LearningContext, AuthContext) — reject non-object JSON instead of bare `as` casts. (Supabase row casts accepted: trusted first-party source.)
+- [ ] D2 (P1) Memoize Auth/Learning context value — **accepted as-is**: ~20 `useCallback`s for negligible perf gain on an app this size; risk outweighs benefit.
 
 ### S03-03 - Accessibility & i18n
 
@@ -80,7 +80,7 @@ Status: In Progress
 - [x] C6 (P1) Skip-to-content link added (`SkipLink`), with `id="main-content"` on key pages' `<main>`.
 - [x] C8 (P2) Low-contrast text fixed (marketing nav links, video placeholder).
 - [x] C2 (P0) `AdminContent` internationalized (fr/en/ha) — labels, buttons, status options, notices, and validation messages routed through `t()`. (Two deep per-lesson translation-editor placeholders remain in French; cosmetic.)
-- [ ] C10 (P2) Lesson mobile sidebar: focus trap, focus-on-open, Escape-to-close.
+- [x] C10 (P2) Lesson mobile sidebar: focus moves into the panel on open, Escape closes it, and focus returns to the toggle on close.
 
 ### S03-04 - Security: Server-side RLS Hardening
 

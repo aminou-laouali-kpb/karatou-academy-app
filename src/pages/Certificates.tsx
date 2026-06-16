@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
 import { Button } from '../components/Button';
@@ -40,7 +41,7 @@ export function Certificates() {
   const { user } = useAuth();
   const { lang, t } = useLanguage();
   const { modules, getUserCertificates, getProgress, issueCertificate } = useLearning();
-  const localizedModules = localizeModules(modules, lang);
+  const localizedModules = useMemo(() => localizeModules(modules, lang), [modules, lang]);
   const certificates = user ? getUserCertificates(user.id) : [];
   const activeCertificates = certificates.filter((certificate) => certificate.status === 'active');
   const readyModules = localizedModules.filter(

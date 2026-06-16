@@ -28,7 +28,9 @@ function readStoredUser() {
 
   try {
     const raw = window.localStorage.getItem(AUTH_STORAGE_KEY);
-    const storedUser = raw ? (JSON.parse(raw) as DemoUser) : null;
+    const parsed: unknown = raw ? JSON.parse(raw) : null;
+    const storedUser =
+      parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? (parsed as DemoUser) : null;
 
     if (storedUser?.password && !isDemoEnabled) {
       window.localStorage.removeItem(AUTH_STORAGE_KEY);

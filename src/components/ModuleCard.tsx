@@ -4,7 +4,6 @@ import { ProgressBar } from './ProgressBar';
 import { Button } from './Button';
 import { LearningModule } from '../types';
 import { useLanguage } from '../hooks/useLanguage';
-import { localizeModule } from '../data/localizedContent';
 
 interface ModuleCardProps {
   module: LearningModule;
@@ -12,8 +11,9 @@ interface ModuleCardProps {
 
 export function ModuleCard({ module }: ModuleCardProps) {
   const navigate = useNavigate();
-  const { lang, t } = useLanguage();
-  const localizedModule = localizeModule(module, lang);
+  const { t } = useLanguage();
+  // The module is already localized + progress-augmented by the caller (Dashboard).
+  const localizedModule = module;
   const isLocked = !localizedModule.isFree && localizedModule.progress === 0;
   const isInProgress = localizedModule.progress > 0;
   const isCompleted = localizedModule.progress >= 100;
