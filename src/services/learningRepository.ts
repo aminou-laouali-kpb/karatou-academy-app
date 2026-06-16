@@ -183,12 +183,13 @@ export async function fetchCertificateByUid(uid: string): Promise<Certificate | 
     return null;
   }
 
-  const { data, error } = await requireClient()
-    .from(TABLES.certificates)
-    .select('*')
-    .ilike('uid', normalizedUid)
-    .maybeSingle();
+  // Public verification goes through a SECURITY DEFINER RPC: the certificate
+  // table is no longer directly readable (confidentiality hardening).
+  const { data, error } = await requireClient().rpc('karatou_verify_certificate', {
+    input_uid: normalizedUid,
+  });
 
   if (error) throw error;
-  return data ? mapCertificate(data as CertificateRow) : null;
+  const row = (Array.isArray(data) ? data[0] : data) as CertificateRow | undefined;
+  return row ? mapCertificate(row) : null;
 }

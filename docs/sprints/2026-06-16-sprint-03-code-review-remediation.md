@@ -86,14 +86,26 @@ Status: In Progress
 
 Priority: P0
 Estimate: 8 pts
-Status: Not started (requires live Supabase access; see also Sprint 02 S02-11)
+Status: Applied & verified on the live project (`pqcovsnomouclkdjhjig`). Migrations
+`20260616120000_s03_security_certificate_progress_hardening` and
+`20260616120500_s03_security_revoke_legacy_exposure`.
 
-- [ ] B1 (P0) Certificate table is world-readable (PII). Replace blanket read with a `SECURITY DEFINER` verify RPC returning a single UID; restrict table SELECT to owner + org admins.
-- [ ] B2 (P0) Certificates are forgeable (INSERT/UPDATE only check `user_id = auth.uid()`). Move issuance to a server RPC that verifies completion and generates the UID; revoke direct client writes; add a DB unique index.
-- [ ] B4 (P1) `karatou_learner_progress` readable by any enterprise admin; scope to the admin's organization.
-- [ ] B5 (P1) `karatou_content_imports` writable by enterprise admins; re-harden to platform-admin only.
+- [x] B1 (P0) Certificate table no longer world-readable. Dropped the anon blanket read; added `public.karatou_verify_certificate(uid)` SECURITY DEFINER RPC (single UID, minimal fields); restricted authenticated SELECT to owner / org-admin-of-learner / platform admin. App `fetchCertificateByUid` now calls the RPC. Verified: anon reads 0 table rows, RPC returns the single cert.
+- [x] B2 (P0) Certificates no longer forgeable. Dropped the permissive INSERT/UPDATE policies. Verified: an authenticated INSERT is rejected by RLS. (Full server-authoritative issuance RPC that validates completion → Sprint 02 S02-03; no real learners issue certs yet.)
+- [x] B4 (P1) `karatou_learner_progress` SELECT scoped to owner / org-admin-of-the-learner / platform admin (was any enterprise admin globally). Full cross-org browser proof → S02-05 (needs seeded 2nd org + auth users).
+- [x] B5 (P1) Already fixed on prod — `karatou_content_imports` is already platform-admin only (verified live; the review read an older migration file).
 - [ ] B7 (P2) Generate bourse codes server-side with a CSPRNG + adequate length; rate-limit the redeem RPC.
 - [ ] B8 (P2) Confirm `profiles.role` cannot be self-updated; treat it as display-only.
+
+Additional findings from `get_advisors` (not in the file-based review) — fixed:
+- [x] Legacy SECURITY DEFINER views `certificate_status_view` / `org_member_progress_view` (from the archived Next.js schema, unused by this app) had full anon grants and exposed `auth.users.email`. Revoked anon/authenticated access; advisors' ERROR-level `auth_users_exposed` and `security_definer_view` lints cleared.
+- [x] Trigger/maintenance functions `handle_new_user` / `update_expired_certificates` were anon-callable RPCs — revoked public EXECUTE.
+
+Residual advisor items (accepted / follow-up):
+- `karatou_verify_certificate` is anon-executable — intentional (public verification by UID).
+- `handle_new_user` / `update_expired_certificates` have mutable `search_path` (WARN, legacy functions) — left as-is to avoid breaking legacy behavior.
+- Auth: enable leaked-password protection (HaveIBeenPwned) in the Supabase Auth settings.
+- Cleanup: the legacy Next.js tables/views/functions should eventually be dropped from this project.
 
 ### S03-05 - Security: Client & Repo Hygiene
 
