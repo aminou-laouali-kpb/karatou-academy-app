@@ -227,9 +227,19 @@ Acceptance criteria:
 
 ### S02-09 - Privacy, Terms, And PII Review
 
-Status: Not started
+Status: Core done (pages live + PII documented). Needs counsel review + real contact before launch.
 Priority: P1
 Estimate: 3 pts
+
+Implementation:
+- Added `/privacy` and `/terms` pages (lazy, trilingual fr/en/ha) sourced from
+  `src/data/legalContent.ts`, linked from the Landing footer. E2E covers both.
+- PII documented in the privacy policy: name, email, country, learning progress,
+  certificates; purpose, Supabase as processor, retention, and user rights (access/
+  rectify/delete). No payment or unnecessary sensitive data is collected.
+- Caveats (operator): the legal text is a reviewed-by-counsel starting template, not
+  legal advice — have counsel review it and replace the placeholder `contact@karatou.academy`
+  with the real address before a public launch.
 
 User story:
 As Karatou, I want privacy/terms pages and a PII review so a public education platform

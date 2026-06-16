@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MarketingNav } from '../layouts/MarketingNav';
 import { Button } from '../components/Button';
 import { ModuleCard } from '../components/ModuleCard';
@@ -219,8 +219,10 @@ export function Landing() {
               <p className="text-xs text-gray-500 mt-1">FR · EN · HA</p>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-6 text-center">
+          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-2 text-center">
             <p className="text-xs text-gray-500">&copy; 2026 Karatou Academy - {t('copyright')}</p>
+            <Link to="/privacy" className="text-xs text-gray-400 hover:text-white transition-colors">{t('footerPrivacy')}</Link>
+            <Link to="/terms" className="text-xs text-gray-400 hover:text-white transition-colors">{t('footerTerms')}</Link>
           </div>
         </div>
       </footer>
