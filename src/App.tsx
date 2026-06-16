@@ -17,6 +17,7 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword').then((m) => (
 const ResetPassword = lazy(() => import('./pages/ResetPassword').then((m) => ({ default: m.ResetPassword })));
 const PrivacyPolicy = lazy(() => import('./pages/Legal').then((m) => ({ default: m.PrivacyPolicy })));
 const TermsOfService = lazy(() => import('./pages/Legal').then((m) => ({ default: m.TermsOfService })));
+const VerifyAttestation = lazy(() => import('./pages/VerifyAttestation').then((m) => ({ default: m.VerifyAttestation })));
 const Dashboard = lazy(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })));
 const LessonPlayer = lazy(() => import('./pages/LessonPlayer').then((m) => ({ default: m.LessonPlayer })));
 const Certificates = lazy(() => import('./pages/Certificates').then((m) => ({ default: m.Certificates })));
@@ -98,6 +99,7 @@ function App() {
                 )}
               />
               <Route path="/verify/:uid" element={<Verify />} />
+              <Route path="/verify-attestation" element={<VerifyAttestation />} />
               <Route
                 path="/enterprise"
                 element={(

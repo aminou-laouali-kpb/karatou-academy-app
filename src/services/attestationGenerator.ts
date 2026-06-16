@@ -47,9 +47,58 @@ export function buildSignedPayload(name: string): CertificatePayload {
   const issuedAt = format(now, 'yyyy-MM-dd');
   const expiresAt = format(addYears(now, 1), 'yyyy-MM-dd');
   // Sign the canonical fields so the QR cannot be altered without the secret.
-  const base = JSON.stringify({ id, name, issuedAt, expiresAt });
-  const signature = CryptoJS.HmacSHA256(base, SECRET).toString();
+  const signature = signatureFor({ id, name, issuedAt, expiresAt });
   return { id, name, issuedAt, expiresAt, signature };
+}
+
+export type VerificationStatus = 'valid' | 'expired' | 'invalid';
+
+export interface VerificationResult {
+  status: VerificationStatus;
+  payload?: CertificatePayload;
+}
+
+function signatureFor(payload: Pick<CertificatePayload, 'id' | 'name' | 'issuedAt' | 'expiresAt'>): string {
+  const base = JSON.stringify({
+    id: payload.id,
+    name: payload.name,
+    issuedAt: payload.issuedAt,
+    expiresAt: payload.expiresAt,
+  });
+  return CryptoJS.HmacSHA256(base, SECRET).toString();
+}
+
+/** Recomputes the HMAC and checks expiry. */
+export function verifyAttestation(payload: CertificatePayload): VerificationResult {
+  if (!payload?.id || !payload.signature) return { status: 'invalid' };
+  if (signatureFor(payload) !== payload.signature) return { status: 'invalid' };
+  const expired = new Date(`${payload.expiresAt}T23:59:59`).getTime() < Date.now();
+  return { status: expired ? 'expired' : 'valid', payload };
+}
+
+export function encodeAttestationPayload(payload: CertificatePayload): string {
+  const bytes = new TextEncoder().encode(JSON.stringify(payload));
+  let binary = '';
+  bytes.forEach((b) => { binary += String.fromCharCode(b); });
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+export function decodeAttestationPayload(encoded: string): CertificatePayload | null {
+  try {
+    const padded = encoded.replace(/-/g, '+').replace(/_/g, '/');
+    const binary = atob(padded);
+    const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+    const parsed = JSON.parse(new TextDecoder().decode(bytes));
+    return parsed && typeof parsed === 'object' && parsed.id && parsed.signature ? (parsed as CertificatePayload) : null;
+  } catch {
+    return null;
+  }
+}
+
+/** The QR encodes this URL: scanning opens the verifier with the signed payload. */
+export function attestationVerifyUrl(payload: CertificatePayload): string {
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://karatou.academy';
+  return `${origin}/verify-attestation#${encodeAttestationPayload(payload)}`;
 }
 
 /** Parses the first sheet's first column into a list of participant names. */
@@ -129,7 +178,7 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     page.drawText(name, { x: textX, y: textY, size: fontSize, font, color: hexToRgb(namePlacement.colorHex) });
 
     // QR code with the signed payload.
-    const qrDataUrl = await QRCode.toDataURL(JSON.stringify(payload), { margin: 1, width: 512 });
+    const qrDataUrl = await QRCode.toDataURL(attestationVerifyUrl(payload), { margin: 1, width: 512 });
     const qrImage = await pdfDoc.embedPng(qrDataUrl);
     const qrSize = qrPlacement.sizeRatio * pageWidth;
     const qrX = qrPlacement.xRatio * pageWidth;

@@ -356,6 +356,10 @@ Implementation:
 - Heavy libs (pdf-lib, pdfjs, xlsx, jszip) live only in this lazy chunk (~1.4 MB),
   so the main bundle is unaffected. `tsconfig` gained `esModuleInterop` for the CJS libs.
 - E2E: the tool page loads.
+- Verification: the QR now encodes a scannable `/verify-attestation#<signed-payload>` URL
+  (the signed JSON is base64 in the hash, so it stays self-contained/offline-verifiable).
+  The public `/verify-attestation` page recomputes the HMAC and shows authentic / expired /
+  tampered, with a paste fallback. E2E covers the tamper-detection path.
 
 Caveats:
 - The HMAC secret is a `VITE_` var, so it is bundled into the client and not truly
