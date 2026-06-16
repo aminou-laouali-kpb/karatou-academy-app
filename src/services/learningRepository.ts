@@ -62,12 +62,6 @@ function resolveCertificateStatus(row: CertificateRow): Certificate['status'] {
   return row.status;
 }
 
-function oneYearFromNow() {
-  const expires = new Date();
-  expires.setFullYear(expires.getFullYear() + 1);
-  return expires.toISOString();
-}
-
 function mapCertificate(row: CertificateRow): Certificate {
   return {
     id: row.id,
@@ -82,20 +76,6 @@ function mapCertificate(row: CertificateRow): Certificate {
     expiresAtIso: row.expires_at,
     status: resolveCertificateStatus(row),
     daysLeft: daysLeft(row.expires_at),
-  };
-}
-
-function certificateToRow(certificate: Certificate) {
-  return {
-    id: certificate.id,
-    uid: certificate.uid,
-    user_id: certificate.userId,
-    user_name: certificate.userName,
-    module_slug: certificate.moduleSlug,
-    module_name: certificate.moduleName,
-    issued_at: certificate.issuedAtIso || new Date().toISOString(),
-    expires_at: certificate.expiresAtIso || oneYearFromNow(),
-    status: certificate.status,
   };
 }
 
@@ -163,14 +143,20 @@ export async function saveCompletedCourseRecords(userId: string, moduleSlug: str
   await Promise.all(courseIds.map((courseId) => saveCompletedCourseRecord(userId, moduleSlug, courseId)));
 }
 
-export async function saveCertificateRecord(certificate: Certificate) {
-  if (!isSupabaseConfigured) return;
+// Server-authoritative issuance: the RPC verifies the caller completed the
+// module and generates the UID. Direct client INSERT is no longer permitted.
+export async function issueCertificateRecord(moduleSlug: string): Promise<Certificate | null> {
+  if (!isSupabaseConfigured) {
+    return null;
+  }
 
-  const { error } = await requireClient()
-    .from(TABLES.certificates)
-    .upsert(certificateToRow(certificate), { onConflict: 'uid' });
+  const { data, error } = await requireClient().rpc('karatou_issue_certificate', {
+    input_module_slug: moduleSlug,
+  });
 
   if (error) throw error;
+  const row = (Array.isArray(data) ? data[0] : data) as CertificateRow | undefined;
+  return row ? mapCertificate(row) : null;
 }
 
 export async function fetchCertificateByUid(uid: string): Promise<Certificate | null> {

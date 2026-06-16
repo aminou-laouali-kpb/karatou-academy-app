@@ -84,9 +84,16 @@ Acceptance criteria:
 
 ### S02-03 - Durable Certificate Issuance
 
-Status: Not started
+Status: Core done (server issuance). Migration `20260616130000_s02_03_certificate_issuance_rpc` applied to prod.
 Priority: P0
 Estimate: 8 pts
+
+Implementation:
+- Added SECURITY DEFINER RPC `public.karatou_issue_certificate(module_slug)` that verifies the caller completed every course of the module (`karatou_learner_progress` vs `karatou_courses`), generates the UID server-side, sets the dates, and inserts the row. Idempotent (returns the existing active cert). Granted to `authenticated` only.
+- App: `issueCertificate` calls the RPC in Supabase mode (saving progress first) and keeps local generation in demo mode. Removed the now-dead client `saveCertificateRecord` / `certificateToRow` (direct writes are blocked by RLS since S03-04).
+- Verified on prod (rollback-wrapped): a fully-completed module issues `KA-2026-INT-...` with the real profile name; an incomplete module is refused (`module not completed (0 / 8)`).
+- Remaining: optional backfill of certificates for launch learners (none exist yet → with S02-01).
+
 
 User story:
 As a learner, I want a real, verifiable certificate written to the database when I

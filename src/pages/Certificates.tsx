@@ -59,7 +59,7 @@ export function Certificates() {
       return;
     }
 
-    issueCertificate(user, moduleSlug);
+    void issueCertificate(user, moduleSlug);
   };
 
   return (

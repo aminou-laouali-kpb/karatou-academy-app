@@ -22,7 +22,7 @@ export interface LearningContextValue {
   isCourseCompleted: (moduleSlug: string, courseId: string) => boolean;
   getProgress: (moduleSlug: string) => number;
   completeCourse: (moduleSlug: string, courseId: string) => string[];
-  issueCertificate: (user: DemoUser, moduleSlug: string, completedCourseIds?: string[]) => Certificate | null;
+  issueCertificate: (user: DemoUser, moduleSlug: string, completedCourseIds?: string[]) => Promise<Certificate | null>;
   getUserCertificates: (userId: string) => Certificate[];
   addMember: (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => void;
   createScholarship: () => Scholarship;

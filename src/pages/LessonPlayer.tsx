@@ -272,7 +272,7 @@ export function LessonPlayer() {
   const nextCourse = module.courses[courseIndex + 1];
   const videoUrl = lesson.video[videoLang];
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     if (!user) {
       return;
     }
@@ -281,7 +281,7 @@ export function LessonPlayer() {
     const nextCompleted = new Set(nextCompletedIds);
 
     if (nextCompleted.size >= module.courses.length) {
-      const certificate = issueCertificate(user, module.slug, nextCompletedIds);
+      const certificate = await issueCertificate(user, module.slug, nextCompletedIds);
       if (certificate) {
         setIssuedUid(certificate.uid);
       }

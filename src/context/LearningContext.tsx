@@ -15,8 +15,8 @@ import {
   saveRubriqueRecord,
 } from '../services/contentRepository';
 import {
+  issueCertificateRecord,
   loadLearnerActivity,
-  saveCertificateRecord,
   saveCompletedCourseRecord,
   saveCompletedCourseRecords,
 } from '../services/learningRepository';
@@ -641,7 +641,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return nextIds;
   };
 
-  const issueCertificate = (user: DemoUser, moduleSlug: string, completedCourseIds?: string[]) => {
+  const issueCertificate = async (
+    user: DemoUser,
+    moduleSlug: string,
+    completedCourseIds?: string[]
+  ): Promise<Certificate | null> => {
     const module = state.modules.find((candidate) => candidate.slug === moduleSlug);
     if (!module) {
       return null;
@@ -657,11 +661,34 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       return existing;
     }
 
+    // Production: issuance is server-authoritative (the RPC verifies completion
+    // and generates the UID). Direct client writes are blocked by RLS.
+    if (authMode === 'supabase') {
+      try {
+        if (completedCourseIds && completedCourseIds.length > 0) {
+          await saveCompletedCourseRecords(user.id, moduleSlug, completedCourseIds);
+        }
+        const issued = await issueCertificateRecord(moduleSlug);
+        if (issued) {
+          commit((current) => ({
+            ...current,
+            certificates: [...current.certificates.filter((c) => c.uid !== issued.uid), issued],
+          }));
+          setContentSyncStatus(`Certification synchronisee: ${issued.uid}`);
+        }
+        return issued;
+      } catch (error) {
+        setContentSyncStatus(
+          `Echec certification: ${error instanceof Error ? error.message : 'erreur inconnue'}`
+        );
+        return null;
+      }
+    }
+
+    // Local demo: generate the certificate client-side.
     const issued = new Date();
     const expires = new Date(issued);
     expires.setFullYear(issued.getFullYear() + 1);
-    const issuedAtIso = issued.toISOString();
-    const expiresAtIso = expires.toISOString();
 
     const certificate: Certificate = {
       id: `cert-${Date.now()}`,
@@ -672,8 +699,8 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       userId: user.id,
       issuedAt: formatDate(issued),
       expiresAt: formatDate(expires),
-      issuedAtIso,
-      expiresAtIso,
+      issuedAtIso: issued.toISOString(),
+      expiresAtIso: expires.toISOString(),
       status: 'active',
       daysLeft: daysBetween(issued, expires),
     };
@@ -682,11 +709,6 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       ...current,
       certificates: [...current.certificates, certificate],
     }));
-
-    const syncTask = completedCourseIds
-      ? saveCompletedCourseRecords(user.id, module.slug, completedCourseIds).then(() => saveCertificateRecord(certificate))
-      : saveCertificateRecord(certificate);
-    syncLearnerActivity(syncTask, `Certification synchronisee: ${certificate.uid}`);
 
     return certificate;
   };
