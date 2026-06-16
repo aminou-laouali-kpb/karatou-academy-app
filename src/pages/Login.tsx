@@ -78,7 +78,7 @@ export function Login() {
         </div>
       </section>
 
-      <main className="px-5 py-8 sm:px-10 flex items-center">
+      <main id="main-content" className="px-5 py-8 sm:px-10 flex items-center">
         <div className="w-full max-w-md mx-auto">
           <div className="mb-8">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">{t('signInTitle')}</h2>
@@ -124,7 +124,7 @@ export function Login() {
             )}
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">Email</span>
+              <span className="text-sm font-medium text-gray-700">{t('email')}</span>
               <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/15">
                 <Mail size={16} className="text-gray-400" />
                 <input
@@ -152,7 +152,7 @@ export function Login() {
             </label>
 
             <Button type="submit" variant="primary" size="md" className="w-full" disabled={loading}>
-              {loading ? 'Connexion...' : t('signInAction')}
+              {loading ? t('signingIn') : t('signInAction')}
             </Button>
           </form>
 

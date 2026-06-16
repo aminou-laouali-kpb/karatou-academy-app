@@ -140,7 +140,7 @@ export function EnterpriseMembers() {
     <div className="min-h-screen bg-gray-50">
       <EnterpriseNav />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
             <h1 className="font-playfair text-2xl font-bold text-gray-900">{members.length} {t('members').toLowerCase()}</h1>
@@ -192,7 +192,7 @@ export function EnterpriseMembers() {
                 />
               </label>
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">Email</span>
+                <span className="text-sm font-medium text-gray-700">{t('email')}</span>
                 <input
                   type="email"
                   value={inviteEmail}

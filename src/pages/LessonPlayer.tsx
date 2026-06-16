@@ -365,7 +365,7 @@ export function LessonPlayer() {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 pb-24">
+        <main id="main-content" className="flex-1 min-w-0 pb-24">
           <div className="bg-white border-b border-gray-100 px-4 sm:px-8 py-4">
             <div className="flex flex-wrap items-center gap-2 mb-1">
               <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider">{t('lesson')} {courseIndex + 1}</p>
@@ -460,8 +460,8 @@ export function LessonPlayer() {
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20">
                       <Play size={28} className="text-white ml-1" />
                     </div>
-                    <p className="text-white/80 text-sm">{t('videoComingSoon')}</p>
-                    <p className="text-white/50 text-xs mt-1">Version {videoLang.toUpperCase()}</p>
+                    <p className="text-white/90 text-sm">{t('videoComingSoon')}</p>
+                    <p className="text-white/70 text-xs mt-1">Version {videoLang.toUpperCase()}</p>
                   </div>
                 )}
                 <div className="flex items-center justify-between">

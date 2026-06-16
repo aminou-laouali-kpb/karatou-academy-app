@@ -76,10 +76,10 @@ Status: In Progress
 - [x] C4 Enterprise search/filter controls get labels.
 - [x] C9 Quiz options grouped with `role="radiogroup"` bound to the question.
 - [x] C7 (partial) Decorative icons marked `aria-hidden` on touched components.
+- [x] C5 (P1) Remaining hardcoded strings ("Email", "Connexion...", "Creation...") translated.
+- [x] C6 (P1) Skip-to-content link added (`SkipLink`), with `id="main-content"` on key pages' `<main>`.
+- [x] C8 (P2) Low-contrast text fixed (marketing nav links, video placeholder).
 - [ ] C2 (P0) `AdminContent` is hardcoded French; route all strings through `t()` and add keys to fr/en/ha.
-- [ ] C5 (P1) Remaining hardcoded strings ("Email", "Connexion...", "Creation...") translated.
-- [ ] C6 (P1) Add a skip-to-content link targeting each page's `<main>`.
-- [ ] C8 (P2) Fix low-contrast text (marketing nav `text-gray-300`, video placeholder `text-white/50`).
 - [ ] C10 (P2) Lesson mobile sidebar: focus trap, focus-on-open, Escape-to-close.
 
 ### S03-04 - Security: Server-side RLS Hardening

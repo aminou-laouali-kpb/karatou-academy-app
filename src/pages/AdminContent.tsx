@@ -475,7 +475,7 @@ export function AdminContent() {
     <div className="min-h-screen bg-gray-50">
       <AdminNav />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-7">
           <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou CMS</p>
           <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Admin contenus</h1>

@@ -33,7 +33,7 @@ export function Register() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-5 py-10">
-      <main className="w-full max-w-lg">
+      <main id="main-content" className="w-full max-w-lg">
         <div className="flex justify-center mb-8">
           <Logo />
         </div>
@@ -64,7 +64,7 @@ export function Register() {
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">Email</span>
+              <span className="text-sm font-medium text-gray-700">{t('email')}</span>
               <input
                 type="email"
                 value={email}
@@ -88,7 +88,7 @@ export function Register() {
             </label>
 
             <Button type="submit" variant="primary" size="md" className="w-full" disabled={loading}>
-              {loading ? 'Creation...' : t('startTest')}
+              {loading ? t('creatingAccount') : t('startTest')}
             </Button>
           </form>
         </div>

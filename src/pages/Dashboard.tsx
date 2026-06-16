@@ -34,7 +34,7 @@ export function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <StudentNav />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Welcome Banner */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 sm:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />

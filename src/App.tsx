@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { LearningProvider } from './context/LearningContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { DemoBadge } from './components/DemoBadge';
+import { SkipLink } from './components/SkipLink';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
 // download the admin CMS, lesson player, and all lesson copy up front.
@@ -38,6 +39,7 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <LearningProvider>
+            <SkipLink />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<Landing />} />
