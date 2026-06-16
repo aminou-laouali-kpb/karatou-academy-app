@@ -2,7 +2,9 @@
 
 Dates: June 16, 2026 to June 27, 2026
 Owner: Karatou Academy product/engineering
-Status: In Progress
+Status: Done — all P0/P1 findings resolved (client + server). Remaining items are
+P2 only: B7 (server, → S02), B8 (confirmed low-impact, fix recommended), D2 (accepted),
+A8 (accepted), A10 (→ S02-02), C10 done.
 
 ## Sprint Goal
 
@@ -94,8 +96,8 @@ Status: Applied & verified on the live project (`pqcovsnomouclkdjhjig`). Migrati
 - [x] B2 (P0) Certificates no longer forgeable. Dropped the permissive INSERT/UPDATE policies. Verified: an authenticated INSERT is rejected by RLS. (Full server-authoritative issuance RPC that validates completion → Sprint 02 S02-03; no real learners issue certs yet.)
 - [x] B4 (P1) `karatou_learner_progress` SELECT scoped to owner / org-admin-of-the-learner / platform admin (was any enterprise admin globally). Full cross-org browser proof → S02-05 (needs seeded 2nd org + auth users).
 - [x] B5 (P1) Already fixed on prod — `karatou_content_imports` is already platform-admin only (verified live; the review read an older migration file).
-- [ ] B7 (P2) Generate bourse codes server-side with a CSPRNG + adequate length; rate-limit the redeem RPC.
-- [ ] B8 (P2) Confirm `profiles.role` cannot be self-updated; treat it as display-only.
+- [ ] B7 (P2) Generate bourse codes server-side with a CSPRNG + adequate length; rate-limit the redeem RPC. (Server-side; pairs with S02 redemption work.)
+- [ ] B8 (P2) Confirmed low-impact: `profiles` has an UPDATE policy with no `with_check` and a `role` column grant, so a user can write their own `profiles.role`. **Authorization is unaffected** (RLS keys off `app_metadata` JWT role, not `profiles.role`); impact is client-side display/routing only. Recommended fix: `revoke insert (role), update (role) on public.profiles from anon, authenticated;` (role is only set by the service-role `seed:admin` script).
 
 Additional findings from `get_advisors` (not in the file-based review) — fixed:
 - [x] Legacy SECURITY DEFINER views `certificate_status_view` / `org_member_progress_view` (from the archived Next.js schema, unused by this app) had full anon grants and exposed `auth.users.email`. Revoked anon/authenticated access; advisors' ERROR-level `auth_users_exposed` and `security_definer_view` lints cleared.
