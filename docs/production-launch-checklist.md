@@ -117,11 +117,19 @@ npm run seed:admin   # needs SUPABASE_SERVICE_ROLE_KEY + KARATOU_ADMIN_EMAIL/PAS
 
 Convenience: `npm run prod:bootstrap` runs push + seed:content + seed:admin in order.
 
-### Enterprise admins (manual)
+### Enterprise admins
 
-There is no script for enterprise admins yet. To grant one, create the Auth user, then
-set `app_metadata.role = "enterprise_admin"` (and add an active row in
-`karatou_org_memberships` for their organization) via the Supabase dashboard or admin API.
+`seed:enterprise-admin` creates/updates an enterprise-admin Auth user, sets
+`app_metadata.role = "enterprise_admin"`, and links them to an existing organization
+(`karatou_org_memberships` + `karatou_enterprise_members`). The org must already exist
+(`npm run seed:content`).
+
+```bash
+KARATOU_ENTERPRISE_EMAIL=admin@partner.org \
+KARATOU_ENTERPRISE_PASSWORD=... \
+KARATOU_ENTERPRISE_ORG_ID=org-pnud-niger \
+npm run seed:enterprise-admin   # needs SUPABASE_SERVICE_ROLE_KEY
+```
 
 ---
 

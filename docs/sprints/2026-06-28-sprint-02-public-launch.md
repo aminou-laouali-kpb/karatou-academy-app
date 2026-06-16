@@ -43,7 +43,11 @@ Out of scope (deferred, same as Sprint 01 plus follow-ups):
 
 ### S02-01 - Real Auth Users And Roles In Production
 
-Status: Not started
+Status: Partially done. **Platform admin already configured & functional** —
+`alaoualiabdou@karatoupostbac.com` has `app_metadata.role = 'admin'` (email confirmed),
+which `karatou_is_platform_admin()` accepts and the app normalizes to `platform_admin`.
+Remaining: create real **enterprise-admin** and **learner** Auth accounts (needs the
+service-role key — use `seed:enterprise-admin` for the admin; learners self-register).
 Priority: P0
 Estimate: 5 pts
 
@@ -64,7 +68,10 @@ Acceptance criteria:
 
 ### S02-02 - Enterprise Admin Provisioning Script
 
-Status: Not started
+Status: Done. Added `scripts/create-supabase-enterprise-admin.mjs` + `npm run seed:enterprise-admin`:
+creates/updates an enterprise-admin Auth user, sets `app_metadata.role = 'enterprise_admin'`,
+and links them to an existing org (`karatou_org_memberships` + `karatou_enterprise_members`).
+Env vars documented in `.env.example`; usage in the launch checklist.
 Priority: P1
 Estimate: 3 pts
 

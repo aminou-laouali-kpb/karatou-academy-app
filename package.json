@@ -18,6 +18,7 @@
     "seed:content:dry": "node scripts/seed-supabase-content.mjs --dry-run",
     "seed:content": "node scripts/seed-supabase-content.mjs",
     "seed:admin": "node scripts/create-supabase-admin.mjs",
+    "seed:enterprise-admin": "node scripts/create-supabase-enterprise-admin.mjs",
     "prod:bootstrap": "npm run supabase:push && npm run seed:content && npm run seed:admin"
   },
   "dependencies": {
