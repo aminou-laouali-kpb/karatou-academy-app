@@ -22,6 +22,13 @@ test.describe('Platform admin CMS', () => {
     await expect(page.getByRole('heading', { name: 'Creer un admin entreprise' })).toBeVisible();
   });
 
+  test('bulk attestations tool loads', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.goto('/admin/attestations');
+    await expect(page.getByRole('heading', { name: 'Attestations en masse' })).toBeVisible();
+    await expect(page.getByText('Charger le modele PDF')).toBeVisible();
+  });
+
   test('saves a new draft module and shows it in the module list', async ({ page }) => {
     await demoLogin(page, 'platform');
 

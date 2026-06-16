@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { BookOpenCheck, Building2, LogOut, ShieldCheck, UserPlus, UsersRound } from 'lucide-react';
+import { Award, BookOpenCheck, Building2, LogOut, ShieldCheck, UserPlus, UsersRound } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { useAuth } from '../hooks/useAuth';
@@ -13,6 +13,7 @@ export function AdminNav() {
   const tabs = [
     { to: '/admin', label: 'Contenus CMS', icon: BookOpenCheck, end: true },
     { to: '/admin/team', label: 'Equipe & acces', icon: UserPlus },
+    { to: '/admin/attestations', label: 'Attestations', icon: Award },
     { to: '/enterprise', label: 'Supervision enterprise', icon: Building2 },
     { to: '/enterprise/members', label: 'Apprenants & bourses', icon: UsersRound },
   ];

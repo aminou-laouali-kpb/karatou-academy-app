@@ -333,6 +333,37 @@ Implementation:
 Why this matters: this is the production-grade replacement for the `seed:enterprise-admin`
 script (which stays only for the very first bootstrap).
 
+### S02-13 - Bulk Attestation Generator
+
+Status: Done (client tool). Lazy-loaded admin page.
+Priority: P2
+Estimate: 8 pts
+
+User story:
+As a platform admin, I want to generate signed attestation PDFs in bulk from a PDF
+template and an Excel list, positioning the name and QR visually.
+
+Implementation:
+- `/admin/attestations` page (lazy, platform-admin) with a left config panel and a
+  live `react-pdf` preview. Upload a PDF template + an `.xlsx/.xls` list (parsed with
+  `xlsx`, first column = names). Drag-and-drop the name and QR over the preview
+  (pointer events), resize the name box (handle), and control font size/colour/X-Y/
+  alignment/width; per-participant navigation.
+- `src/services/attestationGenerator.ts`: per name, builds a QR payload
+  (random id, name, issue/expiry dates, **HMAC-SHA256** signature via `crypto-js`),
+  stamps the template with `pdf-lib`, embeds the QR, and zips all PDFs + a
+  `Tracabilite_Certificats.csv` with `jszip` + `file-saver`.
+- Heavy libs (pdf-lib, pdfjs, xlsx, jszip) live only in this lazy chunk (~1.4 MB),
+  so the main bundle is unaffected. `tsconfig` gained `esModuleInterop` for the CJS libs.
+- E2E: the tool page loads.
+
+Caveats:
+- The HMAC secret is a `VITE_` var, so it is bundled into the client and not truly
+  secret (deters casual tampering only) — per the chosen design. For real
+  tamper-resistance, sign server-side.
+- `xlsx@0.18.5` carries a known advisory; acceptable for an admin-only upload, but
+  consider the SheetJS CDN build before wider exposure.
+
 ## Definition Of Done
 
 Every completed item must:
