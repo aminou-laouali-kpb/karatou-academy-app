@@ -209,7 +209,10 @@ Acceptance criteria:
 
 ### S02-08 - Observability And Error Monitoring
 
-Status: Not started
+Status: Deferred (decision 2026-06-17). Product analytics (PostHog) postponed to
+post-launch; for the pilot, derive metrics (signups / completions / certificates)
+directly from Supabase SQL. When added, use PostHog EU Cloud, events-not-PII,
+lazy-loaded + consent-gated. Error monitoring still TODO before wide launch.
 Priority: P2
 Estimate: 3 pts
 
