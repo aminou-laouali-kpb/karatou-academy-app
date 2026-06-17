@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Ban, CheckCircle2, ShieldCheck, XCircle } from 'lucide-react';
 import { Logo } from '../components/Logo';
@@ -17,17 +17,28 @@ export function VerifyAttestation() {
   const { t } = useLanguage();
   const [manual, setManual] = useState('');
   const [manualResult, setManualResult] = useState<VerificationResult | null>(null);
+  const [hashResult, setHashResult] = useState<VerificationResult | null>(null);
 
-  // Result from the scanned QR (URL hash) is derived during render.
-  const hashResult = useMemo<VerificationResult | null>(() => {
+  // Decode the scanned QR (URL hash) during render; verify it (async) in an effect.
+  const hashPayload = useMemo(() => {
     const raw = hash.replace(/^#/, '');
-    if (!raw) return null;
-    const payload = decodeAttestationPayload(raw);
-    return payload ? verifyAttestation(payload) : { status: 'invalid' };
+    if (!raw) return undefined;
+    return decodeAttestationPayload(raw);
   }, [hash]);
+
+  useEffect(() => {
+    if (hashPayload === undefined) return;
+    let active = true;
+    const run = hashPayload
+      ? verifyAttestation(hashPayload)
+      : Promise.resolve<VerificationResult>({ status: 'invalid' });
+    run.then((value) => { if (active) setHashResult(value); });
+    return () => { active = false; };
+  }, [hashPayload]);
+
   const result = manualResult ?? hashResult;
 
-  const verifyManual = () => {
+  const verifyManual = async () => {
     const trimmed = manual.trim();
     if (!trimmed) return;
     let payload: CertificatePayload | null = null;
@@ -41,7 +52,7 @@ export function VerifyAttestation() {
       const fragment = trimmed.includes('#') ? trimmed.slice(trimmed.indexOf('#') + 1) : trimmed;
       payload = decodeAttestationPayload(fragment);
     }
-    setManualResult(payload?.signature ? verifyAttestation(payload) : { status: 'invalid' });
+    setManualResult(payload?.signature ? await verifyAttestation(payload) : { status: 'invalid' });
   };
 
   const status = result?.status;

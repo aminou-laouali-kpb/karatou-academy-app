@@ -356,15 +356,23 @@ Implementation:
 - Heavy libs (pdf-lib, pdfjs, xlsx, jszip) live only in this lazy chunk (~1.4 MB),
   so the main bundle is unaffected. `tsconfig` gained `esModuleInterop` for the CJS libs.
 - E2E: the tool page loads.
-- Verification: the QR now encodes a scannable `/verify-attestation#<signed-payload>` URL
-  (the signed JSON is base64 in the hash, so it stays self-contained/offline-verifiable).
-  The public `/verify-attestation` page recomputes the HMAC and shows authentic / expired /
-  tampered, with a paste fallback. E2E covers the tamper-detection path.
+- Verification: the QR encodes a scannable `/verify-attestation#<signed-payload>` URL.
+  The public `/verify-attestation` page shows authentic / expired / tampered, with a
+  paste fallback. E2E covers the tamper-detection path.
+
+Security upgrade (server-side signing):
+- Signing and verification now run **server-side** via Edge Functions
+  `attestation-sign` (platform-admin only) and `attestation-verify` (public). The HMAC
+  secret lives on the server (derived from the service-role key, or `ATTESTATION_SECRET`
+  if set) and is never shipped to the browser → signatures are **infalsifiable** in
+  production. Generation does one batch sign call; verification is online.
+- A local HMAC fallback (the `VITE_ATTESTATION_SECRET`) is used **only** when Supabase
+  is not configured (offline/demo, e.g. Replit). Verified on prod: unauthenticated
+  verify returns 401, a tampered payload returns `invalid`.
 
 Caveats:
-- The HMAC secret is a `VITE_` var, so it is bundled into the client and not truly
-  secret (deters casual tampering only) — per the chosen design. For real
-  tamper-resistance, sign server-side.
+- Server-side verification requires a network call (no offline verify in production) —
+  the trade-off for infalsifiability.
 - `xlsx@0.18.5` carries a known advisory; acceptable for an admin-only upload, but
   consider the SheetJS CDN build before wider exposure.
 

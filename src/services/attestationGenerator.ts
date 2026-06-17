@@ -5,10 +5,12 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { format, addYears } from 'date-fns';
 import * as XLSX from 'xlsx';
+import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 
-// HMAC secret. NOTE: a VITE_ var is bundled into the client, so this is NOT
-// truly secret — it deters casual tampering, not a determined attacker. For
-// real tamper-resistance, sign server-side (see Sprint 02 notes).
+// Local/demo HMAC secret — used ONLY when Supabase is not configured (offline
+// demo on e.g. Replit). In production, signing and verification run server-side
+// via the attestation-sign / attestation-verify Edge Functions, where the real
+// secret lives and is never shipped to the browser.
 const SECRET = (import.meta.env.VITE_ATTESTATION_SECRET as string | undefined) || 'karatou-attestation-demo-secret';
 
 export type TextAlign = 'left' | 'center' | 'right';
@@ -41,14 +43,40 @@ function randomCertId(): string {
   return `KA-ATT-${format(new Date(), 'yyyy')}-${rand}`;
 }
 
-export function buildSignedPayload(name: string): CertificatePayload {
+// Local/demo signing (used only when Supabase is not configured).
+function buildSignedPayloadLocal(name: string): CertificatePayload {
   const now = new Date();
   const id = randomCertId();
   const issuedAt = format(now, 'yyyy-MM-dd');
   const expiresAt = format(addYears(now, 1), 'yyyy-MM-dd');
-  // Sign the canonical fields so the QR cannot be altered without the secret.
   const signature = signatureFor({ id, name, issuedAt, expiresAt });
   return { id, name, issuedAt, expiresAt, signature };
+}
+
+/**
+ * Signs a batch of names. Server-side via the attestation-sign Edge Function when
+ * Supabase is configured (real secret, infalsifiable); local demo fallback otherwise.
+ */
+export async function signAttestations(names: string[]): Promise<CertificatePayload[]> {
+  const clean = names.map((value) => value.trim()).filter(Boolean);
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.functions.invoke('attestation-sign', { body: { names: clean } });
+    if (error) {
+      let message = error.message;
+      const context = (error as { context?: Response }).context;
+      if (context && typeof context.json === 'function') {
+        try {
+          const payload = await context.json();
+          if (payload?.error) message = String(payload.error);
+        } catch {
+          // keep the original error message
+        }
+      }
+      throw new Error(message);
+    }
+    return (data as { payloads: CertificatePayload[] }).payloads;
+  }
+  return clean.map((name) => buildSignedPayloadLocal(name));
 }
 
 export type VerificationStatus = 'valid' | 'expired' | 'invalid';
@@ -68,12 +96,24 @@ function signatureFor(payload: Pick<CertificatePayload, 'id' | 'name' | 'issuedA
   return CryptoJS.HmacSHA256(base, SECRET).toString();
 }
 
-/** Recomputes the HMAC and checks expiry. */
-export function verifyAttestation(payload: CertificatePayload): VerificationResult {
+function verifyAttestationLocal(payload: CertificatePayload): VerificationResult {
   if (!payload?.id || !payload.signature) return { status: 'invalid' };
   if (signatureFor(payload) !== payload.signature) return { status: 'invalid' };
   const expired = new Date(`${payload.expiresAt}T23:59:59`).getTime() < Date.now();
   return { status: expired ? 'expired' : 'valid', payload };
+}
+
+/**
+ * Verifies a payload. Server-side via the attestation-verify Edge Function when
+ * Supabase is configured; local demo fallback otherwise.
+ */
+export async function verifyAttestation(payload: CertificatePayload): Promise<VerificationResult> {
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.functions.invoke('attestation-verify', { body: { payload } });
+    if (error || !data) return { status: 'invalid' };
+    return data as VerificationResult;
+  }
+  return verifyAttestationLocal(payload);
 }
 
 export function encodeAttestationPayload(payload: CertificatePayload): string {
@@ -157,9 +197,12 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
       .join(','),
   ];
 
-  for (let index = 0; index < names.length; index += 1) {
-    const name = names[index];
-    const payload = buildSignedPayload(name);
+  // Sign the whole batch up front (one server round-trip when Supabase is configured).
+  const payloads = await signAttestations(names);
+
+  for (let index = 0; index < payloads.length; index += 1) {
+    const payload = payloads[index];
+    const name = payload.name;
 
     const pdfDoc = await PDFDocument.load(templateBuffer.slice(0));
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
@@ -189,7 +232,7 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     zip.file(`${safeFileName(name)}_Attestation.pdf`, bytes);
     csvRows.push([payload.id, name, payload.issuedAt, payload.expiresAt, payload.signature].map(csvCell).join(','));
 
-    onProgress?.(index + 1, names.length);
+    onProgress?.(index + 1, payloads.length);
   }
 
   // BOM so Excel opens the UTF-8 CSV correctly.
@@ -197,5 +240,5 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
 
   const blob = await zip.generateAsync({ type: 'blob' });
   saveAs(blob, 'Attestations_Karatou.zip');
-  return names.length;
+  return payloads.length;
 }
