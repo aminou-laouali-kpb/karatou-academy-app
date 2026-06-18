@@ -1,0 +1,19 @@
+modules = ["nodejs-20"]
+entrypoint = "src/main.tsx"
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+# Static deployment: build the Vite SPA and serve dist/.
+# In the Replit Deployments UI, enable the single-page-app rewrite so client
+# routes like /verify/:uid and /redeem/:code resolve to index.html.
+[deployment]
+deploymentTarget = "static"
+build = ["npm", "run", "build"]
+publicDir = "dist"
+
+# Map the Vite dev server (5173) to the public preview.
+[[ports]]
+localPort = 5173
+externalPort = 80
