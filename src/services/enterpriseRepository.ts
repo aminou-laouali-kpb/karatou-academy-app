@@ -16,6 +16,7 @@ interface OrganizationRow {
   plan: string;
   seats_total: number;
   status: Organization['status'];
+  logo_url: string | null;
 }
 
 interface EnterpriseMemberRow {
@@ -78,6 +79,7 @@ function mapOrganization(row: OrganizationRow): Organization {
     plan: row.plan,
     seatsTotal: row.seats_total,
     status: row.status,
+    logoUrl: row.logo_url ?? undefined,
   };
 }
 
@@ -258,6 +260,7 @@ function organizationToRow(org: Organization) {
     plan: org.plan,
     seats_total: org.seatsTotal,
     status: org.status,
+    logo_url: org.logoUrl ?? null,
   };
 }
 
@@ -270,6 +273,39 @@ export async function saveOrganizationRecord(org: Organization) {
 
   if (isEnterpriseSchemaPending(error)) return;
   if (error) throw error;
+}
+
+const ORG_LOGO_BUCKET = 'org-logos';
+
+// Uploads a sponsor logo to the public Storage bucket (platform-admin only by
+// RLS) and returns its public URL.
+export async function uploadOrgLogo(orgId: string, file: File): Promise<string> {
+  if (!isSupabaseConfigured || !supabase) {
+    throw new Error('Supabase requis pour televerser un logo.');
+  }
+  const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '') || 'png';
+  const path = `${orgId}/logo.${ext}`;
+  const { error } = await supabase.storage
+    .from(ORG_LOGO_BUCKET)
+    .upload(path, file, { upsert: true, contentType: file.type || undefined });
+  if (error) throw error;
+  const { data } = supabase.storage.from(ORG_LOGO_BUCKET).getPublicUrl(path);
+  return `${data.publicUrl}?v=${Date.now()}`;
+}
+
+export async function fetchOrganizationLogo(orgId: string): Promise<string | null> {
+  if (!isSupabaseConfigured || !supabase || !orgId) {
+    return null;
+  }
+  const { data, error } = await requireClient()
+    .from(TABLES.organizations)
+    .select('logo_url')
+    .eq('id', orgId)
+    .maybeSingle();
+  if (error) {
+    return null;
+  }
+  return (data as { logo_url: string | null } | null)?.logo_url ?? null;
 }
 
 export async function redeemScholarshipRecord(code: string): Promise<RedeemScholarshipResult | null> {

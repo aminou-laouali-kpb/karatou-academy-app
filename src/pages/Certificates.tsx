@@ -9,32 +9,9 @@ import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
+import { downloadCertificatePdf } from '../services/certificatePdf';
+import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { Download, ExternalLink, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
-
-function downloadCertificate(certificate: Certificate) {
-  const verificationUrl =
-    typeof window === 'undefined'
-      ? `https://karatou.academy/verify/${encodeURIComponent(certificate.uid)}`
-      : `${window.location.origin}/verify/${encodeURIComponent(certificate.uid)}`;
-  const content = [
-    'Karatou Academy - Certification Officielle',
-    '',
-    `Titulaire: ${certificate.userName}`,
-    `Module: ${certificate.moduleName}`,
-    `ID: ${certificate.uid}`,
-    `Delivre: ${certificate.issuedAt}`,
-    `Valide jusqu'au: ${certificate.expiresAt}`,
-    `Statut: ${certificate.status}`,
-    `Verification: ${verificationUrl}`,
-  ].join('\n');
-  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `${certificate.uid}.txt`;
-  link.click();
-  URL.revokeObjectURL(url);
-}
 
 export function Certificates() {
   const navigate = useNavigate();
@@ -53,6 +30,22 @@ export function Certificates() {
   const primaryModuleTitle = primaryCert
     ? localizedModules.find((module) => module.slug === primaryCert.moduleSlug)?.title || primaryCert.moduleName
     : '';
+
+  const handleDownload = async (certificate: Certificate, moduleTitle: string) => {
+    const verifyUrl =
+      typeof window === 'undefined'
+        ? `https://karatou.academy/verify/${certificate.uid}`
+        : `${window.location.origin}/verify/${certificate.uid}`;
+    const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
+    await downloadCertificatePdf({
+      name: certificate.userName,
+      moduleName: moduleTitle,
+      issuedAt: certificate.issuedAt,
+      uid: certificate.uid,
+      verifyUrl,
+      sponsorLogoUrl,
+    });
+  };
 
   const handleIssue = (moduleSlug: string) => {
     if (!user) {
@@ -142,7 +135,7 @@ export function Certificates() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-12">
-              <Button variant="outline" size="sm" onClick={() => downloadCertificate({ ...primaryCert, moduleName: primaryModuleTitle })}>
+              <Button variant="outline" size="sm" onClick={() => handleDownload(primaryCert, primaryModuleTitle)}>
                 <Download size={16} /> {t('downloadCertificate')}
               </Button>
               <Button variant="primary" size="sm" onClick={() => navigate(`/verify/${primaryCert.uid}`)}>

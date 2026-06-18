@@ -56,6 +56,23 @@ sprint closes them so that, in production, **each user sees only their own data*
 - Backend journey re-validated on prod (rolled back): issuance gated on completion, anon verify
   reflects active/expired/revoked/unknown.
 
+## Designed certificate (Coursera-style) + sponsor logos
+
+Learner certificate download is now a branded PDF (replacing the old `.txt`):
+- `src/services/certificatePdf.ts` generates the certificate with `pdf-lib`: recreated
+  Karatou Academy logo (gold "K" on a blue rounded mark + serif wordmark + tagline),
+  double navy/gold frame, gold corner flourishes, a gold seal/rosette, the recipient
+  name, module, issue date, and a **QR + ID** linking to `/verify/:uid`. Verified by a
+  Node smoke test (valid PDF, all SVG-path/dashed/QR primitives render).
+- **Sponsor logo**: `karatou_organizations.logo_url` (migration) + a public Storage
+  bucket `org-logos` (platform-admin write, public read). `/admin/team` org creation
+  gains an optional logo upload (`uploadOrgLogo`). When a learner's org has a logo, the
+  certificate embeds it top-right ("En partenariat avec"). Resolved at download via
+  `fetchOrganizationLogo(user.orgId)`; missing/CORS-failing logos are skipped gracefully.
+- Karatou logo is recreated in code (zero asset dependency); drop a real PNG at
+  `public/brand/` later for pixel-perfect if desired.
+- typecheck, lint, build, 27 E2E all green.
+
 ## Remaining (operator)
 
 1. **Replit env (the actual switch to production):** set Secrets and restart the Repl —

@@ -47,6 +47,7 @@ export interface Organization {
   plan: string;
   seatsTotal: number;
   status: 'active' | 'inactive';
+  logoUrl?: string;
 }
 
 export interface Course {

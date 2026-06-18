@@ -6,6 +6,7 @@ import { useLearning } from '../hooks/useLearning';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 import { provisionEnterpriseAdmin } from '../services/adminRepository';
+import { uploadOrgLogo, saveOrganizationRecord } from '../services/enterpriseRepository';
 
 const inputClass =
   'mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
@@ -21,15 +22,37 @@ export function AdminTeam() {
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<{ tone: 'success' | 'error'; message: string } | null>(null);
   const [orgName, setOrgName] = useState('');
+  const [orgLogoFile, setOrgLogoFile] = useState<File | null>(null);
 
   const isSupabase = authMode === 'supabase';
 
-  const handleCreateOrg = (event: FormEvent) => {
+  const handleCreateOrg = async (event: FormEvent) => {
     event.preventDefault();
+    setNotice(null);
     const created = createOrganization({ name: orgName });
+    let extra = '';
+    if (orgLogoFile && isSupabase) {
+      try {
+        const url = await uploadOrgLogo(created.id, orgLogoFile);
+        await saveOrganizationRecord({ ...created, logoUrl: url });
+        extra = ' — logo televerse';
+      } catch (error) {
+        setOrgId(created.id);
+        setOrgName('');
+        setOrgLogoFile(null);
+        setNotice({
+          tone: 'error',
+          message: `Organisation creee, mais echec du logo: ${error instanceof Error ? error.message : 'erreur'}`,
+        });
+        return;
+      }
+    } else if (orgLogoFile && !isSupabase) {
+      extra = ' (logo ignore en mode demo)';
+    }
     setOrgId(created.id);
     setOrgName('');
-    setNotice({ tone: 'success', message: `${t('teamOrgCreated')}: ${created.name}` });
+    setOrgLogoFile(null);
+    setNotice({ tone: 'success', message: `${t('teamOrgCreated')}: ${created.name}${extra}` });
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -91,6 +114,16 @@ export function AdminTeam() {
           <label className="block">
             <span className="text-sm font-medium text-gray-700">{t('teamOrgNameLabel')}</span>
             <input value={orgName} onChange={(event) => setOrgName(event.target.value)} required className={inputClass} />
+          </label>
+          <label className="block">
+            <span className="text-sm font-medium text-gray-700">{t('teamOrgLogoLabel')}</span>
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/jpg"
+              onChange={(event) => setOrgLogoFile(event.target.files?.[0] ?? null)}
+              className="mt-1.5 w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-blue-700"
+            />
+            <span className="mt-1 block text-xs text-gray-400">{t('teamOrgLogoHint')}</span>
           </label>
           <Button type="submit" variant="outline" size="md" disabled={!orgName.trim()}>
             {t('teamCreateOrgBtn')}
