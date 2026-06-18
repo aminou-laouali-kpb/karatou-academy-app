@@ -27,7 +27,7 @@ export default tseslint.config(
   },
   {
     // Node-context files: E2E tests, Playwright config, and Vite config.
-    files: ['e2e/**/*.ts', 'playwright.config.ts', 'vite.config.ts'],
+    files: ['e2e/**/*.ts', 'e2e-prod/**/*.ts', 'playwright.config.ts', 'vite.config.ts'],
     languageOptions: {
       globals: globals.node,
     },

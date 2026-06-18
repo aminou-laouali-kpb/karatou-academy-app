@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:e2e": "vite --mode e2e --port 4317 --strictPort --host 127.0.0.1",
+    "dev:e2e-prod": "vite --mode e2e-prod --port 4318 --strictPort --host 127.0.0.1",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",

@@ -251,18 +251,32 @@ export function LessonPlayer() {
 
   const module = useMemo(() => {
     const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
-    return localizeModule(sourceModule, lang);
+    return sourceModule ? localizeModule(sourceModule, lang) : null;
   }, [modules, moduleSlug, lang]);
-  const courseIndex = Math.max(0, module.courses.findIndex((candidate) => candidate.id === courseId));
-  const course = module.courses[courseIndex] || module.courses[0];
-  const completedIds = getCompletedCourseIds(module.slug);
-  const progress = getProgress(module.slug);
+  const courseIndex = module ? Math.max(0, module.courses.findIndex((candidate) => candidate.id === courseId)) : 0;
+  const course = module ? module.courses[courseIndex] || module.courses[0] : undefined;
+  const completedIds = module ? getCompletedCourseIds(module.slug) : [];
+  const progress = module ? getProgress(module.slug) : 0;
   const lesson = useMemo(
     () =>
-      getAuthoredLesson(module.slug, course.id, lang) ||
-      buildLesson(module.title, course.title, courseIndex, course.description, lang),
-    [course.description, course.id, course.title, courseIndex, lang, module.slug, module.title]
+      module && course
+        ? getAuthoredLesson(module.slug, course.id, lang) ||
+          buildLesson(module.title, course.title, courseIndex, course.description, lang)
+        : null,
+    [module, course, courseIndex, lang]
   );
+
+  // Empty production tenant (no published modules / course): clean empty state.
+  if (!module || !course || !lesson) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <p className="text-sm text-gray-500">{t('noCoursesYet')}</p>
+        </main>
+      </div>
+    );
+  }
   const userCertificates = user ? getUserCertificates(user.id) : [];
   const activeCertificate = userCertificates.find(
     (certificate) => certificate.moduleSlug === module.slug && certificate.status === 'active'

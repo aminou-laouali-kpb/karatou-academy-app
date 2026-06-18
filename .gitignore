@@ -33,3 +33,4 @@ supabase/.temp/
 .env*
 !.env.example
 !.env.e2e
+!.env.e2e-prod

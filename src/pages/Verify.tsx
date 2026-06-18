@@ -6,6 +6,7 @@ import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { fetchCertificateByUid } from '../services/learningRepository';
+import { isDemoEnabled } from '../lib/demoMode';
 import { Certificate } from '../types';
 import { Ban, CheckCircle2, Shield, XCircle, QrCode } from 'lucide-react';
 
@@ -19,7 +20,11 @@ export function Verify() {
   const { certificates, modules } = useLearning();
   const { lang, t } = useLanguage();
   const normalizedUid = normalizeCertificateUid(uid);
-  const localCert = certificates.find((candidate) => normalizeCertificateUid(candidate.uid) === normalizedUid);
+  // Only trust local (demo seed) certificates in demo mode. In production, /verify is
+  // authoritative on the server RPC so fabricated demo UIDs can never pass verification.
+  const localCert = isDemoEnabled
+    ? certificates.find((candidate) => normalizeCertificateUid(candidate.uid) === normalizedUid)
+    : undefined;
   const remoteCert = remoteLookup?.uid === normalizedUid ? remoteLookup.certificate : null;
   const isLoading = Boolean(normalizedUid && !localCert && remoteLookup?.uid !== normalizedUid);
   const cert = localCert || remoteCert;

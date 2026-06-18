@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { certificates as seedCertificates, enterpriseData, modules as seedModules, rubriques as seedRubriques } from '../data/mockData';
 import { Certificate, ContentImportRecord, ContentMutationResult, DemoUser, EnterpriseMember, LearningModule, Organization, RedeemScholarshipResult, Rubrique, Scholarship } from '../types';
 import { LearningContext } from './learningCore';
@@ -28,7 +28,8 @@ import {
   saveScholarshipRecord,
 } from '../services/enterpriseRepository';
 
-const LEARNING_STORAGE_KEY = 'karatou.learning.v6';
+// Namespaced per mode so a demo-populated store can never be read in production.
+const LEARNING_STORAGE_KEY = isDemoEnabled ? 'karatou.learning.v6.demo' : 'karatou.learning.v6.prod';
 
 interface StoredLearningState {
   modules: LearningModule[];
@@ -49,7 +50,8 @@ const initialCompletedCourses = seedModules.reduce<Record<string, string[]>>((ac
   return acc;
 }, {});
 
-const defaultState: StoredLearningState = {
+// Demo seed (mockData) — used ONLY in demo mode.
+const demoSeedState: StoredLearningState = {
   modules: seedModules,
   rubriques: seedRubriques,
   contentImports: [],
@@ -60,6 +62,22 @@ const defaultState: StoredLearningState = {
   members: enterpriseData.members,
   scholarships: enterpriseData.scholarships,
 };
+
+// Empty state — the production default. Real data comes only from Supabase, so
+// no shared/mock/demo data is ever shown to a real user.
+const emptyState: StoredLearningState = {
+  modules: [],
+  rubriques: [],
+  contentImports: [],
+  completedCourses: {},
+  certificates: [],
+  organizations: [],
+  organization: null,
+  members: [],
+  scholarships: [],
+};
+
+const defaultState: StoredLearningState = isDemoEnabled ? demoSeedState : emptyState;
 
 function readStoredState() {
   if (typeof window === 'undefined') {
@@ -86,6 +104,10 @@ function repairStoredState(state: StoredLearningState): StoredLearningState {
 }
 
 function repairSeedCertificates(state: StoredLearningState): StoredLearningState {
+  // Never inject demo certificates in production (they would let /verify validate fakes).
+  if (!isDemoEnabled) {
+    return state;
+  }
   const existingUids = new Set(state.certificates.map((certificate) => certificate.uid));
   const missingSeedCertificates = seedCertificates.filter((certificate) => !existingUids.has(certificate.uid));
 
@@ -192,6 +214,22 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     getContentBackend() === 'supabase' ? 'Connexion Supabase en attente...' : 'Mode demo local'
   );
 
+  // Per-user isolation: when the auth identity changes (login / logout / switch on
+  // a shared device), drop the previous session's cached data. Real data reloads via
+  // the snapshot effects below. Demo mode keeps its seed.
+  const lastUserIdRef = useRef(userId);
+  useEffect(() => {
+    if (lastUserIdRef.current === userId) {
+      return;
+    }
+    lastUserIdRef.current = userId;
+    if (!isDemoEnabled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on identity change
+      setState(emptyState);
+      persistState(emptyState);
+    }
+  }, [userId]);
+
   useEffect(() => {
     let active = true;
 
@@ -293,7 +331,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
             persistState(next);
             return next;
           });
-          setContentSyncStatus('Supabase enterprise en attente - schema organisations a appliquer, donnees locales actives');
+          setContentSyncStatus(
+            isDemoEnabled
+              ? 'Supabase enterprise en attente - schema organisations a appliquer, donnees demo actives'
+              : 'Supabase enterprise en attente - aucune donnee (schema a appliquer)'
+          );
           return;
         }
 

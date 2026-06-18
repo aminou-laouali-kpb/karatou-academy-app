@@ -26,6 +26,15 @@ function readStoredUser() {
     return null;
   }
 
+  // Production never trusts the local auth store: real Supabase sessions are not
+  // persisted to this key (login/register/hydrate call persistUser(null)), so this
+  // key only ever holds demo users. Ignoring it in production prevents a crafted
+  // localStorage entry from granting a synchronous "authenticated" state before the
+  // real getUser() validation runs.
+  if (!isDemoEnabled) {
+    return null;
+  }
+
   try {
     const raw = window.localStorage.getItem(AUTH_STORAGE_KEY);
     const parsed: unknown = raw ? JSON.parse(raw) : null;

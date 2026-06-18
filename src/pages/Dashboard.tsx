@@ -33,6 +33,28 @@ export function Dashboard() {
     (total, module) => total + getCompletedCourseIds(module.slug).length,
     0
   );
+
+  // Empty production tenant (no published modules yet): show a clean empty state
+  // instead of crashing on an undefined active module.
+  if (!activeModule) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 sm:p-8 mb-8">
+            <h1 className="font-playfair text-2xl sm:text-3xl font-bold text-white mb-2">
+              {t('hello')}, {user?.name?.split(' ')[0] || ''}
+            </h1>
+            <p className="text-blue-100">{t('noCoursesYet')}</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-sm text-gray-500">
+            {t('noCoursesYet')}
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   const activeCourse = activeModule.courses.find((course) => !getCompletedCourseIds(activeModule.slug).includes(course.id)) || activeModule.courses[0];
 
   return (
