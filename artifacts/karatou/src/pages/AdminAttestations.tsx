@@ -10,8 +10,8 @@ import {
   generateAttestationsZip, parseParticipants, NamePlacement, QrPlacement, TextAlign,
 } from '../services/attestationGenerator';
 
-// pdf.js worker (Vite-friendly).
-pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+// pdf.js worker — served from /public so it works in both dev and production builds.
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
 const PREVIEW_WIDTH = 560;
 const inputClass = 'w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
