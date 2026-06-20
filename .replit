@@ -34,3 +34,8 @@ externalPort = 3001
 [[ports]]
 localPort = 24841
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+VITE_DEMO_ENABLED = "true"
