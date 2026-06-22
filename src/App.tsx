@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { ComponentType, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
@@ -7,30 +7,44 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { DemoBadge } from './components/DemoBadge';
 import { SkipLink } from './components/SkipLink';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { OfflineBanner } from './components/OfflineBanner';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
 // download the admin CMS, lesson player, and all lesson copy up front.
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
 
-const Register = lazy(() => import('./pages/Register').then((m) => ({ default: m.Register })));
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword').then((m) => ({ default: m.ForgotPassword })));
-const ResetPassword = lazy(() => import('./pages/ResetPassword').then((m) => ({ default: m.ResetPassword })));
-const PrivacyPolicy = lazy(() => import('./pages/Legal').then((m) => ({ default: m.PrivacyPolicy })));
-const TermsOfService = lazy(() => import('./pages/Legal').then((m) => ({ default: m.TermsOfService })));
-const VerifyAttestation = lazy(() => import('./pages/VerifyAttestation').then((m) => ({ default: m.VerifyAttestation })));
-const Dashboard = lazy(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })));
-const LessonPlayer = lazy(() => import('./pages/LessonPlayer').then((m) => ({ default: m.LessonPlayer })));
-const Certificates = lazy(() => import('./pages/Certificates').then((m) => ({ default: m.Certificates })));
-const Verify = lazy(() => import('./pages/Verify').then((m) => ({ default: m.Verify })));
-const RedeemScholarship = lazy(() => import('./pages/RedeemScholarship').then((m) => ({ default: m.RedeemScholarship })));
-const EnterpriseDashboard = lazy(() => import('./pages/EnterpriseDashboard').then((m) => ({ default: m.EnterpriseDashboard })));
-const EnterpriseMembers = lazy(() => import('./pages/EnterpriseMembers').then((m) => ({ default: m.EnterpriseMembers })));
-const AdminContent = lazy(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
-const AdminTeam = lazy(() => import('./pages/AdminTeam').then((m) => ({ default: m.AdminTeam })));
-const AdminAttestations = lazy(() => import('./pages/AdminAttestations').then((m) => ({ default: m.AdminAttestations })));
-const AdminNewsletter = lazy(() => import('./pages/AdminNewsletter').then((m) => ({ default: m.AdminNewsletter })));
-const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
+// Lazy with one retry: on a flaky 2G link a chunk import() can transiently fail;
+// retrying once (after a brief wait) recovers without surfacing the ErrorBoundary.
+function lazyWithRetry<T extends ComponentType<unknown>>(factory: () => Promise<{ default: T }>) {
+  return lazy(async () => {
+    try {
+      return await factory();
+    } catch {
+      await new Promise((r) => setTimeout(r, 800));
+      return factory();
+    }
+  });
+}
+
+const Register = lazyWithRetry(() => import('./pages/Register').then((m) => ({ default: m.Register })));
+const ForgotPassword = lazyWithRetry(() => import('./pages/ForgotPassword').then((m) => ({ default: m.ForgotPassword })));
+const ResetPassword = lazyWithRetry(() => import('./pages/ResetPassword').then((m) => ({ default: m.ResetPassword })));
+const PrivacyPolicy = lazyWithRetry(() => import('./pages/Legal').then((m) => ({ default: m.PrivacyPolicy })));
+const TermsOfService = lazyWithRetry(() => import('./pages/Legal').then((m) => ({ default: m.TermsOfService })));
+const VerifyAttestation = lazyWithRetry(() => import('./pages/VerifyAttestation').then((m) => ({ default: m.VerifyAttestation })));
+const Dashboard = lazyWithRetry(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })));
+const LessonPlayer = lazyWithRetry(() => import('./pages/LessonPlayer').then((m) => ({ default: m.LessonPlayer })));
+const Certificates = lazyWithRetry(() => import('./pages/Certificates').then((m) => ({ default: m.Certificates })));
+const Verify = lazyWithRetry(() => import('./pages/Verify').then((m) => ({ default: m.Verify })));
+const RedeemScholarship = lazyWithRetry(() => import('./pages/RedeemScholarship').then((m) => ({ default: m.RedeemScholarship })));
+const EnterpriseDashboard = lazyWithRetry(() => import('./pages/EnterpriseDashboard').then((m) => ({ default: m.EnterpriseDashboard })));
+const EnterpriseMembers = lazyWithRetry(() => import('./pages/EnterpriseMembers').then((m) => ({ default: m.EnterpriseMembers })));
+const AdminContent = lazyWithRetry(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
+const AdminTeam = lazyWithRetry(() => import('./pages/AdminTeam').then((m) => ({ default: m.AdminTeam })));
+const AdminAttestations = lazyWithRetry(() => import('./pages/AdminAttestations').then((m) => ({ default: m.AdminAttestations })));
+const AdminNewsletter = lazyWithRetry(() => import('./pages/AdminNewsletter').then((m) => ({ default: m.AdminNewsletter })));
+const NotFound = lazyWithRetry(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
 function RouteFallback() {
   return (
@@ -154,6 +168,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             </Suspense>
+            <OfflineBanner />
             <DemoBadge />
           </LearningProvider>
         </AuthProvider>
