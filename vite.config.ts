@@ -50,22 +50,8 @@ export default defineConfig(({ mode }) => ({
         // OAuth callbacks that may need real network responses).
         navigateFallbackDenylist: [/^\/api\//, /^\/auth\//],
         runtimeCaching: [
-          // Google Fonts CSS — small, frequently checked.
-          {
-            urlPattern: ({ url }) => url.origin === 'https://fonts.googleapis.com',
-            handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'google-fonts-stylesheets' },
-          },
-          // Google Fonts woff2 — large, immutable. Cache aggressively.
-          {
-            urlPattern: ({ url }) => url.origin === 'https://fonts.gstatic.com',
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-webfonts',
-              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
+          // (Fonts are now self-hosted via @fontsource — included in the SW
+          // precache as woff2 assets; no Google Fonts CDN runtime rule needed.)
           // Supabase Storage (public org logos used on certificates).
           {
             urlPattern: ({ url }) =>
