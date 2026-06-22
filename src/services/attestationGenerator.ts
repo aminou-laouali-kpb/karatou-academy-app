@@ -236,13 +236,15 @@ export interface GenerateParams {
   templateBuffer: ArrayBuffer;
   names: string[];
   namePlacement: NamePlacement;
+  /** Optional placement for the certificate ID (KA-ATT-YYYY-XXXXXX). */
+  idPlacement?: NamePlacement;
   qrPlacement: QrPlacement;
   onProgress?: (done: number, total: number) => void;
 }
 
 /** Builds one attestation PDF per name + a traceability CSV, zips and downloads them. */
 export async function generateAttestationsZip(params: GenerateParams): Promise<number> {
-  const { templateBuffer, names, namePlacement, qrPlacement, onProgress } = params;
+  const { templateBuffer, names, namePlacement, idPlacement, qrPlacement, onProgress } = params;
   const zip = new JSZip();
   const csvRows: string[] = [
     ['ID Certificat', 'Nom du Participant', 'Date de Delivrance', 'Date d Expiration', 'Signature Electronique']
@@ -272,6 +274,22 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     else if (namePlacement.align === 'right') textX = boxX + (boxWidth - textWidth);
     const textY = pageHeight * (1 - namePlacement.yRatio) - fontSize;
     page.drawText(name, { x: textX, y: textY, size: fontSize, font, color: hexToRgb(namePlacement.colorHex) });
+
+    // Certificate ID (same box model as the name) — optional, rendered only
+    // when an idPlacement is provided. Lets admins position the signed UID on
+    // the template so it appears alongside the holder's name.
+    if (idPlacement) {
+      const idText = payload.id;
+      const idFontSize = idPlacement.fontSize;
+      const idBoxX = idPlacement.xRatio * pageWidth;
+      const idBoxWidth = idPlacement.widthRatio * pageWidth;
+      const idTextWidth = font.widthOfTextAtSize(idText, idFontSize);
+      let idTextX = idBoxX;
+      if (idPlacement.align === 'center') idTextX = idBoxX + (idBoxWidth - idTextWidth) / 2;
+      else if (idPlacement.align === 'right') idTextX = idBoxX + (idBoxWidth - idTextWidth);
+      const idTextY = pageHeight * (1 - idPlacement.yRatio) - idFontSize;
+      page.drawText(idText, { x: idTextX, y: idTextY, size: idFontSize, font, color: hexToRgb(idPlacement.colorHex) });
+    }
 
     // QR code with the signed payload.
     const qrDataUrl = await QRCode.toDataURL(attestationVerifyUrl(payload), { margin: 1, width: 512 });
