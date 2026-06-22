@@ -9,9 +9,14 @@ import { Button } from '../components/Button';
 import {
   generateAttestationsZip, parseParticipants, NamePlacement, QrPlacement, TextAlign,
 } from '../services/attestationGenerator';
+// Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
+// Vite emit it as a hashed asset that resolves correctly in production builds
+// (more robust than `new URL(..., import.meta.url)`, which can break under a
+// non-root base path / static hosting).
+import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// pdf.js worker (Vite-friendly).
-pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+// pdf.js worker (Vite-friendly, version-locked to the dependency).
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const PREVIEW_WIDTH = 560;
 const inputClass = 'w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
