@@ -26,6 +26,7 @@
     "prod:bootstrap": "npm run supabase:push && npm run seed:content && npm run seed:admin"
   },
   "dependencies": {
+    "@sentry/react": "^10.59.0",
     "@supabase/supabase-js": "^2.57.4",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.4.0",

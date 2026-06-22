@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { initMonitoring } from './lib/monitoring';
 // Self-hosted fonts (bundled, no CDN). Variable fonts ship the whole weight axis
 // in a single woff2, so DM Sans/Playfair cover all weights with one file each.
 // DM Mono is not yet variable on fontsource, so only the weights we actually use.
@@ -9,6 +10,9 @@ import '@fontsource/dm-mono/400.css';
 import '@fontsource/dm-mono/500.css';
 import App from './App.tsx';
 import './index.css';
+
+// Opt-in: no-op unless VITE_SENTRY_DSN is set in the environment.
+initMonitoring();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

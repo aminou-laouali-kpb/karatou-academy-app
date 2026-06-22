@@ -1,5 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
+import { captureError } from '../lib/monitoring';
 import type { Language } from '../data/translations';
 
 // Self-contained trilingual copy: the boundary must render even if something
@@ -69,8 +70,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    // TODO(KPB-34): forward to Sentry once error monitoring is wired.
+    // Always log locally; forward to Sentry when VITE_SENTRY_DSN is configured
+    // (no-op otherwise, see src/lib/monitoring.ts).
     console.error('[ErrorBoundary]', error, info.componentStack);
+    captureError(error, { componentStack: info.componentStack });
   }
 
   render() {
