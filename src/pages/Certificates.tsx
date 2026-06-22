@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
 import { Button } from '../components/Button';
@@ -12,7 +12,13 @@ import { Certificate } from '../types';
 import { downloadCertificatePdf } from '../services/certificatePdf';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
-import { Download, ExternalLink, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
+import { Download, ExternalLink, Loader2, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
+
+const DOWNLOAD_ERROR = {
+  fr: 'Échec du téléchargement du certificat. Vérifiez votre connexion et réessayez.',
+  en: 'Certificate download failed. Check your connection and try again.',
+  ha: 'Sauke takardar shaida ya gaza. Duba haɗin yanar gizo sannan a sake gwadawa.',
+} as const;
 
 export function Certificates() {
   const navigate = useNavigate();
@@ -32,17 +38,29 @@ export function Certificates() {
     ? localizedModules.find((module) => module.slug === primaryCert.moduleSlug)?.title || primaryCert.moduleName
     : '';
 
+  const [downloadingUid, setDownloadingUid] = useState<string | null>(null);
+  const [downloadFailed, setDownloadFailed] = useState(false);
+
   const handleDownload = async (certificate: Certificate, moduleTitle: string) => {
-    const verifyUrl = certificateVerifyUrl(certificate.uid);
-    const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
-    await downloadCertificatePdf({
-      name: certificate.userName,
-      moduleName: moduleTitle,
-      issuedAt: certificate.issuedAt,
-      uid: certificate.uid,
-      verifyUrl,
-      sponsorLogoUrl,
-    });
+    if (downloadingUid) return; // guard against double-clicks
+    setDownloadFailed(false);
+    setDownloadingUid(certificate.uid);
+    try {
+      const verifyUrl = certificateVerifyUrl(certificate.uid);
+      const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
+      await downloadCertificatePdf({
+        name: certificate.userName,
+        moduleName: moduleTitle,
+        issuedAt: certificate.issuedAt,
+        uid: certificate.uid,
+        verifyUrl,
+        sponsorLogoUrl,
+      });
+    } catch {
+      setDownloadFailed(true);
+    } finally {
+      setDownloadingUid(null);
+    }
   };
 
   const handleIssue = (moduleSlug: string) => {
@@ -132,9 +150,18 @@ export function Certificates() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-12">
-              <Button variant="outline" size="sm" onClick={() => handleDownload(primaryCert, primaryModuleTitle)}>
-                <Download size={16} /> {t('downloadCertificate')}
+            <div className="flex flex-wrap gap-3 mb-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleDownload(primaryCert, primaryModuleTitle)}
+                disabled={downloadingUid === primaryCert.uid}
+              >
+                {downloadingUid === primaryCert.uid ? (
+                  <><Loader2 size={16} className="animate-spin" /> {t('downloadCertificate')}…</>
+                ) : (
+                  <><Download size={16} /> {t('downloadCertificate')}</>
+                )}
               </Button>
               <Button variant="primary" size="sm" onClick={() => navigate(`/verify/${primaryCert.uid}`)}>
                 <ExternalLink size={16} /> {t('verifyOnline')}
@@ -143,6 +170,12 @@ export function Certificates() {
                 <RotateCw size={16} /> {t('renewIn')} {primaryCert.daysLeft} {t('days')}
               </Button>
             </div>
+            {downloadFailed && (
+              <div role="alert" className="mb-12 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                {DOWNLOAD_ERROR[lang] ?? DOWNLOAD_ERROR.fr}
+              </div>
+            )}
+            {!downloadFailed && <div className="mb-12" />}
           </>
         )}
 

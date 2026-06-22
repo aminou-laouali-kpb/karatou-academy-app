@@ -40,13 +40,19 @@ export interface CertificatePdfInput {
   sponsorLogoUrl?: string | null;
 }
 
-async function fetchImageBytes(url: string): Promise<ArrayBuffer | null> {
+async function fetchImageBytes(url: string, timeoutMs = 6000): Promise<ArrayBuffer | null> {
+  // Abort after a short delay: on a slow 2G link a hanging logo fetch must never
+  // freeze the whole certificate generation — we just skip the sponsor logo.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { mode: 'cors' });
+    const res = await fetch(url, { mode: 'cors', signal: controller.signal });
     if (!res.ok) return null;
     return await res.arrayBuffer();
   } catch {
     return null;
+  } finally {
+    clearTimeout(timer);
   }
 }
 
