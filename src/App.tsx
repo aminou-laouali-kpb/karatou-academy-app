@@ -6,6 +6,7 @@ import { LearningProvider } from './context/LearningContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { DemoBadge } from './components/DemoBadge';
 import { SkipLink } from './components/SkipLink';
+import { ErrorBoundary } from './components/ErrorBoundary';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
 // download the admin CMS, lesson player, and all lesson copy up front.
@@ -45,6 +46,7 @@ function App() {
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <LanguageProvider>
+        <ErrorBoundary>
         <AuthProvider>
           <LearningProvider>
             <SkipLink />
@@ -155,6 +157,7 @@ function App() {
             <DemoBadge />
           </LearningProvider>
         </AuthProvider>
+        </ErrorBoundary>
       </LanguageProvider>
     </BrowserRouter>
   );
