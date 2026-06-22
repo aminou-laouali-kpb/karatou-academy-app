@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 import { format, addYears } from 'date-fns';
 import * as XLSX from 'xlsx';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
+import { VERIFY_BASE_URL } from '../lib/verification';
 
 // Local/demo HMAC secret — used ONLY when Supabase is not configured (offline
 // demo on e.g. Replit). In production, signing and verification run server-side
@@ -137,8 +138,7 @@ export function decodeAttestationPayload(encoded: string): CertificatePayload | 
 
 /** The QR encodes this URL: scanning opens the verifier with the signed payload. */
 export function attestationVerifyUrl(payload: CertificatePayload): string {
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://karatou.academy';
-  return `${origin}/verify-attestation#${encodeAttestationPayload(payload)}`;
+  return `${VERIFY_BASE_URL}/verify-attestation#${encodeAttestationPayload(payload)}`;
 }
 
 /** Parses the first sheet's first column into a list of participant names. */

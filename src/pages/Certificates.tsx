@@ -11,6 +11,7 @@ import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
 import { downloadCertificatePdf } from '../services/certificatePdf';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
+import { certificateVerifyUrl } from '../lib/verification';
 import { Download, ExternalLink, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
 
 export function Certificates() {
@@ -32,10 +33,7 @@ export function Certificates() {
     : '';
 
   const handleDownload = async (certificate: Certificate, moduleTitle: string) => {
-    const verifyUrl =
-      typeof window === 'undefined'
-        ? `https://karatou.academy/verify/${certificate.uid}`
-        : `${window.location.origin}/verify/${certificate.uid}`;
+    const verifyUrl = certificateVerifyUrl(certificate.uid);
     const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
     await downloadCertificatePdf({
       name: certificate.userName,

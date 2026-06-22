@@ -1,6 +1,7 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 import { saveAs } from 'file-saver';
+import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 
 // A4 landscape, points. The layout is authored in the 680x480 mockup coordinate
 // space and scaled to the page, so it matches the approved design 1:1.
@@ -186,7 +187,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   const qr = await doc.embedPng(qrDataUrl);
   page.drawImage(qr, { x: sx(566), y: sy(444), width: 60 * k, height: 60 * k });
   rightText("Vérifier l'authenticité", sans, fs(11), 556, 402, GRAY);
-  rightText('karatou.academy/verify', sans, fs(11), 556, 418, NAVY);
+  rightText(`${VERIFY_DISPLAY_HOST}/verify`, sans, fs(11), 556, 418, NAVY);
   rightText(`ID : ${input.uid}`, mono, fs(10.5), 556, 434, GRAY);
 
   return doc.save();

@@ -7,6 +7,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { fetchCertificateByUid } from '../services/learningRepository';
 import { isDemoEnabled } from '../lib/demoMode';
+import { certificateVerifyUrl, VERIFY_DISPLAY_HOST } from '../lib/verification';
 import { Certificate } from '../types';
 import { Ban, CheckCircle2, Shield, XCircle, QrCode } from 'lucide-react';
 
@@ -60,10 +61,7 @@ export function Verify() {
   const isExpired = status === 'expired';
   const isRevoked = status === 'revoked';
   const displayUid = cert?.uid || normalizedUid || uid || '';
-  const verificationUrl =
-    typeof window === 'undefined'
-      ? `https://karatou.academy/verify/${encodeURIComponent(displayUid)}`
-      : `${window.location.origin}/verify/${encodeURIComponent(displayUid)}`;
+  const verificationUrl = certificateVerifyUrl(displayUid);
   const statusTone = isValid ? 'emerald' : isExpired ? 'amber' : 'red';
   const statusHeaderClass = {
     emerald: 'bg-emerald-50',
@@ -88,7 +86,7 @@ export function Verify() {
           <div className="flex justify-center mb-3">
             <Logo variant="default" />
           </div>
-          <p className="text-sm text-gray-500">karatou.academy/verify</p>
+          <p className="text-sm text-gray-500">{VERIFY_DISPLAY_HOST}/verify</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-blue-md overflow-hidden">
