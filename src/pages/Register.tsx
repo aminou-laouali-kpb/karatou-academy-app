@@ -16,6 +16,10 @@ export function Register() {
   // Pre-fill the demo password only in demo mode (mirrors Login); production
   // registrations start with an empty password field.
   const [password, setPassword] = useState(() => (isDemoEnabled ? 'demo1234' : ''));
+  // Opt-in demographic fields (feed the public impact dashboard). Both can stay
+  // blank — the user controls disclosure.
+  const [region, setRegion] = useState('');
+  const [gender, setGender] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +27,7 @@ export function Register() {
     event.preventDefault();
     setError('');
     setLoading(true);
-    const result = await register({ name, email, password });
+    const result = await register({ name, email, password, region, gender });
     setLoading(false);
 
     if (!result.ok) {
@@ -92,6 +96,50 @@ export function Register() {
                 required
               />
             </label>
+
+            <fieldset className="rounded-xl border border-blue-100 bg-blue-50/40 px-4 py-3">
+              <legend className="px-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+                {t('demographicsTitle')}
+              </legend>
+              <p className="text-xs text-blue-700/80 mb-3">{t('demographicsHelp')}</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <label className="block">
+                  <span className="text-xs font-medium text-gray-700">{t('regionLabel')}</span>
+                  <select
+                    value={region}
+                    onChange={(event) => setRegion(event.target.value)}
+                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  >
+                    <option value="">{t('regionPlaceholder')}</option>
+                    {/* Niger's 8 regions. Stored as the French canonical label
+                        so admin breakdowns are consistent across languages. */}
+                    <option value="Niamey">Niamey</option>
+                    <option value="Tillabéri">Tillabéri</option>
+                    <option value="Tahoua">Tahoua</option>
+                    <option value="Maradi">Maradi</option>
+                    <option value="Zinder">Zinder</option>
+                    <option value="Diffa">Diffa</option>
+                    <option value="Agadez">Agadez</option>
+                    <option value="Dosso">Dosso</option>
+                    <option value="autre">{t('regionOther')}</option>
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="text-xs font-medium text-gray-700">{t('genderLabel')}</span>
+                  <select
+                    value={gender}
+                    onChange={(event) => setGender(event.target.value)}
+                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  >
+                    <option value="">{t('genderPlaceholder')}</option>
+                    <option value="female">{t('genderFemale')}</option>
+                    <option value="male">{t('genderMale')}</option>
+                    <option value="other">{t('genderOther')}</option>
+                    <option value="prefer_not_to_say">{t('genderUndisclosed')}</option>
+                  </select>
+                </label>
+              </div>
+            </fieldset>
 
             <Button type="submit" variant="primary" size="md" className="w-full" disabled={loading}>
               {loading ? t('creatingAccount') : t('startTest')}

@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import { ModuleCard } from '../components/ModuleCard';
 import { Logo } from '../components/Logo';
 import { NewsletterPopup } from '../components/NewsletterPopup';
+import { ImpactStats } from '../components/ImpactStats';
 import { useLanguage } from '../hooks/useLanguage';
 import { useLearning } from '../hooks/useLearning';
 import { GraduationCap, Globe, Building2, Check, Star } from 'lucide-react';
@@ -42,19 +43,12 @@ export function Landing() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto">
-            {[
-              { value: '1 200+', label: t('learners') },
-              { value: String(publishedModules.length), label: t('modules').toLowerCase() },
-              { value: '98%', label: t('satisfaction') },
-              { value: '12', label: t('countries') },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="font-playfair text-2xl font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          <ImpactStats
+            variant="hero"
+            modulesCount={publishedModules.length}
+            fallback={{ learners: '—', certificates: '—', countries: '—' }}
+          />
+          <p className="text-center text-xs text-gray-500 mt-3">{t('impactDisclaimer')}</p>
         </div>
       </section>
 

@@ -281,9 +281,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   };
 
-  const register = async (payload: { name: string; email: string; password: string }) => {
+  const register = async (payload: {
+    name: string;
+    email: string;
+    password: string;
+    region?: string;
+    gender?: string;
+  }) => {
     const cleanName = payload.name.trim() || 'Nouvel apprenant';
     const normalizedEmail = payload.email.trim().toLowerCase();
+    const region = payload.region?.trim() || undefined;
+    const gender = payload.gender?.trim() || undefined;
 
     if (supabase) {
       const { data, error } = await supabase.auth.signUp({
@@ -293,6 +301,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           data: {
             full_name: cleanName,
             country: 'NE',
+            ...(region ? { region } : {}),
+            ...(gender ? { gender } : {}),
           },
         },
       });
@@ -319,6 +329,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             id: data.user.id,
             full_name: cleanName,
             country: 'NE',
+            ...(region ? { region } : {}),
+            ...(gender ? { gender } : {}),
           },
           { onConflict: 'id' }
         );
