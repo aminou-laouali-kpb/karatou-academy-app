@@ -2,6 +2,69 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 import { saveAs } from 'file-saver';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
+import type { Language } from '../data/translations';
+
+// Self-contained trilingual copy for the printable certificate — kept inline
+// (not in translations.ts) so the PDF generator stays decoupled from React and
+// can be unit-tested without the i18n provider.
+const PDF_COPY: Record<Language, {
+  eyebrow: string;     // "CERTIFICAT DE RÉUSSITE"
+  attests: string;     // "Le présent certificat atteste que"
+  completed: string;   // "a complété avec succès le module"
+  issuedOn: (date: string) => string;
+  partnership: string; // "EN PARTENARIAT AVEC"
+  verifyAuth: string;  // "Vérifier l'authenticité"
+  signature: string;   // "Le Président"
+  fileLabel: string;   // "Certificat" (filename prefix)
+}> = {
+  fr: {
+    eyebrow: 'CERTIFICAT DE RÉUSSITE',
+    attests: 'Le présent certificat atteste que',
+    completed: 'a complété avec succès le module',
+    issuedOn: (d) => `Délivré le ${d}`,
+    partnership: 'EN PARTENARIAT AVEC',
+    verifyAuth: "Vérifier l'authenticité",
+    signature: 'Le Président',
+    fileLabel: 'Certificat',
+  },
+  en: {
+    eyebrow: 'CERTIFICATE OF ACHIEVEMENT',
+    attests: 'This is to certify that',
+    completed: 'has successfully completed the module',
+    issuedOn: (d) => `Issued on ${d}`,
+    partnership: 'IN PARTNERSHIP WITH',
+    verifyAuth: 'Verify authenticity',
+    signature: 'The President',
+    fileLabel: 'Certificate',
+  },
+  ha: {
+    eyebrow: 'TAKARDAR SHAIDAR NASARA',
+    attests: 'Wannan takarda tana tabbatar da cewa',
+    completed: 'ya kammala module cikin nasara',
+    issuedOn: (d) => `An fitar a ${d}`,
+    partnership: 'TARE DA',
+    verifyAuth: 'Tabbatar da gaskiya',
+    signature: 'Shugaba',
+    fileLabel: 'Takarda',
+  },
+};
+
+// Locale code used for Intl.DateTimeFormat per app language.
+const DATE_LOCALE: Record<Language, string> = { fr: 'fr-FR', en: 'en-US', ha: 'ha-NE' };
+
+export function formatCertificateDate(isoOrDate: string, lang: Language = 'fr'): string {
+  const d = new Date(isoOrDate);
+  if (Number.isNaN(d.getTime())) return isoOrDate;
+  try {
+    return new Intl.DateTimeFormat(DATE_LOCALE[lang], {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(d);
+  } catch {
+    return d.toISOString().slice(0, 10);
+  }
+}
 
 // A4 landscape, points. The layout is authored in the 680x480 mockup coordinate
 // space and scaled to the page, so it matches the approved design 1:1.
@@ -34,10 +97,12 @@ function safe(text: string): string {
 export interface CertificatePdfInput {
   name: string;
   moduleName: string;
-  issuedAt: string; // already formatted, e.g. "1 juin 2026"
+  issuedAt: string; // already formatted in the caller's locale, e.g. "1 juin 2026"
   uid: string;
   verifyUrl: string; // e.g. https://site/verify/UID
   sponsorLogoUrl?: string | null;
+  /** UI language for the PDF copy (eyebrow, signature, dates…). Defaults to 'fr'. */
+  lang?: Language;
 }
 
 async function fetchImageBytes(url: string, timeoutMs = 6000): Promise<ArrayBuffer | null> {
@@ -57,6 +122,8 @@ async function fetchImageBytes(url: string, timeoutMs = 6000): Promise<ArrayBuff
 }
 
 export async function generateCertificatePdf(input: CertificatePdfInput): Promise<Uint8Array> {
+  const lang: Language = input.lang ?? 'fr';
+  const t = PDF_COPY[lang] ?? PDF_COPY.fr;
   const doc = await PDFDocument.create();
   const page = doc.addPage([W, H]);
 
@@ -133,7 +200,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
         const scale = Math.min(maxW / img.width, maxH / img.height);
         const dw = img.width * scale;
         const dh = img.height * scale;
-        rightText('EN PARTENARIAT AVEC', sans, fs(8.5), 636, 42, GRAY);
+        rightText(t.partnership, sans, fs(8.5), 636, 42, GRAY);
         page.drawImage(img, { x: sx(636) - dw, y: H - 46 * k - dh, width: dw, height: dh });
       }
     }
@@ -142,7 +209,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   line(46, 92, 540, 92, FAINT_GOLD);
 
   // Eyebrow with side rules.
-  const eyebrow = 'CERTIFICAT DE RÉUSSITE';
+  const eyebrow = t.eyebrow;
   const ebSize = fs(13);
   const ebW = sansBold.widthOfTextAtSize(eyebrow, ebSize);
   const ebX = (W - ebW) / 2;
@@ -150,7 +217,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   page.drawLine({ start: { x: ebX - 44, y: sy(120) }, end: { x: ebX - 12, y: sy(120) }, thickness: 0.75, color: GOLD });
   page.drawLine({ start: { x: ebX + ebW + 12, y: sy(120) }, end: { x: ebX + ebW + 44, y: sy(120) }, thickness: 0.75, color: GOLD });
 
-  center('Le présent certificat atteste que', sans, fs(13), 151, GRAY);
+  center(t.attests, sans, fs(13), 151, GRAY);
 
   // Recipient name.
   center(input.name, serifBold, fs(38), 206, NAVY);
@@ -162,7 +229,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   page.drawCircle({ x: ux, y: sy(223), size: 2.6, color: GOLD });
   page.drawCircle({ x: ux + uw, y: sy(223), size: 2.6, color: GOLD });
 
-  center('a complété avec succès le module', sans, fs(14), 256, GRAY);
+  center(t.completed, sans, fs(14), 256, GRAY);
 
   // Module name (shrink to fit the safe width).
   let modSize = fs(17);
@@ -172,7 +239,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   }
   center(input.moduleName, sansBold, modSize, 284, BLUE);
 
-  center(`Délivré le ${input.issuedAt}`, sans, fs(13), 315, GRAY);
+  center(t.issuedOn(input.issuedAt), sans, fs(13), 315, GRAY);
 
   // Gold seal / rosette.
   page.drawCircle({ x: sx(340), y: sy(390), size: 21 * k, borderColor: GOLD, borderWidth: 3, borderDashArray: [1 * k, 5 * k] });
@@ -186,13 +253,13 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   page.drawText('Karatou', { x: sx(60), y: sy(406), size: fs(21), font: serifItalic, color: NAVY });
   line(60, 416, 232, 416, GRAY);
   page.drawText('Karatou Academy', { x: sx(60), y: sy(432), size: fs(12), font: sansBold, color: NAVY });
-  page.drawText('Le Président', { x: sx(60), y: sy(446), size: fs(11), font: sans, color: GRAY });
+  page.drawText(t.signature, { x: sx(60), y: sy(446), size: fs(11), font: sans, color: GRAY });
 
   // QR + verification (bottom-right).
   const qrDataUrl = await QRCode.toDataURL(input.verifyUrl, { margin: 0, width: 256 });
   const qr = await doc.embedPng(qrDataUrl);
   page.drawImage(qr, { x: sx(566), y: sy(444), width: 60 * k, height: 60 * k });
-  rightText("Vérifier l'authenticité", sans, fs(11), 556, 402, GRAY);
+  rightText(t.verifyAuth, sans, fs(11), 556, 402, GRAY);
   rightText(`${VERIFY_DISPLAY_HOST}/verify`, sans, fs(11), 556, 418, NAVY);
   rightText(`ID : ${input.uid}`, mono, fs(10.5), 556, 434, GRAY);
 
@@ -208,5 +275,6 @@ function safeFileName(name: string): string {
 
 export async function downloadCertificatePdf(input: CertificatePdfInput): Promise<void> {
   const bytes = await generateCertificatePdf(input);
-  saveAs(new Blob([bytes], { type: 'application/pdf' }), `Certificat_${safeFileName(input.name)}.pdf`);
+  const prefix = (PDF_COPY[input.lang ?? 'fr'] ?? PDF_COPY.fr).fileLabel;
+  saveAs(new Blob([bytes], { type: 'application/pdf' }), `${prefix}_${safeFileName(input.name)}.pdf`);
 }

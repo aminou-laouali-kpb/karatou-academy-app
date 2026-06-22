@@ -9,7 +9,7 @@ import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
-import { downloadCertificatePdf } from '../services/certificatePdf';
+import { downloadCertificatePdf, formatCertificateDate } from '../services/certificatePdf';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
 import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
@@ -49,13 +49,19 @@ export function Certificates() {
     try {
       const verifyUrl = certificateVerifyUrl(certificate.uid);
       const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
+      // Reformat the date in the active language (issuedAtIso preserves the
+      // original timestamp; issuedAt is the fr-FR-formatted fallback).
+      const issuedAt = certificate.issuedAtIso
+        ? formatCertificateDate(certificate.issuedAtIso, lang)
+        : certificate.issuedAt;
       await downloadCertificatePdf({
         name: certificate.userName,
         moduleName: moduleTitle,
-        issuedAt: certificate.issuedAt,
+        issuedAt,
         uid: certificate.uid,
         verifyUrl,
         sponsorLogoUrl,
+        lang,
       });
     } catch {
       setDownloadFailed(true);
