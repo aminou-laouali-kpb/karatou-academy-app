@@ -7,8 +7,10 @@ import {
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
-  generateAttestationsZip, parseParticipants, NamePlacement, QrPlacement, TextAlign,
+  generateAttestationsZip, parseParticipantsWithContact,
+  NamePlacement, QrPlacement, TextAlign, ParticipantContact,
 } from '../services/attestationGenerator';
+import { addSubscribers } from '../services/newsletterService';
 
 // pdf.js worker — served from /public so it works in both dev and production builds.
 pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
@@ -22,7 +24,7 @@ type DragKind = 'name' | 'name-resize' | 'qr';
 
 export function AdminAttestations() {
   const [templateBuffer, setTemplateBuffer] = useState<ArrayBuffer | null>(null);
-  const [names, setNames] = useState<string[]>([]);
+  const [contacts, setContacts] = useState<ParticipantContact[]>([]);
   const [current, setCurrent] = useState(0);
   const [pdfPoints, setPdfPoints] = useState<{ width: number; height: number } | null>(null);
   const [error, setError] = useState('');
@@ -37,6 +39,8 @@ export function AdminAttestations() {
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ kind: DragKind; offsetX: number; offsetY: number } | null>(null);
+
+  const names = contacts.map((c) => c.name);
 
   const previewFile = useMemo(
     () => (templateBuffer ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
@@ -57,12 +61,12 @@ export function AdminAttestations() {
     setError('');
     setDone('');
     try {
-      const parsed = await parseParticipants(file);
+      const parsed = await parseParticipantsWithContact(file);
       if (parsed.length === 0) {
         setError('Aucun nom trouve dans la premiere colonne du fichier.');
         return;
       }
-      setNames(parsed);
+      setContacts(parsed);
       setCurrent(0);
     } catch {
       setError('Fichier Excel illisible. Verifiez le format (.xlsx/.xls).');
@@ -128,7 +132,19 @@ export function AdminAttestations() {
         qrPlacement: qr,
         onProgress: (d, total) => setProgress(Math.round((d / total) * 100)),
       });
-      setDone(`${count} attestations generees et telechargees (ZIP + CSV de tracabilite).`);
+
+      const withEmail = contacts.filter((c) => c.email);
+      let subMsg = '';
+      if (withEmail.length > 0) {
+        const added = addSubscribers(
+          withEmail.map((c) => ({ name: c.name, email: c.email!, phone: c.phone, source: 'attestation' })),
+        );
+        if (added > 0) {
+          subMsg = ` · ${added} participant${added !== 1 ? 's' : ''} ajouté${added !== 1 ? 's' : ''} à la newsletter.`;
+        }
+      }
+
+      setDone(`${count} attestations generees et telechargees (ZIP + CSV de tracabilite).${subMsg}`);
     } catch (e) {
       setError(`Echec de la generation: ${e instanceof Error ? e.message : 'erreur inconnue'}`);
     } finally {

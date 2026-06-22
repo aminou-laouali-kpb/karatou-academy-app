@@ -141,23 +141,68 @@ export function attestationVerifyUrl(payload: CertificatePayload): string {
   return `${origin}/verify-attestation#${encodeAttestationPayload(payload)}`;
 }
 
-/** Parses the first sheet's first column into a list of participant names. */
-export async function parseParticipants(file: File): Promise<string[]> {
+export interface ParticipantContact {
+  name: string;
+  email?: string;
+  phone?: string;
+}
+
+/**
+ * Parses the first sheet and extracts name (col A) plus optional email and
+ * phone columns. Columns are detected by header keywords, or by value pattern
+ * if no header row is present.
+ */
+export async function parseParticipantsWithContact(file: File): Promise<ParticipantContact[]> {
   const buffer = await file.arrayBuffer();
   const workbook = XLSX.read(buffer, { type: 'array' });
   const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
   if (!firstSheet) return [];
 
   const rows = XLSX.utils.sheet_to_json<unknown[]>(firstSheet, { header: 1, blankrows: false });
-  const names = rows
-    .map((row) => (row?.[0] ?? '').toString().trim())
-    .filter((value) => value.length > 0);
+  if (rows.length === 0) return [];
 
-  // Drop an obvious header row.
-  if (names.length > 0 && /^(nom|name|participant|prenom|full\s?name|apprenant)/i.test(names[0])) {
-    names.shift();
+  const firstRow = rows[0] as unknown[];
+  const looksLikeHeader = /^(nom|name|participant|prenom|full\s?name|apprenant)/i.test(
+    String(firstRow[0] ?? '').trim(),
+  );
+
+  let dataStartRow = 0;
+  let emailCol = -1;
+  let phoneCol = -1;
+
+  if (looksLikeHeader) {
+    dataStartRow = 1;
+    firstRow.forEach((cell, index) => {
+      const h = String(cell ?? '').trim().toLowerCase();
+      if (emailCol === -1 && /e-?mail|courriel/.test(h)) emailCol = index;
+      else if (phoneCol === -1 && /t[ée]l[eé]?phone?|portable|mobile/.test(h)) phoneCol = index;
+    });
+  } else if (rows.length > 1) {
+    const sampleRow = rows[1] as unknown[];
+    for (let i = 1; i < sampleRow.length; i++) {
+      const val = String(sampleRow[i] ?? '').trim();
+      if (emailCol === -1 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) emailCol = i;
+      else if (phoneCol === -1 && /^[\+\d\s\-().]{7,20}$/.test(val)) phoneCol = i;
+    }
   }
-  return names;
+
+  return rows
+    .slice(dataStartRow)
+    .map((row) => {
+      const r = row as unknown[];
+      const name = String(r[0] ?? '').trim();
+      if (!name) return null;
+      const email = emailCol >= 0 ? String(r[emailCol] ?? '').trim() || undefined : undefined;
+      const phone = phoneCol >= 0 ? String(r[phoneCol] ?? '').trim() || undefined : undefined;
+      return { name, email, phone };
+    })
+    .filter((p): p is ParticipantContact => p !== null && p.name.length > 0);
+}
+
+/** Parses the first sheet's first column into a list of participant names. */
+export async function parseParticipants(file: File): Promise<string[]> {
+  const contacts = await parseParticipantsWithContact(file);
+  return contacts.map((c) => c.name);
 }
 
 function hexToRgb(hex: string) {

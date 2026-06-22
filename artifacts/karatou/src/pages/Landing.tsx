@@ -3,6 +3,7 @@ import { MarketingNav } from '../layouts/MarketingNav';
 import { Button } from '../components/Button';
 import { ModuleCard } from '../components/ModuleCard';
 import { Logo } from '../components/Logo';
+import { NewsletterPopup } from '../components/NewsletterPopup';
 import { useLanguage } from '../hooks/useLanguage';
 import { useLearning } from '../hooks/useLearning';
 import { GraduationCap, Globe, Building2, Check, Star } from 'lucide-react';
@@ -16,6 +17,7 @@ export function Landing() {
   return (
     <div className="min-h-screen">
       <MarketingNav />
+      <NewsletterPopup />
 
       {/* Hero */}
       <section className="relative bg-blue-900 pt-32 pb-20 px-4 overflow-hidden">

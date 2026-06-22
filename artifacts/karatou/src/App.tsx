@@ -25,6 +25,7 @@ const EnterpriseMembers = lazy(() => import('./pages/EnterpriseMembers').then((m
 const AdminContent = lazy(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
 const AdminTeam = lazy(() => import('./pages/AdminTeam').then((m) => ({ default: m.AdminTeam })));
 const AdminAttestations = lazy(() => import('./pages/AdminAttestations').then((m) => ({ default: m.AdminAttestations })));
+const AdminNewsletter = lazy(() => import('./pages/AdminNewsletter').then((m) => ({ default: m.AdminNewsletter })));
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
 function RouteFallback() {
@@ -134,6 +135,14 @@ function App() {
                 element={(
                   <ProtectedRoute role="platform_admin">
                     <AdminAttestations />
+                  </ProtectedRoute>
+                )}
+              />
+              <Route
+                path="/admin/newsletter"
+                element={(
+                  <ProtectedRoute role="platform_admin">
+                    <AdminNewsletter />
                   </ProtectedRoute>
                 )}
               />
