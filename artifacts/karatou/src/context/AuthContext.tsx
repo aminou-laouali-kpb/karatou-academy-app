@@ -172,12 +172,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const mappedUser = await buildSupabaseUser(authUser);
         if (active) {
           demoSessionActive.current = false;
-          persistUser(null);
+          persistUser(mappedUser);
           setUser(mappedUser);
           setAuthReady(true);
         }
       } catch {
         if (active) {
+          persistUser(null);
           setUser(null);
           setAuthReady(true);
         }

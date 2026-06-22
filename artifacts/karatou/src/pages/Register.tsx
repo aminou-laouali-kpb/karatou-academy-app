@@ -5,6 +5,8 @@ import { Logo } from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 
+const CONFIRM_EMAIL_MSG = 'Compte cree. Confirmez votre email, puis connectez-vous.';
+
 export function Register() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -12,19 +14,26 @@ export function Register() {
   const { t } = useLanguage();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('demo1234');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [info, setInfo] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError('');
+    setInfo('');
     setLoading(true);
     const result = await register({ name, email, password });
     setLoading(false);
 
     if (!result.ok) {
-      setError(result.error || 'Creation de compte impossible.');
+      const msg = result.error || 'Creation de compte impossible.';
+      if (msg === CONFIRM_EMAIL_MSG) {
+        setInfo(msg);
+      } else {
+        setError(msg);
+      }
       return;
     }
 
@@ -48,6 +57,12 @@ export function Register() {
             {error && (
               <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 {error}
+              </div>
+            )}
+
+            {info && (
+              <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-700">
+                {info}
               </div>
             )}
 
@@ -83,6 +98,7 @@ export function Register() {
                 onChange={(event) => setPassword(event.target.value)}
                 minLength={6}
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                placeholder="••••••••"
                 required
               />
             </label>
