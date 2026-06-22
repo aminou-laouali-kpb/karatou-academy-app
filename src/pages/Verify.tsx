@@ -8,6 +8,7 @@ import { localizeModules } from '../data/localizedContent';
 import { fetchCertificateByUid } from '../services/learningRepository';
 import { isDemoEnabled } from '../lib/demoMode';
 import { certificateVerifyUrl, VERIFY_DISPLAY_HOST } from '../lib/verification';
+import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
 import { Certificate } from '../types';
 import { Ban, CheckCircle2, Shield, XCircle, QrCode } from 'lucide-react';
 
@@ -177,6 +178,16 @@ export function Verify() {
               <p className="text-xs font-mono text-gray-500 break-all">{verificationUrl}</p>
             </div>
           </div>
+
+          {isValid && cert && (
+            <div className="border-t border-gray-100 px-6 py-4 bg-gray-50">
+              <ShareCertificateButtons
+                url={verificationUrl}
+                moduleName={moduleTitle}
+                holderName={cert.userName}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

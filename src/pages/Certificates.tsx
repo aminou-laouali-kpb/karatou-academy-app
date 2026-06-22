@@ -12,6 +12,7 @@ import { Certificate } from '../types';
 import { downloadCertificatePdf } from '../services/certificatePdf';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
+import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
 import { Download, ExternalLink, Loader2, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
 
 const DOWNLOAD_ERROR = {
@@ -171,11 +172,17 @@ export function Certificates() {
               </Button>
             </div>
             {downloadFailed && (
-              <div role="alert" className="mb-12 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 {DOWNLOAD_ERROR[lang] ?? DOWNLOAD_ERROR.fr}
               </div>
             )}
-            {!downloadFailed && <div className="mb-12" />}
+            <div className="mb-12">
+              <ShareCertificateButtons
+                url={certificateVerifyUrl(primaryCert.uid)}
+                moduleName={primaryModuleTitle}
+                holderName={primaryCert.userName}
+              />
+            </div>
           </>
         )}
 
