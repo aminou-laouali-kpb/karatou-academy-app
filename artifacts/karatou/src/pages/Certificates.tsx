@@ -9,13 +9,11 @@ import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
+import { certificateVerifyUrl } from '../lib/verification';
 import { Download, ExternalLink, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
 
 function downloadCertificate(certificate: Certificate) {
-  const verificationUrl =
-    typeof window === 'undefined'
-      ? `https://karatou.academy/verify/${encodeURIComponent(certificate.uid)}`
-      : `${window.location.origin}/verify/${encodeURIComponent(certificate.uid)}`;
+  const verificationUrl = certificateVerifyUrl(certificate.uid);
   const content = [
     'Karatou Academy - Certification Officielle',
     '',

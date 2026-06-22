@@ -8,6 +8,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import {
   decodeAttestationPayload, verifyAttestation, CertificatePayload, VerificationResult,
 } from '../services/attestationGenerator';
+import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 
 const inputClass =
   'mt-1.5 w-full h-24 rounded-xl border border-gray-200 px-3 py-2 text-sm font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
@@ -69,7 +70,7 @@ export function VerifyAttestation() {
       <main id="main-content" className="w-full max-w-lg">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3"><Logo variant="default" /></div>
-          <p className="text-sm text-gray-500">karatou.academy/verify-attestation</p>
+          <p className="text-sm text-gray-500">{VERIFY_DISPLAY_HOST}/verify-attestation</p>
         </div>
 
         {result && (
