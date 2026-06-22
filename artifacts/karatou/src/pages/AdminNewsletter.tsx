@@ -1,12 +1,12 @@
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Download, Mail, Send, Trash2, Users } from 'lucide-react';
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
   deleteDraft,
   exportSubscribersCSV,
+  fetchSubscribers,
   getDrafts,
-  getSubscribers,
   markSent,
   NewsletterDraft,
   NewsletterSubscriber,
@@ -27,7 +27,8 @@ const SOURCE_LABEL: Record<NewsletterSubscriber['source'], string> = {
 
 export function AdminNewsletter() {
   const [tab, setTab] = useState<Tab>('subscribers');
-  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>(() => getSubscribers());
+  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
+  const [loading, setLoading] = useState(true);
   const [drafts, setDrafts] = useState<NewsletterDraft[]>(() => getDrafts());
 
   const [subject, setSubject] = useState('');
@@ -35,16 +36,26 @@ export function AdminNewsletter() {
   const [sending, setSending] = useState(false);
   const [notice, setNotice] = useState<{ tone: 'success' | 'error'; text: string } | null>(null);
 
-  const refreshSubscribers = useCallback(() => setSubscribers(getSubscribers()), []);
+  const refreshSubscribers = useCallback(async () => {
+    setLoading(true);
+    try {
+      setSubscribers(await fetchSubscribers());
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { void refreshSubscribers(); }, [refreshSubscribers]);
+
   const refreshDrafts = useCallback(() => setDrafts(getDrafts()), []);
 
-  const handleRemoveSub = (id: string) => {
-    removeSubscriber(id);
-    refreshSubscribers();
+  const handleRemoveSub = async (id: string) => {
+    await removeSubscriber(id);
+    void refreshSubscribers();
   };
 
   const handleExportCSV = () => {
-    const csv = exportSubscribersCSV();
+    const csv = exportSubscribersCSV(subscribers);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -72,7 +83,7 @@ export function AdminNewsletter() {
     setSending(false);
     setNotice({
       tone: 'success',
-      text: `Newsletter envoyée à ${subscribers.length} abonné${subscribers.length !== 1 ? 's' : ''}. (Mode démo — intégrez un service d'envoi email pour une diffusion réelle.)`,
+      text: `Newsletter enregistrée pour ${subscribers.length} abonné${subscribers.length !== 1 ? 's' : ''}. (Intégrez un service d'envoi email pour une diffusion réelle.)`,
     });
     setSubject('');
     setBody('');
@@ -136,7 +147,12 @@ export function AdminNewsletter() {
               </Button>
             </div>
 
-            {subscribers.length === 0 ? (
+            {loading ? (
+              <div className="px-5 py-16 text-center text-sm text-gray-400">
+                <div className="w-6 h-6 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin mx-auto mb-3" />
+                Chargement des abonnés…
+              </div>
+            ) : subscribers.length === 0 ? (
               <div className="px-5 py-16 text-center text-sm text-gray-400">
                 <Mail size={32} className="mx-auto mb-3 text-gray-300" />
                 <p className="font-medium text-gray-500 mb-1">Aucun abonné pour l'instant</p>
@@ -177,7 +193,7 @@ export function AdminNewsletter() {
                         <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{formatDate(sub.joinedAt)}</td>
                         <td className="px-4 py-3 text-right">
                           <button
-                            onClick={() => handleRemoveSub(sub.id)}
+                            onClick={() => void handleRemoveSub(sub.id)}
                             aria-label="Supprimer"
                             className="text-gray-400 hover:text-red-500 transition-colors p-1 rounded"
                           >
@@ -255,7 +271,7 @@ export function AdminNewsletter() {
                       )}
                     </Button>
                   </div>
-                  {subscribers.length === 0 && (
+                  {subscribers.length === 0 && !loading && (
                     <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2">
                       Aucun abonné. Générez des attestations avec emails, ou attendez des inscriptions via la popup du site.
                     </p>

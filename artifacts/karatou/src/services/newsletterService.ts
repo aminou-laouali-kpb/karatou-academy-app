@@ -1,3 +1,5 @@
+import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
+
 export interface NewsletterSubscriber {
   id: string;
   name: string;
@@ -41,12 +43,33 @@ export function getSubscribers(): NewsletterSubscriber[] {
   return load<NewsletterSubscriber[]>(SUBS_KEY, []);
 }
 
+export async function fetchSubscribers(): Promise<NewsletterSubscriber[]> {
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase
+      .from('newsletter_subscribers')
+      .select('id,name,email,phone,source,created_at')
+      .order('created_at', { ascending: false });
+
+    if (!error && data) {
+      return data.map((row: { id: string; name: string; email: string; phone?: string; source: NewsletterSubscriber['source']; created_at: string }) => ({
+        id: row.id,
+        name: row.name,
+        email: row.email,
+        phone: row.phone,
+        source: row.source,
+        joinedAt: row.created_at,
+      }));
+    }
+  }
+  return getSubscribers();
+}
+
 export function addSubscribers(
   incoming: Omit<NewsletterSubscriber, 'id' | 'joinedAt'>[],
 ): number {
   const existing = getSubscribers();
   const emailSet = new Set(existing.map((s) => s.email.toLowerCase()));
-  let added = 0;
+  const toAdd: Omit<NewsletterSubscriber, 'id' | 'joinedAt'>[] = [];
   for (const sub of incoming) {
     const key = sub.email.trim().toLowerCase();
     if (!key || emailSet.has(key)) continue;
@@ -57,14 +80,38 @@ export function addSubscribers(
       id: `ns-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
       joinedAt: new Date().toISOString(),
     });
-    added++;
+    toAdd.push({ ...sub, email: key });
   }
   save(SUBS_KEY, existing);
-  return added;
+
+  if (isSupabaseConfigured && supabase && toAdd.length > 0) {
+    supabase
+      .from('newsletter_subscribers')
+      .upsert(
+        toAdd.map((s) => ({
+          name: s.name,
+          email: s.email,
+          phone: s.phone || null,
+          source: s.source,
+        })),
+        { onConflict: 'email', ignoreDuplicates: true },
+      )
+      .then(({ error }) => {
+        if (error) {
+          console.warn('[newsletter] Supabase upsert failed:', error.message);
+        }
+      });
+  }
+
+  return toAdd.length;
 }
 
-export function removeSubscriber(id: string): void {
+export async function removeSubscriber(id: string): Promise<void> {
   save(SUBS_KEY, getSubscribers().filter((s) => s.id !== id));
+
+  if (isSupabaseConfigured && supabase) {
+    await supabase.from('newsletter_subscribers').delete().eq('id', id);
+  }
 }
 
 export function getDrafts(): NewsletterDraft[] {
@@ -100,8 +147,7 @@ export function deleteDraft(id: string): void {
   save(DRAFTS_KEY, getDrafts().filter((d) => d.id !== id));
 }
 
-export function exportSubscribersCSV(): string {
-  const subs = getSubscribers();
+export function exportSubscribersCSV(subs: NewsletterSubscriber[]): string {
   const header = ['Nom', 'Email', 'Telephone', 'Source', "Date d'inscription"]
     .map((h) => `"${h}"`)
     .join(',');

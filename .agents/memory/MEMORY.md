@@ -1,0 +1,3 @@
+- [Supabase setup](supabase-setup.md) — project "Karatou Academy" id=pqcovsnomouclkdjhjig, eu-west-3; env vars set as shared; edge fns deployed.
+- [Role mapping](role-mapping.md) — DB roles student/admin/org_admin → app roles learner/platform_admin/enterprise_admin via normalizeUserRole().
+- [Edge function constraints](edge-fn-constraints.md) — Deno.land/std imports NOT available; use native Web Crypto API for HMAC-SHA256.

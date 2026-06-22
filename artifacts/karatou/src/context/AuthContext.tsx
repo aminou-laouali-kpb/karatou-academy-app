@@ -79,22 +79,27 @@ function roleFromSupabase(user: SupabaseAuthUser, profile?: ProfileRow | null): 
   return normalizeUserRole(user.app_metadata?.role || profile?.role);
 }
 
-async function loadPrimaryOrganization(role: UserRole): Promise<UserOrganizationRow | null> {
+async function loadPrimaryOrganization(
+  userId: string,
+  role: UserRole,
+): Promise<UserOrganizationRow | null> {
   if (!supabase || role !== 'enterprise_admin') {
     return null;
   }
 
   const { data, error } = await supabase
-    .from('karatou_organizations')
-    .select('id,name')
-    .order('name', { ascending: true })
-    .limit(1);
+    .from('org_members')
+    .select('organizations!inner(id,name)')
+    .eq('user_id', userId)
+    .limit(1)
+    .maybeSingle();
 
-  if (error) {
+  if (error || !data) {
     return null;
   }
 
-  return (data?.[0] as UserOrganizationRow | undefined) || null;
+  const org = (data as { organizations: UserOrganizationRow }).organizations;
+  return org || null;
 }
 
 async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> {
@@ -116,7 +121,7 @@ async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> 
     authUser.email?.split('@')[0] ||
     'Karatou Learner';
   const role = roleFromSupabase(authUser, profileRow);
-  const organization = await loadPrimaryOrganization(role);
+  const organization = await loadPrimaryOrganization(authUser.id, role);
 
   return {
     id: authUser.id,
