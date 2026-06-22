@@ -142,22 +142,75 @@ export function attestationVerifyUrl(payload: CertificatePayload): string {
 }
 
 /** Parses the first sheet's first column into a list of participant names. */
-export async function parseParticipants(file: File): Promise<string[]> {
+export interface Participant {
+  name: string;
+  email?: string;
+  phone?: string;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const HEADER_NAME_RE = /^(nom|name|participant|prenom|full\s?name|apprenant)/i;
+const HEADER_EMAIL_RE = /^(e?[-_ ]?mail|courriel|imel)/i;
+const HEADER_PHONE_RE = /^(tel|tél|tele|teleph|phone|portable|mobile|whatsapp|num[ée]ro)/i;
+
+// Parses an XLSX file into [{name, email?, phone?}]. The first column is the
+// name; we autodetect optional email/phone columns from header labels (and
+// fall back to scanning rows for anything that looks like an email).
+export async function parseParticipants(file: File): Promise<Participant[]> {
   const buffer = await file.arrayBuffer();
   const workbook = XLSX.read(buffer, { type: 'array' });
   const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
   if (!firstSheet) return [];
 
   const rows = XLSX.utils.sheet_to_json<unknown[]>(firstSheet, { header: 1, blankrows: false });
-  const names = rows
-    .map((row) => (row?.[0] ?? '').toString().trim())
-    .filter((value) => value.length > 0);
+  if (rows.length === 0) return [];
 
-  // Drop an obvious header row.
-  if (names.length > 0 && /^(nom|name|participant|prenom|full\s?name|apprenant)/i.test(names[0])) {
-    names.shift();
+  // Detect a header row in the first non-empty line and map columns.
+  const firstRow = rows[0].map((c) => (c ?? '').toString().trim());
+  const headerLooksReal = firstRow.some((c) => HEADER_NAME_RE.test(c));
+  let emailCol = -1;
+  let phoneCol = -1;
+  let nameCol = 0;
+  let dataStart = 0;
+  if (headerLooksReal) {
+    firstRow.forEach((cell, idx) => {
+      if (HEADER_NAME_RE.test(cell)) nameCol = idx;
+      else if (HEADER_EMAIL_RE.test(cell) && emailCol < 0) emailCol = idx;
+      else if (HEADER_PHONE_RE.test(cell) && phoneCol < 0) phoneCol = idx;
+    });
+    dataStart = 1;
   }
-  return names;
+
+  const out: Participant[] = [];
+  for (let i = dataStart; i < rows.length; i++) {
+    const row = rows[i];
+    const name = (row?.[nameCol] ?? '').toString().trim();
+    if (!name) continue;
+
+    let email: string | undefined;
+    let phone: string | undefined;
+
+    if (emailCol >= 0) {
+      const v = (row?.[emailCol] ?? '').toString().trim();
+      if (EMAIL_RE.test(v)) email = v.toLowerCase();
+    }
+    if (phoneCol >= 0) {
+      const v = (row?.[phoneCol] ?? '').toString().trim();
+      if (v) phone = v;
+    }
+
+    // Fallback: if we didn't have a labelled email column, scan the row for
+    // anything that looks like an email.
+    if (!email) {
+      for (const cell of row || []) {
+        const v = (cell ?? '').toString().trim();
+        if (EMAIL_RE.test(v)) { email = v.toLowerCase(); break; }
+      }
+    }
+
+    out.push({ name, email, phone });
+  }
+  return out;
 }
 
 function hexToRgb(hex: string) {

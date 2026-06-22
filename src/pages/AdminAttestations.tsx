@@ -7,8 +7,9 @@ import {
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
-  generateAttestationsZip, parseParticipants, NamePlacement, QrPlacement, TextAlign,
+  generateAttestationsZip, parseParticipants, NamePlacement, Participant, QrPlacement, TextAlign,
 } from '../services/attestationGenerator';
+import { addSubscribers } from '../services/newsletterService';
 // Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
 // Vite emit it as a hashed asset that resolves correctly in production builds
 // (more robust than `new URL(..., import.meta.url)`, which can break under a
@@ -27,7 +28,7 @@ type DragKind = 'name' | 'name-resize' | 'qr';
 
 export function AdminAttestations() {
   const [templateBuffer, setTemplateBuffer] = useState<ArrayBuffer | null>(null);
-  const [names, setNames] = useState<string[]>([]);
+  const [participants, setParticipants] = useState<Participant[]>([]);
   const [current, setCurrent] = useState(0);
   const [pdfPoints, setPdfPoints] = useState<{ width: number; height: number } | null>(null);
   const [error, setError] = useState('');
@@ -47,7 +48,8 @@ export function AdminAttestations() {
     () => (templateBuffer ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
     [templateBuffer]
   );
-  const previewName = names[current] || 'Nom du participant';
+  const previewName = participants[current]?.name || 'Nom du participant';
+  const subscribableCount = participants.filter((p) => p.email).length;
   const scale = pdfPoints ? PREVIEW_WIDTH / pdfPoints.width : 1;
 
   const onPdfUpload = async (file?: File) => {
@@ -67,7 +69,7 @@ export function AdminAttestations() {
         setError('Aucun nom trouve dans la premiere colonne du fichier.');
         return;
       }
-      setNames(parsed);
+      setParticipants(parsed);
       setCurrent(0);
     } catch {
       setError('Fichier Excel illisible. Verifiez le format (.xlsx/.xls).');
@@ -120,7 +122,7 @@ export function AdminAttestations() {
   };
 
   const handleGenerate = async () => {
-    if (!templateBuffer || names.length === 0) return;
+    if (!templateBuffer || participants.length === 0) return;
     setGenerating(true);
     setError('');
     setDone('');
@@ -128,12 +130,29 @@ export function AdminAttestations() {
     try {
       const count = await generateAttestationsZip({
         templateBuffer,
-        names,
+        names: participants.map((p) => p.name),
         namePlacement: name,
         qrPlacement: qr,
         onProgress: (d, total) => setProgress(Math.round((d / total) * 100)),
       });
-      setDone(`${count} attestations generees et telechargees (ZIP + CSV de tracabilite).`);
+
+      // Auto-subscribe participants who provided an email (source: 'attestation').
+      // Best-effort: failure is silent so the certified batch still ships.
+      const withEmail = participants.filter((p) => p.email);
+      let extra = '';
+      if (withEmail.length > 0) {
+        try {
+          const added = addSubscribers(
+            withEmail.map((p) => ({ name: p.name, email: p.email!, phone: p.phone, source: 'attestation' as const }))
+          );
+          if (added > 0) {
+            extra = ` · ${added} participant${added !== 1 ? 's' : ''} ajoute${added !== 1 ? 's' : ''} a la newsletter.`;
+          }
+        } catch {
+          // Swallow — subscription failures should not break the success message.
+        }
+      }
+      setDone(`${count} attestations generees et telechargees (ZIP + CSV de tracabilite).${extra}`);
     } catch (e) {
       setError(`Echec de la generation: ${e instanceof Error ? e.message : 'erreur inconnue'}`);
     } finally {
@@ -168,7 +187,7 @@ export function AdminAttestations() {
                 <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={(e) => onPdfUpload(e.target.files?.[0])} />
               </label>
               <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
-                <FileSpreadsheet size={16} className="text-emerald-600" /> {names.length ? `${names.length} participants` : 'Charger la liste Excel'}
+                <FileSpreadsheet size={16} className="text-emerald-600" /> {participants.length ? `${participants.length} participants${subscribableCount > 0 ? ` · ${subscribableCount} email${subscribableCount !== 1 ? 's' : ''}` : ''}` : 'Charger la liste Excel'}
                 <input type="file" accept=".xlsx,.xls" className="hidden" onChange={(e) => onExcelUpload(e.target.files?.[0])} />
               </label>
             </section>
@@ -224,18 +243,18 @@ export function AdminAttestations() {
               </div>
             </section>
 
-            <Button variant="primary" size="md" className="w-full" onClick={handleGenerate} disabled={!templateBuffer || names.length === 0 || generating}>
-              {generating ? <><Loader2 size={16} className="animate-spin" /> Generation {progress}%</> : <><Download size={16} /> Generer ({names.length})</>}
+            <Button variant="primary" size="md" className="w-full" onClick={handleGenerate} disabled={!templateBuffer || participants.length === 0 || generating}>
+              {generating ? <><Loader2 size={16} className="animate-spin" /> Generation {progress}%</> : <><Download size={16} /> Generer ({participants.length})</>}
             </Button>
           </aside>
 
           {/* Live preview */}
           <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
-            {names.length > 0 && (
+            {participants.length > 0 && (
               <div className="flex items-center justify-between mb-4">
                 <button onClick={() => setCurrent((c) => Math.max(0, c - 1))} disabled={current === 0} aria-label="Precedent" className="p-1.5 rounded-lg border border-gray-200 disabled:opacity-40"><ChevronLeft size={16} /></button>
-                <p className="text-sm font-medium text-gray-700 truncate px-3">{current + 1} / {names.length} - {previewName}</p>
-                <button onClick={() => setCurrent((c) => Math.min(names.length - 1, c + 1))} disabled={current >= names.length - 1} aria-label="Suivant" className="p-1.5 rounded-lg border border-gray-200 disabled:opacity-40"><ChevronRight size={16} /></button>
+                <p className="text-sm font-medium text-gray-700 truncate px-3">{current + 1} / {participants.length} - {previewName}</p>
+                <button onClick={() => setCurrent((c) => Math.min(participants.length - 1, c + 1))} disabled={current >= participants.length - 1} aria-label="Suivant" className="p-1.5 rounded-lg border border-gray-200 disabled:opacity-40"><ChevronRight size={16} /></button>
               </div>
             )}
 
