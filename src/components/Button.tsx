@@ -12,7 +12,7 @@ interface ButtonProps {
 
 const variantStyles = {
   primary: 'bg-gradient-blue text-white hover:opacity-90 shadow-blue-md hover:shadow-blue-lg',
-  gold: 'bg-gradient-gold text-white hover:opacity-90 shadow-gold-md',
+  gold: 'bg-gradient-gold text-blue-900 hover:opacity-90 shadow-gold-md',
   outline: 'border-2 border-blue-500 text-blue-500 hover:bg-blue-50',
   ghost: 'text-gray-700 hover:bg-gray-100',
   danger: 'bg-red-600 text-white hover:bg-red-700',
@@ -43,6 +43,7 @@ export function Button({
         font-semibold rounded-xl
         transition-all duration-200
         active:scale-95
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variantStyles[variant]}
         ${sizeStyles[size]}

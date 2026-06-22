@@ -22,7 +22,13 @@ export function ProgressBar({ value, variant = 'blue', height = 'sm', className 
   }, [value]);
 
   return (
-    <div className={`w-full rounded-full bg-gray-200 overflow-hidden ${height === 'sm' ? 'h-1.5' : 'h-2.5'} ${className}`}>
+    <div
+      role="progressbar"
+      aria-valuenow={Math.round(value)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      className={`w-full rounded-full bg-gray-200 overflow-hidden ${height === 'sm' ? 'h-1.5' : 'h-2.5'} ${className}`}
+    >
       <div
         className={`h-full rounded-full transition-all duration-700 ease-out ${gradients[variant]}`}
         style={{ width: `${width}%` }}

@@ -129,6 +129,7 @@ export function Login() {
                 <Mail size={16} className="text-gray-400" />
                 <input
                   type="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   className="w-full py-2.5 text-sm outline-none"
@@ -143,6 +144,7 @@ export function Login() {
                 <Lock size={16} className="text-gray-400" />
                 <input
                   type="password"
+                  autoComplete="current-password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   className="w-full py-2.5 text-sm outline-none"

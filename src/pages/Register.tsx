@@ -58,6 +58,7 @@ export function Register() {
               <span className="text-sm font-medium text-gray-700">{t('fullName')}</span>
               <input
                 type="text"
+                autoComplete="name"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
@@ -70,6 +71,7 @@ export function Register() {
               <span className="text-sm font-medium text-gray-700">{t('email')}</span>
               <input
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
@@ -82,6 +84,7 @@ export function Register() {
               <span className="text-sm font-medium text-gray-700">{t('password')}</span>
               <input
                 type="password"
+                autoComplete="new-password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 minLength={6}
