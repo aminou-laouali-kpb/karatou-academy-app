@@ -41,6 +41,15 @@ export default {
         'blue-xl': '0 12px 48px rgba(26, 115, 232, 0.2)',
         'gold-md': '0 4px 16px rgba(245, 166, 35, 0.15)',
       },
+      keyframes: {
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 0.3s ease-out',
+      },
     },
   },
   plugins: [],
