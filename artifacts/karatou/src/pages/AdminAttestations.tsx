@@ -20,7 +20,51 @@ const inputClass = 'w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-type DragKind = 'name' | 'name-resize' | 'qr';
+type DragKind = 'name' | 'name-resize' | 'id' | 'id-resize' | 'qr';
+
+function TextControls({ title, placement, onChange }: {
+  title: string;
+  placement: NamePlacement;
+  onChange: (updater: (p: NamePlacement) => NamePlacement) => void;
+}) {
+  return (
+    <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
+      <h2 className="font-semibold text-gray-900">{title}</h2>
+      <div className="flex gap-2">
+        {([['left', AlignLeft], ['center', AlignCenter], ['right', AlignRight]] as const).map(([value, Icon]) => (
+          <button
+            key={value}
+            onClick={() => onChange((p) => ({ ...p, align: value as TextAlign }))}
+            aria-label={`Aligner ${value}`}
+            className={`flex-1 flex items-center justify-center rounded-lg border py-2 ${placement.align === value ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-gray-200 text-gray-500'}`}
+          >
+            <Icon size={16} />
+          </button>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <label className="block text-xs font-medium text-gray-600">Taille (pt)
+          <input type="number" min={6} max={120} value={placement.fontSize} onChange={(e) => onChange((p) => ({ ...p, fontSize: clamp(Number(e.target.value) || 0, 6, 200) }))} className={inputClass} />
+        </label>
+        <label className="block text-xs font-medium text-gray-600">Couleur
+          <span className="mt-1 flex items-center gap-2">
+            <input type="color" value={placement.colorHex} onChange={(e) => onChange((p) => ({ ...p, colorHex: e.target.value }))} className="h-8 w-9 rounded border border-gray-200" />
+            <input type="text" value={placement.colorHex} onChange={(e) => onChange((p) => ({ ...p, colorHex: e.target.value }))} className={inputClass} />
+          </span>
+        </label>
+        <label className="block text-xs font-medium text-gray-600">Position X (%)
+          <input type="number" min={0} max={100} value={Math.round(placement.xRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, xRatio: clamp(Number(e.target.value) / 100, 0, 1 - p.widthRatio) }))} className={inputClass} />
+        </label>
+        <label className="block text-xs font-medium text-gray-600">Position Y (%)
+          <input type="number" min={0} max={100} value={Math.round(placement.yRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, 0.98) }))} className={inputClass} />
+        </label>
+        <label className="block text-xs font-medium text-gray-600 col-span-2">Largeur de la zone (%)
+          <input type="number" min={5} max={100} value={Math.round(placement.widthRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, widthRatio: clamp(Number(e.target.value) / 100, 0.05, 1 - p.xRatio) }))} className={inputClass} />
+        </label>
+      </div>
+    </section>
+  );
+}
 
 export function AdminAttestations() {
   const [templateBuffer, setTemplateBuffer] = useState<ArrayBuffer | null>(null);
@@ -36,6 +80,9 @@ export function AdminAttestations() {
     xRatio: 0.25, yRatio: 0.45, widthRatio: 0.5, fontSize: 28, colorHex: '#1e3a8a', align: 'center',
   });
   const [qr, setQr] = useState<QrPlacement>({ xRatio: 0.8, yRatio: 0.78, sizeRatio: 0.12 });
+  const [certId, setCertId] = useState<NamePlacement>({
+    xRatio: 0.25, yRatio: 0.6, widthRatio: 0.5, fontSize: 12, colorHex: '#475569', align: 'center',
+  });
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ kind: DragKind; offsetX: number; offsetY: number } | null>(null);
@@ -47,6 +94,7 @@ export function AdminAttestations() {
     [templateBuffer]
   );
   const previewName = names[current] || 'Nom du participant';
+  const previewId = `KA-ATT-${new Date().getFullYear()}-XXXXXX`;
   const scale = pdfPoints ? PREVIEW_WIDTH / pdfPoints.width : 1;
 
   const onPdfUpload = async (file?: File) => {
@@ -79,8 +127,12 @@ export function AdminAttestations() {
     if (!kind || !rect) return;
     event.preventDefault();
     event.stopPropagation();
-    const anchorX = kind === 'qr' ? qr.xRatio : name.xRatio;
-    const anchorY = kind === 'qr' ? qr.yRatio : name.yRatio;
+    const anchor =
+      kind === 'qr' ? qr
+        : kind === 'id' || kind === 'id-resize' ? certId
+          : name;
+    const anchorX = anchor.xRatio;
+    const anchorY = anchor.yRatio;
     dragRef.current = {
       kind,
       offsetX: event.clientX - (rect.left + anchorX * rect.width),
@@ -104,6 +156,14 @@ export function AdminAttestations() {
       }));
     } else if (drag.kind === 'name-resize') {
       setName((prev) => ({ ...prev, widthRatio: clamp(px / rect.width - prev.xRatio, 0.05, 1 - prev.xRatio) }));
+    } else if (drag.kind === 'id') {
+      setCertId((prev) => ({
+        ...prev,
+        xRatio: clamp((px - drag.offsetX) / rect.width, 0, 1 - prev.widthRatio),
+        yRatio: clamp((py - drag.offsetY) / rect.height, 0, 0.98),
+      }));
+    } else if (drag.kind === 'id-resize') {
+      setCertId((prev) => ({ ...prev, widthRatio: clamp(px / rect.width - prev.xRatio, 0.05, 1 - prev.xRatio) }));
     } else {
       setQr((prev) => ({
         ...prev,
@@ -129,6 +189,7 @@ export function AdminAttestations() {
         templateBuffer,
         names,
         namePlacement: name,
+        idPlacement: certId,
         qrPlacement: qr,
         onProgress: (d, total) => setProgress(Math.round((d / total) * 100)),
       });
@@ -162,7 +223,7 @@ export function AdminAttestations() {
           <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou</p>
           <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Attestations en masse</h1>
           <p className="text-sm text-gray-500 mt-2 max-w-2xl">
-            Chargez un modele PDF et une liste Excel, positionnez le nom et le QR code, puis generez toutes les attestations signees en un ZIP.
+            Chargez un modele PDF et une liste Excel, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
           </p>
         </div>
 
@@ -184,41 +245,8 @@ export function AdminAttestations() {
               </label>
             </section>
 
-            <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
-              <h2 className="font-semibold text-gray-900">Texte du nom</h2>
-              <div className="flex gap-2">
-                {([['left', AlignLeft], ['center', AlignCenter], ['right', AlignRight]] as const).map(([value, Icon]) => (
-                  <button
-                    key={value}
-                    onClick={() => setName((p) => ({ ...p, align: value as TextAlign }))}
-                    aria-label={`Aligner ${value}`}
-                    className={`flex-1 flex items-center justify-center rounded-lg border py-2 ${name.align === value ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-gray-200 text-gray-500'}`}
-                  >
-                    <Icon size={16} />
-                  </button>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <label className="block text-xs font-medium text-gray-600">Taille (pt)
-                  <input type="number" min={6} max={120} value={name.fontSize} onChange={(e) => setName((p) => ({ ...p, fontSize: clamp(Number(e.target.value) || 0, 6, 200) }))} className={inputClass} />
-                </label>
-                <label className="block text-xs font-medium text-gray-600">Couleur
-                  <span className="mt-1 flex items-center gap-2">
-                    <input type="color" value={name.colorHex} onChange={(e) => setName((p) => ({ ...p, colorHex: e.target.value }))} className="h-8 w-9 rounded border border-gray-200" />
-                    <input type="text" value={name.colorHex} onChange={(e) => setName((p) => ({ ...p, colorHex: e.target.value }))} className={inputClass} />
-                  </span>
-                </label>
-                <label className="block text-xs font-medium text-gray-600">Position X (%)
-                  <input type="number" min={0} max={100} value={Math.round(name.xRatio * 100)} onChange={(e) => setName((p) => ({ ...p, xRatio: clamp(Number(e.target.value) / 100, 0, 1 - p.widthRatio) }))} className={inputClass} />
-                </label>
-                <label className="block text-xs font-medium text-gray-600">Position Y (%)
-                  <input type="number" min={0} max={100} value={Math.round(name.yRatio * 100)} onChange={(e) => setName((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, 0.98) }))} className={inputClass} />
-                </label>
-                <label className="block text-xs font-medium text-gray-600 col-span-2">Largeur de la zone (%)
-                  <input type="number" min={5} max={100} value={Math.round(name.widthRatio * 100)} onChange={(e) => setName((p) => ({ ...p, widthRatio: clamp(Number(e.target.value) / 100, 0.05, 1 - p.xRatio) }))} className={inputClass} />
-                </label>
-              </div>
-            </section>
+            <TextControls title="Texte du nom" placement={name} onChange={setName} />
+            <TextControls title="Texte de l'ID du certificat" placement={certId} onChange={setCertId} />
 
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
               <h2 className="font-semibold text-gray-900 flex items-center gap-2"><QrCode size={16} className="text-blue-600" /> QR code</h2>
@@ -294,6 +322,31 @@ export function AdminAttestations() {
                       data-drag="name-resize"
                       onPointerDown={handleDragStart}
                       className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 cursor-ew-resize"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  {/* Certificate ID box */}
+                  <div
+                    data-drag="id"
+                    onPointerDown={handleDragStart}
+                    style={{
+                      position: 'absolute',
+                      left: `${certId.xRatio * 100}%`,
+                      top: `${certId.yRatio * 100}%`,
+                      width: `${certId.widthRatio * 100}%`,
+                      textAlign: certId.align,
+                      color: certId.colorHex,
+                      fontSize: `${certId.fontSize * scale}px`,
+                      lineHeight: 1.1,
+                    }}
+                    className="group cursor-move outline-dashed outline-1 outline-emerald-400/60 hover:outline-emerald-500"
+                  >
+                    <span className="whitespace-nowrap overflow-hidden">{previewId}</span>
+                    <span
+                      data-drag="id-resize"
+                      onPointerDown={handleDragStart}
+                      className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-emerald-500 opacity-0 group-hover:opacity-100 cursor-ew-resize"
                       aria-hidden="true"
                     />
                   </div>
