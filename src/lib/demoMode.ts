@@ -1,4 +1,5 @@
-function parseDemoFlag(value: string | undefined) {
+// Exported for unit tests; production code uses `isDemoEnabled` below.
+export function parseDemoFlag(value: string | undefined) {
   if (!value) return null;
 
   const normalized = value.trim().toLowerCase();
