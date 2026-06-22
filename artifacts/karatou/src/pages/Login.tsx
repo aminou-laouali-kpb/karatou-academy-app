@@ -1,21 +1,19 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Building2, GraduationCap, Lock, Mail, ShieldCheck } from 'lucide-react';
+import { Lock, Mail } from 'lucide-react';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 import { isDemoEnabled } from '../lib/demoMode';
-import { defaultRouteForRole } from '../lib/roles';
-import { UserRole } from '../types';
 
 export function Login() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { login, loginAs } = useAuth();
+  const { login } = useAuth();
   const { t } = useLanguage();
-  const [email, setEmail] = useState(() => (isDemoEnabled ? 'student@karatou.test' : ''));
-  const [password, setPassword] = useState(() => (isDemoEnabled ? 'demo1234' : ''));
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -34,22 +32,6 @@ export function Login() {
     }
 
     navigate(redirectTo, { replace: true });
-  };
-
-  const handleDemo = async (role: UserRole) => {
-    if (!isDemoEnabled) {
-      return;
-    }
-
-    setError('');
-    setLoading(true);
-    const result = await loginAs(role);
-    setLoading(false);
-    if (!result.ok) {
-      setError(result.error || t('loginError'));
-      return;
-    }
-    navigate(searchParams.get('redirect') || defaultRouteForRole(role), { replace: true });
   };
 
   return (
@@ -86,35 +68,6 @@ export function Login() {
               {isDemoEnabled ? t('signInSubtitle') : t('signInSubtitleProduction')}
             </p>
           </div>
-
-          {isDemoEnabled && (
-            <div className="grid sm:grid-cols-3 gap-3 mb-6">
-              <button
-                onClick={() => handleDemo('learner')}
-                className="text-left bg-white border border-gray-200 rounded-2xl p-4 hover:border-blue-300 hover:shadow-blue-sm transition-all"
-              >
-                <GraduationCap size={20} className="text-blue-500 mb-3" />
-                <p className="font-semibold text-gray-900">{t('demoStudent')}</p>
-                <p className="text-xs text-gray-500 mt-1">student@karatou.test</p>
-              </button>
-              <button
-                onClick={() => handleDemo('enterprise_admin')}
-                className="text-left bg-white border border-gray-200 rounded-2xl p-4 hover:border-gold-300 hover:shadow-blue-sm transition-all"
-              >
-                <Building2 size={20} className="text-gold-500 mb-3" />
-                <p className="font-semibold text-gray-900">{t('demoEnterprise')}</p>
-                <p className="text-xs text-gray-500 mt-1">admin@karatou.test</p>
-              </button>
-              <button
-                onClick={() => handleDemo('platform_admin')}
-                className="text-left bg-white border border-gray-200 rounded-2xl p-4 hover:border-blue-400 hover:shadow-blue-sm transition-all"
-              >
-                <ShieldCheck size={20} className="text-blue-700 mb-3" />
-                <p className="font-semibold text-gray-900">{t('demoPlatformAdmin')}</p>
-                <p className="text-xs text-gray-500 mt-1">platform@karatou.test</p>
-              </button>
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-blue-sm border border-gray-100 p-5 space-y-4">
             {error && (

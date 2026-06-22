@@ -4,7 +4,6 @@ import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
 import { LearningProvider } from './context/LearningContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { DemoBadge } from './components/DemoBadge';
 import { SkipLink } from './components/SkipLink';
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
@@ -149,7 +148,6 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             </Suspense>
-            <DemoBadge />
           </LearningProvider>
         </AuthProvider>
       </LanguageProvider>

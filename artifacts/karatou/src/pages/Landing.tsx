@@ -41,20 +41,6 @@ export function Landing() {
               {t('seeModules')}
             </Button>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto">
-            {[
-              { value: '1 200+', label: t('learners') },
-              { value: String(publishedModules.length), label: t('modules').toLowerCase() },
-              { value: '98%', label: t('satisfaction') },
-              { value: '12', label: t('countries') },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="font-playfair text-2xl font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -187,20 +173,6 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Partners */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm text-gray-500 uppercase tracking-wider mb-8">{t('trustedBy')}</p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {['PNUD', t('ministryEducation'), 'ONG Sahel Tech', t('universityNiamey'), 'Banque Sahel'].map((p) => (
-              <span key={p} className="bg-white border border-gray-200 text-gray-600 text-sm font-medium px-6 py-2.5 rounded-full">
-                {p}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-blue-900 py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -210,14 +182,20 @@ export function Landing() {
               <p className="text-gray-400 text-sm mt-3">{t('footerTagline')}</p>
             </div>
             <div className="flex flex-wrap gap-6 justify-center">
-              {[t('modules'), t('pricing'), t('enterprise'), t('about')].map((link) => (
-                <a key={link} href="#" className="text-sm text-gray-400 hover:text-white transition-colors">
-                  {link}
-                </a>
-              ))}
+              <a href="#modules" className="text-sm text-gray-400 hover:text-white transition-colors">{t('modules')}</a>
+              <a href="#pricing" className="text-sm text-gray-400 hover:text-white transition-colors">{t('pricing')}</a>
+              <Link to="/enterprise" className="text-sm text-gray-400 hover:text-white transition-colors">{t('enterprise')}</Link>
+              <Link to="/verify-attestation" className="text-sm text-gray-400 hover:text-white transition-colors">{t('verifyCertificateLink')}</Link>
             </div>
             <div className="text-right">
-              <p className="text-sm text-gray-300">karatou.academy</p>
+              <a
+                href="https://karatou.academy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gray-300 hover:text-white transition-colors"
+              >
+                karatou.academy
+              </a>
               <p className="text-xs text-gray-500 mt-1">FR · EN · HA</p>
             </div>
           </div>

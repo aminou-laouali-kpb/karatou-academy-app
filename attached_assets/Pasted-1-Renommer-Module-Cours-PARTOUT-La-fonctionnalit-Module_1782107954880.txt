@@ -1,0 +1,89 @@
+1. Renommer "Module" → "Cours" PARTOUT
+
+La fonctionnalité "Modules" délivre des "Cours" : on appelle ça des Cours.
+Remplacer dans toute l'UI (composants, i18n, libellés, boutons, titres de sections) :
+
+
+Nav "Modules" → "Cours"
+Section "Nos Modules" → "Nos Cours"
+Bouton "Voir les modules" → "Voir les cours"
+Pricing : "Par module" → "Par cours" · "Tous les modules inclus" → "Tous les cours inclus"
+Footer : lien "Modules" → "Cours"
+Tout autre texte visible contenant "module(s)" → "cours" (singulier ET pluriel : "cours" reste "cours")
+
+
+Ne touche PAS aux noms de variables/routes/fichiers de code si ça casse le build (ex. ancrage #modules peut rester en interne). C'est le texte VISIBLE par l'utilisateur qui doit dire "Cours".
+
+2. Enlever toute mention "test", "demo", "MVP"
+
+Supprimer ou reformuler en wording production :
+
+
+Badge flottant "Mode Demonstration - karatou.academy" → SUPPRIMER.
+Page connexion : titre "Connexion, cours et certifications dans un seul parcours demo" → "Connecte-toi à ton espace Karatou Academy".
+Label "MVP TESTABLE" → SUPPRIMER.
+"Utilisez les comptes de test pour valider le parcours apprenant, puis basculez vers le portail enterprise." → "Accède à tes cours, suis ta progression et obtiens tes certificats."
+Cartes de comptes de démo (Apprenant / Enterprise / Admin avec emails @karatou.test) → SUPPRIMER l'affichage public. Garder ces comptes seulement en interne/staging, jamais visibles en prod.
+"Nouveau testeur ? Créer un compte apprenant" → "Pas encore de compte ? Crée ton compte".
+Tout email d'exemple *.test → retirer du front public.
+
+
+3. Supprimer la preuve sociale fictive et les stats démo
+
+
+Section "ILS FONT CONFIANCE A KARATOU ACADEMY" + logos PNUD / Ministère de l'Éducation / ONG Sahel Tech / Université Niamey / Banque Sahel → SUPPRIMER entièrement la section.
+Barre de stats du hero "1 200+ apprenants · 3 modules · 98% satisfaction · 12 pays" → SUPPRIMER la barre (chiffres non réels).
+Sur les cartes de cours : retirer le nombre d'apprenants (1240, 856, 623...) et la note (4.8, 4.7...) tant que ce ne sont pas de vraies données. Garder : nombre de leçons + durée + niveau (Débutant/Intermédiaire).
+NE PAS ajouter de ligne d'attribution / soutien institutionnel ici (elle reste sur la vitrine karatou.academy uniquement).
+
+
+4. Corriger TOUS les accents (encodage)
+
+Le site affiche du français sans accents. Passer tous les fichiers source et i18n en UTF-8 et corriger les chaînes. Exemples à corriger (liste non exhaustive, vérifier tout le texte visible) :
+
+
+"reference" → "référence" · "maitriser" → "maîtriser"
+"competences" → "compétences" · "reconnaitre" → "reconnaître" · "Evoluez" → "Évolue" (voir ton §5)
+"penses" → "pensés" · "Termine" → "Terminé" · "lecons" → "leçons" · "methodes" → "méthodes"
+"Donnees" → "Données" · "Analyse de Donnees" → "Analyse de Données"
+"a transformer / a votre / a grande echelle" → "à transformer / à ton / à grande échelle"
+"Francais" → "Français" · "Universite" → "Université" · "Confidentialite" → "Confidentialité"
+"verifiables / verifiable" → "vérifiables / vérifiable" · "numerique" → "numérique"
+"etes pret" → "es prêt" (voir ton §5)
+
+
+5. Passer le ton au tutoiement (voix de marque Karatou)
+
+La marque tutoie. Remplacer le vouvoiement :
+
+
+Hero sous-titre : "Certifiez vos compétences. Faites-vous reconnaître. Évoluez." → "Certifie tes compétences. Fais-toi reconnaître. Évolue."
+Pricing intro : "Commencez gratuitement, certifiez-vous quand vous êtes prêt" → "Commence gratuitement, certifie-toi quand tu es prêt."
+"Formez vos équipes à grande échelle" (carte organisations) → "Forme tes équipes à grande échelle."
+Appliquer le tutoiement partout ailleurs (vos → tes, vous → tu, impératif 2e pers. du singulier).
+
+
+6. Mettre en avant la vérification de certificat
+
+C'est le vrai signal de confiance, auto-détenu.
+
+
+Garder/renforcer le bénéfice "Certifications renouvelables · valides 12 mois · vérifiables par QR code".
+S'assurer qu'une page publique de vérification existe et est accessible sans compte (ex. /verify/{id} qui affiche : nom, cours, date, statut valide/expiré). La lier depuis le footer ("Vérifier un certificat").
+
+
+7. Slogan officiel + cohérence marque
+
+
+Footer : "Apprendre · Certifier · Grandir" → "Se Former · Certifier · Évoluer" (slogan FR officiel).
+Wordmark : "Karatou Academy" (identique à la vitrine).
+Footer : rendre cliquable le lien vers la vitrine karatou.academy (renvoi vers le site marque).
+
+
+8. Garder tel quel
+
+
+Les 3 langues FR / EN / HA (scope "Afrique francophone + EN/HA" assumé).
+Les 3 espaces Apprenant / Enterprise / Admin (juste retirer leur présentation "comptes de test" en public).
+Pricing FCFA (Gratuit / Certificat 7 500 FCFA par cours / Plus 90 000 FCFA/an / devis Enterprise).
+Charte Bleu Karatou #1A73E8 + Or #F5A623, navy sections sombres, Playfair + DM Sans.
