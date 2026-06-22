@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
+import { isDemoEnabled } from '../lib/demoMode';
 
 export function Register() {
   const navigate = useNavigate();
@@ -12,7 +13,9 @@ export function Register() {
   const { t } = useLanguage();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('demo1234');
+  // Pre-fill the demo password only in demo mode (mirrors Login); production
+  // registrations start with an empty password field.
+  const [password, setPassword] = useState(() => (isDemoEnabled ? 'demo1234' : ''));
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
