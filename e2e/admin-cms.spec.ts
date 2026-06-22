@@ -18,8 +18,8 @@ test.describe('Platform admin CMS', () => {
   test('team page loads with the create-enterprise-admin form', async ({ page }) => {
     await demoLogin(page, 'platform');
     await page.goto('/admin/team');
-    await expect(page.getByRole('heading', { name: 'Equipe & acces' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Creer un admin entreprise' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Équipe & accès' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Créer un admin entreprise' })).toBeVisible();
   });
 
   test('bulk attestations tool loads', async ({ page }) => {

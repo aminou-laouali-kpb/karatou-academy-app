@@ -18,46 +18,46 @@ export interface LegalDoc {
 
 export const privacyPolicy: Record<Language, LegalDoc> = {
   fr: {
-    title: 'Politique de confidentialite',
-    updated: 'Mise a jour : 16 juin 2026',
+    title: 'Politique de confidentialité',
+    updated: 'Mise à jour : 16 juin 2026',
     intro:
-      'Karatou Academy respecte votre vie privee. Cette politique explique quelles donnees nous collectons, pourquoi, et quels sont vos droits.',
+      'Karatou Academy respecte votre vie privée. Cette politique explique quelles données nous collectons, pourquoi, et quels sont vos droits.',
     sections: [
       {
-        heading: 'Donnees que nous collectons',
+        heading: 'Données que nous collectons',
         body: [
-          'Lors de la creation de votre compte et de votre apprentissage, nous collectons : votre nom, votre adresse email, votre pays, votre progression dans les modules et les certificats que vous obtenez.',
-          'Nous ne collectons pas de donnees de paiement ni de donnees sensibles non necessaires au service.',
+          'Lors de la création de votre compte et de votre apprentissage, nous collectons : votre nom, votre adresse email, votre pays, votre progression dans les modules et les certificats que vous obtenez.',
+          'Nous ne collectons pas de données de paiement ni de données sensibles non nécessaires au service.',
         ],
       },
       {
-        heading: 'Pourquoi nous utilisons ces donnees',
+        heading: 'Pourquoi nous utilisons ces données',
         body: [
-          'Vos donnees servent uniquement a : creer et securiser votre compte, fournir les cours, suivre votre progression, et emettre des certificats verifiables.',
-          "Pour les apprenants rattaches a une organisation partenaire, l'organisation peut voir la progression et les certificats de ses membres.",
+          'Vos données servent uniquement à : créer et sécuriser votre compte, fournir les cours, suivre votre progression, et émettre des certificats vérifiables.',
+          "Pour les apprenants rattachés à une organisation partenaire, l'organisation peut voir la progression et les certificats de ses membres.",
         ],
       },
       {
-        heading: 'Hebergement et sous-traitants',
+        heading: 'Hébergement et sous-traitants',
         body: [
-          "L'authentification et la base de donnees sont fournies par Supabase. Vos donnees sont stockees de maniere securisee et l'acces est protege par des regles de securite au niveau des lignes (RLS).",
+          "L'authentification et la base de données sont fournies par Supabase. Vos données sont stockées de manière sécurisée et l'accès est protégé par des règles de sécurité au niveau des lignes (RLS).",
         ],
       },
       {
-        heading: 'Conservation des donnees',
+        heading: 'Conservation des données',
         body: [
-          "Nous conservons vos donnees tant que votre compte est actif. Vous pouvez demander la suppression de votre compte et de vos donnees a tout moment ; les certificats deja emis peuvent etre conserves de maniere anonymisee a des fins de verification.",
+          "Nous conservons vos données tant que votre compte est actif. Vous pouvez demander la suppression de votre compte et de vos données à tout moment ; les certificats déjà émis peuvent être conservés de manière anonymisée à des fins de vérification.",
         ],
       },
       {
         heading: 'Vos droits',
         body: [
-          "Vous disposez d'un droit d'acces, de rectification et de suppression de vos donnees personnelles. Pour exercer ces droits, contactez-nous.",
+          "Vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour exercer ces droits, contactez-nous.",
         ],
       },
       {
         heading: 'Contact',
-        body: [`Pour toute question relative a vos donnees : ${CONTACT_EMAIL}.`],
+        body: [`Pour toute question relative à vos données : ${CONTACT_EMAIL}.`],
       },
     ],
   },
@@ -154,42 +154,42 @@ export const privacyPolicy: Record<Language, LegalDoc> = {
 export const termsOfService: Record<Language, LegalDoc> = {
   fr: {
     title: "Conditions d'utilisation",
-    updated: 'Mise a jour : 16 juin 2026',
+    updated: 'Mise à jour : 16 juin 2026',
     intro:
       "En utilisant Karatou Academy, vous acceptez les conditions suivantes. Merci de les lire attentivement.",
     sections: [
       {
         heading: 'Acceptation',
-        body: ["L'utilisation de la plateforme implique l'acceptation de ces conditions. Si vous n'etes pas d'accord, n'utilisez pas le service."],
+        body: ["L'utilisation de la plateforme implique l'acceptation de ces conditions. Si vous n'êtes pas d'accord, n'utilisez pas le service."],
       },
       {
-        heading: 'Comptes et securite',
+        heading: 'Comptes et sécurité',
         body: [
-          'Vous etes responsable de la confidentialite de vos identifiants et de toute activite sur votre compte. Utilisez un mot de passe robuste et signalez tout acces non autorise.',
+          'Vous êtes responsable de la confidentialité de vos identifiants et de toute activité sur votre compte. Utilisez un mot de passe robuste et signalez tout accès non autorisé.',
         ],
       },
       {
         heading: 'Utilisation acceptable',
         body: [
-          "Vous vous engagez a ne pas detourner la plateforme, a ne pas tenter d'acceder a des donnees d'autres utilisateurs, et a respecter les lois applicables.",
+          "Vous vous engagez à ne pas détourner la plateforme, à ne pas tenter d'accéder à des données d'autres utilisateurs, et à respecter les lois applicables.",
         ],
       },
       {
         heading: 'Certificats',
         body: [
-          "Les certificats sont emis apres validation d'un module et sont verifiables publiquement par leur identifiant. Un certificat peut etre revoque en cas de fraude ou d'erreur.",
+          "Les certificats sont émis après validation d'un module et sont vérifiables publiquement par leur identifiant. Un certificat peut être révoqué en cas de fraude ou d'erreur.",
         ],
       },
       {
-        heading: 'Propriete intellectuelle',
+        heading: 'Propriété intellectuelle',
         body: [
-          'Les contenus de cours restent la propriete de Karatou Academy ou de ses partenaires. Ils sont fournis pour votre apprentissage personnel.',
+          'Les contenus de cours restent la propriété de Karatou Academy ou de ses partenaires. Ils sont fournis pour votre apprentissage personnel.',
         ],
       },
       {
-        heading: 'Responsabilite et contact',
+        heading: 'Responsabilité et contact',
         body: [
-          'Le service est fourni "en l’etat". Dans les limites permises par la loi, Karatou Academy ne saurait etre tenue responsable des dommages indirects.',
+          'Le service est fourni « en l\'état ». Dans les limites permises par la loi, Karatou Academy ne saurait être tenue responsable des dommages indirects.',
           `Contact : ${CONTACT_EMAIL}.`,
         ],
       },

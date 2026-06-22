@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 
 // Seed fixtures from src/data/mockData.ts, one per certificate status.
 const CASES = [
-  { uid: 'KA-2026-AI-PN001', holder: 'Fatima Moussa', heading: 'Certificat Verifie' },
-  { uid: 'KA-2024-AI-00017', holder: 'Jean Dupont', heading: 'Certificat Expire' },
-  { uid: 'KA-2026-AI-REVOKED', holder: 'Ali Zaki', heading: 'Certificat Revoque' },
+  { uid: 'KA-2026-AI-PN001', holder: 'Fatima Moussa', heading: 'Certificat Vérifié' },
+  { uid: 'KA-2024-AI-00017', holder: 'Jean Dupont', heading: 'Certificat Expiré' },
+  { uid: 'KA-2026-AI-REVOKED', holder: 'Ali Zaki', heading: 'Certificat Révoqué' },
 ] as const;
 
 test.describe('Public certificate verification', () => {

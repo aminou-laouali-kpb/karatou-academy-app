@@ -10,9 +10,9 @@ test.describe('Enterprise portal', () => {
 
   test('creates a bourse (scholarship) code', async ({ page }) => {
     await demoLogin(page, 'enterprise');
-    await page.getByRole('button', { name: 'Creer des bourses' }).click();
+    await page.getByRole('button', { name: 'Créer des bourses' }).click();
 
-    await expect(page.getByText('Bourse creee')).toBeVisible();
+    await expect(page.getByText('Bourse créée')).toBeVisible();
     // The new code is shown both as a label and inside the redeem URL.
     await expect(page.getByText(/KA-SCH-PNUD-[A-Z0-9]{6}/).first()).toBeVisible();
   });
