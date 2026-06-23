@@ -1,6 +1,13 @@
 import { Language } from './translations';
 import { LessonContent, lesson1 } from './lessonContent';
 import { Course, LearningModule } from '../types';
+import { iaLessonC2 } from './lessons/ia-c2-llms';
+import { iaLessonC3 } from './lessons/ia-c3-prompting';
+import { iaLessonC4 } from './lessons/ia-c4-organisations';
+import { iaLessonC5 } from './lessons/ia-c5-automatisation';
+import { iaLessonC6 } from './lessons/ia-c6-ethique';
+import { iaLessonC7 } from './lessons/ia-c7-outils';
+import { iaLessonC8 } from './lessons/ia-c8-evaluation';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
 type ModuleCopy = {
@@ -268,6 +275,13 @@ export function getLessonOne(lang: Language) {
 // See docs/authoring-lessons.md.
 const authoredLessons: Record<string, Record<Language, LessonContent>> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
+  'intelligence-artificielle/c2': iaLessonC2,
+  'intelligence-artificielle/c3': iaLessonC3,
+  'intelligence-artificielle/c4': iaLessonC4,
+  'intelligence-artificielle/c5': iaLessonC5,
+  'intelligence-artificielle/c6': iaLessonC6,
+  'intelligence-artificielle/c7': iaLessonC7,
+  'intelligence-artificielle/c8': iaLessonC8,
 };
 
 export function getAuthoredLesson(
