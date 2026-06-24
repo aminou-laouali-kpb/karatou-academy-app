@@ -8,6 +8,11 @@ import { iaLessonC5 } from './lessons/ia-c5-automatisation';
 import { iaLessonC6 } from './lessons/ia-c6-ethique';
 import { iaLessonC7 } from './lessons/ia-c7-outils';
 import { iaLessonC8 } from './lessons/ia-c8-evaluation';
+import { pmLessonP1 } from './lessons/pm-p1-cadrage';
+import { pmLessonP2 } from './lessons/pm-p2-mvp';
+import { pmLessonP3 } from './lessons/pm-p3-sprint';
+import { pmLessonP4 } from './lessons/pm-p4-risques';
+import { pmLessonP5 } from './lessons/pm-p5-retrospective';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
 type ModuleCopy = {
@@ -282,6 +287,11 @@ const authoredLessons: Record<string, Record<Language, LessonContent>> = {
   'intelligence-artificielle/c6': iaLessonC6,
   'intelligence-artificielle/c7': iaLessonC7,
   'intelligence-artificielle/c8': iaLessonC8,
+  'gestion-projet/p1': pmLessonP1,
+  'gestion-projet/p2': pmLessonP2,
+  'gestion-projet/p3': pmLessonP3,
+  'gestion-projet/p4': pmLessonP4,
+  'gestion-projet/p5': pmLessonP5,
 };
 
 export function getAuthoredLesson(
