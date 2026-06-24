@@ -13,6 +13,12 @@ import { pmLessonP2 } from './lessons/pm-p2-mvp';
 import { pmLessonP3 } from './lessons/pm-p3-sprint';
 import { pmLessonP4 } from './lessons/pm-p4-risques';
 import { pmLessonP5 } from './lessons/pm-p5-retrospective';
+import { daLessonD1 } from './lessons/da-d1-nettoyage';
+import { daLessonD2 } from './lessons/da-d2-tableaux-croises';
+import { daLessonD3 } from './lessons/da-d3-python';
+import { daLessonD4 } from './lessons/da-d4-visualisation';
+import { daLessonD5 } from './lessons/da-d5-raconter';
+import { daLessonD6 } from './lessons/da-d6-mini-projet';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
 type ModuleCopy = {
@@ -292,6 +298,12 @@ const authoredLessons: Record<string, Record<Language, LessonContent>> = {
   'gestion-projet/p3': pmLessonP3,
   'gestion-projet/p4': pmLessonP4,
   'gestion-projet/p5': pmLessonP5,
+  'data-analysis/d1': daLessonD1,
+  'data-analysis/d2': daLessonD2,
+  'data-analysis/d3': daLessonD3,
+  'data-analysis/d4': daLessonD4,
+  'data-analysis/d5': daLessonD5,
+  'data-analysis/d6': daLessonD6,
 };
 
 export function getAuthoredLesson(
