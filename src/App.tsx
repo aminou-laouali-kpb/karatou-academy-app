@@ -66,7 +66,7 @@ function App() {
             <SkipLink />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/" element={<Landing />} />
+              <Route path="/" element={window.location.hostname === 'verify.karatou.academy' ? <VerifyAttestation /> : <Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

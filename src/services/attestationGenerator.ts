@@ -138,7 +138,7 @@ export function decodeAttestationPayload(encoded: string): CertificatePayload | 
 
 /** The QR encodes this URL: scanning opens the verifier with the signed payload. */
 export function attestationVerifyUrl(payload: CertificatePayload): string {
-  return `${VERIFY_BASE_URL}/verify-attestation#${encodeAttestationPayload(payload)}`;
+  return `${VERIFY_BASE_URL}/#${encodeAttestationPayload(payload)}`;
 }
 
 /** Parses the first sheet's first column into a list of participant names. */
