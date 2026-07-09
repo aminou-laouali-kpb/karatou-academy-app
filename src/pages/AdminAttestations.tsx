@@ -1,13 +1,14 @@
-import { PointerEvent as ReactPointerEvent, useMemo, useRef, useState } from 'react';
+import { PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import {
   AlignCenter, AlignLeft, AlignRight, ChevronLeft, ChevronRight,
-  Download, FileSpreadsheet, FileText, Loader2, QrCode,
+  Download, FileSpreadsheet, FileText, Loader2, Plus, QrCode, Trash2, Image as ImageIcon,
 } from 'lucide-react';
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
-  generateAttestationsZip, parseParticipants, NamePlacement, Participant, QrPlacement, TextAlign,
+  detectTemplateType, generateAttestationsZip, parseParticipants,
+  NamePlacement, Participant, QrPlacement, TemplateType, TextAlign,
 } from '../services/attestationGenerator';
 import { addSubscribers } from '../services/newsletterService';
 // Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
@@ -75,6 +76,9 @@ function TextControls({ title, placement, onChange }: {
 
 export function AdminAttestations() {
   const [templateBuffer, setTemplateBuffer] = useState<ArrayBuffer | null>(null);
+  const [templateType, setTemplateType] = useState<TemplateType>('pdf');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [manualName, setManualName] = useState('');
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [current, setCurrent] = useState(0);
   const [pdfPoints, setPdfPoints] = useState<{ width: number; height: number } | null>(null);
@@ -95,19 +99,35 @@ export function AdminAttestations() {
   const dragRef = useRef<{ kind: DragKind; offsetX: number; offsetY: number } | null>(null);
 
   const previewFile = useMemo(
-    () => (templateBuffer ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
-    [templateBuffer]
+    () => (templateBuffer && templateType === 'pdf' ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
+    [templateBuffer, templateType]
   );
   const previewName = participants[current]?.name || 'Nom du participant';
   const previewId = `KA-ATT-${new Date().getFullYear()}-XXXXXX`;
   const subscribableCount = participants.filter((p) => p.email).length;
   const scale = pdfPoints ? PREVIEW_WIDTH / pdfPoints.width : 1;
 
-  const onPdfUpload = async (file?: File) => {
+  // Revoke the object URL used for the image preview when it's replaced/unmounted.
+  useEffect(() => () => { if (imageUrl) URL.revokeObjectURL(imageUrl); }, [imageUrl]);
+
+  const onTemplateUpload = async (file?: File) => {
     if (!file) return;
     setError('');
     setDone('');
+    const type = detectTemplateType(file);
+    if (!type) {
+      setError('Format non pris en charge. Utilisez un PDF, PNG ou JPG.');
+      return;
+    }
+    setPdfPoints(null);
+    setTemplateType(type);
     setTemplateBuffer(await file.arrayBuffer());
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
+    setImageUrl(type === 'image' ? URL.createObjectURL(file) : null);
+  };
+
+  const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    setPdfPoints({ width: e.currentTarget.naturalWidth, height: e.currentTarget.naturalHeight });
   };
 
   const onExcelUpload = async (file?: File) => {
@@ -120,11 +140,26 @@ export function AdminAttestations() {
         setError('Aucun nom trouve dans la premiere colonne du fichier.');
         return;
       }
-      setParticipants(parsed);
+      setParticipants((prev) => [...prev, ...parsed]);
       setCurrent(0);
     } catch {
       setError('Fichier Excel illisible. Verifiez le format (.xlsx/.xls).');
     }
+  };
+
+  const onAddManualName = () => {
+    const trimmed = manualName.trim();
+    if (!trimmed) return;
+    setError('');
+    setDone('');
+    setParticipants((prev) => [...prev, { name: trimmed }]);
+    setManualName('');
+    setCurrent((c) => (participants.length === 0 ? 0 : c));
+  };
+
+  const onRemoveParticipant = (index: number) => {
+    setParticipants((prev) => prev.filter((_, i) => i !== index));
+    setCurrent((c) => Math.max(0, Math.min(c, participants.length - 2)));
   };
 
   const handleDragStart = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -193,6 +228,7 @@ export function AdminAttestations() {
     try {
       const count = await generateAttestationsZip({
         templateBuffer,
+        templateType,
         names: participants.map((p) => p.name),
         namePlacement: name,
         idPlacement: certId,
@@ -234,7 +270,7 @@ export function AdminAttestations() {
           <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou</p>
           <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Attestations en masse</h1>
           <p className="text-sm text-gray-500 mt-2 max-w-2xl">
-            Chargez un modele PDF et une liste Excel, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
+            Chargez un modele (PDF, PNG ou JPG) puis une liste Excel ou des noms tapes a la main, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
           </p>
         </div>
 
@@ -247,13 +283,52 @@ export function AdminAttestations() {
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
               <h2 className="font-semibold text-gray-900">Sources</h2>
               <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
-                <FileText size={16} className="text-blue-600" /> {templateBuffer ? 'Modele PDF charge' : 'Charger le modele PDF'}
-                <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={(e) => onPdfUpload(e.target.files?.[0])} />
+                {templateType === 'image' ? <ImageIcon size={16} className="text-blue-600" /> : <FileText size={16} className="text-blue-600" />}
+                {templateBuffer ? (templateType === 'image' ? 'Modele image charge' : 'Modele PDF charge') : 'Charger le modele (PDF, PNG ou JPG)'}
+                <input type="file" accept="application/pdf,.pdf,image/png,image/jpeg,.png,.jpg,.jpeg" className="hidden" onChange={(e) => onTemplateUpload(e.target.files?.[0])} />
               </label>
               <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
                 <FileSpreadsheet size={16} className="text-emerald-600" /> {participants.length ? `${participants.length} participants${subscribableCount > 0 ? ` · ${subscribableCount} email${subscribableCount !== 1 ? 's' : ''}` : ''}` : 'Charger la liste Excel'}
                 <input type="file" accept=".xlsx,.xls" className="hidden" onChange={(e) => onExcelUpload(e.target.files?.[0])} />
               </label>
+
+              <div className="flex gap-2 pt-1">
+                <input
+                  type="text"
+                  value={manualName}
+                  onChange={(e) => setManualName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); onAddManualName(); } }}
+                  placeholder="Taper un nom puis Ajouter"
+                  className={inputClass}
+                />
+                <button
+                  type="button"
+                  onClick={onAddManualName}
+                  disabled={!manualName.trim()}
+                  aria-label="Ajouter le nom"
+                  className="shrink-0 flex items-center justify-center rounded-lg border border-blue-200 bg-blue-50 text-blue-600 px-3 disabled:opacity-40"
+                >
+                  <Plus size={16} />
+                </button>
+              </div>
+
+              {participants.length > 0 && (
+                <ul className="max-h-40 overflow-y-auto divide-y divide-gray-100 rounded-xl border border-gray-100">
+                  {participants.map((p, i) => (
+                    <li key={`${p.name}-${i}`} className="flex items-center justify-between gap-2 px-3 py-1.5 text-sm text-gray-700">
+                      <span className="truncate">{p.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => onRemoveParticipant(i)}
+                        aria-label={`Retirer ${p.name}`}
+                        className="shrink-0 text-gray-400 hover:text-red-500"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
 
             <TextControls title="Texte du nom" placement={name} onChange={setName} />
@@ -289,9 +364,9 @@ export function AdminAttestations() {
               </div>
             )}
 
-            {!previewFile ? (
+            {!templateBuffer ? (
               <div className="rounded-2xl border border-dashed border-gray-300 p-16 text-center text-sm text-gray-500">
-                Chargez un modele PDF pour afficher l'apercu et positionner les elements.
+                Chargez un modele (PDF, PNG ou JPG) pour afficher l'apercu et positionner les elements.
               </div>
             ) : (
               <div className="flex justify-center">
@@ -302,15 +377,26 @@ export function AdminAttestations() {
                   onPointerUp={endDrag}
                   onPointerCancel={endDrag}
                 >
-                  <Document file={previewFile} onLoadError={() => setError('PDF illisible.')}>
-                    <Page
-                      pageNumber={1}
+                  {templateType === 'image' && imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="Modele d'attestation"
                       width={PREVIEW_WIDTH}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                      onLoadSuccess={(page) => setPdfPoints({ width: page.originalWidth, height: page.originalHeight })}
+                      style={{ width: PREVIEW_WIDTH, height: 'auto', display: 'block' }}
+                      onLoad={onImageLoad}
+                      onError={() => setError('Image illisible.')}
                     />
-                  </Document>
+                  ) : previewFile ? (
+                    <Document file={previewFile} onLoadError={() => setError('PDF illisible.')}>
+                      <Page
+                        pageNumber={1}
+                        width={PREVIEW_WIDTH}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                        onLoadSuccess={(page) => setPdfPoints({ width: page.originalWidth, height: page.originalHeight })}
+                      />
+                    </Document>
+                  ) : null}
 
                   {/* Name box */}
                   <div

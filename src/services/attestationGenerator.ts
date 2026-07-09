@@ -232,8 +232,21 @@ function csvCell(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+export type TemplateType = 'pdf' | 'image';
+
+/** Detects whether a template file is a PDF or a raster image from its MIME type/name. */
+export function detectTemplateType(file: File): TemplateType | null {
+  const type = file.type.toLowerCase();
+  const name = file.name.toLowerCase();
+  if (type === 'application/pdf' || name.endsWith('.pdf')) return 'pdf';
+  if (type.startsWith('image/') || /\.(png|jpe?g)$/.test(name)) return 'image';
+  return null;
+}
+
 export interface GenerateParams {
   templateBuffer: ArrayBuffer;
+  /** Whether the template is a PDF page or a raster image (PNG/JPEG) used as a full-page background. */
+  templateType: TemplateType;
   names: string[];
   namePlacement: NamePlacement;
   /** Optional placement for the certificate ID (KA-ATT-YYYY-XXXXXX). */
@@ -242,9 +255,26 @@ export interface GenerateParams {
   onProgress?: (done: number, total: number) => void;
 }
 
+/** Loads the template into a fresh pdf-lib document: the PDF as-is, or an image drawn full-bleed onto a new page. */
+async function loadTemplateDoc(templateBuffer: ArrayBuffer, templateType: TemplateType) {
+  if (templateType === 'pdf') {
+    return PDFDocument.load(templateBuffer.slice(0));
+  }
+  const pdfDoc = await PDFDocument.create();
+  let image;
+  try {
+    image = await pdfDoc.embedPng(templateBuffer.slice(0));
+  } catch {
+    image = await pdfDoc.embedJpg(templateBuffer.slice(0));
+  }
+  const page = pdfDoc.addPage([image.width, image.height]);
+  page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
+  return pdfDoc;
+}
+
 /** Builds one attestation PDF per name + a traceability CSV, zips and downloads them. */
 export async function generateAttestationsZip(params: GenerateParams): Promise<number> {
-  const { templateBuffer, names, namePlacement, idPlacement, qrPlacement, onProgress } = params;
+  const { templateBuffer, templateType, names, namePlacement, idPlacement, qrPlacement, onProgress } = params;
   const zip = new JSZip();
   const csvRows: string[] = [
     ['ID Certificat', 'Nom du Participant', 'Date de Delivrance', 'Date d Expiration', 'Signature Electronique']
@@ -259,7 +289,7 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     const payload = payloads[index];
     const name = payload.name;
 
-    const pdfDoc = await PDFDocument.load(templateBuffer.slice(0));
+    const pdfDoc = await loadTemplateDoc(templateBuffer, templateType);
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const page = pdfDoc.getPages()[0];
     const { width: pageWidth, height: pageHeight } = page.getSize();
