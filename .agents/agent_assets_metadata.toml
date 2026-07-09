@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "9D_1TFhmwrT1QBmldG9aI"
+uri = "file://attached_assets/liens_verification_certificats.csv"
+type = "table"
+title = "Liens de vérification (24 certificats)"
