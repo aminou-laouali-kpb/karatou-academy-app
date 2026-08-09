@@ -213,10 +213,17 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   const [contentSyncStatus, setContentSyncStatus] = useState(
     getContentBackend() === 'supabase' ? 'Connexion Supabase en attente...' : 'Mode demo local'
   );
+  // True while the initial catalog fetch is in flight — lets pages show a
+  // loading state instead of "no courses yet" during a hard refresh.
+  const [contentLoading, setContentLoading] = useState(getContentBackend() === 'supabase');
 
   // Per-user isolation: when the auth identity changes (login / logout / switch on
-  // a shared device), drop the previous session's cached data. Real data reloads via
-  // the snapshot effects below. Demo mode keeps its seed.
+  // a shared device), drop the previous session's personal data. Real data reloads
+  // via the snapshot effects below. Demo mode keeps its seed.
+  // The course catalog (modules/rubriques/contentImports) is shared tenant content,
+  // not per-user data: it must survive the identity change. On a hard refresh the
+  // identity resolves undefined -> uuid after mount, and the one-shot content fetch
+  // below may already have settled — wiping the catalog here left the app blank.
   const lastUserIdRef = useRef(userId);
   useEffect(() => {
     if (lastUserIdRef.current === userId) {
@@ -225,8 +232,16 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     lastUserIdRef.current = userId;
     if (!isDemoEnabled) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on identity change
-      setState(emptyState);
-      persistState(emptyState);
+      setState((current) => {
+        const next: StoredLearningState = {
+          ...emptyState,
+          modules: current.modules,
+          rubriques: current.rubriques,
+          contentImports: current.contentImports,
+        };
+        persistState(next);
+        return next;
+      });
     }
   }, [userId]);
 
@@ -264,6 +279,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       .catch((error: Error) => {
         if (active) {
           setContentSyncStatus(`Supabase indisponible - fallback local (${error.message})`);
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setContentLoading(false);
         }
       });
 
@@ -966,6 +986,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     contentImports: state.contentImports,
     contentBackend: getContentBackend(),
     contentSyncStatus,
+    contentLoading,
     completedCourses: state.completedCourses,
     certificates: state.certificates,
     organizations: state.organizations,

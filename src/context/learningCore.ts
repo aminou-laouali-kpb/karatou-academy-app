@@ -7,6 +7,7 @@ export interface LearningContextValue {
   contentImports: ContentImportRecord[];
   contentBackend: 'local' | 'supabase';
   contentSyncStatus: string;
+  contentLoading: boolean;
   completedCourses: Record<string, string[]>;
   certificates: Certificate[];
   organizations: Organization[];

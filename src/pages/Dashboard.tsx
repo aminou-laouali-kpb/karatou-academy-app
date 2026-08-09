@@ -15,7 +15,7 @@ export function Dashboard() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { lang, t } = useLanguage();
-  const { modules, getProgress, getCompletedCourseIds, getUserCertificates } = useLearning();
+  const { modules, contentLoading, getProgress, getCompletedCourseIds, getUserCertificates } = useLearning();
   const localizedModules = useMemo(
     () => localizeModules(modules.filter((module) => module.status !== 'draft'), lang),
     [modules, lang]
@@ -33,6 +33,21 @@ export function Dashboard() {
     (total, module) => total + getCompletedCourseIds(module.slug).length,
     0
   );
+
+  // Catalog fetch still in flight (e.g. right after a hard refresh): show a
+  // loading state instead of the misleading "no courses yet" empty state.
+  if (!activeModule && contentLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-sm text-gray-500" role="status">
+            {t('loadingCourses')}
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   // Empty production tenant (no published modules yet): show a clean empty state
   // instead of crashing on an undefined active module.
