@@ -211,6 +211,7 @@ export function LessonPlayer() {
   const { lang, t } = useLanguage();
   const {
     modules,
+    contentLoading,
     getCompletedCourseIds,
     isCourseCompleted,
     getProgress,
@@ -249,6 +250,13 @@ export function LessonPlayer() {
     return () => document.removeEventListener('keydown', onKey);
   }, [sidebarOpen]);
 
+  // Keep the active tab visible inside the horizontally scrollable strip when
+  // navigating with the previous/next section arrows.
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    activeTabRef.current?.scrollIntoView?.({ block: 'nearest', inline: 'center' });
+  }, [activeTab]);
+
   const module = useMemo(() => {
     const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
     return sourceModule ? localizeModule(sourceModule, lang) : null;
@@ -267,12 +275,14 @@ export function LessonPlayer() {
   );
 
   // Empty production tenant (no published modules / course): clean empty state.
+  // While the catalog fetch is still in flight (hard refresh), show a loading
+  // message instead of the misleading "no courses yet".
   if (!module || !course || !lesson) {
     return (
       <div className="min-h-screen bg-gray-50">
         <StudentNav />
-        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <p className="text-sm text-gray-500">{t('noCoursesYet')}</p>
+        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center" role="status">
+          <p className="text-sm text-gray-500">{contentLoading ? t('loadingCourses') : t('noCoursesYet')}</p>
         </main>
       </div>
     );
@@ -309,6 +319,14 @@ export function LessonPlayer() {
     setQuizAnswers({});
     setQuizSubmitted({});
     setSidebarOpen(false);
+  };
+
+  const activeTabIndex = tabs.indexOf(activeTab);
+  const goToTab = (index: number) => {
+    const target = tabs[index];
+    if (target) {
+      setActiveTab(target);
+    }
   };
 
   return (
@@ -411,24 +429,45 @@ export function LessonPlayer() {
             <h1 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900">{lesson.title}</h1>
           </div>
 
-          <div className="sticky top-16 z-20 bg-white border-b border-gray-200 px-4 sm:px-6">
-            <div className="overflow-x-auto">
-              <div className="flex gap-0 min-w-max">
-                {tabs.map((tab, index) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex items-center gap-1.5 ${
-                      activeTab === tab
-                        ? 'border-blue-500 text-blue-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    <span className="text-xs text-gray-400 font-mono">{index + 1}</span>
-                    {t(tab)}
-                  </button>
-                ))}
+          <div className="sticky top-16 z-20 bg-white border-b border-gray-200 px-2 sm:px-4">
+            <div className="flex items-center">
+              <button
+                onClick={() => goToTab(activeTabIndex - 1)}
+                disabled={activeTabIndex === 0}
+                aria-label={t('previousSection')}
+                title={t('previousSection')}
+                className="flex-shrink-0 p-2 rounded-full text-gray-500 hover:text-blue-600 hover:bg-blue-50 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+              >
+                <ChevronLeft size={18} aria-hidden="true" />
+              </button>
+              <div className="overflow-x-auto flex-1">
+                <div className="flex gap-0 min-w-max">
+                  {tabs.map((tab, index) => (
+                    <button
+                      key={tab}
+                      ref={activeTab === tab ? activeTabRef : undefined}
+                      onClick={() => setActiveTab(tab)}
+                      className={`px-4 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                        activeTab === tab
+                          ? 'border-blue-500 text-blue-600'
+                          : 'border-transparent text-gray-500 hover:text-gray-700'
+                      }`}
+                    >
+                      <span className="text-xs text-gray-400 font-mono">{index + 1}</span>
+                      {t(tab)}
+                    </button>
+                  ))}
+                </div>
               </div>
+              <button
+                onClick={() => goToTab(activeTabIndex + 1)}
+                disabled={activeTabIndex === tabs.length - 1}
+                aria-label={t('nextSection')}
+                title={t('nextSection')}
+                className="flex-shrink-0 p-2 rounded-full text-gray-500 hover:text-blue-600 hover:bg-blue-50 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+              >
+                <ChevronRight size={18} aria-hidden="true" />
+              </button>
             </div>
           </div>
 

@@ -213,10 +213,23 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   const [contentSyncStatus, setContentSyncStatus] = useState(
     getContentBackend() === 'supabase' ? 'Connexion Supabase en attente...' : 'Mode demo local'
   );
+  // True while the initial catalog fetch is in flight — lets pages show a
+  // loading state instead of "no courses yet" during a hard refresh.
+  const [contentLoading, setContentLoading] = useState(getContentBackend() === 'supabase');
+  // Bumped on auth identity changes to refetch the catalog under the new
+  // identity's RLS visibility (admins see drafts, learners do not).
+  const [contentReloadKey, setContentReloadKey] = useState(0);
 
   // Per-user isolation: when the auth identity changes (login / logout / switch on
-  // a shared device), drop the previous session's cached data. Real data reloads via
-  // the snapshot effects below. Demo mode keeps its seed.
+  // a shared device), drop the previous session's personal data. Real data reloads
+  // via the snapshot effects below. Demo mode keeps its seed.
+  // The published course catalog is shared tenant content, not per-user data: it
+  // must survive the identity change. On a hard refresh the identity resolves
+  // undefined -> uuid after mount, and the content fetch below may already have
+  // settled — wiping the catalog here left the app blank. Only publicly visible
+  // entries are carried over: a privileged session (admin) may have cached draft
+  // modules/courses that the next identity must not see. The catalog is then
+  // refetched under the new identity's RLS visibility.
   const lastUserIdRef = useRef(userId);
   useEffect(() => {
     if (lastUserIdRef.current === userId) {
@@ -225,13 +238,31 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     lastUserIdRef.current = userId;
     if (!isDemoEnabled) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on identity change
-      setState(emptyState);
-      persistState(emptyState);
+      setState((current) => {
+        const next: StoredLearningState = {
+          ...emptyState,
+          modules: current.modules
+            .filter((module) => module.status !== 'draft')
+            .map((module) => ({
+              ...module,
+              courses: module.courses.filter((course) => course.status !== 'draft'),
+            })),
+          rubriques: current.rubriques.filter((rubrique) => rubrique.status !== 'draft'),
+        };
+        persistState(next);
+        return next;
+      });
+      setContentReloadKey((key) => key + 1);
     }
   }, [userId]);
 
   useEffect(() => {
     let active = true;
+
+    if (getContentBackend() === 'supabase') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- loading flag for the fetch below
+      setContentLoading(true);
+    }
 
     loadContentSnapshot()
       .then((snapshot) => {
@@ -265,12 +296,17 @@ export function LearningProvider({ children }: { children: ReactNode }) {
         if (active) {
           setContentSyncStatus(`Supabase indisponible - fallback local (${error.message})`);
         }
+      })
+      .finally(() => {
+        if (active) {
+          setContentLoading(false);
+        }
       });
 
     return () => {
       active = false;
     };
-  }, []);
+  }, [contentReloadKey]);
 
   useEffect(() => {
     if (authMode !== 'supabase' || !authReady || !userId) {
@@ -966,6 +1002,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     contentImports: state.contentImports,
     contentBackend: getContentBackend(),
     contentSyncStatus,
+    contentLoading,
     completedCourses: state.completedCourses,
     certificates: state.certificates,
     organizations: state.organizations,

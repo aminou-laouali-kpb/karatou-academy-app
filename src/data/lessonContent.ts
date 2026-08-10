@@ -62,7 +62,7 @@ export const lesson1: LessonContent = {
     },
     {
       title: "L'IA que vous utilisez déjà",
-      body: "Vous avez probablement déjà utilisé l'IA aujourd'hui sans même vous en rendre compte, car elle est intégrée dans vos applications préférées. Sur WhatsApp, les filtres antispam et les suggestions de mots reposent sur des modèles de langage. Lorsque vous utilisez Google Maps ou des outils SIG pour trouver l'itinéraire le plus rapide entre deux quartiers, une IA analyse en temps réel les flux de données pour optimiser votre trajet.\n\nPlus important encore, les services de Mobile Money comme M-Pesa ou Orange Money utilisent l'IA pour détecter les fraudes et sécuriser vos transactions en analysant des millions de transferts par seconde.\n\nDans le secteur humanitaire, 70 % des praticiens intègrent désormais des outils comme ChatGPT ou Claude dans leurs flux de travail quotidiens pour rédiger des rapports ou polir des communications professionnelles. Ces outils, dits \"IA générative\", ne font pas que traiter l'information : ils créent du contenu (texte, audio ou image) pour vous faire gagner un temps précieux dans vos tâches administratives et techniques.",
+      body: "Vous avez probablement déjà utilisé l'IA aujourd'hui sans même vous en rendre compte, car elle est intégrée dans vos applications préférées. Sur WhatsApp, les filtres antispam et les suggestions de mots reposent sur des modèles de langage. Lorsque vous utilisez Google Maps ou des outils SIG pour trouver l'itinéraire le plus rapide entre deux quartiers, une IA analyse en temps réel les flux de données pour optimiser votre trajet.\n\nPlus important encore, les services de Mobile Money comme M-Pesa ou Orange Money utilisent l'IA pour détecter les fraudes et sécuriser vos transactions en analysant des millions de transferts par seconde.\n\nDans le secteur humanitaire, 70 % des praticiens sondés intègrent désormais des outils comme ChatGPT ou Claude dans leurs flux de travail quotidiens ou hebdomadaires pour rédiger des rapports ou polir des communications professionnelles. Ces outils, dits \"IA générative\", ne font pas que traiter l'information : ils créent du contenu (texte, audio ou image) pour vous faire gagner un temps précieux dans vos tâches administratives et techniques.",
     },
     {
       title: "L'IA en Afrique aujourd'hui",
@@ -146,7 +146,7 @@ export const lesson1: LessonContent = {
     },
   ],
   reflection:
-    "L'étude \"Humanitarian AI 2025\" montre que 93 % des individus utilisent l'IA, mais que seulement 8 % des organisations l'ont officiellement intégrée. À votre avis, pourquoi existe-t-il un tel écart entre l'usage personnel et l'adoption par les institutions, et comment cela affecte-t-il la sécurité de vos données personnelles ?",
+    "L'enquête \"How are humanitarians using artificial intelligence in 2025?\" (Data Friendly Space et Humanitarian Leadership Academy, 2 539 répondants dans 144 pays) montre que 93 % des professionnels humanitaires sondés utilisent ou ont utilisé l'IA, mais que seulement 8 % des organisations déclarent une intégration généralisée de l'IA. À votre avis, pourquoi existe-t-il un tel écart entre l'usage individuel et l'adoption institutionnelle, et comment cela affecte-t-il la sécurité de vos données personnelles ?",
   glossary: [
     {
       term: "Intelligence Artificielle (IA)",
