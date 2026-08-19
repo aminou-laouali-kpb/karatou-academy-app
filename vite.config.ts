@@ -105,5 +105,18 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: true,
     // On Replit the public HTTPS proxy terminates on 443, so HMR must target it.
     ...(isReplit ? { hmr: { clientPort: 443 } } : {}),
+    // Keep Vite from watching Replit's internal package cache and generated
+    // reports. Without this, the E2E servers can hit the host watcher limit
+    // before Playwright starts a browser.
+    watch: {
+      ignored: [
+        /[\\/]\.local[\\/]/,
+        /[\\/]\.agents[\\/]/,
+        '**/dist/**',
+        '**/coverage/**',
+        '**/playwright-report/**',
+        '**/test-results/**',
+      ],
+    },
   },
 }));

@@ -1,18 +1,29 @@
 import { createClient } from '@supabase/supabase-js';
 
-const KARATOU_SUPABASE_URL = 'https://pqcovsnomouclkdjhjig.supabase.co';
-const KARATOU_SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxY292c25vbW91Y2xrZGpoamlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NzMyMDUsImV4cCI6MjA5NjM0OTIwNX0.LNxMDT036mCVqlQYLBJCwChmPjIHVR-hK2G0CqKW4zs';
+type ClientEnvironment = Record<string, string | undefined>;
 
-const supabaseUrl =
-  (import.meta.env.VITE_SUPABASE_URL as string | undefined) || KARATOU_SUPABASE_URL;
-const supabaseAnonKey =
-  (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) || KARATOU_SUPABASE_ANON_KEY;
+export interface SupabaseConfig {
+  url: string;
+  anonKey: string;
+}
 
-export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+/**
+ * Resolves an explicit browser configuration only. In particular, test modes
+ * can set both VITE variables to empty strings and remain fully offline.
+ */
+export function resolveSupabaseConfig(environment: ClientEnvironment): SupabaseConfig | null {
+  const url = environment.VITE_SUPABASE_URL?.trim();
+  const anonKey = environment.VITE_SUPABASE_ANON_KEY?.trim();
 
-export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl as string, supabaseAnonKey as string, {
+  return url && anonKey ? { url, anonKey } : null;
+}
+
+const config = resolveSupabaseConfig(import.meta.env);
+
+export const isSupabaseConfigured = config !== null;
+
+export const supabase = config
+  ? createClient(config.url, config.anonKey, {
       auth: {
         persistSession: true,
         autoRefreshToken: true,

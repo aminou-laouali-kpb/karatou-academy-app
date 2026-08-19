@@ -1,5 +1,5 @@
-import { ComponentType, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ComponentType, lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
 import { LearningProvider } from './context/LearningContext';
@@ -8,6 +8,8 @@ import { DemoBadge } from './components/DemoBadge';
 import { SkipLink } from './components/SkipLink';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { OfflineBanner } from './components/OfflineBanner';
+import { isVerificationHost } from './lib/runtimeConfig';
+import { consumeSpaRedirect } from './lib/spaRedirect';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
 // download the admin CMS, lesson player, and all lesson copy up front.
@@ -56,9 +58,29 @@ function RouteFallback() {
   );
 }
 
+function RedirectRecovery() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const recoveredPath = consumeSpaRedirect();
+    if (recoveredPath) navigate(recoveredPath, { replace: true });
+  }, [navigate]);
+
+  return null;
+}
+
+function RootEntry() {
+  const showAttestationVerifier =
+    isVerificationHost(window.location.hostname) ||
+    new URLSearchParams(window.location.search).get('__karatou_attestation') === '1';
+
+  return showAttestationVerifier ? <VerifyAttestation /> : <Landing />;
+}
+
 function App() {
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+      <RedirectRecovery />
       <LanguageProvider>
         <ErrorBoundary>
         <AuthProvider>
@@ -66,7 +88,7 @@ function App() {
             <SkipLink />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/" element={window.location.hostname === 'verify.karatou.academy' ? <VerifyAttestation /> : <Landing />} />
+              <Route path="/" element={<RootEntry />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

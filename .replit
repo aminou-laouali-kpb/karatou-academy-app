@@ -4,6 +4,7 @@ run = "npm run dev"
 
 [nix]
 channel = "stable-24_05"
+packages = ["glib", "nspr", "nss", "atk", "at-spi2-atk", "at-spi2-core", "dbus", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "mesa", "xorg.libxcb", "libxkbcommon", "alsa-lib"]
 
 # Static deployment: build the Vite SPA and serve dist/.
 # In the Replit Deployments UI, enable the single-page-app rewrite so client

@@ -4,12 +4,24 @@
 <body>
 <script>
   var path = window.location.pathname;
+  var search = window.location.search;
   var hash = window.location.hash;
-  if (path === '/verify-attestation' || path === '/verify-attestation/') {
-    window.location.replace('/' + hash);
+  var isAttestation = path === '/verify-attestation' || path === '/verify-attestation/';
+
+  if (isAttestation) {
+    // The certificate-verification CDN only guarantees `/`. Keep the QR
+    // fragment and render the checker there, rather than requesting this
+    // deep path again and risking a 404 loop.
+    var parameters = new URLSearchParams(search);
+    parameters.set('__karatou_attestation', '1');
+    window.location.replace('/?' + parameters.toString() + hash);
   } else {
+    // Other static-host deep links are restored by the SPA after it loads.
+    var target = path + search + hash;
+    window.sessionStorage.setItem('karatou:spa-redirect', target);
     window.location.replace('/');
   }
 </script>
+<noscript><p>JavaScript est nécessaire pour ouvrir cette page.</p></noscript>
 </body>
 </html>

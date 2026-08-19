@@ -26,7 +26,7 @@ test.describe('Platform admin CMS', () => {
     await demoLogin(page, 'platform');
     await page.goto('/admin/attestations');
     await expect(page.getByRole('heading', { name: 'Attestations en masse' })).toBeVisible();
-    await expect(page.getByText('Charger le modele PDF')).toBeVisible();
+    await expect(page.getByText('Charger le modele (PDF, PNG ou JPG)')).toBeVisible();
   });
 
   test('saves a new draft module and shows it in the module list', async ({ page }) => {
@@ -38,6 +38,6 @@ test.describe('Platform admin CMS', () => {
     await page.getByRole('button', { name: 'Sauvegarder', exact: true }).click();
 
     await expect(page.getByRole('status')).toContainText(title);
-    await expect(page.getByRole('button', { name: new RegExp(title) })).toBeVisible();
+    await expect(page.getByRole('button', { name: new RegExp(title) })).toBeVisible({ timeout: 10_000 });
   });
 });

@@ -20,7 +20,17 @@ export default defineConfig({
     { name: 'chromium-prod', testDir: './e2e-prod', use: { ...devices['Desktop Chrome'], baseURL: prodURL } },
   ],
   webServer: [
-    { command: 'npm run dev:e2e', url: baseURL, reuseExistingServer: !process.env.CI, timeout: 120_000 },
-    { command: 'npm run dev:e2e-prod', url: prodURL, reuseExistingServer: !process.env.CI, timeout: 120_000 },
+    {
+      command: 'npm run dev:e2e',
+      url: baseURL,
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: 'npm run dev:e2e-prod',
+      url: prodURL,
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
   ],
 });
