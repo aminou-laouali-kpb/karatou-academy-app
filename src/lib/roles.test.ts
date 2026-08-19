@@ -4,6 +4,7 @@ import {
   canAccessRole,
   defaultRouteForRole,
   normalizeUserRole,
+  resolveServerAuthorizedRole,
 } from './roles';
 
 describe('normalizeUserRole', () => {
@@ -36,6 +37,17 @@ describe('defaultRouteForRole', () => {
     expect(defaultRouteForRole('platform_admin')).toBe('/admin');
     expect(defaultRouteForRole('enterprise_admin')).toBe('/enterprise');
     expect(defaultRouteForRole('learner')).toBe('/dashboard');
+  });
+});
+
+describe('resolveServerAuthorizedRole', () => {
+  it('requires an active organization-admin membership for enterprise access', () => {
+    expect(resolveServerAuthorizedRole('enterprise_admin', true)).toBe('enterprise_admin');
+    expect(resolveServerAuthorizedRole('enterprise_admin', false)).toBe('learner');
+  });
+
+  it('keeps platform administrators authorized without an organization membership', () => {
+    expect(resolveServerAuthorizedRole('platform_admin', false)).toBe('platform_admin');
   });
 });
 

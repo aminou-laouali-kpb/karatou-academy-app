@@ -230,6 +230,28 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     }
   }, [userId]);
 
+  // A token refresh can keep the same user id while changing their role or
+  // organization membership. Clear enterprise data before reloading so a
+  // revoked or reassigned administrator never keeps the previous org in memory.
+  useEffect(() => {
+    if (isDemoEnabled || authMode !== 'supabase' || !authReady) {
+      return;
+    }
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional security reset on authorization changes
+    setState((current) => {
+      const next = {
+        ...current,
+        organizations: [],
+        organization: null,
+        members: [],
+        scholarships: [],
+      };
+      persistState(next);
+      return next;
+    });
+  }, [authMode, authReady, userRole, userOrgId]);
+
   useEffect(() => {
     let active = true;
 
@@ -887,7 +909,12 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   };
 
   const addMember = (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => {
-    const organizationId = state.organization?.id || user?.orgId || enterpriseData.org.id;
+    const organizationId = user?.orgId || (isDemoEnabled ? state.organization?.id || enterpriseData.org.id : undefined);
+    if (!organizationId) {
+      setContentSyncStatus('Aucune organisation autorisee n est associee a ce compte.');
+      return;
+    }
+
     const member: EnterpriseMember = {
       id: `member-${Date.now()}`,
       organizationId,
@@ -909,7 +936,12 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   };
 
   const createScholarship = () => {
-    const organizationId = state.organization?.id || user?.orgId || enterpriseData.org.id;
+    const organizationId = user?.orgId || (isDemoEnabled ? state.organization?.id || enterpriseData.org.id : undefined);
+    if (!organizationId) {
+      setContentSyncStatus('Aucune organisation autorisee n est associee a ce compte.');
+      return null;
+    }
+
     const code = `KA-SCH-PNUD-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
     const scholarship: Scholarship = {
       id: `scholarship-${Date.now()}`,

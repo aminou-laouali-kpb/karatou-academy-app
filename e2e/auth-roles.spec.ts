@@ -41,6 +41,12 @@ test.describe('Auth and role-based routing', () => {
     await expect(page).toHaveURL(/\/dashboard$/);
   });
 
+  test('learner cannot access enterprise member management', async ({ page }) => {
+    await demoLogin(page, 'learner');
+    await page.goto('/enterprise/members');
+    await expect(page).toHaveURL(/\/dashboard$/);
+  });
+
   test('enterprise admin cannot access the platform admin portal', async ({ page }) => {
     await demoLogin(page, 'enterprise');
     await page.goto('/admin');

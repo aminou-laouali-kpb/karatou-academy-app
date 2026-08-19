@@ -25,7 +25,7 @@ export interface LearningContextValue {
   issueCertificate: (user: DemoUser, moduleSlug: string, completedCourseIds?: string[]) => Promise<Certificate | null>;
   getUserCertificates: (userId: string) => Certificate[];
   addMember: (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => void;
-  createScholarship: () => Scholarship;
+  createScholarship: () => Scholarship | null;
   createOrganization: (payload: { name: string; country?: string; industry?: string; seatsTotal?: number }) => Organization;
   redeemScholarship: (code: string) => Promise<RedeemScholarshipResult>;
   resetDemoData: () => void;

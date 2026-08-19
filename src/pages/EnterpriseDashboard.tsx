@@ -17,6 +17,7 @@ export function EnterpriseDashboard() {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { organization, organizations, members, scholarships, createScholarship } = useLearning();
+  const canManageOrganization = Boolean(organization);
   const [createdScholarship, setCreatedScholarship] = useState('');
   const certifiedMembers = members.filter((member) => member.status === 'certified').length;
   const completionRate = members.length
@@ -44,7 +45,9 @@ export function EnterpriseDashboard() {
 
   const handleCreateScholarship = () => {
     const scholarship = createScholarship();
-    setCreatedScholarship(scholarship.code);
+    if (scholarship) {
+      setCreatedScholarship(scholarship.code);
+    }
   };
 
   const exportReport = () => {
@@ -175,7 +178,7 @@ export function EnterpriseDashboard() {
               <Button variant="primary" size="sm" className="w-full" onClick={() => navigate('/enterprise/members')}>
                 <UserPlus size={16} /> {t('inviteMember')}
               </Button>
-              <Button variant="gold" size="sm" className="w-full" onClick={handleCreateScholarship}>
+              <Button variant="gold" size="sm" className="w-full" onClick={handleCreateScholarship} disabled={!canManageOrganization}>
                 <Gift size={16} /> {t('createScholarships')}
               </Button>
               <Button variant="outline" size="sm" className="w-full" onClick={exportReport}>

@@ -16,6 +16,22 @@ export function normalizeUserRole(value: unknown): UserRole {
   return 'learner';
 }
 
+/**
+ * Keeps the browser's role in lockstep with the authorization claims used by
+ * Supabase RLS. An enterprise-admin claim is not sufficient on its own: the
+ * user must also have an active enterprise-admin membership.
+ */
+export function resolveServerAuthorizedRole(
+  appMetadataRole: unknown,
+  hasActiveEnterpriseAdminMembership: boolean
+): UserRole {
+  const role = normalizeUserRole(appMetadataRole);
+
+  return role === 'enterprise_admin' && !hasActiveEnterpriseAdminMembership
+    ? 'learner'
+    : role;
+}
+
 export function defaultRouteForRole(role: UserRole) {
   switch (role) {
     case 'platform_admin':

@@ -158,11 +158,11 @@ function mapRedeemScholarshipResult(row: RedeemScholarshipRow): RedeemScholarshi
 }
 
 function chooseOrganization(organizations: Organization[], user?: DemoUser | null) {
-  if (user?.orgId) {
-    return organizations.find((organization) => organization.id === user.orgId) || organizations[0] || null;
+  if (!user?.orgId) {
+    return null;
   }
 
-  return organizations[0] || null;
+  return organizations.find((organization) => organization.id === user.orgId) || null;
 }
 
 function isEnterpriseSchemaPending(error: unknown) {
