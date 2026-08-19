@@ -59,11 +59,13 @@ export function VerifyAttestation() {
   const status = result?.status;
   const isValid = status === 'valid';
   const isExpired = status === 'expired';
+  const isRevoked = status === 'revoked';
+  const isUnavailable = status === 'unavailable';
   const cert = result?.payload;
 
-  const headerClass = isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
-  const titleClass = isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : 'text-red-700';
-  const bodyClass = isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : 'text-red-600';
+  const headerClass = isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : isUnavailable ? 'bg-blue-50' : 'bg-red-50';
+  const titleClass = isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : isUnavailable ? 'text-blue-700' : 'text-red-700';
+  const bodyClass = isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : isUnavailable ? 'text-blue-600' : 'text-red-600';
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -76,18 +78,19 @@ export function VerifyAttestation() {
         {result && (
           <div className="bg-white rounded-2xl shadow-blue-md overflow-hidden mb-6">
             <div className={`px-6 py-5 text-center ${headerClass}`}>
-              {isValid ? <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
-                : isExpired ? <XCircle size={40} className="text-amber-500 mx-auto mb-2" />
-                : <Ban size={40} className="text-red-500 mx-auto mb-2" />}
+                {isValid ? <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
+                  : isExpired ? <XCircle size={40} className="text-amber-500 mx-auto mb-2" />
+                    : isUnavailable ? <ShieldCheck size={40} className="text-blue-500 mx-auto mb-2" />
+                    : <Ban size={40} className="text-red-500 mx-auto mb-2" />}
               <h1 className={`font-playfair text-xl font-bold ${titleClass}`}>
-                {isValid ? t('attValid') : isExpired ? t('attExpired') : t('attInvalid')}
+                  {isValid ? t('attValid') : isExpired ? t('attExpired') : isRevoked ? 'Attestation révoquée' : isUnavailable ? 'Vérification indisponible' : t('attInvalid')}
               </h1>
               <p className={`text-sm mt-1 ${bodyClass}`}>
-                {isValid || isExpired ? t('attValidBody') : t('attInvalidBody')}
+                  {isValid || isExpired ? t('attValidBody') : isRevoked ? 'Cette attestation a été annulée par Karatou.' : isUnavailable ? 'Le registre est momentanément indisponible. Réessayez dans quelques instants.' : t('attInvalidBody')}
               </p>
             </div>
 
-            {cert && status !== 'invalid' && (
+            {cert && status !== 'invalid' && status !== 'unavailable' && (
               <div className="px-6 py-6 space-y-4">
                 <div className="flex justify-between items-start">
                   <span className="text-sm text-gray-500">{t('holder')}</span>
@@ -103,7 +106,7 @@ export function VerifyAttestation() {
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-sm text-gray-500">{t('status')}</span>
-                  {isValid ? <Badge variant="green">{t('active').toUpperCase()}</Badge> : <Badge variant="gold">{t('expired')}</Badge>}
+                  {isValid ? <Badge variant="green">{t('active').toUpperCase()}</Badge> : isRevoked ? <Badge variant="red">{t('revoked')}</Badge> : <Badge variant="gold">{t('expired')}</Badge>}
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-sm text-gray-500">ID</span>

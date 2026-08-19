@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import { saveAs } from 'file-saver';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 import type { Language } from '../data/translations';
+import { drawUnicodeName, embedNameFonts, unicodeNameWidth } from './pdfFonts';
 
 // Self-contained trilingual copy for the printable certificate — kept inline
 // (not in translations.ts) so the PDF generator stays decoupled from React and
@@ -88,8 +89,8 @@ const WHITE = rgb(1, 1, 1);
 
 const SVG_OPTS = { x: 0, y: H, scale: k } as const;
 
-// pdf-lib StandardFonts use WinAnsi (Latin-1); strip anything outside it so a
-// stray character never throws mid-generation.
+// Standard PDF fonts only support WinAnsi. They are still used for the fixed
+// layout copy; participant names use an embedded Unicode font below.
 function safe(text: string): string {
   return text.normalize('NFC').replace(/[^\u0020-\u00FF]/g, '');
 }
@@ -132,6 +133,7 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
   const sans = await doc.embedFont(StandardFonts.Helvetica);
   const sansBold = await doc.embedFont(StandardFonts.HelveticaBold);
   const mono = await doc.embedFont(StandardFonts.Courier);
+  const nameFonts = await embedNameFonts(doc);
 
   const center = (text: string, font: typeof sans, size: number, yTop: number, color = NAVY) => {
     const t = safe(text);
@@ -219,8 +221,16 @@ export async function generateCertificatePdf(input: CertificatePdfInput): Promis
 
   center(t.attests, sans, fs(13), 151, GRAY);
 
-  // Recipient name.
-  center(input.name, serifBold, fs(38), 206, NAVY);
+  // Recipient name. This font covers French accents, Hausa letters and Arabic
+  // rather than stripping them as the standard PDF fonts would.
+  const recipient = input.name.normalize('NFC');
+  let recipientSize = fs(38);
+  const maxRecipientWidth = W - sx(120);
+  while (unicodeNameWidth(recipient, nameFonts, recipientSize) > maxRecipientWidth && recipientSize > fs(15)) {
+    recipientSize -= 1;
+  }
+  const recipientWidth = unicodeNameWidth(recipient, nameFonts, recipientSize);
+  drawUnicodeName(page, recipient, nameFonts, { x: (W - recipientWidth) / 2, y: sy(206), size: recipientSize, color: NAVY });
 
   // Gold underline + end dots.
   const uw = 150 * k;

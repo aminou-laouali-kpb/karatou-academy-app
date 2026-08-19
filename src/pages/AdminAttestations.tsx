@@ -2,13 +2,14 @@ import { PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState
 import { Document, Page, pdfjs } from 'react-pdf';
 import {
   AlignCenter, AlignLeft, AlignRight, ChevronLeft, ChevronRight,
-  Download, FileSpreadsheet, FileText, Loader2, Plus, QrCode, Trash2, Image as ImageIcon,
+  Ban, Download, FileSpreadsheet, FileText, Loader2, Plus, QrCode, RefreshCw, Search, Trash2, Image as ImageIcon,
 } from 'lucide-react';
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
-  detectTemplateType, generateAttestationsZip, parseParticipants,
-  NamePlacement, Participant, QrPlacement, TemplateType, TextAlign,
+  ArchivedAttestation, detectTemplateType, generateAttestationsZip, parseParticipants,
+  NamePlacement, Participant, QrPlacement, revokeArchivedAttestation, searchAttestationArchive,
+  TemplateType, TextAlign, validateTemplate,
 } from '../services/attestationGenerator';
 import { addSubscribers } from '../services/newsletterService';
 // Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
@@ -86,6 +87,11 @@ export function AdminAttestations() {
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState('');
+  const [archive, setArchive] = useState<ArchivedAttestation[]>([]);
+  const [archiveQuery, setArchiveQuery] = useState('');
+  const [archiveError, setArchiveError] = useState('');
+  const [archiveLoading, setArchiveLoading] = useState(false);
+  const [revokingId, setRevokingId] = useState<string | null>(null);
 
   const [name, setName] = useState<NamePlacement>({
     xRatio: 0.25, yRatio: 0.45, widthRatio: 0.5, fontSize: 28, colorHex: '#1e3a8a', align: 'center',
@@ -110,6 +116,14 @@ export function AdminAttestations() {
   // Revoke the object URL used for the image preview when it's replaced/unmounted.
   useEffect(() => () => { if (imageUrl) URL.revokeObjectURL(imageUrl); }, [imageUrl]);
 
+  useEffect(() => {
+    let active = true;
+    searchAttestationArchive()
+      .then((items) => { if (active) setArchive(items); })
+      .catch(() => { if (active) setArchiveError('Le registre des attestations est indisponible pour le moment.'); })
+    return () => { active = false; };
+  }, []);
+
   const onTemplateUpload = async (file?: File) => {
     if (!file) return;
     setError('');
@@ -119,11 +133,17 @@ export function AdminAttestations() {
       setError('Format non pris en charge. Utilisez un PDF, PNG ou JPG.');
       return;
     }
-    setPdfPoints(null);
-    setTemplateType(type);
-    setTemplateBuffer(await file.arrayBuffer());
-    if (imageUrl) URL.revokeObjectURL(imageUrl);
-    setImageUrl(type === 'image' ? URL.createObjectURL(file) : null);
+    try {
+      const buffer = await file.arrayBuffer();
+      const dimensions = await validateTemplate(buffer, type);
+      setPdfPoints(dimensions);
+      setTemplateType(type);
+      setTemplateBuffer(buffer);
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+      setImageUrl(type === 'image' ? URL.createObjectURL(file) : null);
+    } catch (templateError) {
+      setError(templateError instanceof Error ? templateError.message : 'Modèle illisible.');
+    }
   };
 
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -209,7 +229,7 @@ export function AdminAttestations() {
       setQr((prev) => ({
         ...prev,
         xRatio: clamp((px - drag.offsetX) / rect.width, 0, 1 - prev.sizeRatio),
-        yRatio: clamp((py - drag.offsetY) / rect.height, 0, 1 - prev.sizeRatio * scale),
+        yRatio: clamp((py - drag.offsetY) / rect.height, 0, Math.max(0, 1 - prev.sizeRatio * rect.width / rect.height)),
       }));
     }
   };
@@ -260,7 +280,35 @@ export function AdminAttestations() {
     }
   };
 
+  const handleArchiveSearch = async () => {
+    setArchiveLoading(true);
+    setArchiveError('');
+    try {
+      setArchive(await searchAttestationArchive(archiveQuery));
+    } catch (archiveLookupError) {
+      setArchiveError(archiveLookupError instanceof Error ? archiveLookupError.message : 'Recherche impossible.');
+    } finally {
+      setArchiveLoading(false);
+    }
+  };
+
+  const handleRevoke = async (record: ArchivedAttestation) => {
+    if (!window.confirm(`Révoquer définitivement l’attestation ${record.id} de ${record.recipientName} ?`)) return;
+    setRevokingId(record.id);
+    setArchiveError('');
+    try {
+      const updated = await revokeArchivedAttestation(record.id, 'Révoquée depuis le registre administrateur.');
+      setArchive((current) => current.map((item) => item.id === updated.id ? updated : item));
+      setDone(`Attestation ${updated.id} révoquée. Le QR indiquera désormais qu’elle n’est plus valide.`);
+    } catch (revokeError) {
+      setArchiveError(revokeError instanceof Error ? revokeError.message : 'Révocation impossible.');
+    } finally {
+      setRevokingId(null);
+    }
+  };
+
   const qrSidePx = qr.sizeRatio * PREVIEW_WIDTH;
+  const qrMaxY = Math.max(0, 1 - qr.sizeRatio * ((pdfPoints?.width ?? PREVIEW_WIDTH) / (pdfPoints?.height ?? PREVIEW_WIDTH)));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -341,10 +389,14 @@ export function AdminAttestations() {
                   <input type="number" min={0} max={100} value={Math.round(qr.xRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, xRatio: clamp(Number(e.target.value) / 100, 0, 1 - p.sizeRatio) }))} className={inputClass} />
                 </label>
                 <label className="block text-xs font-medium text-gray-600">Y (%)
-                  <input type="number" min={0} max={100} value={Math.round(qr.yRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, 1) }))} className={inputClass} />
+                  <input type="number" min={0} max={Math.floor(qrMaxY * 100)} value={Math.round(qr.yRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, qrMaxY) }))} className={inputClass} />
                 </label>
                 <label className="block text-xs font-medium text-gray-600">Taille (%)
-                  <input type="number" min={3} max={50} value={Math.round(qr.sizeRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, sizeRatio: clamp(Number(e.target.value) / 100, 0.03, 0.5) }))} className={inputClass} />
+                  <input type="number" min={3} max={50} value={Math.round(qr.sizeRatio * 100)} onChange={(e) => setQr((p) => {
+                    const sizeRatio = clamp(Number(e.target.value) / 100, 0.03, 0.5);
+                    const maxY = Math.max(0, 1 - sizeRatio * ((pdfPoints?.width ?? PREVIEW_WIDTH) / (pdfPoints?.height ?? PREVIEW_WIDTH)));
+                    return { ...p, sizeRatio, xRatio: Math.min(p.xRatio, 1 - sizeRatio), yRatio: Math.min(p.yRatio, maxY) };
+                  })} className={inputClass} />
                 </label>
               </div>
             </section>
@@ -463,6 +515,66 @@ export function AdminAttestations() {
             )}
           </section>
         </div>
+
+        <section className="mt-8 bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div>
+              <h2 className="font-semibold text-gray-900">Registre des attestations émises</h2>
+              <p className="text-sm text-gray-500">Recherchez une attestation archivée et révoquez-la si nécessaire.</p>
+            </div>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <input
+                value={archiveQuery}
+                onChange={(event) => setArchiveQuery(event.target.value)}
+                onKeyDown={(event) => { if (event.key === 'Enter') void handleArchiveSearch(); }}
+                placeholder="Nom ou ID d’attestation"
+                className={inputClass}
+                aria-label="Rechercher dans le registre"
+              />
+              <Button variant="outline" size="sm" onClick={() => void handleArchiveSearch()} disabled={archiveLoading}>
+                {archiveLoading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />} Rechercher
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => { setArchiveQuery(''); void handleArchiveSearch(); }} disabled={archiveLoading} aria-label="Actualiser le registre">
+                <RefreshCw size={16} />
+              </Button>
+            </div>
+          </div>
+          {archiveError && <p role="alert" className="mb-3 text-sm text-red-700">{archiveError}</p>}
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead className="border-b border-gray-200 text-left text-xs uppercase tracking-wide text-gray-500">
+                <tr><th className="py-2 pr-4">Bénéficiaire</th><th className="py-2 pr-4">ID</th><th className="py-2 pr-4">Émise le</th><th className="py-2 pr-4">Statut</th><th className="py-2 text-right">Action</th></tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {archive.map((record) => (
+                  <tr key={record.id}>
+                    <td className="py-3 pr-4 font-medium text-gray-900">{record.recipientName}</td>
+                    <td className="py-3 pr-4 font-mono text-xs text-gray-600">{record.id}</td>
+                    <td className="py-3 pr-4 text-gray-600">{record.issuedAt}</td>
+                    <td className="py-3 pr-4">
+                      <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${record.status === 'revoked' ? 'bg-red-100 text-red-700' : record.status === 'expired' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                        {record.status === 'revoked' ? 'Révoquée' : record.status === 'expired' ? 'Expirée' : 'Active'}
+                      </span>
+                    </td>
+                    <td className="py-3 text-right">
+                      <button
+                        type="button"
+                        disabled={record.status === 'revoked' || revokingId === record.id}
+                        onClick={() => void handleRevoke(record)}
+                        className="inline-flex items-center gap-1 text-xs font-medium text-red-600 hover:text-red-800 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        {revokingId === record.id ? <Loader2 size={14} className="animate-spin" /> : <Ban size={14} />} Révoquer
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {!archiveLoading && archive.length === 0 && (
+                  <tr><td colSpan={5} className="py-6 text-center text-sm text-gray-500">Aucune attestation trouvée.</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
     </div>
   );
