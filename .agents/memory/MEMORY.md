@@ -1,1 +1,0 @@
-- [Deux projets Supabase](supabase-two-projects.md) — pqcovsnomouclkdjhjig = vrai projet Karatou (profiles, contenu, admin) ; hijzqsljasbobjrjotjy = KPB post-bac (autre app, ne pas utiliser)

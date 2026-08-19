@@ -22,6 +22,7 @@
     "test:e2e:install": "playwright install chromium",
     "validate:release": "npm run typecheck && npm run lint && npm test && npm run build && node scripts/validate-release.mjs",
     "validate:release:full": "npm run validate:release && npm run test:e2e",
+    "validate:attestation:registry": "node scripts/validate-attestation-registry.mjs --live",
     "supabase:push:dry": "supabase db push --dry-run --linked",
     "supabase:push": "supabase db push --linked --yes",
     "seed:content:dry": "node scripts/seed-supabase-content.mjs --dry-run",
