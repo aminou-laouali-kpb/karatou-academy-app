@@ -23,7 +23,7 @@ export function Landing() {
       {/* Hero */}
       <section className="relative bg-blue-900 pt-32 pb-20 px-4 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold-400/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold-400/20 rounded-full blur-[100px]" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="font-heading text-display sm:text-display-lg lg:text-display-xl text-white mb-6">
