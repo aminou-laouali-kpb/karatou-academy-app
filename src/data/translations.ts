@@ -132,7 +132,7 @@ export const translations: Record<Language, TranslationMap> = {
     continue: 'Continuer',
     studentView: 'Vue Apprenant',
     enterpriseView: 'Vue Enterprise',
-    demoBadge: '',
+    demoBadge: 'Mode démo - karatou.academy',
 
     heroTitle1: 'La plateforme de référence',
     heroTitle2: "pour maîtriser l'IA",
