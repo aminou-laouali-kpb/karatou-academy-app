@@ -1,0 +1,4 @@
+# Netlify / Cloudflare Pages: serve every client-side route with index.html and
+# a 200 status. This is the correct fix for SPA deep links — the 404.html
+# fallback only exists for hosts that cannot rewrite (see docs/go-live-runbook.md).
+/*  /index.html  200

@@ -12,19 +12,25 @@
       content="Karatou Academy : plateforme trilingue (français, anglais, hausa) d'apprentissage et de certification en intelligence artificielle pour le Niger et l'Afrique de l'Ouest. Apprenez, certifiez-vous, évoluez."
     />
 
-    <!-- Open Graph / partage social. Ajustez le domaine si la production diffère de karatou.academy. -->
+    <!-- Open Graph / partage social.
+         PUBLIC_ORIGIN: l'application est servie sur https://verify.karatou.academy
+         (voir src/lib/verification.ts, qui porte la même URL pour les QR codes).
+         Si l'app déménage (apex karatou.academy, app.karatou.academy…), mettez à
+         jour og:url, og:image, twitter:image, le canonical ci-dessous, public/robots.txt,
+         public/sitemap.xml et VERIFY_BASE_URL — dans le même commit. -->
+    <link rel="canonical" href="https://verify.karatou.academy/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Karatou Academy" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:locale:alternate" content="ha" />
-    <meta property="og:url" content="https://karatou.academy/" />
+    <meta property="og:url" content="https://verify.karatou.academy/" />
     <meta property="og:title" content="Karatou Academy — Certifiez vos compétences IA en Afrique" />
     <meta
       property="og:description"
       content="Plateforme trilingue d'apprentissage et de certification en IA pour le Niger et l'Afrique de l'Ouest. Apprenez, certifiez-vous, évoluez."
     />
-    <meta property="og:image" content="https://karatou.academy/opengraph.jpg" />
+    <meta property="og:image" content="https://verify.karatou.academy/opengraph.jpg" />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="720" />
     <meta property="og:image:alt" content="Karatou Academy — la plateforme de référence pour maîtriser l'IA en Afrique" />
@@ -36,7 +42,7 @@
       name="twitter:description"
       content="Plateforme trilingue d'apprentissage et de certification en IA pour le Niger et l'Afrique de l'Ouest."
     />
-    <meta name="twitter:image" content="https://karatou.academy/opengraph.jpg" />
+    <meta name="twitter:image" content="https://verify.karatou.academy/opengraph.jpg" />
 
     <!-- Fonts are now self-hosted (see src/main.tsx) — no Google Fonts CDN
          dependency, so first paint is reliable on 2G/3G and inside the PWA. -->

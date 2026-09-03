@@ -263,17 +263,73 @@ export function getLessonOne(lang: Language) {
 // Registry of hand-authored lessons, keyed by `${moduleSlug}/${courseId}`.
 // To publish real content for a course (video URLs + rich sections + quiz),
 // author a `Record<Language, LessonContent>` (see `lesson1ByLanguage` above for
-// a complete trilingual example) and add an entry here. Courses without an entry
+// a complete trilingual example) and add a loader here. Courses without an entry
 // fall back to the auto-generated template in LessonPlayer's `buildLesson`.
 // See docs/authoring-lessons.md.
-const authoredLessons: Record<string, Record<Language, LessonContent>> = {
+//
+// Lesson bodies are the heaviest content in the app: 19 lessons x 3 languages is
+// ~270 kB gzipped. They are loaded on demand — one lesson is ~15 kB gzipped —
+// so opening a lesson on a 2G link does not pay for the whole catalogue, and
+// the service worker keeps each visited lesson available offline.
+type LessonBundle = Record<Language, LessonContent>;
+
+const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
+  'intelligence-artificielle/c2': () => import('./lessons/ia-c2-llms').then((m) => m.iaLessonC2),
+  'intelligence-artificielle/c3': () => import('./lessons/ia-c3-prompting').then((m) => m.iaLessonC3),
+  'intelligence-artificielle/c4': () => import('./lessons/ia-c4-organisations').then((m) => m.iaLessonC4),
+  'intelligence-artificielle/c5': () => import('./lessons/ia-c5-automatisation').then((m) => m.iaLessonC5),
+  'intelligence-artificielle/c6': () => import('./lessons/ia-c6-ethique').then((m) => m.iaLessonC6),
+  'intelligence-artificielle/c7': () => import('./lessons/ia-c7-outils').then((m) => m.iaLessonC7),
+  'intelligence-artificielle/c8': () => import('./lessons/ia-c8-evaluation').then((m) => m.iaLessonC8),
+  'gestion-projet/p1': () => import('./lessons/pm-p1-cadrage').then((m) => m.pmLessonP1),
+  'gestion-projet/p2': () => import('./lessons/pm-p2-mvp').then((m) => m.pmLessonP2),
+  'gestion-projet/p3': () => import('./lessons/pm-p3-sprint').then((m) => m.pmLessonP3),
+  'gestion-projet/p4': () => import('./lessons/pm-p4-risques').then((m) => m.pmLessonP4),
+  'gestion-projet/p5': () => import('./lessons/pm-p5-retrospective').then((m) => m.pmLessonP5),
+  'data-analysis/d1': () => import('./lessons/da-d1-nettoyage').then((m) => m.daLessonD1),
+  'data-analysis/d2': () => import('./lessons/da-d2-tableaux-croises').then((m) => m.daLessonD2),
+  'data-analysis/d3': () => import('./lessons/da-d3-python').then((m) => m.daLessonD3),
+  'data-analysis/d4': () => import('./lessons/da-d4-visualisation').then((m) => m.daLessonD4),
+  'data-analysis/d5': () => import('./lessons/da-d5-raconter').then((m) => m.daLessonD5),
+  'data-analysis/d6': () => import('./lessons/da-d6-mini-projet').then((m) => m.daLessonD6),
+};
+
+// Lesson 1 of module 1 ships with the shell: it is the entry point of the
+// learning path (and the fallback lesson), so it must render with no extra
+// round trip.
+const eagerLessons: Record<string, LessonBundle> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
 };
 
+/** True when real authored content exists for this course (eager or lazy). */
+export function hasAuthoredLesson(moduleSlug: string, courseId: string): boolean {
+  const key = `${moduleSlug}/${courseId}`;
+  return key in eagerLessons || key in authoredLessonLoaders;
+}
+
+/** Synchronous lookup — only resolves lessons bundled with the shell. */
 export function getAuthoredLesson(
   moduleSlug: string,
   courseId: string,
   lang: Language
 ): LessonContent | null {
-  return authoredLessons[`${moduleSlug}/${courseId}`]?.[lang] ?? null;
+  return eagerLessons[`${moduleSlug}/${courseId}`]?.[lang] ?? null;
+}
+
+/** Loads authored content, fetching the lesson chunk when needed. */
+export async function loadAuthoredLesson(
+  moduleSlug: string,
+  courseId: string,
+  lang: Language
+): Promise<LessonContent | null> {
+  const eager = getAuthoredLesson(moduleSlug, courseId, lang);
+  if (eager) return eager;
+  const loader = authoredLessonLoaders[`${moduleSlug}/${courseId}`];
+  if (!loader) return null;
+  try {
+    return (await loader())[lang] ?? null;
+  } catch {
+    // Offline / flaky link: the caller falls back to the generated template.
+    return null;
+  }
 }
