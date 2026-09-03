@@ -12,11 +12,15 @@ the registry below.
 ## How it works
 
 - The lesson shape is `LessonContent` in [`src/data/lessonContent.ts`](../src/data/lessonContent.ts).
-- Authored lessons live in the `authoredLessons` registry in
+- Authored lessons live in the `authoredLessonLoaders` registry in
   [`src/data/localizedContent.ts`](../src/data/localizedContent.ts), keyed by
-  `` `${moduleSlug}/${courseId}` ``.
-- `LessonPlayer` calls `getAuthoredLesson(moduleSlug, courseId, lang)` and uses
-  the registry entry when present, otherwise the generated fallback.
+  `` `${moduleSlug}/${courseId}` ``. Each entry is a **dynamic import**, so every
+  lesson is its own chunk (~15 kB gzip): opening one lesson on a 2G link does not
+  download the whole catalogue. Only `intelligence-artificielle/c1` is eager
+  (`eagerLessons`), because it is the entry lesson and the fallback.
+- `LessonPlayer` calls `loadAuthoredLesson(moduleSlug, courseId, lang)` and shows
+  a loading state while the chunk arrives (`hasAuthoredLesson` tells it real
+  content exists), then the generated fallback only if there is none.
 - `lesson1ByLanguage` (the AI module's first lesson) is a complete, trilingual
   reference — copy its structure.
 
@@ -32,14 +36,17 @@ the registry below.
    Split long `content[].body` text with blank lines (`\n\n`) — each block
    renders as its own paragraph.
 
-3. **Register it** in `authoredLessons`:
+3. **Register it** in `authoredLessonLoaders` — a loader, not a static import
+   (a static import would put the lesson back in the shared chunk):
 
    ```ts
-   const authoredLessons: Record<string, Record<Language, LessonContent>> = {
-     'intelligence-artificielle/c1': lesson1ByLanguage,
-     'data-analysis/d1': dataAnalysisLesson1, // <- your new entry
+   const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
+     'data-analysis/d1': () => import('./lessons/da-d1-nettoyage').then((m) => m.daLessonD1),
    };
    ```
+
+   The file must live in `src/data/lessons/` and export the
+   `Record<Language, LessonContent>` under a named export.
 
 ## Tips
 

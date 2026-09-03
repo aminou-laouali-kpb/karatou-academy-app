@@ -5,7 +5,7 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { LessonContent } from '../data/lessonContent';
-import { getAuthoredLesson, localizeModule } from '../data/localizedContent';
+import { getAuthoredLesson, hasAuthoredLesson, loadAuthoredLesson, localizeModule } from '../data/localizedContent';
 import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
@@ -265,13 +265,39 @@ export function LessonPlayer() {
   const course = module ? module.courses[courseIndex] || module.courses[0] : undefined;
   const completedIds = module ? getCompletedCourseIds(module.slug) : [];
   const progress = module ? getProgress(module.slug) : 0;
+  // Authored lesson bodies live in per-lesson chunks (see localizedContent):
+  // resolve the one bundled with the shell synchronously, fetch the others.
+  const lessonKey = module && course ? `${module.slug}/${course.id}` : null;
+  const [loadedLesson, setLoadedLesson] = useState<
+    { key: string; lang: Language; content: LessonContent } | null
+  >(null);
+
+  useEffect(() => {
+    if (!module || !course || !lessonKey) return;
+    let active = true;
+    loadAuthoredLesson(module.slug, course.id, lang).then((content) => {
+      if (active && content) setLoadedLesson({ key: lessonKey, lang, content });
+    });
+    return () => { active = false; };
+  }, [module, course, lessonKey, lang]);
+
+  const authoredLesson =
+    (module && course ? getAuthoredLesson(module.slug, course.id, lang) : null) ||
+    (loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
+      ? loadedLesson.content
+      : null);
+  // Real content exists but its chunk is still in flight: wait rather than
+  // flash the generated template.
+  const lessonPending = Boolean(
+    lessonKey && module && course && hasAuthoredLesson(module.slug, course.id) && !authoredLesson
+  );
   const lesson = useMemo(
     () =>
-      module && course
-        ? getAuthoredLesson(module.slug, course.id, lang) ||
+      module && course && !lessonPending
+        ? authoredLesson ||
           buildLesson(module.title, course.title, courseIndex, course.description, lang)
         : null,
-    [module, course, courseIndex, lang]
+    [module, course, courseIndex, lang, authoredLesson, lessonPending]
   );
 
   // Empty production tenant (no published modules / course): clean empty state.
@@ -282,7 +308,9 @@ export function LessonPlayer() {
       <div className="min-h-screen bg-gray-50">
         <StudentNav />
         <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center" role="status">
-          <p className="text-body text-gray-500">{contentLoading ? t('loadingCourses') : t('noCoursesYet')}</p>
+          <p className="text-body text-gray-500">
+            {contentLoading || lessonPending ? t('loadingCourses') : t('noCoursesYet')}
+          </p>
         </main>
       </div>
     );
