@@ -1,6 +1,24 @@
 import { Language } from './translations';
 import { LessonContent, lesson1 } from './lessonContent';
 import { Course, LearningModule } from '../types';
+import { iaLessonC2 } from './lessons/ia-c2-llms';
+import { iaLessonC3 } from './lessons/ia-c3-prompting';
+import { iaLessonC4 } from './lessons/ia-c4-organisations';
+import { iaLessonC5 } from './lessons/ia-c5-automatisation';
+import { iaLessonC6 } from './lessons/ia-c6-ethique';
+import { iaLessonC7 } from './lessons/ia-c7-outils';
+import { iaLessonC8 } from './lessons/ia-c8-evaluation';
+import { pmLessonP1 } from './lessons/pm-p1-cadrage';
+import { pmLessonP2 } from './lessons/pm-p2-mvp';
+import { pmLessonP3 } from './lessons/pm-p3-sprint';
+import { pmLessonP4 } from './lessons/pm-p4-risques';
+import { pmLessonP5 } from './lessons/pm-p5-retrospective';
+import { daLessonD1 } from './lessons/da-d1-nettoyage';
+import { daLessonD2 } from './lessons/da-d2-tableaux-croises';
+import { daLessonD3 } from './lessons/da-d3-python';
+import { daLessonD4 } from './lessons/da-d4-visualisation';
+import { daLessonD5 } from './lessons/da-d5-raconter';
+import { daLessonD6 } from './lessons/da-d6-mini-projet';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
 type ModuleCopy = {
@@ -268,6 +286,24 @@ export function getLessonOne(lang: Language) {
 // See docs/authoring-lessons.md.
 const authoredLessons: Record<string, Record<Language, LessonContent>> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
+  'intelligence-artificielle/c2': iaLessonC2,
+  'intelligence-artificielle/c3': iaLessonC3,
+  'intelligence-artificielle/c4': iaLessonC4,
+  'intelligence-artificielle/c5': iaLessonC5,
+  'intelligence-artificielle/c6': iaLessonC6,
+  'intelligence-artificielle/c7': iaLessonC7,
+  'intelligence-artificielle/c8': iaLessonC8,
+  'gestion-projet/p1': pmLessonP1,
+  'gestion-projet/p2': pmLessonP2,
+  'gestion-projet/p3': pmLessonP3,
+  'gestion-projet/p4': pmLessonP4,
+  'gestion-projet/p5': pmLessonP5,
+  'data-analysis/d1': daLessonD1,
+  'data-analysis/d2': daLessonD2,
+  'data-analysis/d3': daLessonD3,
+  'data-analysis/d4': daLessonD4,
+  'data-analysis/d5': daLessonD5,
+  'data-analysis/d6': daLessonD6,
 };
 
 export function getAuthoredLesson(
