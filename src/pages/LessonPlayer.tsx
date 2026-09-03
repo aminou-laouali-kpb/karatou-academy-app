@@ -282,7 +282,7 @@ export function LessonPlayer() {
       <div className="min-h-screen bg-gray-50">
         <StudentNav />
         <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center" role="status">
-          <p className="text-sm text-gray-500">{contentLoading ? t('loadingCourses') : t('noCoursesYet')}</p>
+          <p className="text-body text-gray-500">{contentLoading ? t('loadingCourses') : t('noCoursesYet')}</p>
         </main>
       </div>
     );
@@ -352,8 +352,8 @@ export function LessonPlayer() {
           <div className="p-5">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider">{t('module')}</p>
-                <h2 className="font-playfair text-lg font-bold text-gray-900">{module.title}</h2>
+                <p className="text-eyebrow text-blue-500">{t('module')}</p>
+                <h2 className="font-heading text-title text-gray-900">{module.title}</h2>
               </div>
               <button ref={closeSidebarBtnRef} onClick={closeSidebar} className="lg:hidden" aria-label={t('closeMenu')}>
                 <X size={20} className="text-gray-500" aria-hidden="true" />
@@ -362,8 +362,8 @@ export function LessonPlayer() {
 
             <div className="mb-5">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-gray-500">{t('moduleProgress')}</span>
-                <span className="text-xs font-semibold text-blue-600">{progress}%</span>
+                <span className="text-meta text-gray-500">{t('moduleProgress')}</span>
+                <span className="text-meta font-semibold text-blue-600">{progress}%</span>
               </div>
               <ProgressBar value={progress} />
             </div>
@@ -380,7 +380,7 @@ export function LessonPlayer() {
                     key={item.id}
                     onClick={() => isUnlocked && goToCourse(item.id)}
                     disabled={!isUnlocked}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors text-left ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-body transition-colors text-left ${
                       isCurrent
                         ? 'bg-blue-50 text-blue-700 font-medium'
                         : isCompleted
@@ -402,7 +402,7 @@ export function LessonPlayer() {
                       )}
                     </span>
                     <span className="flex-1 truncate">{t('lesson')} {index + 1} - {item.title}</span>
-                    <span className="text-xs text-gray-400">{item.duration}</span>
+                    <span className="text-meta text-gray-400">{item.duration}</span>
                   </button>
                 );
               })}
@@ -410,11 +410,11 @@ export function LessonPlayer() {
 
             {activeCertificate && (
               <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                <div className="flex items-center gap-2 text-emerald-700 font-semibold text-sm">
+                <div className="flex items-center gap-2 text-emerald-700 font-semibold text-body">
                   <ShieldCheck size={16} />
                   {t('activeCertificate')}
                 </div>
-                <p className="text-xs text-emerald-700 mt-2 font-mono">{activeCertificate.uid}</p>
+                <p className="text-meta text-emerald-700 mt-2 font-mono">{activeCertificate.uid}</p>
               </div>
             )}
           </div>
@@ -423,10 +423,10 @@ export function LessonPlayer() {
         <main id="main-content" className="flex-1 min-w-0 pb-24">
           <div className="bg-white border-b border-gray-100 px-4 sm:px-8 py-4">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider">{t('lesson')} {courseIndex + 1}</p>
+              <p className="text-eyebrow text-blue-500">{t('lesson')} {courseIndex + 1}</p>
               {currentDone && <Badge variant="green">{t('completedBadge')}</Badge>}
             </div>
-            <h1 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900">{lesson.title}</h1>
+            <h1 className="font-heading text-h3 sm:text-h2 text-gray-900">{lesson.title}</h1>
           </div>
 
           <div className="sticky top-16 z-20 bg-white border-b border-gray-200 px-2 sm:px-4">
@@ -447,13 +447,13 @@ export function LessonPlayer() {
                       key={tab}
                       ref={activeTab === tab ? activeTabRef : undefined}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-4 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                      className={`px-4 py-3.5 text-body font-medium border-b-2 transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                         activeTab === tab
                           ? 'border-blue-500 text-blue-600'
                           : 'border-transparent text-gray-500 hover:text-gray-700'
                       }`}
                     >
-                      <span className="text-xs text-gray-400 font-mono">{index + 1}</span>
+                      <span className="text-meta text-gray-400 font-mono">{index + 1}</span>
                       {t(tab)}
                     </button>
                   ))}
@@ -478,7 +478,7 @@ export function LessonPlayer() {
                   <ShieldCheck size={22} className="text-emerald-600 mt-0.5" />
                   <div>
                     <p className="font-semibold text-emerald-800">{t('certificationIssued')}</p>
-                    <p className="text-sm text-emerald-700 mt-1">{t('verifiableId')}: {issuedUid}</p>
+                    <p className="text-body text-emerald-700 mt-1">{t('verifiableId')}: {issuedUid}</p>
                     <Button variant="outline" size="sm" className="mt-3" onClick={() => navigate('/certificates')}>
                       {t('seeMyCertificates')}
                     </Button>
@@ -504,15 +504,15 @@ export function LessonPlayer() {
                   <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3">
                     <Clock size={18} className="text-gray-400" />
                     <div>
-                      <p className="text-xs text-gray-500">{t('estimatedDuration')}</p>
-                      <p className="text-sm font-medium text-gray-900">{course.duration}</p>
+                      <p className="text-meta text-gray-500">{t('estimatedDuration')}</p>
+                      <p className="text-body font-medium text-gray-900">{course.duration}</p>
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3">
                     <BookOpen size={18} className="text-gray-400" />
                     <div>
-                      <p className="text-xs text-gray-500">{t('level')}</p>
-                      <p className="text-sm font-medium text-gray-900">{module.level}</p>
+                      <p className="text-meta text-gray-500">{t('level')}</p>
+                      <p className="text-body font-medium text-gray-900">{module.level}</p>
                     </div>
                   </div>
                 </div>
@@ -536,12 +536,12 @@ export function LessonPlayer() {
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 border border-white/20">
                       <Play size={28} className="text-white ml-1" />
                     </div>
-                    <p className="text-white/90 text-sm">{t('videoComingSoon')}</p>
-                    <p className="text-white/70 text-xs mt-1">Version {videoLang.toUpperCase()}</p>
+                    <p className="text-white/90 text-body">{t('videoComingSoon')}</p>
+                    <p className="text-white/70 text-meta mt-1">Version {videoLang.toUpperCase()}</p>
                   </div>
                 )}
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-gray-500">{course.title}</p>
+                  <p className="text-body text-gray-500">{course.title}</p>
                   <div className="flex items-center gap-0.5 bg-gray-100 rounded-full p-0.5">
                     {[
                       { code: 'fr' as const, label: 'FR' },
@@ -551,7 +551,7 @@ export function LessonPlayer() {
                       <button
                         key={item.code}
                         onClick={() => setVideoLang(item.code)}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+                        className={`px-3 py-1.5 text-meta font-medium rounded-full transition-all ${
                           videoLang === item.code ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700'
                         }`}
                       >
@@ -571,7 +571,7 @@ export function LessonPlayer() {
                       onClick={() => setExpandedBloc(expandedBloc === index ? null : index)}
                       className="w-full px-5 py-4 flex items-center gap-3 text-left"
                     >
-                      <span className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 text-sm font-bold text-blue-600">
+                      <span className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 text-body font-bold text-blue-600">
                         {index + 1}
                       </span>
                       <h3 className="font-semibold text-gray-900 flex-1">{bloc.title}</h3>
@@ -584,7 +584,7 @@ export function LessonPlayer() {
                       <div className="px-5 pb-5 border-t border-gray-100">
                         <div className="pt-4 space-y-3">
                           {bloc.body.split('\n\n').map((paragraph) => (
-                            <p key={paragraph} className="text-sm text-gray-700 leading-relaxed">{paragraph}</p>
+                            <p key={paragraph} className="text-body text-gray-700 leading-relaxed">{paragraph}</p>
                           ))}
                         </div>
                       </div>
@@ -599,22 +599,22 @@ export function LessonPlayer() {
                 <div className="flex items-start gap-3 mb-4">
                   <Lightbulb size={20} className="text-gold-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-semibold text-gold-600 uppercase tracking-wider mb-1">{t('realCase')}</p>
-                    <h3 className="font-playfair text-lg font-bold text-gray-900">{lesson.example.title}</h3>
+                    <p className="text-eyebrow text-gold-600 mb-1">{t('realCase')}</p>
+                    <h3 className="font-heading text-title text-gray-900">{lesson.example.title}</h3>
                   </div>
                 </div>
                 <div className="space-y-5 sm:ml-8">
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{t('challenge')}</p>
-                    <p className="text-sm text-gray-800 leading-relaxed">{lesson.example.challenge}</p>
+                    <p className="text-eyebrow text-gray-500 mb-1">{t('challenge')}</p>
+                    <p className="text-body text-gray-800 leading-relaxed">{lesson.example.challenge}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{t('solution')}</p>
-                    <p className="text-sm text-gray-800 leading-relaxed">{lesson.example.solution}</p>
+                    <p className="text-eyebrow text-gray-500 mb-1">{t('solution')}</p>
+                    <p className="text-body text-gray-800 leading-relaxed">{lesson.example.solution}</p>
                   </div>
                   <div className="bg-white/60 rounded-xl p-4 border border-gold-200">
-                    <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">{t('measurableImpact')}</p>
-                    <p className="text-sm text-gray-800 leading-relaxed">{lesson.example.impact}</p>
+                    <p className="text-eyebrow text-emerald-600 mb-1">{t('measurableImpact')}</p>
+                    <p className="text-body text-gray-800 leading-relaxed">{lesson.example.impact}</p>
                   </div>
                 </div>
               </div>
@@ -623,28 +623,28 @@ export function LessonPlayer() {
             {activeTab === 'practice' && (
               <div>
                 <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-5">
-                  <h3 className="font-semibold text-gray-900 text-lg mb-4">{lesson.practice.title}</h3>
+                  <h3 className="text-title text-gray-900 mb-4">{lesson.practice.title}</h3>
                   <ol className="space-y-3">
                     {lesson.practice.instructions.map((step, index) => (
                       <li key={step} className="flex gap-3">
-                        <span className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold text-blue-600 mt-0.5">
+                        <span className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0 text-meta font-bold text-blue-600 mt-0.5">
                           {index + 1}
                         </span>
-                        <p className="text-sm text-gray-700 leading-relaxed">{step}</p>
+                        <p className="text-body text-gray-700 leading-relaxed">{step}</p>
                       </li>
                     ))}
                   </ol>
                 </div>
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
-                  <p className="text-sm text-blue-800 leading-relaxed">
+                  <p className="text-body text-blue-800 leading-relaxed">
                     <strong>{t('observe')} :</strong> {lesson.practice.observation}
                   </p>
                 </div>
                 <textarea
-                  className="w-full h-40 border border-gray-200 rounded-xl p-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
+                  className="w-full h-40 border border-gray-200 rounded-xl p-4 text-body text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
                   placeholder={t('notesPlaceholder')}
                 />
-                <p className="text-xs text-gray-400 mt-2">{t('localSave')}</p>
+                <p className="text-meta text-gray-400 mt-2">{t('localSave')}</p>
               </div>
             )}
 
@@ -655,7 +655,7 @@ export function LessonPlayer() {
                     <button
                       key={index}
                       onClick={() => setCurrentQuiz(index)}
-                      className={`w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
+                      className={`w-8 h-8 rounded-full text-meta font-bold flex items-center justify-center transition-all ${
                         index === currentQuiz
                           ? 'bg-blue-500 text-white'
                           : quizSubmitted[index]
@@ -668,12 +668,12 @@ export function LessonPlayer() {
                       {index + 1}
                     </button>
                   ))}
-                  <span className="text-xs text-gray-500 ml-2">
+                  <span className="text-meta text-gray-500 ml-2">
                     {Object.keys(quizSubmitted).length}/{lesson.quiz.length} {t('answered')}
                   </span>
                 </div>
 
-                <p id="quiz-question" className="font-semibold text-gray-900 mb-5 text-lg">{lesson.quiz[currentQuiz].question}</p>
+                <p id="quiz-question" className="text-title text-gray-900 mb-5">{lesson.quiz[currentQuiz].question}</p>
                 <div className="space-y-3 mb-6" role="radiogroup" aria-labelledby="quiz-question">
                   {lesson.quiz[currentQuiz].options.map((option) => {
                     const isCorrect = option.key === lesson.quiz[currentQuiz].answer;
@@ -701,7 +701,7 @@ export function LessonPlayer() {
                           onChange={() => !isSubmitted && setQuizAnswers({ ...quizAnswers, [currentQuiz]: option.key })}
                           className="w-4 h-4 text-blue-500"
                         />
-                        <span className="text-sm text-gray-700">
+                        <span className="text-body text-gray-700">
                           <strong>{option.key})</strong> {option.text}
                         </span>
                       </label>
@@ -720,7 +720,7 @@ export function LessonPlayer() {
                   </Button>
                 ) : (
                   <div className="space-y-3">
-                    <p className={`text-sm font-medium ${
+                    <p className={`text-body font-medium ${
                       quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer ? 'text-emerald-600' : 'text-red-600'
                     }`}>
                       {quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer
@@ -728,7 +728,7 @@ export function LessonPlayer() {
                         : `${t('wrongAnswer')} ${lesson.quiz[currentQuiz].answer}.`}
                     </p>
                     <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-                      <p className="text-sm text-gray-700 leading-relaxed">
+                      <p className="text-body text-gray-700 leading-relaxed">
                         <strong>{t('explanation')} :</strong> {lesson.quiz[currentQuiz].explanation}
                       </p>
                     </div>
@@ -748,10 +748,10 @@ export function LessonPlayer() {
                   <p className="font-semibold text-gray-900 leading-relaxed">{lesson.reflection}</p>
                 </div>
                 <textarea
-                  className="w-full h-48 border border-gray-200 rounded-xl p-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
+                  className="w-full h-48 border border-gray-200 rounded-xl p-4 text-body text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
                   placeholder={t('reflectionPlaceholder')}
                 />
-                <p className="text-xs text-gray-400 mt-2">{t('localSave')}</p>
+                <p className="text-meta text-gray-400 mt-2">{t('localSave')}</p>
               </div>
             )}
 
@@ -760,7 +760,7 @@ export function LessonPlayer() {
                 {lesson.glossary.map((item) => (
                   <div key={item.term} className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-blue-sm transition-all">
                     <p className="font-semibold text-gray-900 mb-1.5">{item.term}</p>
-                    <p className="text-sm text-gray-600 leading-relaxed">{item.definition}</p>
+                    <p className="text-body text-gray-600 leading-relaxed">{item.definition}</p>
                   </div>
                 ))}
               </div>
@@ -773,7 +773,7 @@ export function LessonPlayer() {
             </Button>
             <div className="hidden sm:flex items-center gap-3">
               <ProgressBar value={progress} className="w-32" />
-              <span className="text-xs text-gray-500 font-mono">{completedIds.length}/{module.courses.length}</span>
+              <span className="text-meta text-gray-500 font-mono">{completedIds.length}/{module.courses.length}</span>
             </div>
             <div className="flex items-center gap-2">
               <Button variant={currentDone ? 'outline' : 'gold'} size="sm" onClick={handleComplete} disabled={currentDone}>

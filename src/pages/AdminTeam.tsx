@@ -9,7 +9,7 @@ import { provisionEnterpriseAdmin } from '../services/adminRepository';
 import { uploadOrgLogo, saveOrganizationRecord } from '../services/enterpriseRepository';
 
 const inputClass =
-  'mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
+  'mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
 
 export function AdminTeam() {
   const { organizations, createOrganization } = useLearning();
@@ -78,13 +78,13 @@ export function AdminTeam() {
 
       <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-7">
-          <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou</p>
-          <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">{t('teamTitle')}</h1>
-          <p className="text-sm text-gray-500 mt-2 max-w-2xl">{t('teamIntro')}</p>
+          <p className="text-eyebrow text-blue-600">Karatou</p>
+          <h1 className="font-heading text-h1 text-gray-900 mt-1">{t('teamTitle')}</h1>
+          <p className="text-body text-gray-500 mt-2 max-w-2xl">{t('teamIntro')}</p>
         </div>
 
         {!isSupabase && (
-          <div className="mb-6 flex items-start gap-2 rounded-2xl border border-gold-200 bg-gold-50 px-4 py-3 text-sm text-gold-700" role="status">
+          <div className="mb-6 flex items-start gap-2 rounded-2xl border border-gold-200 bg-gold-50 px-4 py-3 text-body text-gold-700" role="status">
             <AlertCircle size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
             <span>{t('teamDemoNote')}</span>
           </div>
@@ -92,7 +92,7 @@ export function AdminTeam() {
 
         {notice && (
           <div
-            className={`mb-6 flex items-start gap-2 rounded-2xl border px-4 py-3 text-sm ${
+            className={`mb-6 flex items-start gap-2 rounded-2xl border px-4 py-3 text-body ${
               notice.tone === 'success'
                 ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                 : 'border-red-200 bg-red-50 text-red-700'
@@ -112,18 +112,18 @@ export function AdminTeam() {
             <Building2 size={18} className="text-blue-600" aria-hidden="true" /> {t('teamCreateOrgTitle')}
           </h2>
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('teamOrgNameLabel')}</span>
+            <span className="text-body font-medium text-gray-700">{t('teamOrgNameLabel')}</span>
             <input value={orgName} onChange={(event) => setOrgName(event.target.value)} required className={inputClass} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('teamOrgLogoLabel')}</span>
+            <span className="text-body font-medium text-gray-700">{t('teamOrgLogoLabel')}</span>
             <input
               type="file"
               accept="image/png,image/jpeg,image/jpg"
               onChange={(event) => setOrgLogoFile(event.target.files?.[0] ?? null)}
-              className="mt-1.5 w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-blue-700"
+              className="mt-1.5 w-full text-body text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:text-body file:font-medium file:text-blue-700"
             />
-            <span className="mt-1 block text-xs text-gray-400">{t('teamOrgLogoHint')}</span>
+            <span className="mt-1 block text-meta text-gray-400">{t('teamOrgLogoHint')}</span>
           </label>
           <Button type="submit" variant="outline" size="md" disabled={!orgName.trim()}>
             {t('teamCreateOrgBtn')}
@@ -136,7 +136,7 @@ export function AdminTeam() {
           </h2>
 
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('teamOrgLabel')}</span>
+            <span className="text-body font-medium text-gray-700">{t('teamOrgLabel')}</span>
             <select value={orgId} onChange={(event) => setOrgId(event.target.value)} required className={inputClass}>
               {organizations.length === 0 && <option value="">-</option>}
               {organizations.map((org) => (
@@ -146,17 +146,17 @@ export function AdminTeam() {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('fullName')}</span>
+            <span className="text-body font-medium text-gray-700">{t('fullName')}</span>
             <input value={name} onChange={(event) => setName(event.target.value)} required className={inputClass} />
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('email')}</span>
+            <span className="text-body font-medium text-gray-700">{t('email')}</span>
             <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required className={inputClass} />
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-gray-700">{t('password')}</span>
+            <span className="text-body font-medium text-gray-700">{t('password')}</span>
             <input
               type="password"
               value={password}

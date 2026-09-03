@@ -84,14 +84,14 @@ export function Certificates() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
-          <h1 className="font-playfair text-3xl font-bold text-gray-900">{t('certificatesTitle')}</h1>
+          <h1 className="font-heading text-h1 text-gray-900">{t('certificatesTitle')}</h1>
           <p className="text-gray-500 mt-1">{t('certificatesSubtitle')}</p>
         </div>
 
         {readyModules.length > 0 && (
           <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 mb-6">
             <p className="font-semibold text-emerald-800 mb-2">{t('readyCertTitle')}</p>
-            <p className="text-sm text-emerald-700 mb-4">
+            <p className="text-body text-emerald-700 mb-4">
               {t('readyCertBody')}
             </p>
             <div className="flex flex-wrap gap-3">
@@ -110,7 +110,7 @@ export function Certificates() {
               <GraduationCap size={28} className="text-gray-400" />
             </div>
             <p className="font-semibold text-gray-700 mb-2">{t('noActiveCert')}</p>
-            <p className="text-sm text-gray-500 mb-5">{t('finishAllLessons')}</p>
+            <p className="text-body text-gray-500 mb-5">{t('finishAllLessons')}</p>
             <Button variant="primary" size="sm" onClick={() => navigate('/learn')}>
               {t('continueCourses')}
             </Button>
@@ -126,33 +126,33 @@ export function Certificates() {
               <div className="relative">
                 <div className="flex items-center gap-2 mb-6">
                   <Shield size={16} className="text-blue-300" />
-                  <p className="text-sm text-blue-300 font-medium">{t('officialCertification')}</p>
+                  <p className="text-body text-blue-300 font-medium">{t('officialCertification')}</p>
                 </div>
 
-                <p className="text-xs uppercase tracking-wider text-gray-400 mb-1">{t('certifyThat')}</p>
-                <h2 className="font-playfair text-2xl font-bold text-white mb-1">{primaryCert.userName}</h2>
+                <p className="text-eyebrow text-gray-400 mb-1">{t('certifyThat')}</p>
+                <h2 className="font-heading text-h2 text-white mb-1">{primaryCert.userName}</h2>
                 <p className="text-gray-300 mb-6">{t('completedSuccessfully')}</p>
-                <h3 className="font-playfair text-xl font-bold text-gold-400 mb-8">
+                <h3 className="font-heading text-h3 text-gold-400 mb-8">
                   {primaryModuleTitle}
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
-                    <p className="text-xs text-gray-400 uppercase tracking-wider">{t('issued')}</p>
-                    <p className="text-sm text-white font-medium mt-0.5">{primaryCert.issuedAt}</p>
+                    <p className="text-eyebrow text-gray-400">{t('issued')}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.issuedAt}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 uppercase tracking-wider">{t('validUntil')}</p>
-                    <p className="text-sm text-white font-medium mt-0.5">{primaryCert.expiresAt}</p>
+                    <p className="text-eyebrow text-gray-400">{t('validUntil')}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.expiresAt}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 uppercase tracking-wider">{t('status')}</p>
+                    <p className="text-eyebrow text-gray-400">{t('status')}</p>
                     <Badge variant="green" className="mt-1">{t('active')}</Badge>
                   </div>
                 </div>
 
                 <div className="border-t border-white/10 pt-4">
-                  <p className="font-mono text-sm text-blue-300">{primaryCert.uid}</p>
+                  <p className="font-mono text-body text-blue-300">{primaryCert.uid}</p>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@ export function Certificates() {
               </Button>
             </div>
             {downloadFailed && (
-              <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
                 {DOWNLOAD_ERROR[lang] ?? DOWNLOAD_ERROR.fr}
               </div>
             )}
@@ -192,7 +192,7 @@ export function Certificates() {
           </>
         )}
 
-        <h2 className="font-playfair text-xl font-bold text-gray-900 mb-4">{t('moduleStatus')}</h2>
+        <h2 className="font-heading text-h3 text-gray-900 mb-4">{t('moduleStatus')}</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {localizedModules.map((module) => {
             const progress = getProgress(module.slug);
@@ -204,13 +204,13 @@ export function Certificates() {
                   <span className="text-2xl">{module.emoji}</span>
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">{module.title}</h3>
-                    <p className="text-xs text-gray-500 mb-3">{module.subtitle}</p>
+                    <p className="text-meta text-gray-500 mb-3">{module.subtitle}</p>
                     <div className="flex items-center gap-3">
                       <BookOpen size={14} className="text-gray-400" />
                       <div className="flex-1">
                         <ProgressBar value={progress} />
                       </div>
-                      <span className="text-xs text-gray-500">{progress}%</span>
+                      <span className="text-meta text-gray-500">{progress}%</span>
                     </div>
                   </div>
                   {certificate ? <Badge variant="green">{t('certified')}</Badge> : <Badge variant="gray">{t('inProgress')}</Badge>}

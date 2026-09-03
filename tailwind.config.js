@@ -27,6 +27,13 @@ export default {
         playfair: ['Literata', 'Georgia', 'serif'],
       },
       fontSize: {
+        // `display-xl` et `display-lg` prolongent l'échelle du design system,
+        // qui s'arrête à `display` (40px) : il ne contient aucun composant de
+        // héros marketing. Ces deux crans nomment les tailles déjà en place
+        // sur la page d'accueil (48px et 60px) au lieu de les laisser en
+        // classes brutes `text-5xl` / `text-6xl`.
+        'display-xl': ['3.75rem', { lineHeight: '1', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'display-lg': ['3rem', { lineHeight: '1.05', letterSpacing: '-0.025em', fontWeight: '700' }],
         display: ['2.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
         h1: ['2rem', { lineHeight: '1.15', letterSpacing: '-0.015em', fontWeight: '700' }],
         h2: ['1.5rem', { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '700' }],

@@ -24,7 +24,7 @@ export function AdminNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 min-h-16 flex flex-wrap items-center justify-between gap-3 py-3">
         <div className="flex items-center gap-3 min-w-0">
           <Logo />
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-meta font-semibold text-blue-700">
             <ShieldCheck size={13} />
             Admin plateforme
           </span>
@@ -41,7 +41,7 @@ export function AdminNav() {
                   to={tab.to}
                   end={tab.end}
                   className={({ isActive }) =>
-                    `inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium rounded-xl transition-all duration-150 ${
+                    `inline-flex items-center gap-2 px-3.5 py-2 text-body font-medium rounded-xl transition-all duration-150 ${
                       isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`
                   }
@@ -57,12 +57,12 @@ export function AdminNav() {
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <div className="hidden sm:block text-right">
-            <p className="text-sm font-semibold text-gray-900">Admin Karatou</p>
-            <p className="text-xs text-gray-500">Back office Karatou</p>
+            <p className="text-body font-semibold text-gray-900">Admin Karatou</p>
+            <p className="text-meta text-gray-500">Back office Karatou</p>
           </div>
           <button
             onClick={() => navigate('/admin')}
-            className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center text-white text-sm font-semibold"
+            className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center text-white text-body font-semibold"
             title={user?.name || 'Admin Karatou'}
           >
             KA

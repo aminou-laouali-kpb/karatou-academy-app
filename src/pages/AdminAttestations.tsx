@@ -20,7 +20,7 @@ import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const PREVIEW_WIDTH = 560;
-const inputClass = 'w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
+const inputClass = 'w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -50,22 +50,22 @@ function TextControls({ title, placement, onChange }: {
         ))}
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <label className="block text-xs font-medium text-gray-600">Taille (pt)
+        <label className="block text-meta font-medium text-gray-600">Taille (pt)
           <input type="number" min={6} max={120} value={placement.fontSize} onChange={(e) => onChange((p) => ({ ...p, fontSize: clamp(Number(e.target.value) || 0, 6, 200) }))} className={inputClass} />
         </label>
-        <label className="block text-xs font-medium text-gray-600">Couleur
+        <label className="block text-meta font-medium text-gray-600">Couleur
           <span className="mt-1 flex items-center gap-2">
             <input type="color" value={placement.colorHex} onChange={(e) => onChange((p) => ({ ...p, colorHex: e.target.value }))} className="h-8 w-9 rounded border border-gray-200" />
             <input type="text" value={placement.colorHex} onChange={(e) => onChange((p) => ({ ...p, colorHex: e.target.value }))} className={inputClass} />
           </span>
         </label>
-        <label className="block text-xs font-medium text-gray-600">Position X (%)
+        <label className="block text-meta font-medium text-gray-600">Position X (%)
           <input type="number" min={0} max={100} value={Math.round(placement.xRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, xRatio: clamp(Number(e.target.value) / 100, 0, 1 - p.widthRatio) }))} className={inputClass} />
         </label>
-        <label className="block text-xs font-medium text-gray-600">Position Y (%)
+        <label className="block text-meta font-medium text-gray-600">Position Y (%)
           <input type="number" min={0} max={100} value={Math.round(placement.yRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, 0.98) }))} className={inputClass} />
         </label>
-        <label className="block text-xs font-medium text-gray-600 col-span-2">Largeur de la zone (%)
+        <label className="block text-meta font-medium text-gray-600 col-span-2">Largeur de la zone (%)
           <input type="number" min={5} max={100} value={Math.round(placement.widthRatio * 100)} onChange={(e) => onChange((p) => ({ ...p, widthRatio: clamp(Number(e.target.value) / 100, 0.05, 1 - p.xRatio) }))} className={inputClass} />
         </label>
       </div>
@@ -231,26 +231,26 @@ export function AdminAttestations() {
       <AdminNav />
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6">
-          <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou</p>
-          <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Attestations en masse</h1>
-          <p className="text-sm text-gray-500 mt-2 max-w-2xl">
+          <p className="text-eyebrow text-blue-600">Karatou</p>
+          <h1 className="font-heading text-h1 text-gray-900 mt-1">Attestations en masse</h1>
+          <p className="text-body text-gray-500 mt-2 max-w-2xl">
             Chargez un modele PDF et une liste Excel, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
           </p>
         </div>
 
-        {error && <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">{error}</div>}
-        {done && <div className="mb-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700" role="status">{done}</div>}
+        {error && <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700" role="alert">{error}</div>}
+        {done && <div className="mb-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-body text-emerald-700" role="status">{done}</div>}
 
         <div className="grid lg:grid-cols-[360px_1fr] gap-6">
           {/* Config panel */}
           <aside className="space-y-5">
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
               <h2 className="font-semibold text-gray-900">Sources</h2>
-              <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-body font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
                 <FileText size={16} className="text-blue-600" /> {templateBuffer ? 'Modele PDF charge' : 'Charger le modele PDF'}
                 <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={(e) => onPdfUpload(e.target.files?.[0])} />
               </label>
-              <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-body font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
                 <FileSpreadsheet size={16} className="text-emerald-600" /> {participants.length ? `${participants.length} participants${subscribableCount > 0 ? ` · ${subscribableCount} email${subscribableCount !== 1 ? 's' : ''}` : ''}` : 'Charger la liste Excel'}
                 <input type="file" accept=".xlsx,.xls" className="hidden" onChange={(e) => onExcelUpload(e.target.files?.[0])} />
               </label>
@@ -262,13 +262,13 @@ export function AdminAttestations() {
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
               <h2 className="font-semibold text-gray-900 flex items-center gap-2"><QrCode size={16} className="text-blue-600" /> QR code</h2>
               <div className="grid grid-cols-3 gap-3">
-                <label className="block text-xs font-medium text-gray-600">X (%)
+                <label className="block text-meta font-medium text-gray-600">X (%)
                   <input type="number" min={0} max={100} value={Math.round(qr.xRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, xRatio: clamp(Number(e.target.value) / 100, 0, 1 - p.sizeRatio) }))} className={inputClass} />
                 </label>
-                <label className="block text-xs font-medium text-gray-600">Y (%)
+                <label className="block text-meta font-medium text-gray-600">Y (%)
                   <input type="number" min={0} max={100} value={Math.round(qr.yRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, yRatio: clamp(Number(e.target.value) / 100, 0, 1) }))} className={inputClass} />
                 </label>
-                <label className="block text-xs font-medium text-gray-600">Taille (%)
+                <label className="block text-meta font-medium text-gray-600">Taille (%)
                   <input type="number" min={3} max={50} value={Math.round(qr.sizeRatio * 100)} onChange={(e) => setQr((p) => ({ ...p, sizeRatio: clamp(Number(e.target.value) / 100, 0.03, 0.5) }))} className={inputClass} />
                 </label>
               </div>
@@ -284,13 +284,13 @@ export function AdminAttestations() {
             {participants.length > 0 && (
               <div className="flex items-center justify-between mb-4">
                 <button onClick={() => setCurrent((c) => Math.max(0, c - 1))} disabled={current === 0} aria-label="Precedent" className="p-1.5 rounded-lg border border-gray-200 disabled:opacity-40"><ChevronLeft size={16} /></button>
-                <p className="text-sm font-medium text-gray-700 truncate px-3">{current + 1} / {participants.length} - {previewName}</p>
+                <p className="text-body font-medium text-gray-700 truncate px-3">{current + 1} / {participants.length} - {previewName}</p>
                 <button onClick={() => setCurrent((c) => Math.min(participants.length - 1, c + 1))} disabled={current >= participants.length - 1} aria-label="Suivant" className="p-1.5 rounded-lg border border-gray-200 disabled:opacity-40"><ChevronRight size={16} /></button>
               </div>
             )}
 
             {!previewFile ? (
-              <div className="rounded-2xl border border-dashed border-gray-300 p-16 text-center text-sm text-gray-500">
+              <div className="rounded-2xl border border-dashed border-gray-300 p-16 text-center text-body text-gray-500">
                 Chargez un modele PDF pour afficher l'apercu et positionner les elements.
               </div>
             ) : (

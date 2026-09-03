@@ -28,7 +28,7 @@ export function StudentNav() {
               key={tab.to}
               to={tab.to}
               className={({ isActive }) =>
-                `px-4 py-2 text-sm font-medium rounded-xl transition-all duration-150 ${
+                `px-4 py-2 text-body font-medium rounded-xl transition-all duration-150 ${
                   isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`
               }
@@ -52,7 +52,7 @@ export function StudentNav() {
           </button>
           <button
             onClick={() => navigate('/certificates')}
-            className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-sm font-semibold"
+            className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-body font-semibold"
             aria-label={`${t('profile')}: ${user?.name ?? ''}`.trim()}
             title={user?.name}
           >
@@ -78,7 +78,7 @@ export function StudentNav() {
             key={tab.to}
             to={tab.to}
             className={({ isActive }) =>
-              `px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap ${
+              `px-3 py-1.5 text-meta font-medium rounded-lg whitespace-nowrap ${
                 isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600'
               }`
             }

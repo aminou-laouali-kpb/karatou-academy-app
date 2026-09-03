@@ -19,17 +19,17 @@ function LegalLayout({ doc }: { doc: LegalDoc }) {
       </header>
 
       <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
-        <h1 className="font-playfair text-3xl font-bold text-gray-900">{doc.title}</h1>
-        <p className="text-sm text-gray-500 mt-1">{doc.updated}</p>
+        <h1 className="font-heading text-h1 text-gray-900">{doc.title}</h1>
+        <p className="text-body text-gray-500 mt-1">{doc.updated}</p>
         <p className="text-gray-700 leading-relaxed mt-4">{doc.intro}</p>
 
         <div className="mt-8 space-y-8">
           {doc.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="font-semibold text-lg text-gray-900 mb-2">{section.heading}</h2>
+              <h2 className="text-title text-gray-900 mb-2">{section.heading}</h2>
               <div className="space-y-2">
                 {section.body.map((paragraph) => (
-                  <p key={paragraph} className="text-sm text-gray-700 leading-relaxed">{paragraph}</p>
+                  <p key={paragraph} className="text-body text-gray-700 leading-relaxed">{paragraph}</p>
                 ))}
               </div>
             </section>
