@@ -21,17 +21,17 @@ export function ModuleCard({ module }: ModuleCardProps) {
   const target = firstCourse ? `/learn/${localizedModule.slug}/${firstCourse}` : `/learn/${localizedModule.slug}`;
 
   return (
-    <div className="relative bg-white rounded-2xl overflow-hidden shadow-blue-sm hover:shadow-blue-lg hover:-translate-y-1 transition-all duration-200 group">
+    <article className="relative bg-white rounded-2xl overflow-hidden shadow-blue-sm hover:shadow-blue-lg hover:-translate-y-1 transition-all duration-200 group">
       <div className={`h-32 bg-gradient-to-br ${localizedModule.color} flex items-center justify-center relative`}>
-        <span className="text-5xl">{localizedModule.emoji}</span>
+        <span className="text-5xl" aria-hidden="true">{localizedModule.emoji}</span>
         {isCompleted && (
-          <div className="absolute top-3 right-3 bg-white/90 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+          <div className="absolute top-3 right-3 bg-white/90 text-emerald-700 text-meta font-semibold px-3 py-1 rounded-full flex items-center gap-1">
             <CheckCircle2 size={13} /> {t('completed')}
           </div>
         )}
         {isLocked && (
           <div className="absolute inset-0 bg-blue-900/60 backdrop-blur-[2px] flex items-center justify-center">
-            <span className="bg-white/90 text-blue-900 text-xs font-semibold px-4 py-1.5 rounded-full">
+            <span className="bg-white/90 text-blue-900 text-meta font-semibold px-4 py-1.5 rounded-full">
               {t('subscription')}
             </span>
           </div>
@@ -39,13 +39,13 @@ export function ModuleCard({ module }: ModuleCardProps) {
       </div>
 
       <div className="p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-blue-500 mb-1">
+        <p className="text-eyebrow text-blue-500 mb-1">
           {localizedModule.level}
         </p>
-        <h3 className="font-playfair text-lg font-bold text-gray-900 mb-1">{localizedModule.title}</h3>
-        <p className="text-sm text-gray-500 mb-4 line-clamp-2">{localizedModule.description}</p>
+        <h3 className="font-body text-title text-gray-900 mb-1">{localizedModule.title}</h3>
+        <p className="text-body-sm text-gray-500 mb-4 line-clamp-2">{localizedModule.description}</p>
 
-        <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+        <div className="flex items-center gap-4 text-meta text-gray-500 mb-4">
           <span className="flex items-center gap-1">
             <BookOpen size={13} /> {localizedModule.lessons} {t('lesson').toLowerCase()}s
           </span>
@@ -62,9 +62,9 @@ export function ModuleCard({ module }: ModuleCardProps) {
 
         {isInProgress && (
           <div className="mb-4">
-            <div className="flex justify-between text-xs text-gray-500 mb-1.5">
+            <div className="flex justify-between text-meta text-gray-500 mb-1.5">
               <span>{t('progress')}</span>
-              <span className="font-medium text-blue-600">{localizedModule.progress}%</span>
+              <span className="font-medium tabular-nums text-blue-600">{localizedModule.progress}%</span>
             </div>
             <ProgressBar value={localizedModule.progress} />
           </div>
@@ -80,6 +80,6 @@ export function ModuleCard({ module }: ModuleCardProps) {
           {isCompleted ? t('review') : isInProgress ? t('continue') : isLocked ? t('lockedSubscription') : t('start')}
         </Button>
       </div>
-    </div>
+    </article>
   );
 }

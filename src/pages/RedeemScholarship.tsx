@@ -88,7 +88,7 @@ export function RedeemScholarship() {
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-100 text-gold-600 mb-5">
               <Gift size={24} />
             </div>
-            <h1 className="font-playfair text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
+            <h1 className="font-heading text-h1 sm:text-display text-gray-900">
               {t('redeemTitle')}
             </h1>
             <p className="text-gray-500 mt-4 leading-relaxed">
@@ -99,14 +99,14 @@ export function RedeemScholarship() {
           <div className="bg-white border border-gray-100 rounded-2xl shadow-blue-sm p-5 sm:p-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">{t('bourseCode')}</span>
+                <span className="text-body font-medium text-gray-700">{t('bourseCode')}</span>
                 <input
                   value={code}
                   onChange={(event) => {
                     setCode(normalizeCode(event.target.value));
                     setResult(null);
                   }}
-                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-3 font-mono text-sm tracking-wide outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-3 font-mono text-body tracking-wide outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   placeholder={t('redeemCodePlaceholder')}
                   required
                 />
@@ -114,8 +114,8 @@ export function RedeemScholarship() {
 
               {!isAuthenticated ? (
                 <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                  <p className="text-sm font-semibold text-blue-800">{t('redeemAuthRequiredTitle')}</p>
-                  <p className="text-sm text-blue-700 mt-1">{t('redeemAuthRequiredBody')}</p>
+                  <p className="text-body font-semibold text-blue-800">{t('redeemAuthRequiredTitle')}</p>
+                  <p className="text-body text-blue-700 mt-1">{t('redeemAuthRequiredBody')}</p>
                   <div className="mt-4 flex flex-col sm:flex-row gap-2">
                     <Button size="sm" onClick={() => navigate(loginTarget)}>
                       <LogIn size={16} /> {t('redeemSignIn')}
@@ -137,11 +137,11 @@ export function RedeemScholarship() {
                 <div className="mt-0.5 flex-shrink-0">{statusTone.icon}</div>
                 <div>
                   <p className="font-semibold">{statusTone.title}</p>
-                  <p className="text-sm mt-1">
+                  <p className="text-body mt-1">
                     {result?.message || t('redeemPendingBody')}
                   </p>
                   {result?.organizationName && (
-                    <p className="text-sm mt-2">
+                    <p className="text-body mt-2">
                       {t('portal')} <span className="font-semibold">{result.organizationName}</span>
                     </p>
                   )}
@@ -156,7 +156,7 @@ export function RedeemScholarship() {
             )}
 
             {isAuthenticated && user?.role !== 'learner' && (
-              <p className="mt-4 text-xs text-gray-500">{t('redeemLearnerOnlyBody')}</p>
+              <p className="mt-4 text-meta text-gray-500">{t('redeemLearnerOnlyBody')}</p>
             )}
           </div>
         </section>

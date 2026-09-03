@@ -11,7 +11,7 @@ import {
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 
 const inputClass =
-  'mt-1.5 w-full h-24 rounded-xl border border-gray-200 px-3 py-2 text-sm font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
+  'mt-1.5 w-full h-24 rounded-xl border border-gray-200 px-3 py-2 text-body font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
 
 export function VerifyAttestation() {
   const { hash } = useLocation();
@@ -70,7 +70,7 @@ export function VerifyAttestation() {
       <main id="main-content" className="w-full max-w-lg">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3"><Logo variant="default" /></div>
-          <p className="text-sm text-gray-500">{VERIFY_DISPLAY_HOST}/verify-attestation</p>
+          <p className="text-body text-gray-500">{VERIFY_DISPLAY_HOST}/verify-attestation</p>
         </div>
 
         {result && (
@@ -79,10 +79,10 @@ export function VerifyAttestation() {
               {isValid ? <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
                 : isExpired ? <XCircle size={40} className="text-amber-500 mx-auto mb-2" />
                 : <Ban size={40} className="text-red-500 mx-auto mb-2" />}
-              <h1 className={`font-playfair text-xl font-bold ${titleClass}`}>
+              <h1 className={`font-heading text-h3 ${titleClass}`}>
                 {isValid ? t('attValid') : isExpired ? t('attExpired') : t('attInvalid')}
               </h1>
-              <p className={`text-sm mt-1 ${bodyClass}`}>
+              <p className={`text-body mt-1 ${bodyClass}`}>
                 {isValid || isExpired ? t('attValidBody') : t('attInvalidBody')}
               </p>
             </div>
@@ -90,24 +90,24 @@ export function VerifyAttestation() {
             {cert && status !== 'invalid' && (
               <div className="px-6 py-6 space-y-4">
                 <div className="flex justify-between items-start">
-                  <span className="text-sm text-gray-500">{t('holder')}</span>
-                  <span className="text-sm font-semibold text-gray-900 text-right">{cert.name}</span>
+                  <span className="text-body text-gray-500">{t('holder')}</span>
+                  <span className="text-body font-semibold text-gray-900 text-right">{cert.name}</span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <span className="text-sm text-gray-500">{t('issued')}</span>
-                  <span className="text-sm text-gray-700">{cert.issuedAt}</span>
+                  <span className="text-body text-gray-500">{t('issued')}</span>
+                  <span className="text-body text-gray-700">{cert.issuedAt}</span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <span className="text-sm text-gray-500">{t('validUntil')}</span>
-                  <span className="text-sm text-gray-700">{cert.expiresAt}</span>
+                  <span className="text-body text-gray-500">{t('validUntil')}</span>
+                  <span className="text-body text-gray-700">{cert.expiresAt}</span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <span className="text-sm text-gray-500">{t('status')}</span>
+                  <span className="text-body text-gray-500">{t('status')}</span>
                   {isValid ? <Badge variant="green">{t('active').toUpperCase()}</Badge> : <Badge variant="gold">{t('expired')}</Badge>}
                 </div>
                 <div className="flex justify-between items-start">
-                  <span className="text-sm text-gray-500">ID</span>
-                  <span className="text-sm font-mono text-gray-700 text-right break-all">{cert.id}</span>
+                  <span className="text-body text-gray-500">ID</span>
+                  <span className="text-body font-mono text-gray-700 text-right break-all">{cert.id}</span>
                 </div>
               </div>
             )}
@@ -119,7 +119,7 @@ export function VerifyAttestation() {
             <ShieldCheck size={16} className="text-blue-500" />
             <h2 className="font-semibold text-gray-900">{t('attVerifyTitle')}</h2>
           </div>
-          <p className="text-sm text-gray-500 mb-3">{t('attVerifyIntro')}</p>
+          <p className="text-body text-gray-500 mb-3">{t('attVerifyIntro')}</p>
           <textarea
             value={manual}
             onChange={(event) => setManual(event.target.value)}

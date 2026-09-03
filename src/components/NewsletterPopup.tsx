@@ -115,11 +115,11 @@ export function NewsletterPopup() {
           <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
             <Mail size={18} className="text-white" />
           </div>
-          <p className="font-playfair text-lg font-bold text-white leading-tight">
+          <p className="font-heading text-title text-white leading-tight">
             {t.title}
           </p>
         </div>
-        <p className="text-blue-100 text-sm leading-relaxed">
+        <p className="text-blue-100 text-body-sm leading-relaxed">
           {t.body}
         </p>
       </div>
@@ -127,13 +127,13 @@ export function NewsletterPopup() {
       <div className="px-5 py-4">
         {done ? (
           <div className="text-center py-2">
-            <p className="text-emerald-600 font-semibold text-sm">{t.doneTitle}</p>
-            <p className="text-gray-500 text-xs mt-1">{t.doneBody}</p>
+            <p className="text-emerald-600 font-semibold text-body">{t.doneTitle}</p>
+            <p className="text-gray-500 text-meta mt-1">{t.doneBody}</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
             {error && (
-              <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+              <p className="text-meta text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
             )}
             <input
               type="text"
@@ -141,7 +141,7 @@ export function NewsletterPopup() {
               autoComplete="given-name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
             />
             <input
               type="email"
@@ -150,7 +150,7 @@ export function NewsletterPopup() {
               value={email}
               onChange={(e) => { setEmail(e.target.value); setError(''); }}
               required
-              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
             />
             <Button type="submit" variant="primary" size="sm" className="w-full">
               {t.submit}
@@ -158,7 +158,7 @@ export function NewsletterPopup() {
             <button
               type="button"
               onClick={dismiss}
-              className="w-full text-xs text-gray-400 hover:text-gray-600 transition-colors py-1"
+              className="w-full text-meta text-gray-400 hover:text-gray-600 transition-colors py-1"
             >
               {t.dismiss}
             </button>

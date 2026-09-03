@@ -41,7 +41,7 @@ export function Dashboard() {
       <div className="min-h-screen bg-gray-50">
         <StudentNav />
         <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-sm text-gray-500" role="status">
+          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-body text-gray-500" role="status">
             {t('loadingCourses')}
           </div>
         </main>
@@ -57,12 +57,12 @@ export function Dashboard() {
         <StudentNav />
         <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
           <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 sm:p-8 mb-8">
-            <h1 className="font-playfair text-2xl sm:text-3xl font-bold text-white mb-2">
+            <h1 className="font-heading text-h2 sm:text-h1 text-white mb-2">
               {t('hello')}, {user?.name?.split(' ')[0] || ''}
             </h1>
             <p className="text-blue-100">{t('noCoursesYet')}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-sm text-gray-500">
+          <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center text-body text-gray-500">
             {t('noCoursesYet')}
           </div>
         </main>
@@ -81,7 +81,7 @@ export function Dashboard() {
         <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 sm:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
           <div className="relative">
-            <h1 className="font-playfair text-2xl sm:text-3xl font-bold text-white mb-2">
+            <h1 className="font-heading text-h2 sm:text-h1 text-white mb-2">
               {t('hello')}, {user?.name.split(' ')[0] || 'Amadou'}
             </h1>
             <p className="text-blue-100 mb-5">
@@ -92,11 +92,11 @@ export function Dashboard() {
                 {t('continueLesson')} <ArrowRight size={16} />
               </Button>
               <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-2">
-                <span className="text-xs text-blue-100">{t('progress')}</span>
+                <span className="text-meta text-blue-100">{t('progress')}</span>
                 <div className="w-32">
                   <ProgressBar value={activeModule.progress} variant="gold" height="md" />
                 </div>
-                <span className="text-sm font-semibold text-white">{activeModule.progress}%</span>
+                <span className="text-body font-semibold text-white">{activeModule.progress}%</span>
               </div>
             </div>
           </div>
@@ -133,13 +133,13 @@ export function Dashboard() {
 
         {/* Continue Learning */}
         <section className="mb-8">
-          <h2 className="font-playfair text-xl font-bold text-gray-900 mb-4">{t('continueLearning')}</h2>
+          <h2 className="font-heading text-h3 text-gray-900 mb-4">{t('continueLearning')}</h2>
           <div className="bg-white rounded-2xl shadow-blue-sm p-5 flex flex-col sm:flex-row items-start gap-5 hover:shadow-blue-md transition-all duration-200">
             <div className={`w-20 h-20 rounded-xl bg-gradient-to-br ${activeModule.color} flex items-center justify-center flex-shrink-0`}>
               <span className="text-3xl">{activeModule.emoji}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider mb-1">{activeModule.title}</p>
+              <p className="text-eyebrow text-blue-500 mb-1">{activeModule.title}</p>
               <h3 className="font-semibold text-gray-900 mb-2">
                 {t('resume')} : {activeCourse.title}
               </h3>
@@ -147,7 +147,7 @@ export function Dashboard() {
                 <div className="flex-1 max-w-xs">
                   <ProgressBar value={activeModule.progress} />
                 </div>
-                <span className="text-xs text-gray-500">{activeModule.progress}%</span>
+                <span className="text-meta text-gray-500">{activeModule.progress}%</span>
               </div>
               <Button variant="primary" size="sm" onClick={() => navigate(`/learn/${activeModule.slug}/${activeCourse.id}`)}>
                 {t('resume')} <ArrowRight size={14} />
@@ -158,14 +158,14 @@ export function Dashboard() {
 
         {/* My Certificates */}
         <section className="mb-8">
-          <h2 className="font-playfair text-xl font-bold text-gray-900 mb-4">{t('myCertificates')}</h2>
+          <h2 className="font-heading text-h3 text-gray-900 mb-4">{t('myCertificates')}</h2>
           {userCertificates.length === 0 ? (
             <div className="bg-white rounded-2xl shadow-blue-sm p-10 text-center">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <GraduationCap size={28} className="text-gray-400" />
               </div>
               <p className="font-semibold text-gray-700 mb-2">{t('noCertificates')}</p>
-              <p className="text-sm text-gray-500 mb-4">{t('finishModuleToCert')}</p>
+              <p className="text-body text-gray-500 mb-4">{t('finishModuleToCert')}</p>
               <Button variant="outline" size="sm" onClick={() => navigate('/learn')}>
                 {t('seeModules')}
               </Button>
@@ -181,7 +181,7 @@ export function Dashboard() {
                     <p className="font-semibold text-gray-900">
                       {modulesWithProgress.find((module) => module.slug === userCertificates[0].moduleSlug)?.title || userCertificates[0].moduleName}
                     </p>
-                    <p className="text-sm text-gray-500 font-mono">{userCertificates[0].uid}</p>
+                    <p className="text-body text-gray-500 font-mono">{userCertificates[0].uid}</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm" onClick={() => navigate('/certificates')}>
@@ -194,7 +194,7 @@ export function Dashboard() {
 
         {/* Available Modules */}
         <section>
-          <h2 className="font-playfair text-xl font-bold text-gray-900 mb-4">{t('availableModules')}</h2>
+          <h2 className="font-heading text-h3 text-gray-900 mb-4">{t('availableModules')}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {modulesWithProgress.map((m) => (
               <ModuleCard key={m.id} module={m} />

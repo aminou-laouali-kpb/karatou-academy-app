@@ -37,12 +37,12 @@ function ErrorFallback() {
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50">
           <span className="text-2xl" aria-hidden="true">⚠️</span>
         </div>
-        <h1 className="font-playfair text-xl font-bold text-gray-900">{copy.title}</h1>
-        <p className="mt-2 text-sm text-gray-500">{copy.body}</p>
+        <h1 className="font-heading text-h3 text-gray-900">{copy.title}</h1>
+        <p className="mt-2 text-body text-gray-500">{copy.body}</p>
         <button
           autoFocus
           onClick={() => window.location.reload()}
-          className="mt-5 inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          className="mt-5 inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-body font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
         >
           {copy.reload}
         </button>

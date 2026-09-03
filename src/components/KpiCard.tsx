@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState, useRef } from 'react';
 
-interface KpiCardProps {
+export interface KpiCardProps {
   icon: ReactNode;
   value: number;
   label: string;
@@ -35,12 +35,12 @@ export function KpiCard({ icon, value, label, trend, suffix = '', iconBg = 'bg-b
       <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center mb-3`}>
         {icon}
       </div>
-      <p className="font-playfair text-2xl font-bold text-gray-900">
+      <p className="font-heading text-h2 tabular-nums text-gray-900">
         {count}{suffix}
       </p>
-      <p className="font-mono text-xs uppercase text-gray-500 mt-1 tracking-wide">{label}</p>
+      <p className="text-eyebrow text-gray-500 mt-1">{label}</p>
       {trend && (
-        <p className="text-xs text-emerald-600 font-medium mt-2">{trend}</p>
+        <p className="text-meta text-emerald-600 font-medium mt-2">{trend}</p>
       )}
     </div>
   );

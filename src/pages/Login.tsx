@@ -57,17 +57,17 @@ export function Login() {
       <section className="bg-blue-900 text-white px-6 py-8 sm:px-10 lg:px-16 flex flex-col justify-between">
         <Logo variant="dark" />
         <div className="max-w-xl py-16">
-          <p className="text-sm font-semibold text-gold-400 uppercase tracking-wider mb-4">
+          <p className="text-eyebrow text-gold-400 mb-4">
             {isDemoEnabled ? t('mvpTestable') : t('loginEyebrowProduction')}
           </p>
-          <h1 className="font-playfair text-4xl sm:text-5xl font-bold leading-tight mb-5">
+          <h1 className="font-heading text-display sm:text-display-lg mb-5">
             {isDemoEnabled ? t('loginHero') : t('loginHeroProduction')}
           </h1>
-          <p className="text-blue-100 text-lg leading-relaxed">
+          <p className="text-blue-100 text-body-lg leading-relaxed">
             {isDemoEnabled ? t('loginHeroSubtitle') : t('loginHeroSubtitleProduction')}
           </p>
         </div>
-        <div className="grid sm:grid-cols-3 gap-3 text-sm text-blue-100">
+        <div className="grid sm:grid-cols-3 gap-3 text-body text-blue-100">
           <span className="rounded-xl bg-white/10 px-4 py-3">
             {isDemoEnabled ? t('localSession') : t('secureAccount')}
           </span>
@@ -81,7 +81,7 @@ export function Login() {
       <main id="main-content" className="px-5 py-8 sm:px-10 flex items-center">
         <div className="w-full max-w-md mx-auto">
           <div className="mb-8">
-            <h2 className="font-playfair text-3xl font-bold text-gray-900">{t('signInTitle')}</h2>
+            <h2 className="font-heading text-h1 text-gray-900">{t('signInTitle')}</h2>
             <p className="text-gray-500 mt-2">
               {isDemoEnabled ? t('signInSubtitle') : t('signInSubtitleProduction')}
             </p>
@@ -95,7 +95,7 @@ export function Login() {
               >
                 <GraduationCap size={20} className="text-blue-500 mb-3" />
                 <p className="font-semibold text-gray-900">{t('demoStudent')}</p>
-                <p className="text-xs text-gray-500 mt-1">student@karatou.test</p>
+                <p className="text-meta text-gray-500 mt-1">student@karatou.test</p>
               </button>
               <button
                 onClick={() => handleDemo('enterprise_admin')}
@@ -103,7 +103,7 @@ export function Login() {
               >
                 <Building2 size={20} className="text-gold-500 mb-3" />
                 <p className="font-semibold text-gray-900">{t('demoEnterprise')}</p>
-                <p className="text-xs text-gray-500 mt-1">admin@karatou.test</p>
+                <p className="text-meta text-gray-500 mt-1">admin@karatou.test</p>
               </button>
               <button
                 onClick={() => handleDemo('platform_admin')}
@@ -111,20 +111,20 @@ export function Login() {
               >
                 <ShieldCheck size={20} className="text-blue-700 mb-3" />
                 <p className="font-semibold text-gray-900">{t('demoPlatformAdmin')}</p>
-                <p className="text-xs text-gray-500 mt-1">platform@karatou.test</p>
+                <p className="text-meta text-gray-500 mt-1">platform@karatou.test</p>
               </button>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-blue-sm border border-gray-100 p-5 space-y-4">
             {error && (
-              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
                 {error}
               </div>
             )}
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('email')}</span>
+              <span className="text-body font-medium text-gray-700">{t('email')}</span>
               <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/15">
                 <Mail size={16} className="text-gray-400" />
                 <input
@@ -132,14 +132,14 @@ export function Login() {
                   autoComplete="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="w-full py-2.5 text-sm outline-none"
+                  className="w-full py-2.5 text-body outline-none"
                   required
                 />
               </span>
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('password')}</span>
+              <span className="text-body font-medium text-gray-700">{t('password')}</span>
               <span className="mt-1.5 flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/15">
                 <Lock size={16} className="text-gray-400" />
                 <input
@@ -147,7 +147,7 @@ export function Login() {
                   autoComplete="current-password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  className="w-full py-2.5 text-sm outline-none"
+                  className="w-full py-2.5 text-body outline-none"
                   required
                 />
               </span>
@@ -158,11 +158,11 @@ export function Login() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-body text-gray-500 mt-4">
             <Link to="/forgot-password" className="text-blue-600 font-medium hover:underline">{t('forgotLink')}</Link>
           </p>
 
-          <p className="text-center text-sm text-gray-500 mt-2">
+          <p className="text-center text-body text-gray-500 mt-2">
             {t('newTester')}{' '}
             <Link to="/register" className="text-blue-600 font-medium hover:underline">
               {t('createLearnerAccount')}

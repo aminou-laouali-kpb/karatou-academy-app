@@ -143,8 +143,8 @@ export function EnterpriseMembers() {
       <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
-            <h1 className="font-playfair text-2xl font-bold text-gray-900">{members.length} {t('members').toLowerCase()}</h1>
-            <p className="text-sm text-gray-500 mt-1">{t('membersIntro')}</p>
+            <h1 className="font-heading text-h2 text-gray-900">{members.length} {t('members').toLowerCase()}</h1>
+            <p className="text-body text-gray-500 mt-1">{t('membersIntro')}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative">
@@ -155,7 +155,7 @@ export function EnterpriseMembers() {
                 placeholder={t('search')}
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-56"
+                className="pl-9 pr-4 py-2 text-body border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-56"
               />
             </div>
             <div className="relative">
@@ -164,7 +164,7 @@ export function EnterpriseMembers() {
                 aria-label={t('filterByStatus')}
                 value={statusFilter}
                 onChange={(event) => setStatusFilter(event.target.value)}
-                className="pl-9 pr-8 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                className="pl-9 pr-8 py-2 text-body border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
               >
                 <option value="all">{t('filterAll')}</option>
                 <option value="certified">{t('verifiedLearners')}</option>
@@ -182,32 +182,32 @@ export function EnterpriseMembers() {
           <form onSubmit={handleInvite} className="bg-white border border-blue-100 rounded-2xl shadow-blue-sm p-5 mb-6">
             <div className="grid md:grid-cols-[1fr_1fr_160px_auto] gap-3 items-end">
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">{t('name')}</span>
+                <span className="text-body font-medium text-gray-700">{t('name')}</span>
                 <input
                   value={inviteName}
                   onChange={(event) => setInviteName(event.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   placeholder={t('newMemberPlaceholder')}
                   required
                 />
               </label>
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">{t('email')}</span>
+                <span className="text-body font-medium text-gray-700">{t('email')}</span>
                 <input
                   type="email"
                   value={inviteEmail}
                   onChange={(event) => setInviteEmail(event.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   placeholder="membre@org.test"
                   required
                 />
               </label>
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">{t('role')}</span>
+                <span className="text-body font-medium text-gray-700">{t('role')}</span>
                 <select
                   value={inviteRole}
                   onChange={(event) => setInviteRole(event.target.value as 'learner' | 'enterprise_admin')}
-                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 >
                   <option value="learner">{t('learner')}</option>
                   <option value="enterprise_admin">{t('enterpriseAdmin')}</option>
@@ -224,24 +224,24 @@ export function EnterpriseMembers() {
         <form onSubmit={handleVerifyCertificate} className="bg-white border border-blue-100 rounded-2xl shadow-blue-sm p-5 mb-6">
           <div className="grid md:grid-cols-[1fr_auto] gap-3 items-end">
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('verifyCert')}</span>
+              <span className="text-body font-medium text-gray-700">{t('verifyCert')}</span>
               <input
                 value={verifyUid}
                 onChange={(event) => {
                   setVerifyUid(event.target.value);
                   setVerifyError('');
                 }}
-                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 font-mono text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 font-mono text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 placeholder={t('verifyCertSearchPlaceholder')}
               />
-              <span className="mt-1.5 block text-xs text-gray-500">{t('verifyCertSearchHelp')}</span>
+              <span className="mt-1.5 block text-meta text-gray-500">{t('verifyCertSearchHelp')}</span>
             </label>
             <Button type="submit" variant="outline" size="sm" disabled={!verifyUid.trim()}>
               <ExternalLink size={14} /> {t('verifyCert')}
             </Button>
           </div>
           {verifyError && (
-            <p className="mt-3 rounded-xl border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-600">
+            <p className="mt-3 rounded-xl border border-red-100 bg-red-50 px-3 py-2 text-body text-red-600">
               {verifyError}
             </p>
           )}
@@ -252,12 +252,12 @@ export function EnterpriseMembers() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-100">
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider">{t('member')}</th>
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider">{t('role')}</th>
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider">{t('progress')}</th>
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider">{t('certs')}</th>
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">{t('lastActivity')}</th>
-                  <th className="text-left px-5 py-3.5 text-xs font-medium text-gray-500 uppercase tracking-wider">{t('status')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500">{t('member')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500">{t('role')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500">{t('progress')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500">{t('certs')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500 hidden lg:table-cell">{t('lastActivity')}</th>
+                  <th className="text-left px-5 py-3.5 text-eyebrow text-gray-500">{t('status')}</th>
                   <th className="px-5 py-3.5"></th>
                 </tr>
               </thead>
@@ -266,12 +266,12 @@ export function EnterpriseMembers() {
                   <tr key={member.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${avatarColors[index % avatarColors.length]} flex items-center justify-center text-white text-xs font-semibold`}>
+                        <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${avatarColors[index % avatarColors.length]} flex items-center justify-center text-white text-meta font-semibold`}>
                           {getInitials(member.name)}
                         </div>
                         <div>
-                          <span className="text-sm font-medium text-gray-900 block">{member.name}</span>
-                          <span className="text-xs text-gray-500">{member.email}</span>
+                          <span className="text-body font-medium text-gray-900 block">{member.name}</span>
+                          <span className="text-meta text-gray-500">{member.email}</span>
                         </div>
                       </div>
                     </td>
@@ -283,17 +283,17 @@ export function EnterpriseMembers() {
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-2">
                         <ProgressBar value={member.progress} variant={member.progress === 100 ? 'green' : 'blue'} className="w-16" />
-                        <span className="text-xs text-gray-500">{member.progress}%</span>
+                        <span className="text-meta text-gray-500">{member.progress}%</span>
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-1 text-sm text-gray-700">
+                      <div className="flex items-center gap-1 text-body text-gray-700">
                         <GraduationCap size={14} className="text-gold-500" />
                         {member.certificates}
                       </div>
                     </td>
                     <td className="px-5 py-3.5 hidden lg:table-cell">
-                      <span className="text-sm text-gray-500">{formatLastActivity(member.lastActivity)}</span>
+                      <span className="text-body text-gray-500">{formatLastActivity(member.lastActivity)}</span>
                     </td>
                     <td className="px-5 py-3.5">{statusBadge(member.status)}</td>
                     <td className="px-5 py-3.5">
@@ -307,7 +307,7 @@ export function EnterpriseMembers() {
                 ))}
                 {filteredMembers.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-5 py-10 text-center text-sm text-gray-500">
+                    <td colSpan={7} className="px-5 py-10 text-center text-body text-gray-500">
                       {t('noMemberMatch')}
                     </td>
                   </tr>
@@ -321,7 +321,7 @@ export function EnterpriseMembers() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <div>
               <h2 className="font-semibold text-gray-900">{t('scholarships')}</h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-body text-gray-500">
                 {scholarships.length} {t('scholarships').toLowerCase()} - {scholarships.filter((item) => item.status === 'claimed').length} {t('claimed').toLowerCase()} - {scholarships.filter((item) => item.status === 'pending').length} {t('available').toLowerCase()}
               </p>
             </div>
@@ -330,7 +330,7 @@ export function EnterpriseMembers() {
             </Button>
           </div>
           {createdScholarship && (
-            <div className="mb-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-sm text-gold-600">
+            <div className="mb-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-body text-gold-600">
               <p>
                 {t('scholarshipCreated')}: <span className="font-mono">{createdScholarship}</span>
               </p>
@@ -346,16 +346,16 @@ export function EnterpriseMembers() {
             {scholarships.map((scholarship) => (
               <div key={scholarship.id} className="flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-gray-50 transition-colors">
                 <div>
-                  <span className="font-mono text-xs text-gray-600">{scholarship.code}</span>
+                  <span className="font-mono text-meta text-gray-600">{scholarship.code}</span>
                   <a
                     href={redeemPath(scholarship.code)}
-                    className="mt-1 flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline"
+                    className="mt-1 flex items-center gap-1 text-meta font-medium text-blue-600 hover:underline"
                   >
                     <ExternalLink size={12} /> {t('openRedeemLink')}
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  {scholarship.claimedBy && <span className="text-xs text-gray-500 hidden sm:block">{scholarship.claimedBy}</span>}
+                  {scholarship.claimedBy && <span className="text-meta text-gray-500 hidden sm:block">{scholarship.claimedBy}</span>}
                   <Badge variant={scholarship.status === 'claimed' ? 'green' : scholarship.status === 'expired' ? 'red' : 'gold'}>
                     {scholarship.status === 'claimed'
                       ? t('claimed')
