@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Karatou Academy</title>
+    <script>
+      // Static-host fallback for a single-page app.
+      //
+      // The app routes client-side, so a deep link (/verify/:uid, /redeem/:code,
+      // /verify-attestation#payload) must be served with index.html. On a host
+      // that answers 404 instead, this page preserves the whole location —
+      // path, query AND hash — in a query string that src/lib/spaRedirect.ts
+      // turns back into the real route before React mounts.
+      //
+      // "&" inside the original query is escaped as "~and~" so it cannot be
+      // confused with the separator we add here.
+      (function () {
+        var l = window.location;
+        var path = l.pathname.replace(/&/g, '~and~');
+        var query = l.search.slice(1).replace(/&/g, '~and~');
+        l.replace(l.origin + '/?' + path + (query ? '&' + query : '') + l.hash);
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <p>Cette page nécessite JavaScript. Ouvrez <a href="/">karatou.academy</a>.</p>
+    </noscript>
+  </body>
+</html>
