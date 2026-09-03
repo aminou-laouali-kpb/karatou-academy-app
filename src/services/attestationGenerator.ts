@@ -7,6 +7,11 @@ import { format, addYears } from 'date-fns';
 import * as XLSX from 'xlsx';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { VERIFY_BASE_URL } from '../lib/verification';
+import { encodeAttestationPayload } from '../lib/attestationPayload';
+import type { AttestationPayload } from '../lib/attestationPayload';
+
+// Re-exported so the attestation tool and its tests keep a single import site.
+export { encodeAttestationPayload, decodeAttestationPayload } from '../lib/attestationPayload';
 
 // Local/demo HMAC secret — used ONLY when Supabase is not configured (offline
 // demo on e.g. Replit). In production, signing and verification run server-side
@@ -31,13 +36,8 @@ export interface QrPlacement {
   sizeRatio: number; // square side, 0..1 of page width
 }
 
-export interface CertificatePayload {
-  id: string;
-  name: string;
-  issuedAt: string;
-  expiresAt: string;
-  signature: string;
-}
+/** Kept as the historical name used across the attestation tool and tests. */
+export type CertificatePayload = AttestationPayload;
 
 function randomCertId(): string {
   const rand = CryptoJS.lib.WordArray.random(6).toString().toUpperCase();
@@ -80,7 +80,7 @@ export async function signAttestations(names: string[]): Promise<CertificatePayl
   return clean.map((name) => buildSignedPayloadLocal(name));
 }
 
-export type VerificationStatus = 'valid' | 'expired' | 'invalid';
+export type VerificationStatus = 'valid' | 'expired' | 'revoked' | 'invalid';
 
 export interface VerificationResult {
   status: VerificationStatus;
@@ -115,25 +115,6 @@ export async function verifyAttestation(payload: CertificatePayload): Promise<Ve
     return data as VerificationResult;
   }
   return verifyAttestationLocal(payload);
-}
-
-export function encodeAttestationPayload(payload: CertificatePayload): string {
-  const bytes = new TextEncoder().encode(JSON.stringify(payload));
-  let binary = '';
-  bytes.forEach((b) => { binary += String.fromCharCode(b); });
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-
-export function decodeAttestationPayload(encoded: string): CertificatePayload | null {
-  try {
-    const padded = encoded.replace(/-/g, '+').replace(/_/g, '/');
-    const binary = atob(padded);
-    const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
-    const parsed = JSON.parse(new TextDecoder().decode(bytes));
-    return parsed && typeof parsed === 'object' && parsed.id && parsed.signature ? (parsed as CertificatePayload) : null;
-  } catch {
-    return null;
-  }
 }
 
 /** The QR encodes this URL: scanning opens the verifier with the signed payload. */

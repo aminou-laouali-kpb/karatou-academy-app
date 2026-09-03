@@ -5,9 +5,8 @@ import { Logo } from '../components/Logo';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { useLanguage } from '../hooks/useLanguage';
-import {
-  decodeAttestationPayload, verifyAttestation, CertificatePayload, VerificationResult,
-} from '../services/attestationGenerator';
+import { verifyAttestation, CertificatePayload, VerificationResult } from '../services/attestationGenerator';
+import { decodeAttestationPayload } from '../lib/attestationPayload';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 
 const inputClass =
@@ -59,6 +58,9 @@ export function VerifyAttestation() {
   const status = result?.status;
   const isValid = status === 'valid';
   const isExpired = status === 'expired';
+  // A revoked attestation was genuinely issued, then withdrawn: it must never
+  // read as authentic, and never as a forgery either.
+  const isRevoked = status === 'revoked';
   const cert = result?.payload;
 
   const headerClass = isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
@@ -80,10 +82,10 @@ export function VerifyAttestation() {
                 : isExpired ? <XCircle size={40} className="text-amber-500 mx-auto mb-2" />
                 : <Ban size={40} className="text-red-500 mx-auto mb-2" />}
               <h1 className={`font-heading text-h3 ${titleClass}`}>
-                {isValid ? t('attValid') : isExpired ? t('attExpired') : t('attInvalid')}
+                {isValid ? t('attValid') : isExpired ? t('attExpired') : isRevoked ? t('attRevoked') : t('attInvalid')}
               </h1>
               <p className={`text-body mt-1 ${bodyClass}`}>
-                {isValid || isExpired ? t('attValidBody') : t('attInvalidBody')}
+                {isValid || isExpired ? t('attValidBody') : isRevoked ? t('attRevokedBody') : t('attInvalidBody')}
               </p>
             </div>
 
@@ -103,7 +105,9 @@ export function VerifyAttestation() {
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('status')}</span>
-                  {isValid ? <Badge variant="green">{t('active').toUpperCase()}</Badge> : <Badge variant="gold">{t('expired')}</Badge>}
+                  {isValid ? <Badge variant="green">{t('active').toUpperCase()}</Badge>
+                    : isRevoked ? <Badge variant="red">{t('regRevokedBadge')}</Badge>
+                    : <Badge variant="gold">{t('expired')}</Badge>}
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">ID</span>

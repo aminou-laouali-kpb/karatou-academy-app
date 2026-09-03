@@ -29,6 +29,22 @@ test.describe('Platform admin CMS', () => {
     await expect(page.getByText('Charger le modele PDF')).toBeVisible();
   });
 
+  test('attestation registry page loads and is gated in demo mode', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.goto('/admin/attestations/registry');
+    await expect(page.getByRole('heading', { name: 'Registre des attestations' })).toBeVisible();
+    // No Supabase session in demo mode: searching the real registry is refused,
+    // with the same notice as the other server-backed admin tools.
+    await expect(page.getByRole('button', { name: /Rechercher/ })).toBeDisabled();
+    await expect(page.getByRole('status')).toContainText('platform admin Supabase');
+  });
+
+  test('the registry is reachable from the admin navigation', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.getByRole('link', { name: 'Registre' }).click();
+    await expect(page).toHaveURL(/\/admin\/attestations\/registry$/);
+  });
+
   test('saves a new draft module and shows it in the module list', async ({ page }) => {
     await demoLogin(page, 'platform');
 

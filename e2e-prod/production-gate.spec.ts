@@ -12,7 +12,7 @@ test.describe('Production mode (demo off)', () => {
   });
 
   test('logged-out users are redirected from every dashboard', async ({ page }) => {
-    for (const path of ['/dashboard', '/admin', '/admin/team', '/admin/attestations', '/enterprise', '/enterprise/members']) {
+    for (const path of ['/dashboard', '/admin', '/admin/team', '/admin/attestations', '/admin/attestations/registry', '/admin/newsletter', '/enterprise', '/enterprise/members']) {
       await page.goto(path);
       await expect(page).toHaveURL(/\/login/);
     }
