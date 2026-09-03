@@ -25,4 +25,11 @@ test.describe('Enterprise portal', () => {
 // sprint notes. A browser-level cross-org test requires seeding a second
 // organization plus a second enterprise-admin Auth user in the Supabase
 // project, which is tracked as a production-data residual risk.
-test.fixme('enterprise admin cannot see another organization (needs seeded 2nd org in Supabase)', () => {});
+// Cross-organization isolation (S02-05) is proven at the database layer, where
+// it is actually enforced: `scripts/verify-cross-org-rls.sql` seeds two throwaway
+// organizations, switches to the `authenticated` / `anon` roles and asserts that
+// neither admin can see the other's organization, members, bourses, progress or
+// certificates. It runs against a real Postgres (`npm run test:rls`); this suite
+// runs hermetically in local-demo mode with no Supabase, so RLS cannot be
+// exercised from here.
+test.fixme('enterprise admin cannot see another organization (covered by npm run test:rls)', () => {});

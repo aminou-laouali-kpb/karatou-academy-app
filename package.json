@@ -1,7 +1,7 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "karatou-academy",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,6 +23,7 @@
     "seed:content": "node scripts/seed-supabase-content.mjs",
     "seed:admin": "node scripts/create-supabase-admin.mjs",
     "seed:enterprise-admin": "node scripts/create-supabase-enterprise-admin.mjs",
+    "test:rls": "psql \"$DATABASE_URL\" -f scripts/verify-cross-org-rls.sql",
     "prod:bootstrap": "npm run supabase:push && npm run seed:content && npm run seed:admin"
   },
   "dependencies": {
