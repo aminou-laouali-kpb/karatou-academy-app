@@ -159,7 +159,7 @@ HMAC serveur ; Edge Functions revérifient le rôle ; aucune policy `using(true)
   `exceljs` ou isolation stricte côté admin).
 
 ### 🎨 UX / UI polish — 6.5/10
-**Forces :** design system cohérent (bleu/or, ombres sur-mesure), typographie éditoriale (Playfair + DM Sans),
+**Forces :** design system cohérent (bleu/or, ombres sur-mesure), typographie éditoriale (Literata + Inter),
 états vides soignés, composants factorisés, micro-interactions sur cartes, sidebar mobile accessible.
 **À corriger :** pas d'anneau de **focus visible** sur `Button` ; **pas de feedback de chargement** sur les
 actions async critiques (téléchargement PDF, émission) ; **pas de système de toast/confirmation** ; animations

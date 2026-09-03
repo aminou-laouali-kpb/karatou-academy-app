@@ -16,7 +16,7 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
   if (!authReady) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="rounded-2xl border border-blue-100 bg-white px-5 py-4 text-sm font-medium text-blue-700 shadow-blue-sm">
+        <div className="rounded-2xl border border-blue-100 bg-white px-5 py-4 text-body font-medium text-blue-700 shadow-blue-sm">
           Connexion en cours...
         </div>
       </div>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-interface ProgressBarProps {
+export interface ProgressBarProps {
   value: number;
   variant?: 'blue' | 'gold' | 'green';
   height?: 'sm' | 'md';
   className?: string;
 }
 
-const gradients = {
+const gradients: Record<NonNullable<ProgressBarProps['variant']>, string> = {
   blue: 'bg-gradient-to-r from-blue-500 to-blue-400',
   gold: 'bg-gradient-to-r from-gold-500 to-gold-400',
   green: 'bg-gradient-to-r from-emerald-600 to-emerald-400',

@@ -2,32 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Charte graphique Karatou Academy — alignée sur le design system
+   (Magic Patterns ds-bdba3ec2-3e08-4f0e-bfa6-dc8cce1c9911).
+
+   Les polices sont auto-hébergées via fontsource (voir src/main.tsx) plutôt
+   qu'importées depuis Google Fonts comme dans le fichier livré : le premier
+   rendu doit rester fiable en 2G/3G et dans la PWA, sans dépendance CDN. */
+
 :root {
-  --blue-900: #0A1628;
-  --blue-800: #0D2245;
-  --blue-700: #1035A0;
-  --blue-600: #1A52CC;
-  --blue-500: #1A73E8;
-  --blue-400: #4A9EF5;
-  --blue-300: #8EC5FF;
+  /* Marque — bleu */
+  --blue-50: #F0F7FF;
   --blue-100: #E8F2FF;
-  --blue-50:  #F0F7FF;
-  --gold-600: #C47D0A;
-  --gold-500: #E8960C;
-  --gold-400: #F5A623;
-  --gold-300: #FAC55A;
+  --blue-200: #BFDBFE;
+  --blue-300: #8EC5FF;
+  --blue-400: #4A9EF5;
+  --blue-500: #1A73E8;
+  --blue-600: #1A52CC;
+  --blue-700: #1035A0;
+  --blue-800: #0D2245;
+  --blue-900: #0A1628;
+
+  /* Marque — or. 200 et 700 complètent la rampe publiée par le design system
+     (voir la note dans tailwind.config.js). */
+  --gold-50: #FFFBF0;
   --gold-100: #FEF3D8;
-  --gold-50:  #FFFBF0;
-  --gray-900: #111827;
-  --gray-700: #374151;
-  --gray-500: #6B7280;
-  --gray-300: #D1D5DB;
+  --gold-200: #FCDC99;
+  --gold-300: #FAC55A;
+  --gold-400: #F5A623;
+  --gold-500: #E8960C;
+  --gold-600: #C47D0A;
+  --gold-700: #A06608;
+
+  /* Neutres */
+  --gray-50: #F9FAFB;
   --gray-100: #F3F4F6;
-  --gray-50:  #F9FAFB;
-  --success:  #16A34A;
-  --error:    #DC2626;
-  --warning:  #D97706;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-900: #111827;
+
+  /* Sémantiques — succès = emerald, avertissement = amber, erreur = red */
+  --emerald-50: #ECFDF5;
+  --emerald-100: #D1FAE5;
+  --emerald-200: #A7F3D0;
+  --emerald-500: #10B981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --amber-50: #FFFBEB;
+  --amber-100: #FEF3C7;
+  --amber-200: #FDE68A;
+  --amber-500: #F59E0B;
+  --amber-600: #D97706;
+  --amber-900: #78350F;
+  --red-50: #FEF2F2;
+  --red-100: #FEE2E2;
+  --red-200: #FECACA;
+  --red-300: #FCA5A5;
+  --red-500: #EF4444;
+  --red-600: #DC2626;
+  --red-700: #B91C1C;
+
+  /* Identité décorative — initiales d'avatar, pastilles d'icône KPI.
+     Jamais pour du texte courant. */
+  --rose-400: #FB7185;
+  --rose-600: #E11D48;
+  --cyan-500: #06B6D4;
+  --cyan-700: #0E7490;
+  --orange-100: #FFEDD5;
+  --orange-400: #FB923C;
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+
+  --success: #16A34A;
+  --error: #DC2626;
+  --warning: #D97706;
+  --white: #FFFFFF;
+
+  /* Espacement */
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* Rayons */
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2-xl: 16px;
+  --radius-3-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Dégradés de marque — action principale, accent or, fond de section sombre */
+  --gradient-blue: linear-gradient(135deg, #1A73E8, #1A52CC);
+  --gradient-gold: linear-gradient(135deg, #F5A623, #E8960C);
+  --gradient-dark: linear-gradient(135deg, #0A1628, #0D2245);
+
+  /* Élévation — toujours teintée bleu/or, jamais gris neutre */
+  --shadow-blue-sm: 0 2px 8px rgba(26, 115, 232, 0.08);
+  --shadow-blue-md: 0 4px 16px rgba(26, 115, 232, 0.12);
+  --shadow-blue-lg: 0 8px 32px rgba(26, 115, 232, 0.16);
+  --shadow-blue-xl: 0 12px 48px rgba(26, 115, 232, 0.2);
+  --shadow-gold-md: 0 4px 16px rgba(245, 166, 35, 0.15);
+
+  --duration-150: 150ms;
+  --duration-200: 200ms;
 }
+
+/* Surfaces translucides, filets et anneaux de focus.
+   Le design system en fait des tokens de couleur dédiés parce que ses couleurs
+   sont portées par des `var()`, sur lesquelles Tailwind ne peut pas calculer
+   d'alpha. Ici les couleurs sont en hexadécimal littéral, donc les modificateurs
+   d'opacité natifs expriment les mêmes valeurs, en plus idiomatique :
+
+     overlay-navy         → bg-blue-900/40
+     overlay-navy-strong  → bg-blue-900/60
+     surface-navy-95      → bg-blue-900/95
+     surface-white-95/90  → bg-white/95, bg-white/90
+     surface-white-10     → bg-white/10
+     hairline-white       → border-white/10
+     hairline-white-subtle→ border-white/5
+     track-gray           → bg-gray-100/80
+     focus-soft           → ring-blue-500/15
+     focus-soft-strong    → ring-blue-500/20
+     focus-soft-error     → ring-red-500/15
+     glow-gold            → bg-gold-400/20
+     glow-blue            → bg-blue-500/5 */
 
 @layer base {
   html,
@@ -41,42 +156,54 @@
 
   html {
     scroll-behavior: auto;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Literata', Georgia, serif;
   }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-body);
     color: var(--gray-900);
+    /* Inter rend mieux avec un lissage en niveaux de gris sur les écrans
+       Android à faible densité utilisés par la plupart des apprenants. */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    /* Literata porte un axe optique : on laisse le navigateur le piloter
+       depuis la taille rendue, pour que les grands titres se resserrent et
+       que le petit texte reste ouvert. */
+    font-optical-sizing: auto;
   }
 }
 
 @layer utilities {
+  /* Signature de marque : la proposition mise en avant d'un titre, en dégradé bleu. */
   .text-gradient-blue {
-    background: linear-gradient(135deg, #1A73E8, #4A9EF5);
+    background: var(--gradient-blue);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .bg-gradient-blue {
-    background: linear-gradient(135deg, #1A73E8, #1A52CC);
-  }
-
-  .bg-gradient-gold {
-    background: linear-gradient(135deg, #F5A623, #E8960C);
-  }
-
-  .bg-gradient-dark {
-    background: linear-gradient(135deg, #0A1628, #0D2245);
+  /* Sur-titre / intitulé — le seul style en petites capitales du système.
+     Remplace les variantes `text-xs uppercase tracking-wider` écrites à la main. */
+  .text-eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 }
 
-/* Respect users who prefer reduced motion: neutralise animations/transitions. */
+/* Respecte les utilisateurs qui préfèrent moins d'animation. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
