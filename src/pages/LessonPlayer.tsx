@@ -5,7 +5,9 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { LessonContent } from '../data/lessonContent';
-import { getAuthoredLesson, hasAuthoredLesson, loadAuthoredLesson, localizeModule } from '../data/localizedContent';
+import { getAuthoredLesson, hasAuthoredLesson, localizeModule } from '../data/localizedContent';
+import { resolveLessonContent } from '../services/lessonContentRepository';
+import { isSupabaseConfigured } from '../lib/supabaseClient';
 import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
@@ -265,31 +267,41 @@ export function LessonPlayer() {
   const course = module ? module.courses[courseIndex] || module.courses[0] : undefined;
   const completedIds = module ? getCompletedCourseIds(module.slug) : [];
   const progress = module ? getProgress(module.slug) : 0;
-  // Authored lesson bodies live in per-lesson chunks (see localizedContent):
-  // resolve the one bundled with the shell synchronously, fetch the others.
+  // A lesson body can come from the CMS (karatou_courses.lesson_content) or
+  // from the per-lesson chunks of the TypeScript registry. `resolveLessonContent`
+  // tries them in that order; the one lesson bundled with the shell also renders
+  // synchronously so the entry point never waits on a round trip.
   const lessonKey = module && course ? `${module.slug}/${course.id}` : null;
   const [loadedLesson, setLoadedLesson] = useState<
-    { key: string; lang: Language; content: LessonContent } | null
+    { key: string; lang: Language; content: LessonContent | null } | null
   >(null);
 
   useEffect(() => {
     if (!module || !course || !lessonKey) return;
     let active = true;
-    loadAuthoredLesson(module.slug, course.id, lang).then((content) => {
-      if (active && content) setLoadedLesson({ key: lessonKey, lang, content });
+    resolveLessonContent(module.slug, course.id, lang).then((content) => {
+      if (active) setLoadedLesson({ key: lessonKey, lang, content });
     });
     return () => { active = false; };
   }, [module, course, lessonKey, lang]);
 
-  const authoredLesson =
-    (module && course ? getAuthoredLesson(module.slug, course.id, lang) : null) ||
-    (loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
+  const resolvedLesson =
+    loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
       ? loadedLesson.content
-      : null);
-  // Real content exists but its chunk is still in flight: wait rather than
-  // flash the generated template.
+      : undefined;
+  const eagerLesson = module && course ? getAuthoredLesson(module.slug, course.id, lang) : null;
+  // The resolver wins once it answers (an admin edit must override the bundled
+  // copy); until then the eager body keeps the first paint instant.
+  const authoredLesson = resolvedLesson ?? eagerLesson;
+  // Real content may still be in flight — a lesson chunk, or the CMS lookup:
+  // wait rather than flash the generated template.
   const lessonPending = Boolean(
-    lessonKey && module && course && hasAuthoredLesson(module.slug, course.id) && !authoredLesson
+    lessonKey &&
+      module &&
+      course &&
+      !authoredLesson &&
+      resolvedLesson === undefined &&
+      (isSupabaseConfigured || hasAuthoredLesson(module.slug, course.id))
   );
   const lesson = useMemo(
     () =>

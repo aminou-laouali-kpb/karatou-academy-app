@@ -80,6 +80,32 @@ VITE_DEMO_ENABLED=false
 That removes the demo badge, demo account cards, demo switcher, local demo
 sessions, and Supabase-login fallback to demo accounts.
 
+## Authoring lessons
+
+Lesson bodies come from two places, and the database wins:
+
+1. **`/admin/lecons` (lesson studio)** — a platform admin writes the objective,
+   sections, worked example, practice, quiz, reflection, glossary and the FR/EN/HA
+   video URLs, and publishes without a redeploy. Stored in
+   `karatou_courses.lesson_content`. A **Générer un brouillon** button drafts the
+   lesson with Claude through the `admin-generate-lesson` Edge Function, and
+   **Traduire depuis le français** produces the EN/HA versions; nothing is
+   published until the admin saves. The generator needs a server-side key:
+
+   ```bash
+   supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref <project-ref>
+   ```
+
+   Without it the manual editor still works and the button returns a clear error.
+   `LESSON_MODEL` overrides the default model (`claude-opus-5`).
+
+2. **The TypeScript registry** (`src/data/lessons/`, wired in
+   `src/data/localizedContent.ts`) — the 19 launch lessons, versioned with the
+   code and precached for offline use. Used whenever the database has nothing for
+   that lesson and language.
+
+See [docs/authoring-lessons.md](docs/authoring-lessons.md) for the full workflow.
+
 ## End-to-End Smoke Tests
 
 Playwright smoke tests cover the production-core flows: role-based login and
