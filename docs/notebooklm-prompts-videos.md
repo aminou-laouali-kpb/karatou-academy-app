@@ -7,6 +7,11 @@ et en **anglais**, plus un prompt **par cours** (vidéo d'introduction du module
 > Les leçons s'affichent déjà avec tout le texte trilingue. La vidéo est un **complément** :
 > le champ `video` de chaque leçon est aujourd'hui vide (`{ "fr": "", "en": "", "ha": "" }`).
 > Une fois la vidéo produite et publiée sur YouTube, on colle l'URL d'**embed** dans ce champ.
+>
+> **Depuis le studio des leçons (`/admin/lecons`), plus besoin de toucher au code** : la carte
+> « Vidéos de la leçon » contient les trois champs FR / EN / HA, et « Enregistrer » publie
+> immédiatement. Le mapping fichier ↔ leçon plus bas ne sert plus qu'à modifier une leçon
+> directement dans le dépôt.
 
 ---
 

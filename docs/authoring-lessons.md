@@ -5,11 +5,55 @@ sections**, a worked **example**, a **practice** exercise, a **quiz**, a
 **reflection** prompt, and a **glossary**.
 
 Courses without authored content fall back to an auto-generated placeholder
-lesson (`buildLesson` in `src/pages/LessonPlayer.tsx`). That fallback is what
-makes most lessons currently feel generic — replace it course by course using
-the registry below.
+lesson (`buildLesson` in `src/pages/LessonPlayer.tsx`).
 
-## How it works
+## Two ways to author a lesson
+
+| | **Lesson studio** (`/admin/lecons`) | **TypeScript registry** (`src/data/lessons/`) |
+|---|---|---|
+| Who | A platform admin, in the browser | A developer, in the repo |
+| Publish | Immediate — "Enregistrer" writes to Supabase | Needs a commit + a redeploy |
+| Stored in | `karatou_courses.lesson_content` (jsonb) | The JS bundle, one chunk per lesson |
+| Offline (PWA) | Cached after the learner opens the lesson once (`supabase-rest-content` runtime cache) | Precached with the app |
+| AI draft | Yes — "Générer un brouillon" / "Traduire depuis le français" | No |
+| Use it for | New lessons, fixes, video URLs, translations | The launch catalogue, and anything you want versioned with the code |
+
+**The database wins.** `resolveLessonContent` (see
+[`src/services/lessonContentRepository.ts`](../src/services/lessonContentRepository.ts))
+reads `karatou_courses.lesson_content` first and falls back to the registry, so
+editing a lesson in the studio overrides its bundled version without touching
+the code. Clearing a language in the studio hands that language back to the
+registry.
+
+Whatever the source, the body is parsed by `parseLessonContent`
+([`src/data/lessonContentSchema.ts`](../src/data/lessonContentSchema.ts)) before it
+reaches the player: a malformed field is dropped, a quiz question whose answer
+matches no option is removed, and a body with no usable core is refused (the
+player then falls back). That is what keeps a bad row — or a surprising AI
+response — from blanking the lesson screen.
+
+## Authoring from the studio (no deploy)
+
+1. Open `/admin/lecons` as a platform admin (a **real Supabase** admin session —
+   the demo mode shows the form but cannot save).
+2. Pick the course and the lesson. The editor pre-fills with what is already
+   published: the saved body if there is one, otherwise the registry version.
+3. Write the FR version — or click **Générer un brouillon** to have the model
+   draft it, then read it and fix it. The guidance box steers the draft ("insist on
+   farming cooperatives", "no jargon", …).
+4. Switch to EN / HA and click **Traduire depuis le français** for a localised
+   draft of the same lesson, then review.
+5. Paste the **video** URLs (embed form) — they are shared by the three languages.
+6. **Enregistrer**. The lesson is live for the learners of that course.
+
+The generator runs in the `admin-generate-lesson` Edge Function, which holds the
+OpenRouter key server-side and re-checks that the caller is a platform admin. It
+calls `z-ai/glm-5.3-flash` with a strict JSON schema, low reasoning effort and
+throughput-sorted provider routing — about 15 seconds and well under a cent per
+lesson. If the project has no `OPENROUTER_API_KEY`, the button returns a clear
+error and the manual editor keeps working.
+
+## How the registry works
 
 - The lesson shape is `LessonContent` in [`src/data/lessonContent.ts`](../src/data/lessonContent.ts).
 - Authored lessons live in the `authoredLessonLoaders` registry in

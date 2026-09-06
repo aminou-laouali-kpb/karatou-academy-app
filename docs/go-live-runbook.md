@@ -47,6 +47,27 @@ domaine + un redéploiement**, pas un chantier de code.
   (règle `CacheFirst` sur `/assets/`) — ce qui correspond enfin à la promesse
   « shell précaché + contenu consulté disponible hors ligne ».
 
+### Studio des leçons — écriture et publication depuis l'admin
+
+`/admin/lecons` permet à un platform admin de rédiger le corps complet d'une
+leçon (objectif, sections, exemple, exercice, quiz, réflexion, glossaire, liens
+vidéo FR/EN/HA) et de le publier **sans redéploiement**. Un bouton « Générer un
+brouillon » fait rédiger un premier jet par Claude (Edge Function
+`admin-generate-lesson`, clé côté serveur), et « Traduire depuis le français »
+produit les versions EN et HA. Rien n'est publié tant que l'admin n'enregistre
+pas.
+
+- Stockage : `karatou_courses.lesson_content` (jsonb, migration S06), lisible
+  publiquement pour les cours publiés, modifiable seulement par un platform
+  admin (RLS existante).
+- Priorité : la base gagne sur le registre TypeScript ; vider une langue rend la
+  main au registre. Les 19 leçons du lancement restent donc intactes et
+  versionnées avec le code.
+- Robustesse : tout corps venant de la base ou du modèle passe par
+  `parseLessonContent` (12 tests unitaires) avant d'atteindre le lecteur.
+- Hors-ligne : une leçon CMS est mise en cache par le service worker dès la
+  première ouverture (règle `supabase-rest-content`).
+
 ### Attestations — registre et révocation
 - Le dépôt était **en retard sur la production** : les Edge Functions déployées
   (v4, 17 août 2026) archivent chaque attestation signée, vérifient contre ce
@@ -152,33 +173,52 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
 
 ### P1 — à faire avant de communiquer largement
 
-6. **Contact légal** : `src/data/legalContent.ts` porte
+6. **Clé Anthropic pour le studio des leçons** (optionnelle, mais sans elle le
+   bouton « Générer un brouillon » renvoie une erreur explicite et seule la
+   saisie manuelle fonctionne) :
+
+   Tableau de bord Supabase → *Project Settings* → *Edge Functions* → *Secrets* →
+   ajouter `OPENROUTER_API_KEY`. En ligne de commande :
+
+   ```bash
+   supabase secrets set OPENROUTER_API_KEY=sk-or-v1-... --project-ref pqcovsnomouclkdjhjig
+   ```
+
+   La clé reste côté serveur (Edge Function `admin-generate-lesson`) et n'est
+   jamais exposée au navigateur. Modèle par défaut : `z-ai/glm-5.3-flash` via
+   OpenRouter (mesuré : ~15 s et moins d'un centime par leçon) ; `LESSON_MODEL`
+   permet de pointer n'importe quel autre modèle OpenRouter sans redéployer.
+
+7. **Contact légal** : `src/data/legalContent.ts` porte
    `contact@karatou.academy`. Une boîte `@karatou.academy` existe bien
    (`idriss.laouali@karatou.academy` est un compte réel), mais **confirmer que
    cette adresse est relevée** — c'est l'adresse d'exercice des droits RGPD des
    apprenants. Faire relire la politique de confidentialité et les CGU par un
    conseil (le texte est un modèle, pas un avis juridique).
 
-7. **Première organisation partenaire réelle** : la base n'a aucune organisation.
+8. **Première organisation partenaire réelle** : la base n'a aucune organisation.
    Créer l'organisation puis son admin depuis `/admin/team` (Edge Function
    `admin-provision-enterprise-admin`, aucune clé de service à partager).
 
-8. **Vidéos des leçons** : les 19 leçons ont `video: ''` pour les trois langues,
-   ce qui affiche un espace « bientôt disponible ». Voir
-   `docs/notebooklm-prompts-videos.md` pour les prompts par leçon, puis remplir
-   avec des URL `https://www.youtube.com/embed/<id>`.
+9. **Vidéos des leçons** : 18 des 19 leçons ont `video: ''` pour les trois
+   langues (seule `intelligence-artificielle/c1` en a), ce qui affiche un espace
+   « bientôt disponible ». Voir `docs/notebooklm-prompts-videos.md` pour les
+   prompts de génération leçon par leçon, puis coller les URL
+   `https://www.youtube.com/embed/<id>` — désormais **directement dans
+   `/admin/lecons`**, sans redéploiement.
 
-9. **Relecture hausa par un locuteur natif** des 19 leçons et des libellés
-   d'interface ajoutés ici (registre des attestations).
+10. **Relecture hausa par un locuteur natif** des 19 leçons et des libellés
+   d'interface ajoutés ici (registre des attestations, studio des leçons).
+
 
 ### P2 — après le lancement
 
-10. Deux modules restent en brouillon sans contenu rédigé (`agriculture-ia` 7
+11. Deux modules restent en brouillon sans contenu rédigé (`agriculture-ia` 7
     cours, `productivite-google` 2 cours) : les rédiger avec le skill
     `karatou-course-creator` ou les retirer du CMS.
-11. Monitoring d'erreurs : `VITE_SENTRY_DSN` est prêt et inactif tant qu'il est
+12. Monitoring d'erreurs : `VITE_SENTRY_DSN` est prêt et inactif tant qu'il est
     vide. Le renseigner pour voir les erreurs client réelles après le lancement.
-12. Analytics produit (PostHog EU, sans PII) — reporté sciemment (S02-08) ; les
+13. Analytics produit (PostHog EU, sans PII) — reporté sciemment (S02-08) ; les
     métriques du pilote se tirent en SQL depuis Supabase.
 
 ---
@@ -223,6 +263,6 @@ Puis, sur le domaine de production :
    `/verify/:uid` en navigation privée.
 6. Scanner le QR d'une attestation déjà imprimée → la page de vérification
    s'ouvre et affiche « authentique ».
-7. Révoquer une attestation de test depuis `/admin/attestations/registry`, puis
+8. Révoquer une attestation de test depuis `/admin/attestations/registry`, puis
    rescanner son QR → « révoquée ».
-8. Coller le lien du domaine dans WhatsApp ou LinkedIn → l'aperçu social s'affiche.
+9. Coller le lien du domaine dans WhatsApp ou LinkedIn → l'aperçu social s'affiche.

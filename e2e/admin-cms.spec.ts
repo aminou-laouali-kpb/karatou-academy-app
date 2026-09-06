@@ -45,6 +45,42 @@ test.describe('Platform admin CMS', () => {
     await expect(page).toHaveURL(/\/admin\/attestations\/registry$/);
   });
 
+  test('lesson studio loads with the selected lesson and is gated in demo mode', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.goto('/admin/lecons');
+    await expect(page.getByRole('heading', { name: 'Studio des leçons' })).toBeVisible();
+
+    // The editor opens on the first lesson of the first course, pre-filled from
+    // the authored registry rather than a blank form.
+    await expect(page.getByLabel('Titre', { exact: true })).not.toHaveValue('');
+    await expect(page.getByRole('heading', { name: 'Sections du cours' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Vidéos de la leçon' })).toBeVisible();
+
+    // No Supabase session in demo mode: generating and saving are refused.
+    await expect(page.getByRole('button', { name: /Générer un brouillon/ })).toBeDisabled();
+    await expect(page.getByRole('status').first()).toContainText('platform admin Supabase');
+  });
+
+  test('the lesson studio is reachable from the admin navigation', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.getByRole('link', { name: 'Leçons' }).click();
+    await expect(page).toHaveURL(/\/admin\/lecons$/);
+  });
+
+  test('editing a lesson field marks the draft as unsaved', async ({ page }) => {
+    await demoLogin(page, 'platform');
+    await page.goto('/admin/lecons');
+    await expect(page.getByText('À jour')).toBeVisible();
+
+    await page.getByLabel('Objectif de la leçon').fill('Objectif de test E2E.');
+    await expect(page.getByText('Modifications non enregistrées')).toBeVisible();
+
+    // "Revert" drops the local edit and restores the loaded body.
+    await page.getByRole('button', { name: /Annuler mes modifications/ }).click();
+    await expect(page.getByText('À jour')).toBeVisible();
+    await expect(page.getByLabel('Objectif de la leçon')).not.toHaveValue('Objectif de test E2E.');
+  });
+
   test('saves a new draft module and shows it in the module list', async ({ page }) => {
     await demoLogin(page, 'platform');
 
