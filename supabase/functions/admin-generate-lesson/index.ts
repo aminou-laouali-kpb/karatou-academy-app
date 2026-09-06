@@ -1,18 +1,23 @@
-// Draft a lesson body with Claude, for the /admin/lecons editor.
+// Draft a lesson body with an LLM, for the /admin/lecons editor.
 //
-// Why an Edge Function: the Anthropic key must never reach the browser, and the
+// Why an Edge Function: the model API key must never reach the browser, and the
 // caller must be a real platform admin — both are checked here. The function is
 // stateless: it returns a draft, it does not write to the database. Saving is
 // the editor's job (RLS on karatou_courses already restricts writes to admins),
 // so a bad generation can never overwrite a published lesson on its own.
 //
-// Requires the secret ANTHROPIC_API_KEY:
-//   supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
-// Optional: LESSON_MODEL to pin another model than the default below.
+// Provider: OpenRouter (OpenAI-compatible /chat/completions), default model
+// z-ai/glm-5.3-flash. Requires the secret OPENROUTER_API_KEY:
+//   supabase secrets set OPENROUTER_API_KEY=sk-or-v1-...
+// Optional: LESSON_MODEL to point at another OpenRouter model.
 import { createClient } from 'jsr:@supabase/supabase-js@2';
-import Anthropic from 'npm:@anthropic-ai/sdk@0.124.0';
 
-const DEFAULT_MODEL = 'claude-opus-5';
+const DEFAULT_MODEL = 'z-ai/glm-5.3-flash';
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+// An Edge Function runs under a wall-clock limit; fail with a readable message
+// rather than being killed mid-flight. Measured: ~15 s for a full lesson with
+// the settings below, so this is a wide margin, not a target.
+const REQUEST_TIMEOUT_MS = 110_000;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -31,8 +36,8 @@ const LANGUAGE_NAMES: Record<string, string> = {
 };
 
 // Mirrors the LessonContent interface (src/data/lessonContent.ts) minus the
-// fields the app owns: id, lessonNumber and the video URLs. `strict: true`
-// makes the API validate the arguments against this schema.
+// fields the app owns: id, lessonNumber and the video URLs. Sent as a strict
+// JSON schema, so the provider constrains the model to this exact shape.
 const LESSON_SCHEMA = {
   type: 'object',
   properties: {
@@ -45,7 +50,7 @@ const LESSON_SCHEMA = {
         type: 'object',
         properties: {
           title: { type: 'string' },
-          body: { type: 'string', description: '2 to 4 paragraphs separated by \\n\\n.' },
+          body: { type: 'string', description: '2 to 4 paragraphs separated by a blank line.' },
         },
         required: ['title', 'body'],
         additionalProperties: false,
@@ -117,7 +122,7 @@ const LESSON_SCHEMA = {
   },
   required: ['title', 'objective', 'content', 'example', 'practice', 'quiz', 'reflection', 'glossary'],
   additionalProperties: false,
-} as const;
+};
 
 const SYSTEM_PROMPT = `You write lessons for Karatou Academy, an online school for learners in Niger and French-speaking West and Central Africa. Your readers are students and working professionals, often on a phone and a slow connection, frequently studying in their second or third language.
 
@@ -128,7 +133,7 @@ Editorial standard:
 - Examples are African by default, and specific: name a city, a crop, a currency amount in FCFA, a real constraint.
 - The learner must be able to do something at the end, not just recognise a definition.
 
-You always answer by calling the emit_lesson tool exactly once. Never write the lesson as prose in your reply.`;
+Answer with the JSON object required by the schema, and nothing else.`;
 
 function generationPrompt(body: Record<string, unknown>): string {
   const language = String(body.language || 'fr');
@@ -142,8 +147,6 @@ function generationPrompt(body: Record<string, unknown>): string {
     `Planned duration: ${body.duration || '15 min'} — size the content so it can honestly be read and practised in that time.`,
     `Write everything in ${LANGUAGE_NAMES[language] || language}.`,
     guidance ? `\nAdditional instructions from the editor:\n${guidance}` : '',
-    ``,
-    `Call emit_lesson with the complete lesson.`,
   ].join('\n');
 }
 
@@ -162,10 +165,16 @@ function translationPrompt(body: Record<string, unknown>): string {
       : '',
     ``,
     `Source lesson (JSON):`,
-    JSON.stringify(body.source, null, 2),
-    ``,
-    `Call emit_lesson with the localised lesson.`,
+    JSON.stringify(body.source),
   ].join('\n');
+}
+
+interface CompletionResponse {
+  choices?: { message?: { content?: string | null }; finish_reason?: string }[];
+  usage?: { prompt_tokens?: number; completion_tokens?: number; cost?: number };
+  model?: string;
+  provider?: string;
+  error?: { message?: string };
 }
 
 Deno.serve(async (req) => {
@@ -189,9 +198,9 @@ Deno.serve(async (req) => {
       return json({ error: 'forbidden: platform admin required' }, 403);
     }
 
-    const apiKey = Deno.env.get('ANTHROPIC_API_KEY');
+    const apiKey = Deno.env.get('OPENROUTER_API_KEY');
     if (!apiKey) {
-      return json({ error: 'ANTHROPIC_API_KEY is not set on this project — the generator is unavailable.' }, 503);
+      return json({ error: 'OPENROUTER_API_KEY is not set on this project — the generator is unavailable.' }, 503);
     }
 
     const body = await req.json().catch(() => ({}));
@@ -201,60 +210,79 @@ Deno.serve(async (req) => {
       return json({ error: 'source lesson required to translate' }, 400);
     }
 
-    const anthropic = new Anthropic({ apiKey });
-    // Streamed: a full lesson is a long completion, and streaming keeps the
-    // request from hitting the platform's HTTP timeout.
-    const stream = anthropic.messages.stream({
-      model: Deno.env.get('LESSON_MODEL') || DEFAULT_MODEL,
-      max_tokens: 16000,
-      thinking: { type: 'adaptive' },
-      // `medium` rather than the default `high`: drafting a lesson is writing,
-      // not deep reasoning, and the Edge Function runs under a wall-clock limit.
-      output_config: { effort: 'medium' },
-      system: SYSTEM_PROMPT,
-      tools: [
-        {
-          name: 'emit_lesson',
-          description: 'Return the complete lesson body.',
-          strict: true,
-          input_schema: LESSON_SCHEMA,
+    const response = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        // OpenRouter attribution headers (optional, but they identify the app
+        // in the dashboard and in provider rankings).
+        'HTTP-Referer': 'https://karatou.academy',
+        'X-Title': 'Karatou Academy',
+      },
+      body: JSON.stringify({
+        model: Deno.env.get('LESSON_MODEL') || DEFAULT_MODEL,
+        max_tokens: 16000,
+        // Drafting a lesson is writing, not deep reasoning: low effort keeps a
+        // full lesson around 15 s instead of several minutes.
+        reasoning: { effort: 'low' },
+        // Route to the fastest provider serving this model — the function runs
+        // under a wall-clock limit, and providers differ by more than 10x here.
+        provider: { sort: 'throughput' },
+        response_format: {
+          type: 'json_schema',
+          json_schema: { name: 'lesson', strict: true, schema: LESSON_SCHEMA },
         },
-      ],
-      messages: [
-        {
-          role: 'user',
-          content: action === 'translate' ? translationPrompt(body) : generationPrompt(body),
-        },
-      ],
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: action === 'translate' ? translationPrompt(body) : generationPrompt(body) },
+        ],
+      }),
     });
 
-    const message = await stream.finalMessage();
-    const toolUse = message.content.find(
-      (block) => block.type === 'tool_use' && block.name === 'emit_lesson'
-    );
-    if (!toolUse || toolUse.type !== 'tool_use') {
-      const refusal = message.stop_reason === 'refusal'
-        ? 'the model declined this request'
-        : `the model returned no lesson (stop_reason: ${message.stop_reason})`;
-      return json({ error: refusal }, 502);
+    const payload: CompletionResponse = await response.json().catch(() => ({}));
+    if (!response.ok || payload.error) {
+      const detail = payload.error?.message || `HTTP ${response.status}`;
+      return json({ error: `the model provider refused the request (${detail})` }, 502);
+    }
+
+    const choice = payload.choices?.[0];
+    if (choice?.finish_reason === 'length') {
+      return json({ error: 'the model ran out of output budget before finishing the lesson — try again' }, 502);
+    }
+
+    let lesson: unknown;
+    try {
+      lesson = JSON.parse(choice?.message?.content || '');
+    } catch {
+      return json({ error: 'the model returned something that is not a lesson' }, 502);
+    }
+    if (typeof lesson !== 'object' || lesson === null) {
+      return json({ error: 'the model returned something that is not a lesson' }, 502);
     }
 
     return json(
       {
         lesson: {
-          ...(toolUse.input as Record<string, unknown>),
+          ...(lesson as Record<string, unknown>),
           id: body.courseId,
           lessonNumber: body.lessonNumber,
         },
         usage: {
-          input_tokens: message.usage.input_tokens,
-          output_tokens: message.usage.output_tokens,
+          input_tokens: payload.usage?.prompt_tokens ?? 0,
+          output_tokens: payload.usage?.completion_tokens ?? 0,
+          cost: payload.usage?.cost ?? 0,
         },
-        model: message.model,
+        model: payload.model,
+        provider: payload.provider,
       },
       200
     );
   } catch (e) {
+    if (e instanceof DOMException && e.name === 'TimeoutError') {
+      return json({ error: 'the model took too long to answer — try again' }, 504);
+    }
     return json({ error: e instanceof Error ? e.message : 'unexpected error' }, 500);
   }
 });

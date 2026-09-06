@@ -93,11 +93,13 @@ Lesson bodies come from two places, and the database wins:
    published until the admin saves. The generator needs a server-side key:
 
    ```bash
-   supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref <project-ref>
+   supabase secrets set OPENROUTER_API_KEY=sk-or-v1-... --project-ref <project-ref>
    ```
 
    Without it the manual editor still works and the button returns a clear error.
-   `LESSON_MODEL` overrides the default model (`claude-opus-5`).
+   The model is `z-ai/glm-5.3-flash` on OpenRouter (~15 s and well under a cent
+   per lesson); `LESSON_MODEL` points the function at any other OpenRouter model
+   without a redeploy.
 
 2. **The TypeScript registry** (`src/data/lessons/`, wired in
    `src/data/localizedContent.ts`) — the 19 launch lessons, versioned with the

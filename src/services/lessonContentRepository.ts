@@ -139,7 +139,7 @@ async function invokeGenerator(body: Record<string, unknown>): Promise<unknown> 
 }
 
 /**
- * Asks the `admin-generate-lesson` Edge Function (Claude, server-side key) for
+ * Asks the `admin-generate-lesson` Edge Function (OpenRouter, server-side key) for
  * a draft body. The result is parsed like any untrusted input before it reaches
  * the editor — a model can always return a surprising shape.
  */

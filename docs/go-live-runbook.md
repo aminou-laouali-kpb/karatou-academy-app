@@ -177,14 +177,17 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
    bouton « Générer un brouillon » renvoie une erreur explicite et seule la
    saisie manuelle fonctionne) :
 
+   Tableau de bord Supabase → *Project Settings* → *Edge Functions* → *Secrets* →
+   ajouter `OPENROUTER_API_KEY`. En ligne de commande :
+
    ```bash
-   supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref pqcovsnomouclkdjhjig
+   supabase secrets set OPENROUTER_API_KEY=sk-or-v1-... --project-ref pqcovsnomouclkdjhjig
    ```
 
    La clé reste côté serveur (Edge Function `admin-generate-lesson`) et n'est
-   jamais exposée au navigateur. Modèle par défaut : `claude-opus-5` ; pour en
-   changer sans redéployer, poser `LESSON_MODEL`. Compter environ 1 à 2 minutes
-   et quelques dizaines de centimes par leçon générée.
+   jamais exposée au navigateur. Modèle par défaut : `z-ai/glm-5.3-flash` via
+   OpenRouter (mesuré : ~15 s et moins d'un centime par leçon) ; `LESSON_MODEL`
+   permet de pointer n'importe quel autre modèle OpenRouter sans redéployer.
 
 7. **Contact légal** : `src/data/legalContent.ts` porte
    `contact@karatou.academy`. Une boîte `@karatou.academy` existe bien

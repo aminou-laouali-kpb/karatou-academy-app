@@ -38,8 +38,8 @@ response — from blanking the lesson screen.
    the demo mode shows the form but cannot save).
 2. Pick the course and the lesson. The editor pre-fills with what is already
    published: the saved body if there is one, otherwise the registry version.
-3. Write the FR version — or click **Générer un brouillon** to have Claude draft
-   it, then read it and fix it. The guidance box steers the draft ("insist on
+3. Write the FR version — or click **Générer un brouillon** to have the model
+   draft it, then read it and fix it. The guidance box steers the draft ("insist on
    farming cooperatives", "no jargon", …).
 4. Switch to EN / HA and click **Traduire depuis le français** for a localised
    draft of the same lesson, then review.
@@ -47,9 +47,11 @@ response — from blanking the lesson screen.
 6. **Enregistrer**. The lesson is live for the learners of that course.
 
 The generator runs in the `admin-generate-lesson` Edge Function, which holds the
-Anthropic key server-side and re-checks that the caller is a platform admin. If
-the project has no `ANTHROPIC_API_KEY`, the button returns a clear error and the
-manual editor keeps working.
+OpenRouter key server-side and re-checks that the caller is a platform admin. It
+calls `z-ai/glm-5.3-flash` with a strict JSON schema, low reasoning effort and
+throughput-sorted provider routing — about 15 seconds and well under a cent per
+lesson. If the project has no `OPENROUTER_API_KEY`, the button returns a clear
+error and the manual editor keeps working.
 
 ## How the registry works
 
