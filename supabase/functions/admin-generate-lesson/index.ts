@@ -182,6 +182,20 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json({ error: 'method not allowed' }, 405);
 
   try {
+    // Configuration probe. Deliberately before the admin check and deliberately
+    // cheap: it calls no model and returns no secret, only whether a key is
+    // configured and which model would be used. That is the same information the
+    // admin UI already surfaces, and it makes "is the generator wired up?"
+    // answerable without an admin session or a single token spent.
+    const probe = await req.clone().json().catch(() => ({}));
+    if (probe?.action === 'health') {
+      return json({
+        ok: true,
+        keyConfigured: Boolean(Deno.env.get('OPENROUTER_API_KEY')),
+        model: Deno.env.get('LESSON_MODEL') || DEFAULT_MODEL,
+      }, 200);
+    }
+
     const url = Deno.env.get('SUPABASE_URL')!;
     const anonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
     const authHeader = req.headers.get('Authorization') ?? '';
