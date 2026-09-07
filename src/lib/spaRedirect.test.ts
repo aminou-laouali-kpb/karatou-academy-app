@@ -33,6 +33,17 @@ describe('decodeSpaRedirect', () => {
   });
 });
 
+describe('decodeSpaRedirect (cross-origin)', () => {
+  it('rejects protocol-relative and backslash paths that resolve off-origin', () => {
+    expect(decodeSpaRedirect('?//evil.example/x')).toBeNull();
+    expect(decodeSpaRedirect('?/\\evil.example/x')).toBeNull();
+  });
+
+  it('still accepts a normal deep link', () => {
+    expect(decodeSpaRedirect('?/verify/KA-2026-1')).toBe('/verify/KA-2026-1');
+  });
+});
+
 describe('resolveBootPath', () => {
   it('keeps the hash when recovering a deep link', () => {
     expect(resolveBootPath('/', '?/verify-attestation', payloadHash))

@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { DemoBadge } from './components/DemoBadge';
 import { SkipLink } from './components/SkipLink';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { isVerificationHost } from './lib/runtimeConfig';
 import { OfflineBanner } from './components/OfflineBanner';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
@@ -58,6 +59,16 @@ function RouteFallback() {
   );
 }
 
+/**
+ * `verify.karatou.academy` and `course.karatou.academy` serve the same build.
+ * On the verification host the root is the address printed on every attestation
+ * QR code, so it opens the public checker instead of the marketing page.
+ */
+function RootEntry() {
+  const hostname = typeof window === 'undefined' ? '' : window.location.hostname;
+  return isVerificationHost(hostname) ? <VerifyAttestation /> : <Landing />;
+}
+
 function App() {
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
@@ -68,7 +79,7 @@ function App() {
             <SkipLink />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/" element={<Landing />} />
+              <Route path="/" element={<RootEntry />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

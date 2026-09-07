@@ -10,6 +10,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
 import { downloadCertificatePdf, formatCertificateDate } from '../services/certificatePdf';
+import { trackEvent } from '../lib/analytics';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
 import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
@@ -63,6 +64,7 @@ export function Certificates() {
         sponsorLogoUrl,
         lang,
       });
+      trackEvent('certificate_downloaded', { module: moduleTitle, format: 'pdf' });
     } catch {
       setDownloadFailed(true);
     } finally {
@@ -170,7 +172,14 @@ export function Certificates() {
                   <><Download size={16} /> {t('downloadCertificate')}</>
                 )}
               </Button>
-              <Button variant="primary" size="sm" onClick={() => navigate(`/verify/${primaryCert.uid}`)}>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  trackEvent('certificate_verification_opened');
+                  navigate(`/verify/${primaryCert.uid}`);
+                }}
+              >
                 <ExternalLink size={16} /> {t('verifyOnline')}
               </Button>
               <Button variant="ghost" size="sm" disabled>

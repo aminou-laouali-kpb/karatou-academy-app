@@ -9,6 +9,7 @@ import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { VERIFY_BASE_URL } from '../lib/verification';
 import { encodeAttestationPayload } from '../lib/attestationPayload';
 import type { AttestationPayload } from '../lib/attestationPayload';
+import { drawUnicodeName, embedNameFonts, isRightToLeft, unicodeNameWidth } from './pdfFonts';
 
 // Re-exported so the attestation tool and its tests keep a single import site.
 export { encodeAttestationPayload, decodeAttestationPayload } from '../lib/attestationPayload';
@@ -63,24 +64,33 @@ export async function signAttestations(names: string[]): Promise<CertificatePayl
   if (isSupabaseConfigured && supabase) {
     const { data, error } = await supabase.functions.invoke('attestation-sign', { body: { names: clean } });
     if (error) {
-      let message = error.message;
-      const context = (error as { context?: Response }).context;
-      if (context && typeof context.json === 'function') {
-        try {
-          const payload = await context.json();
-          if (payload?.error) message = String(payload.error);
-        } catch {
-          // keep the original error message
-        }
-      }
-      throw new Error(message);
+      throw await attestationFunctionError(error);
     }
     return (data as { payloads: CertificatePayload[] }).payloads;
   }
   return clean.map((name) => buildSignedPayloadLocal(name));
 }
 
-export type VerificationStatus = 'valid' | 'expired' | 'revoked' | 'invalid';
+/** Unwraps the Edge Function error body, which carries the real message. */
+async function attestationFunctionError(error: unknown): Promise<Error> {
+  const initial = error instanceof Error ? error.message : 'Erreur de service.';
+  const context = (error as { context?: Response })?.context;
+  if (context && typeof context.json === 'function') {
+    try {
+      const payload = await context.json();
+      if (payload?.error) return new Error(String(payload.error));
+    } catch {
+      // Keep the original function error.
+    }
+  }
+  return new Error(initial);
+}
+
+/**
+ * `unavailable` is deliberately distinct from `invalid`: an unreachable
+ * verification service must never tell a holder their attestation is a forgery.
+ */
+export type VerificationStatus = 'valid' | 'expired' | 'revoked' | 'invalid' | 'unavailable';
 
 export interface VerificationResult {
   status: VerificationStatus;
@@ -111,8 +121,11 @@ function verifyAttestationLocal(payload: CertificatePayload): VerificationResult
 export async function verifyAttestation(payload: CertificatePayload): Promise<VerificationResult> {
   if (isSupabaseConfigured && supabase) {
     const { data, error } = await supabase.functions.invoke('attestation-verify', { body: { payload } });
-    if (error || !data) return { status: 'invalid' };
-    return data as VerificationResult;
+    if (error || !data) return { status: 'unavailable' };
+    const result = data as VerificationResult;
+    return ['valid', 'expired', 'revoked', 'invalid'].includes(result.status)
+      ? result
+      : { status: 'unavailable' };
   }
   return verifyAttestationLocal(payload);
 }
@@ -213,8 +226,113 @@ function csvCell(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+export type TemplateType = 'pdf' | 'image';
+
+/** Detects whether a template file is a PDF or a raster image from its MIME type/name. */
+export function detectTemplateType(file: File): TemplateType | null {
+  const type = file.type.toLowerCase();
+  const name = file.name.toLowerCase();
+  if (type === 'application/pdf' || name.endsWith('.pdf')) return 'pdf';
+  if (type === 'image/png' || type === 'image/jpeg' || /\.(png|jpe?g)$/.test(name)) return 'image';
+  return null;
+}
+
+export interface TemplateDimensions {
+  width: number;
+  height: number;
+}
+
+const MIN_QR_SIZE_POINTS = 72;
+const QR_PNG_SIZE = 512;
+const MIN_QR_PIXELS_PER_MODULE = 4;
+
+function assertFiniteRatio(value: number, name: string) {
+  if (!Number.isFinite(value) || value < 0 || value > 1) {
+    throw new Error(`${name} doit être compris entre 0 et 100%.`);
+  }
+}
+
+/** Loads the template into a fresh pdf-lib document: the PDF as-is, or an image drawn full-bleed onto a new page. */
+async function loadTemplateDoc(templateBuffer: ArrayBuffer, templateType: TemplateType) {
+  if (templateType === 'pdf') {
+    return PDFDocument.load(templateBuffer.slice(0));
+  }
+  const pdfDoc = await PDFDocument.create();
+  let image;
+  try {
+    image = await pdfDoc.embedPng(templateBuffer.slice(0));
+  } catch {
+    image = await pdfDoc.embedJpg(templateBuffer.slice(0));
+  }
+  const page = pdfDoc.addPage([image.width, image.height]);
+  page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
+  return pdfDoc;
+}
+
+/**
+ * A certificate must have one unambiguous background page. Multi-page PDFs are
+ * rejected rather than silently placing the name and QR on their first page.
+ */
+export async function validateTemplate(
+  templateBuffer: ArrayBuffer,
+  templateType: TemplateType
+): Promise<TemplateDimensions> {
+  const doc = await loadTemplateDoc(templateBuffer, templateType);
+  const pages = doc.getPages();
+  if (pages.length !== 1) {
+    throw new Error('Le modèle PDF doit contenir une seule page. Exportez la page d’attestation seule avant de continuer.');
+  }
+  const { width, height } = pages[0].getSize();
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+    throw new Error('Le modèle ne contient pas de page utilisable.');
+  }
+  return { width, height };
+}
+
+/**
+ * Checks both clipping and QR density before certificates are signed or saved.
+ * Four printer pixels per module is the minimum reliable 300dpi print target.
+ */
+export function validateQrPlacement(
+  placement: QrPlacement,
+  dimensions: TemplateDimensions,
+  verifyUrl: string
+): void {
+  assertFiniteRatio(placement.xRatio, 'La position X du QR');
+  assertFiniteRatio(placement.yRatio, 'La position Y du QR');
+  if (!Number.isFinite(placement.sizeRatio) || placement.sizeRatio <= 0 || placement.sizeRatio > 1) {
+    throw new Error('La taille du QR doit être comprise entre 1 et 100%.');
+  }
+
+  const size = placement.sizeRatio * dimensions.width;
+  const x = placement.xRatio * dimensions.width;
+  const yFromTop = placement.yRatio * dimensions.height;
+  if (size < MIN_QR_SIZE_POINTS) {
+    throw new Error('Le QR est trop petit pour être lu de façon fiable à l’impression. Choisissez au moins 25 mm.');
+  }
+  if (x + size > dimensions.width || yFromTop + size > dimensions.height) {
+    throw new Error('Le QR doit rester entièrement dans les limites de la page.');
+  }
+
+  const qr = QRCode.create(verifyUrl, { errorCorrectionLevel: 'M' });
+  const moduleCount = qr.modules.size;
+  if (QR_PNG_SIZE / moduleCount < MIN_QR_PIXELS_PER_MODULE) {
+    throw new Error('Les données du QR sont trop denses pour être lues de façon fiable. Raccourcissez le nom du participant.');
+  }
+  if (((size / 72) * 300) / moduleCount < MIN_QR_PIXELS_PER_MODULE) {
+    throw new Error('Le QR est trop dense pour sa taille d’impression. Augmentez sa taille.');
+  }
+}
+
+/** Numbered, ID-suffixed filename so homonyms never collide inside the ZIP. */
+export function attestationZipFilename(payload: Pick<CertificatePayload, 'id' | 'name'>, index: number): string {
+  return `${String(index + 1).padStart(3, '0')}_${safeFileName(payload.name)}_${payload.id}.pdf`;
+}
+
 export interface GenerateParams {
   templateBuffer: ArrayBuffer;
+  /** Whether the template is a PDF page or a raster image (PNG/JPEG) used as a full-page background. */
+  templateType: TemplateType;
   names: string[];
   namePlacement: NamePlacement;
   /** Optional placement for the certificate ID (KA-ATT-YYYY-XXXXXX). */
@@ -225,7 +343,27 @@ export interface GenerateParams {
 
 /** Builds one attestation PDF per name + a traceability CSV, zips and downloads them. */
 export async function generateAttestationsZip(params: GenerateParams): Promise<number> {
-  const { templateBuffer, names, namePlacement, idPlacement, qrPlacement, onProgress } = params;
+  const { templateBuffer, templateType, names, namePlacement, idPlacement, qrPlacement, onProgress } = params;
+  const dimensions = await validateTemplate(templateBuffer, templateType);
+  // Refuse an unreadable layout BEFORE signing: a signed attestation is
+  // archived server-side, so a batch that fails halfway would leave orphans.
+  const today = format(new Date(), 'yyyy-MM-dd');
+  names
+    .map((name) => name.trim())
+    .filter(Boolean)
+    .forEach((name) => {
+      validateQrPlacement(
+        qrPlacement,
+        dimensions,
+        attestationVerifyUrl({
+          id: 'KA-ATT-0000-0000000000',
+          name,
+          issuedAt: today,
+          expiresAt: today,
+          signature: '0'.repeat(64),
+        })
+      );
+    });
   const zip = new JSZip();
   const csvRows: string[] = [
     ['ID Certificat', 'Nom du Participant', 'Date de Delivrance', 'Date d Expiration', 'Signature Electronique']
@@ -240,7 +378,8 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     const payload = payloads[index];
     const name = payload.name;
 
-    const pdfDoc = await PDFDocument.load(templateBuffer.slice(0));
+    const pdfDoc = await loadTemplateDoc(templateBuffer, templateType);
+    const nameFonts = await embedNameFonts(pdfDoc);
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const page = pdfDoc.getPages()[0];
     const { width: pageWidth, height: pageHeight } = page.getSize();
@@ -249,12 +388,17 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     const fontSize = namePlacement.fontSize;
     const boxX = namePlacement.xRatio * pageWidth;
     const boxWidth = namePlacement.widthRatio * pageWidth;
-    const textWidth = font.widthOfTextAtSize(name, fontSize);
+    const textWidth = unicodeNameWidth(name, nameFonts, fontSize);
     let textX = boxX;
     if (namePlacement.align === 'center') textX = boxX + (boxWidth - textWidth) / 2;
-    else if (namePlacement.align === 'right') textX = boxX + (boxWidth - textWidth);
+    else if (namePlacement.align === 'right' || isRightToLeft(name)) textX = boxX + (boxWidth - textWidth);
     const textY = pageHeight * (1 - namePlacement.yRatio) - fontSize;
-    page.drawText(name, { x: textX, y: textY, size: fontSize, font, color: hexToRgb(namePlacement.colorHex) });
+    drawUnicodeName(page, name, nameFonts, {
+      x: textX,
+      y: textY,
+      size: fontSize,
+      color: hexToRgb(namePlacement.colorHex),
+    });
 
     // Certificate ID (same box model as the name) — optional, rendered only
     // when an idPlacement is provided. Lets admins position the signed UID on
@@ -273,7 +417,13 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     }
 
     // QR code with the signed payload.
-    const qrDataUrl = await QRCode.toDataURL(attestationVerifyUrl(payload), { margin: 1, width: 512 });
+    const verifyUrl = attestationVerifyUrl(payload);
+    validateQrPlacement(qrPlacement, dimensions, verifyUrl);
+    const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
+      margin: 1,
+      width: QR_PNG_SIZE,
+      errorCorrectionLevel: 'M',
+    });
     const qrImage = await pdfDoc.embedPng(qrDataUrl);
     const qrSize = qrPlacement.sizeRatio * pageWidth;
     const qrX = qrPlacement.xRatio * pageWidth;
@@ -281,7 +431,7 @@ export async function generateAttestationsZip(params: GenerateParams): Promise<n
     page.drawImage(qrImage, { x: qrX, y: qrY, width: qrSize, height: qrSize });
 
     const bytes = await pdfDoc.save();
-    zip.file(`${safeFileName(name)}_Attestation.pdf`, bytes);
+    zip.file(attestationZipFilename(payload, index), bytes);
     csvRows.push([payload.id, name, payload.issuedAt, payload.expiresAt, payload.signature].map(csvCell).join(','));
 
     onProgress?.(index + 1, payloads.length);

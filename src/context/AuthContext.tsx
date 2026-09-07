@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { User as SupabaseAuthUser } from '@supabase/supabase-js';
 import { demoUsers } from '../data/mockData';
 import { isDemoEnabled } from '../lib/demoMode';
-import { normalizeUserRole } from '../lib/roles';
+import { normalizeUserRole, resolveServerAuthorizedRole } from '../lib/roles';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { DemoUser, UserRole } from '../types';
 import { AuthContext } from './authCore';
@@ -12,7 +12,6 @@ const AUTH_STORAGE_KEY = 'karatou.auth.v1';
 interface ProfileRow {
   id: string;
   full_name: string | null;
-  role: string | null;
   country: string | null;
 }
 
@@ -84,26 +83,66 @@ function getInitials(name: string) {
     .toUpperCase() || 'KA';
 }
 
-function roleFromSupabase(user: SupabaseAuthUser, profile?: ProfileRow | null): UserRole {
-  return normalizeUserRole(user.app_metadata?.role || profile?.role);
+function roleFromSupabase(user: SupabaseAuthUser): UserRole {
+  // RLS reads app_metadata from the JWT. `profiles.role` is display data that
+  // the account holder can write, so it must never grant the browser more
+  // access than the database will allow.
+  return normalizeUserRole(user.app_metadata?.role);
 }
 
-async function loadPrimaryOrganization(role: UserRole): Promise<UserOrganizationRow | null> {
+/**
+ * Resolves the organization this user actually belongs to. Picking the first
+ * organization alphabetically would hand an enterprise admin someone else's
+ * dashboard, so the membership is looked up by user id, then by invited email
+ * for an admin who has not been linked to their auth user yet.
+ */
+async function loadPrimaryOrganization(
+  authUser: SupabaseAuthUser,
+  role: UserRole
+): Promise<UserOrganizationRow | null> {
   if (!supabase || role !== 'enterprise_admin') {
     return null;
   }
 
-  const { data, error } = await supabase
-    .from('karatou_organizations')
-    .select('id,name')
-    .order('name', { ascending: true })
-    .limit(1);
+  const client = supabase;
+  const findMembership = async (column: 'user_id' | 'email', value: string) =>
+    client
+      .from('karatou_org_memberships')
+      .select('organization_id')
+      .eq(column, value)
+      .eq('role', 'enterprise_admin')
+      .eq('status', 'active')
+      .limit(1)
+      .maybeSingle();
 
-  if (error) {
+  const byUserId = await findMembership('user_id', authUser.id);
+  if (byUserId.error) {
     return null;
   }
 
-  return (data?.[0] as UserOrganizationRow | undefined) || null;
+  const email = authUser.email?.trim().toLowerCase();
+  const byEmail = !byUserId.data && email ? await findMembership('email', email) : null;
+
+  if (byEmail?.error) {
+    return null;
+  }
+
+  const organizationId =
+    (byUserId.data as { organization_id?: string } | null)?.organization_id ||
+    (byEmail?.data as { organization_id?: string } | null)?.organization_id;
+
+  if (!organizationId) {
+    return null;
+  }
+
+  const { data, error } = await client
+    .from('karatou_organizations')
+    .select('id,name')
+    .eq('id', organizationId)
+    .maybeSingle();
+
+  if (error) return null;
+  return (data as UserOrganizationRow | null) || null;
 }
 
 async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> {
@@ -113,7 +152,7 @@ async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> 
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('id,full_name,role,country')
+    .select('id,full_name,country')
     .eq('id', authUser.id)
     .maybeSingle();
 
@@ -124,8 +163,9 @@ async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> 
     (authUser.user_metadata?.name as string | undefined) ||
     authUser.email?.split('@')[0] ||
     'Karatou Learner';
-  const role = roleFromSupabase(authUser, profileRow);
-  const organization = await loadPrimaryOrganization(role);
+  const claimedRole = roleFromSupabase(authUser);
+  const organization = await loadPrimaryOrganization(authUser, claimedRole);
+  const role = resolveServerAuthorizedRole(authUser.app_metadata?.role, Boolean(organization));
 
   return {
     id: authUser.id,
@@ -136,7 +176,7 @@ async function buildSupabaseUser(authUser: SupabaseAuthUser): Promise<DemoUser> 
     initials: getInitials(name),
     country: profileRow?.country || 'NE',
     orgId: organization?.id,
-    orgName: role === 'enterprise_admin' ? organization?.name || 'Enterprise Karatou' : undefined,
+    orgName: role === 'enterprise_admin' ? organization?.name : undefined,
   };
 }
 

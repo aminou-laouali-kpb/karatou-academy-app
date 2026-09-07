@@ -7,6 +7,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 import { isDemoEnabled } from '../lib/demoMode';
 import { defaultRouteForRole } from '../lib/roles';
+import { trackEvent } from '../lib/analytics';
 import { UserRole } from '../types';
 
 export function Login() {
@@ -33,6 +34,7 @@ export function Login() {
       return;
     }
 
+    trackEvent('auth_login', { method: 'password' });
     navigate(redirectTo, { replace: true });
   };
 
@@ -49,6 +51,7 @@ export function Login() {
       setError(result.error || t('loginError'));
       return;
     }
+    trackEvent('auth_login', { method: 'demo', role });
     navigate(searchParams.get('redirect') || defaultRouteForRole(role), { replace: true });
   };
 
