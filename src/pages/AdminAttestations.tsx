@@ -12,6 +12,7 @@ import {
   TemplateType, TextAlign, validateTemplate,
 } from '../services/attestationGenerator';
 import { addSubscribers } from '../services/newsletterService';
+import { trackEvent } from '../lib/analytics';
 // Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
 // Vite emit it as a hashed asset that resolves correctly in production builds
 // (more robust than `new URL(..., import.meta.url)`, which can break under a
@@ -141,6 +142,7 @@ export function AdminAttestations() {
       setTemplateBuffer(buffer);
       if (imageUrl) URL.revokeObjectURL(imageUrl);
       setImageUrl(type === 'image' ? URL.createObjectURL(file) : null);
+      trackEvent('attestation_template_loaded', { template_type: type });
     } catch (templateError) {
       setError(templateError instanceof Error ? templateError.message : 'Modèle illisible.');
     }
@@ -162,6 +164,10 @@ export function AdminAttestations() {
       }
       setParticipants((prev) => [...prev, ...parsed]);
       setCurrent(0);
+      trackEvent('attestation_participants_imported', {
+        source: 'spreadsheet',
+        participant_count: parsed.length,
+      });
     } catch {
       setError('Fichier Excel illisible. Verifiez le format (.xlsx/.xls).');
     }
@@ -273,6 +279,11 @@ export function AdminAttestations() {
         }
       }
       setDone(`${count} attestations generees et telechargees (ZIP + CSV de tracabilite).${extra}`);
+      trackEvent('attestation_batch_generated', {
+        template_type: templateType,
+        participant_count: participants.length,
+        output_count: count,
+      });
     } catch (e) {
       setError(`Echec de la generation: ${e instanceof Error ? e.message : 'erreur inconnue'}`);
     } finally {
@@ -284,7 +295,12 @@ export function AdminAttestations() {
     setArchiveLoading(true);
     setArchiveError('');
     try {
-      setArchive(await searchAttestationArchive(archiveQuery));
+      const results = await searchAttestationArchive(archiveQuery);
+      setArchive(results);
+      trackEvent('attestation_archive_searched', {
+        has_query: Boolean(archiveQuery.trim()),
+        result_count: results.length,
+      });
     } catch (archiveLookupError) {
       setArchiveError(archiveLookupError instanceof Error ? archiveLookupError.message : 'Recherche impossible.');
     } finally {
@@ -300,6 +316,7 @@ export function AdminAttestations() {
       const updated = await revokeArchivedAttestation(record.id, 'Révoquée depuis le registre administrateur.');
       setArchive((current) => current.map((item) => item.id === updated.id ? updated : item));
       setDone(`Attestation ${updated.id} révoquée. Le QR indiquera désormais qu’elle n’est plus valide.`);
+      trackEvent('attestation_revoked', { status: 'revoked' });
     } catch (revokeError) {
       setArchiveError(revokeError instanceof Error ? revokeError.message : 'Révocation impossible.');
     } finally {

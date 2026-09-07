@@ -5,6 +5,7 @@ import { LearningContext } from './learningCore';
 import { useAuth } from '../hooks/useAuth';
 import { canAccessEnterprise } from '../lib/roles';
 import { isDemoEnabled } from '../lib/demoMode';
+import { trackEvent } from '../lib/analytics';
 import { slugify } from '../lib/strings';
 import {
   getContentBackend,
@@ -703,6 +704,13 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       );
     }
 
+    const module = state.modules.find((candidate) => candidate.slug === moduleSlug);
+    trackEvent('lesson_completed', {
+      module_slug: moduleSlug,
+      completed_count: nextIds.length,
+      total_lessons: module?.courses.length || 0,
+    });
+
     return nextIds;
   };
 
@@ -740,6 +748,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
             certificates: [...current.certificates.filter((c) => c.uid !== issued.uid), issued],
           }));
           setContentSyncStatus(`Certification synchronisee: ${issued.uid}`);
+           trackEvent('certificate_issued', { module_slug: moduleSlug, mode: 'supabase' });
         }
         return issued;
       } catch (error) {
@@ -775,6 +784,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       certificates: [...current.certificates, certificate],
     }));
 
+    trackEvent('certificate_issued', { module_slug: moduleSlug, mode: 'demo' });
     return certificate;
   };
 

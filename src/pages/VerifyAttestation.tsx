@@ -9,6 +9,7 @@ import {
   decodeAttestationPayload, verifyAttestation, CertificatePayload, VerificationResult,
 } from '../services/attestationGenerator';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
+import { trackEvent } from '../lib/analytics';
 
 const inputClass =
   'mt-1.5 w-full h-24 rounded-xl border border-gray-200 px-3 py-2 text-sm font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
@@ -33,7 +34,10 @@ export function VerifyAttestation() {
     const run = hashPayload
       ? verifyAttestation(hashPayload)
       : Promise.resolve<VerificationResult>({ status: 'invalid' });
-    run.then((value) => { if (active) setHashResult(value); });
+    run.then((value) => {
+      trackEvent('attestation_verified', { source: 'qr', status: value.status });
+      if (active) setHashResult(value);
+    });
     return () => { active = false; };
   }, [hashPayload]);
 
@@ -53,7 +57,9 @@ export function VerifyAttestation() {
       const fragment = trimmed.includes('#') ? trimmed.slice(trimmed.indexOf('#') + 1) : trimmed;
       payload = decodeAttestationPayload(fragment);
     }
-    setManualResult(payload?.signature ? await verifyAttestation(payload) : { status: 'invalid' });
+    const verification = payload?.signature ? await verifyAttestation(payload) : { status: 'invalid' as const };
+    trackEvent('attestation_verified', { source: 'manual', status: verification.status });
+    setManualResult(verification);
   };
 
   const status = result?.status;

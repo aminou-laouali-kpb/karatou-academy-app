@@ -12,6 +12,7 @@ import { Certificate } from '../types';
 import { downloadCertificatePdf, formatCertificateDate } from '../services/certificatePdf';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
+import { trackEvent } from '../lib/analytics';
 import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
 import { Download, ExternalLink, Loader2, RotateCw, GraduationCap, Shield, BookOpen } from 'lucide-react';
 
@@ -63,6 +64,7 @@ export function Certificates() {
         sponsorLogoUrl,
         lang,
       });
+      trackEvent('certificate_downloaded', { module_slug: certificate.moduleSlug, format: 'pdf' });
     } catch {
       setDownloadFailed(true);
     } finally {
@@ -170,7 +172,14 @@ export function Certificates() {
                   <><Download size={16} /> {t('downloadCertificate')}</>
                 )}
               </Button>
-              <Button variant="primary" size="sm" onClick={() => navigate(`/verify/${primaryCert.uid}`)}>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  trackEvent('certificate_verification_opened', { module_slug: primaryCert.moduleSlug });
+                  navigate(`/verify/${primaryCert.uid}`);
+                }}
+              >
                 <ExternalLink size={16} /> {t('verifyOnline')}
               </Button>
               <Button variant="ghost" size="sm" disabled>
