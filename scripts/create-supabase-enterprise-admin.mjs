@@ -113,7 +113,9 @@ async function main() {
 
   const { error: profileError } = await client
     .from('profiles')
-    .upsert({ id: user.id, full_name: name, role: 'enterprise_admin', country: 'NE' }, { onConflict: 'id' });
+    // Le rôle fait autorité dans app_metadata (posé ci-dessus). `profiles.role`
+    // n'accepte que les valeurs héritées student/admin/org_admin.
+    .upsert({ id: user.id, full_name: name, country: 'NE' }, { onConflict: 'id' });
   if (profileError) throw profileError;
 
   const { error: membershipError } = await client

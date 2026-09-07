@@ -81,8 +81,13 @@ Deno.serve(async (req) => {
 
     // 5) Profile + org membership + enterprise member.
     const upserts = await Promise.all([
+      // No `role` here: the authoritative role is the app_metadata claim set
+      // above, and `profiles.role` only accepts the legacy Next.js values
+      // (student/admin/org_admin) — writing 'enterprise_admin' violated
+      // profiles_role_check and made this whole call fail with a 500 after the
+      // auth user had already been created.
       admin.from('profiles').upsert(
-        { id: newUser.id, full_name: name, role: 'enterprise_admin', country: 'NE' },
+        { id: newUser.id, full_name: name, country: 'NE' },
         { onConflict: 'id' }
       ),
       admin.from('karatou_org_memberships').upsert(
