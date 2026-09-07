@@ -102,10 +102,12 @@ async function main() {
   const { error: profileError } = await client
     .from('profiles')
     .upsert(
+      // Le rôle fait autorité dans app_metadata (posé ci-dessus). `profiles.role`
+      // n'accepte que les valeurs héritées student/admin/org_admin, donc écrire
+      // 'platform_admin' ici faisait échouer l'amorçage sur profiles_role_check.
       {
         id: user.id,
         full_name: name,
-        role: 'platform_admin',
         country: 'NE',
       },
       { onConflict: 'id' }
