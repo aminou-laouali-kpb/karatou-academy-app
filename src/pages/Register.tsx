@@ -5,6 +5,7 @@ import { Logo } from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 import { isDemoEnabled } from '../lib/demoMode';
+import { trackEvent } from '../lib/analytics';
 
 export function Register() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export function Register() {
       return;
     }
 
+    trackEvent('auth_register');
     navigate(searchParams.get('redirect') || '/dashboard', { replace: true });
   };
 

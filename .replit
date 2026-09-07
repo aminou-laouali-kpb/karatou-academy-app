@@ -4,10 +4,21 @@ run = "npm run dev"
 
 [nix]
 channel = "stable-24_05"
+# Headless Chromium needs these to start, which is what `npm run test:e2e`
+# drives through Playwright. Without them the browser exits before the first
+# test and the failure reads as a timeout.
+packages = [
+  "glib", "nspr", "nss", "atk", "at-spi2-atk", "at-spi2-core", "dbus",
+  "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext",
+  "xorg.libXfixes", "xorg.libXrandr", "mesa", "xorg.libxcb", "libxkbcommon",
+  "alsa-lib",
+]
 
 # Static deployment: build the Vite SPA and serve dist/.
 # In the Replit Deployments UI, enable the single-page-app rewrite so client
-# routes like /verify/:uid and /redeem/:code resolve to index.html.
+# routes like /verify/:uid and /redeem/:code resolve to index.html with a 200.
+# Without it those URLs answer 404 and only recover client-side, so crawlers and
+# social previews see an error page.
 [deployment]
 deploymentTarget = "static"
 build = ["npm", "run", "build"]
@@ -17,3 +28,21 @@ publicDir = "dist"
 [[ports]]
 localPort = 5173
 externalPort = 80
+
+# The two Playwright servers: demo mode on 4317, production mode on 4318.
+[[ports]]
+localPort = 4317
+externalPort = 3003
+exposeLocalhost = true
+
+[[ports]]
+localPort = 4318
+externalPort = 4200
+exposeLocalhost = true
+
+# Reinstall dependencies after pulling `main`: a merge that adds a package
+# (the Unicode PDF fonts, for instance) otherwise breaks the next build with an
+# unresolved import.
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 180000

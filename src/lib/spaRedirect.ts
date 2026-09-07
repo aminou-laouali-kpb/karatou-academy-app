@@ -30,7 +30,10 @@ export function decodeSpaRedirect(search: string): string | null {
   const [rawPath, ...rest] = search.slice(1).split('&');
   const path = rawPath.replace(/~and~/g, '&');
   const query = rest.join('&').replace(/~and~/g, '&');
-  if (!path.startsWith('/')) return null;
+  // `//host` and `/\host` look relative but the browser resolves them as
+  // absolute cross-origin URLs. history.replaceState then throws a
+  // SecurityError — before React mounts, so the visitor gets a blank page.
+  if (!path.startsWith('/') || path[1] === '/' || path[1] === '\\') return null;
   return query ? `${path}?${query}` : path;
 }
 
@@ -54,6 +57,11 @@ export function resolveBootPath(pathname: string, search: string, hash: string):
 export function applyBootRedirect(): void {
   if (typeof window === 'undefined') return;
   const { pathname, search, hash } = window.location;
-  const target = resolveBootPath(pathname, search, hash);
-  if (target) window.history.replaceState(null, '', target);
+  try {
+    const target = resolveBootPath(pathname, search, hash);
+    if (target) window.history.replaceState(null, '', target);
+  } catch {
+    // This runs before React mounts: a rejected URL must cost the visitor the
+    // deep link, never the whole application.
+  }
 }

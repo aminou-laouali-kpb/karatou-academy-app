@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  canAccessEnterprise,
-  canAccessRole,
-  defaultRouteForRole,
-  normalizeUserRole,
-} from './roles';
+import { canAccessEnterprise, canAccessRole, defaultRouteForRole, normalizeUserRole, resolveServerAuthorizedRole } from './roles';
 
 describe('normalizeUserRole', () => {
   it('keeps canonical roles', () => {
@@ -72,5 +67,22 @@ describe('canAccessEnterprise', () => {
     expect(canAccessEnterprise('platform_admin')).toBe(true);
     expect(canAccessEnterprise('learner')).toBe(false);
     expect(canAccessEnterprise(undefined)).toBe(false);
+  });
+});
+
+describe('resolveServerAuthorizedRole', () => {
+  it('downgrades an enterprise-admin claim with no active membership', () => {
+    expect(resolveServerAuthorizedRole('enterprise_admin', false)).toBe('learner');
+    expect(resolveServerAuthorizedRole('org_admin', false)).toBe('learner');
+  });
+
+  it('keeps the claim when a membership backs it', () => {
+    expect(resolveServerAuthorizedRole('enterprise_admin', true)).toBe('enterprise_admin');
+  });
+
+  it('leaves platform admins and learners untouched', () => {
+    expect(resolveServerAuthorizedRole('platform_admin', false)).toBe('platform_admin');
+    expect(resolveServerAuthorizedRole('admin', false)).toBe('platform_admin');
+    expect(resolveServerAuthorizedRole(undefined, true)).toBe('learner');
   });
 });

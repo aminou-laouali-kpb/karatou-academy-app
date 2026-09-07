@@ -182,6 +182,45 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json({ error: 'method not allowed' }, 405);
 
   try {
+    // Configuration probe. Deliberately before the admin check and deliberately
+    // cheap: it calls no model and returns no secret, only whether a key is
+    // configured and which model would be used. That is the same information the
+    // admin UI already surfaces, and it makes "is the generator wired up?"
+    // answerable without an admin session or a single token spent.
+    const probe = await req.clone().json().catch(() => ({}));
+    if (probe?.action === 'health') {
+      const configuredKey = Deno.env.get('OPENROUTER_API_KEY');
+      const health: Record<string, unknown> = {
+        ok: true,
+        keyConfigured: Boolean(configuredKey),
+        model: Deno.env.get('LESSON_MODEL') || DEFAULT_MODEL,
+      };
+
+      // `deep` additionally proves that this runtime can reach the provider and
+      // that the stored key is live. It reads the provider's key-metadata
+      // endpoint, which runs no model and costs nothing, and reports booleans
+      // plus the account's own spend — never the key itself.
+      if (probe?.deep === true && configuredKey) {
+        try {
+          const check = await fetch('https://openrouter.ai/api/v1/key', {
+            headers: { Authorization: `Bearer ${configuredKey}` },
+            signal: AbortSignal.timeout(15_000),
+          });
+          const detail = await check.json().catch(() => ({}));
+          health.egressOk = true;
+          health.keyValid = check.ok;
+          health.usage = detail?.data?.usage ?? null;
+          if (!check.ok) health.keyError = detail?.error?.message ?? `HTTP ${check.status}`;
+        } catch (e) {
+          health.egressOk = false;
+          health.keyValid = false;
+          health.keyError = e instanceof Error ? e.message : 'egress failed';
+        }
+      }
+
+      return json(health, 200);
+    }
+
     const url = Deno.env.get('SUPABASE_URL')!;
     const anonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
     const authHeader = req.headers.get('Authorization') ?? '';

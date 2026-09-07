@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Ban, CheckCircle2, ShieldCheck, XCircle } from 'lucide-react';
+import { AlertCircle, Ban, CheckCircle2, ShieldCheck, XCircle } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -61,11 +61,14 @@ export function VerifyAttestation() {
   // A revoked attestation was genuinely issued, then withdrawn: it must never
   // read as authentic, and never as a forgery either.
   const isRevoked = status === 'revoked';
+  // The service could not be reached. This is not a verdict on the document:
+  // showing "forged" here would accuse a genuine holder over a dropped 2G link.
+  const isUnavailable = status === 'unavailable';
   const cert = result?.payload;
 
-  const headerClass = isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
-  const titleClass = isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : 'text-red-700';
-  const bodyClass = isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : 'text-red-600';
+  const headerClass = isUnavailable ? 'bg-gray-100' : isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
+  const titleClass = isUnavailable ? 'text-gray-700' : isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : 'text-red-700';
+  const bodyClass = isUnavailable ? 'text-gray-600' : isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : 'text-red-600';
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -78,18 +81,21 @@ export function VerifyAttestation() {
         {result && (
           <div className="bg-white rounded-2xl shadow-blue-md overflow-hidden mb-6">
             <div className={`px-6 py-5 text-center ${headerClass}`}>
-              {isValid ? <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
+              {isUnavailable ? <AlertCircle size={40} className="text-gray-400 mx-auto mb-2" />
+                : isValid ? <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
                 : isExpired ? <XCircle size={40} className="text-amber-500 mx-auto mb-2" />
                 : <Ban size={40} className="text-red-500 mx-auto mb-2" />}
               <h1 className={`font-heading text-h3 ${titleClass}`}>
-                {isValid ? t('attValid') : isExpired ? t('attExpired') : isRevoked ? t('attRevoked') : t('attInvalid')}
+                {isUnavailable ? t('attUnavailable')
+                  : isValid ? t('attValid') : isExpired ? t('attExpired') : isRevoked ? t('attRevoked') : t('attInvalid')}
               </h1>
               <p className={`text-body mt-1 ${bodyClass}`}>
-                {isValid || isExpired ? t('attValidBody') : isRevoked ? t('attRevokedBody') : t('attInvalidBody')}
+                {isUnavailable ? t('attUnavailableBody')
+                  : isValid || isExpired ? t('attValidBody') : isRevoked ? t('attRevokedBody') : t('attInvalidBody')}
               </p>
             </div>
 
-            {cert && status !== 'invalid' && (
+            {cert && status !== 'invalid' && status !== 'unavailable' && (
               <div className="px-6 py-6 space-y-4">
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('holder')}</span>
