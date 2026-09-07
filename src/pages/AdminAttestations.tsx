@@ -1,4 +1,4 @@
-import { PointerEvent as ReactPointerEvent, useMemo, useRef, useState } from 'react';
+import { PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import {
   AlignCenter, AlignLeft, AlignRight, ChevronLeft, ChevronRight,
@@ -7,7 +7,8 @@ import {
 import { AdminNav } from '../layouts/AdminNav';
 import { Button } from '../components/Button';
 import {
-  generateAttestationsZip, parseParticipants, NamePlacement, Participant, QrPlacement, TextAlign,
+  detectTemplateType, generateAttestationsZip, parseParticipants, validateTemplate,
+  NamePlacement, Participant, QrPlacement, TemplateType, TextAlign,
 } from '../services/attestationGenerator';
 import { addSubscribers } from '../services/newsletterService';
 // Bundle the worker that matches the installed pdfjs-dist version. `?url` lets
@@ -75,6 +76,8 @@ function TextControls({ title, placement, onChange }: {
 
 export function AdminAttestations() {
   const [templateBuffer, setTemplateBuffer] = useState<ArrayBuffer | null>(null);
+  const [templateType, setTemplateType] = useState<TemplateType | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [current, setCurrent] = useState(0);
   const [pdfPoints, setPdfPoints] = useState<{ width: number; height: number } | null>(null);
@@ -95,19 +98,47 @@ export function AdminAttestations() {
   const dragRef = useRef<{ kind: DragKind; offsetX: number; offsetY: number } | null>(null);
 
   const previewFile = useMemo(
-    () => (templateBuffer ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
-    [templateBuffer]
+    () => (templateBuffer && templateType === 'pdf' ? { data: new Uint8Array(templateBuffer.slice(0)) } : null),
+    [templateBuffer, templateType]
   );
+  const hasTemplate = Boolean(templateBuffer);
+
+  // The object URL backing the image preview is owned by this component.
+  useEffect(() => () => {
+    if (imagePreviewUrl) URL.revokeObjectURL(imagePreviewUrl);
+  }, [imagePreviewUrl]);
   const previewName = participants[current]?.name || 'Nom du participant';
   const previewId = `KA-ATT-${new Date().getFullYear()}-XXXXXX`;
   const subscribableCount = participants.filter((p) => p.email).length;
   const scale = pdfPoints ? PREVIEW_WIDTH / pdfPoints.width : 1;
 
-  const onPdfUpload = async (file?: File) => {
+  const onTemplateUpload = async (file?: File) => {
     if (!file) return;
     setError('');
     setDone('');
-    setTemplateBuffer(await file.arrayBuffer());
+
+    const type = detectTemplateType(file);
+    if (!type) {
+      setError('Modele non reconnu. Utilisez un PDF d’une seule page, ou une image PNG/JPG.');
+      return;
+    }
+
+    const buffer = await file.arrayBuffer();
+    try {
+      // Reject a multi-page or unreadable template now, not after signing.
+      await validateTemplate(buffer, type);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Modele illisible.');
+      return;
+    }
+
+    setImagePreviewUrl((previous) => {
+      if (previous) URL.revokeObjectURL(previous);
+      return type === 'image' ? URL.createObjectURL(file) : null;
+    });
+    setPdfPoints(null);
+    setTemplateType(type);
+    setTemplateBuffer(buffer);
   };
 
   const onExcelUpload = async (file?: File) => {
@@ -185,7 +216,7 @@ export function AdminAttestations() {
   };
 
   const handleGenerate = async () => {
-    if (!templateBuffer || participants.length === 0) return;
+    if (!templateBuffer || !templateType || participants.length === 0) return;
     setGenerating(true);
     setError('');
     setDone('');
@@ -193,6 +224,7 @@ export function AdminAttestations() {
     try {
       const count = await generateAttestationsZip({
         templateBuffer,
+        templateType,
         names: participants.map((p) => p.name),
         namePlacement: name,
         idPlacement: certId,
@@ -234,7 +266,7 @@ export function AdminAttestations() {
           <p className="text-eyebrow text-blue-600">Karatou</p>
           <h1 className="font-heading text-h1 text-gray-900 mt-1">Attestations en masse</h1>
           <p className="text-body text-gray-500 mt-2 max-w-2xl">
-            Chargez un modele PDF et une liste Excel, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
+            Chargez un modele (PDF d'une page, PNG ou JPG) et une liste Excel, positionnez le nom, l'ID du certificat et le QR code, puis generez toutes les attestations signees en un ZIP.
           </p>
         </div>
 
@@ -247,8 +279,13 @@ export function AdminAttestations() {
             <section className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm space-y-3">
               <h2 className="font-semibold text-gray-900">Sources</h2>
               <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-body font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
-                <FileText size={16} className="text-blue-600" /> {templateBuffer ? 'Modele PDF charge' : 'Charger le modele PDF'}
-                <input type="file" accept="application/pdf,.pdf" className="hidden" onChange={(e) => onPdfUpload(e.target.files?.[0])} />
+                <FileText size={16} className="text-blue-600" /> {hasTemplate ? `Modele ${templateType === 'image' ? 'image' : 'PDF'} charge` : 'Charger le modele (PDF, PNG ou JPG)'}
+                <input
+                  type="file"
+                  accept="application/pdf,.pdf,image/png,image/jpeg,.png,.jpg,.jpeg"
+                  className="hidden"
+                  onChange={(e) => onTemplateUpload(e.target.files?.[0])}
+                />
               </label>
               <label className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-body font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
                 <FileSpreadsheet size={16} className="text-emerald-600" /> {participants.length ? `${participants.length} participants${subscribableCount > 0 ? ` · ${subscribableCount} email${subscribableCount !== 1 ? 's' : ''}` : ''}` : 'Charger la liste Excel'}
@@ -289,9 +326,9 @@ export function AdminAttestations() {
               </div>
             )}
 
-            {!previewFile ? (
+            {!hasTemplate ? (
               <div className="rounded-2xl border border-dashed border-gray-300 p-16 text-center text-body text-gray-500">
-                Chargez un modele PDF pour afficher l'apercu et positionner les elements.
+                Chargez un modele (PDF, PNG ou JPG) pour afficher l'apercu et positionner les elements.
               </div>
             ) : (
               <div className="flex justify-center">
@@ -302,15 +339,35 @@ export function AdminAttestations() {
                   onPointerUp={endDrag}
                   onPointerCancel={endDrag}
                 >
-                  <Document file={previewFile} onLoadError={() => setError('PDF illisible.')}>
-                    <Page
-                      pageNumber={1}
-                      width={PREVIEW_WIDTH}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                      onLoadSuccess={(page) => setPdfPoints({ width: page.originalWidth, height: page.originalHeight })}
-                    />
-                  </Document>
+                  {previewFile ? (
+                    <Document file={previewFile} onLoadError={() => setError('PDF illisible.')}>
+                      <Page
+                        pageNumber={1}
+                        width={PREVIEW_WIDTH}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                        onLoadSuccess={(page) => setPdfPoints({ width: page.originalWidth, height: page.originalHeight })}
+                      />
+                    </Document>
+                  ) : (
+                    imagePreviewUrl && (
+                      // An image template becomes a full-bleed page whose size in
+                      // points equals its pixel size, so the overlay ratios match.
+                      <img
+                        src={imagePreviewUrl}
+                        alt="Apercu du modele d'attestation"
+                        width={PREVIEW_WIDTH}
+                        style={{ display: 'block', width: PREVIEW_WIDTH, height: 'auto' }}
+                        onLoad={(e) =>
+                          setPdfPoints({
+                            width: e.currentTarget.naturalWidth,
+                            height: e.currentTarget.naturalHeight,
+                          })
+                        }
+                        onError={() => setError('Image du modele illisible.')}
+                      />
+                    )
+                  )}
 
                   {/* Name box */}
                   <div

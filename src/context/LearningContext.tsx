@@ -945,7 +945,12 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   };
 
   const createScholarship = () => {
-    const organizationId = state.organization?.id || user?.orgId || enterpriseData.org.id;
+    // Falling back to the demo organization would mint a code that RLS refuses
+    // to persist, leaving the admin with a reference that verifies nowhere.
+    const organizationId = state.organization?.id || user?.orgId;
+    if (!organizationId) {
+      return null;
+    }
     const code = `KA-SCH-PNUD-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
     const scholarship: Scholarship = {
       id: `scholarship-${Date.now()}`,

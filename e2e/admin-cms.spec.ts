@@ -26,7 +26,7 @@ test.describe('Platform admin CMS', () => {
     await demoLogin(page, 'platform');
     await page.goto('/admin/attestations');
     await expect(page.getByRole('heading', { name: 'Attestations en masse' })).toBeVisible();
-    await expect(page.getByText('Charger le modele PDF')).toBeVisible();
+    await expect(page.getByText('Charger le modele (PDF, PNG ou JPG)')).toBeVisible();
   });
 
   test('attestation registry page loads and is gated in demo mode', async ({ page }) => {

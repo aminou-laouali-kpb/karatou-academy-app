@@ -33,7 +33,10 @@ export function EnterpriseMembers() {
   const [createdScholarship, setCreatedScholarship] = useState('');
   const [verifyUid, setVerifyUid] = useState('');
   const [verifyError, setVerifyError] = useState('');
-  const { members, scholarships, addMember, createScholarship } = useLearning();
+  const { organization, members, scholarships, addMember, createScholarship } = useLearning();
+  // Both writes are scoped to an organization by RLS: offer them only when
+  // one is actually resolved for this session.
+  const canManageOrganization = Boolean(organization?.id);
 
   const filteredMembers = useMemo(
     () =>
@@ -95,7 +98,9 @@ export function EnterpriseMembers() {
 
   const handleCreateScholarship = () => {
     const scholarship = createScholarship();
-    setCreatedScholarship(scholarship.code);
+    if (scholarship) {
+      setCreatedScholarship(scholarship.code);
+    }
   };
 
   const handleVerifyCertificate = (event: FormEvent) => {
@@ -172,7 +177,7 @@ export function EnterpriseMembers() {
                 <option value="not_started">{t('notStarted')}</option>
               </select>
             </div>
-            <Button variant="primary" size="sm" onClick={() => setShowInvite(true)}>
+            <Button variant="primary" size="sm" onClick={() => setShowInvite(true)} disabled={!canManageOrganization}>
               <UserPlus size={16} /> {t('invite')}
             </Button>
           </div>
@@ -325,7 +330,7 @@ export function EnterpriseMembers() {
                 {scholarships.length} {t('scholarships').toLowerCase()} - {scholarships.filter((item) => item.status === 'claimed').length} {t('claimed').toLowerCase()} - {scholarships.filter((item) => item.status === 'pending').length} {t('available').toLowerCase()}
               </p>
             </div>
-            <Button variant="gold" size="sm" onClick={handleCreateScholarship}>
+            <Button variant="gold" size="sm" onClick={handleCreateScholarship} disabled={!canManageOrganization}>
               <Gift size={16} /> {t('createScholarships')}
             </Button>
           </div>

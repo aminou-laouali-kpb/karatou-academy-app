@@ -53,6 +53,9 @@ export default defineConfig(({ mode }) => ({
           'assets/pm-p*.js',
           'assets/da-d*.js',
           'assets/attestationGenerator-*.js',
+          // fontkit + the Noto subsets: ~500 KiB gzip, needed only when a PDF is
+          // actually generated. The runtime /assets/ rule caches it on first use.
+          'assets/pdfFonts-*.js',
           'assets/AdminAttestations-*.js',
           'assets/FileSaver.min-*.js',
         ],
