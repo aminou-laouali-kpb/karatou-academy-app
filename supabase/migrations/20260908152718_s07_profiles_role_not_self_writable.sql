@@ -1,5 +1,9 @@
 -- S07 — `public.profiles.role` cesse d'être écrivable par son propriétaire.
 --
+-- Appliquée en production le 2026-09-08. L'horodatage du nom de fichier est
+-- celui que `supabase_migrations.schema_migrations` a réellement enregistré
+-- (20260908152718) : sans cet alignement, `supabase db push` la rejouerait.
+--
 -- Constat (vérifié en production le 2026-09-07) : `public.profiles` porte encore
 -- les grants « GRANT ALL » hérités du schéma Next.js d'origine, et sa policy
 -- « Users can update own profile » n'a pas de WITH CHECK. Un apprenant connecté
