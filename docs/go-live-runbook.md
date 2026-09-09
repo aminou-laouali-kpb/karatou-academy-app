@@ -301,10 +301,48 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
    *(Éviter de coller un jeton dans l'URL du remote : il resterait en clair dans
    `.git/config` de l'espace de travail.)*
 
-2. **Réaligner sur `main`.**
+   **État constaté le 9 septembre 2026** (interrogation en lecture seule de
+   l'espace de travail) : `HEAD` toujours sur `e68ce6d`, arbre de travail propre
+   (0 fichier modifié), aucune branche `*snapshot*`, et `git fetch origin`
+   répond encore :
+
+   ```
+   remote: Invalid username or token. Password authentication is not supported
+   fatal: Authentication failed for '…/karatou-academy-app/'
+   ```
+
+   Autrement dit : rien n'a bougé, et **l'authentification GitHub est le seul
+   verrou** — elle bloque à la fois la sauvegarde (étape 1) et le réalignement
+   (étape 2). Le reste de la procédure ne peut pas commencer avant.
+
+   Point rassurant : `HEAD` est resté sur le commit exact qui a servi à
+   l'analyse. Le lot des 55 fichiers modifiés côté Replit est donc inchangé, et
+   tout ce qui méritait d'être conservé est déjà dans `main` via la PR #11. La
+   sauvegarde reste une assurance contre un oubli d'analyse, pas contre une
+   perte connue.
+
+2. **Réaligner sur `main` — mais seulement après un `fetch` réussi.**
+
+   ⚠️ **Le piège le plus dangereux de toute l'opération.** Tant que
+   l'authentification GitHub échoue, la référence `origin/main` *à l'intérieur de
+   Replit* reste figée sur `00fd9df` — le commit du **22 juin**. Un
+   `git reset --hard origin/main` lancé dans cet état ne ramènerait pas le
+   travail récent : il détruirait les 49 commits **et** ferait reculer l'espace
+   de travail de trois mois.
+
+   Vérifier d'abord que le `fetch` passe, et que `origin/main` a bien avancé :
 
    ```bash
-   git fetch origin
+   git fetch origin && git log --oneline -1 origin/main
+   ```
+
+   La sortie doit montrer un commit de septembre (« Merge pull request #14 … »
+   ou plus récent). Si elle affiche `00fd9df` ou une erreur d'authentification,
+   **s'arrêter là** et revenir à l'étape 1.
+
+   Une fois seulement cette vérification passée :
+
+   ```bash
    git checkout main
    git reset --hard origin/main
    npm ci
@@ -313,6 +351,9 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
    `npm ci` est indispensable : `main` a introduit `@pdf-lib/fontkit` et les
    polices Noto. Sans lui, le build échoue sur un import non résolu. (Le hook
    `scripts/post-merge.sh` couvre le cas d'un `git pull`, pas d'un `reset`.)
+
+   À noter : `git reset --hard` ne touche ni aux fichiers non suivis ni aux
+   fichiers ignorés — les secrets locaux de l'espace de travail survivent.
 
 3. **Vérifier les secrets Replit** : `VITE_SUPABASE_URL`,
    `VITE_SUPABASE_ANON_KEY`, `VITE_DEMO_ENABLED=false`. Optionnel :
