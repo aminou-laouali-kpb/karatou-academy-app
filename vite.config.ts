@@ -134,5 +134,18 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: true,
     // On Replit the public HTTPS proxy terminates on 443, so HMR must target it.
     ...(isReplit ? { hmr: { clientPort: 443 } } : {}),
+    // Directories the workspace writes to but that are never sources. Watching
+    // them exhausts the host's file-watcher limit, and the e2e servers then die
+    // before Playwright can start a browser.
+    watch: {
+      ignored: [
+        /[\\/]\.local[\\/]/,
+        /[\\/]\.agents[\\/]/,
+        '**/dist/**',
+        '**/coverage/**',
+        '**/playwright-report/**',
+        '**/test-results/**',
+      ],
+    },
   },
 }));
