@@ -12,7 +12,7 @@ procédure de déploiement complète (env, migrations, seed), voir
 
 | Élément | Constat |
 | --- | --- |
-| Application en ligne | **https://verify.karatou.academy** (hébergement statique Replit) |
+| Application en ligne | **https://course.karatou.academy** — et `verify.karatou.academy` sert le **même** déploiement statique Replit (les deux pointent vers `34.111.179.208`) |
 | Domaine apex | **https://karatou.academy** sert une **page « liste d'attente »** distincte (« Lancement officiel en 2026 ») — ce n'est pas cette application |
 | `www.karatou.academy` | redirige (302) vers l'apex |
 | Supabase | projet `pqcovsnomouclkdjhjig` (eu-west-3) |
@@ -22,7 +22,8 @@ procédure de déploiement complète (env, migrations, seed), voir
 | Newsletter | 22 abonnés réels |
 | Organisations | 0 (les données de démo PNUD ont déjà été retirées de la prod) |
 | Catalogue | 5 modules : 3 publiés (`intelligence-artificielle` c1–c8, `gestion-projet` p1–p5, `data-analysis` d1–d6), 2 brouillons (`agriculture-ia`, `productivite-google`) |
-| Build déployé | **antérieur** à la refonte de charte et à ce sprint → un redéploiement est nécessaire |
+| Build déployé | figé au **7 septembre 2026, 10:00 UTC** : polices DM Sans/Playfair (avant refonte), aucune leçon rédigée, ni studio, ni registre. Voir §6 |
+| Liens profonds | `/login`, `/verify/:uid` répondent **404** : la réécriture SPA n'est pas activée côté hôte |
 
 **Conclusion :** la plateforme est déjà utilisée par de vrais apprenants, mais elle
 est publiée derrière un sous-domaine `verify.` pendant que l'apex annonce encore
@@ -266,3 +267,96 @@ Puis, sur le domaine de production :
 8. Révoquer une attestation de test depuis `/admin/attestations/registry`, puis
    rescanner son QR → « révoquée ».
 9. Coller le lien du domaine dans WhatsApp ou LinkedIn → l'aperçu social s'affiche.
+
+---
+
+## 6. Phase 2 — réaligner le déploiement en ligne sur `main`
+
+*(rédigé le 9 septembre 2026, après vérification en local du build de `main`)*
+
+### Pourquoi c'est une opération à part
+
+L'espace de travail Replit **est un clone du même dépôt GitHub**, mais il a
+divergé de `main` le 22 juin 2026 (base commune `00fd9df`) et son `git fetch`
+échoue depuis — authentification GitHub cassée. Il porte donc **49 commits jamais
+poussés**, et c'est lui qui construit le site public.
+
+Ce n'est ni « Replit est en retard » ni « Replit est en avance » : c'est les deux
+à la fois. Ce qui méritait d'être sauvé a été porté dans `main` (PR #11) ; le
+reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
+
+### Ordre des opérations — le premier point n'est pas négociable
+
+1. **Rétablir l'accès GitHub depuis Replit, puis sauvegarder les 49 commits.**
+   Dans Replit : panneau *Git* → reconnecter le compte GitHub. Puis, dans le
+   Shell :
+
+   ```bash
+   git checkout -b replit-snapshot-2026-09-09
+   git push -u origin replit-snapshot-2026-09-09
+   ```
+
+   ⚠️ **Ne rien réinitialiser tant que ce `push` n'a pas réussi.** Les 49 commits
+   n'existent nulle part ailleurs.
+   *(Éviter de coller un jeton dans l'URL du remote : il resterait en clair dans
+   `.git/config` de l'espace de travail.)*
+
+2. **Réaligner sur `main`.**
+
+   ```bash
+   git fetch origin
+   git checkout main
+   git reset --hard origin/main
+   npm ci
+   ```
+
+   `npm ci` est indispensable : `main` a introduit `@pdf-lib/fontkit` et les
+   polices Noto. Sans lui, le build échoue sur un import non résolu. (Le hook
+   `scripts/post-merge.sh` couvre le cas d'un `git pull`, pas d'un `reset`.)
+
+3. **Vérifier les secrets Replit** : `VITE_SUPABASE_URL`,
+   `VITE_SUPABASE_ANON_KEY`, `VITE_DEMO_ENABLED=false`. Optionnel :
+   `VITE_VERIFY_HOSTS` (défaut `verify.karatou.academy`) — liste des hôtes dont
+   la racine doit ouvrir le vérificateur d'attestation plutôt que la page
+   d'accueil. Les `VITE_*` sont gravées **au build**.
+
+4. **Activer la réécriture SPA** dans l'interface *Deployments* de Replit, pour
+   que `/login` et `/verify/:uid` répondent **200** au lieu de 404.
+
+5. **Republier**, puis contrôler :
+
+   ```bash
+   curl -I https://course.karatou.academy/verify/KA-2026-INT-0001   # attendu : 200
+   curl -s https://course.karatou.academy/ | grep -c inter-latin    # polices de la charte
+   ```
+
+### Ce qui a déjà été vérifié en local, et ne reste donc pas à découvrir
+
+Le build de `main` a été servi derrière un simulateur reproduisant exactement le
+comportement actuel de l'hôte (200 sur `/`, 404 + `404.html` sur tout le reste),
+puis parcouru dans un vrai navigateur :
+
+| Cas | Résultat |
+| --- | --- |
+| `/verify/:uid` sans réécriture SPA | rattrapé côté client, identifiant préservé |
+| QR format `main` : `/verify-attestation#payload` | ouvre le vérificateur |
+| QR format Replit : `/#payload` | ouvre aussi le vérificateur |
+| Racine avec `VITE_VERIFY_HOSTS` correspondant | ouvre le vérificateur, pas la landing |
+| Polices | Inter + Literata + DM Mono, zéro DM Sans/Playfair |
+| Contenu | 18 chunks de leçons, `AdminLessonStudio`, `AdminAttestationRegistry` |
+
+**Conséquence pratique :** les 13 attestations déjà imprimées continuent de se
+vérifier après la bascule, dans les deux formats de QR — y compris si l'étape 4
+(réécriture SPA) est reportée. L'étape 4 reste nécessaire pour les aperçus
+sociaux et l'indexation, pas pour que le site fonctionne.
+
+### Si Replit n'est pas la bonne maison
+
+La réécriture SPA est le seul point que l'hébergement statique Replit ne garantit
+pas. Déménager (Netlify, Cloudflare Pages) rendrait `public/_redirects` — déjà
+présent dans le dépôt — immédiatement effectif. Dans ce cas, `verify.karatou.academy`
+doit rester servi (ou redirigé en 301) : c'est l'URL gravée dans les QR imprimés.
+
+À noter pour qui reprendra le dossier : la zone DNS de `karatou.academy` est chez
+**n0c.com** (PlanetHoster), pas chez Hostinger — le compte Hostinger connecté ne
+gère que `kpbeducation.cloud`.
