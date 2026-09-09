@@ -148,11 +148,10 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
 2. **Configurer une vraie réécriture SPA (statut 200)** sur l'hôte.
    - Netlify / Cloudflare Pages : `public/_redirects` est déjà dans le dépôt, rien
      à faire de plus.
-   - Replit statique : si l'hôte ne sait pas réécrire, le `public/404.html` livré
-     ici prend le relais sans perdre le chemin — mais les routes continueront à
-     répondre 404 aux robots, donc **aucun aperçu social sur un lien de
-     certificat partagé**. C'est l'argument le plus concret pour déménager
-     l'hébergement.
+   - Replit statique : réglé par `[[deployment.rewrites]]` dans `.replit`
+     (`from = "/*"`, `to = "/index.html"`), effectif à la republication.
+     `public/404.html` reste en place — dormant tant que la règle est active,
+     filet si elle disparaît.
    - Vérification : `curl -I https://<domaine>/verify/KA-2026-INT-0001` doit
      répondre **200**.
 
@@ -396,8 +395,19 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
    la racine doit ouvrir le vérificateur d'attestation plutôt que la page
    d'accueil. Les `VITE_*` sont gravées **au build**.
 
-4. **Activer la réécriture SPA** dans l'interface *Deployments* de Replit, pour
-   que `/login` et `/verify/:uid` répondent **200** au lieu de 404.
+4. **Réécriture SPA** — plus rien à faire dans l'interface : la règle est
+   désormais versionnée dans `.replit`.
+
+   ```toml
+   [[deployment.rewrites]]
+   from = "/*"
+   to = "/index.html"
+   ```
+
+   Elle prend effet à la republication. Les fichiers réellement présents dans
+   `dist/` restent servis tels quels (« shadowing » : quand une réécriture vise
+   un chemin qui correspond aussi à un fichier, le fichier gagne), donc les
+   assets, `robots.txt`, `sitemap.xml` et `opengraph.jpg` ne sont pas affectés.
 
 5. **Republier**, puis contrôler :
 
