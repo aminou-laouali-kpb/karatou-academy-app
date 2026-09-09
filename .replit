@@ -15,14 +15,28 @@ packages = [
 ]
 
 # Static deployment: build the Vite SPA and serve dist/.
-# In the Replit Deployments UI, enable the single-page-app rewrite so client
-# routes like /verify/:uid and /redeem/:code resolve to index.html with a 200.
-# Without it those URLs answer 404 and only recover client-side, so crawlers and
-# social previews see an error page.
 [deployment]
 deploymentTarget = "static"
 build = ["npm", "run", "build"]
 publicDir = "dist"
+
+# Réécriture SPA. L'application route côté client : sans cette règle, un lien
+# profond (/login, /verify/:uid, /redeem/:code) répond 404. Le repli
+# `public/404.html` rattrape bien la navigation, mais un robot ou un aperçu
+# social ne voit qu'une page d'erreur — donc aucun aperçu sur un certificat
+# partagé, et aucune indexation des pages profondes.
+#
+# Le `*` ne vaut qu'en fin de chemin et capture le reste de l'URL. Les fichiers
+# réellement présents dans dist/ restent servis tels quels : la documentation
+# Replit appelle cela le « shadowing » — quand une réécriture vise un chemin qui
+# correspond aussi à un fichier, le fichier gagne. Les assets, robots.txt,
+# sitemap.xml et opengraph.jpg ne sont donc pas affectés.
+#
+# `public/404.html` est conservé : il ne sert plus tant que cette règle est
+# active, et redevient le filet si elle disparaît.
+[[deployment.rewrites]]
+from = "/*"
+to = "/index.html"
 
 # Map the Vite dev server (5173) to the public preview.
 [[ports]]
