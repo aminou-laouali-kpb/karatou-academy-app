@@ -288,8 +288,30 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
 ### Ordre des opérations — le premier point n'est pas négociable
 
 1. **Rétablir l'accès GitHub depuis Replit, puis sauvegarder les 49 commits.**
-   Dans Replit : panneau *Git* → reconnecter le compte GitHub. Puis, dans le
-   Shell :
+
+   Reconnecter le compte GitHub dans le panneau *Git* de l'interface **ne suffit
+   pas** : constaté le 9 septembre, l'espace de travail n'a *aucun*
+   `credential.helper` configuré, son remote est une HTTPS nue sans identifiants,
+   et aucune variable d'environnement GitHub n'est exposée. Le `git` du Shell n'a
+   donc littéralement aucun moyen de s'authentifier, quoi qu'affiche l'interface.
+
+   La voie propre passe par le GitHub CLI, déjà installé dans l'espace de travail.
+   Dans le Shell :
+
+   ```bash
+   gh auth login       # GitHub.com → HTTPS → « Login with a web browser »
+   gh auth setup-git   # câble le credential.helper pour git
+   ```
+
+   `gh auth login` affiche un code à usage unique à valider dans le navigateur :
+   aucun jeton à copier-coller, rien de secret à écrire dans le dépôt. Contrôler
+   ensuite que l'accès fonctionne :
+
+   ```bash
+   git fetch origin && git log --oneline -1 origin/main
+   ```
+
+   La sortie doit montrer un commit de septembre. Une fois l'accès rétabli :
 
    ```bash
    git checkout -b replit-snapshot-2026-09-09
@@ -299,7 +321,9 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
    ⚠️ **Ne rien réinitialiser tant que ce `push` n'a pas réussi.** Les 49 commits
    n'existent nulle part ailleurs.
    *(Éviter de coller un jeton dans l'URL du remote : il resterait en clair dans
-   `.git/config` de l'espace de travail.)*
+   `.git/config` de l'espace de travail. `gh auth login` le range hors du dépôt.
+   Un `gh auth logout` après l'opération referme l'accès si l'espace de travail
+   est partagé.)*
 
    **État constaté le 9 septembre 2026** (interrogation en lecture seule de
    l'espace de travail) : `HEAD` toujours sur `e68ce6d`, arbre de travail propre
