@@ -296,7 +296,18 @@ reste est du bruit d'agent (`attached_assets/`, `.agents/`, `.bolt/`).
    donc littéralement aucun moyen de s'authentifier, quoi qu'affiche l'interface.
 
    La voie propre passe par le GitHub CLI, déjà installé dans l'espace de travail.
-   Dans le Shell :
+
+   ⚠️ **Dans le Shell de Replit, pas dans un terminal local.** La confusion est
+   facile et elle fait perdre un aller-retour : une machine de développement a
+   souvent déjà un `gh` authentifié et un `origin/main` à jour, si bien que les
+   commandes ci-dessous y réussissent sans rien changer à l'espace de travail.
+   Vérifier d'abord où l'on se trouve :
+
+   ```bash
+   hostname && pwd     # attendu dans Replit : « repl » et /home/runner/workspace
+   ```
+
+   Puis, dans ce Shell :
 
    ```bash
    gh auth login       # GitHub.com → HTTPS → « Login with a web browser »
