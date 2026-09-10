@@ -35,7 +35,7 @@ export interface AuthContextValue {
     name: string;
     email: string;
     password: string;
-    region?: string;
+    country?: string;
     gender?: string;
   }) => Promise<AuthResult>;
   requestPasswordReset: (email: string) => Promise<AuthResult>;

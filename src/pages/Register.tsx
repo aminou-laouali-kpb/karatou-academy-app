@@ -7,12 +7,17 @@ import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../hooks/useLanguage';
 import { isDemoEnabled } from '../lib/demoMode';
 import { trackEvent } from '../lib/analytics';
+import {
+  OTHER_COUNTRY_CODE,
+  WEST_AFRICA_COUNTRIES,
+  countryLabel,
+} from '../data/westAfricaCountries';
 
 export function Register() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { register } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   // Pre-fill the demo password only in demo mode (mirrors Login); production
@@ -20,7 +25,7 @@ export function Register() {
   const [password, setPassword] = useState(() => (isDemoEnabled ? 'demo1234' : ''));
   // Opt-in demographic fields (feed the public impact dashboard). Both can stay
   // blank — the user controls disclosure.
-  const [region, setRegion] = useState('');
+  const [country, setCountry] = useState('');
   const [gender, setGender] = useState('');
   const [error, setError] = useState('');
   const [errorDetail, setErrorDetail] = useState('');
@@ -35,7 +40,7 @@ export function Register() {
     setError('');
     setErrorDetail('');
     setLoading(true);
-    const result = await register({ name, email, password, region, gender });
+    const result = await register({ name, email, password, country, gender });
     setLoading(false);
 
     if (!result.ok) {
@@ -157,24 +162,22 @@ export function Register() {
               <p className="text-meta text-blue-700/80 mb-3">{t('demographicsHelp')}</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <label className="block">
-                  <span className="text-meta font-medium text-gray-700">{t('regionLabel')}</span>
+                  <span className="text-meta font-medium text-gray-700">{t('countryLabel')}</span>
                   <select
-                    value={region}
-                    onChange={(event) => setRegion(event.target.value)}
+                    value={country}
+                    onChange={(event) => setCountry(event.target.value)}
                     className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    required
                   >
-                    <option value="">{t('regionPlaceholder')}</option>
-                    {/* Niger's 8 regions. Stored as the French canonical label
-                        so admin breakdowns are consistent across languages. */}
-                    <option value="Niamey">Niamey</option>
-                    <option value="Tillabéri">Tillabéri</option>
-                    <option value="Tahoua">Tahoua</option>
-                    <option value="Maradi">Maradi</option>
-                    <option value="Zinder">Zinder</option>
-                    <option value="Diffa">Diffa</option>
-                    <option value="Agadez">Agadez</option>
-                    <option value="Dosso">Dosso</option>
-                    <option value="autre">{t('regionOther')}</option>
+                    <option value="">{t('countryPlaceholder')}</option>
+                    {/* Required: left empty, the database trigger would default
+                        everyone to Niger and quietly falsify the impact figures. */}
+                    {WEST_AFRICA_COUNTRIES.map((option) => (
+                      <option key={option.code} value={option.code}>
+                        {countryLabel(option.code, lang)}
+                      </option>
+                    ))}
+                    <option value={OTHER_COUNTRY_CODE}>{t('countryOther')}</option>
                   </select>
                 </label>
                 <label className="block">

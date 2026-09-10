@@ -3,6 +3,7 @@ import { User as SupabaseAuthUser } from '@supabase/supabase-js';
 import { demoUsers } from '../data/mockData';
 import { isDemoEnabled } from '../lib/demoMode';
 import { authErrorDetail, mapAuthError } from '../lib/authErrors';
+import { normalizeCountryCode } from '../data/westAfricaCountries';
 import { normalizeUserRole, resolveServerAuthorizedRole } from '../lib/roles';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { DemoUser, UserRole } from '../types';
@@ -326,12 +327,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     name: string;
     email: string;
     password: string;
-    region?: string;
+    country?: string;
     gender?: string;
-  }) => {
+  }): Promise<AuthResult> => {
     const cleanName = payload.name.trim() || 'Nouvel apprenant';
     const normalizedEmail = payload.email.trim().toLowerCase();
-    const region = payload.region?.trim() || undefined;
+    // Anything unrecognised collapses to 'XX' rather than reaching the column
+    // the public impact statistics group on.
+    const country = normalizeCountryCode(payload.country);
     const gender = payload.gender?.trim() || undefined;
 
     if (supabase) {
@@ -341,8 +344,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         options: {
           data: {
             full_name: cleanName,
-            country: 'NE',
-            ...(region ? { region } : {}),
+            ...(country ? { country } : {}),
             ...(gender ? { gender } : {}),
           },
         },
@@ -370,8 +372,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           {
             id: data.user.id,
             full_name: cleanName,
-            country: 'NE',
-            ...(region ? { region } : {}),
+            ...(country ? { country } : {}),
             ...(gender ? { gender } : {}),
           },
           { onConflict: 'id' }
@@ -397,7 +398,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password: payload.password,
       role: 'learner',
       initials: getInitials(cleanName),
-      country: 'NE',
+      country: country || 'NE',
     };
 
     demoSessionActive.current = true;
