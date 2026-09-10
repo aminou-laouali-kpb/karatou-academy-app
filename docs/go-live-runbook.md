@@ -452,6 +452,40 @@ vérifier après la bascule, dans les deux formats de QR — y compris si l'éta
 (réécriture SPA) est reportée. L'étape 4 reste nécessaire pour les aperçus
 sociaux et l'indexation, pas pour que le site fonctionne.
 
+### Le cycle de déploiement courant
+
+Une fois l'espace de travail réaligné, chaque mise en ligne suit toujours la même
+séquence — dans le Shell Replit, après avoir vérifié `hostname` (« repl ») :
+
+```bash
+git fetch origin && git reset --hard origin/main
+```
+
+puis **Republish**.
+
+⚠️ **Ne pas utiliser `git pull`.** Replit crée un commit vide « Published your
+App » à chaque publication : le `main` local diverge donc systématiquement, et
+le `pull` échoue (`Not possible to fast-forward, aborting` — avec
+`pull.ff only`) ou fabrique une fusion inutile. Le piège coûte cher parce que
+l'échec est discret : on republie sans s'en apercevoir, et c'est l'ancien build
+qui repart en ligne. C'est arrivé deux fois.
+
+Écraser ces commits ne perd rien : ils sont vides, ce que `git show --stat`
+confirme (aucun fichier listé). Faire `npm ci` **uniquement** quand la mise à
+jour touche `package.json`.
+
+**Contrôler ce qui est réellement servi** — et par le contenu, pas par le nom du
+fichier : le hash du bundle dépend des variables `VITE_*` inlinées au build, donc
+un build local sans les secrets de production ne produit jamais le même nom.
+
+```bash
+curl -s https://course.karatou.academy/ | grep -o 'assets/index-[^"]*\.js'
+```
+
+Le hash doit simplement **avoir changé** par rapport à l'avant-déploiement. Pour
+confirmer le contenu, chercher une chaîne propre à la nouvelle version dans le
+bundle servi.
+
 ### Si Replit n'est pas la bonne maison
 
 La réécriture SPA est le seul point que l'hébergement statique Replit ne garantit
