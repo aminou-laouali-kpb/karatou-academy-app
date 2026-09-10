@@ -23,7 +23,7 @@ export function ForgotPassword() {
     const result = await requestPasswordReset(email);
     setLoading(false);
     if (!result.ok) {
-      setError(result.error || t('genericError'));
+      setError(t(result.errorKey || 'authErrGeneric'));
       return;
     }
     setSent(true);

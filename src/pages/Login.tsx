@@ -30,7 +30,7 @@ export function Login() {
     setLoading(false);
 
     if (!result.ok) {
-      setError(result.error || t('loginError'));
+      setError(t(result.errorKey || 'authErrInvalidCredentials'));
       return;
     }
 
@@ -48,7 +48,7 @@ export function Login() {
     const result = await loginAs(role);
     setLoading(false);
     if (!result.ok) {
-      setError(result.error || t('loginError'));
+      setError(t(result.errorKey || 'authErrInvalidCredentials'));
       return;
     }
     trackEvent('auth_login', { method: 'demo', role });
@@ -121,7 +121,7 @@ export function Login() {
 
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-blue-sm border border-gray-100 p-5 space-y-4">
             {error && (
-              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700" role="alert">
                 {error}
               </div>
             )}

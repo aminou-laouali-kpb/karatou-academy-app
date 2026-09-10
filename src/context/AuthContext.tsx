@@ -2,10 +2,12 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { User as SupabaseAuthUser } from '@supabase/supabase-js';
 import { demoUsers } from '../data/mockData';
 import { isDemoEnabled } from '../lib/demoMode';
+import { authErrorDetail, mapAuthError } from '../lib/authErrors';
 import { normalizeUserRole, resolveServerAuthorizedRole } from '../lib/roles';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { DemoUser, UserRole } from '../types';
 import { AuthContext } from './authCore';
+import type { AuthResult } from './authCore';
 
 const AUTH_STORAGE_KEY = 'karatou.auth.v1';
 
@@ -244,7 +246,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<AuthResult> => {
     const tryLocalDemoLogin = () => {
       if (!isDemoEnabled) {
         return false;
@@ -281,7 +283,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         return {
           ok: false,
-          error: error?.message || 'Connexion impossible.',
+          errorKey: mapAuthError(error),
+          errorDetail: authErrorDetail(error),
         };
       }
 
@@ -296,20 +299,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ? { ok: true }
       : {
           ok: false,
-          error: isDemoEnabled
-            ? 'Email ou mot de passe incorrect. Essayez un compte demo.'
-            : 'Email ou mot de passe incorrect.',
+          errorKey: isDemoEnabled ? 'authErrInvalidCredentialsDemo' : 'authErrInvalidCredentials',
         };
   };
 
-  const loginAs = async (role: UserRole) => {
+  const loginAs = async (role: UserRole): Promise<AuthResult> => {
     if (!isDemoEnabled) {
-      return { ok: false, error: 'Les comptes demo sont desactives.' };
+      return { ok: false, errorKey: 'authErrDemoDisabled' };
     }
 
     const found = demoUsers.find((candidate) => candidate.role === role);
     if (!found) {
-      return { ok: false, error: 'Compte demo introuvable.' };
+      return { ok: false, errorKey: 'authErrDemoMissing' };
     }
 
     if (supabase) {
@@ -350,16 +351,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (error || !data.user) {
         return {
           ok: false,
-          error: error?.message || 'Creation de compte impossible.',
+          errorKey: mapAuthError(error),
+          errorDetail: authErrorDetail(error),
         };
       }
 
       if (!data.session) {
+        // The account exists; Supabase is simply waiting for the address to be
+        // confirmed. Reporting this as a failure made a success look like a
+        // crash, in red, to every person who signed up.
         setAuthReady(true);
-        return {
-          ok: false,
-          error: 'Compte cree. Confirmez votre email, puis connectez-vous.',
-        };
+        return { ok: true, pendingEmailConfirmation: true };
       }
 
       const { error: profileError } = await supabase
@@ -376,7 +378,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         );
 
       if (profileError) {
-        return { ok: false, error: profileError.message };
+        return { ok: false, errorKey: 'authErrProfile' };
       }
 
       setUser(await buildSupabaseUser(data.user));
@@ -385,10 +387,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!isDemoEnabled) {
-      return {
-        ok: false,
-        error: 'Creation de compte indisponible: Supabase doit etre configure.',
-      };
+      return { ok: false, errorKey: 'authErrSupabaseRequired' };
     }
 
     const newUser: DemoUser = {
@@ -406,11 +405,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   };
 
-  const requestPasswordReset = async (email: string) => {
+  const requestPasswordReset = async (email: string): Promise<AuthResult> => {
     if (!supabase) {
       return {
         ok: false,
-        error: isDemoEnabled ? 'Reinitialisation indisponible en mode demo.' : 'Service indisponible.',
+        errorKey: isDemoEnabled ? 'authErrResetDemo' : 'authErrServiceUnavailable',
       };
     }
 
@@ -418,19 +417,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       typeof window !== 'undefined' ? `${window.location.origin}/reset-password` : undefined;
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo });
     if (error) {
-      return { ok: false, error: error.message };
+      return { ok: false, errorKey: mapAuthError(error), errorDetail: authErrorDetail(error) };
     }
     return { ok: true };
   };
 
-  const updatePassword = async (password: string) => {
+  const updatePassword = async (password: string): Promise<AuthResult> => {
     if (!supabase) {
-      return { ok: false, error: 'Service indisponible.' };
+      return { ok: false, errorKey: 'authErrServiceUnavailable' };
     }
 
     const { error } = await supabase.auth.updateUser({ password });
     if (error) {
-      return { ok: false, error: error.message };
+      return { ok: false, errorKey: mapAuthError(error), errorDetail: authErrorDetail(error) };
     }
     return { ok: true };
   };

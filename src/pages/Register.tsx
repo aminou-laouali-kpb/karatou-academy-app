@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { CheckCircle2, MailCheck } from 'lucide-react';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
 import { useAuth } from '../hooks/useAuth';
@@ -22,23 +23,68 @@ export function Register() {
   const [region, setRegion] = useState('');
   const [gender, setGender] = useState('');
   const [error, setError] = useState('');
+  const [errorDetail, setErrorDetail] = useState('');
+  // Registration can succeed without a session: the address needs confirming
+  // first. That is not a failure, so it gets its own screen rather than the
+  // red banner that used to make a success look like a crash.
+  const [pendingEmail, setPendingEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError('');
+    setErrorDetail('');
     setLoading(true);
     const result = await register({ name, email, password, region, gender });
     setLoading(false);
 
     if (!result.ok) {
-      setError(result.error || 'Creation de compte impossible.');
+      setError(t(result.errorKey || 'authErrGeneric'));
+      setErrorDetail(result.errorDetail || '');
       return;
     }
 
     trackEvent('auth_register');
+
+    if (result.pendingEmailConfirmation) {
+      setPendingEmail(email.trim());
+      return;
+    }
+
     navigate(searchParams.get('redirect') || '/dashboard', { replace: true });
   };
+
+  if (pendingEmail) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-5 py-10">
+        <main id="main-content" className="w-full max-w-lg">
+          <div className="flex justify-center mb-8">
+            <Logo />
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-blue-md border border-gray-100 p-6 sm:p-8 text-center">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
+              <CheckCircle2 size={28} className="text-emerald-600" />
+            </div>
+            <h1 className="font-heading text-h2 text-gray-900">{t('registerPendingTitle')}</h1>
+            <p className="text-body text-gray-600 mt-3">{t('registerPendingBody')}</p>
+            <p className="text-body font-semibold text-gray-900 mt-3 break-all">{pendingEmail}</p>
+            <p className="text-meta text-gray-500 mt-4 flex items-center justify-center gap-1.5">
+              <MailCheck size={14} /> {t('registerPendingSpam')}
+            </p>
+            <Button
+              variant="primary"
+              size="md"
+              className="w-full mt-6"
+              onClick={() => navigate('/login', { replace: true })}
+            >
+              {t('registerPendingCta')}
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-5 py-10">
@@ -55,8 +101,13 @@ export function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
-                {error}
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700" role="alert">
+                <p>{error}</p>
+                {errorDetail && (
+                  <p className="text-meta text-red-600/80 mt-1">
+                    {t('authErrDetailPrefix')} : {errorDetail}
+                  </p>
+                )}
               </div>
             )}
 

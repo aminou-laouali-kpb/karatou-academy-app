@@ -22,6 +22,22 @@ test.describe('Auth and role-based routing', () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
+  test('a rejected login shows a translated message, never raw upstream text', async ({ page }) => {
+    // Regression: auth results used to carry a display string built in the
+    // context layer — Supabase's English prose reached French screens, and the
+    // registration success was even rendered in the error style. Results now
+    // carry a translation key that the page resolves.
+    await page.goto('/login');
+    await page.getByLabel('Email', { exact: true }).fill('inconnu@karatou.test');
+    await page.getByLabel('Mot de passe', { exact: true }).fill('mauvaispass');
+    await page.getByRole('button', { name: 'Connexion' }).click();
+
+    const alert = page.getByRole('alert');
+    await expect(alert).toContainText('Email ou mot de passe incorrect');
+    // The upstream vocabulary must never surface.
+    await expect(alert).not.toContainText(/password|credentials/i);
+  });
+
   test('forgot-password page is reachable from login', async ({ page }) => {
     await page.goto('/login');
     await page.getByRole('link', { name: 'Mot de passe oublié ?' }).click();

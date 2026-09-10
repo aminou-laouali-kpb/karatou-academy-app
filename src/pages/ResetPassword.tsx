@@ -15,11 +15,13 @@ export function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
+  const [errorDetail, setErrorDetail] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError('');
+    setErrorDetail('');
     if (password !== confirm) {
       setError(t('resetMismatch'));
       return;
@@ -28,7 +30,8 @@ export function ResetPassword() {
     const result = await updatePassword(password);
     setLoading(false);
     if (!result.ok) {
-      setError(result.error || t('genericError'));
+      setError(t(result.errorKey || 'authErrGeneric'));
+      setErrorDetail(result.errorDetail || '');
       return;
     }
     navigate('/dashboard', { replace: true });
@@ -47,7 +50,12 @@ export function ResetPassword() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700" role="alert">
-                {error}
+                <p>{error}</p>
+                {errorDetail && (
+                  <p className="text-meta text-red-600/80 mt-1">
+                    {t('authErrDetailPrefix')} : {errorDetail}
+                  </p>
+                )}
               </div>
             )}
             <label className="block">
