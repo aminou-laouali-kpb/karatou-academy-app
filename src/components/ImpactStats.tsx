@@ -35,7 +35,13 @@ export function ImpactStats({ variant = 'hero', fallback, modulesCount }: Impact
   const learners = stats ? formatInt(stats.learners) : fallback?.learners ?? '—';
   const certificates = stats ? formatInt(stats.certificates) : fallback?.certificates ?? '—';
   const countries = stats ? formatInt(Math.max(stats.countries, 1)) : fallback?.countries ?? '—';
-  const regions = stats ? formatInt(stats.regions) : fallback?.regions;
+  // Sign-up now collects a country, not a Niger region, so this breakdown is
+  // empty on a fresh tenant. Showing « 0 régions » would read as a bug.
+  const regions = stats
+    ? stats.regions > 0
+      ? formatInt(stats.regions)
+      : undefined
+    : fallback?.regions;
 
   const items = [
     { value: learners, label: t('learners'), Icon: Users },

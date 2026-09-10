@@ -163,9 +163,23 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
      modification.
 
 4. **Supabase → Authentication → URL Configuration** : ajouter le domaine de
-   production aux *Redirect URLs* (sinon les liens de confirmation d'email et de
-   réinitialisation de mot de passe ne résolvent pas), et relire les modèles
-   d'email.
+   production aux *Redirect URLs* (sinon les liens de réinitialisation de mot de
+   passe ne résolvent pas), et relire les modèles d'email.
+
+4 bis. **Désactiver la confirmation d'email** — décision prise le 2026-09-10.
+   *Authentication → Providers → Email* → décocher **Confirm email**.
+
+   Motif : aucun SMTP n'est branché, et le service d'envoi par défaut de Supabase
+   ne délivre pas de façon fiable. Avec la confirmation active, personne ne
+   recevait le lien, donc personne ne pouvait activer son compte — et l'upsert du
+   profil, qui n'a lieu qu'en présence d'une session, ne s'exécutait jamais : ni
+   pays ni genre n'étaient enregistrés. C'est ce qu'Idriss a rencontré.
+
+   ⚠️ **Contrepartie assumée** : sans confirmation, rien ne prouve qu'une personne
+   possède l'adresse qu'elle déclare. Sur une plateforme de certification où
+   l'email identifie le titulaire, c'est un vrai compromis. À rétablir dès qu'un
+   SMTP réel est en place (Resend, Postmark, SES…) — l'écran de confirmation
+   côté application est déjà écrit et se réactivera tout seul.
 
 5. **Supabase → Authentication → Policies** : activer **Leaked password
    protection** (dernier advisor de sécurité ouvert ; bascule tableau de bord,
@@ -256,7 +270,9 @@ Puis, sur le domaine de production :
 
 1. `curl -I https://<domaine>/verify/KA-2026-INT-0001` → **200** (pas 404).
 2. Ouvrir `/` : aucun badge démo, aucune carte de compte démo, aucun sélecteur de démo.
-3. Créer un compte apprenant réel, confirmer par email, se connecter.
+3. Créer un compte apprenant réel : l'inscription doit ouvrir la session
+   directement (la confirmation d'email est désactivée, cf. §3 P0 4 bis), et le
+   pays choisi doit apparaître dans `profiles.country`.
 4. Ouvrir une leçon de chaque module et vérifier le contenu rédigé (pas le gabarit
    générique) en FR, EN et HA.
 5. Terminer un module → un certificat durable est émis → le vérifier sur
