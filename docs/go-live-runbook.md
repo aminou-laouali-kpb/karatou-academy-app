@@ -163,23 +163,49 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
      modification.
 
 4. **Supabase → Authentication → URL Configuration** : ajouter le domaine de
-   production aux *Redirect URLs* (sinon les liens de réinitialisation de mot de
-   passe ne résolvent pas), et relire les modèles d'email.
+   production aux *Redirect URLs* — `https://course.karatou.academy/**` couvre
+   les deux liens que l'application envoie :
 
-4 bis. **Désactiver la confirmation d'email** — décision prise le 2026-09-10.
-   *Authentication → Providers → Email* → décocher **Confirm email**.
+   | Lien | Destination demandée | Si l'URL n'est pas autorisée |
+   | --- | --- | --- |
+   | Confirmation d'inscription | `/dashboard` | retombe sur la *Site URL* |
+   | Réinitialisation de mot de passe | `/reset-password` | le lien ne résout pas |
 
-   Motif : aucun SMTP n'est branché, et le service d'envoi par défaut de Supabase
-   ne délivre pas de façon fiable. Avec la confirmation active, personne ne
-   recevait le lien, donc personne ne pouvait activer son compte — et l'upsert du
-   profil, qui n'a lieu qu'en présence d'une session, ne s'exécutait jamais : ni
-   pays ni genre n'étaient enregistrés. C'est ce qu'Idriss a rencontré.
+   Vérifier aussi que la *Site URL* pointe sur le domaine de production : c'est
+   le filet de sécurité des deux lignes ci-dessus. Relire enfin les modèles
+   d'email (ils portent le nom et le ton de la plateforme).
 
-   ⚠️ **Contrepartie assumée** : sans confirmation, rien ne prouve qu'une personne
-   possède l'adresse qu'elle déclare. Sur une plateforme de certification où
-   l'email identifie le titulaire, c'est un vrai compromis. À rétablir dès qu'un
-   SMTP réel est en place (Resend, Postmark, SES…) — l'écran de confirmation
-   côté application est déjà écrit et se réactivera tout seul.
+4 bis. **Garder la confirmation d'email** — décision prise le 2026-09-11,
+   après un essai concluant en conditions réelles : le lien part, arrive, et le
+   compte s'active.
+
+   La décision inverse avait été préparée la veille, au motif qu'aucun SMTP
+   n'était branché et que le service d'envoi par défaut de Supabase ne délivre
+   pas de façon fiable. L'essai a tranché : la livraison fonctionne. Sur une
+   plateforme de certification où l'email identifie le titulaire d'une
+   attestation, prouver que la personne possède son adresse vaut mieux que
+   l'inscription en un clic.
+
+   ⚠️ **Ce que cela implique, et qui n'est pas évident** : tant que l'adresse
+   n'est pas confirmée, `signUp` ne rend aucune session. L'upsert de profil
+   côté application, qui en exige une, ne s'exécute donc **jamais** — même plus
+   tard. Le déclencheur `app_private.create_karatou_profile_for_new_user()` sur
+   `auth.users` est le **seul** écrivain des données démographiques.
+
+   Conséquence mesurée en production le 2026-09-11 : 9 profils, 0 avec un
+   genre, alors que cinq personnes l'avaient bien déclaré à l'inscription. Le
+   déclencheur ne recopiait que `full_name` et `country`. Corrigé par la
+   migration `20260911104500_s08`, qui recopie aussi le genre et restitue les
+   valeurs perdues. Contrôle : `npm run test:signup-trigger`.
+
+   👉 **Règle à retenir** : tout nouveau champ collecté à l'inscription doit
+   être ajouté à ce déclencheur, pas seulement à l'upsert de `AuthContext`.
+   Sans cela il sera saisi, transmis, puis perdu sans le moindre message
+   d'erreur.
+
+   Le débit d'envoi par défaut de Supabase reste bas (quelques messages par
+   heure). Au premier afflux d'inscriptions, brancher un SMTP réel (Resend,
+   Postmark, SES…) : c'est un réglage de projet, aucun changement de code.
 
 5. **Supabase → Authentication → Policies** : activer **Leaked password
    protection** (dernier advisor de sécurité ouvert ; bascule tableau de bord,
@@ -270,9 +296,11 @@ Puis, sur le domaine de production :
 
 1. `curl -I https://<domaine>/verify/KA-2026-INT-0001` → **200** (pas 404).
 2. Ouvrir `/` : aucun badge démo, aucune carte de compte démo, aucun sélecteur de démo.
-3. Créer un compte apprenant réel : l'inscription doit ouvrir la session
-   directement (la confirmation d'email est désactivée, cf. §3 P0 4 bis), et le
-   pays choisi doit apparaître dans `profiles.country`.
+3. Créer un compte apprenant réel : l'inscription doit afficher l'écran
+   « Compte créé » (la confirmation d'email est active, cf. §3 P0 4 bis), le
+   lien reçu doit ramener sur le domaine de production, et le pays **comme le
+   genre** choisis doivent apparaître dans `profiles` — ils y sont écrits par le
+   déclencheur, avant toute connexion.
 4. Ouvrir une leçon de chaque module et vérifier le contenu rédigé (pas le gabarit
    générique) en FR, EN et HA.
 5. Terminer un module → un certificat durable est émis → le vérifier sur

@@ -23,6 +23,7 @@
     "test:e2e:report": "playwright show-report",
     "test:e2e:ui": "playwright test --ui",
     "test:profiles-lockdown": "psql \"$DATABASE_URL\" -f scripts/verify-profiles-role-lockdown.sql",
+    "test:signup-trigger": "psql \"$DATABASE_URL\" -f scripts/verify-signup-profile-trigger.sql",
     "test:rls": "psql \"$DATABASE_URL\" -f scripts/verify-cross-org-rls.sql",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",

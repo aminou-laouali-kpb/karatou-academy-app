@@ -338,10 +338,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const gender = payload.gender?.trim() || undefined;
 
     if (supabase) {
+      // La confirmation d'email est active : le lien reçu doit ramener sur le
+      // domaine où la personne s'est inscrite, pas sur la « Site URL » du
+      // projet Supabase. Une URL absente de la liste blanche est ignorée et
+      // retombe sur cette Site URL — l'option ne peut donc rien dégrader.
+      const emailRedirectTo =
+        typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined;
+
       const { data, error } = await supabase.auth.signUp({
         email: normalizedEmail,
         password: payload.password,
         options: {
+          emailRedirectTo,
           data: {
             full_name: cleanName,
             ...(country ? { country } : {}),
