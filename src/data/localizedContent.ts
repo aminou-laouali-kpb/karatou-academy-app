@@ -1,13 +1,5 @@
 import { Language } from './translations';
 import { LessonContent, lesson1 } from './lessonContent';
-import {
-  claudeLesson1ByLanguage,
-  claudeLesson2ByLanguage,
-  claudeLesson3ByLanguage,
-  claudeLesson4ByLanguage,
-  claudeLesson5ByLanguage,
-  claudeLesson6ByLanguage,
-} from './lessons/introduction-claude-ai';
 import { Course, LearningModule } from '../types';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
@@ -328,6 +320,12 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'data-analysis/d4': () => import('./lessons/da-d4-visualisation').then((m) => m.daLessonD4),
   'data-analysis/d5': () => import('./lessons/da-d5-raconter').then((m) => m.daLessonD5),
   'data-analysis/d6': () => import('./lessons/da-d6-mini-projet').then((m) => m.daLessonD6),
+  'introduction-claude-ai/cl1': () => import('./lessons/introduction-claude-ai/cl1').then((m) => m.claudeLesson1ByLanguage),
+  'introduction-claude-ai/cl2': () => import('./lessons/introduction-claude-ai/cl2').then((m) => m.claudeLesson2ByLanguage),
+  'introduction-claude-ai/cl3': () => import('./lessons/introduction-claude-ai/cl3').then((m) => m.claudeLesson3ByLanguage),
+  'introduction-claude-ai/cl4': () => import('./lessons/introduction-claude-ai/cl4').then((m) => m.claudeLesson4ByLanguage),
+  'introduction-claude-ai/cl5': () => import('./lessons/introduction-claude-ai/cl5').then((m) => m.claudeLesson5ByLanguage),
+  'introduction-claude-ai/cl6': () => import('./lessons/introduction-claude-ai/cl6').then((m) => m.claudeLesson6ByLanguage),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the
@@ -335,12 +333,6 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
 // round trip.
 const eagerLessons: Record<string, LessonBundle> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
-  'introduction-claude-ai/cl1': claudeLesson1ByLanguage,
-  'introduction-claude-ai/cl2': claudeLesson2ByLanguage,
-  'introduction-claude-ai/cl3': claudeLesson3ByLanguage,
-  'introduction-claude-ai/cl4': claudeLesson4ByLanguage,
-  'introduction-claude-ai/cl5': claudeLesson5ByLanguage,
-  'introduction-claude-ai/cl6': claudeLesson6ByLanguage,
 };
 
 /** True when real authored content exists for this course (eager or lazy). */
