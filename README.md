@@ -1,9 +1,11 @@
-# karatou-academy-baby
+# karatou-academy
 
 [![Open in Bolt](https://bolt.new/static/open-in-bolt.svg)](https://bolt.new/~/sb1-1s97mn1z)
 
-> Deploying? See the [Production Launch Checklist](docs/production-launch-checklist.md)
-> for the full local-demo / staging / production runbook.
+> **Launching?** Start with the [Go-live runbook](docs/go-live-runbook.md): it records
+> the real state of production and the operator actions that remain.
+> For the full local-demo / staging / production deployment procedure, see the
+> [Production Launch Checklist](docs/production-launch-checklist.md).
 
 ## Production Supabase Bootstrap
 
@@ -78,6 +80,34 @@ VITE_DEMO_ENABLED=false
 That removes the demo badge, demo account cards, demo switcher, local demo
 sessions, and Supabase-login fallback to demo accounts.
 
+## Authoring lessons
+
+Lesson bodies come from two places, and the database wins:
+
+1. **`/admin/lecons` (lesson studio)** — a platform admin writes the objective,
+   sections, worked example, practice, quiz, reflection, glossary and the FR/EN/HA
+   video URLs, and publishes without a redeploy. Stored in
+   `karatou_courses.lesson_content`. A **Générer un brouillon** button drafts the
+   lesson with Claude through the `admin-generate-lesson` Edge Function, and
+   **Traduire depuis le français** produces the EN/HA versions; nothing is
+   published until the admin saves. The generator needs a server-side key:
+
+   ```bash
+   supabase secrets set OPENROUTER_API_KEY=sk-or-v1-... --project-ref <project-ref>
+   ```
+
+   Without it the manual editor still works and the button returns a clear error.
+   The model is `z-ai/glm-5.3-flash` on OpenRouter (~15 s and well under a cent
+   per lesson); `LESSON_MODEL` points the function at any other OpenRouter model
+   without a redeploy.
+
+2. **The TypeScript registry** (`src/data/lessons/`, wired in
+   `src/data/localizedContent.ts`) — the 19 launch lessons, versioned with the
+   code and precached for offline use. Used whenever the database has nothing for
+   that lesson and language.
+
+See [docs/authoring-lessons.md](docs/authoring-lessons.md) for the full workflow.
+
 ## End-to-End Smoke Tests
 
 Playwright smoke tests cover the production-core flows: role-based login and
@@ -91,11 +121,20 @@ npm run test:e2e:ui               # interactive runner
 npm run test:e2e:report           # open the last HTML report
 ```
 
-The tests run against a deterministic local-demo build: `npm run test:e2e`
+Cross-organization RLS isolation is proven separately, against a real Postgres:
+
+```bash
+npm run test:rls   # psql "$DATABASE_URL" -f scripts/verify-cross-org-rls.sql
+```
+
+The script seeds two throwaway organizations, switches to the `authenticated` /
+`anon` roles, asserts that neither admin can see the other's data, and cleans up
+after itself (including on failure).
+
+The Playwright tests run against a deterministic local-demo build: `npm run test:e2e`
 auto-starts `npm run dev:e2e` (`vite --mode e2e` on `127.0.0.1:4317`), which
 loads `.env.e2e` to force `VITE_DEMO_ENABLED=true` with empty Supabase vars.
 This keeps the suite hermetic — it never touches the real Supabase project and
-does not depend on your local `.env.local`. Cross-organization RLS isolation is
-not covered here (it needs a seeded second org + Auth user in Supabase) and is
-left as a documented `test.fixme`; it remains verified at the database layer via
-SQL in the sprint notes.
+does not depend on your local `.env.local`. That is also why cross-organization
+RLS isolation stays a documented `test.fixme` here: with no Supabase, the browser
+suite cannot exercise RLS at all. It is covered by `npm run test:rls` above.

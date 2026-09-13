@@ -46,11 +46,11 @@ export function OfflineBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm text-amber-900 shadow-blue-md border border-amber-200"
+      className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-body-sm text-amber-900 shadow-blue-md border border-amber-200"
     >
       <WifiOff size={14} aria-hidden="true" />
       <span className="font-semibold">{copy.offline}</span>
-      <span className="text-xs text-amber-700 hidden sm:inline">— {copy.cached}</span>
+      <span className="text-meta text-amber-700 hidden sm:inline">— {copy.cached}</span>
     </div>
   );
 }

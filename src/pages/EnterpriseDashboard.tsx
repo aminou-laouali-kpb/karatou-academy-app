@@ -76,7 +76,7 @@ export function EnterpriseDashboard() {
       <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Welcome */}
         <div className="mb-8">
-          <h1 className="font-playfair text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+          <h1 className="font-heading text-h2 sm:text-h1 text-gray-900 mb-1">
             {t('adminHello')}
           </h1>
           <p className="text-gray-500 flex items-center gap-2">
@@ -124,14 +124,14 @@ export function EnterpriseDashboard() {
         <div className="bg-white rounded-2xl p-5 shadow-blue-sm mb-8">
           <div className="flex items-center justify-between mb-3">
             <p className="font-semibold text-gray-900">{t('seatsUsed')}</p>
-            <p className="text-sm text-gray-500">{seatsUsed} / {seatsTotal}</p>
+            <p className="text-body text-gray-500">{seatsUsed} / {seatsTotal}</p>
           </div>
           <ProgressBar value={(seatsUsed / seatsTotal) * 100} height="md" />
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="text-meta text-gray-500 mt-3">
             {scholarships.filter((scholarship) => scholarship.status === 'pending').length} {t('scholarshipsAvailable')}
           </p>
           {createdScholarship && (
-            <div className="mt-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-sm text-gold-700">
+            <div className="mt-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-body text-gold-700">
               <p>
                 {t('scholarshipCreated')}: <span className="font-mono">{createdScholarship}</span>
               </p>
@@ -160,8 +160,8 @@ export function EnterpriseDashboard() {
                     {a.icon}
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-700">{a.text}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{a.time}</p>
+                    <p className="text-body text-gray-700">{a.text}</p>
+                    <p className="text-meta text-gray-400 mt-0.5">{a.time}</p>
                   </div>
                 </div>
               ))}

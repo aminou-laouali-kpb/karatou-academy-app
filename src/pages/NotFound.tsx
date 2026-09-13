@@ -12,8 +12,8 @@ export function NotFound() {
         <div className="flex justify-center mb-6">
           <Logo />
         </div>
-        <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">404</p>
-        <h1 className="font-playfair text-3xl font-bold text-gray-900 mb-3">
+        <p className="text-eyebrow text-blue-600 mb-3">404</p>
+        <h1 className="font-heading text-h1 text-gray-900 mb-3">
           {t('pageNotFound')}
         </h1>
         <p className="text-gray-500 mb-6">

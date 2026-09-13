@@ -42,8 +42,22 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         // Precache the application shell (Vite-built JS/CSS/HTML).
         globPatterns: ['**/*.{js,css,html,svg,jpg,jpeg,png,woff2}'],
+        // ...but not the heavy on-demand chunks: the 19 lesson bodies (~15 kB
+        // gzip each) and the admin attestation tooling (pdf-lib / xlsx / jszip,
+        // ~480 kB gzip). Precaching them made the first visit pay ~3.2 MB on a
+        // 2G link for content most learners never open. They are cached on
+        // first use instead (the runtime rule below), which is the promise the
+        // PWA actually makes: shell precached, visited content available offline.
+        globIgnores: [
+          'assets/ia-c*.js',
+          'assets/pm-p*.js',
+          'assets/da-d*.js',
+          'assets/attestationGenerator-*.js',
+          'assets/AdminAttestations-*.js',
+          'assets/FileSaver.min-*.js',
+        ],
         // Bigger PDF/Excel chunks may exceed the default 2 MiB cap — bump it
-        // so the lazy admin chunks are still precached for offline use.
+        // so any large precached asset still fits.
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         navigateFallback: '/index.html',
         // SPA routes the SW must NOT intercept (server-authoritative paths or
@@ -52,6 +66,18 @@ export default defineConfig(({ mode }) => ({
         runtimeCaching: [
           // (Fonts are now self-hosted via @fontsource — included in the SW
           // precache as woff2 assets; no Google Fonts CDN runtime rule needed.)
+          // Build assets that are deliberately not precached (lesson bodies,
+          // admin tooling). Filenames are content-hashed, so CacheFirst is safe
+          // and a visited lesson stays readable offline.
+          {
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname.startsWith('/assets/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'karatou-assets',
+              expiration: { maxEntries: 120, maxAgeSeconds: 60 * 60 * 24 * 90 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
           // Supabase Storage (public org logos used on certificates).
           {
             urlPattern: ({ url }) =>

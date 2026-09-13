@@ -46,69 +46,69 @@ export function Register() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-blue-md border border-gray-100 p-6 sm:p-8">
-          <h1 className="font-playfair text-3xl font-bold text-gray-900">{t('createAccount')}</h1>
+          <h1 className="font-heading text-h1 text-gray-900">{t('createAccount')}</h1>
           <p className="text-gray-500 mt-2 mb-6">
             {t('registerSubtitle')}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
                 {error}
               </div>
             )}
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('fullName')}</span>
+              <span className="text-body font-medium text-gray-700">{t('fullName')}</span>
               <input
                 type="text"
                 autoComplete="name"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 placeholder="Amina Garba"
                 required
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('email')}</span>
+              <span className="text-body font-medium text-gray-700">{t('email')}</span>
               <input
                 type="email"
                 autoComplete="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 placeholder="amina@example.com"
                 required
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">{t('password')}</span>
+              <span className="text-body font-medium text-gray-700">{t('password')}</span>
               <input
                 type="password"
                 autoComplete="new-password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 minLength={6}
-                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 required
               />
             </label>
 
             <fieldset className="rounded-xl border border-blue-100 bg-blue-50/40 px-4 py-3">
-              <legend className="px-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+              <legend className="px-1 text-eyebrow text-blue-700">
                 {t('demographicsTitle')}
               </legend>
-              <p className="text-xs text-blue-700/80 mb-3">{t('demographicsHelp')}</p>
+              <p className="text-meta text-blue-700/80 mb-3">{t('demographicsHelp')}</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <label className="block">
-                  <span className="text-xs font-medium text-gray-700">{t('regionLabel')}</span>
+                  <span className="text-meta font-medium text-gray-700">{t('regionLabel')}</span>
                   <select
                     value={region}
                     onChange={(event) => setRegion(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   >
                     <option value="">{t('regionPlaceholder')}</option>
                     {/* Niger's 8 regions. Stored as the French canonical label
@@ -125,11 +125,11 @@ export function Register() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-xs font-medium text-gray-700">{t('genderLabel')}</span>
+                  <span className="text-meta font-medium text-gray-700">{t('genderLabel')}</span>
                   <select
                     value={gender}
                     onChange={(event) => setGender(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   >
                     <option value="">{t('genderPlaceholder')}</option>
                     <option value="female">{t('genderFemale')}</option>
@@ -147,7 +147,7 @@ export function Register() {
           </form>
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-body text-gray-500 mt-6">
           {t('alreadyRegistered')}{' '}
           <Link
             to={searchParams.get('redirect') ? `/login?redirect=${encodeURIComponent(searchParams.get('redirect') || '')}` : '/login'}

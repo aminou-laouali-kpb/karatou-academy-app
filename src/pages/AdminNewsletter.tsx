@@ -15,7 +15,7 @@ import {
 } from '../services/newsletterService';
 
 const inputClass =
-  'w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
+  'w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15';
 
 type Tab = 'subscribers' | 'compose';
 
@@ -114,13 +114,13 @@ export function AdminNewsletter() {
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou</p>
-            <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">Newsletter</h1>
-            <p className="text-sm text-gray-500 mt-2 max-w-2xl">
+            <p className="text-eyebrow text-blue-600">Karatou</p>
+            <h1 className="font-heading text-h1 text-gray-900 mt-1">Newsletter</h1>
+            <p className="text-body text-gray-500 mt-2 max-w-2xl">
               Gérez vos abonnés et rédigez vos campagnes email. Les participants certifiés avec email sont ajoutés automatiquement.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-2xl px-4 py-3 text-sm">
+          <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-2xl px-4 py-3 text-body">
             <Users size={16} className="text-blue-600" />
             <span className="font-semibold text-blue-900">{subscribers.length}</span>
             <span className="text-blue-700">abonné{subscribers.length !== 1 ? 's' : ''}</span>
@@ -136,7 +136,7 @@ export function AdminNewsletter() {
             <button
               key={key}
               onClick={() => { setTab(key); setNotice(null); }}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-body font-medium transition-all ${
                 tab === key
                   ? 'bg-white text-blue-700 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
@@ -158,28 +158,28 @@ export function AdminNewsletter() {
             </div>
 
             {loading ? (
-              <div className="px-5 py-16 text-center text-sm text-gray-400">
+              <div className="px-5 py-16 text-center text-body text-gray-400">
                 <div className="w-6 h-6 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin mx-auto mb-3" />
                 Chargement des abonnés…
               </div>
             ) : subscribers.length === 0 ? (
-              <div className="px-5 py-16 text-center text-sm text-gray-400">
+              <div className="px-5 py-16 text-center text-body text-gray-400">
                 <Mail size={32} className="mx-auto mb-3 text-gray-300" />
                 <p className="font-medium text-gray-500 mb-1">Aucun abonné pour l'instant</p>
-                <p className="text-xs max-w-xs mx-auto">
+                <p className="text-meta max-w-xs mx-auto">
                   Les participants certifiés avec email seront ajoutés automatiquement. Les visiteurs peuvent s'abonner via la popup du site.
                 </p>
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full text-body">
                   <thead>
                     <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Nom</th>
-                      <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Téléphone</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Source</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Inscrit le</th>
+                      <th className="text-left px-5 py-3 text-eyebrow text-gray-500">Nom</th>
+                      <th className="text-left px-5 py-3 text-eyebrow text-gray-500">Email</th>
+                      <th className="text-left px-4 py-3 text-eyebrow text-gray-500">Téléphone</th>
+                      <th className="text-left px-4 py-3 text-eyebrow text-gray-500">Source</th>
+                      <th className="text-left px-4 py-3 text-eyebrow text-gray-500">Inscrit le</th>
                       <th className="px-4 py-3" />
                     </tr>
                   </thead>
@@ -190,7 +190,7 @@ export function AdminNewsletter() {
                         <td className="px-5 py-3 text-gray-600">{sub.email}</td>
                         <td className="px-4 py-3 text-gray-500">{sub.phone || '—'}</td>
                         <td className="px-4 py-3">
-                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-meta font-medium ${
                             sub.source === 'attestation'
                               ? 'bg-blue-50 text-blue-700'
                               : sub.source === 'popup'
@@ -226,7 +226,7 @@ export function AdminNewsletter() {
                 <h2 className="font-semibold text-gray-900 mb-4">Nouvelle newsletter</h2>
 
                 {notice && (
-                  <div className={`mb-4 rounded-xl border px-4 py-3 text-sm ${
+                  <div className={`mb-4 rounded-xl border px-4 py-3 text-body ${
                     notice.tone === 'success'
                       ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                       : 'border-red-200 bg-red-50 text-red-700'
@@ -237,7 +237,7 @@ export function AdminNewsletter() {
 
                 <form onSubmit={handleSend} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-body font-medium text-gray-700 mb-1.5">
                       Sujet de l'email
                     </label>
                     <input
@@ -250,7 +250,7 @@ export function AdminNewsletter() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-body font-medium text-gray-700 mb-1.5">
                       Corps du message
                     </label>
                     <textarea
@@ -259,12 +259,12 @@ export function AdminNewsletter() {
                       onChange={(e) => setBody(e.target.value)}
                       required
                       rows={12}
-                      className={`${inputClass} resize-y font-mono text-xs leading-relaxed`}
+                      className={`${inputClass} resize-y font-mono text-meta leading-relaxed`}
                     />
-                    <p className="text-xs text-gray-400 mt-1">{body.length} caractères</p>
+                    <p className="text-meta text-gray-400 mt-1">{body.length} caractères</p>
                   </div>
                   <div className="flex items-center justify-between pt-2 flex-wrap gap-3">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-body text-gray-500">
                       Envoi à <span className="font-semibold text-gray-700">{subscribers.length}</span> abonné{subscribers.length !== 1 ? 's' : ''}
                     </p>
                     <Button
@@ -282,7 +282,7 @@ export function AdminNewsletter() {
                     </Button>
                   </div>
                   {subscribers.length === 0 && !loading && (
-                    <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2">
+                    <p className="text-meta text-amber-600 bg-amber-50 rounded-lg px-3 py-2">
                       Aucun abonné. Générez des attestations avec emails, ou attendez des inscriptions via la popup du site.
                     </p>
                   )}
@@ -294,15 +294,15 @@ export function AdminNewsletter() {
             <div className="bg-white border border-gray-200 rounded-2xl shadow-blue-sm p-5">
               <h2 className="font-semibold text-gray-900 mb-4">Historique des envois</h2>
               {drafts.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-8">Aucun envoi pour l'instant.</p>
+                <p className="text-body text-gray-400 text-center py-8">Aucun envoi pour l'instant.</p>
               ) : (
                 <div className="space-y-3">
                   {drafts.map((d) => (
                     <div key={d.id} className="rounded-xl border border-gray-100 p-3 group">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">{d.subject}</p>
-                          <p className="text-xs text-gray-400 mt-0.5">
+                          <p className="text-body font-medium text-gray-900 truncate">{d.subject}</p>
+                          <p className="text-meta text-gray-400 mt-0.5">
                             {d.sentAt ? (
                               <span className="text-emerald-600">Envoyé le {formatDate(d.sentAt)} · {d.recipientCount} destinataires</span>
                             ) : (

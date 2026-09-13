@@ -60,8 +60,8 @@ export function ImpactStats({ variant = 'hero', fallback, modulesCount }: Impact
       {items.map(({ value, label, Icon }) => (
         <div key={label} className="text-center">
           <Icon size={20} className={`${tone.icon} mx-auto mb-2`} aria-hidden="true" />
-          <p className={`font-playfair text-3xl font-bold ${tone.num}`}>{value}</p>
-          <p className={`text-xs ${tone.label} mt-1 uppercase tracking-wider`}>{label}</p>
+          <p className={`font-heading text-h1 tabular-nums ${tone.num}`}>{value}</p>
+          <p className={`text-eyebrow ${tone.label} mt-1`}>{label}</p>
         </div>
       ))}
       {/* Visually-hidden announcement once loaded so screen readers know the live counts. */}

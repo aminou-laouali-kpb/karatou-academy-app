@@ -1,7 +1,12 @@
 # Karatou Academy - Production Launch Checklist
 
-Last updated: June 15, 2026
+Last updated: September 3, 2026
 Owner: Karatou Academy product/engineering
+
+> **Going live for real?** Read [go-live-runbook.md](go-live-runbook.md) first:
+> it records the actual state of production (domain, real users, deployed build)
+> and the short list of operator actions that remain. This file stays the
+> reference for *how* to deploy from scratch.
 
 This checklist lets a new operator deploy and test Karatou Academy from scratch.
 It separates three environments:
@@ -88,6 +93,18 @@ Migration order (the CLI handles this automatically):
 10. `20260614170328_s01_04_bourse_redemption_conflict_fix.sql`
 11. `20260614170524_s01_04_bourse_redemption_role_guard_fix.sql`
 12. `20260615093513_s01_06_certificate_verification_hardening.sql`
+13. `20260616120000_s03_security_certificate_progress_hardening.sql`
+14. `20260616120500_s03_security_revoke_legacy_exposure.sql`
+15. `20260616130000_s02_03_certificate_issuance_rpc.sql` - server-authoritative issuance
+16. `20260617140000_s04_org_logo_storage.sql`
+17. `20260622120000_newsletter_subscribers.sql`
+18. `20260622130000_progress_integrity_hardening.sql`
+19. `20260622140000_public_impact_stats.sql`
+20. `20260819164745_attestation_archive.sql` - `karatou_attestations` registry (idempotent:
+    it back-fills into the repo a table created directly on production on 2026-08-19)
+21. `20260903162346_s05_launch_hardening.sql` - advisor fixes (attestation read policy,
+    `anon` execute revoked on the issuance RPC, pinned `search_path` on the two legacy
+    SECURITY DEFINER functions, newsletter policies realigned on the JWT role, FK indexes)
 
 A private profile-bootstrap trigger creates a `profiles` row for each new Auth user.
 
@@ -155,9 +172,20 @@ to rewrite all unknown paths to `/index.html`, otherwise deep links like
 npm run test:e2e
 ```
 
-Covers role login + route guards, admin CMS load/validation/draft-save, enterprise
-bourse creation, and public certificate verification. Runs hermetically in forced
-local-demo mode (see README "End-to-End Smoke Tests"). All flows must pass.
+Covers role login + route guards, admin CMS load/validation/draft-save, the
+attestation registry page, enterprise bourse creation, and public certificate
+verification. Runs hermetically in forced local-demo mode (see README "End-to-End
+Smoke Tests"). All flows must pass: 29 tests, plus one documented skip whose
+subject is covered by the SQL test below.
+
+```bash
+npm run test:rls   # needs $DATABASE_URL
+```
+
+Cross-organization RLS isolation, proven where it is actually enforced: the script
+seeds two throwaway organizations, switches to the `authenticated` / `anon` roles
+and asserts that neither admin sees the other's organization, members, bourses,
+progress or certificates. It cleans up after itself, including on failure.
 
 ### Manual demo script (per environment)
 
@@ -175,12 +203,19 @@ local-demo mode (see README "End-to-End Smoke Tests"). All flows must pass.
 ## 8. Pre-launch hardening
 
 - [ ] `VITE_DEMO_ENABLED=false` in the production build, and the bundle was rebuilt after setting it.
-- [ ] Service-role key is server-side only and never shipped to the browser.
+- [x] Service-role key is server-side only and never shipped to the browser.
 - [ ] `KARATOU_ADMIN_PASSWORD` changed from the example value.
-- [ ] Supabase advisors reviewed and addressed (`get_advisors` / dashboard) - legacy issues exist on the project.
-- [ ] RLS verified: anonymous REST reads of organizations/members/scholarships return permission denied.
-- [ ] Public `/verify/:uid` works while logged out.
-- [ ] SPA rewrite-to-index configured on the host.
+- [x] Supabase advisors reviewed and addressed (2026-09-03) - see the decision table in
+      [go-live-runbook.md](go-live-runbook.md#4-advisors-supabase--état-et-décisions).
+- [x] RLS verified: anonymous REST reads of organizations/members/scholarships are denied at
+      the GRANT level (`npm run test:rls`, run against production on 2026-09-03).
+- [x] Public `/verify/:uid` works while logged out.
+- [ ] **SPA rewrite-to-index configured on the host** - still open: the current host answers
+      404 on client routes. `public/_redirects` (Netlify/Cloudflare Pages) ships the correct
+      200 rewrite; `public/404.html` + `src/lib/spaRedirect.ts` are the fallback for hosts
+      that cannot rewrite. Verify with `curl -I https://<domain>/verify/<uid>` -> 200.
+- [ ] Leaked password protection enabled in Supabase Auth.
+- [ ] Supabase Auth redirect URLs include the production domain (email confirmation, reset).
 
 ---
 
@@ -189,11 +224,16 @@ local-demo mode (see README "End-to-End Smoke Tests"). All flows must pass.
 - **Demo accounts are local-only.** `student@karatou.test`, `admin@karatou.test`, and
   `platform@karatou.test` (password `demo1234`) exist only in the browser demo data, not
   in Supabase Auth. Real environments need real Auth users.
-- **No durable learner certificate rows** are seeded into `karatou_certificates` yet;
-  certificate behavior is proven by demo data and rollback-wrapped SQL.
-- **Cross-organization RLS isolation** is verified at the database layer (SQL) but not yet
-  by a browser E2E - that needs a seeded second organization plus a second enterprise-admin
-  Auth user (tracked as a `test.fixme` in `e2e/enterprise.spec.ts`).
+- **No durable learner certificate rows** exist in `karatou_certificates` yet (no learner
+  has completed a module in production); issuance itself is proven server-side.
+- **Cross-organization RLS isolation** is proven by `npm run test:rls` against a real
+  Postgres. The browser E2E for it stays a documented `test.fixme`: the Playwright suites
+  run hermetically with no Supabase, so they cannot exercise RLS at all.
+- **Lesson videos** are empty (`video: ''`) for all 19 authored lessons: the player shows a
+  "coming soon" placeholder until YouTube embed URLs are filled in.
+- **Attestation revocation is online-only**: verification requires a network call to the
+  `attestation-verify` Edge Function, which checks the registry. That is the price of
+  making a revoked attestation impossible to pass off as valid.
 - **PDF/DOCX lesson import** accepts files as sources but does not extract content in the
   browser; production extraction needs a server-side (Supabase Edge Function) workflow.
 - **Out of scope** for this release: payments/subscriptions, multi-tenant billing plans,

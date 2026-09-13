@@ -87,7 +87,7 @@ export function Verify() {
           <div className="flex justify-center mb-3">
             <Logo variant="default" />
           </div>
-          <p className="text-sm text-gray-500">{VERIFY_DISPLAY_HOST}/verify</p>
+          <p className="text-body text-gray-500">{VERIFY_DISPLAY_HOST}/verify</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-blue-md overflow-hidden">
@@ -95,8 +95,8 @@ export function Verify() {
             {isValid ? (
               <>
                 <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
-                <h1 className="font-playfair text-xl font-bold text-emerald-700">{t('verifiedCertificate')}</h1>
-                <p className="text-sm text-emerald-600 mt-1">{t('validCertificateBody')}</p>
+                <h1 className="font-heading text-h3 text-emerald-700">{t('verifiedCertificate')}</h1>
+                <p className="text-body text-emerald-600 mt-1">{t('validCertificateBody')}</p>
               </>
             ) : (
               <>
@@ -105,7 +105,7 @@ export function Verify() {
                 ) : (
                   <XCircle size={40} className={`${isExpired ? 'text-amber-500' : 'text-red-500'} mx-auto mb-2`} />
                 )}
-                <h1 className={`font-playfair text-xl font-bold ${statusTextClass}`}>
+                <h1 className={`font-heading text-h3 ${statusTextClass}`}>
                   {isLoading
                     ? t('loading')
                     : isRevoked
@@ -114,7 +114,7 @@ export function Verify() {
                         ? t('expiredCertificate')
                         : t('certificateNotFound')}
                 </h1>
-                <p className={`text-sm mt-1 ${statusBodyClass}`}>
+                <p className={`text-body mt-1 ${statusBodyClass}`}>
                   {isLoading
                     ? t('loadingContent')
                     : isRevoked
@@ -129,23 +129,23 @@ export function Verify() {
 
           <div className="px-6 py-6 space-y-4">
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">{t('holder')}</span>
-              <span className="text-sm font-semibold text-gray-900 text-right">{cert?.userName || t('unknown')}</span>
+              <span className="text-body text-gray-500">{t('holder')}</span>
+              <span className="text-body font-semibold text-gray-900 text-right">{cert?.userName || t('unknown')}</span>
             </div>
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">{t('module')}</span>
-              <span className="text-sm font-semibold text-gray-900 text-right">{moduleTitle}</span>
+              <span className="text-body text-gray-500">{t('module')}</span>
+              <span className="text-body font-semibold text-gray-900 text-right">{moduleTitle}</span>
             </div>
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">{t('issued')}</span>
-              <span className="text-sm text-gray-700">{cert?.issuedAt || '-'}</span>
+              <span className="text-body text-gray-500">{t('issued')}</span>
+              <span className="text-body text-gray-700">{cert?.issuedAt || '-'}</span>
             </div>
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">{t('validUntil')}</span>
-              <span className="text-sm text-gray-700">{cert?.expiresAt || '-'}</span>
+              <span className="text-body text-gray-500">{t('validUntil')}</span>
+              <span className="text-body text-gray-700">{cert?.expiresAt || '-'}</span>
             </div>
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">{t('status')}</span>
+              <span className="text-body text-gray-500">{t('status')}</span>
               {isValid ? (
                 <Badge variant="green">{t('active').toUpperCase()}</Badge>
               ) : isExpired ? (
@@ -157,8 +157,8 @@ export function Verify() {
               )}
             </div>
             <div className="flex justify-between items-start">
-              <span className="text-sm text-gray-500">ID</span>
-              <span className="text-sm font-mono text-gray-700 text-right break-all">{displayUid}</span>
+              <span className="text-body text-gray-500">ID</span>
+              <span className="text-body font-mono text-gray-700 text-right break-all">{displayUid}</span>
             </div>
           </div>
 
@@ -169,13 +169,13 @@ export function Verify() {
             <div>
               <div className="flex items-center gap-1.5 mb-1">
                 <Shield size={14} className="text-blue-500" />
-                <span className="text-xs font-medium text-blue-600">{t('issuedBy')}</span>
+                <span className="text-meta font-medium text-blue-600">{t('issuedBy')}</span>
               </div>
-              <p className="text-xs text-gray-500">
+              <p className="text-meta text-gray-500">
                 {t('verifyFooter')}
               </p>
-              <p className="mt-2 text-xs font-medium text-gray-700">{t('verificationUrl')}</p>
-              <p className="text-xs font-mono text-gray-500 break-all">{verificationUrl}</p>
+              <p className="mt-2 text-meta font-medium text-gray-700">{t('verificationUrl')}</p>
+              <p className="text-meta font-mono text-gray-500 break-all">{verificationUrl}</p>
             </div>
           </div>
 

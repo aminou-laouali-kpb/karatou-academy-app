@@ -43,6 +43,8 @@ const EnterpriseMembers = lazyWithRetry(() => import('./pages/EnterpriseMembers'
 const AdminContent = lazyWithRetry(() => import('./pages/AdminContent').then((m) => ({ default: m.AdminContent })));
 const AdminTeam = lazyWithRetry(() => import('./pages/AdminTeam').then((m) => ({ default: m.AdminTeam })));
 const AdminAttestations = lazyWithRetry(() => import('./pages/AdminAttestations').then((m) => ({ default: m.AdminAttestations })));
+const AdminLessonStudio = lazyWithRetry(() => import('./pages/AdminLessonStudio').then((m) => ({ default: m.AdminLessonStudio })));
+const AdminAttestationRegistry = lazyWithRetry(() => import('./pages/AdminAttestationRegistry').then((m) => ({ default: m.AdminAttestationRegistry })));
 const AdminNewsletter = lazyWithRetry(() => import('./pages/AdminNewsletter').then((m) => ({ default: m.AdminNewsletter })));
 const NotFound = lazyWithRetry(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
@@ -150,10 +152,26 @@ function App() {
                 )}
               />
               <Route
+                path="/admin/lecons"
+                element={(
+                  <ProtectedRoute role="platform_admin">
+                    <AdminLessonStudio />
+                  </ProtectedRoute>
+                )}
+              />
+              <Route
                 path="/admin/attestations"
                 element={(
                   <ProtectedRoute role="platform_admin">
                     <AdminAttestations />
+                  </ProtectedRoute>
+                )}
+              />
+              <Route
+                path="/admin/attestations/registry"
+                element={(
+                  <ProtectedRoute role="platform_admin">
+                    <AdminAttestationRegistry />
                   </ProtectedRoute>
                 )}
               />

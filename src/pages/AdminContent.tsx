@@ -475,12 +475,12 @@ export function AdminContent() {
 
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-7">
-          <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Karatou CMS</p>
-          <h1 className="font-playfair text-3xl font-bold text-gray-900 mt-1">{t('cmsTitle')}</h1>
-          <p className="text-sm text-gray-500 mt-2 max-w-2xl">
+          <p className="text-eyebrow text-blue-600">Karatou CMS</p>
+          <h1 className="font-heading text-h1 text-gray-900 mt-1">{t('cmsTitle')}</h1>
+          <p className="text-body text-gray-500 mt-2 max-w-2xl">
             {t('cmsIntro')}
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700">
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-meta font-medium text-blue-700">
             <span className="h-2 w-2 rounded-full bg-blue-500" />
             {t('cmsStorage')} {contentBackend === 'supabase' ? 'Supabase' : t('cmsStorageLocal')} - {contentSyncStatus}
           </div>
@@ -497,15 +497,15 @@ export function AdminContent() {
               <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
                 {item.icon}
               </div>
-              <p className="font-playfair text-2xl font-bold text-gray-900">{item.value}</p>
-              <p className="text-xs uppercase tracking-wider text-gray-500 mt-1">{item.label}</p>
+              <p className="font-heading text-h2 text-gray-900">{item.value}</p>
+              <p className="text-eyebrow text-gray-500 mt-1">{item.label}</p>
             </div>
           ))}
         </div>
 
         {notice && (
           <div
-            className={`mb-6 flex items-start gap-2 rounded-2xl border px-4 py-3 text-sm ${noticeStyles[notice.tone]}`}
+            className={`mb-6 flex items-start gap-2 rounded-2xl border px-4 py-3 text-body ${noticeStyles[notice.tone]}`}
             role={notice.tone === 'error' ? 'alert' : 'status'}
             aria-live="polite"
           >
@@ -525,12 +525,12 @@ export function AdminContent() {
                 {sortedRubriques.map((rubrique) => (
                   <div key={rubrique.id} className="rounded-xl border border-gray-100 px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-medium text-gray-900">{rubrique.icon} {rubrique.name}</span>
+                      <span className="text-body font-medium text-gray-900">{rubrique.icon} {rubrique.name}</span>
                       <Badge variant={rubrique.status === 'published' ? 'green' : 'gold'}>
                         {rubrique.status === 'published' ? t('cmsStatusPublished') : t('cmsStatusDraft')}
                       </Badge>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">{rubrique.description}</p>
+                    <p className="text-meta text-gray-500 mt-1">{rubrique.description}</p>
                   </div>
                 ))}
               </div>
@@ -539,7 +539,7 @@ export function AdminContent() {
                   value={newRubrique}
                   onChange={(event) => setNewRubrique(event.target.value)}
                   placeholder={t('cmsNewRubrique')}
-                  className="min-w-0 flex-1 rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="min-w-0 flex-1 rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 />
                 <Button variant="primary" size="sm" onClick={handleCreateRubrique}>
                   <Plus size={15} />
@@ -565,12 +565,12 @@ export function AdminContent() {
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-semibold text-gray-900">{module.emoji} {module.title}</span>
+                      <span className="text-body font-semibold text-gray-900">{module.emoji} {module.title}</span>
                       <Badge variant={module.status === 'published' ? 'green' : 'gold'}>
                         {module.status === 'published' ? t('cmsStatusPublished') : t('cmsStatusDraft')}
                       </Badge>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">{module.courses.length} {t('cmsLessonsStat').toLowerCase()} - EN {translationCompleteness(module, 'en')}% - HA {translationCompleteness(module, 'ha')}%</p>
+                    <p className="text-meta text-gray-500 mt-1">{module.courses.length} {t('cmsLessonsStat').toLowerCase()} - EN {translationCompleteness(module, 'en')}% - HA {translationCompleteness(module, 'ha')}%</p>
                   </button>
                 ))}
               </div>
@@ -581,8 +581,8 @@ export function AdminContent() {
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
                 <div>
-                  <h2 className="font-playfair text-xl font-bold text-gray-900">{t('cmsEditorTitle')}</h2>
-                  <p className="text-sm text-gray-500">{t('cmsEditorSubtitle')}</p>
+                  <h2 className="font-heading text-h3 text-gray-900">{t('cmsEditorTitle')}</h2>
+                  <p className="text-body text-gray-500">{t('cmsEditorSubtitle')}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <Button
@@ -607,7 +607,7 @@ export function AdminContent() {
               {deleteRequested && (
                 <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-sm font-medium text-red-700">
+                    <p className="text-body font-medium text-red-700">
                       {t('cmsDeleteConfirm1')} {draft.title}. {t('cmsDeleteConfirm2')}
                     </p>
                     <div className="flex gap-2">
@@ -634,27 +634,27 @@ export function AdminContent() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsTitleFr')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsTitleFr')}</span>
                   <input
                     value={draft.title}
                     onChange={(event) => patchDraft({ title: event.target.value })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsSlug')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsSlug')}</span>
                   <input
                     value={draft.slug}
                     onChange={(event) => patchDraft({ slug: slugify(event.target.value) })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsRubrique')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsRubrique')}</span>
                   <select
                     value={draft.rubriqueId || ''}
                     onChange={(event) => patchDraft({ rubriqueId: event.target.value })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   >
                     {sortedRubriques.map((rubrique) => (
                       <option key={rubrique.id} value={rubrique.id}>{rubrique.name}</option>
@@ -662,38 +662,38 @@ export function AdminContent() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsStatusLabel')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsStatusLabel')}</span>
                   <select
                     value={draft.status || 'draft'}
                     onChange={(event) => patchDraft({ status: event.target.value as LearningModule['status'] })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   >
                     <option value="draft">{t('cmsStatusDraft')}</option>
                     <option value="published">{t('cmsStatusPublished')}</option>
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsSubtitleFr')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsSubtitleFr')}</span>
                   <input
                     value={draft.subtitle}
                     onChange={(event) => patchDraft({ subtitle: event.target.value })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsLevel')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsLevel')}</span>
                   <input
                     value={draft.level}
                     onChange={(event) => patchDraft({ level: event.target.value })}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
                 <label className="block md:col-span-2">
-                  <span className="text-sm font-medium text-gray-700">{t('cmsDescriptionFr')}</span>
+                  <span className="text-body font-medium text-gray-700">{t('cmsDescriptionFr')}</span>
                   <textarea
                     value={draft.description}
                     onChange={(event) => patchDraft({ description: event.target.value })}
-                    className="mt-1.5 h-24 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                    className="mt-1.5 h-24 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
               </div>
@@ -712,19 +712,19 @@ export function AdminContent() {
                         value={draft.translations?.[lang]?.title || ''}
                         onChange={(event) => patchTranslation(lang, { title: event.target.value })}
                         placeholder={`Titre ${lang.toUpperCase()}`}
-                        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <input
                         value={draft.translations?.[lang]?.subtitle || ''}
                         onChange={(event) => patchTranslation(lang, { subtitle: event.target.value })}
                         placeholder={`Sous-titre ${lang.toUpperCase()}`}
-                        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <textarea
                         value={draft.translations?.[lang]?.description || ''}
                         onChange={(event) => patchTranslation(lang, { description: event.target.value })}
                         placeholder={`Description ${lang.toUpperCase()}`}
-                        className="h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        className="h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                     </div>
                   </div>
@@ -735,8 +735,8 @@ export function AdminContent() {
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-blue-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="font-playfair text-xl font-bold text-gray-900">{t('cmsLessonsTitle')}</h2>
-                  <p className="text-sm text-gray-500">{t('cmsLessonsSubtitle')}</p>
+                  <h2 className="font-heading text-h3 text-gray-900">{t('cmsLessonsTitle')}</h2>
+                  <p className="text-body text-gray-500">{t('cmsLessonsSubtitle')}</p>
                 </div>
                 <Button variant="gold" size="sm" onClick={handleAddCourse}>
                   <Plus size={15} /> {t('cmsAddLesson')}
@@ -747,7 +747,7 @@ export function AdminContent() {
                 {draft.courses.map((course, index) => (
                   <div key={course.id} className="rounded-2xl border border-gray-200 p-4">
                     <div className="flex items-center justify-between gap-3 mb-3">
-                      <p className="text-sm font-semibold text-gray-900">{t('cmsLesson')} {index + 1}</p>
+                      <p className="text-body font-semibold text-gray-900">{t('cmsLesson')} {index + 1}</p>
                       <Button variant="ghost" size="sm" onClick={() => handleRemoveCourse(course.id)}>
                         <Trash2 size={14} /> {t('cmsRemoveLesson')}
                       </Button>
@@ -756,34 +756,34 @@ export function AdminContent() {
                       <input
                         value={course.title}
                         onChange={(event) => patchCourse(course.id, { title: event.target.value })}
-                        className="rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        className="rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <input
                         value={course.duration}
                         onChange={(event) => patchCourse(course.id, { duration: event.target.value })}
-                        className="rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        className="rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                     </div>
                     <textarea
                       value={course.description}
                       onChange={(event) => patchCourse(course.id, { description: event.target.value })}
-                      className="mt-3 h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                      className="mt-3 h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                     />
                     <div className="grid md:grid-cols-2 gap-3 mt-3">
                       {(['en', 'ha'] as const).map((lang) => (
                         <div key={lang} className="rounded-xl bg-gray-50 p-3">
-                          <p className="text-xs font-semibold text-gray-500 mb-2">{lang.toUpperCase()}</p>
+                          <p className="text-meta font-semibold text-gray-500 mb-2">{lang.toUpperCase()}</p>
                           <input
                             value={course.translations?.[lang]?.title || ''}
                             onChange={(event) => patchCourseTranslation(course.id, lang, { title: event.target.value })}
                             placeholder="Titre"
-                            className="mb-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+                            className="mb-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-body outline-none"
                           />
                           <input
                             value={course.translations?.[lang]?.description || ''}
                             onChange={(event) => patchCourseTranslation(course.id, lang, { description: event.target.value })}
                             placeholder="Description"
-                            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+                            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-body outline-none"
                           />
                         </div>
                       ))}
@@ -793,7 +793,7 @@ export function AdminContent() {
                 {draft.courses.length === 0 && (
                   <div className="rounded-2xl border border-dashed border-gray-300 p-8 text-center">
                     <BookOpen size={24} className="text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">{t('cmsNoLessons')}</p>
+                    <p className="text-body text-gray-500">{t('cmsNoLessons')}</p>
                   </div>
                 )}
               </div>
@@ -808,13 +808,13 @@ export function AdminContent() {
                 <textarea
                   value={jsonText}
                   onChange={(event) => setJsonText(event.target.value)}
-                  className="h-72 w-full rounded-xl border border-gray-200 px-3 py-2 text-xs font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                  className="h-72 w-full rounded-xl border border-gray-200 px-3 py-2 text-meta font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 />
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Button variant="primary" size="sm" onClick={handleJsonImport}>
                     <Upload size={15} /> {t('cmsImportJsonBtn')}
                   </Button>
-                  <label className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
+                  <label className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 text-body font-medium text-gray-700 cursor-pointer hover:bg-gray-50">
                     <FileJson size={15} /> {t('cmsFilePicker')}
                     <input type="file" accept=".json,.pdf,.docx" className="hidden" onChange={handleFileImport} />
                   </label>
@@ -829,7 +829,7 @@ export function AdminContent() {
                 <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 mb-4">
                   <div className="flex items-start gap-3">
                     <AlertCircle size={18} className="text-blue-600 mt-0.5" />
-                    <p className="text-sm text-blue-800">
+                    <p className="text-body text-blue-800">
                       {t('cmsSourcesInfo')}
                     </p>
                   </div>
@@ -838,16 +838,16 @@ export function AdminContent() {
                   {contentImports.map((record) => (
                     <div key={record.id} className="rounded-xl border border-gray-100 px-3 py-3">
                       <div className="flex items-center justify-between gap-3">
-                        <span className="text-sm font-medium text-gray-900 truncate">{record.fileName}</span>
+                        <span className="text-body font-medium text-gray-900 truncate">{record.fileName}</span>
                         <Badge variant={record.status === 'imported' ? 'green' : record.status === 'queued' ? 'blue' : 'red'}>
                           {record.status}
                         </Badge>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">{record.message}</p>
+                      <p className="text-meta text-gray-500 mt-1">{record.message}</p>
                     </div>
                   ))}
                   {contentImports.length === 0 && (
-                    <p className="text-sm text-gray-500">{t('cmsNoSources')}</p>
+                    <p className="text-body text-gray-500">{t('cmsNoSources')}</p>
                   )}
                 </div>
               </section>

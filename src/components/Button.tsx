@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface ButtonProps {
+export interface ButtonProps {
   children: ReactNode;
   variant?: 'primary' | 'gold' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
@@ -19,9 +19,9 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-2.5 text-sm',
-  lg: 'px-8 py-3.5 text-base',
+  sm: 'px-4 py-2 text-body-sm',
+  md: 'px-6 py-2.5 text-body',
+  lg: 'px-8 py-3.5 text-body-lg',
 };
 
 export function Button({

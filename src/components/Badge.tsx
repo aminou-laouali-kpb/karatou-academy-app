@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface BadgeProps {
+export interface BadgeProps {
   children: ReactNode;
   variant?: 'blue' | 'gold' | 'green' | 'red' | 'gray';
   className?: string;
@@ -16,7 +16,7 @@ const variantStyles = {
 
 export function Badge({ children, variant = 'blue', className = '' }: BadgeProps) {
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${variantStyles[variant]} ${className}`}>
+    <span className={`inline-flex items-center px-3 py-1 rounded-full text-meta font-medium ${variantStyles[variant]} ${className}`}>
       {children}
     </span>
   );
