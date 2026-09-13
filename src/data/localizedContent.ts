@@ -1,5 +1,13 @@
 import { Language } from './translations';
 import { LessonContent, lesson1 } from './lessonContent';
+import {
+  claudeLesson1ByLanguage,
+  claudeLesson2ByLanguage,
+  claudeLesson3ByLanguage,
+  claudeLesson4ByLanguage,
+  claudeLesson5ByLanguage,
+  claudeLesson6ByLanguage,
+} from './lessons/introduction-claude-ai';
 import { Course, LearningModule } from '../types';
 
 type CourseCopy = Pick<Course, 'title' | 'description'>;
@@ -57,6 +65,20 @@ const copy: Record<Language, Record<string, ModuleCopy>> = {
         p5: { title: 'Retrospective and improvement', description: 'Help the team improve after each cycle.' },
       },
     },
+    'introduction-claude-ai': {
+      title: 'Introduction to Claude AI',
+      subtitle: 'Using an AI assistant day to day',
+      description: 'Get started with Claude step by step: write a clear request, work on your own documents and check answers before using them.',
+      level: 'Beginner',
+      courses: {
+        cl1: { title: 'What is Claude?', description: 'Understand what Claude is, where to reach it and what not to expect from it.' },
+        cl2: { title: 'Writing a good request', description: 'The four ingredients of a clear instruction: context, task, format, example.' },
+        cl3: { title: 'Working with your own documents', description: 'Upload a PDF or a table, summarize, extract and translate.' },
+        cl4: { title: 'Everyday practical uses', description: 'Draft, translate, prepare a meeting and read a simple table.' },
+        cl5: { title: 'Limits, verification and privacy', description: 'Spot plausible errors and protect sensitive data.' },
+        cl6: { title: 'Final assessment', description: 'Validate skills and issue the digital certificate.' },
+      },
+    },
   },
   ha: {
     'intelligence-artificielle': {
@@ -100,6 +122,20 @@ const copy: Record<Language, Record<string, ModuleCopy>> = {
         p3: { title: 'Shirya sprint', description: 'Tsara mako daya da abubuwan bayarwa.' },
         p4: { title: 'Bibiyar hadari', description: 'Gano matsala kafin ta hana aiki.' },
         p5: { title: 'Bita da ingantawa', description: 'Inganta tawaga bayan kowane zagaye.' },
+      },
+    },
+    'introduction-claude-ai': {
+      title: 'Gabatarwa ga Claude AI',
+      subtitle: 'Amfani da mataimakin AI kullum',
+      description: 'Koyi amfani da Claude mataki-mataki: rubuta bukata a fili, yin aiki da takardunka, da tantance amsoshi kafin amfani.',
+      level: 'Mai farawa',
+      courses: {
+        cl1: { title: 'Menene Claude?', description: 'Fahimci menene Claude, inda za ka same shi da abin da bai kamata ka sa rai ba.' },
+        cl2: { title: 'Rubuta bukata mai kyau', description: 'Sinadarai hudu na umarni bayyananne: mahalli, aiki, tsari, misali.' },
+        cl3: { title: 'Aiki da takardunka', description: 'Aika PDF ko tebur, takaitawa, ciro bayanai da fassara.' },
+        cl4: { title: 'Amfani na yau da kullum', description: 'Rubutu, fassara, shirya taro da karanta tebur mai sauki.' },
+        cl5: { title: 'Iyaka, tantancewa da sirri', description: 'Gano kurakurai masu kyan gani da kare bayanai masu muhimmanci.' },
+        cl6: { title: 'Jarabawar karshe', description: 'Tabbatar da kwarewa kuma fitar da takarda.' },
       },
     },
   },
@@ -268,6 +304,12 @@ export function getLessonOne(lang: Language) {
 // See docs/authoring-lessons.md.
 const authoredLessons: Record<string, Record<Language, LessonContent>> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
+  'introduction-claude-ai/cl1': claudeLesson1ByLanguage,
+  'introduction-claude-ai/cl2': claudeLesson2ByLanguage,
+  'introduction-claude-ai/cl3': claudeLesson3ByLanguage,
+  'introduction-claude-ai/cl4': claudeLesson4ByLanguage,
+  'introduction-claude-ai/cl5': claudeLesson5ByLanguage,
+  'introduction-claude-ai/cl6': claudeLesson6ByLanguage,
 };
 
 export function getAuthoredLesson(

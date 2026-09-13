@@ -55,9 +55,11 @@ export function ModuleCard({ module }: ModuleCardProps) {
           <span className="flex items-center gap-1">
             <Users size={13} /> {localizedModule.enrolled}
           </span>
-          <span className="flex items-center gap-1">
-            <Star size={13} className="text-gold-400" /> {localizedModule.rating}
-          </span>
+          {localizedModule.rating > 0 && (
+            <span className="flex items-center gap-1">
+              <Star size={13} className="text-gold-400" /> {localizedModule.rating}
+            </span>
+          )}
         </div>
 
         {isInProgress && (
