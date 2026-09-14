@@ -57,6 +57,20 @@ const copy: Record<Language, Record<string, ModuleCopy>> = {
         p5: { title: 'Retrospective and improvement', description: 'Help the team improve after each cycle.' },
       },
     },
+    'introduction-claude-ai': {
+      title: 'Introduction to Claude AI',
+      subtitle: 'Using an AI assistant day to day',
+      description: 'Get started with Claude step by step: write a clear request, work on your own documents and check answers before using them.',
+      level: 'Beginner',
+      courses: {
+        cl1: { title: 'What is Claude?', description: 'Understand what Claude is, where to reach it and what not to expect from it.' },
+        cl2: { title: 'Writing a good request', description: 'The four ingredients of a clear instruction: context, task, format, example.' },
+        cl3: { title: 'Working with your own documents', description: 'Upload a PDF or a table, summarize, extract and translate.' },
+        cl4: { title: 'Everyday practical uses', description: 'Draft, translate, prepare a meeting and read a simple table.' },
+        cl5: { title: 'Limits, verification and privacy', description: 'Spot plausible errors and protect sensitive data.' },
+        cl6: { title: 'Final assessment', description: 'Validate skills and issue the digital certificate.' },
+      },
+    },
   },
   ha: {
     'intelligence-artificielle': {
@@ -100,6 +114,20 @@ const copy: Record<Language, Record<string, ModuleCopy>> = {
         p3: { title: 'Shirya sprint', description: 'Tsara mako daya da abubuwan bayarwa.' },
         p4: { title: 'Bibiyar hadari', description: 'Gano matsala kafin ta hana aiki.' },
         p5: { title: 'Bita da ingantawa', description: 'Inganta tawaga bayan kowane zagaye.' },
+      },
+    },
+    'introduction-claude-ai': {
+      title: 'Gabatarwa ga Claude AI',
+      subtitle: 'Amfani da mataimakin AI kullum',
+      description: 'Koyi amfani da Claude mataki-mataki: rubuta bukata a fili, yin aiki da takardunka, da tantance amsoshi kafin amfani.',
+      level: 'Mai farawa',
+      courses: {
+        cl1: { title: 'Menene Claude?', description: 'Fahimci menene Claude, inda za ka same shi da abin da bai kamata ka sa rai ba.' },
+        cl2: { title: 'Rubuta bukata mai kyau', description: 'Sinadarai hudu na umarni bayyananne: mahalli, aiki, tsari, misali.' },
+        cl3: { title: 'Aiki da takardunka', description: 'Aika PDF ko tebur, takaitawa, ciro bayanai da fassara.' },
+        cl4: { title: 'Amfani na yau da kullum', description: 'Rubutu, fassara, shirya taro da karanta tebur mai sauki.' },
+        cl5: { title: 'Iyaka, tantancewa da sirri', description: 'Gano kurakurai masu kyan gani da kare bayanai masu muhimmanci.' },
+        cl6: { title: 'Jarabawar karshe', description: 'Tabbatar da kwarewa kuma fitar da takarda.' },
       },
     },
   },
@@ -292,6 +320,12 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'data-analysis/d4': () => import('./lessons/da-d4-visualisation').then((m) => m.daLessonD4),
   'data-analysis/d5': () => import('./lessons/da-d5-raconter').then((m) => m.daLessonD5),
   'data-analysis/d6': () => import('./lessons/da-d6-mini-projet').then((m) => m.daLessonD6),
+  'introduction-claude-ai/cl1': () => import('./lessons/introduction-claude-ai/cl1').then((m) => m.claudeLesson1ByLanguage),
+  'introduction-claude-ai/cl2': () => import('./lessons/introduction-claude-ai/cl2').then((m) => m.claudeLesson2ByLanguage),
+  'introduction-claude-ai/cl3': () => import('./lessons/introduction-claude-ai/cl3').then((m) => m.claudeLesson3ByLanguage),
+  'introduction-claude-ai/cl4': () => import('./lessons/introduction-claude-ai/cl4').then((m) => m.claudeLesson4ByLanguage),
+  'introduction-claude-ai/cl5': () => import('./lessons/introduction-claude-ai/cl5').then((m) => m.claudeLesson5ByLanguage),
+  'introduction-claude-ai/cl6': () => import('./lessons/introduction-claude-ai/cl6').then((m) => m.claudeLesson6ByLanguage),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the
