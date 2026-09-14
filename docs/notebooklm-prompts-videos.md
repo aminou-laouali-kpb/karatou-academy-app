@@ -92,6 +92,11 @@ durée ou ajoutez « insiste sur l'exemple … » si besoin.
 > **FR** : Crée une vidéo de 3–4 minutes qui présente le module « Intelligence Artificielle » à des professionnels africains débutants (ONG, coopératives, petites structures). Explique ce qu'ils vont apprendre (comprendre l'IA, les LLMs, écrire de bons prompts, choisir des cas d'usage, automatiser, rester éthique) et pourquoi c'est utile dans leur travail quotidien. Ton motivant et concret, exemples africains (rapports bailleurs, terrain, FCFA). Termine en invitant à commencer par la première leçon.
 > **EN** : Create a 3–4 minute video introducing the “Artificial Intelligence” module to beginner African professionals (NGOs, cooperatives, small organizations). Explain what they'll learn (understanding AI and LLMs, writing good prompts, choosing use cases, automation, ethics) and why it matters in their daily work. Motivating, concrete tone with African examples. End by inviting them to start the first lesson.
 
+> **Module 1 — voir [`notebooklm-module-1-ia.md`](notebooklm-module-1-ia.md).** Ce document-la est
+> genere depuis le contenu reel des lecons : il contient la source a charger dans NotebookLM
+> (FR et EN) en plus des prompts, et son cadrage d'audience n'est plus limite a l'Afrique.
+> Les prompts ci-dessous sont conserves pour memoire et ne doivent plus servir de reference.
+
 ## Leçon c1 — Introduction à l'IA
 **Source** : sections Contenu + Exemple + Glossaire de la leçon c1.
 > **FR** : Crée une vidéo explicative de 4–6 minutes pour des professionnels africains débutants. Objectif : comprendre ce que l'IA peut faire et ce qu'elle ne peut PAS faire. Couvre dans l'ordre : 1) une définition simple de l'IA, sans jargon ; 2) la différence entre IA spécialisée (qui fait une tâche) et l'idée d'IA « générale » ; 3) des exemples concrets déjà utilisés en Afrique (traduction, prévisions, mobile money, agriculture) ; 4) les limites et les fausses idées. Langage simple, phrases courtes, exemples FCFA/terrain. Termine par 1 chose que l'apprenant peut observer dans sa propre journée. Évite tout jargon non expliqué.
