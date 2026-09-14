@@ -8,7 +8,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "id": "c4",
     "lessonNumber": 4,
     "title": "L'IA dans votre organisation — choisir les bons cas d'usage",
-    "objective": "À la fin de cette leçon, vous serez capable d'identifier les activités de votre organisation où l'IA peut apporter une réelle valeur. Vous saurez évaluer la faisabilité de chaque opportunité en tenant compte des données disponibles, des contraintes du terrain et du niveau de risque. Vous pourrez prioriser un premier cas d'usage pilote et préparer votre équipe à l'adopter progressivement.",
+    "objective": "À la fin de cette leçon, vous serez capable d'identifier les activités où l'IA peut apporter une réelle valeur, dans l'organisation qui est la vôtre : entreprise, administration, école, hôpital, coopérative, association, ONG ou activité indépendante. Vous saurez évaluer la faisabilité de chaque opportunité en tenant compte des données disponibles, des contraintes concrètes de votre environnement de travail et du niveau de risque. Vous pourrez prioriser un premier cas d'usage pilote et préparer votre équipe à l'adopter progressivement.",
     "video": {
       "fr": "",
       "en": "",
@@ -17,19 +17,19 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Cartographier les cas d'usage : où l'IA fait vraiment la différence",
-        "body": "Avant d'adopter un outil d'IA, la première question n'est pas « quelle technologie choisir ? » mais « où avons-nous des problèmes que l'IA peut résoudre ? ». Pensez à votre journée de travail : quelles tâches répétitives vous prennent beaucoup de temps ? Quels rapports reviennent chaque mois avec les mêmes tableaux à remplir ? Quelles informations cherchez-vous souvent en cherchant dans des dizaines de fichiers ?\n\nL'IA crée de la valeur de trois façons principales. Elle fait gagner du temps sur des tâches répétitives, comme traduire des formulaires du français vers le haoussa ou résumer de longs comptes rendus de réunion. Elle améliore la qualité, par exemple en détectant des erreurs dans une liste de bénéficiaires avant l'envoi d'une aide d'urgence. Elle élargit l'accès, en permettant à un agent de santé communautaire en zone rurale de consulter des conseils médicaux en langue locale sans connexion permanente.\n\nImaginez un magasinier qui trie chaque matin des centaines de fiches papier pour retrouver les stocks disponibles. Un simple système de recherche automatisée lui ferait gagner deux heures par jour. C'est exactement cela : l'IA comme assistant intelligent, pas comme remplacement du travail humain. Dans votre organisation, commencez par lister cinq tâches qui vous épuisent. Ce sont vos premiers candidats."
+        "body": "Avant d'adopter un outil d'IA, la première question n'est pas « quelle technologie choisir ? » mais « où avons-nous des problèmes que l'IA peut résoudre ? ». Le mot organisation désigne ici tout endroit où l'on travaille ensemble : une entreprise, une administration, une école, un hôpital, une coopérative, une association, une ONG, une équipe de bénévoles, ou même un cabinet d'une seule personne. Pensez à votre journée de travail : quelles tâches répétitives vous prennent beaucoup de temps ? Quels rapports reviennent chaque mois avec les mêmes tableaux à remplir ? Quelles informations cherchez-vous en fouillant des dizaines de fichiers ?\n\nL'IA crée de la valeur de trois façons principales. Elle fait gagner du temps sur des tâches répétitives : traduire un formulaire du français vers le haoussa, résumer un long compte rendu de réunion, préparer un devis à partir d'un modèle. Elle améliore la qualité : repérer des erreurs dans une liste de clients, d'élèves ou de bénéficiaires avant un envoi important. Elle élargit l'accès : un agent de santé communautaire consulte des conseils en langue locale sans connexion permanente, un artisan rédige une offre dans une langue qu'il maîtrise mal, un étudiant révise avec un tuteur disponible à toute heure.\n\nImaginez un magasinier qui trie chaque matin des centaines de fiches papier pour retrouver les stocks disponibles. Un simple système de recherche automatisée lui ferait gagner deux heures par jour. Le même raisonnement vaut pour une secrétaire de mairie, un comptable de petite entreprise ou un enseignant qui prépare ses cours. C'est exactement cela : l'IA comme assistant intelligent, pas comme remplacement du travail humain. Commencez par lister cinq tâches qui vous épuisent. Ce sont vos premiers candidats."
       },
       {
         "title": "Prioriser : choisir le bon cas d'usage avant de se lancer",
-        "body": "Toutes les idées ne se valent pas. Une matrice simple vous aide à choisir : placez chaque idée sur deux axes — la valeur qu'elle apporte (gain de temps, qualité, portée) et l'effort qu'elle demande (données disponibles, coût, compétences nécessaires). Les meilleurs candidats pilotes sont ceux à haute valeur et faible effort.\n\nLa disponibilité des données est cruciale. Si vous souhaitez automatiser le tri de listes de bénéficiaires, avez-vous déjà ces listes sous forme numérique ? Sont-elles cohérentes et complètes ? Une ONG au Sahel qui voulait utiliser l'IA pour analyser les données de nutrition a découvert que 40 % de ses données étaient saisies différemment selon le collecteur. Il a fallu d'abord nettoyer les données avant toute automatisation.\n\nLe niveau de risque compte aussi. Utiliser l'IA pour rédiger un premier brouillon de rapport interne est peu risqué : un humain relit et corrige. Utiliser l'IA pour décider seule qui reçoit une aide alimentaire est très risqué : des erreurs peuvent priver des familles vulnérables de leur droit. Gardez toujours un humain responsable pour les décisions qui touchent directement des personnes. C'est comme le contrôle qualité dans une coopérative de cacao : on vérifie avant d'exporter."
+        "body": "Toutes les idées ne se valent pas. Une matrice simple vous aide à choisir : placez chaque idée sur deux axes — la valeur qu'elle apporte (gain de temps, qualité, portée) et l'effort qu'elle demande (données disponibles, coût, compétences nécessaires). Les meilleurs candidats pilotes sont ceux à haute valeur et faible effort.\n\nLa disponibilité des données est cruciale. Si vous souhaitez automatiser le tri d'une liste — clients, élèves, adhérents ou bénéficiaires — l'avez-vous déjà sous forme numérique ? Est-elle cohérente et complète ? Une ONG au Sahel qui voulait utiliser l'IA pour analyser des données de nutrition a découvert que 40 % de ses données étaient saisies différemment selon le collecteur. Il a fallu d'abord nettoyer les données avant toute automatisation. Le même piège attend la boutique dont l'historique des ventes vit dans des carnets papier, ou l'école dont les notes sont dispersées dans dix classeurs.\n\nLe niveau de risque compte aussi. Utiliser l'IA pour rédiger un premier brouillon de rapport interne est peu risqué : un humain relit et corrige. La laisser décider seule qui reçoit une aide alimentaire, qui obtient un crédit ou qui est recruté est très risqué : une erreur peut priver quelqu'un d'un droit. Gardez toujours un humain responsable pour les décisions qui touchent directement des personnes. C'est comme le contrôle qualité dans une coopérative de cacao, de café ou de riz : on vérifie avant d'expédier."
       },
       {
-        "title": "Contraintes locales : tenir compte de la réalité du terrain",
-        "body": "Un outil d'IA qui fonctionne parfaitement à Dakar ou Abidjan peut être inutilisable dans un bureau de district sans électricité stable. Avant de choisir une solution, posez-vous trois questions pratiques : Y a-t-il une connexion internet fiable ? L'outil fonctionne-t-il hors ligne ou sur une connexion 2G ? Les agents de terrain ont-ils des smartphones ou seulement des téléphones basiques ?\n\nLa langue est une contrainte majeure souvent sous-estimée. La plupart des outils d'IA performent bien en français ou en anglais, mais beaucoup moins en haoussa, en mooré ou en bambara. Si vos bénéficiaires et vos agents s'expriment principalement en langue locale, vérifiez que l'outil choisi supporte cette langue ou prévoyez une étape de traduction dans votre processus. Des projets d'IA pour la santé au Niger ont montré l'importance d'intégrer le haoussa dès la conception.\n\nLe coût est souvent oublié dans les projets pilotes. Un abonnement à un outil d'IA peut sembler abordable en euros, mais représenter une part importante du budget d'une organisation locale. Explorez d'abord les versions gratuites ou les offres destinées aux ONG. Enfin, évaluez honnêtement les compétences disponibles dans votre équipe : même le meilleur outil est inutile si personne ne sait l'utiliser et si aucune formation n'est prévue. Un téléphone avec Orange Money ne sert à rien si on ne sait pas s'en servir — l'IA, c'est pareil."
+        "title": "Contraintes concrètes : tenir compte de la réalité de votre terrain",
+        "body": "Un outil d'IA qui fonctionne parfaitement au siège, à Dakar, Abidjan, Lima ou Manille, peut être inutilisable dans un bureau de district sans électricité stable, dans un atelier où six personnes partagent un seul ordinateur, ou dans une école où le réseau ne passe que près de la fenêtre. Avant de choisir une solution, posez-vous trois questions pratiques : la connexion internet est-elle fiable ? L'outil fonctionne-t-il hors ligne ou sur une connexion lente ? Les personnes qui l'utiliseront ont-elles un ordinateur, un smartphone récent, ou seulement un téléphone basique partagé ?\n\nLa langue est une contrainte majeure souvent sous-estimée. La plupart des outils d'IA performent bien en français, en anglais ou en espagnol, beaucoup moins en haoussa, en bambara, en quechua ou en créole haïtien. Si vos collègues, vos clients ou vos bénéficiaires s'expriment d'abord dans une langue peu représentée, vérifiez que l'outil choisi la prend en charge ou prévoyez une étape de traduction et de relecture dans votre processus. Des projets d'IA pour la santé au Niger ont montré l'importance d'intégrer le haoussa dès la conception.\n\nLe coût est souvent oublié dans les projets pilotes. Un abonnement peut sembler abordable vu de loin et représenter une part importante du budget d'une petite structure : une association de quartier, une clinique privée, une école communautaire, un atelier de couture. Explorez d'abord les versions gratuites, les tarifs réduits pour l'éducation ou les offres destinées aux associations et aux ONG. Enfin, évaluez honnêtement les compétences disponibles dans votre équipe : même le meilleur outil est inutile si personne ne sait l'utiliser et si aucune formation n'est prévue. Un téléphone avec Orange Money, M-Pesa, bKash ou Pix ne sert à rien si on ne sait pas s'en servir — l'IA, c'est pareil."
       },
       {
         "title": "Conduite du changement : faire adopter l'IA par votre équipe",
-        "body": "Introduire un outil d'IA dans une organisation, c'est d'abord un défi humain, pas technologique. Les résistances sont normales et légitimes : peur de perdre son travail, inquiétude face à quelque chose d'inconnu, méfiance envers un outil « qui se trompe parfois ». Votre rôle de leader est d'écouter ces craintes, de les prendre au sérieux et de montrer par l'exemple.\n\nCommencez petit avec un pilote limité : une équipe, une tâche, un mois. Documentez les résultats honnêtement — ce qui a fonctionné et ce qui n'a pas fonctionné. Impliquez les utilisateurs finaux dès le début : ce sont eux qui connaissent le mieux les problèmes à résoudre. Une infirmière qui utilise l'IA pour rédiger ses rapports quotidiens sera la meilleure ambassadrice si elle a été associée au choix de l'outil.\n\nLa gouvernance légère est essentielle : définissez clairement qui a le droit d'utiliser l'outil, pour quelles tâches, avec quelles données, et qui vérifie les résultats. Ce n'est pas de la bureaucratie — c'est de la responsabilité. Pensez à une tontine bien organisée : chacun connaît son rôle, les règles sont claires et la confiance se construit au fil des cycles. Le passage à l'échelle vient naturellement une fois que le pilote a prouvé sa valeur et que l'équipe est à l'aise."
+        "body": "Introduire un outil d'IA, c'est d'abord un défi humain, pas technologique. Les résistances sont normales et légitimes : peur de perdre son emploi, inquiétude face à quelque chose d'inconnu, méfiance envers un outil « qui se trompe parfois ». Votre rôle, que vous dirigiez un service, une classe, une boutique ou une équipe de terrain, est d'écouter ces craintes, de les prendre au sérieux et de montrer par l'exemple.\n\nCommencez petit avec un pilote limité : une équipe, une tâche, un mois. Documentez les résultats honnêtement — ce qui a fonctionné et ce qui n'a pas fonctionné. Impliquez les utilisateurs finaux dès le début : ce sont eux qui connaissent le mieux les problèmes à résoudre. Une infirmière, un enseignant ou un chargé de clientèle qui utilise l'IA pour rédiger ses comptes rendus quotidiens sera le meilleur ambassadeur s'il a été associé au choix de l'outil.\n\nLa gouvernance légère est essentielle : définissez clairement qui a le droit d'utiliser l'outil, pour quelles tâches, avec quelles données, et qui vérifie les résultats. Ce n'est pas de la bureaucratie — c'est de la responsabilité. Pensez à une caisse d'épargne rotative bien organisée, tontine en Afrique de l'Ouest, tanda au Mexique ou chit fund en Inde : chacun connaît son rôle, les règles sont claires et la confiance se construit au fil des cycles. Le passage à l'échelle vient naturellement une fois que le pilote a prouvé sa valeur et que l'équipe est à l'aise."
       }
     ],
     "example": {
@@ -41,7 +41,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "practice": {
       "title": "Construire votre mini-matrice valeur / effort",
       "instructions": [
-        "Sur votre téléphone, ouvrez une application de notes (Notes, Keep ou même un SMS à vous-même) et listez trois tâches répétitives de votre travail quotidien — par exemple : rédiger des comptes rendus, saisir des données de terrain, traduire des documents, chercher des informations dans des fichiers.",
+        "Sur votre téléphone, ouvrez une application de notes (Notes, Keep ou même un SMS à vous-même) et listez trois tâches répétitives de votre travail, de vos études ou de votre activité — par exemple : rédiger des comptes rendus, saisir des données, répondre aux mêmes questions de clients, traduire des documents, préparer un cours, chercher une information dans des fichiers.",
         "Pour chacune des trois tâches, attribuez un score de 1 à 3 sur deux critères : Valeur (1 = peu utile, 3 = très utile si automatisée) et Effort (1 = facile à automatiser, 3 = très difficile). Notez ces scores à côté de chaque tâche dans votre application de notes.",
         "Identifiez la tâche avec le score Valeur le plus élevé et le score Effort le plus bas — c'est votre meilleur candidat pilote. Notez en une phrase pourquoi vous la choisissez et quelle donnée vous auriez besoin de rassembler pour commencer."
       ],
@@ -69,7 +69,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "La bonne démarche part toujours des besoins réels de l'organisation, pas de la technologie disponible. Identifier les problèmes concrets permet de choisir le bon outil et d'éviter d'adopter une solution à la recherche d'un problème."
+        "explanation": "La bonne démarche part toujours des besoins réels de l'organisation — entreprise, école, administration, coopérative ou association — et non de la technologie disponible. Identifier les problèmes concrets permet de choisir le bon outil et d'éviter d'adopter une solution à la recherche d'un problème."
       },
       {
         "question": "Dans une matrice valeur / effort, quel type de cas d'usage faut-il prioriser en premier ?",
@@ -95,7 +95,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
         "explanation": "Les cas d'usage à haute valeur et faible effort sont les meilleurs candidats pour un pilote : ils offrent un retour rapide et visible avec un minimum de ressources et de risques. C'est la logique des « victoires rapides » qui créent de la confiance avant les projets plus ambitieux."
       },
       {
-        "question": "Une ONG souhaite utiliser l'IA pour décider automatiquement et sans validation humaine qui reçoit une aide alimentaire d'urgence. Quelle est la principale raison de s'en méfier ?",
+        "question": "Une organisation souhaite utiliser l'IA pour décider automatiquement et sans validation humaine qui reçoit une aide d'urgence, un crédit ou une bourse. Quelle est la principale raison de s'en méfier ?",
         "options": [
           {
             "key": "A",
@@ -103,7 +103,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Ce cas d'usage présente un risque élevé : des erreurs peuvent priver des personnes vulnérables de leur droit à l'aide."
+            "text": "Ce cas d'usage présente un risque élevé : des erreurs peuvent priver des personnes de leur droit."
           },
           {
             "key": "C",
@@ -115,14 +115,14 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Lorsqu'une décision touche directement des personnes vulnérables, le niveau de risque est élevé. L'IA peut assister la prise de décision, mais un humain doit rester responsable de la validation finale pour éviter des erreurs aux conséquences graves."
+        "explanation": "Lorsqu'une décision touche directement des personnes — une aide, un crédit, un recrutement, une admission — le niveau de risque est élevé. L'IA peut assister la prise de décision, mais un humain doit rester responsable de la validation finale pour éviter des erreurs aux conséquences graves."
       },
       {
-        "question": "Parmi les contraintes locales suivantes, laquelle est souvent sous-estimée lors du choix d'un outil d'IA en Afrique subsaharienne ?",
+        "question": "Parmi les contraintes suivantes, laquelle est le plus souvent sous-estimée lors du choix d'un outil d'IA ?",
         "options": [
           {
             "key": "A",
-            "text": "La langue des bénéficiaires et des agents de terrain"
+            "text": "La langue des personnes qui utiliseront l'outil et de celles qu'il concerne"
           },
           {
             "key": "B",
@@ -138,7 +138,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "A",
-        "explanation": "La langue est une contrainte majeure souvent négligée. La plupart des outils d'IA sont optimisés pour le français ou l'anglais, et fonctionnent mal en haoussa, mooré ou bambara. Si vos équipes ou bénéficiaires travaillent en langue locale, cela doit être vérifié avant tout déploiement."
+        "explanation": "La langue est une contrainte majeure souvent négligée. La plupart des outils d'IA sont optimisés pour le français, l'anglais ou l'espagnol, et fonctionnent mal en haoussa, en bambara, en quechua ou en créole haïtien. Si vos équipes, vos clients ou vos bénéficiaires travaillent dans une langue peu représentée, cela doit être vérifié avant tout déploiement."
       },
       {
         "question": "Quelle approche est recommandée pour introduire un outil d'IA dans une équipe qui n'en a jamais utilisé ?",
@@ -157,22 +157,22 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Laisser chaque agent choisir librement son propre outil d'IA sans coordination."
+            "text": "Laisser chacun choisir librement son propre outil d'IA sans coordination."
           }
         ],
         "answer": "C",
         "explanation": "Un pilote limité permet de tester, d'apprendre et d'ajuster avec peu de risques. Impliquer les utilisateurs dès le début crée de la confiance et améliore l'adoption. Le passage à l'échelle vient naturellement une fois les résultats prouvés et l'équipe formée."
       }
     ],
-    "reflection": "Pensez à une tâche dans votre organisation que vous jugez fastidieuse et qui revient régulièrement. Si vous deviez la confier à un assistant IA, quelles données lui fourniriez-vous ? Qui vérifierait son travail ? Et comment sauriez-vous que le résultat est fiable ? Répondre à ces trois questions, c'est déjà penser en responsable de l'IA.",
+    "reflection": "Pensez à une tâche de votre travail, de vos études ou de votre activité que vous jugez fastidieuse et qui revient régulièrement. Si vous deviez la confier à un assistant IA, quelles données lui fourniriez-vous ? Qui vérifierait son travail ? Et comment sauriez-vous que le résultat est fiable ? Répondre à ces trois questions, c'est déjà penser en responsable de l'IA.",
     "glossary": [
       {
         "term": "Cas d'usage",
-        "definition": "Une situation concrète dans laquelle un outil ou une technologie est utilisé pour résoudre un problème précis. Par exemple : « utiliser l'IA pour détecter les doublons dans une liste de bénéficiaires » est un cas d'usage."
+        "definition": "Une situation concrète dans laquelle un outil ou une technologie est utilisé pour résoudre un problème précis. Par exemple : « utiliser l'IA pour détecter les doublons dans une liste de clients ou de bénéficiaires » est un cas d'usage."
       },
       {
         "term": "ROI (Retour sur investissement)",
-        "definition": "Mesure du bénéfice obtenu par rapport aux ressources investies (temps, argent, formation). Un ROI positif signifie que le projet rapporte plus qu'il ne coûte. En contexte ONG, le ROI peut inclure des gains non financiers comme du temps libéré pour le terrain."
+        "definition": "Mesure du bénéfice obtenu par rapport aux ressources investies (temps, argent, formation). Un ROI positif signifie que le projet rapporte plus qu'il ne coûte. Dans une entreprise, une école ou une association, le ROI peut inclure des gains non financiers : du temps libéré, moins d'erreurs, un service rendu plus vite."
       },
       {
         "term": "Pilote (POC)",
@@ -196,7 +196,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "id": "c4",
     "lessonNumber": 4,
     "title": "AI in Your Organization — Choosing the Right Use Cases",
-    "objective": "By the end of this lesson, you will be able to identify the activities in your organization where AI can bring real value. You will know how to assess the feasibility of each opportunity, taking into account available data, field constraints, and level of risk. You will be able to prioritize a first pilot use case and prepare your team to adopt it gradually.",
+    "objective": "By the end of this lesson, you will be able to identify the activities where AI can bring real value in whichever organization is yours: a company, a public administration, a school, a hospital, a cooperative, an association, an NGO, or your own independent practice. You will know how to assess the feasibility of each opportunity, taking into account available data, the concrete constraints of your working environment, and the level of risk. You will be able to prioritize a first pilot use case and prepare your team to adopt it gradually.",
     "video": {
       "fr": "",
       "en": "",
@@ -205,19 +205,19 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Mapping Use Cases: Where AI Truly Makes a Difference",
-        "body": "Before adopting an AI tool, the first question is not « which technology should we choose? » but « where do we have problems that AI can solve? ». Think about your working day: which repetitive tasks take up a lot of your time? Which reports come back every month with the same tables to fill in? Which information do you spend time searching for across dozens of files?\n\nAI creates value in three main ways. It saves time on repetitive tasks, such as translating forms from French into Hausa or summarizing long meeting minutes. It improves quality — for example, detecting errors in a beneficiary list before emergency aid is sent out. It broadens access, enabling a community health worker in a rural area to consult medical guidance in a local language without a permanent internet connection.\n\nImagine a storekeeper who spends every morning sorting hundreds of paper forms to find available stock. A simple automated search system would save them two hours a day. That is exactly it: AI as an intelligent assistant, not as a replacement for human work. In your organization, start by listing five tasks that drain your energy. Those are your first candidates."
+        "body": "Before adopting an AI tool, the first question is not \"which technology should we choose?\" but \"where do we have problems that AI can solve?\". The word organization here means any place where people work together: a company, a public administration, a school, a hospital, a cooperative, an association, an NGO, a team of volunteers, or even a one-person practice. Think about your working day: which repetitive tasks take up a lot of your time? Which reports come back every month with the same tables to fill in? Which information do you hunt for across dozens of files?\n\nAI creates value in three main ways. It saves time on repetitive tasks: translating a form from French into Hausa, summarizing a long meeting report, drafting a quote from a template. It improves quality: spotting errors in a list of customers, students, or beneficiaries before an important mailing. It broadens access: a community health worker consults guidance in a local language without a permanent connection, a craftsperson writes an offer in a language they barely master, a student revises with a tutor available at any hour.\n\nImagine a storekeeper who spends every morning sorting hundreds of paper forms to find available stock. A simple automated search system would save them two hours a day. The same reasoning applies to a town hall secretary, an accountant in a small business, or a teacher preparing lessons. That is exactly it: AI as an intelligent assistant, not as a replacement for human work. Start by listing five tasks that drain your energy. Those are your first candidates."
       },
       {
         "title": "Prioritizing: Choosing the Right Use Case Before You Start",
-        "body": "Not all ideas are equal. A simple matrix helps you choose: place each idea on two axes — the value it brings (time saved, quality, reach) and the effort it requires (available data, cost, skills needed). The best pilot candidates are those with high value and low effort.\n\nData availability is crucial. If you want to automate the sorting of beneficiary lists, do you already have those lists in digital form? Are they consistent and complete? An NGO in the Sahel that wanted to use AI to analyze nutrition data discovered that 40% of its data had been entered differently depending on the data collector. The data had to be cleaned before any automation could take place.\n\nThe level of risk also matters. Using AI to draft a first version of an internal report is low risk: a human reviews and corrects it. Using AI to decide alone who receives food assistance is very high risk: errors can deprive vulnerable families of their right to aid. Always keep a human responsible for decisions that directly affect people. It is like quality control in a cocoa cooperative: you check before you export."
+        "body": "Not all ideas are equal. A simple matrix helps you choose: place each idea on two axes — the value it brings (time saved, quality, reach) and the effort it requires (available data, cost, skills needed). The best pilot candidates are those with high value and low effort.\n\nData availability is crucial. If you want to automate the sorting of a list — customers, students, members, or beneficiaries — do you already have it in digital form? Is it consistent and complete? An NGO in the Sahel that wanted to use AI to analyze nutrition data discovered that 40% of its data had been entered differently depending on the data collector. The data had to be cleaned before any automation could take place. The same trap awaits the shop whose sales history lives in paper notebooks, or the school whose grades are scattered across ten binders.\n\nThe level of risk also matters. Using AI to draft a first version of an internal report is low risk: a human reviews and corrects it. Letting it decide alone who receives food assistance, who gets a loan, or who is hired is very high risk: one error can deprive someone of a right. Always keep a human responsible for decisions that directly affect people. It is like quality control in a cocoa, coffee, or rice cooperative: you check before you ship."
       },
       {
-        "title": "Local Constraints: Accounting for Field Realities",
-        "body": "An AI tool that works perfectly in Dakar or Abidjan may be unusable in a district office without reliable electricity. Before choosing a solution, ask yourself three practical questions: Is there a reliable internet connection? Does the tool work offline or on a 2G connection? Do field agents have smartphones, or only basic phones?\n\nLanguage is a major constraint that is often underestimated. Most AI tools perform well in French or English, but far less so in Hausa, Mooré, or Bambara. If your beneficiaries and agents primarily communicate in a local language, verify that the chosen tool supports that language, or plan a translation step in your process. AI projects for health in Niger have shown how important it is to integrate Hausa from the design stage onward.\n\nCost is often overlooked in pilot projects. An AI tool subscription may seem affordable in euros, but can represent a significant share of a local organization's budget. First explore free versions or offers aimed at NGOs. Finally, honestly assess the skills available in your team: even the best tool is useless if no one knows how to use it and no training is planned. A phone with M-Pesa or Orange Money is useless if you do not know how to use it — AI is the same."
+        "title": "Practical Constraints: Accounting for Your Own Working Reality",
+        "body": "An AI tool that works perfectly at headquarters, in Dakar, Abidjan, Lima, or Manila, may be unusable in a district office without reliable electricity, in a workshop where six people share a single computer, or in a school where the signal only reaches near the window. Before choosing a solution, ask yourself three practical questions: Is the internet connection reliable? Does the tool work offline or on a slow connection? Do the people who will use it have a computer, a recent smartphone, or only a shared basic phone?\n\nLanguage is a major constraint that is often underestimated. Most AI tools perform well in French, English, or Spanish, but far less so in Hausa, Bambara, Quechua, or Haitian Creole. If your colleagues, your customers, or your beneficiaries mainly speak an under-represented language, verify that the chosen tool supports it, or plan a translation and review step in your process. AI projects for health in Niger have shown how important it is to integrate Hausa from the design stage onward.\n\nCost is often overlooked in pilot projects. A subscription may look affordable from a distance and still represent a significant share of a small organization's budget: a neighborhood association, a private clinic, a community school, a tailoring workshop. First explore free versions, reduced education pricing, or offers aimed at associations and NGOs. Finally, honestly assess the skills available in your team: even the best tool is useless if no one knows how to use it and no training is planned. A phone with Orange Money, M-Pesa, bKash, or Pix is useless if you do not know how to use it — AI is the same."
       },
       {
         "title": "Change Management: Getting Your Team to Adopt AI",
-        "body": "Introducing an AI tool into an organization is first and foremost a human challenge, not a technological one. Resistance is normal and legitimate: fear of losing one's job, anxiety about something unknown, distrust of a tool that « sometimes makes mistakes ». Your role as a leader is to listen to these concerns, take them seriously, and lead by example.\n\nStart small with a limited pilot: one team, one task, one month. Document results honestly — what worked and what did not. Involve end users from the start: they know the problems to be solved best. A nurse who uses AI to write her daily reports will be the best ambassador if she was involved in choosing the tool.\n\nLight governance is essential: clearly define who is allowed to use the tool, for which tasks, with which data, and who checks the results. This is not bureaucracy — it is accountability. Think of a well-organized tontine: everyone knows their role, the rules are clear, and trust builds with each cycle. Scaling up comes naturally once the pilot has proven its value and the team is comfortable."
+        "body": "Introducing an AI tool is first and foremost a human challenge, not a technological one. Resistance is normal and legitimate: fear of losing one's job, anxiety about something unknown, distrust of a tool that \"sometimes makes mistakes\". Your role — whether you lead a department, a class, a shop, or a field team — is to listen to these concerns, take them seriously, and lead by example.\n\nStart small with a limited pilot: one team, one task, one month. Document results honestly — what worked and what did not. Involve end users from the start: they know the problems to be solved best. A nurse, a teacher, or a customer service officer who uses AI to write daily reports will be the best ambassador if they were involved in choosing the tool.\n\nLight governance is essential: clearly define who is allowed to use the tool, for which tasks, with which data, and who checks the results. This is not bureaucracy — it is accountability. Think of a well-organized rotating savings group, a tontine in West Africa, a tanda in Mexico, or a chit fund in India: everyone knows their role, the rules are clear, and trust builds with each cycle. Scaling up comes naturally once the pilot has proven its value and the team is comfortable."
       }
     ],
     "example": {
@@ -229,7 +229,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "practice": {
       "title": "Building Your Mini Value / Effort Matrix",
       "instructions": [
-        "On your phone, open a notes application (Notes, Keep, or even a text message to yourself) and list three repetitive tasks from your daily work — for example: writing meeting minutes, entering field data, translating documents, searching for information across files.",
+        "On your phone, open a notes application (Notes, Keep, or even a text message to yourself) and list three repetitive tasks from your work, your studies, or your own activity — for example: writing meeting minutes, entering data, answering the same customer questions, translating documents, preparing a lesson, searching for information across files.",
         "For each of the three tasks, assign a score from 1 to 3 on two criteria: Value (1 = not very useful, 3 = very useful if automated) and Effort (1 = easy to automate, 3 = very difficult). Write these scores next to each task in your notes application.",
         "Identify the task with the highest Value score and the lowest Effort score — this is your best pilot candidate. Write one sentence explaining why you chose it and what data you would need to gather to get started."
       ],
@@ -257,7 +257,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "The right approach always starts from the organization's real needs, not from the available technology. Identifying concrete problems allows you to choose the right tool and avoid adopting a solution looking for a problem."
+        "explanation": "The right approach always starts from the real needs of the organization — a company, a school, an administration, a cooperative, or an association — not from the available technology. Identifying concrete problems allows you to choose the right tool and avoid adopting a solution looking for a problem."
       },
       {
         "question": "In a value / effort matrix, which type of use case should be prioritized first?",
@@ -283,7 +283,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
         "explanation": "Use cases with high value and low effort are the best pilot candidates: they deliver quick, visible results with minimal resources and risk. This is the logic of 'quick wins' that build confidence before more ambitious projects."
       },
       {
-        "question": "An NGO wants to use AI to automatically decide — with no human validation — who receives emergency food aid. What is the main reason to be cautious?",
+        "question": "An organization wants to use AI to automatically decide — with no human validation — who receives emergency aid, a loan, or a scholarship. What is the main reason to be cautious?",
         "options": [
           {
             "key": "A",
@@ -291,7 +291,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "This use case carries high risk: errors can deprive vulnerable people of their right to aid."
+            "text": "This use case carries high risk: errors can deprive people of their rights."
           },
           {
             "key": "C",
@@ -303,14 +303,14 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "When a decision directly affects vulnerable people, the risk level is high. AI can assist decision-making, but a human must remain responsible for the final validation to avoid errors with serious consequences."
+        "explanation": "When a decision directly affects people — aid, a loan, a hire, an admission — the risk level is high. AI can assist decision-making, but a human must remain responsible for the final validation to avoid errors with serious consequences."
       },
       {
-        "question": "Among the following local constraints, which one is most often underestimated when choosing an AI tool in sub-Saharan Africa?",
+        "question": "Among the following constraints, which one is most often underestimated when choosing an AI tool?",
         "options": [
           {
             "key": "A",
-            "text": "The language of beneficiaries and field agents"
+            "text": "The language of the people who will use the tool and of those it concerns"
           },
           {
             "key": "B",
@@ -326,7 +326,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "A",
-        "explanation": "Language is a major constraint that is often overlooked. Most AI tools are optimized for French or English and perform poorly in Hausa, Mooré, or Bambara. If your teams or beneficiaries work in a local language, this must be verified before any deployment."
+        "explanation": "Language is a major constraint that is often overlooked. Most AI tools are optimized for French, English, or Spanish and perform poorly in Hausa, Bambara, Quechua, or Haitian Creole. If your teams, customers, or beneficiaries work in an under-represented language, this must be verified before any deployment."
       },
       {
         "question": "What approach is recommended for introducing an AI tool to a team that has never used one?",
@@ -345,22 +345,22 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Let each agent freely choose their own AI tool without coordination."
+            "text": "Let everyone freely choose their own AI tool without coordination."
           }
         ],
         "answer": "C",
         "explanation": "A limited pilot allows you to test, learn, and adjust with little risk. Involving users from the start builds trust and improves adoption. Scaling up comes naturally once results are proven and the team is trained."
       }
     ],
-    "reflection": "Think of a task in your organization that you find tedious and that comes up regularly. If you were to hand it over to an AI assistant, what data would you give it? Who would check its work? And how would you know the result is reliable? Answering these three questions is already thinking like a responsible AI manager.",
+    "reflection": "Think of a task in your work, your studies, or your own activity that you find tedious and that comes up regularly. If you were to hand it over to an AI assistant, what data would you give it? Who would check its work? And how would you know the result is reliable? Answering these three questions is already thinking like a responsible AI manager.",
     "glossary": [
       {
         "term": "Use Case",
-        "definition": "A concrete situation in which a tool or technology is used to solve a specific problem. For example: 'using AI to detect duplicates in a beneficiary list' is a use case."
+        "definition": "A concrete situation in which a tool or technology is used to solve a specific problem. For example: 'using AI to detect duplicates in a list of customers or beneficiaries' is a use case."
       },
       {
         "term": "ROI (Return on Investment)",
-        "definition": "A measure of the benefit obtained relative to resources invested (time, money, training). A positive ROI means the project returns more than it costs. In an NGO context, ROI can include non-financial gains such as time freed up for fieldwork."
+        "definition": "A measure of the benefit obtained relative to resources invested (time, money, training). A positive ROI means the project returns more than it costs. In a company, a school, or an association, ROI can include non-financial gains: time freed up, fewer errors, a service delivered faster."
       },
       {
         "term": "Pilot (POC)",
@@ -384,7 +384,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "id": "c4",
     "lessonNumber": 4,
     "title": "AI a Cikin Kungiyarku — Zabar Ayyukan da Suka Dace",
-    "objective": "A karshen wannan darasi, za ku iya gano ayyukan da ke cikin kungiyarku inda AI zai iya kawo fa'ida ta gaske. Za ku san yadda ake kimanta yiwuwar kowane dama, tare da la'akari da bayanan da ake da su, kalubalen filin aiki, da matakin hadari. Za ku iya zabar harka ta farko ta jarrabawa kuma ku shirya kungiyarku don karbar canjin a hankali.",
+    "objective": "A karshen wannan darasi, za ku iya gano ayyukan da AI zai iya kawo fa'ida ta gaske a cikin kungiyar da ku ke ciki: kamfani, ma'aikatar gwamnati, makaranta, asibiti, kungiyar hadin gwiwa, kungiyar agaji, NGO, ko sana'ar ku ta kanku. Za ku san yadda ake kimanta yiwuwar kowane dama, tare da la'akari da bayanan da ake da su, kalubalen gaske na wurin aikin ku, da matakin hadari. Za ku iya zabar harka ta farko ta jarrabawa kuma ku shirya kungiyarku don karbar canjin a hankali.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,19 +393,19 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Zana Taswira ta Ayyuka: Inda AI Ke Canza Al'amura Gaske",
-        "body": "Kafin ku karbi kayan aiki na AI, tambayar farko ba ita ce « wace fasaha za mu zaba? » ba, sai dai « ina muke da matsaloli da AI zai iya taimaka wajen warware su? ». Yi tunani game da yini naku na aiki: wane ayyuka masu maimaituwa suna daukar lokaci mai yawa? Wane rahotoni ke dawowa kowane wata tare da teburin da ake cika su da hannu? Wane bayani kuke nema a cikin fayiloli da yawa?\n\nAI yana kawo fa'ida ta hanyoyi uku masu muhimmanci. Yana daukar lokaci a ayyukan maimaituwa, kamar fassara fomoci daga Faransanci zuwa Hausa ko takaita bayanan taruka masu tsawo. Yana inganta inganci — misali, gano kurakurai a listan masu karbar taimako kafin a aika agajin gaggawa. Yana fadada damar samun hidima, yana ba ma'aikacin kiwon lafiya na al'umma a yankin karkara damar samun jagoran likita a harshen gida ba tare da hadin intanet na dindindin ba.\n\nKai wa a hankali wajen tunanin mai adana kayan da ke rarraba takardu dari da dari kowace safiya don neman kayan da ake da su. Tsarin neman ta atomatik mai sauki zai iya ceton shi sa'o'i biyu a rana. Wannan shi ne komai: AI a matsayin mataimaki mai hankali, ba maye gurbin aikin dan adam ba. A cikin kungiyarku, fara da jera ayyuka biyar da ke sa ku gajiya. Wadannan su ne 'yan takara na farko."
+        "body": "Kafin ku karbi kayan aiki na AI, tambayar farko ba ita ce « wace fasaha za mu zaba? » ba, sai dai « ina muke da matsaloli da AI zai iya taimaka wajen warware su? ». Kalmar kungiya a nan tana nufin duk inda ake aiki tare: kamfani, ma'aikatar gwamnati, makaranta, asibiti, kungiyar hadin gwiwa, kungiyar agaji, NGO, kungiyar masu sa kai, ko ma ofishi na mutum daya. Yi tunani game da yini naku na aiki: wane ayyuka masu maimaituwa suna daukar lokaci mai yawa? Wane rahotoni ke dawowa kowane wata tare da teburin da ake cika su da hannu? Wane bayani kuke nema a cikin fayiloli da yawa?\n\nAI yana kawo fa'ida ta hanyoyi uku masu muhimmanci. Yana ceton lokaci a ayyukan maimaituwa: fassara fom daga Faransanci zuwa Hausa, takaita dogon rahoton taro, shirya kiyasin farashi daga samfuri. Yana inganta inganci: gano kurakurai a listan abokan ciniki, dalibai ko masu karbar taimako kafin aika wani abu mai muhimmanci. Yana fadada damar samun hidima: ma'aikacin kiwon lafiya na al'umma yana samun shawara a harshen gida ba tare da hadin intanet na dindindin ba, mai sana'a yana rubuta tayin aiki a harshen da bai iya sosai ba, dalibi yana karatu tare da malami da ake samu a kowane lokaci.\n\nKu yi tunanin mai adana kaya da ke rarraba takardu dari da dari kowace safiya don neman kayan da ake da su. Tsarin neman ta atomatik mai sauki zai iya ceton shi sa'o'i biyu a rana. Irin wannan tunani yana aiki ga sakataren ofishin gari, akanta na karamin kamfani, ko malami da ke shirya darussansa. Wannan shi ne komai: AI a matsayin mataimaki mai hankali, ba maye gurbin aikin dan adam ba. Fara da jera ayyuka biyar da ke sa ku gajiya. Wadannan su ne 'yan takara na farko."
       },
       {
         "title": "Fifita Zabi: Zabar Aikin da Ya Dace Kafin Farawa",
-        "body": "Duk ra'ayoyi ba su da nauyi daya. Teburin sauki yana taimakonku wajen zaba: sanya kowane ra'ayi a kan gatari biyu — fa'idar da yake kawo (lokaci da aka ceta, inganci, fadin aiki) da kokarin da yake bukata (bayanan da ake da su, farashi, kwarewa da ake bukata). Mafi kyawun 'yan takara na jarrabawa su ne wadanda ke da fa'ida mai girma da kokari kadan.\n\nSamuwar bayanan yana da matukar muhimmanci. Idan kuna son atomatik rarraban listan masu karbar taimako, shin kuna da wadannan listeddin a tsarin dijital? Shin sun dace kuma cikakku ne? Wata NGO a Sahel da ta so ta yi amfani da AI don nazarin bayanan abinci ta gano cewa 40% na bayanan ta an shigar da su daban-daban dangane da mai tattara bayanai. Dole ne a tsaftace bayanan kafin duk wani atomatik.\n\nMatakin hadari ma yana da muhimmanci. Amfani da AI don rubuta daftarin farko na rahoto na ciki yana da hadarin kasa: dan adam yana nazari kuma yana gyara. Amfani da AI don yanke shawara shi kadai game da wanda ya karbi taimako na abinci yana da hadari mai yawa: kurakurai na iya hana iyalai marasa karfi daga hakkinsu na taimako. Koyaushe ku kiyaye dan adam ya zama mai alhakin yanke shawara da ke shafar mutane kai tsaye. Kamar binciken inganci a wata kungiyar goro ta cacao: ana duba kafin fitar da kaya."
+        "body": "Duk ra'ayoyi ba su da nauyi daya. Teburin sauki yana taimakonku wajen zaba: sanya kowane ra'ayi a kan gatari biyu — fa'idar da yake kawo (lokaci da aka ceta, inganci, fadin aiki) da kokarin da yake bukata (bayanan da ake da su, farashi, kwarewa da ake bukata). Mafi kyawun 'yan takara na jarrabawa su ne wadanda ke da fa'ida mai girma da kokari kadan.\n\nSamuwar bayanan yana da matukar muhimmanci. Idan kuna son rarraba lista ta atomatik — abokan ciniki, dalibai, mambobi ko masu karbar taimako — shin kuna da ita a tsarin dijital? Shin ta dace kuma cikakkiya ce? Wata NGO a Sahel da ta so ta yi amfani da AI don nazarin bayanan abinci mai gina jiki ta gano cewa 40% na bayanan ta an shigar da su daban-daban dangane da mai tattara bayanai. Dole ne a tsaftace bayanan kafin duk wani atomatik. Irin wannan matsala tana jiran shago da tarihin sayarwarsa ke cikin littattafan takarda, ko makaranta da makin dalibanta ke warwatse a cikin fayiloli goma.\n\nMatakin hadari ma yana da muhimmanci. Amfani da AI don rubuta daftarin farko na rahoto na ciki yana da hadari kadan: dan adam yana nazari kuma yana gyara. Barin sa ya yanke shawara shi kadai game da wanda zai karbi taimakon abinci, wanda zai samu rance, ko wanda za a dauka aiki yana da hadari mai yawa: kuskure daya na iya hana mutum hakkinsa. Koyaushe ku kiyaye dan adam ya zama mai alhakin yanke shawara da ke shafar mutane kai tsaye. Kamar binciken inganci a kungiyar hadin gwiwa ta cacao, kofi ko shinkafa: ana duba kafin fitar da kaya."
       },
       {
-        "title": "Kalubalen Gida: La'akari da Gaskiyar Filin Aiki",
-        "body": "Kayan aiki na AI da ke aiki da kyau a Dakar ko Abidjan na iya zama bai amfana ba a ofishin gundumar da ba ta da wutar lantarki mai daidaito. Kafin zabar mafita, yi wa kanku wadannan tambayoyi uku masu amfani: Shin akwai hadin intanet mai inganci? Shin kayan aikin yana aiki ba tare da intanet ba ko a hadin 2G? Shin ma'aikata a filin suna da wayoyin hannu (smartphones) ko kawai tarho na yau da kullum?\n\nHarshene babban kalubale ne da ake kaskantar da shi sosai. Yawancin kayan aiki na AI suna aiki da kyau a Faransanci ko Ingilishi, amma sun yi kasa da yawa a Hausa, Mooré, ko Bambara. Idan masu karbar taimakonku da ma'aikatanku suna yin magana da farko a harshen gida, tabbatar cewa kayan aikin da aka zaba yana goyan bayan wannan harshe, ko kuma shirya matakin fassara a cikin tsarinku. Ayyukan AI don kiwon lafiya a Nijar sun nuna muhimmancin hada Hausa tun daga matakin tsarawa.\n\nFarashi yawanci ana manta da shi a cikin ayyukan jarrabawa. Biyan kudin yabo ga kayan aiki na AI na iya zama mai araha a Yuro, amma na iya wakiltar wani muhimmin bangare na kasafin kungiyar gida. Da farko ku binciki sigogin kyauta ko tayin da aka nufa ga NGOs. A karshe, kimanta kwarewar da ake da ita a cikin kungiyarku da gaskiya: ko da mafi kyawun kayan aiki yana da amfani idan babu wanda ya san yadda ake amfani da shi kuma babu horon da aka tsara. Wayar da M-Pesa ko Orange Money ba ta da amfani idan ba ka san yadda ake amfani da ita ba — AI shi ma haka yake."
+        "title": "Kalubale na Gaskiya: La'akari da Yanayin Wurin Aikinku",
+        "body": "Kayan aiki na AI da ke aiki da kyau a hedkwata, a Dakar, Abidjan, Lima ko Manila, na iya zama ba shi da amfani a ofishin gundumar da ba ta da wutar lantarki mai daidaito, a wurin aiki inda mutane shida ke raba kwamfuta daya, ko a makarantar da hanyar sadarwa ke shiga kusa da taga kawai. Kafin zabar mafita, yi wa kanku wadannan tambayoyi uku masu amfani: Shin hadin intanet yana da inganci? Shin kayan aikin yana aiki ba tare da intanet ba ko a hadin sadarwa mai jinkiri? Shin mutanen da za su yi amfani da shi suna da kwamfuta, waya mai wayo, ko kuma tarho na yau da kullum da ake raba shi?\n\nHarshe babban kalubale ne da ake kaskantar da shi sosai. Yawancin kayan aiki na AI suna aiki da kyau a Faransanci, Ingilishi ko Sifaniyanci, amma sun yi kasa sosai a Hausa, Bambara, Quechua ko Kiriyol na Haiti. Idan abokan aikinku, abokan cinikinku ko masu karbar taimakonku suna magana da farko a harshen da ba a wakilta sosai, tabbatar cewa kayan aikin da aka zaba yana goyan bayan wannan harshe, ko kuma shirya matakin fassara da dubawa a cikin tsarinku. Ayyukan AI don kiwon lafiya a Nijar sun nuna muhimmancin hada Hausa tun daga matakin tsarawa.\n\nFarashi yawanci ana manta da shi a cikin ayyukan jarrabawa. Biyan kudi na wata-wata na iya zama kamar mai araha daga nesa amma ya zama babban bangare na kasafin karamar kungiya: kungiyar unguwa, karamin asibiti mai zaman kansa, makarantar al'umma, ko wurin dinki. Da farko ku binciki sigogin kyauta, farashi mai rangwame ga makarantu, ko tayin da aka nufa ga kungiyoyi da NGOs. A karshe, kimanta kwarewar da ake da ita a cikin kungiyarku da gaskiya: ko da mafi kyawun kayan aiki ba shi da amfani idan babu wanda ya san yadda ake amfani da shi kuma babu horon da aka tsara. Wayar da Orange Money, M-Pesa, bKash ko Pix ba ta da amfani idan ba ka san yadda ake amfani da ita ba — AI shi ma haka yake."
       },
       {
         "title": "Gudanar da Canjin: Sa Kungiyarku Ta Karbi AI",
-        "body": "Gabatar da kayan aiki na AI a cikin kungiya, da farko dai kalubale ne na dan adam, ba na fasaha ba. Juriya abu ne na al'ada kuma na dacewar: tsoro na rasa aikin mutum, damuwa game da wani abu da ba a sani ba, rashin amana ga kayan aiki da « wani lokaci ke yin kuskure ». Rawar ku a matsayin jagora ita ce sauraron wadannan damuwa, daukar su da muhimmanci, da nuna misali ta aikin da ku kanku.\n\nFara da karami tare da jarrabawa iyakantacciya: kungiya daya, aiki daya, wata daya. Rubuta sakamako da aminci — abin da ya yi aiki da abin da bai yi ba. Hada masu amfani na karshe tun daga farko: su ne mafi sanin matsalolin da za a warware. Ma'aikaciyar jinya da ke amfani da AI don rubuta rahotonta na yau da kullum za ta zama mafi kyawun jakada idan an hada ta a zabin kayan aikin.\n\nGovernansi mai sauki yana da matukar muhimmanci: a bayyana wa zai iya amfani da kayan aikin, don wane ayyuka, da wane bayani, kuma wa zai duba sakamako. Wannan ba hukuma ba ne — alhakin ne. Yi tunani da tontine da aka tsara da kyau: kowa ya san rawarsa, ka'idoji sun bayyana, kuma amana tana gina kanta tare da kowane zagaye. Fadada ya zo da kansa lokacin da jarrabawa ta tabbatar da kimarsa kuma kungiyar ta saba da ita."
+        "body": "Gabatar da kayan aiki na AI, da farko dai kalubale ne na dan adam, ba na fasaha ba. Juriya abu ne na al'ada kuma na dacewar: tsoro na rasa aikin mutum, damuwa game da wani abu da ba a sani ba, rashin amana ga kayan aiki da « wani lokaci ke yin kuskure ». Rawar ku — ko kuna jagorantar sashe, aji, shago ko kungiyar aiki a filin — ita ce sauraron wadannan damuwa, daukar su da muhimmanci, da nuna misali ta aikin da ku kanku.\n\nFara da karami tare da jarrabawa iyakantacciya: kungiya daya, aiki daya, wata daya. Rubuta sakamako da aminci — abin da ya yi aiki da abin da bai yi ba. Hada masu amfani na karshe tun daga farko: su ne mafi sanin matsalolin da za a warware. Ma'aikaciyar jinya, malami ko mai kula da abokan ciniki da ke amfani da AI don rubuta rahotonsa na yau da kullum zai zama mafi kyawun jakada idan an hada shi a zabin kayan aikin.\n\nGovernansi mai sauki yana da matukar muhimmanci: a bayyana wa zai iya amfani da kayan aikin, don wane ayyuka, da wane bayani, kuma wa zai duba sakamako. Wannan ba hukuma ba ne — alhakin ne. Yi tunanin kungiyar ajiya mai jujjuyawa da aka tsara da kyau — tontine a Afirka ta Yamma, tanda a Mexico ko chit fund a Indiya: kowa ya san rawarsa, ka'idoji sun bayyana, kuma amana tana gina kanta tare da kowane zagaye. Fadada ya zo da kansa lokacin da jarrabawa ta tabbatar da kimarsa kuma kungiyar ta saba da ita."
       }
     ],
     "example": {
@@ -417,7 +417,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "practice": {
       "title": "Gina Kananan Teburin Fa'ida / Kokari",
       "instructions": [
-        "A wayarku, bude aikace-aikacen bayanin kula (Notes, Keep, ko ko da sakon rubutu zuwa kanku) kuma jera ayyuka uku masu maimaituwa daga aikin yau da kullum — misali: rubuta rahotoni na taruka, shigar da bayanai daga filin, fassara takardu, neman bayani a cikin fayiloli.",
+        "A wayarku, bude aikace-aikacen bayanin kula (Notes, Keep, ko ko da sakon rubutu zuwa kanku) kuma jera ayyuka uku masu maimaituwa daga aikinku, karatunku ko sana'arku — misali: rubuta rahotoni na taruka, shigar da bayanai, amsa tambayoyi iri daya na abokan ciniki, fassara takardu, shirya darasi, neman bayani a cikin fayiloli.",
         "Ga kowane dayan ayyuka uku, ba da maki daga 1 zuwa 3 akan ma'auni biyu: Fa'ida (1 = ba ta da amfani sosai, 3 = mai amfani sosai idan aka atomatize) da Kokari (1 = sauki na atomatize, 3 = yana da wahala sosai). Rubuta wadannan makiya kusa da kowane aiki a cikin aikace-aikacen bayanan kulanku.",
         "Gano aikin da ke da mafi girman maki na Fa'ida da karancin maki na Kokari — wannan shine mafi kyawun 'dan takara na jarrabawarka. Rubuta jumla daya da ke bayyana dalilin da ya sa ka zabe shi da kuma wane bayani kake bukata ka tara don farawa."
       ],
@@ -445,7 +445,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Hanyar da ta dace koyaushe tana farawa daga bukatun gaske na kungiyar, ba daga fasahar da ake da ita ba. Gano matsalolin gaske yana ba ka damar zabar kayan aikin da ya dace da gujewa karbar mafita da ke neman matsala."
+        "explanation": "Hanyar da ta dace koyaushe tana farawa daga bukatun gaske na kungiyar — kamfani, makaranta, ma'aikatar gwamnati, kungiyar hadin gwiwa ko kungiyar agaji — ba daga fasahar da ake da ita ba. Gano matsalolin gaske yana ba ka damar zabar kayan aikin da ya dace da gujewa karbar mafita da ke neman matsala."
       },
       {
         "question": "A cikin teburin fa'ida / kokari, wane irin aiki ne ya kamata a fifita da farko?",
@@ -471,7 +471,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
         "explanation": "Ayyukan da ke da fa'ida mai girma da kokari kadan su ne mafi kyawun 'yan takara na jarrabawa: suna ba da sakamako mai sauri kuma bayyananne tare da karancin albarkatu da hadari. Wannan shine ma'anar 'nasarori masu sauri' da ke gina amana kafin ayyukan mafi girma."
       },
       {
-        "question": "Wata NGO tana son amfani da AI don yanke shawara kai tsaye — ba tare da tabbatarwa ta dan adam ba — game da wanda ya karbi agajin abinci na gaggawa. Menene babban dalilin yin hankali?",
+        "question": "Wata kungiya tana son amfani da AI don yanke shawara kai tsaye — ba tare da tabbatarwa ta dan adam ba — game da wanda zai karbi agajin gaggawa, rance ko tallafin karatu. Menene babban dalilin yin hankali?",
         "options": [
           {
             "key": "A",
@@ -479,7 +479,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Wannan aiki yana da hadari mai girma: kurakurai na iya hana mutane masu rauni daga hakkinsu na taimako."
+            "text": "Wannan aiki yana da hadari mai girma: kurakurai na iya hana mutane hakkinsu."
           },
           {
             "key": "C",
@@ -491,14 +491,14 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Lokacin da yanke shawara ke shafar mutane masu rauni kai tsaye, matakin hadari yana da girma. AI na iya taimakawa wajen yanke shawara, amma dan adam dole ne ya kasance mai alhakin tabbatarwa ta karshe don guje wa kurakurai masu sakamakon tsanani."
+        "explanation": "Lokacin da yanke shawara ke shafar mutane kai tsaye — taimako, rance, daukar aiki, ko shigar da dalibi — matakin hadari yana da girma. AI na iya taimakawa wajen yanke shawara, amma dan adam dole ne ya kasance mai alhakin tabbatarwa ta karshe don guje wa kurakurai masu sakamakon tsanani."
       },
       {
-        "question": "Daga cikin kalubalen gida masu zuwa, wanne ake kaskantar da shi sosai lokacin zabar kayan aiki na AI a Afirka ta Kudu da Sahara?",
+        "question": "Daga cikin kalubale masu zuwa, wanne ake kaskantar da shi sosai lokacin zabar kayan aiki na AI?",
         "options": [
           {
             "key": "A",
-            "text": "Harshan masu karbar taimako da ma'aikata a filin"
+            "text": "Harshen mutanen da za su yi amfani da kayan aikin da na wadanda ya shafa"
           },
           {
             "key": "B",
@@ -514,7 +514,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           }
         ],
         "answer": "A",
-        "explanation": "Harshe babban kalubale ne da ake kaskantar da shi sosai. Yawancin kayan aiki na AI an inganta su don Faransanci ko Ingilishi kuma suna aiki da kasa sosai a Hausa, Mooré, ko Bambara. Idan kungiyarku ko masu karbar taimakon suna aiki a harshen gida, dole ne a tabbatar da wannan kafin duk wani tura."
+        "explanation": "Harshe babban kalubale ne da ake kaskantar da shi sosai. Yawancin kayan aiki na AI an inganta su don Faransanci, Ingilishi ko Sifaniyanci kuma suna aiki da kasa sosai a Hausa, Bambara, Quechua ko Kiriyol na Haiti. Idan kungiyarku, abokan cinikinku ko masu karbar taimakon suna aiki a harshen da ba a wakilta sosai, dole ne a tabbatar da wannan kafin duk wani tura."
       },
       {
         "question": "Wace hanya ake ba da shawara don gabatar da kayan aiki na AI ga kungiyar da ba ta taba amfani da shi ba?",
@@ -533,22 +533,22 @@ export const iaLessonC4: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Bar kowane ma'aikaci ya zabi kayan aiki nasa na AI ba tare da daidaitawa ba."
+            "text": "Bar kowa ya zabi kayan aiki nasa na AI ba tare da daidaitawa ba."
           }
         ],
         "answer": "C",
         "explanation": "Jarrabawa iyakantacciya tana ba ka damar gwaji, koyo, da daidaitawa tare da karancin hadari. Hada masu amfani tun daga farko yana gina amana kuma yana inganta karba. Fadada yana zuwa da kansa lokacin da sakamakon ya tabbata kuma kungiyar ta samu horo."
       }
     ],
-    "reflection": "Yi tunani game da wani aiki a cikin kungiyarku da kuke gani yana gajiye kuma yana dawowa akai-akai. Idan za ku ba mataimaki na AI wannan aiki, wane bayani za ku ba shi? Wa zai duba aikinsa? Kuma ta yaya za ku san cewa sakamakon yana da inganci? Amsawa wadannan tambayoyi uku ta riga ta nufin tunani kamar mai alhakin AI.",
+    "reflection": "Yi tunani game da wani aiki na aikinku, karatunku ko sana'arku da kuke gani yana gajiyar da ku kuma yana dawowa akai-akai. Idan za ku ba mataimaki na AI wannan aiki, wane bayani za ku ba shi? Wa zai duba aikinsa? Kuma ta yaya za ku san cewa sakamakon yana da inganci? Amsawa wadannan tambayoyi uku ta riga ta nufin tunani kamar mai alhakin AI.",
     "glossary": [
       {
         "term": "Aiki (Cas d'usage)",
-        "definition": "Yanayi na gaske wanda ake amfani da kayan aiki ko fasaha don warware wata matsala ta musamman. Misali: 'amfani da AI don gano maimaitawa a cikin listan masu karbar taimako' wani aiki ne."
+        "definition": "Yanayi na gaske wanda ake amfani da kayan aiki ko fasaha don warware wata matsala ta musamman. Misali: 'amfani da AI don gano maimaitawa a cikin listan abokan ciniki ko masu karbar taimako' wani aiki ne."
       },
       {
         "term": "ROI (Dawowar Jari)",
-        "definition": "Auna amfanin da aka samu dangane da albarkatu da aka zuba (lokaci, kudi, horo). ROI mai kyau yana nufin aikin yana dawo da fiye da farashinta. A mahallin NGO, ROI na iya hada fa'idodin da ba na kudi ba kamar lokaci da aka 'yantar don aiki a filin."
+        "definition": "Auna amfanin da aka samu dangane da albarkatu da aka zuba (lokaci, kudi, horo). ROI mai kyau yana nufin aikin yana dawo da fiye da farashinta. A kamfani, makaranta ko kungiyar agaji, ROI na iya hada fa'idodin da ba na kudi ba: lokaci da aka 'yantar, karancin kurakurai, da hidima da ake bayarwa da sauri."
       },
       {
         "term": "Jarrabawa (Pilote / POC)",

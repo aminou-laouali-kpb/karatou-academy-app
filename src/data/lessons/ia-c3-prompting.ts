@@ -8,7 +8,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "id": "c3",
     "lessonNumber": 3,
     "title": "Prompt Engineering — donner les bonnes consignes à l'IA",
-    "objective": "À la fin de cette leçon, vous saurez rédiger des consignes (prompts) structurées et efficaces pour obtenir des résultats fiables, professionnels et directement utilisables. Vous maîtriserez les quatre composantes clés d'un bon prompt : le rôle, le contexte, la tâche et le format. Vous serez capable d'améliorer vos prompts par itération et de les adapter aux situations concrètes de votre travail humanitaire ou de développement.",
+    "objective": "À la fin de cette leçon, vous saurez rédiger des consignes (prompts) structurées et efficaces pour obtenir des résultats fiables, professionnels et directement utilisables. Vous maîtriserez les quatre composantes clés d'un bon prompt : le rôle, le contexte, la tâche et le format. Vous serez capable d'améliorer vos prompts par itération et de les adapter aux situations concrètes de votre métier, que vous soyez salarié, étudiant, indépendant, agent d'une administration ou bénévole.",
     "video": {
       "fr": "",
       "en": "",
@@ -17,33 +17,33 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Anatomie d'un bon prompt : Rôle, Contexte, Tâche, Format",
-        "body": "Imaginez que vous recrutez un assistant pour une mission de terrain. Si vous lui dites simplement « fais un rapport », il ne sait pas quoi mettre dedans. Mais si vous précisez « tu es chargé de suivi-évaluation au PNUD Niger, voici les données de la semaine, rédige un résumé de deux paragraphes pour le coordinateur », il peut travailler efficacement. C'est exactement le principe du prompt structuré.\n\nUn bon prompt repose sur quatre piliers : le Rôle (qui doit se comporter l'IA ?), le Contexte (quelle est la situation ?), la Tâche (qu'attendez-vous précisément ?), et le Format (quelle forme doit avoir la réponse ?). Voyons la différence en pratique :\n\n— Prompt vague : « Écris un e-mail à un bailleur. »\n— Prompt structuré : « Tu es coordinateur de projet dans une ONG sahélienne. Nous avons livré 200 kits nutritionnels dans le district de Tillabéri la semaine dernière. Rédige un e-mail de compte rendu à notre bailleur (UNICEF), en anglais, en 150 mots maximum, avec un ton formel et une phrase de remerciement en conclusion. »\n\nLe second prompt prend 30 secondes de plus à rédiger, mais il vous économise plusieurs allers-retours et produit un résultat quasi prêt à envoyer."
+        "body": "Imaginez que vous accueillez un nouvel assistant dans votre équipe. Si vous lui dites simplement « fais un rapport », il ne sait pas quoi mettre dedans. Mais si vous précisez « tu es assistant pédagogique dans un collège, voici les résultats des évaluations de la semaine, rédige un bilan de deux paragraphes pour la réunion des professeurs », il peut travailler efficacement. C'est exactement le principe du prompt structuré.\n\nUn bon prompt repose sur quatre piliers : le Rôle (comment doit se comporter l'IA ?), le Contexte (quelle est la situation ?), la Tâche (qu'attendez-vous précisément ?), et le Format (quelle forme doit avoir la réponse ?). Voyons la différence en pratique :\n— Prompt vague : « Écris un e-mail à un client. »\n— Prompt structuré : « Tu es gérante d'un atelier de menuiserie. Un client nous a commandé douze chaises et demande où en est la fabrication : huit sont terminées, les quatre dernières partiront la semaine prochaine. Rédige un e-mail de suivi de 150 mots maximum, ton courtois et professionnel, avec une phrase d'excuse pour le retard et une proposition de date de livraison. »\n\nLe second prompt prend 30 secondes de plus à rédiger, mais il vous économise plusieurs allers-retours et produit un résultat quasi prêt à envoyer."
       },
       {
         "title": "Techniques qui marchent : exemples, étape par étape, contraintes de format",
-        "body": "La première technique puissante s'appelle le few-shot : vous donnez un ou deux exemples du résultat que vous attendez. C'est comme montrer à un agent de santé communautaire comment remplir une fiche avant de lui demander d'en remplir dix. Par exemple : « Voici un résumé que j'aime : [exemple]. Maintenant résume ce compte rendu de réunion dans le même style. » L'IA comprend immédiatement votre tonalité, votre niveau de détail, votre langue de travail.\n\nLa deuxième technique : demandez à l'IA de raisonner étape par étape (« think step by step »). Pour des tâches complexes comme analyser un budget de projet ou comparer deux propositions techniques, cela réduit les erreurs. C'est comparable à demander à quelqu'un de vérifier un transfert Mobile Money en lisant les chiffres à voix haute avant de valider.\n\nLa troisième technique : contraindre le format de sortie. Précisez « réponds sous forme de tableau à 3 colonnes », « rédige une liste à puces de 5 points maximum », ou « structure ta réponse avec les titres : Constat, Recommandation, Prochaine étape ». Quand le format est fixé à l'avance, la réponse est directement utilisable dans votre rapport ou votre présentation, sans reformatage."
+        "body": "La première technique puissante s'appelle le few-shot : vous donnez un ou deux exemples du résultat que vous attendez. C'est comme montrer à un nouveau collègue un formulaire déjà rempli avant de lui en confier dix. Par exemple : « Voici un résumé que j'aime : [exemple]. Maintenant résume ce compte rendu de réunion dans le même style. » L'IA comprend immédiatement votre tonalité, votre niveau de détail, votre langue de travail.\n\nLa deuxième technique : demandez à l'IA de raisonner étape par étape (« think step by step »). Pour des tâches complexes comme vérifier le budget d'un projet, comparer deux devis de fournisseurs ou décomposer l'énoncé d'un exercice, cela réduit les erreurs. C'est comparable à relire à voix haute les chiffres d'un paiement avant de valider l'envoi.\n\nLa troisième technique : contraindre le format de sortie. Un agent d'une administration municipale qui prépare une note pour le conseil gagnera à préciser « réponds sous forme de tableau à 3 colonnes », « rédige une liste à puces de 5 points maximum », ou « structure ta réponse avec les titres : Constat, Recommandation, Prochaine étape ». Quand le format est fixé à l'avance, la réponse est directement utilisable dans votre rapport ou votre présentation, sans reformatage."
       },
       {
         "title": "Itérer et corriger : un prompt se travaille en 2–3 allers-retours",
-        "body": "Dans une tontine, on ne fixe pas les règles une fois pour toutes le premier jour : on ajuste selon ce qui marche pour le groupe. Avec l'IA, c'est pareil. Le premier prompt est rarement parfait, et c'est normal. L'objectif est d'arriver à un bon résultat en deux ou trois échanges, pas en un seul.\n\nComment reformuler efficacement ? Soyez précis sur ce qui ne va pas. Ne dites pas « c'est nul ». Dites : « La réponse est trop longue. Raccourcis à 100 mots. » Ou : « Le ton est trop formel pour une réunion communautaire. Utilise un langage plus simple. » Ou encore : « Tu n'as pas mentionné les données de couverture vaccinale. Intègre ce chiffre : environ 67 % dans la région de Dosso. »\n\nGardez une trace de vos meilleurs prompts dans un carnet (numérique ou papier). Les agents de terrain de MSF ou du PAM, par exemple, créent des bibliothèques de prompts réutilisables pour les rapports hebdomadaires, les fiches bénéficiaires ou les alertes de situation. Un bon prompt est un outil de travail, au même titre qu'un formulaire de collecte de données."
+        "body": "Personne ne règle un appareil neuf du premier coup : on essaie, on observe, on ajuste. Avec l'IA, c'est pareil. Le premier prompt est rarement parfait, et c'est normal. L'objectif est d'arriver à un bon résultat en deux ou trois échanges, pas en un seul.\n\nComment reformuler efficacement ? Soyez précis sur ce qui ne va pas. Ne dites pas « c'est nul ». Dites : « La réponse est trop longue. Raccourcis à 100 mots. » Ou : « Le ton est trop formel pour une réunion de parents d'élèves. Utilise un langage plus simple. » Ou encore : « Tu n'as pas repris le chiffre de fréquentation que je t'ai donné plus haut. Intègre-le dans le deuxième paragraphe. »\n\nGardez une trace de vos meilleurs prompts dans un carnet (numérique ou papier). Une équipe de terrain d'une organisation humanitaire, un service municipal ou une petite entreprise de services se constituent ainsi des bibliothèques de prompts réutilisables pour les rapports hebdomadaires, les réponses aux clients ou les comptes rendus de réunion. Un bon prompt est un outil de travail, au même titre qu'un modèle de document."
       },
       {
-        "title": "Prompts pour le travail réel : synthèse, traduction, e-mail bailleur, compte-rendu terrain",
-        "body": "Quatre cas d'usage couvrent l'essentiel du travail documentaire dans le secteur humanitaire et du développement. Le premier : la note de synthèse. Collez un long document (rapport de mission, étude de base) et demandez : « En tant que chargé de programme, résume ce document en 5 points clés pour une réunion de coordination. Format : liste numérotée. Langue : français. »\n\nLe deuxième cas : la traduction et adaptation FR ↔ EN ↔ langue locale. « Traduis ce message de sensibilisation sur le choléra du français vers le haoussa parlé au Niger, en gardant un niveau de langage accessible à des communautés rurales. » L'IA n'est pas parfaite pour toutes les langues locales, mais elle peut produire une première version à faire valider par un locuteur natif, ce qui réduit le temps de traduction d'environ 50 %.\n\nLe troisième cas : l'e-mail bailleur. Donnez les faits, le montant, les résultats, le nom du bailleur, et demandez un e-mail formel de compte rendu en anglais. Le quatrième cas : le compte-rendu de réunion terrain. Collez vos notes brutes ou dictez-les vocalement (via une application de transcription), puis demandez : « Structure ces notes en : Participants, Points discutés, Décisions prises, Actions à suivre avec responsables et échéances. » Le résultat est prêt à partager avec votre superviseur."
+        "title": "Prompts pour le travail réel : synthèse, traduction, e-mail professionnel, compte rendu",
+        "body": "Quatre cas d'usage couvrent l'essentiel du travail documentaire, quel que soit votre métier. Le premier : la note de synthèse. Collez un long document (article de recherche, rapport annuel, dossier de projet) et demandez : « En tant qu'étudiant en master, résume cet article en 5 points clés pour mon groupe de travail. Format : liste numérotée. Langue : français. »\n\nLe deuxième cas : la traduction et l'adaptation d'une langue vers une autre, y compris vers une langue locale peu représentée en ligne. « Traduis ce message d'information sur les horaires du service, du français vers la langue parlée par les habitants du quartier, en gardant un niveau de langage accessible. » L'IA n'est pas également performante dans toutes les langues : elle produit une première version, qu'un locuteur natif doit relire avant diffusion, ce qui reste beaucoup plus rapide que de partir de zéro.\n\nLe troisième cas : l'e-mail professionnel. Donnez les faits, les montants, les résultats et le destinataire — client, partenaire, direction, financeur — puis demandez un e-mail formel de compte rendu. Le quatrième cas : le compte rendu de réunion. Collez vos notes brutes ou dictez-les vocalement (via une application de transcription), puis demandez : « Structure ces notes en : Participants, Points discutés, Décisions prises, Actions à suivre avec responsables et échéances. » Le résultat est prêt à partager avec vos collègues, votre direction ou vos partenaires."
       }
     ],
     "example": {
-      "title": "Du prompt vague au prompt structuré : le cas du rapport de mission",
-      "challenge": "Aminata, coordinatrice d'une ONG à Niamey, demande à un outil IA : « Écris un rapport de mission. » Elle obtient un texte générique de deux pages, sans aucune donnée réelle, qu'elle doit entièrement réécrire. Elle passe 90 minutes sur ce document.",
-      "solution": "Elle reformule avec la structure Rôle/Contexte/Tâche/Format : « Tu es coordinatrice de projet dans une ONG de santé au Niger. La mission s'est déroulée du 10 au 14 juin 2025 dans le district de Maradi. Objectif : évaluation des stocks de médicaments dans 8 centres de santé. Résultats principaux : 6 centres sur 8 ont des stocks suffisants ; 2 centres signalent une rupture en amoxicilline. Rédige un rapport de mission structuré avec les sections suivantes : Contexte, Déroulement, Résultats, Recommandations. Maximum 400 mots. Ton professionnel, langue française. »",
-      "impact": "Le nouveau résultat est utilisable directement après une relecture de 10 minutes. Le temps total de travail passe de 90 minutes à environ 25 minutes, soit un gain de temps d'environ 70 %. La qualité est jugée supérieure par le superviseur, qui valide le rapport sans demande de révision majeure."
+      "title": "Du prompt vague au prompt structuré : le compte rendu client d'une petite entreprise",
+      "challenge": "Lucía dirige une petite entreprise de transport et de livraison à Medellín, en Colombie. Chaque mois, elle doit envoyer un compte rendu d'activité à son principal client. Elle demande à un outil IA : « Écris un compte rendu pour mon client. » Elle obtient un texte générique de deux pages, sans aucune donnée réelle, qu'elle doit entièrement réécrire. Elle passe 90 minutes sur ce document.",
+      "solution": "Elle reformule avec la structure Rôle/Contexte/Tâche/Format : « Tu es gérante d'une petite entreprise de transport et de livraison. Le client est un distributeur de fournitures de bureau. Période couverte : le mois écoulé. Données à intégrer : 140 livraisons réalisées, 3 livraisons en retard de plus de 24 heures, toutes dues à des routes coupées par les pluies. Rédige un compte rendu mensuel structuré avec les sections suivantes : Contexte, Activité du mois, Incidents et causes, Recommandations. Maximum 400 mots. Ton professionnel, langue espagnole. »",
+      "impact": "Le nouveau résultat est utilisable directement après une relecture de 10 minutes. Le temps total de travail passe de 90 minutes à environ 25 minutes, soit un gain de temps d'environ 70 %. Le client juge le document plus clair que les précédents et le valide sans demander de correction majeure."
     },
     "practice": {
       "title": "Exercice : rédigez et améliorez votre premier prompt structuré",
       "instructions": [
-        "Choisissez une tâche réelle de votre travail (rédiger un e-mail, résumer un document, traduire un message). Sur votre téléphone ou ordinateur, rédigez un prompt complet en quatre parties : commencez par « Tu es [votre rôle] », ajoutez le contexte (lieu, projet, données clés), décrivez la tâche précisément, puis précisez le format souhaité (nombre de mots, langue, structure). Soumettez ce prompt à un outil IA (ChatGPT, Claude, Gemini).",
+        "Choisissez une tâche réelle de votre quotidien (rédiger un e-mail, résumer un document, traduire un message, préparer un cours). Sur votre téléphone ou votre ordinateur, rédigez un prompt complet en quatre parties : commencez par « Tu es [votre rôle] », ajoutez le contexte (lieu, activité, données clés), décrivez la tâche précisément, puis précisez le format souhaité (nombre de mots, langue, structure). Soumettez ce prompt à un outil IA (ChatGPT, Claude, Gemini).",
         "Lisez attentivement le résultat obtenu. Identifiez un point précis qui n'est pas satisfaisant : le ton, la longueur, un élément manquant, la structure. Reformulez uniquement cette partie et soumettez une deuxième version du prompt. Comparez les deux réponses côte à côte.",
-        "Copiez votre prompt final (la version améliorée) dans un document ou une note sur votre téléphone, avec un titre court qui décrit son usage (exemple : « Prompt rapport de mission terrain »). Vous commencez ainsi votre bibliothèque personnelle de prompts réutilisables."
+        "Copiez votre prompt final (la version améliorée) dans un document ou une note sur votre téléphone, avec un titre court qui décrit son usage (exemple : « Prompt compte rendu mensuel client »). Vous commencez ainsi votre bibliothèque personnelle de prompts réutilisables."
       ],
       "observation": "Vous constaterez que la deuxième version du prompt produit une réponse nettement plus proche de vos attentes, souvent sans nécessiter de troisième reformulation. L'effort de rédiger un prompt précis se rentabilise dès le premier usage : moins de corrections, moins de frustration, un résultat professionnel plus rapide."
     },
@@ -69,7 +69,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Ce prompt ne contient que la tâche (résumer). Il manque le rôle (qui est l'IA dans ce contexte ?), le contexte (de quel rapport s'agit-il, pour quel public, dans quel projet ?) et le format (liste, paragraphe, nombre de mots ?). Ces trois éléments sont indispensables pour obtenir un résultat utile."
+        "explanation": "Ce prompt ne contient que la tâche (résumer). Il manque le rôle (qui est l'IA dans ce contexte ?), le contexte (de quel rapport s'agit-il, pour quel public, dans quelle activité ?) et le format (liste, paragraphe, nombre de mots ?). Ces trois éléments sont indispensables pour obtenir un résultat utile."
       },
       {
         "question": "La technique « few-shot » consiste à :",
@@ -92,7 +92,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Le few-shot (ou « quelques exemples ») consiste à inclure dans votre prompt un exemple concret du type de résultat que vous souhaitez. Cela permet à l'IA de calibrer son ton, son niveau de détail et son format sur votre modèle, comme vous montrez un formulaire rempli à un agent avant qu'il en remplisse d'autres."
+        "explanation": "Le few-shot (ou « quelques exemples ») consiste à inclure dans votre prompt un exemple concret du type de résultat que vous souhaitez. Cela permet à l'IA de calibrer son ton, son niveau de détail et son format sur votre modèle, comme vous montrez un formulaire rempli à un nouveau collègue avant qu'il en remplisse d'autres."
       },
       {
         "question": "Pourquoi est-il recommandé d'itérer sur un prompt plutôt que de tout réécrire ?",
@@ -118,11 +118,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
         "explanation": "Réécrire entièrement un prompt revient souvent à perdre ce qui fonctionnait déjà. Identifier précisément ce qui ne convient pas (le ton, la longueur, un élément manquant) et le corriger ciblément est beaucoup plus efficace. C'est comme ajuster une recette en modifiant une épice, pas en recommençant depuis zéro."
       },
       {
-        "question": "Pour traduire un message de sensibilisation du français vers le haoussa avec l'IA, quelle précision est la plus importante à inclure dans le prompt ?",
+        "question": "Pour traduire un message d'information vers une langue locale avec l'IA, quelle précision est la plus importante à inclure dans le prompt ?",
         "options": [
           {
             "key": "A",
-            "text": "Le niveau de langage adapté au public cible (ex : communautés rurales)"
+            "text": "Le niveau de langage adapté au public cible (ex : clients, parents d'élèves, habitants d'un quartier)"
           },
           {
             "key": "B",
@@ -134,11 +134,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "La date de la campagne de sensibilisation"
+            "text": "La date à laquelle le message original a été rédigé"
           }
         ],
         "answer": "A",
-        "explanation": "Pour une traduction utile sur le terrain, le niveau de langage est crucial. Un message technique traduit mot à mot peut être incompréhensible pour des communautés rurales. Préciser « langage accessible, communautés rurales du Niger » guide l'IA pour choisir un vocabulaire simple et des formulations claires, même si le résultat doit toujours être validé par un locuteur natif."
+        "explanation": "Pour une traduction réellement utile, le niveau de langage est crucial. Un message technique traduit mot à mot peut être incompréhensible pour des clients pressés ou des habitants peu scolarisés. Préciser « langage accessible, habitants du quartier » guide l'IA vers un vocabulaire simple et des formulations claires, même si le résultat doit toujours être relu par un locuteur natif."
       },
       {
         "question": "Quelle est la meilleure façon de capitaliser sur vos bons prompts pour le long terme ?",
@@ -157,30 +157,30 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Les partager uniquement avec votre superviseur et ne pas les modifier"
+            "text": "Les partager uniquement avec votre responsable et ne pas les modifier"
           }
         ],
         "answer": "C",
-        "explanation": "Un bon prompt est un outil de travail réutilisable, au même titre qu'un modèle de rapport ou un formulaire de collecte. Le sauvegarder avec un titre clair (ex : « Prompt compte-rendu réunion terrain ») vous permet de le retrouver rapidement, de le partager avec votre équipe, et de l'améliorer progressivement. C'est la base d'une pratique professionnelle de l'IA."
+        "explanation": "Un bon prompt est un outil de travail réutilisable, au même titre qu'un modèle de rapport ou un formulaire. Le sauvegarder avec un titre clair (ex : « Prompt compte rendu de réunion ») vous permet de le retrouver rapidement, de le partager avec votre équipe, et de l'améliorer progressivement. C'est la base d'une pratique professionnelle de l'IA."
       }
     ],
-    "reflection": "Pensez à une tâche répétitive que vous faites chaque semaine dans votre travail : un rapport hebdomadaire, un e-mail de suivi, une note de synthèse. Maintenant, imaginez avoir un prompt parfaitement calibré pour cette tâche, que vous n'avez qu'à lancer en quelques secondes. Combien de temps cela vous ferait-il gagner sur un mois ? Sur une année ? La rédaction d'un bon prompt est un investissement de 5 minutes qui peut vous en faire économiser des dizaines.",
+    "reflection": "Pensez à une tâche répétitive que vous faites chaque semaine : un rapport hebdomadaire, un e-mail de suivi, une fiche de préparation de cours, une réponse type à un client. Maintenant, imaginez avoir un prompt parfaitement calibré pour cette tâche, que vous n'avez qu'à lancer en quelques secondes. Combien de temps cela vous ferait-il gagner sur un mois ? Sur une année ? La rédaction d'un bon prompt est un investissement de 5 minutes qui peut vous en faire économiser des dizaines.",
     "glossary": [
       {
         "term": "Prompt",
-        "definition": "La consigne ou instruction que vous donnez à un outil d'IA pour obtenir un résultat. Un prompt bien rédigé est précis, structuré et contextuel. Exemple : « En tant que chargé de programme, rédige un résumé de 150 mots de ce rapport en français. »"
+        "definition": "La consigne ou instruction que vous donnez à un outil d'IA pour obtenir un résultat. Un prompt bien rédigé est précis, structuré et contextuel. Exemple : « En tant que responsable d'une boutique, rédige un résumé de 150 mots de ce rapport en français. »"
       },
       {
         "term": "Contexte",
-        "definition": "Les informations de situation que vous fournissez à l'IA pour qu'elle comprenne l'environnement de la tâche : votre organisation, le projet concerné, le public visé, les données disponibles. Sans contexte, l'IA produit des réponses génériques."
+        "definition": "Les informations de situation que vous fournissez à l'IA pour qu'elle comprenne l'environnement de la tâche : votre organisation ou votre activité, le projet concerné, le public visé (clients, élèves, usagers, collègues), les données disponibles. Sans contexte, l'IA produit des réponses génériques."
       },
       {
         "term": "Few-shot (exemples)",
-        "definition": "Technique consistant à inclure un ou plusieurs exemples du résultat attendu directement dans votre prompt. Cela permet à l'IA d'imiter le ton, le style et la structure que vous souhaitez, comme montrer un modèle rempli à un collègue."
+        "definition": "Technique consistant à inclure un ou plusieurs exemples du résultat attendu directement dans votre prompt. Cela permet à l'IA d'imiter le ton, le style et la structure que vous souhaitez, comme montrer un modèle rempli à un nouveau collègue."
       },
       {
         "term": "Rôle / System prompt",
-        "definition": "La persona ou fonction que vous assignez à l'IA au début de votre prompt (ex : « Tu es un traducteur spécialisé en santé publique »). Définir un rôle cadre le comportement de l'IA et améliore la pertinence de ses réponses."
+        "definition": "La persona ou fonction que vous assignez à l'IA au début de votre prompt (ex : « Tu es un traducteur spécialisé dans les documents administratifs »). Définir un rôle cadre le comportement de l'IA et améliore la pertinence de ses réponses."
       },
       {
         "term": "Itération",
@@ -196,7 +196,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "id": "c3",
     "lessonNumber": 3,
     "title": "Prompt Engineering — Giving the Right Instructions to AI",
-    "objective": "By the end of this lesson, you will know how to write structured, effective prompts to get reliable, professional, and directly usable results. You will master the four key components of a good prompt: role, context, task, and format. You will be able to improve your prompts through iteration and adapt them to real situations in your humanitarian or development work.",
+    "objective": "By the end of this lesson, you will know how to write structured, effective prompts to get reliable, professional, and directly usable results. You will master the four key components of a good prompt: role, context, task, and format. You will be able to improve your prompts through iteration and adapt them to the real situations of your own work, whether you are an employee, a student, self-employed, a public administration officer, or a volunteer.",
     "video": {
       "fr": "",
       "en": "",
@@ -205,33 +205,33 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Anatomy of a Good Prompt: Role, Context, Task, Format",
-        "body": "Imagine you are hiring a field assistant for a mission. If you simply say \"write a report,\" they don't know what to include. But if you specify \"you are a monitoring and evaluation officer at UNDP Niger, here is this week's data, write a two-paragraph summary for the coordinator,\" they can work effectively. This is exactly the principle behind a structured prompt.\n\nA good prompt rests on four pillars: the Role (how should the AI behave?), the Context (what is the situation?), the Task (what exactly do you expect?), and the Format (what form should the answer take?). Let's see the difference in practice:\n\n— Vague prompt: \"Write an email to a donor.\"\n— Structured prompt: \"You are a project coordinator at a Sahelian NGO. Last week we delivered 200 nutrition kits in the Tillabéri district. Write an activity report email to our donor (UNICEF), in English, maximum 150 words, with a formal tone and a thank-you sentence in the conclusion.\"\n\nThe second prompt takes 30 extra seconds to write, but it saves you several back-and-forth exchanges and produces a result that is nearly ready to send."
+        "body": "Imagine you are welcoming a new assistant onto your team. If you simply say \"write a report,\" they don't know what to include. But if you specify \"you are a teaching assistant in a secondary school, here are this week's assessment results, write a two-paragraph summary for the staff meeting,\" they can work effectively. This is exactly the principle behind a structured prompt.\n\nA good prompt rests on four pillars: the Role (how should the AI behave?), the Context (what is the situation?), the Task (what exactly do you expect?), and the Format (what form should the answer take?). Let's see the difference in practice:\n— Vague prompt: \"Write an email to a customer.\"\n— Structured prompt: \"You are the manager of a furniture workshop. A customer ordered twelve chairs and is asking how the work is going: eight are finished, the last four will ship next week. Write a follow-up email of no more than 150 words, courteous and professional in tone, with a sentence apologizing for the delay and a proposed delivery date.\"\n\nThe second prompt takes 30 extra seconds to write, but it saves you several back-and-forth exchanges and produces a result that is nearly ready to send."
       },
       {
         "title": "Techniques That Work: Examples, Step by Step, Format Constraints",
-        "body": "The first powerful technique is called few-shot: you provide one or two examples of the result you expect. It is like showing a community health worker how to fill out a form before asking them to fill out ten. For example: \"Here is a summary I like: [example]. Now summarize this meeting report in the same style.\" The AI immediately understands your tone, your level of detail, and your working language.\n\nThe second technique: ask the AI to reason step by step (\"think step by step\"). For complex tasks like analyzing a project budget or comparing two technical proposals, this reduces errors. It is comparable to asking someone to verify an M-Pesa transfer by reading the figures aloud before confirming.\n\nThe third technique: constrain the output format. Specify \"respond in a 3-column table,\" \"write a bullet list of no more than 5 points,\" or \"structure your response with the following headings: Finding, Recommendation, Next Step.\" When the format is fixed in advance, the response is directly usable in your report or presentation, without any reformatting."
+        "body": "The first powerful technique is called few-shot: you provide one or two examples of the result you expect. It is like showing a new colleague a completed form before handing them ten to fill in. For example: \"Here is a summary I like: [example]. Now summarize this meeting report in the same style.\" The AI immediately understands your tone, your level of detail, and your working language.\n\nThe second technique: ask the AI to reason step by step (\"think step by step\"). For complex tasks such as checking a project budget, comparing two supplier quotes, or breaking down an exam question, this reduces errors. It is comparable to reading the figures of a payment aloud before confirming it.\n\nThe third technique: constrain the output format. An officer in a municipal administration preparing a note for the council will gain from specifying \"respond in a 3-column table,\" \"write a bullet list of no more than 5 points,\" or \"structure your response with the following headings: Finding, Recommendation, Next Step.\" When the format is fixed in advance, the response is directly usable in your report or presentation, without any reformatting."
       },
       {
         "title": "Iterate and Improve: A Prompt Takes 2–3 Rounds of Refinement",
-        "body": "In a tontine savings group, the rules are not set in stone on the first day — they are adjusted based on what works for the group. With AI, it is the same. The first prompt is rarely perfect, and that is completely normal. The goal is to reach a good result in two or three exchanges, not in one.\n\nHow do you reformulate effectively? Be specific about what is wrong. Do not say \"this is bad.\" Say: \"The response is too long. Shorten it to 100 words.\" Or: \"The tone is too formal for a community meeting. Use simpler language.\" Or: \"You did not mention the vaccination coverage data. Include this figure: approximately 67% in the Dosso region.\"\n\nKeep a record of your best prompts in a notebook (digital or paper). Field agents at organizations like MSF or WFP, for example, build libraries of reusable prompts for weekly reports, beneficiary forms, or situation alerts. A good prompt is a work tool, just like a data collection form."
+        "body": "Nobody sets up a new device perfectly on the first try: you try, you observe, you adjust. With AI, it is the same. The first prompt is rarely perfect, and that is completely normal. The goal is to reach a good result in two or three exchanges, not in one.\n\nHow do you reformulate effectively? Be specific about what is wrong. Do not say \"this is bad.\" Say: \"The response is too long. Shorten it to 100 words.\" Or: \"The tone is too formal for a parents' meeting. Use simpler language.\" Or: \"You did not use the attendance figure I gave you above. Include it in the second paragraph.\"\n\nKeep a record of your best prompts in a notebook (digital or paper). A humanitarian field team, a municipal department, or a small service business all build libraries of reusable prompts for weekly reports, customer replies, or meeting minutes. A good prompt is a work tool, just like a document template."
       },
       {
-        "title": "Prompts for Real Work: Summaries, Translations, Donor Emails, Field Meeting Notes",
-        "body": "Four use cases cover most of the documentary work in the humanitarian and development sector. The first: the briefing note. Paste a long document (mission report, baseline study) and ask: \"As a program officer, summarize this document in 5 key points for a coordination meeting. Format: numbered list. Language: English.\"\n\nThe second case: translation and adaptation FR ↔ EN ↔ local language. \"Translate this cholera awareness message from French into Hausa spoken in Niger, keeping the language accessible for rural communities.\" AI is not perfect for all local languages, but it can produce a first version to be validated by a native speaker, which reduces translation time by approximately 50%.\n\nThe third case: the donor email. Provide the facts, the amount, the results, the donor's name, and request a formal activity report email in English. The fourth case: the field meeting summary. Paste your raw notes or dictate them verbally (via a transcription app), then ask: \"Structure these notes into: Participants, Points Discussed, Decisions Made, Follow-up Actions with responsible persons and deadlines.\" The result is ready to share with your supervisor."
+        "title": "Prompts for Real Work: Summaries, Translations, Professional Emails, Meeting Notes",
+        "body": "Four use cases cover most of the documentary work you do, whatever your job. The first: the briefing note. Paste a long document (a research article, an annual report, a project file) and ask: \"As a master's student, summarize this article in 5 key points for my study group. Format: numbered list. Language: English.\"\n\nThe second case: translating and adapting from one language into another, including into a local language that is poorly represented online. \"Translate this information message about opening hours from English into the language spoken by the residents of this neighbourhood, keeping the wording accessible.\" AI does not perform equally well in every language: it produces a first version that a native speaker must review before it is shared, which is still far faster than starting from scratch.\n\nThe third case: the professional email. Provide the facts, the amounts, the results, and the recipient — customer, partner, management, funder — then ask for a formal report email. The fourth case: the meeting summary. Paste your raw notes or dictate them verbally (via a transcription app), then ask: \"Structure these notes into: Participants, Points Discussed, Decisions Made, Follow-up Actions with responsible persons and deadlines.\" The result is ready to share with your colleagues, your management, or your partners."
       }
     ],
     "example": {
-      "title": "From a Vague Prompt to a Structured Prompt: The Mission Report Case",
-      "challenge": "Aminata, a coordinator at an NGO in Niamey, asks an AI tool: \"Write a mission report.\" She gets a generic two-page text with no real data, which she has to rewrite entirely. She spends 90 minutes on this document.",
-      "solution": "She reformulates using the Role/Context/Task/Format structure: \"You are a project coordinator at a health NGO in Niger. The mission took place from June 10 to 14, 2025, in the Maradi district. Objective: assessment of drug stocks in 8 health centers. Main results: 6 out of 8 centers have sufficient stocks; 2 centers report a shortage of amoxicillin. Write a structured mission report with the following sections: Background, Activities, Results, Recommendations. Maximum 400 words. Professional tone, French language.\"",
-      "impact": "The new result is directly usable after a 10-minute review. Total working time drops from 90 minutes to approximately 25 minutes — a time saving of about 70%. The quality is judged superior by the supervisor, who approves the report without requesting major revisions."
+      "title": "From a Vague Prompt to a Structured Prompt: A Small Company's Client Report",
+      "challenge": "Lucía runs a small transport and delivery company in Medellín, Colombia. Every month she has to send an activity report to her main client. She asks an AI tool: \"Write a report for my client.\" She gets a generic two-page text with no real data, which she has to rewrite entirely. She spends 90 minutes on this document.",
+      "solution": "She reformulates using the Role/Context/Task/Format structure: \"You are the manager of a small transport and delivery company. The client is an office supplies distributor. Period covered: the past month. Data to include: 140 deliveries completed, 3 deliveries delayed by more than 24 hours, all caused by roads cut off by the rains. Write a structured monthly report with the following sections: Background, Activity for the Month, Incidents and Causes, Recommendations. Maximum 400 words. Professional tone, Spanish language.\"",
+      "impact": "The new result is directly usable after a 10-minute review. Total working time drops from 90 minutes to approximately 25 minutes — a time saving of about 70%. The client finds the document clearer than the previous ones and approves it without requesting major corrections."
     },
     "practice": {
       "title": "Exercise: Write and Improve Your First Structured Prompt",
       "instructions": [
-        "Choose a real task from your work (writing an email, summarizing a document, translating a message). On your phone or computer, write a complete prompt in four parts: start with \"You are [your role],\" add the context (location, project, key data), describe the task precisely, then specify the desired format (word count, language, structure). Submit this prompt to an AI tool (ChatGPT, Claude, Gemini).",
+        "Choose a real task from your everyday work (writing an email, summarizing a document, translating a message, preparing a class). On your phone or computer, write a complete prompt in four parts: start with \"You are [your role],\" add the context (location, activity, key data), describe the task precisely, then specify the desired format (word count, language, structure). Submit this prompt to an AI tool (ChatGPT, Claude, Gemini).",
         "Read the result carefully. Identify one specific point that is not satisfactory: the tone, the length, a missing element, the structure. Reformulate only that part and submit a second version of the prompt. Compare both responses side by side.",
-        "Copy your final prompt (the improved version) into a document or note on your phone, with a short title describing its use (example: \"Field mission report prompt\"). You are now starting your personal library of reusable prompts."
+        "Copy your final prompt (the improved version) into a document or note on your phone, with a short title describing its use (example: \"Monthly client report prompt\"). You are now starting your personal library of reusable prompts."
       ],
       "observation": "You will notice that the second version of the prompt produces a response much closer to your expectations, often without needing a third reformulation. The effort of writing a precise prompt pays off from the very first use: fewer corrections, less frustration, and a professional result delivered faster."
     },
@@ -257,7 +257,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "This prompt contains only the task (summarize). It is missing the role (who is the AI in this context?), the context (which report, for which audience, within which project?), and the format (list, paragraph, word count?). These three elements are essential to obtain a useful result."
+        "explanation": "This prompt contains only the task (summarize). It is missing the role (who is the AI in this context?), the context (which report, for which audience, within which activity?), and the format (list, paragraph, word count?). These three elements are essential to obtain a useful result."
       },
       {
         "question": "The \"few-shot\" technique consists of:",
@@ -280,7 +280,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Few-shot means including a concrete example of the type of result you want in your prompt. This allows the AI to calibrate its tone, level of detail, and format to match your model — like showing a completed form to a colleague before they fill out more."
+        "explanation": "Few-shot means including a concrete example of the type of result you want in your prompt. This allows the AI to calibrate its tone, level of detail, and format to match your model — like showing a completed form to a new colleague before they fill out more."
       },
       {
         "question": "Why is it recommended to iterate on a prompt rather than rewriting it entirely?",
@@ -306,11 +306,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
         "explanation": "Rewriting a prompt entirely often means losing what was already working. Identifying precisely what does not work (tone, length, a missing element) and fixing it in a targeted way is much more effective. It is like adjusting a recipe by changing one ingredient, not starting from scratch."
       },
       {
-        "question": "When translating an awareness message from French into Hausa using AI, which detail is most important to include in the prompt?",
+        "question": "When translating an information message into a local language using AI, which detail is most important to include in the prompt?",
         "options": [
           {
             "key": "A",
-            "text": "The language level suited to the target audience (e.g., rural communities)"
+            "text": "The language level suited to the target audience (e.g., customers, parents of pupils, residents of a neighbourhood)"
           },
           {
             "key": "B",
@@ -322,11 +322,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "The date of the awareness campaign"
+            "text": "The date the original message was written"
           }
         ],
         "answer": "A",
-        "explanation": "For a translation to be useful in the field, the language level is crucial. A technically translated message can be incomprehensible to rural communities. Specifying \"accessible language, rural communities in Niger\" guides the AI to choose simple vocabulary and clear phrasing, even though the result should always be validated by a native speaker."
+        "explanation": "For a translation to be genuinely useful, the language level is crucial. A technical message translated word for word can be incomprehensible to busy customers or to residents with little schooling. Specifying \"accessible language, residents of the neighbourhood\" guides the AI toward simple vocabulary and clear phrasing, even though the result should always be reviewed by a native speaker."
       },
       {
         "question": "What is the best way to build on your good prompts for the long term?",
@@ -345,30 +345,30 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Share them only with your supervisor and never modify them"
+            "text": "Share them only with your manager and never modify them"
           }
         ],
         "answer": "C",
-        "explanation": "A good prompt is a reusable work tool, just like a report template or a data collection form. Saving it with a clear title (e.g., \"Field meeting summary prompt\") allows you to retrieve it quickly, share it with your team, and gradually improve it. This is the foundation of a professional AI practice."
+        "explanation": "A good prompt is a reusable work tool, just like a report template or a form. Saving it with a clear title (e.g., \"Meeting summary prompt\") allows you to retrieve it quickly, share it with your team, and gradually improve it. This is the foundation of a professional AI practice."
       }
     ],
-    "reflection": "Think of a repetitive task you do every week at work: a weekly report, a follow-up email, a briefing note. Now imagine having a perfectly calibrated prompt for that task, one you can launch in just a few seconds. How much time would that save you in a month? In a year? Writing a good prompt is a 5-minute investment that can save you dozens of hours.",
+    "reflection": "Think of a repetitive task you do every week: a weekly report, a follow-up email, a lesson plan, a standard reply to a customer. Now imagine having a perfectly calibrated prompt for that task, one you can launch in just a few seconds. How much time would that save you in a month? In a year? Writing a good prompt is a 5-minute investment that can save you dozens of hours.",
     "glossary": [
       {
         "term": "Prompt",
-        "definition": "The instruction or command you give an AI tool to get a result. A well-written prompt is precise, structured, and contextual. Example: \"As a program officer, write a 150-word summary of this report in English.\""
+        "definition": "The instruction or command you give an AI tool to get a result. A well-written prompt is precise, structured, and contextual. Example: \"As a shop manager, write a 150-word summary of this report in English.\""
       },
       {
         "term": "Context",
-        "definition": "The situational information you provide to the AI so it understands the environment of the task: your organization, the project involved, the target audience, the available data. Without context, AI produces generic responses."
+        "definition": "The situational information you provide to the AI so it understands the environment of the task: your organization or your business, the project involved, the target audience (customers, pupils, service users, colleagues), the available data. Without context, AI produces generic responses."
       },
       {
         "term": "Few-shot (examples)",
-        "definition": "A technique that involves including one or more examples of the expected result directly in your prompt. This allows the AI to mirror the tone, style, and structure you want — like showing a completed sample form to a colleague."
+        "definition": "A technique that involves including one or more examples of the expected result directly in your prompt. This allows the AI to mirror the tone, style, and structure you want — like showing a completed sample form to a new colleague."
       },
       {
         "term": "Role / System prompt",
-        "definition": "The persona or function you assign to the AI at the start of your prompt (e.g., \"You are a translator specialized in public health\"). Defining a role frames the AI's behavior and improves the relevance of its responses."
+        "definition": "The persona or function you assign to the AI at the start of your prompt (e.g., \"You are a translator specialized in administrative documents\"). Defining a role frames the AI's behavior and improves the relevance of its responses."
       },
       {
         "term": "Iteration",
@@ -384,7 +384,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "id": "c3",
     "lessonNumber": 3,
     "title": "Prompt Engineering — Yadda Ake Ba AI Umurni Daidai",
-    "objective": "A karshen wannan darasi, za ku san yadda ake rubuta umurnai (prompts) da ke da tsari kuma masu amfani don samun sakamako ingantacce, na sana'a, kuma za a iya amfani da shi nan take. Za ku iya koyon ginshikan hudu na prompt mai kyau: rawa, mahallin aiki, aikin da ake son yi, da tsarin amsa. Za ku iya inganta promptoci ku ta hanyar gyara mataki-mataki, kuma ku daidaita su ga ayyukancku na gaske a harkar jin kai ko ci gaban al'umma.",
+    "objective": "A karshen wannan darasi, za ku san yadda ake rubuta umurnai (prompts) da ke da tsari kuma masu amfani don samun sakamako ingantacce, na sana'a, kuma za a iya amfani da shi nan take. Za ku koyi ginshikan hudu na prompt mai kyau: rawa, mahallin aiki, aikin da ake son yi, da tsarin amsa. Za ku iya inganta promptoci ku ta hanyar gyara mataki-mataki, kuma ku daidaita su ga ayyukan ku na gaske, ko kai ma'aikaci ne, dalibi, mai sana'ar kansa, ma'aikacin hukumar gwamnati ko mai aikin sa kai.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,35 +393,35 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Jiki na Prompt Mai Kyau: Rawa, Mahallin, Aiki, Tsari",
-        "body": "Ka yi tunanin kana daukar ma'aikaci don aikin filin. In ka ce masa kawai « rubuta rahoto », bai san me ya saka ciki ba. Amma in ka fayyace masa « kai ne jami'in sa ido a PNUD Niger, ga bayanai na mako, rubuta takaitaccen magana a cikin sakin layi biyu ga mai gudanarwa », zai iya yin aiki sosai. Wannan shi ne daidai ka'idar prompt mai tsari.\n\nPrompt mai kyau yana dogara ne kan ginshikan hudu: Rawa (ta yaya AI ya kamata ya yi aiki?), Mahallin (mene ne halin da ake ciki?), Aiki (me kake tsammani daidai?), da Tsari (wace sura amsar ta kamata ta dauka?). Bari mu ga bambancin a aikace:\n\n— Prompt mara tsari: « Rubuta e-mail ga wanda ke bayar da kudi. »\n— Prompt mai tsari: « Kai ne mai kula da aikin a wata kungiyar jin kai ta yankin Sahel. Mako mai ya gabata mun kai kayan abinci mai gina jiki 200 a gundumar Tillabéri. Rubuta e-mail na rahoton ayyuka ga wanda ke bayar da kudi (UNICEF), cikin Turanci, kalmomin 150 da ba su wuce haka ba, da sautin hukuma, tare da jumla ta godiya a karshe. »\n\nPrompt na biyu yana daukar karin dakika 30 don rubuta shi, amma yana ceton ku daga zagayawa da yawa, kuma yana samar da sakamako kusan mai shirye-shirye don aikawa."
+        "body": "Ka yi tunanin kana karbar sabon mataimaki a kungiyar aikin ka. In ka ce masa kawai « rubuta rahoto », bai san me ya saka ciki ba. Amma in ka fayyace masa « kai ne mataimakin malami a makarantar sakandare, ga sakamakon jarrabawar mako, rubuta takaitaccen bayani a sakin layi biyu don taron malamai », zai iya yin aiki sosai. Wannan shi ne daidai ka'idar prompt mai tsari.\n\nPrompt mai kyau yana dogara ne kan ginshikan hudu: Rawa (ta yaya AI ya kamata ya yi aiki?), Mahallin (mene ne halin da ake ciki?), Aiki (me kake tsammani daidai?), da Tsari (wace sura amsar ta kamata ta dauka?). Bari mu ga bambancin a aikace:\n— Prompt mara tsari: « Rubuta e-mail ga abokin ciniki. »\n— Prompt mai tsari: « Ke ce mai gudanar da bitar kafinta. Wani abokin ciniki ya yi odar kujeru goma sha biyu kuma yana tambaya inda aikin ya kai: takwas sun kare, hudu na karshe za su fita mako mai zuwa. Rubuta e-mail na bibiya na kalmomi 150 da ba su wuce haka ba, da sautin ladabi na sana'a, tare da jumlar neman afuwa kan jinkiri da bayar da ranar isar da kaya. »\n\nPrompt na biyu yana daukar karin dakika 30 don rubuta shi, amma yana ceton ku daga zagayawa da yawa, kuma yana samar da sakamako kusan mai shirye don aikawa."
       },
       {
         "title": "Dabarun da Ke Aiki: Misalai, Mataki-mataki, Kuntatawa na Tsari",
-        "body": "Dabarar farko mai karfi ana kiranta few-shot: kuna ba da misali daya ko biyu na sakamakon da kuke tsammani. Kamar nuna wa ma'aikacin lafiya na al'umma yadda ake cika fom din kafin ka tambaye shi ya cika goma. Misali: « Ga takaitaccen magana da na fi so: [misali]. Yanzu takaita wannan rahoton taron da wannan salo. » AI yana fahimtar sautin ku nan take, matakin bayani ku, da yaren aiki ku.\n\nDabarar ta biyu: ku tambayi AI ya yi tunani mataki bayan mataki (\"think step by step\"). Don ayyuka masu rikitarwa kamar nazarin kasafin kudin aiki ko kwatancen shawarwari biyu na fasaha, wannan yana rage kura-kurai. Yana kama da neman wani ya tabbatar da canja wurin Orange Money ta karanta lambobi da murya kafin tabbatarwa.\n\nDabarar ta uku: kuntatawa ga tsarin amsa. Ku fayyace « amsa cikin teburin ginshikai 3 », « rubuta jerin abubuwa da ke da aya 5 a iya yawancinsu », ko « tsara amsar ka da wadannan taken: Lura, Shawarwari, Mataki na gaba ». Lokacin da aka kayyade tsarin a gaba, amsar ana iya amfani da ita kai tsaye a rahoton ku ko gabatarwar ku, ba tare da sake fasalta shi ba."
+        "body": "Dabarar farko mai karfi ana kiranta few-shot: kuna ba da misali daya ko biyu na sakamakon da kuke tsammani. Kamar nuna wa sabon abokin aiki fom din da aka riga aka cika kafin a ba shi goma ya cika. Misali: « Ga takaitaccen bayani da na fi so: [misali]. Yanzu takaita wannan rahoton taron da wannan salo. » AI yana fahimtar sautin ku nan take, matakin bayani ku, da yaren aiki ku.\n\nDabarar ta biyu: ku tambayi AI ya yi tunani mataki bayan mataki (\"think step by step\"). Don ayyuka masu rikitarwa kamar duba kasafin kudin aiki, kwatanta farashin masu samar da kaya biyu, ko tsattsage tambayar jarrabawa, wannan yana rage kura-kurai. Yana kama da karanta lambobin biyan kudi da murya kafin tabbatar da aikawa.\n\nDabarar ta uku: kuntatawa ga tsarin amsa. Ma'aikacin hukumar gwamnatin gari da ke shirya takarda don majalisar gari zai amfana in ya fayyace « amsa cikin teburin ginshikai 3 », « rubuta jerin abubuwa da ba su wuce aya 5 ba », ko « tsara amsar ka da wadannan taken: Lura, Shawarwari, Mataki na gaba ». Lokacin da aka kayyade tsarin a gaba, ana iya amfani da amsar kai tsaye a rahoton ku ko gabatarwar ku, ba tare da sake fasalta shi ba."
       },
       {
         "title": "Gyara da Ingantawa: Prompt Yana Bukatar Zagaye 2–3 na Aikin Gyara",
-        "body": "A tontine (kungiyar ajiya ta al'umma), ba a kafa dokokin daya-daya a rana ta farko ba — ana daidaita su bisa abin da ke aiki don kungiyar. Tare da AI, shi ne iri daya. Prompt na farko ba kasafai ya zama cikakke ba, kuma hakan al'ada ce gaba daya. Makasudin shi ne cimma sakamakon mai kyau a cikin canjin kalmomi biyu ko uku, ba daya ba.\n\nYaya ake sake fasalta yadda yakamata? Ku fayyace game da abin da ba daidai ba. Kada ku ce « wannan mara kyau ne ». Ku ce: « Amsar tana da tsawo sosai. Takaita zuwa kalmomin 100. » Ko: « Sauti ya yi tsauri sosai ga taron al'umma. Yi amfani da harshen da ya fi sauki. » Ko kuma: « Ba ku ambaci bayanin rufe allurar rigakafi ba. Saka wannan adadi: kimanin kashi 67% a yankin Dosso. »\n\nKu adana kyawawan promptocin ku a cikin littafi (na dijital ko na takarda). Jami'an filin kungiyoyi kamar MSF ko PAM, alal misali, suna gina dakunan karatu na prompts masu sake amfani don rahotannin mako-mako, fomoci na masu amfana, ko gargadin yanayi. Prompt mai kyau kayan aiki ne na aiki, daidai kamar fom din tattara bayanai."
+        "body": "Babu wanda ke daidaita sabuwar na'ura daidai a karo na farko: kana gwadawa, kana lura, kana gyarawa. Tare da AI, shi ne iri daya. Prompt na farko ba kasafai ya zama cikakke ba, kuma hakan al'ada ce gaba daya. Makasudin shi ne cimma sakamako mai kyau a cikin zagaye biyu ko uku, ba daya ba.\n\nYaya ake sake fasalta yadda ya kamata? Ku fayyace game da abin da ba daidai ba. Kada ku ce « wannan mara kyau ne ». Ku ce: « Amsar tana da tsawo sosai. Takaita zuwa kalmomin 100. » Ko: « Sauti ya yi tsauri sosai ga taron iyayen dalibai. Yi amfani da harshen da ya fi sauki. » Ko kuma: « Ba ka yi amfani da adadin masu halarta da na ba ka a sama ba. Saka shi a sakin layi na biyu. »\n\nKu adana kyawawan promptocin ku a cikin littafi (na dijital ko na takarda). Kungiyar filin ta wata kungiyar jin kai, sashen gwamnatin gari, ko karamin kamfanin sabis duk suna gina dakunan ajiya na prompts masu sake amfani don rahotannin mako-mako, amsoshi ga abokan ciniki, ko rahotannin taro. Prompt mai kyau kayan aiki ne na aiki, daidai kamar samfurin takarda."
       },
       {
-        "title": "Prompts Don Aikin Gaske: Takaita, Fassara, E-mail Bailleur, Rahoton Taro na Filin",
-        "body": "Lokuta hudu na amfani suna rufe mafi yawan aikin takardun aiki a harkar jin kai da ci gaban al'umma. Na farko: takaitaccen rahoto. Manna dogon takarda (rahoton aikin, karatun asali) ku tambayi: « A matsayin jami'in shirin, takaita wannan takarda a cikin mahimman batutuwa 5 don taron daidaitawa. Tsari: jerin lambobi. Harshe: Hausa. »\n\nLarura ta biyu: fassara da daidaitawa FR ↔ EN ↔ harshen gida. « Fassara wannan sakon wayewar kan zazzabin kwalara daga Faransanci zuwa Hausa da ake magana a Niger, tare da kiyaye matakin harshe mai sauki ga al'ummomin karkara. » AI ba cikakke ba ne don duk yarukan gida, amma yana iya samar da sigar farko da za a tabbatar da ita ta mai magana na asali, wanda ke rage lokacin fassara da kimanin kashi 50%.\n\nLarura ta uku: e-mail na masu bayar da kudi. Ka ba da gaskiyar abubuwa, adadi, sakamakon, sunan mai ba da kudi, ka tambayi e-mail na yau da kullun na rahoton ayyuka cikin Turanci. Larura ta hudu: takaitan taron filin. Manna rubutun ku na dan gajere ko fadi su ta murya (ta hanyar aikace-aikacen rubuta magana), sannan ku tambayi: « Tsara wadannan bayanan cikin: Mahalarta, Batutuwan da Aka Tattauna, Shawarwarin da Aka Dauka, Ayyukan da Ke Biyo Baya tare da masu alhakin da karewar lokaci. » Sakamakon yana shirye don raba shi da mai kula da ku."
+        "title": "Prompts Don Aikin Gaske: Takaitawa, Fassara, E-mail na Sana'a, Rahoton Taro",
+        "body": "Lokuta hudu na amfani suna rufe mafi yawan aikin takardu, ko wane aiki kake yi. Na farko: takaitaccen rahoto. Manna dogon takarda (makalar bincike, rahoton shekara, fayil din aiki) ku tambayi: « A matsayina na dalibin digiri na biyu, takaita wannan makala a cikin mahimman batutuwa 5 don kungiyar karatu ta. Tsari: jerin lambobi. Harshe: Hausa. »\n\nLarura ta biyu: fassara da daidaitawa daga wani harshe zuwa wani, har da zuwa harshen gida wanda ba a rubuta shi sosai a yanar gizo. « Fassara wannan sakon bayani kan lokutan aiki na sabis, daga Faransanci zuwa harshen da mazauna wannan unguwa ke magana, tare da kiyaye kalmomi masu sauki. » AI ba ya aiki daidai a duk harsuna: yana samar da sigar farko wadda dole mai magana na asali ya duba kafin a rarraba ta, kuma hakan ya fi sauri sosai fiye da fara daga sifili.\n\nLarura ta uku: e-mail na sana'a. Ka ba da gaskiyar abubuwa, adadin kudi, sakamakon, da wanda ake aikawa — abokin ciniki, abokin hulda, shugabanci, mai bayar da tallafi — sannan ka nemi e-mail na hukuma na rahoton ayyuka. Larura ta hudu: rahoton taro. Manna rubutun ka na dan gajere ko ka fadi su ta murya (ta hanyar aikace-aikacen rubuta magana), sannan ka tambayi: « Tsara wadannan bayanan cikin: Mahalarta, Batutuwan da Aka Tattauna, Shawarwarin da Aka Dauka, Ayyukan da Ke Biyo Baya tare da masu alhakin da karewar lokaci. » Sakamakon yana shirye don raba shi da abokan aikin ka, shugabancin ka, ko abokan huldar ka."
       }
     ],
     "example": {
-      "title": "Daga Prompt Marar Tsari zuwa Prompt Mai Tsari: Lamarin Rahoton Aikin",
-      "challenge": "Aminata, mai kula da ayyuka a wata kungiyar NGO a Niamey, ta tambayi kayan aiki na AI: « Rubuta rahoto na aikin. » Ta sami rubutu na gaba daya na shafuka biyu ba tare da wasu bayanan gaske ba, wanda dole ta sake rubutawa gaba daya. Ta kashe mintuna 90 akan wannan takarda.",
-      "solution": "Ta sake fasalta ta amfani da tsarin Rawa/Mahallin/Aiki/Tsari: « Kai ne mai kula da aikin a kungiyar NGO ta lafiya a Niger. Aikin ya gudana daga 10 zuwa 14 ga Yuni 2025 a gundumar Maradi. Makasudi: kimantawa kan kayan magunguna a cibiyoyin lafiya 8. Sakamakon da ya fi muhimmanci: cibiyoyi 6 daga 8 suna da isassun kayan; cibiyoyi 2 sun ruwaito karancin amoxicillin. Rubuta rahoto mai tsari na aikin tare da wadannan sassan: Mahallin, Ayyuka, Sakamakon, Shawarwari. Kalmomin 400 da ba su wuce haka ba. Sauti na sana'a, harshen Faransanci. »",
-      "impact": "Sakamakon sabon rahoto ana iya amfani da shi kai tsaye bayan sake karanta mintuna 10. Jimlar lokacin aiki ya ragu daga mintuna 90 zuwa kimanin mintuna 25 — adana lokaci kimanin kashi 70%. Ingancin ya yi kima mai kula da ita, wanda ya amince da rahoto ba tare da neman babban gyara ba."
+      "title": "Daga Prompt Marar Tsari zuwa Prompt Mai Tsari: Rahoton Abokin Ciniki na Karamin Kamfani",
+      "challenge": "Lucía tana gudanar da karamin kamfanin sufuri da isar da kaya a Medellín, kasar Kolombiya. Kowane wata tana bukatar aika rahoton ayyuka ga babban abokin cinikinta. Ta tambayi kayan aiki na AI: « Rubuta rahoto ga abokin cinikina. » Ta sami rubutu na gaba daya na shafuka biyu ba tare da wasu bayanan gaske ba, wanda dole ta sake rubutawa gaba daya. Ta kashe mintuna 90 akan wannan takarda.",
+      "solution": "Ta sake fasalta ta amfani da tsarin Rawa/Mahallin/Aiki/Tsari: « Ke ce mai gudanar da karamin kamfanin sufuri da isar da kaya. Abokin ciniki shi ne mai rarraba kayan ofis. Lokacin da ake magana a kai: watan da ya gabata. Bayanan da za a saka: isar da kaya 140 da aka kammala, isar da kaya 3 da suka yi jinkiri fiye da sa'o'i 24, duk saboda hanyoyin da ruwan sama ya yanke. Rubuta rahoton wata mai tsari tare da wadannan sassan: Mahallin, Ayyukan Wata, Matsaloli da Dalilansu, Shawarwari. Kalmomin 400 da ba su wuce haka ba. Sauti na sana'a, harshen Sifaniyanci. »",
+      "impact": "Ana iya amfani da sabon sakamakon kai tsaye bayan sake karantawa na mintuna 10. Jimlar lokacin aiki ya ragu daga mintuna 90 zuwa kimanin mintuna 25 — adana lokaci kimanin kashi 70%. Abokin ciniki ya ga takardar ta fi na baya bayyana, kuma ya amince da ita ba tare da neman babban gyara ba."
     },
     "practice": {
       "title": "Aikin Gwaji: Rubuta kuma Inganta Farkon Prompt Ku Mai Tsari",
       "instructions": [
-        "Zabi aikin gaske daga aikin ku (rubuta e-mail, takaita takarda, fassara sako). A wayar ku ko kwamfuta, rubuta cikakken prompt a sassan hudu: fara da « Kai ne [rawar ku] », kara mahallin (wuri, aiki, mahimman bayanai), bayyana aikin daidai, sannan fayyace tsarin da ake so (adadin kalmomi, harshe, tsari). Saka wannan prompt ga kayan aiki na AI (ChatGPT, Claude, Gemini).",
-        "Karanta sakamakon da aka samu sosai. Gano wata daga batutuwa daya da ba ta gamsar da ku ba: sauti, tsawo, bangare da ya bace, tsari. Sake fasalta wannan bangare ne kawai ka saka sigar prompt ta biyu. Kwatanta amsar biyu kai tsaye.",
-        "Kwafa promptr din ku na karshe (sigar da aka inganta) cikin takarda ko bayanin kula a wayar ku, tare da taken gajere da ke bayyana amfaninsa (misali: « Prompt rahoton aikin filin »). Yanzu kun fara dakin karatu ku na sirri na prompts masu sake amfani."
+        "Zabi aikin gaske daga rayuwar ka ta yau da kullum (rubuta e-mail, takaita takarda, fassara sako, shirya darasi). A wayar ka ko kwamfuta, rubuta cikakken prompt a sassan hudu: fara da « Kai ne [rawar ka] », kara mahallin (wuri, aiki, mahimman bayanai), bayyana aikin daidai, sannan fayyace tsarin da ake so (adadin kalmomi, harshe, tsari). Saka wannan prompt ga kayan aiki na AI (ChatGPT, Claude, Gemini).",
+        "Karanta sakamakon da aka samu sosai. Gano batu daya da bai gamsar da kai ba: sauti, tsawo, bangare da ya bace, tsari. Sake fasalta wannan bangare ne kawai ka saka sigar prompt ta biyu. Kwatanta amsoshin biyu kai tsaye.",
+        "Kwafa prompt din ka na karshe (sigar da aka inganta) cikin takarda ko bayanin kula a wayar ka, tare da taken gajere da ke bayyana amfaninsa (misali: « Prompt rahoton wata na abokin ciniki »). Yanzu ka fara dakin ajiya na ka na sirri na prompts masu sake amfani."
       ],
-      "observation": "Za ku lura cewa sigar ta biyu ta prompt tana samar da amsa mafi kusa da tsammaninku, galibi ba tare da bukatar sake fasalta na uku ba. Kokarin rubuta prompt mai daidaito yana biyan kudi tun daga amfanin farko: kananan gyare-gyare, kananan frustration, da sakamakon sana'a da sauri."
+      "observation": "Za ku lura cewa sigar ta biyu ta prompt tana samar da amsa mafi kusa da tsammaninku, galibi ba tare da bukatar sake fasalta na uku ba. Kokarin rubuta prompt mai daidaito yana biyan kudi tun daga amfanin farko: kankanin gyare-gyare, kankanin damuwa, da sakamako na sana'a cikin gaggawa."
     },
     "quiz": [
       {
@@ -468,7 +468,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Few-shot yana nufin saka misali na gaske na nau'in sakamakon da kake so a cikin promptr din ka. Wannan yana baiwa AI damar daidaita sautin sa, matakin bayani sa, da tsarin sa zuwa samfurin ka — kamar nuna fom din da aka cika wa dan'uwa na aiki kafin ya cika sauran."
+        "explanation": "Few-shot yana nufin saka misali na gaske na nau'in sakamakon da kake so a cikin prompt din ka. Wannan yana baiwa AI damar daidaita sautin sa, matakin bayani sa, da tsarin sa zuwa samfurin ka — kamar nuna fom din da aka cika wa sabon abokin aiki kafin ya cika sauran."
       },
       {
         "question": "Me ya sa ake ba da shawarar gyara prompt maimakon sake rubuta shi gaba daya?",
@@ -487,18 +487,18 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Saboda yana da tasiri fiye don gyara wata daga batutuwa daya maimakon sake fasalta komai, wanda ke baiwa ku damar cimma sakamakon daidai a cikin canjin kalmomi 2–3"
+            "text": "Saboda yana da tasiri fiye don gyara batu daya maimakon sake fasalta komai, wanda ke baiwa ku damar cimma sakamakon daidai a cikin zagaye 2–3"
           }
         ],
         "answer": "D",
         "explanation": "Sake rubuta prompt gaba daya galibi yana nufin asarar abin da ya riga ya yi aiki. Gano daidai abin da ba ya aiki (sauti, tsawo, bangare da ya bace) da kuma gyara shi a hankali yana da tasiri sosai. Kamar daidaita girke-girke ta canza daya daga cikin kayan yaji, ba fara daga farko ba."
       },
       {
-        "question": "Lokacin fassara sakon wayewar kan cuta daga Faransanci zuwa Hausa ta amfani da AI, wane bayani ne mafi mahimmanci a saka cikin prompt?",
+        "question": "Lokacin fassara sakon bayani zuwa harshen gida ta amfani da AI, wane bayani ne mafi mahimmanci a saka cikin prompt?",
         "options": [
           {
             "key": "A",
-            "text": "Matakin harshe da ya dace da jama'ar da ake nufi (misali, al'ummomin karkara)"
+            "text": "Matakin harshe da ya dace da jama'ar da ake nufi (misali, abokan ciniki, iyayen dalibai, mazauna unguwa)"
           },
           {
             "key": "B",
@@ -510,18 +510,18 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Ranar kamfen din wayewar kan lafiya"
+            "text": "Ranar da aka rubuta sakon asali"
           }
         ],
         "answer": "A",
-        "explanation": "Don fassara ta kasance da amfani a filin, matakin harshe yana da mahimmanci kwarai. Sakon fasaha da aka fassara kalma-kalma na iya zama ba a fahimta ga al'ummomin karkara. Fayyace « harshe mai sauki, al'ummomin karkara a Niger » yana jagorantar AI don zabar kalmomi masu sauki da jimlan bayyananne, ko da yake dole koyaushe a tabbatar da sakamakon ta mai magana na asali."
+        "explanation": "Don fassara ta kasance da amfani na gaske, matakin harshe yana da mahimmanci kwarai. Sakon fasaha da aka fassara kalma-kalma na iya zama ba a fahimta ga abokan ciniki masu gaggawa ko mazauna da ba su yi karatu sosai ba. Fayyace « harshe mai sauki, mazauna unguwa » yana jagorantar AI don zabar kalmomi masu sauki da jimloli bayyanannu, ko da yake dole koyaushe mai magana na asali ya duba sakamakon."
       },
       {
         "question": "Mene ne mafi kyawun hanyar gina akan kyawawan prompts din ku don dogon lokaci?",
         "options": [
           {
             "key": "A",
-            "text": "Memorize them mentally for each new task"
+            "text": "Rike su a kai kawai don kowane sabon aiki"
           },
           {
             "key": "B",
@@ -529,42 +529,42 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Adana su a dakin karatu na sirri (takarda, bayanin kula, fayil) tare da taken bayyananne"
+            "text": "Adana su a dakin ajiya na sirri (takarda, bayanin kula, fayil) tare da taken bayyananne"
           },
           {
             "key": "D",
-            "text": "Raba su da mai kula da ku kawai kuma kada a gyara su"
+            "text": "Raba su da shugaban ka kawai kuma kada a gyara su"
           }
         ],
         "answer": "C",
-        "explanation": "Prompt mai kyau kayan aiki ne na aiki wanda za a iya sake amfani da shi, daidai kamar samfurin rahoto ko fom din tattara bayanai. Adana shi tare da taken bayyananne (misali, « Prompt takaitan taron filin ») yana baiwa ku damar nemo shi da sauri, raba shi da kungiyar ku, kuma kara kyauta shi a hankali. Wannan shine tushen aikin AI na sana'a."
+        "explanation": "Prompt mai kyau kayan aiki ne na aiki wanda za a iya sake amfani da shi, daidai kamar samfurin rahoto ko fom. Adana shi tare da taken bayyananne (misali, « Prompt rahoton taro ») yana baiwa ku damar nemo shi da sauri, raba shi da kungiyar ku, kuma inganta shi a hankali. Wannan shine tushen aikin AI na sana'a."
       }
     ],
-    "reflection": "Yi tunani kan aikin da ke maimaitawa da kake yi kowace mako a aikinka: rahoto na mako-mako, e-mail na bibiyar aiki, takaitan rahoto. Yanzu ka yi tunanin samun prompt da aka daidaita sosai don wannan aikin, wanda kawai kake kaddamar da shi cikin yan dakika. Nawa lokaci zai cece ka a cikin wata? A cikin shekara? Rubuta prompt mai kyau kuduri ne na mintuna 5 wanda zai iya cece ku daruruwan sa'o'i.",
+    "reflection": "Yi tunani kan aikin da ke maimaituwa da kake yi kowace mako: rahoto na mako-mako, e-mail na bibiyar aiki, takardar shirya darasi, amsa ta yau da kullum ga abokin ciniki. Yanzu ka yi tunanin samun prompt da aka daidaita sosai don wannan aikin, wanda kawai kake kaddamar da shi cikin yan dakika. Nawa lokaci zai cece ka a cikin wata? A cikin shekara? Rubuta prompt mai kyau kuduri ne na mintuna 5 wanda zai iya cece ka daruruwan sa'o'i.",
     "glossary": [
       {
         "term": "Prompt",
-        "definition": "Umurni ko jagorar da kuke bawa kayan aiki na AI don samun sakamakon da ake so. Prompt da aka rubuta yadda ya kamata yana da daidaito, tsari, da mahallin aiki. Misali: « A matsayin jami'in shirin, rubuta takaitaccen magana na kalmomin 150 na wannan rahoto cikin Hausa. »"
+        "definition": "Umurni ko jagorar da kuke bawa kayan aiki na AI don samun sakamakon da ake so. Prompt da aka rubuta yadda ya kamata yana da daidaito, tsari, da mahallin aiki. Misali: « A matsayina na shugaban kanti, rubuta takaitaccen bayani na kalmomin 150 na wannan rahoto cikin Hausa. »"
       },
       {
         "term": "Mahallin (Contexte)",
-        "definition": "Bayanin yanayin da kuke bayarwa ga AI don ya fahimci yanayin aikin: kungiyar ku, aikin da ke cikin tambaya, jama'ar da ake nufi, bayanai da ake da su. Ba tare da mahallin ba, AI yana samar da amsoshi na gaba daya."
+        "definition": "Bayanin yanayin da kuke bayarwa ga AI don ya fahimci yanayin aikin: kungiyar ku ko sana'ar ku, aikin da ke cikin tambaya, jama'ar da ake nufi (abokan ciniki, dalibai, masu amfani da sabis, abokan aiki), da bayanan da ake da su. Ba tare da mahallin ba, AI yana samar da amsoshi na gaba daya."
       },
       {
         "term": "Few-shot (Misalai)",
-        "definition": "Dabarar da ta kunshi saka misali daya ko fiye na sakamakon da ake tsammani kai tsaye a cikin promptr din ka. Wannan yana baiwa AI damar kwaikwayon sauti, salo, da tsari da kake son su — kamar nuna fom din da aka cika wa dan'uwa na aiki."
+        "definition": "Dabarar da ta kunshi saka misali daya ko fiye na sakamakon da ake tsammani kai tsaye a cikin prompt din ka. Wannan yana baiwa AI damar kwaikwayon sauti, salo, da tsari da kake son su — kamar nuna fom din da aka cika wa sabon abokin aiki."
       },
       {
         "term": "Rawa / System prompt",
-        "definition": "Sunan mutum ko aikin da kuke ba AI a farkon promptr din ku (misali, « Kai mai fassara ne da ke kwarewa a lafiyar jama'a »). Bayyana rawa yana tsara dabi'ar AI kuma yana inganta dacewa da amsar sa."
+        "definition": "Sunan mutum ko aikin da kuke ba AI a farkon prompt din ku (misali, « Kai mai fassara ne da ke kwarewa a takardun hukuma »). Bayyana rawa yana tsara dabi'ar AI kuma yana inganta dacewar amsar sa."
       },
       {
         "term": "Gyara mataki-mataki (Itération)",
-        "definition": "Tsarin inganta prompt a hankali ta hanyar canjin kalmomi masu jere. Kuna gano abin da ba daidai ba a amsar farko, gyara wannan bangare musamman, kuma ku sake saka shi. Gabadaya, gyare-gyare 2 zuwa 3 sun isa don samun sakamakon sana'a."
+        "definition": "Tsarin inganta prompt a hankali ta hanyar zagaye masu jere. Kuna gano abin da ba daidai ba a amsar farko, gyara wannan bangare musamman, kuma ku sake saka shi. Gabadaya, gyare-gyare 2 zuwa 3 sun isa don samun sakamako na sana'a."
       },
       {
         "term": "Tsarin amsa (Format de sortie)",
-        "definition": "Sura da kuke so amsar AI ta dauka: jerin abubuwa, teburi, e-mail na yau da kullun, sakin layi na lambobi, iyakar adadin kalmomi. Fayyace tsarin yana hana sake fasalta hannu da hannu kuma yana sa amsa ta kasance mai amfani kai tsaye."
+        "definition": "Sura da kuke so amsar AI ta dauka: jerin abubuwa, teburi, e-mail na hukuma, sakin layi na lambobi, iyakar adadin kalmomi. Fayyace tsarin yana hana sake fasalta hannu da hannu kuma yana sa amsa ta kasance mai amfani kai tsaye."
       }
     ]
   }
