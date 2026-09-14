@@ -256,7 +256,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
         "explanation": "Dans les contextes de faible connectivité, le premier critère de sélection d'un outil est son fonctionnement hors ligne ou en mode faible bande passante, et sa compatibilité avec les appareils réellement disponibles. Un outil inutilisable sur le terrain n'a aucune valeur, quelle que soit sa sophistication technique."
       }
     ],
-    "reflection": "Dans les 30 prochains jours, je m'engage à mettre en place les actions suivantes : premièrement, identifier et documenter un cas d'usage IA concret dans mon travail quotidien, en le choisissant parmi les tâches répétitives à faible risque ; deuxièmement, tester un outil IA adapté à mon contexte de connectivité et valider qu'il respecte la confidentialité des données de mes bénéficiaires ; troisièmement, rédiger et affiner au moins trois prompts structurés pour ce cas d'usage, et noter les résultats obtenus ; quatrièmement, partager au moins une apprentissage clé de ce module avec un collègue ou dans une réunion d'équipe. Je me fixe un indicateur de succès mesurable et je réévaluerai mes pratiques à la fin de ces 30 jours pour décider de la prochaine étape.",
+    "reflection": "Vous venez de parcourir les sept leçons du module : ce qu'est l'IA et ce qu'elle ne sait pas faire, le fonctionnement des modèles de langage, l'écriture de consignes claires, le choix d'un cas d'usage, l'automatisation avec un humain dans la boucle, l'éthique et le choix des outils. Parmi tout cela, quelle est la seule chose que vous mettrez réellement en pratique dans les trente prochains jours ? Quelle tâche confierez-vous à l'IA, quel garde-fou poserez-vous pour protéger les données des personnes concernées, et à quel signe concret saurez-vous, dans un mois, que c'était le bon choix ?",
     "glossary": [
       {
         "term": "Intelligence artificielle (IA)",
@@ -540,7 +540,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
         "explanation": "In low-connectivity contexts, the primary selection criterion for a tool is its ability to work offline or in low-bandwidth mode, and its compatibility with devices actually available in the field. A tool that cannot be used in the field has no value, regardless of its technical sophistication."
       }
     ],
-    "reflection": "Over the next 30 days, I commit to putting the following actions in place: first, identify and document a concrete AI use case in my daily work, choosing from repetitive low-risk tasks; second, test an AI tool suited to my connectivity context and verify that it respects the confidentiality of my beneficiaries' data; third, draft and refine at least three structured prompts for this use case and record the results; fourth, share at least one key learning from this module with a colleague or in a team meeting. I will set a measurable success indicator and reassess my practices at the end of these 30 days to decide on the next step.",
+    "reflection": "You have now worked through the seven lessons of this module: what AI is and what it cannot do, how language models work, writing clear instructions, choosing a use case, automating with a human in the loop, ethics, and picking your tools. Out of all of that, what is the one thing you will actually put into practice over the next thirty days? Which task will you hand to AI, which safeguard will you put in place to protect the data of the people involved, and what concrete sign will tell you, a month from now, that it was the right call?",
     "glossary": [
       {
         "term": "Artificial Intelligence (AI)",
@@ -575,8 +575,8 @@ export const iaLessonC8: Record<Language, LessonContent> = {
   "ha": {
     "id": "c8",
     "lessonNumber": 8,
-    "title": "Ƙarshen Jarrabawa — Tabbatar da Abin da Ka Koya kuma Ka Sami Takardar Shedar Ka",
-    "objective": "Bayan kammala wannan darasin, za ku iya amfani da dukan ilimin da kuka samu a darussan 1 zuwa 7 don magance matsalolin aiki na gaske a fannin agaji da ci gaban al'umma. Za ku nuna fahimtarku game da hankali na wucin gadi, manyan samfuran harshe, amfani na aiki, da tambayoyin ɗa'a. Wannan jarrabawa tana tabbatar da cewa kun kware a dukan sashen, kuma tana bude takardar shedar dijital da za a iya tabbatar da ita ta Karatou Academy.",
+    "title": "Karshen Jarrabawa — Tabbatar da Abin da Ka Koya kuma Ka Sami Takardar Shedar Ka",
+    "objective": "Bayan kammala wannan darasin, za ku iya amfani da dukan ilimin da kuka samu a darussan 1 zuwa 7 don magance matsalolin aiki na gaske a fannin agaji da ci gaban al'umma. Za ku nuna fahimtarku game da hankali na wucin gadi, manyan samfuran harshe, amfani na aiki, da tambayoyin da'a. Wannan jarrabawa tana tabbatar da cewa kun kware a dukan sashen, kuma tana bude takardar shedar dijital da za a iya tabbatar da ita ta Karatou Academy.",
     "video": {
       "fr": "",
       "en": "",
@@ -585,35 +585,35 @@ export const iaLessonC8: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Abubuwan da suka fi muhimmanci game da AI — Ma'ana, koyon na'ura, da AI mai kirkirowa",
-        "body": "Hankali na wucin gadi (AI) shi ne ikon na'ura ta aikata ayyuka da yawanci suna buƙatar hankali na ɗan adam — kamar gane hoto, fahimtar rubutu, ko yanke shawara. Ba sihiri ba ne; lissafi ne da bayanai. Ku yi tunani game da ma'aikacin lafiya na al'umma wanda ya koyi gane alamomin ƙarancin abinci ta hanyar duba ɗaruruwan yanayi — na'ura tana yin haka daidai, amma da miliyoyin misalai.\n\nKoyon na'ura (machine learning) shi ne injin farko na AI na zamani. Maimakon rubuta dokokin a hannu, ana ba tsarin misalai — kamar bayanai na girbi rogo akan lokuta goma — kuma yana koyo da kansa don gano tsarin. Yadda bayanai suka zama wakilin gaskiyar ku ta wurin, haka sakamako yake kyau.\n\nAI mai ƙirƙirowa ta wuce haka — ba ta rarrabawa ko hasashe kawai ba, tana ƙirƙiro abubuwa — rubutu, hotuna, lambar kwamfuta. Kayan aiki kamar LLM (manyan samfuran harshe) na cikin wannan rukunin. Suna da amfani wajen rubuta rahotanni, fassara zuwa Hausa ko Faransanci, ko taƙaita bayanan taron filin aiki. Amma suna da iyakoki: suna iya yin kuskure da tabbaci, kuma bayanai da aka horar da su suna tsayawa a wani takamaiman kwanan wata."
+        "body": "Hankali na wucin gadi (AI) shi ne ikon na'ura ta aikata ayyuka da yawanci suna bukatar hankali na dan adam — kamar gane hoto, fahimtar rubutu, ko yanke shawara. Ba sihiri ba ne; lissafi ne da bayanai. Ku yi tunani game da ma'aikacin lafiya na al'umma wanda ya koyi gane alamomin karancin abinci ta hanyar duba daruruwan yanayi — na'ura tana yin haka daidai, amma da miliyoyin misalai.\n\nKoyon na'ura (machine learning) shi ne injin farko na AI na zamani. Maimakon rubuta dokokin a hannu, ana ba tsarin misalai — kamar bayanai na girbi rogo akan lokuta goma — kuma yana koyo da kansa don gano tsarin. Yadda bayanai suka zama wakilin gaskiyar ku ta wurin, haka sakamako yake kyau.\n\nAI mai kirkirowa ta wuce haka — ba ta rarrabawa ko hasashe kawai ba, tana kirkiro abubuwa — rubutu, hotuna, lambar kwamfuta. Kayan aiki kamar LLM (manyan samfuran harshe) na cikin wannan rukunin. Suna da amfani wajen rubuta rahotanni, fassara zuwa Hausa ko Faransanci, ko takaita bayanan taron filin aiki. Amma suna da iyakoki: suna iya yin kuskure da tabbaci, kuma bayanai da aka horar da su suna tsayawa a wani takamaiman kwanan wata."
       },
       {
         "title": "LLM da Prompts — Samun mafi kyau daga samfuran harshe",
-        "body": "LLM ya yi kama da mataimaki mai ilimi wanda ya karanta ɗakin karatu duka amma bai taɓa zuwa filin aiki ba. Yana san abu mai yawa gaba ɗaya, amma bai san ƙauyenku, kasafin kuɗinku, ko masu amfana da ku ba. Ku ne za ku ba shi wannan mahallin.\n\nPrompt mai kyau umarni ne a bayyane, tare da mahallin da ya dace, kuma na takamaiman buƙata. Kwatanta: 'Rubuta rahoto' da 'Kai jami'in sa ido da kimantawa ne a wata NGO da ke Niger. Rubuta taƙaitaccen shafi ɗaya na rahaton filin Maris, nufin mai ba da kuɗin waje, yana mai nuni ga alƙaluman abinci na yara.' Prompt na biyu yana samar da sakamako mai amfani goma sau fiye. Ku ba shi rawa, mahallin, tsarin da ake tsammani, da iyakoki.\n\nIyakokin LLM suna gaske — hallucinations (ƙirƙirar bayanai da aka gabatar a matsayin gaskiya), son zuciya saboda bayanai da aka horar da su da yawa daga Yamma, rashin iya samun bayanai na kwanan nan ko na sirri ba tare da kayan aiki na musamman ba. Ƙa'idar zinariya: ku koyaushe tabbatar da bayanan da suke da mahimmanci daga hukumomi kafin amfani da su a cikin wata takarda ta hukuma ko yanke shawara da ta shafi masu amfana."
+        "body": "LLM ya yi kama da mataimaki mai ilimi wanda ya karanta dakin karatu duka amma bai taba zuwa filin aiki ba. Yana san abu mai yawa gaba daya, amma bai san kauyenku, kasafin kudinku, ko masu amfana da ku ba. Ku ne za ku ba shi wannan mahallin.\n\nPrompt mai kyau umarni ne a bayyane, tare da mahallin da ya dace, kuma na takamaiman bukata. Kwatanta: 'Rubuta rahoto' da 'Kai jami'in sa ido da kimantawa ne a wata NGO da ke Niger. Rubuta takaitaccen shafi daya na rahaton filin Maris, nufin mai ba da kudin waje, yana mai nuni ga alkaluman abinci na yara.' Prompt na biyu yana samar da sakamako mai amfani goma sau fiye. Ku ba shi rawa, mahallin, tsarin da ake tsammani, da iyakoki.\n\nIyakokin LLM suna gaske — hallucinations (kirkirar bayanai da aka gabatar a matsayin gaskiya), son zuciya saboda bayanai da aka horar da su da yawa daga Yamma, rashin iya samun bayanai na kwanan nan ko na sirri ba tare da kayan aiki na musamman ba. Ka'idar zinariya: ku koyaushe tabbatar da bayanan da suke da mahimmanci daga hukumomi kafin amfani da su a cikin wata takarda ta hukuma ko yanke shawara da ta shafi masu amfana."
       },
       {
-        "title": "Tura da Atomatik — Amfani, Fifiko, da Ɗan Adam a cikin tsarin",
-        "body": "Gano amfani da ya dace shi ne rabin aikin. Hanyar ita ce fara da ayyukan da ake maimaita su, da ke ɗaukar lokaci, kuma masu haɗarin ƙasa — kamar shigar da bayanai na rarraba abinci, fassara fom, ko ƙirƙirar samfuran rahoto. Ana bada fifiko ta amfani da tsari mai sauƙi — tasirin da ake tsammani a kan yiwuwar aiwatarwa da haɗari. Ba kayan aikin da ya fi inganci shi ne ya ci nasara ba; shi ne wanda ya dace da yanayin ku, ciki har da yankuna da haɗin intanet yake ƙasa.\n\nAtomatik ba yana nufin 'ba tare da ɗan adam' ba. Ka'idar 'ɗan adam a cikin tsarin' (human-in-the-loop) tana da matuƙar muhimmanci — kayan aikin AI na iya shirya daftari na farko, rarrabawa bayanai, ko aika gargaɗi, amma wanda ya cancanta dole ne ya tabbatar kafin wani aikin da ya fi muhimmanci. Kamar canja wurin Orange Money — tsarin yana aiwatar da ma'amala, amma ku tabbatar da adadin kuɗin da mai karɓa kafin ku tabbatar.\n\nA yanayin agaji, yanke shawara da ta shafi masu amfana — ba da taimako, nuna kariya, ko kula da lafiya — ba za a bar su gaba ɗaya a hannun na'ura ba. AI na iya taimakawa wajen sarrafa bayanai da sauri; hukunci na ɗa'a yana kasancewa na ɗan adam."
+        "title": "Tura da Atomatik — Amfani, Fifiko, da Dan Adam a cikin tsarin",
+        "body": "Gano amfani da ya dace shi ne rabin aikin. Hanyar ita ce fara da ayyukan da ake maimaita su, da ke daukar lokaci, kuma masu hadarin kasa — kamar shigar da bayanai na rarraba abinci, fassara fom, ko kirkirar samfuran rahoto. Ana bada fifiko ta amfani da tsari mai sauki — tasirin da ake tsammani a kan yiwuwar aiwatarwa da hadari. Ba kayan aikin da ya fi inganci shi ne ya ci nasara ba; shi ne wanda ya dace da yanayin ku, ciki har da yankuna da hadin intanet yake kasa.\n\nAtomatik ba yana nufin 'ba tare da dan adam' ba. Ka'idar 'dan adam a cikin tsarin' (human-in-the-loop) tana da matukar muhimmanci — kayan aikin AI na iya shirya daftari na farko, rarrabawa bayanai, ko aika gargadi, amma wanda ya cancanta dole ne ya tabbatar kafin wani aikin da ya fi muhimmanci. Kamar canja wurin Orange Money — tsarin yana aiwatar da ma'amala, amma ku tabbatar da adadin kudin da mai karba kafin ku tabbatar.\n\nA yanayin agaji, yanke shawara da ta shafi masu amfana — ba da taimako, nuna kariya, ko kula da lafiya — ba za a bar su gaba daya a hannun na'ura ba. AI na iya taimakawa wajen sarrafa bayanai da sauri; hukunci na da'a yana kasancewa na dan adam."
       },
       {
-        "title": "Alhakin da zaɓin kayan aiki — Son zuciya, bayanai, da ɗa'a a aikace",
-        "body": "Son zuciya a cikin AI ba wata matsalar fasaha ce mai wuyar fahimta ba — su ne rashin daidaiton duniya na gaske da aka rubuta a cikin bayanai. Samfuri da aka horar akan bayanai na lafiya da yawa daga birane na Yamma zai ba da sakamako mafi muni ga al'umma ta karkara a Sahel. Gano son zuciya na alhakin ƙwararru ne, ba zaɓi ba.\n\nKiyaye bayanai na masu amfana ba za a iya cinikin su ba. Kafin amfani da kayan aikin AI tare da bayanai na sirri — sunaye, yanayin rauni, wurare — ku tambayi waɗannan tambayoyi guda uku: Ina aka adana wannan bayanan? Wa zai iya samun damar gani? Shin suna bin ƙa'idodin gida da ƙa'idodin agaji? Kada ku taɓa manne bayanai masu mahimmanci a cikin kayan aikin jama'a da ba su da tsaro — kamar yadda ba za ku bar fayil na kiwon lafiya a kan tebur na kasuwa ba.\n\nZaɓar kayan aikin AI yana nufin zaɓar mai samar da hidimomin ma. Kimanta — manufar sirri, samuwa ba tare da intanet ba, farashin ainihi (ciki har da amfanin bayanan waya), tallafi a cikin harsunanku na aiki, da ikon aiwatarwa akan na'urorin da suke samuwa a ƙungiyarku. Kayan aiki da ya kasance cikakke a takarda amma ba za a iya amfani da shi a karkara ba tare da WiFi ba, ba shi ne kayan aikin da ya dace ba. Ku koyaushe fifita kayan aikin da ya dace da yanayin ku na gaske."
+        "title": "Alhakin da zabin kayan aiki — Son zuciya, bayanai, da da'a a aikace",
+        "body": "Son zuciya a cikin AI ba wata matsalar fasaha ce mai wuyar fahimta ba — su ne rashin daidaiton duniya na gaske da aka rubuta a cikin bayanai. Samfuri da aka horar akan bayanai na lafiya da yawa daga birane na Yamma zai ba da sakamako mafi muni ga al'umma ta karkara a Sahel. Gano son zuciya na alhakin kwararru ne, ba zabi ba.\n\nKiyaye bayanai na masu amfana ba za a iya cinikin su ba. Kafin amfani da kayan aikin AI tare da bayanai na sirri — sunaye, yanayin rauni, wurare — ku tambayi wadannan tambayoyi guda uku: Ina aka adana wannan bayanan? Wa zai iya samun damar gani? Shin suna bin ka'idodin gida da ka'idodin agaji? Kada ku taba manne bayanai masu mahimmanci a cikin kayan aikin jama'a da ba su da tsaro — kamar yadda ba za ku bar fayil na kiwon lafiya a kan tebur na kasuwa ba.\n\nZabar kayan aikin AI yana nufin zabar mai samar da hidimomin ma. Kimanta — manufar sirri, samuwa ba tare da intanet ba, farashin ainihi (ciki har da amfanin bayanan waya), tallafi a cikin harsunanku na aiki, da ikon aiwatarwa akan na'urorin da suke samuwa a kungiyarku. Kayan aiki da ya kasance cikakke a takarda amma ba za a iya amfani da shi a karkara ba tare da WiFi ba, ba shi ne kayan aikin da ya dace ba. Ku koyaushe fifita kayan aikin da ya dace da yanayin ku na gaske."
       }
     ],
     "example": {
-      "title": "Nazarin Hali na Haɗin Kai — Hukumar NGO ta SahelAid ta tura AI daga farko zuwa ƙarshe",
-      "challenge": "SahelAid tana daidaita amsar abinci a yankuna uku na Niger tare da jami'ai 45 na filin aiki. Kowane mako, jami'ai suna cike fom na takarda don yara 120 kowane ɗaya. Shigar bayanai, fassara (Hausa zuwa Faransanci), da rubuta rahoto mako-mako ga mai ba da kuɗi suna ɗaukar awowi 14 da aka haɗa na mai daidaitawa. Kuskuren shigar bayanai sun kai kusan kashi 12 cikin ɗari na bayanai. Mai daidaitawa yana tambayar yadda AI zai iya taimaka ba tare da sanya bayanai na masu amfana cikin haɗari ba.",
-      "solution": "Ƙungiyar tana bin tsari mai matakai huɗu. Matakin 1 — Zaɓin amfani: suna fifita fassarar atomatik da rubutun fom, aikin da ake maimaita shi tare da haɗarin ƙasa nan take. Matakin 2 — Prompt tsararre: mai daidaitawa yana rubuta takamaiman prompt — 'Kai mataimakiyar sa ido ta abinci ne. Fassara wannan fom na filin daga Hausa zuwa Faransanci, kiyaye dukan lambobi, nuna duk bayanai da suka ɓace ko mara daidai da [?].' Matakin 3 — Atomatik tare da ɗan adam a cikin tsarin: kayan aikin sarrafa fom yana ƙirƙirar daftari; mai daidaitawa yana tabbatar da kowane fom kafin a shigar da shi a cikin bayanan. Bayanai ba su taɓa barin uwar garken na gida masu aminci na NGO ba. Matakin 4 — Zaɓin kayan aiki mai alhakin: kayan aikin da aka zaɓa yana aiki ba tare da intanet ba, ana ɗaukar sa a gida, kuma mai samar da shi ya sanya hannu kan yarjejeniyar sarrafa bayanai da ta dace da ƙa'idodin CICR.",
-      "impact": "Bayan makonni takwas na tura: lokacin sarrafawa na mako-mako ya sauka daga awowi 14 zuwa 4 — raguwa ta kashi 71 cikin ɗari. Ƙimar kuskuren shigar bayanai ta faɗi zuwa ƙasa da kashi 3 cikin ɗari. Mai daidaitawa yanzu yana ƙarawa awowi 10 a mako don nazari da yanke shawara. Babu bayanai na masu amfana da suka bar kewayen mai aminci. Rahoto ga mai ba da kuɗi ana samar da shi ranar Talata maimakon Jumma'a, yana gaggauta yanke shawarwari na samar da kayan aiki."
+      "title": "Nazarin Hali na Hadin Kai — Hukumar NGO ta SahelAid ta tura AI daga farko zuwa karshe",
+      "challenge": "SahelAid tana daidaita amsar abinci a yankuna uku na Niger tare da jami'ai 45 na filin aiki. Kowane mako, jami'ai suna cike fom na takarda don yara 120 kowane daya. Shigar bayanai, fassara (Hausa zuwa Faransanci), da rubuta rahoto mako-mako ga mai ba da kudi suna daukar awowi 14 da aka hada na mai daidaitawa. Kuskuren shigar bayanai sun kai kusan kashi 12 cikin dari na bayanai. Mai daidaitawa yana tambayar yadda AI zai iya taimaka ba tare da sanya bayanai na masu amfana cikin hadari ba.",
+      "solution": "Kungiyar tana bin tsari mai matakai hudu. Matakin 1 — Zabin amfani: suna fifita fassarar atomatik da rubutun fom, aikin da ake maimaita shi tare da hadarin kasa nan take. Matakin 2 — Prompt tsararre: mai daidaitawa yana rubuta takamaiman prompt — 'Kai mataimakiyar sa ido ta abinci ne. Fassara wannan fom na filin daga Hausa zuwa Faransanci, kiyaye dukan lambobi, nuna duk bayanai da suka bace ko mara daidai da [?].' Matakin 3 — Atomatik tare da dan adam a cikin tsarin: kayan aikin sarrafa fom yana kirkirar daftari; mai daidaitawa yana tabbatar da kowane fom kafin a shigar da shi a cikin bayanan. Bayanai ba su taba barin uwar garken na gida masu aminci na NGO ba. Matakin 4 — Zabin kayan aiki mai alhakin: kayan aikin da aka zaba yana aiki ba tare da intanet ba, ana daukar sa a gida, kuma mai samar da shi ya sanya hannu kan yarjejeniyar sarrafa bayanai da ta dace da ka'idodin CICR.",
+      "impact": "Bayan makonni takwas na tura: lokacin sarrafawa na mako-mako ya sauka daga awowi 14 zuwa 4 — raguwa ta kashi 71 cikin dari. Kimar kuskuren shigar bayanai ta fadi zuwa kasa da kashi 3 cikin dari. Mai daidaitawa yanzu yana karawa awowi 10 a mako don nazari da yanke shawara. Babu bayanai na masu amfana da suka bar kewayen mai aminci. Rahoto ga mai ba da kudi ana samar da shi ranar Talata maimakon Jumma'a, yana gaggauta yanke shawarwari na samar da kayan aiki."
     },
     "practice": {
-      "title": "Tsarin Ɗaukar AI na Sirri — Kwanaki 30 don Farawa",
+      "title": "Tsarin Daukar AI na Sirri — Kwanaki 30 don Farawa",
       "instructions": [
-        "Gano AIKIN ɗaya na maimaita shi kuma mai ɗaukar lokaci a aikinku na yau da kullun (rubuta, fassara, taƙaitawa, shigar bayanai) wanda zai kasance kyakkyawar farkon amfani da AI. Rubuta dalilin da ya sa kuka zaɓe shi da kuma adadin lokaci da kuke tsammani za ku cece.",
-        "Zaɓi KAYAN AIKI ɗaya na AI da ya dace da yanayin ku (yana aiki ba tare da intanet ba idan ana buƙata, ya dace da na'urorinku, yana mutunta asirin bayanai) kuma rubuta PROMPT ɗaya tsararre da za ku yi amfani da shi don wannan amfani. Ku gwada shi kuma ku rubuta abin da ke aiki da kyau da kuma abin da ke buƙatan gyara.",
-        "Ku ayyana KA'IDA ɗaya na ɗa'a a bayyane don amfaninku (misali: 'Ba zan taɓa shigar da sunaye na masu amfana a cikin wannan kayan aikin ba') da ALAMAR SUCCESS ɗaya da za a iya auna a kwanaki 30 (misali: 'Rahoto na mako-mako ana ƙirƙirar sa a ƙasa da awowi 2'). Ku raba wannan shirin tare da abokin aiki don neman ra'ayi daga waje."
+        "Gano AIKIN daya na maimaita shi kuma mai daukar lokaci a aikinku na yau da kullun (rubuta, fassara, takaitawa, shigar bayanai) wanda zai kasance kyakkyawar farkon amfani da AI. Rubuta dalilin da ya sa kuka zabe shi da kuma adadin lokaci da kuke tsammani za ku cece.",
+        "Zabi KAYAN AIKI daya na AI da ya dace da yanayin ku (yana aiki ba tare da intanet ba idan ana bukata, ya dace da na'urorinku, yana mutunta asirin bayanai) kuma rubuta PROMPT daya tsararre da za ku yi amfani da shi don wannan amfani. Ku gwada shi kuma ku rubuta abin da ke aiki da kyau da kuma abin da ke bukatan gyara.",
+        "Ku ayyana KA'IDA daya na da'a a bayyane don amfaninku (misali: 'Ba zan taba shigar da sunaye na masu amfana a cikin wannan kayan aikin ba') da ALAMAR SUCCESS daya da za a iya auna a kwanaki 30 (misali: 'Rahoto na mako-mako ana kirkirar sa a kasa da awowi 2'). Ku raba wannan shirin tare da abokin aiki don neman ra'ayi daga waje."
       ],
-      "observation": "Tsarin ɗaukar da yake da gaskiya yana da daraja fiye da shirin mai tsanani da ba a taɓa aiwatar da shi ba. Fara ƙanana, auna, daidaita. Amincewa da AI ana gina ta ta hanyar gogewa ta kai tsaye, ba ka'ida kawai ba. Ku rubuta bayananku a cikin littafi — za su kasance masu daraja lokacin da kuke horar da abokan aikin ku."
+      "observation": "Tsarin daukar da yake da gaskiya yana da daraja fiye da shirin mai tsanani da ba a taba aiwatar da shi ba. Fara kanana, auna, daidaita. Amincewa da AI ana gina ta ta hanyar gogewa ta kai tsaye, ba ka'ida kawai ba. Ku rubuta bayananku a cikin littafi — za su kasance masu daraja lokacin da kuke horar da abokan aikin ku."
     },
     "quiz": [
       {
@@ -621,30 +621,30 @@ export const iaLessonC8: Record<Language, LessonContent> = {
         "options": [
           {
             "key": "A",
-            "text": "Wata na'ura mai kamannin ɗan adam wanda zai iya tunani kamar ɗan adam."
+            "text": "Wata na'ura mai kamannin dan adam wanda zai iya tunani kamar dan adam."
           },
           {
             "key": "B",
-            "text": "Jerin hanyoyin da ke ba na'ura damar aikata ayyuka da yawanci suna buƙatar hankali na ɗan adam, ta hanyar amfani da bayanai da algorithms."
+            "text": "Jerin hanyoyin da ke ba na'ura damar aikata ayyuka da yawanci suna bukatar hankali na dan adam, ta hanyar amfani da bayanai da algorithms."
           },
           {
             "key": "C",
-            "text": "Shirye-shirye da ke maye gurbin aikin ɗan adam gaba ɗaya a dukkan fannonin."
+            "text": "Shirye-shirye da ke maye gurbin aikin dan adam gaba daya a dukkan fannonin."
           },
           {
             "key": "D",
-            "text": "Babban bayanan da ke adana dukan ilimin ɗan adam."
+            "text": "Babban bayanan da ke adana dukan ilimin dan adam."
           }
         ],
         "answer": "B",
-        "explanation": "AI tana nufin hanyoyi — musamman machine learning — da ke ba na'urori damar aikata ayyuka na fahimta ta amfani da bayanai. Ba ta'aziya ta duniya ba ce kuma ba cikakkiyar maye gurbin ɗan adam ba ce. Jerin kayan aiki ne masu ƙarfi amma masu iyakoki kuma suna dogaro da yanayin da ake amfani da su."
+        "explanation": "AI tana nufin hanyoyi — musamman machine learning — da ke ba na'urori damar aikata ayyuka na fahimta ta amfani da bayanai. Ba ta'aziya ta duniya ba ce kuma ba cikakkiyar maye gurbin dan adam ba ce. Jerin kayan aiki ne masu karfi amma masu iyakoki kuma suna dogaro da yanayin da ake amfani da su."
       },
       {
-        "question": "Darasin 1 — An horar da samfurin hasashen girbin noma a Sahel akan bayanan noma na Turai kawai. Menene mafi girman haɗarin?",
+        "question": "Darasin 1 — An horar da samfurin hasashen girbin noma a Sahel akan bayanan noma na Turai kawai. Menene mafi girman hadarin?",
         "options": [
           {
             "key": "A",
-            "text": "Samfurin zai yi jinkiri wajen ƙididdiga."
+            "text": "Samfurin zai yi jinkiri wajen kididdiga."
           },
           {
             "key": "B",
@@ -675,7 +675,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Suna ƙirƙirar rubutu ta hanyar hasashen kalmar da ta fi yiwuwa daga mahallin, wanda zai iya samar da kuskure da aka gabatar da su da tabbaci."
+            "text": "Suna kirkirar rubutu ta hanyar hasashen kalmar da ta fi yiwuwa daga mahallin, wanda zai iya samar da kuskure da aka gabatar da su da tabbaci."
           },
           {
             "key": "D",
@@ -683,7 +683,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "LLM suna ƙirƙirar rubutu ta hanyar hasashen lissafi, ba hujja ta dabaru mai tabbaci ba. Suna iya samar da faɗa ƙarya — wanda ake kira hallucinations — da sautin da yake da yakini. Don haka yana da muhimmanci a tabbatar da bayanan da suka fi muhimmanci daga hukumomi kafin amfani da su."
+        "explanation": "LLM suna kirkirar rubutu ta hanyar hasashen lissafi, ba hujja ta dabaru mai tabbaci ba. Suna iya samar da fada karya — wanda ake kira hallucinations — da sautin da yake da yakini. Don haka yana da muhimmanci a tabbatar da bayanan da suka fi muhimmanci daga hukumomi kafin amfani da su."
       },
       {
         "question": "Darasin 3 — Mai daidaita agaji yana son amfani da LLM don rubuta rahoto na filin aiki. Wane prompt ne mafi inganci?",
@@ -702,22 +702,22 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "'Kai jami'in sa ido da kimantawa ne a wata NGO da ke Niger. Rubuta taƙaitaccen shafi ɗaya na rahaton filin Maris, nufin mai ba da kuɗin waje, yana mai nuni ga alƙaluman abinci na yara da giɓin da ke akwai daga ga maƙasudai.'"
+            "text": "'Kai jami'in sa ido da kimantawa ne a wata NGO da ke Niger. Rubuta takaitaccen shafi daya na rahaton filin Maris, nufin mai ba da kudin waje, yana mai nuni ga alkaluman abinci na yara da gibin da ke akwai daga ga makasudai.'"
           }
         ],
         "answer": "D",
-        "explanation": "Prompt mai inganci yana fayyace rawa da aka ba AI, takamaiman mahallin, tsarin da ake tsammani, mai sauraro, da bayanan da ya fi muhimmanci don nuni. Zaɓi D yana dauke da dukkan waɗannan abubuwa. Zaɓuɓɓukan A, B, da C sun yi ƙasa da kyau don samar da sakamako mai amfani."
+        "explanation": "Prompt mai inganci yana fayyace rawa da aka ba AI, takamaiman mahallin, tsarin da ake tsammani, mai sauraro, da bayanan da ya fi muhimmanci don nuni. Zabi D yana dauke da dukkan wadannan abubuwa. Zabubbukan A, B, da C sun yi kasa da kyau don samar da sakamako mai amfani."
       },
       {
-        "question": "Darasin 4 — Wace hanya aka ba da shawarar don zaɓar farkon amfani da AI a ƙungiyar agaji?",
+        "question": "Darasin 4 — Wace hanya aka ba da shawarar don zabar farkon amfani da AI a kungiyar agaji?",
         "options": [
           {
             "key": "A",
-            "text": "Fara da mafi hadaddun amfani don nuna ƙarfin AI."
+            "text": "Fara da mafi hadaddun amfani don nuna karfin AI."
           },
           {
             "key": "B",
-            "text": "Zaɓi aikin da ake maimaita shi, mai ɗaukar lokaci, kuma mara haɗarin ƙasa nan take, sannan a auna riba kafin a faɗaɗa."
+            "text": "Zabi aikin da ake maimaita shi, mai daukar lokaci, kuma mara hadarin kasa nan take, sannan a auna riba kafin a fadada."
           },
           {
             "key": "C",
@@ -729,33 +729,33 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Ƙa'idar da ta fi kyau ita ce fara da amfani mai sauƙi, za a iya aunawa, kuma mara haɗari — kamar fassara fom ko ƙirƙirar samfuran rahoto. Wannan yana ba damar koyo, gina amincin ƙungiya, da nuna daraja kafin tafiya zuwa amfani mai hadaddun yanayi."
+        "explanation": "Ka'idar da ta fi kyau ita ce fara da amfani mai sauki, za a iya aunawa, kuma mara hadari — kamar fassara fom ko kirkirar samfuran rahoto. Wannan yana ba damar koyo, gina amincin kungiya, da nuna daraja kafin tafiya zuwa amfani mai hadaddun yanayi."
       },
       {
-        "question": "Darasin 5 — Menene ma'anar ka'idar 'ɗan adam a cikin tsarin' a yanayin atomatik na agaji?",
+        "question": "Darasin 5 — Menene ma'anar ka'idar 'dan adam a cikin tsarin' a yanayin atomatik na agaji?",
         "options": [
           {
             "key": "A",
-            "text": "AI tana yanke dukkan shawarwari ta atomatik ba tare da sa hannun ɗan adam don adanawa lokaci ba."
+            "text": "AI tana yanke dukkan shawarwari ta atomatik ba tare da sa hannun dan adam don adanawa lokaci ba."
           },
           {
             "key": "B",
-            "text": "Ɗan adam mai cancanta yana tabbatar ko kula da muhimman shawarwari kafin a aiwatar da su, ko da AI ta shirya aiki."
+            "text": "Dan adam mai cancanta yana tabbatar ko kula da muhimman shawarwari kafin a aiwatar da su, ko da AI ta shirya aiki."
           },
           {
             "key": "C",
-            "text": "Ɗan adam yana shigar da bayanai da hannu ba tare da amfani da kayan aiki na dijital ba."
+            "text": "Dan adam yana shigar da bayanai da hannu ba tare da amfani da kayan aiki na dijital ba."
           },
           {
             "key": "D",
-            "text": "AI na iya aiki ne kawai idan ɗan adam yana a gaban allon koyaushe."
+            "text": "AI na iya aiki ne kawai idan dan adam yana a gaban allon koyaushe."
           }
         ],
         "answer": "B",
         "explanation": "Human-in-the-loop yana nufin AI tana taimakawa amma ba ta yanke shawara kadai a kan muhimman al'amura ba. Jami'i ko mai daidaitawa yana tabbatar da abubuwan da AI ta samar kafin aiki. Wannan ya fi muhimmanci musamman a yanayin agaji inda kuskure zai iya yin tasiri kai tsaye a kan masu amfana masu rauni."
       },
       {
-        "question": "Darasin 6 — Kayan aikin AI yana koyaushe ƙirƙirar shawarwari mafi kyau ga gidaje na birane fiye da na karkara a binciken rauni. Menene mafi yiwuwar dalilin?",
+        "question": "Darasin 6 — Kayan aikin AI yana koyaushe kirkirar shawarwari mafi kyau ga gidaje na birane fiye da na karkara a binciken rauni. Menene mafi yiwuwar dalilin?",
         "options": [
           {
             "key": "A",
@@ -763,11 +763,11 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Gidaje na karkara sun ƙi shiga binciken."
+            "text": "Gidaje na karkara sun ki shiga binciken."
           },
           {
             "key": "C",
-            "text": "Bayanai da aka yi amfani da su wajen horar da samfurin suna wakiltar yanayin birane fiye da kima, suna ƙirƙirar son zuciya na wakilci."
+            "text": "Bayanai da aka yi amfani da su wajen horar da samfurin suna wakiltar yanayin birane fiye da kima, suna kirkirar son zuciya na wakilci."
           },
           {
             "key": "D",
@@ -775,10 +775,10 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Son zuciya a cikin AI yawanci yana fitowa daga bayanai na horarwa. Idan waɗancan bayanai sun wakilci yanayin birane fiye da kima, samfurin ba zai yi daidai ba ga gaskiyar karkara. Gano da gyara waɗannan son zuciya alhakin ɗa'a ne na ƙwararru a kowace tura AI ta agaji."
+        "explanation": "Son zuciya a cikin AI yawanci yana fitowa daga bayanai na horarwa. Idan wadancan bayanai sun wakilci yanayin birane fiye da kima, samfurin ba zai yi daidai ba ga gaskiyar karkara. Gano da gyara wadannan son zuciya alhakin da'a ne na kwararru a kowace tura AI ta agaji."
       },
       {
-        "question": "Darasin 6 — Kuna buƙatar nazarin jerin masu amfana tare da sunaye da yanayin rauni. Wace ƙa'ida ce ta daidai?",
+        "question": "Darasin 6 — Kuna bukatar nazarin jerin masu amfana tare da sunaye da yanayin rauni. Wace ka'ida ce ta daidai?",
         "options": [
           {
             "key": "A",
@@ -798,10 +798,10 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Bayanai na masu amfana suna da matuƙar mahimmanci kuma ƙa'idodin agaji da dokokin da ake amfani da su suna kare su. Dole ne a cire sunayen ko sauya su kafin sarrafa, kuma a yi amfani kawai da kayan aikin da manufar sirri da adana bayanansu suka dace da alhakinku. HTTPS kadai bai isa ba."
+        "explanation": "Bayanai na masu amfana suna da matukar mahimmanci kuma ka'idodin agaji da dokokin da ake amfani da su suna kare su. Dole ne a cire sunayen ko sauya su kafin sarrafa, kuma a yi amfani kawai da kayan aikin da manufar sirri da adana bayanansu suka dace da alhakinku. HTTPS kadai bai isa ba."
       },
       {
-        "question": "Darasin 7 — Kuna aiki a yankin da haɗin intanet ke da iyaka kuma kasafin kuɗi na bayanan waya yana ƙarami. Wane ma'auni ya kamata ya yi fifiko wajen zaɓar kayan aikin AI?",
+        "question": "Darasin 7 — Kuna aiki a yankin da hadin intanet ke da iyaka kuma kasafin kudi na bayanan waya yana karami. Wane ma'auni ya kamata ya yi fifiko wajen zabar kayan aikin AI?",
         "options": [
           {
             "key": "A",
@@ -813,46 +813,46 @@ export const iaLessonC8: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Ikon kayan aikin na aiki ba tare da intanet ba ko tare da ƙarancin amfanin bayanai, da kuma dacewarsa da na'urori da suke samuwa a ƙungiya."
+            "text": "Ikon kayan aikin na aiki ba tare da intanet ba ko tare da karancin amfanin bayanai, da kuma dacewarsa da na'urori da suke samuwa a kungiya."
           },
           {
             "key": "D",
-            "text": "Shahararriyar kayan aikin a tsakanin ƙungiyoyi da ke Paris ko New York."
+            "text": "Shahararriyar kayan aikin a tsakanin kungiyoyi da ke Paris ko New York."
           }
         ],
         "answer": "C",
-        "explanation": "A yanayin haɗin intanet ƙasa, ma'aunin zaɓe na farko na kayan aiki shi ne ikon aiki ba tare da intanet ba ko a cikin ƙarancin bandwidth, da kuma dacewarsa da na'urori da suke samuwa a filin aiki. Kayan aiki da ba za a iya amfani da shi a filin aiki ba yana da daraja sifili, ba tare da la'akari da ingancin fasaharsa ba."
+        "explanation": "A yanayin hadin intanet kasa, ma'aunin zabe na farko na kayan aiki shi ne ikon aiki ba tare da intanet ba ko a cikin karancin bandwidth, da kuma dacewarsa da na'urori da suke samuwa a filin aiki. Kayan aiki da ba za a iya amfani da shi a filin aiki ba yana da daraja sifili, ba tare da la'akari da ingancin fasaharsa ba."
       }
     ],
-    "reflection": "A cikin kwanaki 30 masu zuwa, na ɗauki alwashin aiwatar da waɗannan ayyuka: Na farko, gano kuma rubuta takamaiman amfani da AI a aikin yau da kullun na, ina zaɓar daga ayyukan da ake maimaita su mara haɗari; Na biyu, gwada kayan aikin AI da ya dace da yanayin haɗin intanet na kuma tabbatar cewa yana mutunta asirin bayanan masu amfana da ni; Na uku, rubuta kuma inganta aƙalla prompts uku tsararru don wannan amfani kuma rubuta sakamakon; Na huɗu, raba aƙalla wata muhimmiyar darasin daga wannan sashen tare da abokin aiki ko a taron ƙungiya. Zan tsara alamar nasara da za a iya auna kuma zan sake duba ayyukan na bayan waɗannan kwanaki 30 don yanke shawara game da matakin gaba.",
+    "reflection": "Ka gama darussa bakwai na wannan sashe: menene AI da abin da ba ya iya yi, yadda samfuran harshe ke aiki, rubuta umarni bayyananne, zabar amfani da ya dace, sarrafa aiki tare da mutum a cikin da'irar, da'a, da zabar kayan aiki. Daga cikin duk wannan, menene abu daya da za ka aiwatar da gaske a cikin kwanaki talatin masu zuwa? Wane aiki za ka mika wa AI, wace kariya za ka sanya don kare bayanan mutanen da abin ya shafa, kuma wace alama bayyananniya za ta nuna maka, bayan wata daya, cewa zabinka ya yi daidai?",
     "glossary": [
       {
         "term": "Hankali na Wucin Gadi (AI)",
-        "definition": "Jerin hanyoyi da ke ba na'ura damar aikata ayyuka da yawanci suna buƙatar hankali na ɗan adam — kamar gane hotuna, fahimtar rubutu, ko yanke shawara — ta hanyar amfani da bayanai da algorithms."
+        "definition": "Jerin hanyoyi da ke ba na'ura damar aikata ayyuka da yawanci suna bukatar hankali na dan adam — kamar gane hotuna, fahimtar rubutu, ko yanke shawara — ta hanyar amfani da bayanai da algorithms."
       },
       {
         "term": "Machine Learning (Koyon Na'ura)",
         "definition": "Reshe na AI inda tsarin yake koyo daga misalai da bayanai ba tare da a shirya shi kai tsaye ga kowane doka ba. Yadda bayanai suka fi wakilci gaskiya, haka samfurin yake daidai."
       },
       {
-        "term": "AI mai Ƙirƙirowa (Generative AI)",
-        "definition": "Nau'in AI wanda zai iya ƙirƙirar sabon abun ciki — rubutu, hotuna, lambar kwamfuta — daga umarni. Kayan aiki na rubuta atomatik da fassara na cikin wannan rukunin."
+        "term": "AI mai Kirkirowa (Generative AI)",
+        "definition": "Nau'in AI wanda zai iya kirkirar sabon abun ciki — rubutu, hotuna, lambar kwamfuta — daga umarni. Kayan aiki na rubuta atomatik da fassara na cikin wannan rukunin."
       },
       {
         "term": "LLM (Babban Samfurin Harshe)",
-        "definition": "Samfurin AI mai ƙirƙirowa da aka horar akan adadi mai yawa na rubutu don fahimtar da samar da yaren halitta. Zai iya rubuta, taƙaita, da fassara, amma kuma zai iya hallucinate — ƙirƙirar bayanan da ba daidai ba da tabbaci."
+        "definition": "Samfurin AI mai kirkirowa da aka horar akan adadi mai yawa na rubutu don fahimtar da samar da yaren halitta. Zai iya rubuta, takaita, da fassara, amma kuma zai iya hallucinate — kirkirar bayanan da ba daidai ba da tabbaci."
       },
       {
         "term": "Prompt",
-        "definition": "Umarni ko jagorar da aka ba kayan aikin AI don samun takamaiman sakamako. Prompt mai kyau yana fayyace rawa, mahallin, tsarin da ake tsammani, da iyakoki. Ingancin prompt shi ne yake ƙayyade ingancin amsa."
+        "definition": "Umarni ko jagorar da aka ba kayan aikin AI don samun takamaiman sakamako. Prompt mai kyau yana fayyace rawa, mahallin, tsarin da ake tsammani, da iyakoki. Ingancin prompt shi ne yake kayyade ingancin amsa."
       },
       {
-        "term": "Ɗan Adam a Cikin Tsarin (Human-in-the-loop)",
-        "definition": "Ka'idar da ɗan adam mai cancanta ke kula, tabbatarwa, ko gyara shawarwari ko abubuwan da AI ta samar kafin a aiwatar da su, musamman a kan shawarwari masu muhimmancin matuƙa."
+        "term": "Dan Adam a Cikin Tsarin (Human-in-the-loop)",
+        "definition": "Ka'idar da dan adam mai cancanta ke kula, tabbatarwa, ko gyara shawarwari ko abubuwan da AI ta samar kafin a aiwatar da su, musamman a kan shawarwari masu muhimmancin matuka."
       },
       {
         "term": "Son Zuciya na Algorithms (Algorithmic Bias)",
-        "definition": "Kuskure na tsari a sakamakon samfurin AI saboda bayanai na horarwa da ba su wakilci gaskiya ko zaɓuɓɓukan ƙira mara adalci. Waɗannan son zuciya na iya maimaita ko ƙara rashin daidaiton da ke akwai, misali tsakanin birane da karkara."
+        "definition": "Kuskure na tsari a sakamakon samfurin AI saboda bayanai na horarwa da ba su wakilci gaskiya ko zabubbukan kira mara adalci. Wadannan son zuciya na iya maimaita ko kara rashin daidaiton da ke akwai, misali tsakanin birane da karkara."
       }
     ]
   }

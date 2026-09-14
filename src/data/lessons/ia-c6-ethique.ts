@@ -29,14 +29,14 @@ export const iaLessonC6: Record<Language, LessonContent> = {
       },
       {
         "title": "Bonnes pratiques et responsabilité organisationnelle",
-        "body": "Utiliser l'IA de façon responsable ne dépend pas uniquement de chaque individu — c'est aussi une responsabilité collective. La Shadow AI désigne l'utilisation d'outils d'IA non approuvés par l'organisation : un agent qui utilise un chatbot grand public pour synthétiser des rapports confidentiels, sans en informer sa hiérarchie. C'est une pratique risquée, même si elle part d'une bonne intention de gagner du temps.\n\nLa transparence est un pilier central : si vous avez utilisé l'IA pour produire un document, signalez-le. Cela permet à vos collègues et à vos partenaires d'exercer leur esprit critique sur le résultat. La supervision humaine reste indispensable — l'IA propose, l'humain décide et assume la responsabilité. Un médecin de santé communautaire peut utiliser l'IA pour obtenir une liste de symptômes, mais c'est lui qui examine le patient et pose le diagnostic.\n\nDans votre organisation, quelques gestes concrets font la différence : établir une liste des outils d'IA autorisés, former les équipes aux risques de base, inclure une clause de confidentialité IA dans les contrats avec les partenaires, et prévoir une relecture humaine systématique pour tout document destiné à des bénéficiaires ou à des bailleurs. Ces pratiques ne ralentissent pas le travail — elles protègent la confiance que vous avez mis des années à construire."
+        "body": "Utiliser l'IA de façon responsable ne dépend pas uniquement de chaque individu — c'est aussi une responsabilité collective. La Shadow AI désigne l'utilisation d'outils d'IA non approuvés par l'organisation : un agent qui utilise un chatbot grand public pour synthétiser des rapports confidentiels, sans en informer sa hiérarchie. C'est une pratique risquée, même si elle part d'une bonne intention de gagner du temps.\n\nLa transparence est un pilier central : si vous avez utilisé l'IA pour produire un document, signalez-le. Cela permet à vos collègues et à vos partenaires d'exercer leur esprit critique sur le résultat. La supervision humaine reste indispensable — l'IA propose, l'humain décide et assume la responsabilité. Un médecin de santé communautaire peut utiliser l'IA pour obtenir une liste de symptômes, mais c'est lui qui examine le patient et pose le diagnostic.\n\nDans votre organisation, quelques gestes concrets font la différence : établir une liste des outils d'IA autorisés, former les équipes aux risques de base, inclure une clause de confidentialité IA dans les contrats avec les partenaires, et prévoir une relecture humaine systématique pour tout document destiné à des bénéficiaires ou à des bailleurs. Ces pratiques ne ralentissent pas le travail — elles protègent la confiance que vous avez mise des années à construire."
       }
     ],
     "example": {
       "title": "Quand un algorithme ne reconnaît pas les visages — et comment corriger cela",
       "challenge": "Une organisation humanitaire au Sahel déploie un système biométrique d'IA pour identifier les bénéficiaires d'une distribution alimentaire. Sur le terrain, les agents constatent que le système échoue à reconnaître environ 30 % des bénéficiaires — presque exclusivement des femmes aux teintes de peau plus foncées et des personnes âgées. La distribution prend deux fois plus de temps, certains bénéficiaires repartent sans aide, et la confiance de la communauté s'érode. L'outil a été entraîné sur des bases de données photographiques majoritairement nord-américaines et européennes.",
       "solution": "L'organisation suspend temporairement le système automatique et revient à une vérification manuelle assistée. Elle documente tous les cas d'échec avec photographies et métadonnées. Elle contacte le fournisseur et lui fournit un jeu de données supplémentaires représentatif de la population locale, collecté avec consentement éclairé. En parallèle, elle met en place un protocole de supervision humaine obligatoire : tout rejet du système doit être confirmé par un agent avant de refuser l'accès à un bénéficiaire. Elle forme ses équipes à identifier les biais et à signaler tout écart.",
-      "impact": "Après correction et réentraînement sur des données plus représentatives, le taux d'erreur de reconnaissance chute de 30 % à moins de 4 %. Le temps de distribution diminue de 40 %. Aucun bénéficiaire éligible n'est plus refusé sans intervention humaine. La communauté retrouve confiance dans le processus, et l'organisation dispose désormais d'un protocole documenté réutilisable pour d'autres déploiements technologiques."
+      "impact": "Après correction et réentraînement sur des données plus représentatives, le taux d'erreur de reconnaissance chute de 30 % à moins de 4 %. Le temps de distribution revient à son niveau normal, divisé par deux. Aucun bénéficiaire éligible n'est plus refusé sans intervention humaine. La communauté retrouve confiance dans le processus, et l'organisation dispose désormais d'un protocole documenté réutilisable pour d'autres déploiements technologiques."
     },
     "practice": {
       "title": "Cartographier les données sensibles de votre organisation",
@@ -224,7 +224,7 @@ export const iaLessonC6: Record<Language, LessonContent> = {
       "title": "When an Algorithm Fails to Recognize Faces — and How to Fix It",
       "challenge": "A humanitarian organization in the Sahel deploys a biometric AI system to identify beneficiaries during a food distribution. In the field, agents notice that the system fails to recognize about 30% of beneficiaries — almost exclusively women with darker skin tones and elderly people. The distribution takes twice as long, some beneficiaries leave without assistance, and community trust erodes. The tool was trained on photographic databases that were predominantly North American and European.",
       "solution": "The organization temporarily suspends the automatic system and returns to manual assisted verification. It documents all failure cases with photographs and metadata. It contacts the vendor and provides an additional dataset representative of the local population, collected with informed consent. In parallel, it establishes a mandatory human supervision protocol: any rejection by the system must be confirmed by a human agent before denying a beneficiary access. It trains its teams to identify biases and report any discrepancy.",
-      "impact": "After correction and retraining on more representative data, the recognition error rate drops from 30% to less than 4%. Distribution time decreases by 40%. No eligible beneficiary is refused without human intervention. The community regains trust in the process, and the organization now has a documented protocol reusable for future technology deployments."
+      "impact": "After correction and retraining on more representative data, the recognition error rate drops from 30% to less than 4%. Distribution time is halved, back to its normal level. No eligible beneficiary is refused without human intervention. The community regains trust in the process, and the organization now has a documented protocol reusable for future technology deployments."
     },
     "practice": {
       "title": "Mapping Your Organization's Sensitive Data",
@@ -383,8 +383,8 @@ export const iaLessonC6: Record<Language, LessonContent> = {
   "ha": {
     "id": "c6",
     "lessonNumber": 6,
-    "title": "Ɗabi'a, Nuna Bambanci, da Kare Bayanan Sirri — Amfani da AI da Hikima",
-    "objective": "A ƙarshen wannan darasin, za ku iya gane manyan abubuwan da ke haifar da nuna bambanci a cikin tsarin AI da tasirin su kai tsaye kan al'ummomin Afirka. Za ku san yadda za ku kare bayanan sirri na masu amfani da taimakon ku ta hanyar aiwatar da ƙa'idodin asiri da yarda da sani. Za ku iya gano faɗan karya da AI ke ƙirƙira da kuma amfani da hanyoyin tabbatarwa masu kyau. Za ku aza tsare-tsare a cikin ƙungiyarku don hana amfani da AI ba tare da kulawa ba.",
+    "title": "Dabi'a, Nuna Bambanci, da Kare Bayanan Sirri — Amfani da AI da Hikima",
+    "objective": "A karshen wannan darasin, za ku iya gane manyan abubuwan da ke haifar da nuna bambanci a cikin tsarin AI da tasirin su kai tsaye kan al'ummomin Afirka. Za ku san yadda za ku kare bayanan sirri na masu amfani da taimakon ku ta hanyar aiwatar da ka'idodin asiri da yarda da sani. Za ku iya gano fadan karya da AI ke kirkira da kuma amfani da hanyoyin tabbatarwa masu kyau. Za ku aza tsare-tsare a cikin kungiyarku don hana amfani da AI ba tare da kulawa ba.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,35 +393,35 @@ export const iaLessonC6: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Daga Ina Nuna Bambanci a AI ke Fitowa?",
-        "body": "Tsarin AI yana koyo daga bayanan da ake ba shi. Idan waɗannan bayanai ba su wakilci bambancin duniya ta ainihi ba, tsarin zai sake nuna — kuma wani lokaci zai ƙara — rashin daidaito da ke wanzu. Kamar girki ne da bai taɓa ɗanɗanar abincin wani yanki ba sai nashi: abincinsa zai yi kyau ga maƙwabtansa, amma ba zai dace da duk kowa ba.\n\nA Afirka, wannan matsala tana bayyane sosai. Kayan aiki na gane fuska da aka horar da su musamman da fuska na Turai ko Arewacin Amurka sun nuna yawan kurakurai mafi yawa a kan fata masu duhu. Mataimakan murya ba sa fahimtar Hausa, Wolof, ko Bambara. Algorithm ɗin bayar da bashi da aka horar da bayanai na banki na al'ada yana hukunta jama'ar da ke amfani da tontine ko Orange Money — hanyoyin kudi masu kyau amma ba su da wakilci a cikin bayanan horo.\n\nA aikace, wannan na iya nufin cewa wata mai amfani da shirin lafiya ta uwa tana karɓar shawarwari da ba su dace da yanayin ta ba, ko kuma wani manomi na rogo a Nijar ya ƙi masa ƙaramin bashi ta wata algorithm da ba ta san hanyoyin aikin kuɗinsa ba. Gane nuna bambanci shi ne mataki na farko na gyara shi."
+        "body": "Tsarin AI yana koyo daga bayanan da ake ba shi. Idan wadannan bayanai ba su wakilci bambancin duniya ta ainihi ba, tsarin zai sake nuna — kuma wani lokaci zai kara — rashin daidaito da ke wanzu. Kamar girki ne da bai taba dandanar abincin wani yanki ba sai nashi: abincinsa zai yi kyau ga makwabtansa, amma ba zai dace da duk kowa ba.\n\nA Afirka, wannan matsala tana bayyane sosai. Kayan aiki na gane fuska da aka horar da su musamman da fuska na Turai ko Arewacin Amurka sun nuna yawan kurakurai mafi yawa a kan fata masu duhu. Mataimakan murya ba sa fahimtar Hausa, Wolof, ko Bambara. Algorithm din bayar da bashi da aka horar da bayanai na banki na al'ada yana hukunta jama'ar da ke amfani da tontine ko Orange Money — hanyoyin kudi masu kyau amma ba su da wakilci a cikin bayanan horo.\n\nA aikace, wannan na iya nufin cewa wata mai amfani da shirin lafiya ta uwa tana karbar shawarwari da ba su dace da yanayin ta ba, ko kuma wani manomi na rogo a Nijar ya ki masa karamin bashi ta wata algorithm da ba ta san hanyoyin aikin kudinsa ba. Gane nuna bambanci shi ne mataki na farko na gyara shi."
       },
       {
         "title": "Asiri da Ikon Mallakan Bayanai",
-        "body": "Lokacin da kuka rubuta suna, lafiyar jiki, ko halin iyalin wanda kuke taimakawa a cikin kayan aiki na AI a kan layi, ina waɗannan bayanai ke tafiya? Yawancin lokaci, ana aika su zuwa sabobin da ke wajen Afirka, ana iya amfani da su don inganta tsarin, kuma suna ƙarƙashin dokokin ƙasar mai masaukin su — ba lallai ba dokokin ku. Wannan shi ne tambayar ikon mallakan bayanai.\n\nƘa'idodi da yawa sun shafi wannan: RGPD na Turai (idan ƙungiyarku tana karɓar kuɗin shiga na Turai ko tana aiki tare da abokan tarayya na EU), amma kuma dokokin ƙasa masu tasowa kamar dokar Nijar game da kare bayanan sirri. Waɗannan ƙa'idodi suna da ƙa'ida mai sauƙi: mutum dole ya san wane bayanan ake tattara game da shi, me yasa, kuma ya ba da yarjejeniyarsa — wannan shi ne yarda da sani.\n\nA aikace, kafin ku yi amfani da kayan aiki na AI don sarrafa bayanai game da masu amfani da taimakon ku, ku tambaye kanku tambayoyi uku: Wa zai iya karanta waɗannan bayanai? Ina aka ajiye su? An ɓoye sunayensu ne? Wakili a filin na UNDP da ke rubuta sunayen da adresoshin mutane a cikin chatbot na jama'a yana fallasa masu amfani da taimakonsa ba tare da son rai ba. Ku fifita kayan aikin da ƙungiyarku ta amince da su, kuma ku ɓoye bayanan sirri koyaushe."
+        "body": "Lokacin da kuka rubuta suna, lafiyar jiki, ko halin iyalin wanda kuke taimakawa a cikin kayan aiki na AI a kan layi, ina wadannan bayanai ke tafiya? Yawancin lokaci, ana aika su zuwa sabobin da ke wajen Afirka, ana iya amfani da su don inganta tsarin, kuma suna karkashin dokokin kasar mai masaukin su — ba lallai ba dokokin ku. Wannan shi ne tambayar ikon mallakan bayanai.\n\nKa'idodi da yawa sun shafi wannan: RGPD na Turai (idan kungiyarku tana karbar kudin shiga na Turai ko tana aiki tare da abokan tarayya na EU), amma kuma dokokin kasa masu tasowa kamar dokar Nijar game da kare bayanan sirri. Wadannan ka'idodi suna da ka'ida mai sauki: mutum dole ya san wane bayanan ake tattara game da shi, me yasa, kuma ya ba da yarjejeniyarsa — wannan shi ne yarda da sani.\n\nA aikace, kafin ku yi amfani da kayan aiki na AI don sarrafa bayanai game da masu amfani da taimakon ku, ku tambaye kanku tambayoyi uku: Wa zai iya karanta wadannan bayanai? Ina aka ajiye su? An boye sunayensu ne? Wakili a filin na UNDP da ke rubuta sunayen da adresoshin mutane a cikin chatbot na jama'a yana fallasa masu amfani da taimakonsa ba tare da son rai ba. Ku fifita kayan aikin da kungiyarku ta amince da su, kuma ku boye bayanan sirri koyaushe."
       },
       {
         "title": "Karya ta AI da Tabbatarwa — Kar a Gaskata Kawai",
-        "body": "AI mai ƙirƙira na iya samar da rubutu, hotuna, bidiyo, da murya na inganci mai ban sha'awa. Wannan ba matsala ce a kanta ba — amma yana zama haɗari lokacin da abun ciki ya ƙarya kuma yana da wahalar gano shi. Muna kiran deepfakes hotuna ko bidiyo da aka gyaggyara, da hallucinations ƙurarren maganganu mara daidai da ake bayyanawa da tabbaci ta hanyar ƙira na yare.\n\nA yanayin taimakon ɗan adam, sakamakon na iya zama mai tsanani. Wata sanarwa ta ƙarya daga wata NGO da ke kiran ficewa da ba ta wanzu ba na iya haifar da firgici. Rahoto na yanayi da AI ta ƙirƙira na iya shafar yanke shawarwari na kuɗin shiga. A lokacin zaɓe ko rikici, jita-jita da kayan aikin AI suka ƙara suka bazu cikin sauri ta WhatsApp a cikin al'ummomi masu rauni.\n\nKa'ida ta zinariya: ku tabbatar da duk wata mahimmiyar bayanai ta hanyar tushe biyu masu zaman kansu kafin ku raba ta ko ku yi amfani da ita don yanke shawara. Ga hotuna, kayan aiki kyauta kamar FotoForensics ko kayan tabbatarwa na hotuna na Google na iya gano gyaggyarana. Ga rubutu, ku tambayi kanku: shin marubucin ana iya ganewa? Kwanan wata ta bayyana? Shin kafar labarai da aka amince da ita ta tabbatar da bayanan? Kar ku taɓa raba abun ciki mai shakku a yanayin sana'a ba tare da tabbatarwa da ta gabata ba."
+        "body": "AI mai kirkira na iya samar da rubutu, hotuna, bidiyo, da murya na inganci mai ban sha'awa. Wannan ba matsala ce a kanta ba — amma yana zama hadari lokacin da abun ciki ya karya kuma yana da wahalar gano shi. Muna kiran deepfakes hotuna ko bidiyo da aka gyaggyara, da hallucinations kurarren maganganu mara daidai da ake bayyanawa da tabbaci ta hanyar kira na yare.\n\nA yanayin taimakon dan adam, sakamakon na iya zama mai tsanani. Wata sanarwa ta karya daga wata NGO da ke kiran ficewa da ba ta wanzu ba na iya haifar da firgici. Rahoto na yanayi da AI ta kirkira na iya shafar yanke shawarwari na kudin shiga. A lokacin zabe ko rikici, jita-jita da kayan aikin AI suka kara suka bazu cikin sauri ta WhatsApp a cikin al'ummomi masu rauni.\n\nKa'ida ta zinariya: ku tabbatar da duk wata mahimmiyar bayanai ta hanyar tushe biyu masu zaman kansu kafin ku raba ta ko ku yi amfani da ita don yanke shawara. Ga hotuna, kayan aiki kyauta kamar FotoForensics ko kayan tabbatarwa na hotuna na Google na iya gano gyaggyarana. Ga rubutu, ku tambayi kanku: shin marubucin ana iya ganewa? Kwanan wata ta bayyana? Shin kafar labarai da aka amince da ita ta tabbatar da bayanan? Kar ku taba raba abun ciki mai shakku a yanayin sana'a ba tare da tabbatarwa da ta gabata ba."
       },
       {
-        "title": "Hanyoyin Kyau da Alhakin Ƙungiya",
-        "body": "Amfani da AI da hikima ba alhakin mutum ɗaya ba ne kawai — alhakin jama'a ne ma. Shadow AI na nufin amfani da kayan aikin AI da ƙungiyar ba ta amince da su ba: ma'aikaci da ke amfani da chatbot na jama'a don taƙaita rahotanni masu asiri ba tare da sanar da shugabancinta ba. Wannan aikin yana da haɗari, ko da ya fito daga niyyar ƙwarai na adana lokaci.\n\nGaskiya ita ce ginshiƙin tsakiya: idan kun yi amfani da AI don samar da wata takarda, ku faɗa hakan. Wannan yana ba wa abokan aikinku da abokan tarayya damar yin amfani da tunani mai zurfin bincike kan sakamakon. Kulawa ta ɗan adam ta kasance dole ne — AI tana ba da shawara, kuma ɗan adam ne ke yanke shawara da ɗaukar alhakin. Ma'aikacin lafiya na al'umma na iya amfani da AI don samun jerin alamomin cuta, amma shi ne ke binciken mai haƙuri kuma ke yanke hukunci.\n\nA cikin ƙungiyarku, ƙananan ayyuka masu ma'ana suna yin babban bambanci: kafa jerin kayan aikin AI da aka amince da su, horar da ƙungiyoyi kan haɗari na asali, haɗa takardar asiri na AI a cikin kwangilolinku tare da abokan tarayya, da kuma saita bitar ɗan adam koyaushe ga duk wata takarda da aka nufa ga masu amfani da taimakon ku ko masu ba da kuɗin shiga. Waɗannan hanyoyin ba sa rage aiki — suna kare amincin da kuka shafe shekaru masu yawa a gina."
+        "title": "Hanyoyin Kyau da Alhakin Kungiya",
+        "body": "Amfani da AI da hikima ba alhakin mutum daya ba ne kawai — alhakin jama'a ne ma. Shadow AI na nufin amfani da kayan aikin AI da kungiyar ba ta amince da su ba: ma'aikaci da ke amfani da chatbot na jama'a don takaita rahotanni masu asiri ba tare da sanar da shugabancinta ba. Wannan aikin yana da hadari, ko da ya fito daga niyyar kwarai na adana lokaci.\n\nGaskiya ita ce ginshikin tsakiya: idan kun yi amfani da AI don samar da wata takarda, ku fada hakan. Wannan yana ba wa abokan aikinku da abokan tarayya damar yin amfani da tunani mai zurfin bincike kan sakamakon. Kulawa ta dan adam ta kasance dole ne — AI tana ba da shawara, kuma dan adam ne ke yanke shawara da daukar alhakin. Ma'aikacin lafiya na al'umma na iya amfani da AI don samun jerin alamomin cuta, amma shi ne ke binciken mai hakuri kuma ke yanke hukunci.\n\nA cikin kungiyarku, kananan ayyuka masu ma'ana suna yin babban bambanci: kafa jerin kayan aikin AI da aka amince da su, horar da kungiyoyi kan hadari na asali, hada takardar asiri na AI a cikin kwangilolinku tare da abokan tarayya, da kuma saita bitar dan adam koyaushe ga duk wata takarda da aka nufa ga masu amfani da taimakon ku ko masu ba da kudin shiga. Wadannan hanyoyin ba sa rage aiki — suna kare amincin da kuka shafe shekaru masu yawa a gina."
       }
     ],
     "example": {
       "title": "Lokacin da Algorithm ba ta Gane Fuska — da Yadda Ake Gyara Hakan",
-      "challenge": "Wata ƙungiyar taimakon ɗan adam a Sahel ta ɗauki tsarin biometric na AI don gane masu amfani da taimakon su lokacin rarraba abinci. A filin, wakilan sun lura cewa tsarin ya kasa gane kusan kashi 30 cikin ɗari na masu amfani da taimakon su — kusan kawai matan da ke da fata masu duhu da tsofaffi. Rarrabawa na ɗaukar lokaci ninki biyu, wasu masu amfani da taimakon sun tafi ba tare da taimakon ba, kuma amincin al'umma ya ragu. An horar da kayan aikin da tarihin hoto da ya kasance musamman na Arewacin Amurka da Turai.",
-      "solution": "Ƙungiyar ta dakatar da tsarin atomatik na ɗan lokaci kuma ta koma ga tabbatarwa ta hannu mai taimako. Ta rubuta duk lokuta na kuskure tare da hotuna da metadata. Ta sadar da mai sayar da kayan aiki kuma ta ba shi ƙarin bayanan da ke wakilci yawan jama'ar yankin, da aka tattara tare da yarda da sani. A lokaci guda, ta kafa ƙa'idar kulawa ta ɗan adam dole ne: kowane ƙin yarda daga tsarin dole ya tabbata ta wakili mutum kafin a ƙi mara amfani da taimakon damar shiga. Ta horar da ƙungiyoyinta gane nuna bambanci da ba da rahoto game da kowane bambanci.",
-      "impact": "Bayan gyara da sake horarwa akan bayanai mafi wakilci, yawan kurakuran gane fuska ya fado daga kashi 30 zuwa ƙasa da kashi 4 cikin ɗari. Lokacin rarrabawa ya ragu da kashi 40 cikin ɗari. Babu wanda ya cancanci amfani da taimako ya ƙi ba tare da shiga tsakani na ɗan adam ba. Al'ummar ta sake samun amincewar tsarin, kuma ƙungiyar yanzu tana da ƙa'idar da aka rubuta da za a iya sake amfani da ita don sauran aiwatar da fasaha."
+      "challenge": "Wata kungiyar taimakon dan adam a Sahel ta dauki tsarin biometric na AI don gane masu amfani da taimakon su lokacin rarraba abinci. A filin, wakilan sun lura cewa tsarin ya kasa gane kusan kashi 30 cikin dari na masu amfani da taimakon su — kusan kawai matan da ke da fata masu duhu da tsofaffi. Rarrabawa na daukar lokaci ninki biyu, wasu masu amfani da taimakon sun tafi ba tare da taimakon ba, kuma amincin al'umma ya ragu. An horar da kayan aikin da tarihin hoto da ya kasance musamman na Arewacin Amurka da Turai.",
+      "solution": "Kungiyar ta dakatar da tsarin atomatik na dan lokaci kuma ta koma ga tabbatarwa ta hannu mai taimako. Ta rubuta duk lokuta na kuskure tare da hotuna da metadata. Ta sadar da mai sayar da kayan aiki kuma ta ba shi karin bayanan da ke wakilci yawan jama'ar yankin, da aka tattara tare da yarda da sani. A lokaci guda, ta kafa ka'idar kulawa ta dan adam dole ne: kowane kin yarda daga tsarin dole ya tabbata ta wakili mutum kafin a ki mara amfani da taimakon damar shiga. Ta horar da kungiyoyinta gane nuna bambanci da ba da rahoto game da kowane bambanci.",
+      "impact": "Bayan gyara da sake horarwa akan bayanai mafi wakilci, yawan kurakuran gane fuska ya fado daga kashi 30 zuwa kasa da kashi 4 cikin dari. Lokacin rarrabawa ya koma rabin abin da yake, kamar yadda ya saba. Babu wanda ya cancanci amfani da taimako ya ki ba tare da shiga tsakani na dan adam ba. Al'ummar ta sake samun amincewar tsarin, kuma kungiyar yanzu tana da ka'idar da aka rubuta da za a iya sake amfani da ita don sauran aiwatar da fasaha."
     },
     "practice": {
-      "title": "Zana Taswira na Bayanan Sirri na Ƙungiyarku",
+      "title": "Zana Taswira na Bayanan Sirri na Kungiyarku",
       "instructions": [
-        "Zaɓi wani lokaci na ainihi a ƙungiyarku inda AI za ta iya amfani ko ana amfani da ita ta riga (misali: taƙaita rahotanni na filin, fassara, nazarin bayanan masu amfani da taimako). Rubuta wannan lokaci a wayarku.",
+        "Zabi wani lokaci na ainihi a kungiyarku inda AI za ta iya amfani ko ana amfani da ita ta riga (misali: takaita rahotanni na filin, fassara, nazarin bayanan masu amfani da taimako). Rubuta wannan lokaci a wayarku.",
         "Jera duk bayanan sirri da ke cikin wannan lokaci: sunayen mutane, wuraren zama, yanayin lafiya, halin iyali, daidaiton GPS, hotuna. Ga kowane nau'in bayana, rubuta abin da zai iya faruwa idan an fallasa shi ko an yi amfani da shi ba tare da izini ba.",
-        "Ga kowane bayanan sirri da kuka gano, ba da shawarar aƙalla ɗaya daga cikin tsare-tsare na ainihi: ɓoye sunaye kafin shigar da bayana (maye gurbin sunayen da lambar sirri), tattara yarda da rubuce-rubuce, amfani da kayan aikin da ƙungiyarku ta amince da su, ko bitar ɗan adam kafin raba. Ɗauki screenshot ko wata lura ta jerin naku don raba shi a taron ƙungiya mai zuwa."
+        "Ga kowane bayanan sirri da kuka gano, ba da shawarar akalla daya daga cikin tsare-tsare na ainihi: boye sunaye kafin shigar da bayana (maye gurbin sunayen da lambar sirri), tattara yarda da rubuce-rubuce, amfani da kayan aikin da kungiyarku ta amince da su, ko bitar dan adam kafin raba. Dauki screenshot ko wata lura ta jerin naku don raba shi a taron kungiya mai zuwa."
       ],
-      "observation": "Wataƙila za ku gano cewa wasu haɗari ba su bayyana kafin wannan aiki ba. Hakan al'ada ne: haɗarin kayan aiki yana bayyana kawai lokacin da kuka yi tambayoyin da suka dace. Wannan taswira mai sauƙi na iya zama tushen manufofin AI na ƙungiyarku."
+      "observation": "Watakila za ku gano cewa wasu hadari ba su bayyana kafin wannan aiki ba. Hakan al'ada ne: hadarin kayan aiki yana bayyana kawai lokacin da kuka yi tambayoyin da suka dace. Wannan taswira mai sauki na iya zama tushen manufofin AI na kungiyarku."
     },
     "quiz": [
       {
@@ -429,11 +429,11 @@ export const iaLessonC6: Record<Language, LessonContent> = {
         "options": [
           {
             "key": "A",
-            "text": "Waɗannan harsuna suna da rikitarwa sosai don AI ta sarrafa su."
+            "text": "Wadannan harsuna suna da rikitarwa sosai don AI ta sarrafa su."
           },
           {
             "key": "B",
-            "text": "Bayanan horo na algorithm ba su ƙunshi isassun misalan waɗannan harsuna ba."
+            "text": "Bayanan horo na algorithm ba su kunshi isassun misalan wadannan harsuna ba."
           },
           {
             "key": "C",
@@ -441,18 +441,18 @@ export const iaLessonC6: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Waɗannan harsuna ba su da haruffan da aka daidaita wanda AI za ta iya amfani da su."
+            "text": "Wadannan harsuna ba su da haruffan da aka daidaita wanda AI za ta iya amfani da su."
           }
         ],
         "answer": "B",
-        "explanation": "Nuna bambanci na AI galibi yana fitowa daga bayanan horo. Idan harsuna na Afirka kamar Hausa ko Wolof ba su da wakilci a cikin waɗannan bayanai, tsarin zai yi aikin da bai dace ba a kansu. Wannan ba iyaka ta halitta na waɗannan harsuna ba ne, amma rashin wakilci ne a cikin bayanan horo."
+        "explanation": "Nuna bambanci na AI galibi yana fitowa daga bayanan horo. Idan harsuna na Afirka kamar Hausa ko Wolof ba su da wakilci a cikin wadannan bayanai, tsarin zai yi aikin da bai dace ba a kansu. Wannan ba iyaka ta halitta na wadannan harsuna ba ne, amma rashin wakilci ne a cikin bayanan horo."
       },
       {
-        "question": "Wani wakili a filin ya rubuta sunayen da adresoshin masu amfani da taimako a cikin chatbot na jama'a don rubuta rahoto. Menene babban haɗari?",
+        "question": "Wani wakili a filin ya rubuta sunayen da adresoshin masu amfani da taimako a cikin chatbot na jama'a don rubuta rahoto. Menene babban hadari?",
         "options": [
           {
             "key": "A",
-            "text": "Rahoton zai zama mara inganci saboda AI ba ta fahimtar yanayin taimakon ɗan adam ba."
+            "text": "Rahoton zai zama mara inganci saboda AI ba ta fahimtar yanayin taimakon dan adam ba."
           },
           {
             "key": "B",
@@ -464,11 +464,11 @@ export const iaLessonC6: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Chatbot ɗin na iya sake rubuta sunayen ba daidai ba."
+            "text": "Chatbot din na iya sake rubuta sunayen ba daidai ba."
           }
         ],
         "answer": "C",
-        "explanation": "Kayan aikin AI na jama'a suna aika bayanan da aka shigar zuwa sabobin da yawancin lokaci suna wajen ƙasar, ana iya amfani da su don horar da tsarin. Shigar da bayanan sirri na masu amfani da taimako a cikin waɗannan kayan aikin yana wakiltar take haƙƙin asiri, ko da ba da gangan ba."
+        "explanation": "Kayan aikin AI na jama'a suna aika bayanan da aka shigar zuwa sabobin da yawancin lokaci suna wajen kasar, ana iya amfani da su don horar da tsarin. Shigar da bayanan sirri na masu amfani da taimako a cikin wadannan kayan aikin yana wakiltar take hakkin asiri, ko da ba da gangan ba."
       },
       {
         "question": "Menene mafi kyawun ma'anar yarda da sani a yanayin tattara bayanai?",
@@ -479,30 +479,30 @@ export const iaLessonC6: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Ƙungiyar ta yanke shawarar wane bayanai za a tattara bisa bukatunta."
+            "text": "Kungiyar ta yanke shawarar wane bayanai za a tattara bisa bukatunta."
           },
           {
             "key": "C",
-            "text": "An sanar da wanda ake taimakon ta hanyar da za a fahimta kuma ya ba da yarjejeniyarsa ta ƙa'ida kafin duk wani tattara."
+            "text": "An sanar da wanda ake taimakon ta hanyar da za a fahimta kuma ya ba da yarjejeniyarsa ta ka'ida kafin duk wani tattara."
           },
           {
             "key": "D",
-            "text": "Ana tattara bayanai ba tare da bayyana sunayen ba, don haka babu buƙatar yarda."
+            "text": "Ana tattara bayanai ba tare da bayyana sunayen ba, don haka babu bukatar yarda."
           }
         ],
         "answer": "C",
-        "explanation": "Yarda da sani na nufin cewa mutumin da ke da sha'awar yana fahimtar bayyananniya wane bayanai ake tattara, me yasa, da kuma ta waye, kuma yana yarda da yardar rai ba tare da tilastawa ba. Ɓoye sunaye yana rage haɗari amma ba ya maye gurbin yarda don tattara farko."
+        "explanation": "Yarda da sani na nufin cewa mutumin da ke da sha'awar yana fahimtar bayyananniya wane bayanai ake tattara, me yasa, da kuma ta waye, kuma yana yarda da yardar rai ba tare da tilastawa ba. Boye sunaye yana rage hadari amma ba ya maye gurbin yarda don tattara farko."
       },
       {
-        "question": "Kun karɓi bidiyo ta WhatsApp da ke nuna wani shugaban NGO yana sanar da soke rarrabawa na abinci. Menene kuke yi da farko?",
+        "question": "Kun karbi bidiyo ta WhatsApp da ke nuna wani shugaban NGO yana sanar da soke rarrabawa na abinci. Menene kuke yi da farko?",
         "options": [
           {
             "key": "A",
-            "text": "Nan da nan kuna aikawa da bidiyon zuwa abokan aikinku don gargaɗe su."
+            "text": "Nan da nan kuna aikawa da bidiyon zuwa abokan aikinku don gargade su."
           },
           {
             "key": "B",
-            "text": "Kuna watsi da bidiyon saboda bayanai ta WhatsApp koyaushe ƙarya ne."
+            "text": "Kuna watsi da bidiyon saboda bayanai ta WhatsApp koyaushe karya ne."
           },
           {
             "key": "C",
@@ -510,26 +510,26 @@ export const iaLessonC6: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Kuna buga bidiyon a kafofin sada zumunta don faɗakar da mutane mafi yawa."
+            "text": "Kuna buga bidiyon a kafofin sada zumunta don fadakar da mutane mafi yawa."
           }
         ],
         "answer": "C",
-        "explanation": "Lokacin da kuka karɓi mahimmiyar bayanai ta hanyar da ba ta hukuma ba, mataki na farko koyaushe shine tabbatar da ita ta hanyar tushe na hukuma. Deepfakes da karya suna yaɗuwa cikin sauƙi a WhatsApp. Aikawa ba tare da tabbatarwa ba na iya haifar da babbar cutarwa, kamar hana masu amfani da taimako daga samun taimakon na ainihi."
+        "explanation": "Lokacin da kuka karbi mahimmiyar bayanai ta hanyar da ba ta hukuma ba, mataki na farko koyaushe shine tabbatar da ita ta hanyar tushe na hukuma. Deepfakes da karya suna yaduwa cikin sauki a WhatsApp. Aikawa ba tare da tabbatarwa ba na iya haifar da babbar cutarwa, kamar hana masu amfani da taimako daga samun taimakon na ainihi."
       },
       {
-        "question": "Menene Shadow AI a cikin wata ƙungiya?",
+        "question": "Menene Shadow AI a cikin wata kungiya?",
         "options": [
           {
             "key": "A",
-            "text": "Tsarin AI da aka ƙera don aiki ba tare da haɗin intanet ba, a yanayin ware layi."
+            "text": "Tsarin AI da aka kera don aiki ba tare da hadin intanet ba, a yanayin ware layi."
           },
           {
             "key": "B",
-            "text": "Amfani da kayan aikin AI da ƙungiyar ba ta amince da su ba, galibi ba tare da ilimin shugabanci ba."
+            "text": "Amfani da kayan aikin AI da kungiyar ba ta amince da su ba, galibi ba tare da ilimin shugabanci ba."
           },
           {
             "key": "C",
-            "text": "Software na AI da aka keɓe don ƙungiyoyin tsaro na fasaha ta bayanai."
+            "text": "Software na AI da aka kebe don kungiyoyin tsaro na fasaha ta bayanai."
           },
           {
             "key": "D",
@@ -537,14 +537,14 @@ export const iaLessonC6: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Shadow AI na nufin amfani da kayan aikin AI ba tare da kulawa a cikin wata ƙungiya ba. Ko da niyyar ta kyau, wannan yana fallasa ƙungiyar ga haɗari na asiri, bin ƙa'ida, da inganci. Maganin ba haramta AI ba ne, amma kafa tsari bayyananne na amfani da amintaccen shi."
+        "explanation": "Shadow AI na nufin amfani da kayan aikin AI ba tare da kulawa a cikin wata kungiya ba. Ko da niyyar ta kyau, wannan yana fallasa kungiyar ga hadari na asiri, bin ka'ida, da inganci. Maganin ba haramta AI ba ne, amma kafa tsari bayyananne na amfani da amintaccen shi."
       }
     ],
-    "reflection": "Ku yi tunanin wani aiki ko wata muhimmar aiki a ƙungiyarku da ke ƙunshe da bayanan mutanen ainihi — masu amfani da taimako, al'ummomi, marasa lafiya. Idan AI ta yi amfani a wannan aiki, wane haɗari na ɗabi'a guda uku mafi muhimmanci za su kasance? Kuma wane tsari mai sauƙi za ku iya aza kafin gobe, ba tare da ƙarin kasafin kuɗi ba, don kare waɗannan mutane?",
+    "reflection": "Ku yi tunanin wani aiki ko wata muhimmar aiki a kungiyarku da ke kunshe da bayanan mutanen ainihi — masu amfani da taimako, al'ummomi, marasa lafiya. Idan AI ta yi amfani a wannan aiki, wane hadari na dabi'a guda uku mafi muhimmanci za su kasance? Kuma wane tsari mai sauki za ku iya aza kafin gobe, ba tare da karin kasafin kudi ba, don kare wadannan mutane?",
     "glossary": [
       {
         "term": "Nuna Bambanci (Bias)",
-        "definition": "Kuskure na tsari a cikin sakamakon tsarin AI, wanda ke fitowa daga bayanan horo mara wakilci ko zaɓuɓɓukan ƙira da ke fifita wasu ƙungiyoyi akan wasu."
+        "definition": "Kuskure na tsari a cikin sakamakon tsarin AI, wanda ke fitowa daga bayanan horo mara wakilci ko zabubbukan kira da ke fifita wasu kungiyoyi akan wasu."
       },
       {
         "term": "Bayanan Sirri (Données personnelles)",
@@ -552,19 +552,19 @@ export const iaLessonC6: Record<Language, LessonContent> = {
       },
       {
         "term": "Ikon Mallakan Bayanai (Souveraineté des données)",
-        "definition": "Ka'idar da ta ce bayanan da aka tattara a wata ƙasa ko game da wata al'umma dole su kasance ƙarƙashin ikon wannan al'umma ko ƙasar, kuma ba a canja su ba tare da yarjejeniya zuwa sabobin na ƙasashen waje."
+        "definition": "Ka'idar da ta ce bayanan da aka tattara a wata kasa ko game da wata al'umma dole su kasance karkashin ikon wannan al'umma ko kasar, kuma ba a canja su ba tare da yarjejeniya zuwa sabobin na kasashen waje."
       },
       {
         "term": "Yarda da Sani (Consentement éclairé)",
-        "definition": "Yarjejeniya ta ƙa'ida da aka bayar ta wani mutum kafin a tattara ko a yi amfani da bayanansu. Mutumin dole ya fahimci bayyananniya abin da yake yarda da shi, a harshe da ya fahimta."
+        "definition": "Yarjejeniya ta ka'ida da aka bayar ta wani mutum kafin a tattara ko a yi amfani da bayanansu. Mutumin dole ya fahimci bayyananniya abin da yake yarda da shi, a harshe da ya fahimta."
       },
       {
         "term": "Gaskiya (Transparence)",
-        "definition": "Wajibin sanar da bayyananniya lokacin da wata takarda, yanke shawara, ko sadarwa aka samar da ita ko an taimaka mata ta hanyar tsarin AI, domin masu karɓa su iya amfani da tunani mai zurfin bincike."
+        "definition": "Wajibin sanar da bayyananniya lokacin da wata takarda, yanke shawara, ko sadarwa aka samar da ita ko an taimaka mata ta hanyar tsarin AI, domin masu karba su iya amfani da tunani mai zurfin bincike."
       },
       {
         "term": "Shadow AI",
-        "definition": "Amfani da kayan aikin AI da ƙungiya ba ta amince da su ba, galibi don amfanin kai kuma ba tare da sanar da shugabanci ba, wanda ke fallasa ƙungiyar ga haɗari na tsaro, asiri, da bin ƙa'idodin doka."
+        "definition": "Amfani da kayan aikin AI da kungiya ba ta amince da su ba, galibi don amfanin kai kuma ba tare da sanar da shugabanci ba, wanda ke fallasa kungiyar ga hadari na tsaro, asiri, da bin ka'idodin doka."
       }
     ]
   }

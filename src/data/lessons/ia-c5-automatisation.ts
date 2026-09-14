@@ -25,7 +25,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
       },
       {
         "title": "Garder l'humain dans la boucle — validation, qualité, responsabilité",
-        "body": "Automatiser ne signifie pas abandonner le volant. Pensez à un taxi-moto qui emprunte un itinéraire connu : il peut aller vite sur le tronçon qu'il connaît bien, mais il ralentit et regarde lui-même aux carrefours dangereux. C'est le principe du human-in-the-loop : la machine fait le travail prévisible, l'humain intervient aux points critiques.\n\nConcrètement, identifiez dans votre workflow au moins un point de contrôle humain. Par exemple : l'automatisation trie les formulaires terrain et pré-remplit un tableau de synthèse, mais c'est le responsable de programme qui valide ce tableau avant qu'il parte au bailleur. Pour les cas signalés comme «sensibles» (bénéficiaire en situation de détresse, données incohérentes), le système doit alerter un humain plutôt que de traiter automatiquement.\n\nLa responsabilité ne se délègue pas à une machine. Si une erreur survient dans un processus automatisé — un rapport mal généré, un bénéficiaire oublié — c'est toujours un être humain qui en répond. Cette conscience doit guider la conception de chaque automatisation dans votre organisation."
+        "body": "Automatiser ne signifie pas abandonner le volant. Pensez à un taxi-moto qui emprunte un itinéraire connu : il peut aller vite sur le tronçon qu'il connaît bien, mais il ralentit et regarde lui-même aux carrefours dangereux. C'est le principe du human-in-the-loop : la machine fait le travail prévisible, l'humain intervient aux points critiques.\n\nConcrètement, identifiez dans votre workflow au moins un point de contrôle humain. Par exemple : l'automatisation trie les formulaires terrain et pré-remplit un tableau de synthèse, mais c'est le responsable de programme qui valide ce tableau avant qu'il parte au bailleur. Pour les cas signalés comme « sensibles » (bénéficiaire en situation de détresse, données incohérentes), le système doit alerter un humain plutôt que de traiter automatiquement.\n\nLa responsabilité ne se délègue pas à une machine. Si une erreur survient dans un processus automatisé — un rapport mal généré, un bénéficiaire oublié — c'est toujours un être humain qui en répond. Cette conscience doit guider la conception de chaque automatisation dans votre organisation."
       },
       {
         "title": "Mesurer gain et risques — temps gagné, erreurs possibles, dépendance",
@@ -35,7 +35,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "example": {
       "title": "Synthèse automatisée des formulaires terrain au PNUD Niger",
       "challenge": "Une équipe de coordination reçoit chaque semaine entre 80 et 120 formulaires terrain remplis par des agents dans 12 régions du Niger. La consolidation manuelle prenait environ 6 heures par semaine à une assistante de programme : copier les données depuis les e-mails, les coller dans un tableur, vérifier les doublons, générer un tableau de synthèse pour le rapport hebdomadaire.",
-      "solution": "L'équipe configure un formulaire KoboToolbox connecté à Google Sheets via une exportation automatique quotidienne. Un script Google Apps Script (sans connaissance avancée en programmation) detecte les nouvelles lignes, génère automatiquement les totaux par région et par indicateur, et envoie par e-mail un tableau de synthèse pré-formaté au coordinateur chaque lundi matin. Les formulaires signalant des incidents critiques (champ «cas sensible» coché) déclenchent une alerte immédiate vers le responsable de protection — sans attendre la synthèse hebdomadaire.",
+      "solution": "L'équipe configure un formulaire KoboToolbox connecté à Google Sheets via une exportation automatique quotidienne. Un script Google Apps Script (sans connaissance avancée en programmation) détecte les nouvelles lignes, génère automatiquement les totaux par région et par indicateur, et envoie par e-mail un tableau de synthèse pré-formaté au coordinateur chaque lundi matin. Les formulaires signalant des incidents critiques (champ « cas sensible » coché) déclenchent une alerte immédiate vers le responsable de protection — sans attendre la synthèse hebdomadaire.",
       "impact": "Le temps de consolidation est passé de 6 heures à moins d'1 heure par semaine (réduction d'environ 85 %), l'assistante consacrant ce temps libéré à l'analyse qualitative des données. Les alertes sur cas sensibles sont transmises en moins de 15 minutes au lieu de parfois 48 heures. Le responsable de programme valide le tableau avant envoi au bailleur — le point de contrôle humain est maintenu."
     },
     "practice": {
@@ -72,7 +72,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
         "explanation": "Une tâche est bonne candidate à l'automatisation quand elle est répétitive, suit toujours les mêmes étapes et s'appuie sur des données structurées. Les tâches complexes nécessitant un jugement humain, ou celles qui concernent des décisions sensibles, doivent rester sous contrôle humain direct."
       },
       {
-        "question": "Qu'est-ce que le principe du «human-in-the-loop» ?",
+        "question": "Qu'est-ce que le principe du « human-in-the-loop » ?",
         "options": [
           {
             "key": "A",
@@ -118,7 +118,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
         "explanation": "Automatiser sans validation humaine des paiements à grande échelle est risqué : une erreur de données (mauvais montant, mauvais numéro) peut affecter des centaines de personnes avant d'être détectée. Un point de contrôle humain avant l'envoi massif est indispensable pour ce type d'opération sensible."
       },
       {
-        "question": "Parmi ces outils, lequel est qualifié de «no-code» ?",
+        "question": "Parmi ces outils, lequel est qualifié de « no-code » ?",
         "options": [
           {
             "key": "A",
@@ -384,7 +384,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "id": "c5",
     "lessonNumber": 5,
     "title": "Yin Aiki ta Atomatik ba tare da Rasa Iko ba — Dan Adam Ya Kasance a Tsakiya",
-    "objective": "Bayan kammala wannan darasi, za ku iya gano ayyukan da kuke maimaita su kowace rana waɗanda suka dace da atomatik. Za ku san yadda ake zaɓar kayan aiki mai sauƙi don kafa tsarin atomatik na farko. Za ku koyi yadda ake kiyaye iko na ɗan adam a matakan mahimmi, kuma za ku iya aunawa gaskiya awa da aka adana idan aka kwatanta da haɗarurrukan da aka samar.",
+    "objective": "Bayan kammala wannan darasi, za ku iya gano ayyukan da kuke maimaita su kowace rana wadanda suka dace da atomatik. Za ku san yadda ake zabar kayan aiki mai sauki don kafa tsarin atomatik na farko. Za ku koyi yadda ake kiyaye iko na dan adam a matakan mahimmi, kuma za ku iya aunawa gaskiya awa da aka adana idan aka kwatanta da hadarurrukan da aka samar.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,35 +393,35 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Me Za a Yi ta Atomatik — da Abin da Ya Fi Kyau a Bar ga Dan Adam",
-        "body": "Ka yi tunanin wakilin filin da ke cika wannan takarda ta Excel kowace safe: sunayen masu amfana, adadin da aka raba, ƙauye, kwanan wata. Kwafi-manna, sake tsarawa, aika ta email. Wannan aiki ne da ake maimaita shi, mai ka'idoji a sarari — wannan shine daidai abin da atomatik zai iya ɗauka a madadin ku.\n\nAiki yana da kyau ga atomatik idan ya bi matakai ɗaya koyaushe, idan bayanai na shigarwa sun tsara (fom, takardar lissafi, email na ƙididdiga), kuma idan kuskure ba zai haifar da sakamakon muni maras gyara ba. Misali: raba email bisa nau'in buƙata, samar da rahoto na mako-mako daga fom na KoboToolbox, ko aika sakon SMS na tunatar ta amfani da kayan aiki kamar Orange SMS API.\n\nA gefe guda, wasu ayyuka ba za a yi su ta atomatik ba ba tare da kula sosai ba: yanke shawara da ta shafi masu amfana masu rauni kai tsaye, tabbatar da biyan kuɗi mai yawa (kamar canja wurin M-Pesa zuwa mutane ɗari), ko kowane yanayi da mahallin gida da na ɗan adam ya yi muhimmanci. Yin atomatik ba tare da tunani ba, kamar ba wanda bai san hanyar ba makullin motar yatsa."
+        "body": "Ka yi tunanin wakilin filin da ke cika wannan takarda ta Excel kowace safe: sunayen masu amfana, adadin da aka raba, kauye, kwanan wata. Kwafi-manna, sake tsarawa, aika ta email. Wannan aiki ne da ake maimaita shi, mai ka'idoji a sarari — wannan shine daidai abin da atomatik zai iya dauka a madadin ku.\n\nAiki yana da kyau ga atomatik idan ya bi matakai daya koyaushe, idan bayanai na shigarwa sun tsara (fom, takardar lissafi, email na kididdiga), kuma idan kuskure ba zai haifar da sakamakon muni maras gyara ba. Misali: raba email bisa nau'in bukata, samar da rahoto na mako-mako daga fom na KoboToolbox, ko aika sakon SMS na tunatar ta amfani da kayan aiki kamar Orange SMS API.\n\nA gefe guda, wasu ayyuka ba za a yi su ta atomatik ba ba tare da kula sosai ba: yanke shawara da ta shafi masu amfana masu rauni kai tsaye, tabbatar da biyan kudi mai yawa (kamar canja wurin M-Pesa zuwa mutane dari), ko kowane yanayi da mahallin gida da na dan adam ya yi muhimmanci. Yin atomatik ba tare da tunani ba, kamar ba wanda bai san hanyar ba makullin motar yatsa."
       },
       {
-        "title": "Kayan Aiki Masu Sauƙi — Haɗa AI, No-Code da Takardar Lissafi",
-        "body": "Ba kwa buƙatar zama mai shirye-shirye don yin atomatik. Kayan aiki kamar Google Sheets tare da ƙididdiga na gaba, dandamali na no-code kamar Zapier ko Make (tsohon Integromat), ko mataimakiyar AI kamar ChatGPT, za a iya haɗa su don ƙirƙirar tsarin aiki mai ƙarfi da za a iya shiga ma daga wayar Android tare da haɗin 3G.\n\nA aikace: mai kula da PNUD a Nijar na iya saita mai kunna (trigger) a Google Sheets — da zarar wakilin filin ya ƙara layi sabon ta fom na Google Forms, taƙaicen atomatik yana samuwa ta ƙididdigar ko buƙatar AI, sa'an nan ya aika ta email zuwa mai kula. Duk wannan ba tare da rubuta layi ɗaya na code ba.\n\nDon wuraren da ba su da alaƙa mai kyau, akwai hanyoyin da ba su buƙatar haɗin intanet: rubutun Excel (macros) waɗanda ke aiki a gida, ko fom na ODK da aka tattara a yanayin kashe wutar da za a daidaita da zarar cibiyar sadarwa ta dawo. Abin da ya fi muhimmanci shi ne zaɓar kayan aikin da suka dace da haƙiƙanin aikin ku a filin, ba mafi haɓakawa a kasuwa ba."
+        "title": "Kayan Aiki Masu Sauki — Hada AI, No-Code da Takardar Lissafi",
+        "body": "Ba kwa bukatar zama mai shirye-shirye don yin atomatik. Kayan aiki kamar Google Sheets tare da kididdiga na gaba, dandamali na no-code kamar Zapier ko Make (tsohon Integromat), ko mataimakiyar AI kamar ChatGPT, za a iya hada su don kirkirar tsarin aiki mai karfi da za a iya shiga ma daga wayar Android tare da hadin 3G.\n\nA aikace: mai kula da PNUD a Nijar na iya saita mai kunna (trigger) a Google Sheets — da zarar wakilin filin ya kara layi sabon ta fom na Google Forms, takaicen atomatik yana samuwa ta kididdigar ko bukatar AI, sa'an nan ya aika ta email zuwa mai kula. Duk wannan ba tare da rubuta layi daya na code ba.\n\nDon wuraren da ba su da alaka mai kyau, akwai hanyoyin da ba su bukatar hadin intanet: rubutun Excel (macros) wadanda ke aiki a gida, ko fom na ODK da aka tattara a yanayin kashe wutar da za a daidaita da zarar cibiyar sadarwa ta dawo. Abin da ya fi muhimmanci shi ne zabar kayan aikin da suka dace da hakikanin aikin ku a filin, ba mafi habakawa a kasuwa ba."
       },
       {
         "title": "Kiyaye Dan Adam a Tsakiya — Tabbatarwa, Inganci, Alhakin",
-        "body": "Yin atomatik ba yana nufin barin maɓallin motoci ba. Ka yi tunanin direban babura da ke bin hanyar da ya sani: zai iya tafi da sauri a sashin da ya sani sosai, amma yana rage gudu kuma yana kallo da kansa a wuraren haɗari. Wannan shine ka'idar human-in-the-loop: na'ura tana yin aikin da ake iya hasashe, ɗan adam yana shiga a wuraren mahimmi.\n\nA aikace, gano aƙalla wuri ɗaya na bincike na ɗan adam a tsarin aikin ku. Misali: atomatik yana raba fom na filin kuma yana cika tebur na taƙaice da hannu, amma mai shirin shine wanda ke tabbatar da wannan tebur kafin ya tafi wajen mai ba da kuɗi. Ga fom ɗin da aka nuna da 'shari'a mai hankali' (mai amfana a cikin wahala, bayanai marasa daidaituwa), tsarin ya kamata ya sanar da ɗan adam maimakon sarrafawa kai tsaye.\n\nAlhaki ba za a ba shi ga na'ura ba. Idan kuskure ya faru a tsarin atomatik — rahoto da aka ƙirƙira ba daidai ba, mai amfana da aka manta — ɗan adam ne koyaushe ke amsawa. Wannan wayewa ta kamata ta jagoranci tsarin kowace atomatik a ƙungiyar ku."
+        "body": "Yin atomatik ba yana nufin barin maballin motoci ba. Ka yi tunanin direban babura da ke bin hanyar da ya sani: zai iya tafi da sauri a sashin da ya sani sosai, amma yana rage gudu kuma yana kallo da kansa a wuraren hadari. Wannan shine ka'idar human-in-the-loop: na'ura tana yin aikin da ake iya hasashe, dan adam yana shiga a wuraren mahimmi.\n\nA aikace, gano akalla wuri daya na bincike na dan adam a tsarin aikin ku. Misali: atomatik yana raba fom na filin kuma yana cika tebur na takaice da hannu, amma mai shirin shine wanda ke tabbatar da wannan tebur kafin ya tafi wajen mai ba da kudi. Ga fom din da aka nuna da 'shari'a mai hankali' (mai amfana a cikin wahala, bayanai marasa daidaituwa), tsarin ya kamata ya sanar da dan adam maimakon sarrafawa kai tsaye.\n\nAlhaki ba za a ba shi ga na'ura ba. Idan kuskure ya faru a tsarin atomatik — rahoto da aka kirkira ba daidai ba, mai amfana da aka manta — dan adam ne koyaushe ke amsawa. Wannan wayewa ta kamata ta jagoranci tsarin kowace atomatik a kungiyar ku."
       },
       {
-        "title": "Auna Riba da Haɗarurru — Lokaci da aka Adana, Kurakurai Masu Yiwuwa, Dogaro",
-        "body": "Kafin fitar da atomatik, ku yi wa kanku tambayoyi uku masu sauƙi: Wannan aiki yana ɗaukar nawa lokaci a yau? Menene yiwuwar kuskuren atomatik da zai wuce ba a gano shi ba? Idan kayan aiki ya lalace, me zai faru? Kamar yadda ake kimanta ko siyan injin dawa na gama-gari ya fi inganci da buga da hannu — dole ne ku kwatanta farashi, amincewa, da dogaro ga mai gyara injin.\n\nKimanin da suka dace suna nuna cewa atomatik da aka tsara sosai na iya rage lokacin da aka kashe kan ayyukan shigar da bayanai ko tarawa maimaitawa da kashi 40 zuwa 70 cikin ɗari. Amma wannan riba dole ne a auna ta da lokacin da ake buƙatar saita, gwaji, da kula da atomatik — galibi ana ƙasa da kimantawarsa. Doka mai amfani: idan aiki yana ɗaukar ƙasa da minti biyar a mako, yin atomatik ba zai kasance da fifiko ba.\n\nKula da haɗarin dogaro yana da muhimmanci. Idan ƙungiyar ku ta dogara gaba ɗaya kan kayan aiki na kyauta wanda yanayin sa na iya canzawa dare ɗaya, kuna cikin haɗari. Koyaushe rubuta tsarin aikin ku, kiyaye hanyar tafiya ta hannu na baya, kuma gwada atomatik akai-akai don tabbatar yana samar da sakamako da ake tsammanin. Tontine ta dijital da ta kasa a ranar biyan bashin, lamari ne da za a iya hana shi."
+        "title": "Auna Riba da Hadarurru — Lokaci da aka Adana, Kurakurai Masu Yiwuwa, Dogaro",
+        "body": "Kafin fitar da atomatik, ku yi wa kanku tambayoyi uku masu sauki: Wannan aiki yana daukar nawa lokaci a yau? Menene yiwuwar kuskuren atomatik da zai wuce ba a gano shi ba? Idan kayan aiki ya lalace, me zai faru? Kamar yadda ake kimanta ko siyan injin dawa na gama-gari ya fi inganci da buga da hannu — dole ne ku kwatanta farashi, amincewa, da dogaro ga mai gyara injin.\n\nKimanin da suka dace suna nuna cewa atomatik da aka tsara sosai na iya rage lokacin da aka kashe kan ayyukan shigar da bayanai ko tarawa maimaitawa da kashi 40 zuwa 70 cikin dari. Amma wannan riba dole ne a auna ta da lokacin da ake bukatar saita, gwaji, da kula da atomatik — galibi ana kasa da kimantawarsa. Doka mai amfani: idan aiki yana daukar kasa da minti biyar a mako, yin atomatik ba zai kasance da fifiko ba.\n\nKula da hadarin dogaro yana da muhimmanci. Idan kungiyar ku ta dogara gaba daya kan kayan aiki na kyauta wanda yanayin sa na iya canzawa dare daya, kuna cikin hadari. Koyaushe rubuta tsarin aikin ku, kiyaye hanyar tafiya ta hannu na baya, kuma gwada atomatik akai-akai don tabbatar yana samar da sakamako da ake tsammanin. Tontine ta dijital da ta kasa a ranar biyan bashin, lamari ne da za a iya hana shi."
       }
     ],
     "example": {
-      "title": "Taƙaicen Fom na Filin ta Atomatik a PNUD Nijar",
-      "challenge": "Ƙungiyar daidaitawa tana karɓar tsakanin fom na filin 80 zuwa 120 kowace mako, waɗanda wakilan ke cika su a yankuna 12 na Nijar. Haɗawa da hannu yana ɗaukar mataimakiyar shirye-shirye kimanin awanni 6 a mako: kwafi bayanai daga email, manna su a takardar lissafi, bincika kwafi biyu, samar da tebur na taƙaice don rahoto na mako-mako.",
-      "solution": "Ƙungiyar ta saita fom na KoboToolbox da aka haɗa da Google Sheets ta fitar da atomatik kowace rana. Script na Google Apps (ba tare da ilimin shirye-shirye na gaba ba) yana ganowa layuka sabbi, yana samar da jimla ta yanki da mai nuna kai tsaye, kuma yana aika tebur na taƙaice wanda aka shirya a email zuwa mai kula kowace Litinin da safe. Fom ɗin da ke nuna lamura masu haɗari (filin 'shari'a mai hankali' an yi alama) suna kunna faɗakarwa ta nan take zuwa mai kula da kariya — ba tare da jiran taƙaicen mako-mako ba.",
-      "impact": "Lokacin haɗawa ya ragu daga awanni 6 zuwa ƙasa da awa ɗaya a mako (raguwa kusan kashi 85 cikin ɗari), tare da mataimakiyar ta sadaukar da lokacin da ta 'yantar don binciken ingancin bayanai. Ana isar da faɗakarwa kan shari'o'in masu hankali a ƙasa da minti 15 maimakon wani lokaci har sa'o'i 48. Mai shirin yana tabbatar da tebur kafin ya aika wa mai ba da kuɗi — ana kiyaye binciken ɗan adam."
+      "title": "Takaicen Fom na Filin ta Atomatik a PNUD Nijar",
+      "challenge": "Kungiyar daidaitawa tana karbar tsakanin fom na filin 80 zuwa 120 kowace mako, wadanda wakilan ke cika su a yankuna 12 na Nijar. Hadawa da hannu yana daukar mataimakiyar shirye-shirye kimanin awanni 6 a mako: kwafi bayanai daga email, manna su a takardar lissafi, bincika kwafi biyu, samar da tebur na takaice don rahoto na mako-mako.",
+      "solution": "Kungiyar ta saita fom na KoboToolbox da aka hada da Google Sheets ta fitar da atomatik kowace rana. Script na Google Apps (ba tare da ilimin shirye-shirye na gaba ba) yana ganowa layuka sabbi, yana samar da jimla ta yanki da mai nuna kai tsaye, kuma yana aika tebur na takaice wanda aka shirya a email zuwa mai kula kowace Litinin da safe. Fom din da ke nuna lamura masu hadari (filin 'shari'a mai hankali' an yi alama) suna kunna fadakarwa ta nan take zuwa mai kula da kariya — ba tare da jiran takaicen mako-mako ba.",
+      "impact": "Lokacin hadawa ya ragu daga awanni 6 zuwa kasa da awa daya a mako (raguwa kusan kashi 85 cikin dari), tare da mataimakiyar ta sadaukar da lokacin da ta 'yantar don binciken ingancin bayanai. Ana isar da fadakarwa kan shari'o'in masu hankali a kasa da minti 15 maimakon wani lokaci har sa'o'i 48. Mai shirin yana tabbatar da tebur kafin ya aika wa mai ba da kudi — ana kiyaye binciken dan adam."
     },
     "practice": {
       "title": "Zana Tsarin Aiki na Farko Da Za a Yi ta Atomatik",
       "instructions": [
-        "Buɗe app na rubutun bayanai a wayar ku. Bayyana a layuka 5 zuwa 8 aiki maimaitawa da kuke yi aƙalla sau ɗaya a mako: fayyace bayanai na shigarwa (daga ina suke zuwa?), matakai da kuke aiwatarwa, da sakamakon ƙarshe da aka samar.",
-        "Sake karanta bayananku kuma kewaye (ko rubuta da babban harafi) mataki wanda za a iya yi ta atomatik ta kayan aiki ko mataimakiyar AI — wannan shine mataki mai yuwuwar atomatik. Sa'an nan gano mataki inda kuskure zai yi tsanani ko inda hukuncin ɗan adam ya zama wajibi — wannan shine binciken ɗan adam ku.",
-        "Yi kiyasin da aminci: wannan aiki yana ɗaukar mintuna nawa kowace mako? Idan kun adana kashi 70 cikin ɗari na wannan lokaci, me za ku yi da shi? Rubuta amsar ku. Wannan ya zama ma'auni na nasarar ku don kimanta ko atomatik ya cancanci ƙoƙarin saita."
+        "Bude app na rubutun bayanai a wayar ku. Bayyana a layuka 5 zuwa 8 aiki maimaitawa da kuke yi akalla sau daya a mako: fayyace bayanai na shigarwa (daga ina suke zuwa?), matakai da kuke aiwatarwa, da sakamakon karshe da aka samar.",
+        "Sake karanta bayananku kuma kewaye (ko rubuta da babban harafi) mataki wanda za a iya yi ta atomatik ta kayan aiki ko mataimakiyar AI — wannan shine mataki mai yuwuwar atomatik. Sa'an nan gano mataki inda kuskure zai yi tsanani ko inda hukuncin dan adam ya zama wajibi — wannan shine binciken dan adam ku.",
+        "Yi kiyasin da aminci: wannan aiki yana daukar mintuna nawa kowace mako? Idan kun adana kashi 70 cikin dari na wannan lokaci, me za ku yi da shi? Rubuta amsar ku. Wannan ya zama ma'auni na nasarar ku don kimanta ko atomatik ya cancanci kokarin saita."
       ],
-      "observation": "Za ku gano cewa yawancin ayyukan maimaitawa suna da tsari a sarari da zarar an rubuta su baki — kuma binciken ɗan adam galibi ya fi bayyane fiye da yadda ake tsammani. Kiyaye wannan bayanan: zai zama farkon ku idan kun yanke shawarar aiwatar da atomatik."
+      "observation": "Za ku gano cewa yawancin ayyukan maimaitawa suna da tsari a sarari da zarar an rubuta su baki — kuma binciken dan adam galibi ya fi bayyane fiye da yadda ake tsammani. Kiyaye wannan bayanan: zai zama farkon ku idan kun yanke shawarar aiwatar da atomatik."
     },
     "quiz": [
       {
@@ -429,7 +429,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
         "options": [
           {
             "key": "A",
-            "text": "Yana da rikitarwa kuma yana buƙatar hukunci na ƙwararru."
+            "text": "Yana da rikitarwa kuma yana bukatar hukunci na kwararru."
           },
           {
             "key": "B",
@@ -441,37 +441,37 @@ export const iaLessonC5: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Ana yin sa sau ɗaya kawai a shekara kuma yana ɗaukar lokaci mai yawa."
+            "text": "Ana yin sa sau daya kawai a shekara kuma yana daukar lokaci mai yawa."
           }
         ],
         "answer": "C",
-        "explanation": "Aiki yana da kyau ga atomatik idan yana maimaitawa, koyaushe yana bin matakai ɗaya, kuma yana dogara kan bayanai masu tsari. Ayyukan da ke buƙatar hukunci na ɗan adam, ko waɗanda suka shafi yanke shawara mai hankali, dole ne su kasance ƙarƙashin iko na ɗan adam kai tsaye."
+        "explanation": "Aiki yana da kyau ga atomatik idan yana maimaitawa, koyaushe yana bin matakai daya, kuma yana dogara kan bayanai masu tsari. Ayyukan da ke bukatar hukunci na dan adam, ko wadanda suka shafi yanke shawara mai hankali, dole ne su kasance karkashin iko na dan adam kai tsaye."
       },
       {
         "question": "Menene ma'anar ka'idar 'human-in-the-loop'?",
         "options": [
           {
             "key": "A",
-            "text": "Maye gurbin mutane gaba ɗaya da na'urori kan ayyukan maimaitawa."
+            "text": "Maye gurbin mutane gaba daya da na'urori kan ayyukan maimaitawa."
           },
           {
             "key": "B",
-            "text": "Tambayi ɗan adam don maimaita kowace mataki na atomatik don tabbatarwa."
+            "text": "Tambayi dan adam don maimaita kowace mataki na atomatik don tabbatarwa."
           },
           {
             "key": "C",
-            "text": "Amfani da kayan aiki da ƙungiyoyin ɗan adam suka haɓaka kawai."
+            "text": "Amfani da kayan aiki da kungiyoyin dan adam suka habaka kawai."
           },
           {
             "key": "D",
-            "text": "Kiyaye shiga tsakanin ɗan adam a matakan mahimmi na tsarin atomatik."
+            "text": "Kiyaye shiga tsakanin dan adam a matakan mahimmi na tsarin atomatik."
           }
         ],
         "answer": "D",
-        "explanation": "Human-in-the-loop yana nufin atomatik yana ɗaukar matakai masu iya hasashe da maimaitawa, amma ɗan adam yana shiga a wuraren mahimmi: tabbatar da sakamako masu muhimmanci, gudanar da shari'o'i masu hankali, gyara rashin daidaituwa. Alhaki koyaushe yana tare da ɗan adam."
+        "explanation": "Human-in-the-loop yana nufin atomatik yana daukar matakai masu iya hasashe da maimaitawa, amma dan adam yana shiga a wuraren mahimmi: tabbatar da sakamako masu muhimmanci, gudanar da shari'o'i masu hankali, gyara rashin daidaituwa. Alhaki koyaushe yana tare da dan adam."
       },
       {
-        "question": "Mai kula yana son yin atomatik a canja wurin M-Pesa zuwa masu amfana 500 ba tare da tabbatarwar ɗan adam ta tsakiya ba. Menene babbar damuwa?",
+        "question": "Mai kula yana son yin atomatik a canja wurin M-Pesa zuwa masu amfana 500 ba tare da tabbatarwar dan adam ta tsakiya ba. Menene babbar damuwa?",
         "options": [
           {
             "key": "A",
@@ -479,7 +479,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Kuskuren atomatik a kan biyan kuɗi mai yawa na iya samun sakamakon tsanani wanda ke da wahalar gyarawa."
+            "text": "Kuskuren atomatik a kan biyan kudi mai yawa na iya samun sakamakon tsanani wanda ke da wahalar gyarawa."
           },
           {
             "key": "C",
@@ -487,22 +487,22 @@ export const iaLessonC5: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Masu amfana koyaushe sun fi son karɓar kiran tarho."
+            "text": "Masu amfana koyaushe sun fi son karbar kiran tarho."
           }
         ],
         "answer": "B",
-        "explanation": "Yin atomatik kan biyan kuɗi mai yawa ba tare da tabbatarwar ɗan adam ba yana da haɗari: kuskuren bayanai (adadi mara daidai, lamba mara daidai) na iya shafar mutane ɗari kafin a gano shi. Bincike na ɗan adam kafin canja wuri mai yawa yana da wajibi ga irin wannan aiki mai hankali."
+        "explanation": "Yin atomatik kan biyan kudi mai yawa ba tare da tabbatarwar dan adam ba yana da hadari: kuskuren bayanai (adadi mara daidai, lamba mara daidai) na iya shafar mutane dari kafin a gano shi. Bincike na dan adam kafin canja wuri mai yawa yana da wajibi ga irin wannan aiki mai hankali."
       },
       {
-        "question": "Daga cikin waɗannan kayan aikin, wanne ake kira 'no-code'?",
+        "question": "Daga cikin wadannan kayan aikin, wanne ake kira 'no-code'?",
         "options": [
           {
             "key": "A",
-            "text": "Python tare da ɗakin karatu na pandas."
+            "text": "Python tare da dakin karatu na pandas."
           },
           {
             "key": "B",
-            "text": "Script na Linux Shell da aka keɓance."
+            "text": "Script na Linux Shell da aka kebance."
           },
           {
             "key": "C",
@@ -510,22 +510,22 @@ export const iaLessonC5: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "REST API da aka haɓaka a cikin JavaScript."
+            "text": "REST API da aka habaka a cikin JavaScript."
           }
         ],
         "answer": "C",
-        "explanation": "Kayan aikin no-code kamar Zapier ko Make suna ba ku damar ƙirƙirar atomatik da haɗaka ba tare da rubuta code ba, ta hanyar interfaces na gani. Masu ƙwararru ba tare da horo na fasaha ba na iya shiga su kuma za a iya saita su daga burauzar ko app na wayar hannu."
+        "explanation": "Kayan aikin no-code kamar Zapier ko Make suna ba ku damar kirkirar atomatik da hadaka ba tare da rubuta code ba, ta hanyar interfaces na gani. Masu kwararru ba tare da horo na fasaha ba na iya shiga su kuma za a iya saita su daga burauzar ko app na wayar hannu."
       },
       {
-        "question": "Kun yi atomatik haɗawar rahoto na mako-mako. Ta yaya za ku kimanta gaskiya ko atomatik ya yi nasara?",
+        "question": "Kun yi atomatik hadawar rahoto na mako-mako. Ta yaya za ku kimanta gaskiya ko atomatik ya yi nasara?",
         "options": [
           {
             "key": "A",
-            "text": "Idan aƙalla abokan aiki goma a wasu ƙungiyoyi sun yi amfani da kayan aikin."
+            "text": "Idan akalla abokan aiki goma a wasu kungiyoyi sun yi amfani da kayan aikin."
           },
           {
             "key": "B",
-            "text": "Idan ba ku taɓa buƙatar taɓa tsarin da hannu kuma ba."
+            "text": "Idan ba ku taba bukatar taba tsarin da hannu kuma ba."
           },
           {
             "key": "C",
@@ -533,38 +533,38 @@ export const iaLessonC5: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Idan rahoto ya samuwa da sauri, ko ya ƙunshi kurakurai ko ba."
+            "text": "Idan rahoto ya samuwa da sauri, ko ya kunshi kurakurai ko ba."
           }
         ],
         "answer": "C",
         "explanation": "Nasarar atomatik ana auna ta ta hanyar kwatanta gaskiya riba na lokaci da ingancin sakamako da farashin saita da kula. Atomatik da ke samar da kurakurai da ba a gano su ba ko da ke lalacewa akai-akai ba nasara ba ne, ko da yana da sauri."
       }
     ],
-    "reflection": "Yi tunanin aiki da kuke yi kowace mako wanda kuke ganin yana gajiyarwa. Shin gaskiya yana maimaitawa kuma yana da ka'idoji masu sarari? Idan haka, menene binciken ɗan adam da ba ku son kawar da shi? Rubuta amsar ku kuma ku raba ta da abokin aiki don samun ra'ayinsa.",
+    "reflection": "Yi tunanin aiki da kuke yi kowace mako wanda kuke ganin yana gajiyarwa. Shin gaskiya yana maimaitawa kuma yana da ka'idoji masu sarari? Idan haka, menene binciken dan adam da ba ku son kawar da shi? Rubuta amsar ku kuma ku raba ta da abokin aiki don samun ra'ayinsa.",
     "glossary": [
       {
         "term": "Atomatik (Automation)",
-        "definition": "Saita tsari don aiwatar da aiki maimaitawa kai tsaye, bisa ka'idoji da aka tsara a gaba, ba tare da shiga tsakanin ɗan adam a kowace lokaci ba."
+        "definition": "Saita tsari don aiwatar da aiki maimaitawa kai tsaye, bisa ka'idoji da aka tsara a gaba, ba tare da shiga tsakanin dan adam a kowace lokaci ba."
       },
       {
         "term": "Human-in-the-loop",
-        "definition": "Ka'idar ƙira wanda ɗan adam ke ci gaba da shiga a tsarin atomatik, musamman don tabbatar da sakamako a matakan mahimmi ko don gudanar da shari'o'i na musamman."
+        "definition": "Ka'idar kira wanda dan adam ke ci gaba da shiga a tsarin atomatik, musamman don tabbatar da sakamako a matakan mahimmi ko don gudanar da shari'o'i na musamman."
       },
       {
         "term": "Workflow (Tsarin Aiki)",
-        "definition": "Jerin matakai ko ayyuka masu tsari don kammala tsari ko cimma sakamakon. Ana iya yin atomatik a wani bangare ko gaba ɗayan workflow."
+        "definition": "Jerin matakai ko ayyuka masu tsari don kammala tsari ko cimma sakamakon. Ana iya yin atomatik a wani bangare ko gaba dayan workflow."
       },
       {
         "term": "No-code",
-        "definition": "Nau'in kayan aikin da ke ba ku damar ƙirƙirar aikace-aikace, atomatik, ko haɗaka ba tare da rubuta code na kwamfuta ba, ta hanyar interfaces na gani da kowa zai iya shiga."
+        "definition": "Nau'in kayan aikin da ke ba ku damar kirkirar aikace-aikace, atomatik, ko hadaka ba tare da rubuta code na kwamfuta ba, ta hanyar interfaces na gani da kowa zai iya shiga."
       },
       {
         "term": "Mai Kunna (Trigger)",
-        "definition": "Taron musamman wanda ke kunna aiki ko workflow ta atomatik. Misali: karɓar email, ƙara layi a takardar lissafi, ko zuwan lokaci na rana."
+        "definition": "Taron musamman wanda ke kunna aiki ko workflow ta atomatik. Misali: karbar email, kara layi a takardar lissafi, ko zuwan lokaci na rana."
       },
       {
-        "term": "Bincike na Ɗan Adam (Point de contrôle)",
-        "definition": "Mataki a tsarin atomatik inda ɗan adam ke shiga don bincika, tabbatar, ko gyara sakamakon kafin tsarin ya ci gaba. Shi ne kamafen tsaro na atomatik."
+        "term": "Bincike na Dan Adam (Point de contrôle)",
+        "definition": "Mataki a tsarin atomatik inda dan adam ke shiga don bincika, tabbatar, ko gyara sakamakon kafin tsarin ya ci gaba. Shi ne kamafen tsaro na atomatik."
       }
     ]
   }

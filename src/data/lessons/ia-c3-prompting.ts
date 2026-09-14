@@ -17,11 +17,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Anatomie d'un bon prompt : Rôle, Contexte, Tâche, Format",
-        "body": "Imaginez que vous recrutez un assistant pour une mission de terrain. Si vous lui dites simplement « fais un rapport », il ne sait pas quoi mettre dedans. Mais si vous précisez « tu es chargé de suivi-évaluation au PNUD Niger, voici les données de la semaine, rédige un résumé de deux paragraphes pour le coordinateur », il peut travailler efficacement. C'est exactement le principe du prompt structuré.\n\nUn bon prompt repose sur quatre piliers : le **Rôle** (qui doit se comporter l'IA ?), le **Contexte** (quelle est la situation ?), la **Tâche** (qu'attendez-vous précisément ?), et le **Format** (quelle forme doit avoir la réponse ?). Voyons la différence en pratique :\n\n— Prompt vague : « Écris un e-mail à un bailleur. »\n— Prompt structuré : « Tu es coordinateur de projet dans une ONG sahélienne. Nous avons livré 200 kits nutritionnels dans le district de Tillabéri la semaine dernière. Rédige un e-mail de compte rendu à notre bailleur (UNICEF), en anglais, en 150 mots maximum, avec un ton formel et une phrase de remerciement en conclusion. »\n\nLe second prompt prend 30 secondes de plus à rédiger, mais il vous économise plusieurs allers-retours et produit un résultat quasi prêt à envoyer."
+        "body": "Imaginez que vous recrutez un assistant pour une mission de terrain. Si vous lui dites simplement « fais un rapport », il ne sait pas quoi mettre dedans. Mais si vous précisez « tu es chargé de suivi-évaluation au PNUD Niger, voici les données de la semaine, rédige un résumé de deux paragraphes pour le coordinateur », il peut travailler efficacement. C'est exactement le principe du prompt structuré.\n\nUn bon prompt repose sur quatre piliers : le Rôle (qui doit se comporter l'IA ?), le Contexte (quelle est la situation ?), la Tâche (qu'attendez-vous précisément ?), et le Format (quelle forme doit avoir la réponse ?). Voyons la différence en pratique :\n\n— Prompt vague : « Écris un e-mail à un bailleur. »\n— Prompt structuré : « Tu es coordinateur de projet dans une ONG sahélienne. Nous avons livré 200 kits nutritionnels dans le district de Tillabéri la semaine dernière. Rédige un e-mail de compte rendu à notre bailleur (UNICEF), en anglais, en 150 mots maximum, avec un ton formel et une phrase de remerciement en conclusion. »\n\nLe second prompt prend 30 secondes de plus à rédiger, mais il vous économise plusieurs allers-retours et produit un résultat quasi prêt à envoyer."
       },
       {
         "title": "Techniques qui marchent : exemples, étape par étape, contraintes de format",
-        "body": "La première technique puissante s'appelle le **few-shot** : vous donnez un ou deux exemples du résultat que vous attendez. C'est comme montrer à un agent de santé communautaire comment remplir une fiche avant de lui demander d'en remplir dix. Par exemple : « Voici un résumé que j'aime : [exemple]. Maintenant résume ce compte rendu de réunion dans le même style. » L'IA comprend immédiatement votre tonalité, votre niveau de détail, votre langue de travail.\n\nLa deuxième technique : demandez à l'IA de **raisonner étape par étape** (« think step by step »). Pour des tâches complexes comme analyser un budget de projet ou comparer deux propositions techniques, cela réduit les erreurs. C'est comparable à demander à quelqu'un de vérifier un transfert Mobile Money en lisant les chiffres à voix haute avant de valider.\n\nLa troisième technique : **contraindre le format de sortie**. Précisez « réponds sous forme de tableau à 3 colonnes », « rédige une liste à puces de 5 points maximum », ou « structure ta réponse avec les titres : Constat, Recommandation, Prochaine étape ». Quand le format est fixé à l'avance, la réponse est directement utilisable dans votre rapport ou votre présentation, sans reformatage."
+        "body": "La première technique puissante s'appelle le few-shot : vous donnez un ou deux exemples du résultat que vous attendez. C'est comme montrer à un agent de santé communautaire comment remplir une fiche avant de lui demander d'en remplir dix. Par exemple : « Voici un résumé que j'aime : [exemple]. Maintenant résume ce compte rendu de réunion dans le même style. » L'IA comprend immédiatement votre tonalité, votre niveau de détail, votre langue de travail.\n\nLa deuxième technique : demandez à l'IA de raisonner étape par étape (« think step by step »). Pour des tâches complexes comme analyser un budget de projet ou comparer deux propositions techniques, cela réduit les erreurs. C'est comparable à demander à quelqu'un de vérifier un transfert Mobile Money en lisant les chiffres à voix haute avant de valider.\n\nLa troisième technique : contraindre le format de sortie. Précisez « réponds sous forme de tableau à 3 colonnes », « rédige une liste à puces de 5 points maximum », ou « structure ta réponse avec les titres : Constat, Recommandation, Prochaine étape ». Quand le format est fixé à l'avance, la réponse est directement utilisable dans votre rapport ou votre présentation, sans reformatage."
       },
       {
         "title": "Itérer et corriger : un prompt se travaille en 2–3 allers-retours",
@@ -29,7 +29,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
       },
       {
         "title": "Prompts pour le travail réel : synthèse, traduction, e-mail bailleur, compte-rendu terrain",
-        "body": "Quatre cas d'usage couvrent l'essentiel du travail documentaire dans le secteur humanitaire et du développement. Le premier : la **note de synthèse**. Collez un long document (rapport de mission, étude de base) et demandez : « En tant que chargé de programme, résume ce document en 5 points clés pour une réunion de coordination. Format : liste numérotée. Langue : français. »\n\nLe deuxième cas : la **traduction et adaptation FR ↔ EN ↔ langue locale**. « Traduis ce message de sensibilisation sur le choléra du français vers le haoussa parlé au Niger, en gardant un niveau de langage accessible à des communautés rurales. » L'IA n'est pas parfaite pour toutes les langues locales, mais elle peut produire une première version à faire valider par un locuteur natif, ce qui réduit le temps de traduction d'environ 50 %.\n\nLe troisième cas : l'**e-mail bailleur**. Donnez les faits, le montant, les résultats, le nom du bailleur, et demandez un e-mail formel de compte rendu en anglais. Le quatrième cas : le **compte-rendu de réunion terrain**. Collez vos notes brutes ou dictez-les vocalement (via une application de transcription), puis demandez : « Structure ces notes en : Participants, Points discutés, Décisions prises, Actions à suivre avec responsables et échéances. » Le résultat est prêt à partager avec votre superviseur."
+        "body": "Quatre cas d'usage couvrent l'essentiel du travail documentaire dans le secteur humanitaire et du développement. Le premier : la note de synthèse. Collez un long document (rapport de mission, étude de base) et demandez : « En tant que chargé de programme, résume ce document en 5 points clés pour une réunion de coordination. Format : liste numérotée. Langue : français. »\n\nLe deuxième cas : la traduction et adaptation FR ↔ EN ↔ langue locale. « Traduis ce message de sensibilisation sur le choléra du français vers le haoussa parlé au Niger, en gardant un niveau de langage accessible à des communautés rurales. » L'IA n'est pas parfaite pour toutes les langues locales, mais elle peut produire une première version à faire valider par un locuteur natif, ce qui réduit le temps de traduction d'environ 50 %.\n\nLe troisième cas : l'e-mail bailleur. Donnez les faits, le montant, les résultats, le nom du bailleur, et demandez un e-mail formel de compte rendu en anglais. Le quatrième cas : le compte-rendu de réunion terrain. Collez vos notes brutes ou dictez-les vocalement (via une application de transcription), puis demandez : « Structure ces notes en : Participants, Points discutés, Décisions prises, Actions à suivre avec responsables et échéances. » Le résultat est prêt à partager avec votre superviseur."
       }
     ],
     "example": {
@@ -205,11 +205,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Anatomy of a Good Prompt: Role, Context, Task, Format",
-        "body": "Imagine you are hiring a field assistant for a mission. If you simply say \"write a report,\" they don't know what to include. But if you specify \"you are a monitoring and evaluation officer at UNDP Niger, here is this week's data, write a two-paragraph summary for the coordinator,\" they can work effectively. This is exactly the principle behind a structured prompt.\n\nA good prompt rests on four pillars: the **Role** (how should the AI behave?), the **Context** (what is the situation?), the **Task** (what exactly do you expect?), and the **Format** (what form should the answer take?). Let's see the difference in practice:\n\n— Vague prompt: \"Write an email to a donor.\"\n— Structured prompt: \"You are a project coordinator at a Sahelian NGO. Last week we delivered 200 nutrition kits in the Tillabéri district. Write an activity report email to our donor (UNICEF), in English, maximum 150 words, with a formal tone and a thank-you sentence in the conclusion.\"\n\nThe second prompt takes 30 extra seconds to write, but it saves you several back-and-forth exchanges and produces a result that is nearly ready to send."
+        "body": "Imagine you are hiring a field assistant for a mission. If you simply say \"write a report,\" they don't know what to include. But if you specify \"you are a monitoring and evaluation officer at UNDP Niger, here is this week's data, write a two-paragraph summary for the coordinator,\" they can work effectively. This is exactly the principle behind a structured prompt.\n\nA good prompt rests on four pillars: the Role (how should the AI behave?), the Context (what is the situation?), the Task (what exactly do you expect?), and the Format (what form should the answer take?). Let's see the difference in practice:\n\n— Vague prompt: \"Write an email to a donor.\"\n— Structured prompt: \"You are a project coordinator at a Sahelian NGO. Last week we delivered 200 nutrition kits in the Tillabéri district. Write an activity report email to our donor (UNICEF), in English, maximum 150 words, with a formal tone and a thank-you sentence in the conclusion.\"\n\nThe second prompt takes 30 extra seconds to write, but it saves you several back-and-forth exchanges and produces a result that is nearly ready to send."
       },
       {
         "title": "Techniques That Work: Examples, Step by Step, Format Constraints",
-        "body": "The first powerful technique is called **few-shot**: you provide one or two examples of the result you expect. It is like showing a community health worker how to fill out a form before asking them to fill out ten. For example: \"Here is a summary I like: [example]. Now summarize this meeting report in the same style.\" The AI immediately understands your tone, your level of detail, and your working language.\n\nThe second technique: ask the AI to **reason step by step** (\"think step by step\"). For complex tasks like analyzing a project budget or comparing two technical proposals, this reduces errors. It is comparable to asking someone to verify an M-Pesa transfer by reading the figures aloud before confirming.\n\nThe third technique: **constrain the output format**. Specify \"respond in a 3-column table,\" \"write a bullet list of no more than 5 points,\" or \"structure your response with the following headings: Finding, Recommendation, Next Step.\" When the format is fixed in advance, the response is directly usable in your report or presentation, without any reformatting."
+        "body": "The first powerful technique is called few-shot: you provide one or two examples of the result you expect. It is like showing a community health worker how to fill out a form before asking them to fill out ten. For example: \"Here is a summary I like: [example]. Now summarize this meeting report in the same style.\" The AI immediately understands your tone, your level of detail, and your working language.\n\nThe second technique: ask the AI to reason step by step (\"think step by step\"). For complex tasks like analyzing a project budget or comparing two technical proposals, this reduces errors. It is comparable to asking someone to verify an M-Pesa transfer by reading the figures aloud before confirming.\n\nThe third technique: constrain the output format. Specify \"respond in a 3-column table,\" \"write a bullet list of no more than 5 points,\" or \"structure your response with the following headings: Finding, Recommendation, Next Step.\" When the format is fixed in advance, the response is directly usable in your report or presentation, without any reformatting."
       },
       {
         "title": "Iterate and Improve: A Prompt Takes 2–3 Rounds of Refinement",
@@ -217,7 +217,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
       },
       {
         "title": "Prompts for Real Work: Summaries, Translations, Donor Emails, Field Meeting Notes",
-        "body": "Four use cases cover most of the documentary work in the humanitarian and development sector. The first: the **briefing note**. Paste a long document (mission report, baseline study) and ask: \"As a program officer, summarize this document in 5 key points for a coordination meeting. Format: numbered list. Language: English.\"\n\nThe second case: **translation and adaptation FR ↔ EN ↔ local language**. \"Translate this cholera awareness message from French into Hausa spoken in Niger, keeping the language accessible for rural communities.\" AI is not perfect for all local languages, but it can produce a first version to be validated by a native speaker, which reduces translation time by approximately 50%.\n\nThe third case: the **donor email**. Provide the facts, the amount, the results, the donor's name, and request a formal activity report email in English. The fourth case: the **field meeting summary**. Paste your raw notes or dictate them verbally (via a transcription app), then ask: \"Structure these notes into: Participants, Points Discussed, Decisions Made, Follow-up Actions with responsible persons and deadlines.\" The result is ready to share with your supervisor."
+        "body": "Four use cases cover most of the documentary work in the humanitarian and development sector. The first: the briefing note. Paste a long document (mission report, baseline study) and ask: \"As a program officer, summarize this document in 5 key points for a coordination meeting. Format: numbered list. Language: English.\"\n\nThe second case: translation and adaptation FR ↔ EN ↔ local language. \"Translate this cholera awareness message from French into Hausa spoken in Niger, keeping the language accessible for rural communities.\" AI is not perfect for all local languages, but it can produce a first version to be validated by a native speaker, which reduces translation time by approximately 50%.\n\nThe third case: the donor email. Provide the facts, the amount, the results, the donor's name, and request a formal activity report email in English. The fourth case: the field meeting summary. Paste your raw notes or dictate them verbally (via a transcription app), then ask: \"Structure these notes into: Participants, Points Discussed, Decisions Made, Follow-up Actions with responsible persons and deadlines.\" The result is ready to share with your supervisor."
       }
     ],
     "example": {
@@ -384,7 +384,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "id": "c3",
     "lessonNumber": 3,
     "title": "Prompt Engineering — Yadda Ake Ba AI Umurni Daidai",
-    "objective": "A karshen wannan darasi, za ku san yadda ake rubuta umurnai (prompts) da ke da tsari kuma masu amfani don samun sakamako ingantacce, na sana'a, kuma za a iya amfani da shi nan take. Za ku iya koyon ginshiƙan huɗu na prompt mai kyau: rawa, mahallin aiki, aikin da ake son yi, da tsarin amsa. Za ku iya inganta promptoci ku ta hanyar gyara mataki-mataki, kuma ku daidaita su ga ayyukancku na gaske a harkar jin kai ko ci gaban al'umma.",
+    "objective": "A karshen wannan darasi, za ku san yadda ake rubuta umurnai (prompts) da ke da tsari kuma masu amfani don samun sakamako ingantacce, na sana'a, kuma za a iya amfani da shi nan take. Za ku iya koyon ginshikan hudu na prompt mai kyau: rawa, mahallin aiki, aikin da ake son yi, da tsarin amsa. Za ku iya inganta promptoci ku ta hanyar gyara mataki-mataki, kuma ku daidaita su ga ayyukancku na gaske a harkar jin kai ko ci gaban al'umma.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,43 +393,43 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Jiki na Prompt Mai Kyau: Rawa, Mahallin, Aiki, Tsari",
-        "body": "Ka yi tunanin kana daukar ma'aikaci don aikin filin. In ka ce masa kawai « rubuta rahoto », bai san me ya saka ciki ba. Amma in ka fayyace masa « kai ne jami'in sa ido a PNUD Niger, ga bayanai na mako, rubuta taƙaitaccen magana a cikin sakin layi biyu ga mai gudanarwa », zai iya yin aiki sosai. Wannan shi ne daidai ka'idar prompt mai tsari.\n\nPrompt mai kyau yana dogara ne kan ginshiƙan huɗu: **Rawa** (ta yaya AI ya kamata ya yi aiki?), **Mahallin** (mene ne halin da ake ciki?), **Aiki** (me kake tsammani daidai?), da **Tsari** (wace sura amsar ta kamata ta ɗauka?). Bari mu ga bambancin a aikace:\n\n— Prompt mara tsari: « Rubuta e-mail ga wanda ke bayar da kuɗi. »\n— Prompt mai tsari: « Kai ne mai kula da aikin a wata ƙungiyar jin kai ta yankin Sahel. Mako mai ya gabata mun kai kayan abinci mai gina jiki 200 a gundumar Tillabéri. Rubuta e-mail na rahoton ayyuka ga wanda ke bayar da kuɗi (UNICEF), cikin Turanci, kalmomin 150 da ba su wuce haka ba, da sautin hukuma, tare da jumla ta godiya a ƙarshe. »\n\nPrompt na biyu yana ɗaukar ƙarin daƙiƙa 30 don rubuta shi, amma yana ceton ku daga zagayawa da yawa, kuma yana samar da sakamako kusan mai shirye-shirye don aikawa."
+        "body": "Ka yi tunanin kana daukar ma'aikaci don aikin filin. In ka ce masa kawai « rubuta rahoto », bai san me ya saka ciki ba. Amma in ka fayyace masa « kai ne jami'in sa ido a PNUD Niger, ga bayanai na mako, rubuta takaitaccen magana a cikin sakin layi biyu ga mai gudanarwa », zai iya yin aiki sosai. Wannan shi ne daidai ka'idar prompt mai tsari.\n\nPrompt mai kyau yana dogara ne kan ginshikan hudu: Rawa (ta yaya AI ya kamata ya yi aiki?), Mahallin (mene ne halin da ake ciki?), Aiki (me kake tsammani daidai?), da Tsari (wace sura amsar ta kamata ta dauka?). Bari mu ga bambancin a aikace:\n\n— Prompt mara tsari: « Rubuta e-mail ga wanda ke bayar da kudi. »\n— Prompt mai tsari: « Kai ne mai kula da aikin a wata kungiyar jin kai ta yankin Sahel. Mako mai ya gabata mun kai kayan abinci mai gina jiki 200 a gundumar Tillabéri. Rubuta e-mail na rahoton ayyuka ga wanda ke bayar da kudi (UNICEF), cikin Turanci, kalmomin 150 da ba su wuce haka ba, da sautin hukuma, tare da jumla ta godiya a karshe. »\n\nPrompt na biyu yana daukar karin dakika 30 don rubuta shi, amma yana ceton ku daga zagayawa da yawa, kuma yana samar da sakamako kusan mai shirye-shirye don aikawa."
       },
       {
-        "title": "Dabarun da Ke Aiki: Misalai, Mataki-mataki, Ƙuntatawa na Tsari",
-        "body": "Dabarar farko mai ƙarfi ana kiranta **few-shot**: kuna ba da misali ɗaya ko biyu na sakamakon da kuke tsammani. Kamar nuna wa ma'aikacin lafiya na al'umma yadda ake cika fom ɗin kafin ka tambaye shi ya cika goma. Misali: « Ga taƙaitaccen magana da na fi so: [misali]. Yanzu taƙaita wannan rahoton taron da wannan salo. » AI yana fahimtar sautin ku nan take, matakin bayani ku, da yaren aiki ku.\n\nDabarar ta biyu: ku tambayi AI ya **yi tunani mataki bayan mataki** (\"think step by step\"). Don ayyuka masu rikitarwa kamar nazarin kasafin kuɗin aiki ko kwatancen shawarwari biyu na fasaha, wannan yana rage kura-kurai. Yana kama da neman wani ya tabbatar da canja wurin Orange Money ta karanta lambobi da murya kafin tabbatarwa.\n\nDabarar ta uku: **ƙuntatawa ga tsarin amsa**. Ku fayyace « amsa cikin teburin ginshiƙai 3 », « rubuta jerin abubuwa da ke da aya 5 a iya yawancinsu », ko « tsara amsar ka da waɗannan taken: Lura, Shawarwari, Mataki na gaba ». Lokacin da aka ƙayyade tsarin a gaba, amsar ana iya amfani da ita kai tsaye a rahoton ku ko gabatarwar ku, ba tare da sake fasalta shi ba."
+        "title": "Dabarun da Ke Aiki: Misalai, Mataki-mataki, Kuntatawa na Tsari",
+        "body": "Dabarar farko mai karfi ana kiranta few-shot: kuna ba da misali daya ko biyu na sakamakon da kuke tsammani. Kamar nuna wa ma'aikacin lafiya na al'umma yadda ake cika fom din kafin ka tambaye shi ya cika goma. Misali: « Ga takaitaccen magana da na fi so: [misali]. Yanzu takaita wannan rahoton taron da wannan salo. » AI yana fahimtar sautin ku nan take, matakin bayani ku, da yaren aiki ku.\n\nDabarar ta biyu: ku tambayi AI ya yi tunani mataki bayan mataki (\"think step by step\"). Don ayyuka masu rikitarwa kamar nazarin kasafin kudin aiki ko kwatancen shawarwari biyu na fasaha, wannan yana rage kura-kurai. Yana kama da neman wani ya tabbatar da canja wurin Orange Money ta karanta lambobi da murya kafin tabbatarwa.\n\nDabarar ta uku: kuntatawa ga tsarin amsa. Ku fayyace « amsa cikin teburin ginshikai 3 », « rubuta jerin abubuwa da ke da aya 5 a iya yawancinsu », ko « tsara amsar ka da wadannan taken: Lura, Shawarwari, Mataki na gaba ». Lokacin da aka kayyade tsarin a gaba, amsar ana iya amfani da ita kai tsaye a rahoton ku ko gabatarwar ku, ba tare da sake fasalta shi ba."
       },
       {
-        "title": "Gyara da Ingantawa: Prompt Yana Buƙatar Zagaye 2–3 na Aikin Gyara",
-        "body": "A tontine (ƙungiyar ajiya ta al'umma), ba a kafa dokokin daya-daya a rana ta farko ba — ana daidaita su bisa abin da ke aiki don ƙungiyar. Tare da AI, shi ne iri ɗaya. Prompt na farko ba kasafai ya zama cikakke ba, kuma hakan al'ada ce gaba ɗaya. Maƙasudin shi ne cimma sakamakon mai kyau a cikin canjin kalmomi biyu ko uku, ba ɗaya ba.\n\nYaya ake sake fasalta yadda yakamata? Ku fayyace game da abin da ba daidai ba. Kada ku ce « wannan mara kyau ne ». Ku ce: « Amsar tana da tsawo sosai. Taƙaita zuwa kalmomin 100. » Ko: « Sauti ya yi tsauri sosai ga taron al'umma. Yi amfani da harshen da ya fi sauƙi. » Ko kuma: « Ba ku ambaci bayanin rufe allurar rigakafi ba. Saka wannan adadi: kimanin kashi 67% a yankin Dosso. »\n\nKu adana kyawawan promptocin ku a cikin littafi (na dijital ko na takarda). Jami'an filin ƙungiyoyi kamar MSF ko PAM, alal misali, suna gina ɗakunan karatu na prompts masu sake amfani don rahotannin mako-mako, fomoci na masu amfana, ko gargaɗin yanayi. Prompt mai kyau kayan aiki ne na aiki, daidai kamar fom ɗin tattara bayanai."
+        "title": "Gyara da Ingantawa: Prompt Yana Bukatar Zagaye 2–3 na Aikin Gyara",
+        "body": "A tontine (kungiyar ajiya ta al'umma), ba a kafa dokokin daya-daya a rana ta farko ba — ana daidaita su bisa abin da ke aiki don kungiyar. Tare da AI, shi ne iri daya. Prompt na farko ba kasafai ya zama cikakke ba, kuma hakan al'ada ce gaba daya. Makasudin shi ne cimma sakamakon mai kyau a cikin canjin kalmomi biyu ko uku, ba daya ba.\n\nYaya ake sake fasalta yadda yakamata? Ku fayyace game da abin da ba daidai ba. Kada ku ce « wannan mara kyau ne ». Ku ce: « Amsar tana da tsawo sosai. Takaita zuwa kalmomin 100. » Ko: « Sauti ya yi tsauri sosai ga taron al'umma. Yi amfani da harshen da ya fi sauki. » Ko kuma: « Ba ku ambaci bayanin rufe allurar rigakafi ba. Saka wannan adadi: kimanin kashi 67% a yankin Dosso. »\n\nKu adana kyawawan promptocin ku a cikin littafi (na dijital ko na takarda). Jami'an filin kungiyoyi kamar MSF ko PAM, alal misali, suna gina dakunan karatu na prompts masu sake amfani don rahotannin mako-mako, fomoci na masu amfana, ko gargadin yanayi. Prompt mai kyau kayan aiki ne na aiki, daidai kamar fom din tattara bayanai."
       },
       {
-        "title": "Prompts Don Aikin Gaske: Taƙaita, Fassara, E-mail Bailleur, Rahoton Taro na Filin",
-        "body": "Lokuta huɗu na amfani suna rufe mafi yawan aikin takardun aiki a harkar jin kai da ci gaban al'umma. Na farko: **taƙaitaccen rahoto**. Manna dogon takarda (rahoton aikin, karatun asali) ku tambayi: « A matsayin jami'in shirin, taƙaita wannan takarda a cikin mahimman batutuwa 5 don taron daidaitawa. Tsari: jerin lambobi. Harshe: Hausa. »\n\nLarura ta biyu: **fassara da daidaitawa FR ↔ EN ↔ harshen gida**. « Fassara wannan sakon wayewar kan zazzabin kwalara daga Faransanci zuwa Hausa da ake magana a Niger, tare da kiyaye matakin harshe mai sauƙi ga al'ummomin karkara. » AI ba cikakke ba ne don duk yarukan gida, amma yana iya samar da sigar farko da za a tabbatar da ita ta mai magana na asali, wanda ke rage lokacin fassara da kimanin kashi 50%.\n\nLarura ta uku: **e-mail na masu bayar da kuɗi**. Ka ba da gaskiyar abubuwa, adadi, sakamakon, sunan mai ba da kuɗi, ka tambayi e-mail na yau da kullun na rahoton ayyuka cikin Turanci. Larura ta huɗu: **taƙaitan taron filin**. Manna rubutun ku na ɗan gajere ko faɗi su ta murya (ta hanyar aikace-aikacen rubuta magana), sannan ku tambayi: « Tsara waɗannan bayanan cikin: Mahalarta, Batutuwan da Aka Tattauna, Shawarwarin da Aka Ɗauka, Ayyukan da Ke Biyo Baya tare da masu alhakin da ƙarewar lokaci. » Sakamakon yana shirye don raba shi da mai kula da ku."
+        "title": "Prompts Don Aikin Gaske: Takaita, Fassara, E-mail Bailleur, Rahoton Taro na Filin",
+        "body": "Lokuta hudu na amfani suna rufe mafi yawan aikin takardun aiki a harkar jin kai da ci gaban al'umma. Na farko: takaitaccen rahoto. Manna dogon takarda (rahoton aikin, karatun asali) ku tambayi: « A matsayin jami'in shirin, takaita wannan takarda a cikin mahimman batutuwa 5 don taron daidaitawa. Tsari: jerin lambobi. Harshe: Hausa. »\n\nLarura ta biyu: fassara da daidaitawa FR ↔ EN ↔ harshen gida. « Fassara wannan sakon wayewar kan zazzabin kwalara daga Faransanci zuwa Hausa da ake magana a Niger, tare da kiyaye matakin harshe mai sauki ga al'ummomin karkara. » AI ba cikakke ba ne don duk yarukan gida, amma yana iya samar da sigar farko da za a tabbatar da ita ta mai magana na asali, wanda ke rage lokacin fassara da kimanin kashi 50%.\n\nLarura ta uku: e-mail na masu bayar da kudi. Ka ba da gaskiyar abubuwa, adadi, sakamakon, sunan mai ba da kudi, ka tambayi e-mail na yau da kullun na rahoton ayyuka cikin Turanci. Larura ta hudu: takaitan taron filin. Manna rubutun ku na dan gajere ko fadi su ta murya (ta hanyar aikace-aikacen rubuta magana), sannan ku tambayi: « Tsara wadannan bayanan cikin: Mahalarta, Batutuwan da Aka Tattauna, Shawarwarin da Aka Dauka, Ayyukan da Ke Biyo Baya tare da masu alhakin da karewar lokaci. » Sakamakon yana shirye don raba shi da mai kula da ku."
       }
     ],
     "example": {
       "title": "Daga Prompt Marar Tsari zuwa Prompt Mai Tsari: Lamarin Rahoton Aikin",
-      "challenge": "Aminata, mai kula da ayyuka a wata ƙungiyar NGO a Niamey, ta tambayi kayan aiki na AI: « Rubuta rahoto na aikin. » Ta sami rubutu na gaba ɗaya na shafuka biyu ba tare da wasu bayanan gaske ba, wanda dole ta sake rubutawa gaba ɗaya. Ta kashe mintuna 90 akan wannan takarda.",
-      "solution": "Ta sake fasalta ta amfani da tsarin Rawa/Mahallin/Aiki/Tsari: « Kai ne mai kula da aikin a ƙungiyar NGO ta lafiya a Niger. Aikin ya gudana daga 10 zuwa 14 ga Yuni 2025 a gundumar Maradi. Maƙasudi: kimantawa kan kayan magunguna a cibiyoyin lafiya 8. Sakamakon da ya fi muhimmanci: cibiyoyi 6 daga 8 suna da isassun kayan; cibiyoyi 2 sun ruwaito karancin amoxicillin. Rubuta rahoto mai tsari na aikin tare da waɗannan sassan: Mahallin, Ayyuka, Sakamakon, Shawarwari. Kalmomin 400 da ba su wuce haka ba. Sauti na sana'a, harshen Faransanci. »",
-      "impact": "Sakamakon sabon rahoto ana iya amfani da shi kai tsaye bayan sake karanta mintuna 10. Jimlar lokacin aiki ya ragu daga mintuna 90 zuwa kimanin mintuna 25 — adana lokaci kimanin kashi 70%. Ingancin ya yi ƙima mai kula da ita, wanda ya amince da rahoto ba tare da neman babban gyara ba."
+      "challenge": "Aminata, mai kula da ayyuka a wata kungiyar NGO a Niamey, ta tambayi kayan aiki na AI: « Rubuta rahoto na aikin. » Ta sami rubutu na gaba daya na shafuka biyu ba tare da wasu bayanan gaske ba, wanda dole ta sake rubutawa gaba daya. Ta kashe mintuna 90 akan wannan takarda.",
+      "solution": "Ta sake fasalta ta amfani da tsarin Rawa/Mahallin/Aiki/Tsari: « Kai ne mai kula da aikin a kungiyar NGO ta lafiya a Niger. Aikin ya gudana daga 10 zuwa 14 ga Yuni 2025 a gundumar Maradi. Makasudi: kimantawa kan kayan magunguna a cibiyoyin lafiya 8. Sakamakon da ya fi muhimmanci: cibiyoyi 6 daga 8 suna da isassun kayan; cibiyoyi 2 sun ruwaito karancin amoxicillin. Rubuta rahoto mai tsari na aikin tare da wadannan sassan: Mahallin, Ayyuka, Sakamakon, Shawarwari. Kalmomin 400 da ba su wuce haka ba. Sauti na sana'a, harshen Faransanci. »",
+      "impact": "Sakamakon sabon rahoto ana iya amfani da shi kai tsaye bayan sake karanta mintuna 10. Jimlar lokacin aiki ya ragu daga mintuna 90 zuwa kimanin mintuna 25 — adana lokaci kimanin kashi 70%. Ingancin ya yi kima mai kula da ita, wanda ya amince da rahoto ba tare da neman babban gyara ba."
     },
     "practice": {
       "title": "Aikin Gwaji: Rubuta kuma Inganta Farkon Prompt Ku Mai Tsari",
       "instructions": [
-        "Zaɓi aikin gaske daga aikin ku (rubuta e-mail, taƙaita takarda, fassara saƙo). A wayar ku ko kwamfuta, rubuta cikakken prompt a sassan huɗu: fara da « Kai ne [rawar ku] », ƙara mahallin (wuri, aiki, mahimman bayanai), bayyana aikin daidai, sannan fayyace tsarin da ake so (adadin kalmomi, harshe, tsari). Saka wannan prompt ga kayan aiki na AI (ChatGPT, Claude, Gemini).",
-        "Karanta sakamakon da aka samu sosai. Gano wata daga batutuwa ɗaya da ba ta gamsar da ku ba: sauti, tsawo, ɓangare da ya ɓace, tsari. Sake fasalta wannan ɓangare ne kawai ka saka sigar prompt ta biyu. Kwatanta amsar biyu kai tsaye.",
-        "Kwafa promptr ɗin ku na ƙarshe (sigar da aka inganta) cikin takarda ko bayanin kula a wayar ku, tare da taken gajere da ke bayyana amfaninsa (misali: « Prompt rahoton aikin filin »). Yanzu kun fara ɗakin karatu ku na sirri na prompts masu sake amfani."
+        "Zabi aikin gaske daga aikin ku (rubuta e-mail, takaita takarda, fassara sako). A wayar ku ko kwamfuta, rubuta cikakken prompt a sassan hudu: fara da « Kai ne [rawar ku] », kara mahallin (wuri, aiki, mahimman bayanai), bayyana aikin daidai, sannan fayyace tsarin da ake so (adadin kalmomi, harshe, tsari). Saka wannan prompt ga kayan aiki na AI (ChatGPT, Claude, Gemini).",
+        "Karanta sakamakon da aka samu sosai. Gano wata daga batutuwa daya da ba ta gamsar da ku ba: sauti, tsawo, bangare da ya bace, tsari. Sake fasalta wannan bangare ne kawai ka saka sigar prompt ta biyu. Kwatanta amsar biyu kai tsaye.",
+        "Kwafa promptr din ku na karshe (sigar da aka inganta) cikin takarda ko bayanin kula a wayar ku, tare da taken gajere da ke bayyana amfaninsa (misali: « Prompt rahoton aikin filin »). Yanzu kun fara dakin karatu ku na sirri na prompts masu sake amfani."
       ],
-      "observation": "Za ku lura cewa sigar ta biyu ta prompt tana samar da amsa mafi kusa da tsammaninku, galibi ba tare da buƙatar sake fasalta na uku ba. Ƙoƙarin rubuta prompt mai daidaito yana biyan kuɗi tun daga amfanin farko: ƙananan gyare-gyare, ƙananan frustration, da sakamakon sana'a da sauri."
+      "observation": "Za ku lura cewa sigar ta biyu ta prompt tana samar da amsa mafi kusa da tsammaninku, galibi ba tare da bukatar sake fasalta na uku ba. Kokarin rubuta prompt mai daidaito yana biyan kudi tun daga amfanin farko: kananan gyare-gyare, kananan frustration, da sakamakon sana'a da sauri."
     },
     "quiz": [
       {
-        "question": "Wane ɓangare ya ɓace a cikin wannan prompt: « Taƙaita wannan rahoto a gare ni »?",
+        "question": "Wane bangare ya bace a cikin wannan prompt: « Takaita wannan rahoto a gare ni »?",
         "options": [
           {
             "key": "A",
-            "text": "Aikin (taƙaita)"
+            "text": "Aikin (takaita)"
           },
           {
             "key": "B",
@@ -445,10 +445,10 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "B",
-        "explanation": "Wannan prompt yana ɗauke da aikin kawai (taƙaita). Rawa ta ɓace (AI wanene a wannan yanayin?), mahallin ya ɓace (wane rahoto, ga wane jama'a, a cikin wane aiki?), da tsari ya ɓace (jeri, sakin layi, adadin kalmomi?). Waɗannan abubuwa uku suna da mahimmanci wajen samun sakamakon da ke da amfani."
+        "explanation": "Wannan prompt yana dauke da aikin kawai (takaita). Rawa ta bace (AI wanene a wannan yanayin?), mahallin ya bace (wane rahoto, ga wane jama'a, a cikin wane aiki?), da tsari ya bace (jeri, sakin layi, adadin kalmomi?). Wadannan abubuwa uku suna da mahimmanci wajen samun sakamakon da ke da amfani."
       },
       {
-        "question": "Dabarar « few-shot » ta ƙunshi:",
+        "question": "Dabarar « few-shot » ta kunshi:",
         "options": [
           {
             "key": "A",
@@ -460,7 +460,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Bayar da misali ɗaya ko biyu na sakamakon da ake tsammani a cikin prompt"
+            "text": "Bayar da misali daya ko biyu na sakamakon da ake tsammani a cikin prompt"
           },
           {
             "key": "D",
@@ -468,14 +468,14 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Few-shot yana nufin saka misali na gaske na nau'in sakamakon da kake so a cikin promptr ɗin ka. Wannan yana baiwa AI damar daidaita sautin sa, matakin bayani sa, da tsarin sa zuwa samfurin ka — kamar nuna fom ɗin da aka cika wa ɗan'uwa na aiki kafin ya cika sauran."
+        "explanation": "Few-shot yana nufin saka misali na gaske na nau'in sakamakon da kake so a cikin promptr din ka. Wannan yana baiwa AI damar daidaita sautin sa, matakin bayani sa, da tsarin sa zuwa samfurin ka — kamar nuna fom din da aka cika wa dan'uwa na aiki kafin ya cika sauran."
       },
       {
-        "question": "Me ya sa ake ba da shawarar gyara prompt maimakon sake rubuta shi gaba ɗaya?",
+        "question": "Me ya sa ake ba da shawarar gyara prompt maimakon sake rubuta shi gaba daya?",
         "options": [
           {
             "key": "A",
-            "text": "Saboda AI yana manta da saƙon da ya gabata"
+            "text": "Saboda AI yana manta da sakon da ya gabata"
           },
           {
             "key": "B",
@@ -487,11 +487,11 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Saboda yana da tasiri fiye don gyara wata daga batutuwa ɗaya maimakon sake fasalta komai, wanda ke baiwa ku damar cimma sakamakon daidai a cikin canjin kalmomi 2–3"
+            "text": "Saboda yana da tasiri fiye don gyara wata daga batutuwa daya maimakon sake fasalta komai, wanda ke baiwa ku damar cimma sakamakon daidai a cikin canjin kalmomi 2–3"
           }
         ],
         "answer": "D",
-        "explanation": "Sake rubuta prompt gaba ɗaya galibi yana nufin asarar abin da ya riga ya yi aiki. Gano daidai abin da ba ya aiki (sauti, tsawo, ɓangare da ya ɓace) da kuma gyara shi a hankali yana da tasiri sosai. Kamar daidaita girke-girke ta canza ɗaya daga cikin kayan yaji, ba fara daga farko ba."
+        "explanation": "Sake rubuta prompt gaba daya galibi yana nufin asarar abin da ya riga ya yi aiki. Gano daidai abin da ba ya aiki (sauti, tsawo, bangare da ya bace) da kuma gyara shi a hankali yana da tasiri sosai. Kamar daidaita girke-girke ta canza daya daga cikin kayan yaji, ba fara daga farko ba."
       },
       {
         "question": "Lokacin fassara sakon wayewar kan cuta daga Faransanci zuwa Hausa ta amfani da AI, wane bayani ne mafi mahimmanci a saka cikin prompt?",
@@ -510,14 +510,14 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Ranar kamfen ɗin wayewar kan lafiya"
+            "text": "Ranar kamfen din wayewar kan lafiya"
           }
         ],
         "answer": "A",
-        "explanation": "Don fassara ta kasance da amfani a filin, matakin harshe yana da mahimmanci ƙwarai. Sakon fasaha da aka fassara kalma-kalma na iya zama ba a fahimta ga al'ummomin karkara. Fayyace « harshe mai sauƙi, al'ummomin karkara a Niger » yana jagorantar AI don zaɓar kalmomi masu sauƙi da jimlan bayyananne, ko da yake dole koyaushe a tabbatar da sakamakon ta mai magana na asali."
+        "explanation": "Don fassara ta kasance da amfani a filin, matakin harshe yana da mahimmanci kwarai. Sakon fasaha da aka fassara kalma-kalma na iya zama ba a fahimta ga al'ummomin karkara. Fayyace « harshe mai sauki, al'ummomin karkara a Niger » yana jagorantar AI don zabar kalmomi masu sauki da jimlan bayyananne, ko da yake dole koyaushe a tabbatar da sakamakon ta mai magana na asali."
       },
       {
-        "question": "Mene ne mafi kyawun hanyar gina akan kyawawan prompts ɗin ku don dogon lokaci?",
+        "question": "Mene ne mafi kyawun hanyar gina akan kyawawan prompts din ku don dogon lokaci?",
         "options": [
           {
             "key": "A",
@@ -529,7 +529,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Adana su a ɗakin karatu na sirri (takarda, bayanin kula, fayil) tare da taken bayyananne"
+            "text": "Adana su a dakin karatu na sirri (takarda, bayanin kula, fayil) tare da taken bayyananne"
           },
           {
             "key": "D",
@@ -537,34 +537,34 @@ export const iaLessonC3: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "Prompt mai kyau kayan aiki ne na aiki wanda za a iya sake amfani da shi, daidai kamar samfurin rahoto ko fom ɗin tattara bayanai. Adana shi tare da taken bayyananne (misali, « Prompt taƙaitan taron filin ») yana baiwa ku damar nemo shi da sauri, raba shi da ƙungiyar ku, kuma ƙara kyauta shi a hankali. Wannan shine tushen aikin AI na sana'a."
+        "explanation": "Prompt mai kyau kayan aiki ne na aiki wanda za a iya sake amfani da shi, daidai kamar samfurin rahoto ko fom din tattara bayanai. Adana shi tare da taken bayyananne (misali, « Prompt takaitan taron filin ») yana baiwa ku damar nemo shi da sauri, raba shi da kungiyar ku, kuma kara kyauta shi a hankali. Wannan shine tushen aikin AI na sana'a."
       }
     ],
-    "reflection": "Yi tunani kan aikin da ke maimaitawa da kake yi kowace mako a aikinka: rahoto na mako-mako, e-mail na bibiyar aiki, taƙaitan rahoto. Yanzu ka yi tunanin samun prompt da aka daidaita sosai don wannan aikin, wanda kawai kake ƙaddamar da shi cikin ƴan daƙiƙa. Nawa lokaci zai cece ka a cikin wata? A cikin shekara? Rubuta prompt mai kyau ƙuduri ne na mintuna 5 wanda zai iya cece ku daruruwan sa'o'i.",
+    "reflection": "Yi tunani kan aikin da ke maimaitawa da kake yi kowace mako a aikinka: rahoto na mako-mako, e-mail na bibiyar aiki, takaitan rahoto. Yanzu ka yi tunanin samun prompt da aka daidaita sosai don wannan aikin, wanda kawai kake kaddamar da shi cikin yan dakika. Nawa lokaci zai cece ka a cikin wata? A cikin shekara? Rubuta prompt mai kyau kuduri ne na mintuna 5 wanda zai iya cece ku daruruwan sa'o'i.",
     "glossary": [
       {
         "term": "Prompt",
-        "definition": "Umurni ko jagorar da kuke bawa kayan aiki na AI don samun sakamakon da ake so. Prompt da aka rubuta yadda ya kamata yana da daidaito, tsari, da mahallin aiki. Misali: « A matsayin jami'in shirin, rubuta taƙaitaccen magana na kalmomin 150 na wannan rahoto cikin Hausa. »"
+        "definition": "Umurni ko jagorar da kuke bawa kayan aiki na AI don samun sakamakon da ake so. Prompt da aka rubuta yadda ya kamata yana da daidaito, tsari, da mahallin aiki. Misali: « A matsayin jami'in shirin, rubuta takaitaccen magana na kalmomin 150 na wannan rahoto cikin Hausa. »"
       },
       {
         "term": "Mahallin (Contexte)",
-        "definition": "Bayanin yanayin da kuke bayarwa ga AI don ya fahimci yanayin aikin: ƙungiyar ku, aikin da ke cikin tambaya, jama'ar da ake nufi, bayanai da ake da su. Ba tare da mahallin ba, AI yana samar da amsoshi na gaba ɗaya."
+        "definition": "Bayanin yanayin da kuke bayarwa ga AI don ya fahimci yanayin aikin: kungiyar ku, aikin da ke cikin tambaya, jama'ar da ake nufi, bayanai da ake da su. Ba tare da mahallin ba, AI yana samar da amsoshi na gaba daya."
       },
       {
         "term": "Few-shot (Misalai)",
-        "definition": "Dabarar da ta ƙunshi saka misali ɗaya ko fiye na sakamakon da ake tsammani kai tsaye a cikin promptr ɗin ka. Wannan yana baiwa AI damar kwaikwayon sauti, salo, da tsari da kake son su — kamar nuna fom ɗin da aka cika wa ɗan'uwa na aiki."
+        "definition": "Dabarar da ta kunshi saka misali daya ko fiye na sakamakon da ake tsammani kai tsaye a cikin promptr din ka. Wannan yana baiwa AI damar kwaikwayon sauti, salo, da tsari da kake son su — kamar nuna fom din da aka cika wa dan'uwa na aiki."
       },
       {
         "term": "Rawa / System prompt",
-        "definition": "Sunan mutum ko aikin da kuke ba AI a farkon promptr ɗin ku (misali, « Kai mai fassara ne da ke ƙwarewa a lafiyar jama'a »). Bayyana rawa yana tsara ɗabi'ar AI kuma yana inganta dacewa da amsar sa."
+        "definition": "Sunan mutum ko aikin da kuke ba AI a farkon promptr din ku (misali, « Kai mai fassara ne da ke kwarewa a lafiyar jama'a »). Bayyana rawa yana tsara dabi'ar AI kuma yana inganta dacewa da amsar sa."
       },
       {
         "term": "Gyara mataki-mataki (Itération)",
-        "definition": "Tsarin inganta prompt a hankali ta hanyar canjin kalmomi masu jere. Kuna gano abin da ba daidai ba a amsar farko, gyara wannan ɓangare musamman, kuma ku sake saka shi. Gabaɗaya, gyare-gyare 2 zuwa 3 sun isa don samun sakamakon sana'a."
+        "definition": "Tsarin inganta prompt a hankali ta hanyar canjin kalmomi masu jere. Kuna gano abin da ba daidai ba a amsar farko, gyara wannan bangare musamman, kuma ku sake saka shi. Gabadaya, gyare-gyare 2 zuwa 3 sun isa don samun sakamakon sana'a."
       },
       {
         "term": "Tsarin amsa (Format de sortie)",
-        "definition": "Sura da kuke so amsar AI ta ɗauka: jerin abubuwa, teburi, e-mail na yau da kullun, sakin layi na lambobi, iyakar adadin kalmomi. Fayyace tsarin yana hana sake fasalta hannu da hannu kuma yana sa amsa ta kasance mai amfani kai tsaye."
+        "definition": "Sura da kuke so amsar AI ta dauka: jerin abubuwa, teburi, e-mail na yau da kullun, sakin layi na lambobi, iyakar adadin kalmomi. Fayyace tsarin yana hana sake fasalta hannu da hannu kuma yana sa amsa ta kasance mai amfani kai tsaye."
       }
     ]
   }

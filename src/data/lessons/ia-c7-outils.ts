@@ -16,19 +16,19 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
     "content": [
       {
-        "title": "1. Panorama des outils IA disponibles",
+        "title": "Panorama des outils IA disponibles",
         "body": "Imaginez une boîte à outils de menuisier : il y a le marteau, la scie, le mètre. Chaque outil a sa fonction précise. Les outils IA fonctionnent de la même façon — il en existe plusieurs catégories, et chacune répond à un besoin différent.\n\nLes assistants conversationnels (comme ChatGPT, Claude ou Gemini) répondent à vos questions, rédigent des textes, résument des documents et vous aident à préparer des réunions. Les outils de transcription et de traduction (comme Whisper ou DeepL) convertissent la parole en texte ou traduisent vos rapports du français au haoussa ou à l'anglais. C'est particulièrement utile lors des réunions communautaires en milieu rural, où les échanges se font souvent en langue locale.\n\nLes outils de génération d'images (comme DALL·E ou Canva IA) créent des visuels pour vos supports de sensibilisation ou vos affiches de santé communautaire. Les outils d'analyse de documents, comme NotebookLM de Google, vous permettent de poser des questions directement sur un rapport de 80 pages, comme si vous parliez à un collègue qui l'aurait lu pour vous. Pour une équipe PNUD au Niger traitant des dizaines de rapports de terrain chaque mois, c'est un gain de temps considérable."
       },
       {
-        "title": "2. Critères pour bien choisir son outil",
+        "title": "Critères pour bien choisir son outil",
         "body": "Choisir un outil IA sans critères clairs, c'est comme aller au marché sans liste de courses : on risque de repartir avec des choses inutiles ou de dépasser son budget. Quatre critères essentiels doivent guider votre choix.\n\nPremier critère : le coût. La plupart des outils proposent une version gratuite (freemium) avec des fonctionnalités limitées, et une version payante. Pour beaucoup d'organisations locales et d'ONG en Afrique subsaharienne, la version gratuite suffit pour démarrer. Deuxième critère : le fonctionnement hors ligne. Dans les zones rurales du Sahel où la connexion 3G est intermittente, un outil qui nécessite une connexion permanente peut devenir inutilisable. Certains outils permettent un usage partiel sans internet.\n\nTroisième critère : la confidentialité. Si vos données concernent des bénéficiaires vulnérables — réfugiés, patients, victimes de violence — vous devez vérifier où sont stockées ces données et qui y a accès. Ne jamais saisir de données personnelles identifiables dans un outil grand public sans vérifier sa politique de confidentialité. Quatrième critère : les langues supportées. Un outil excellent en anglais peut être médiocre en haoussa ou en bambara. Testez toujours l'outil dans la langue de votre travail réel avant de l'adopter."
       },
       {
-        "title": "3. Combiner les outils dans un flux de travail",
+        "title": "Combiner les outils dans un flux de travail",
         "body": "Un seul outil IA peut vous aider. Plusieurs outils bien combinés peuvent transformer votre façon de travailler. Pensez à une chaîne de production artisanale : chaque artisan fait une étape, et ensemble ils produisent un résultat que personne n'aurait pu faire seul.\n\nVoici un exemple concret de flux de travail pour une équipe de terrain : Étape 1 — vous enregistrez votre réunion communautaire sur votre téléphone. Étape 2 — vous utilisez un outil de transcription (comme Whisper) pour convertir l'audio en texte. Étape 3 — vous collez ce texte dans un assistant conversationnel (Claude ou ChatGPT) pour en extraire un résumé structuré et les points d'action. Étape 4 — vous traduisez ce résumé en français ou en anglais pour votre rapport avec DeepL ou Google Translate. Étape 5 — vous intégrez ce rapport dans NotebookLM pour l'archiver et permettre à votre équipe de le retrouver et de l'interroger plus tard.\n\nCe flux, qui aurait pris une journée entière à rédiger manuellement, peut se faire en une à deux heures. Des équipes humanitaires au Sahel ont signalé des gains de temps similaires sur leurs rapports de monitoring. L'essentiel est de définir votre flux en avance et de tester chaque étape avant de l'utiliser sur des données sensibles."
       },
       {
-        "title": "4. Démarrer gratuitement et monter en compétence",
+        "title": "Démarrer gratuitement et monter en compétence",
         "body": "Apprendre à utiliser les outils IA ressemble à apprendre à cultiver un nouveau légume : au début on tâtonne, on fait quelques erreurs, puis on trouve le bon rythme. La bonne nouvelle, c'est que la plupart des ressources pour apprendre sont gratuites et accessibles depuis un smartphone.\n\nPour démarrer sans budget, vous pouvez utiliser les versions gratuites de ChatGPT, Claude, Gemini ou Perplexity pour vos questions quotidiennes. Whisper d'OpenAI est disponible en ligne gratuitement pour la transcription. NotebookLM de Google est gratuit pour analyser vos documents. DeepL propose une traduction de qualité avec une limite mensuelle raisonnable en version gratuite. Des plateformes comme YouTube, Coursera (avec audit gratuit) ou des communautés WhatsApp d'apprentissage permettent de progresser à son rythme, même avec une connexion limitée.\n\nLa pratique régulière est plus efficace que les longues sessions rares. Consacrez dix à quinze minutes par jour à tester un outil sur une tâche réelle de votre travail — rédiger un courriel, résumer un rapport, préparer un ordre du jour. En un mois, vous aurez une vraie maîtrise pratique. Des agents de santé communautaire au Niger ont commencé par transcrire leurs notes de visite sur WhatsApp Business, avant de progresser vers des outils plus complets. Chaque petit pas compte."
       }
     ],
@@ -204,19 +204,19 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
     "content": [
       {
-        "title": "1. Overview of Available AI Tools",
+        "title": "Overview of Available AI Tools",
         "body": "Think of a carpenter's toolbox: there is the hammer, the saw, the tape measure. Each tool has its precise function. AI tools work the same way — there are several categories, and each addresses a different need.\n\nConversational assistants (such as ChatGPT, Claude or Gemini) answer your questions, draft texts, summarise documents and help you prepare meetings. Transcription and translation tools (such as Whisper or DeepL) convert speech to text or translate your reports from French to Hausa or English. This is especially useful during community meetings in rural areas, where exchanges often happen in local languages.\n\nImage-generation tools (such as DALL·E or Canva AI) create visuals for your awareness materials or community health posters. Document analysis tools, such as Google's NotebookLM, let you ask questions directly about an 80-page report, as if you were talking to a colleague who had read it on your behalf. For a UNDP team in Niger processing dozens of field reports each month, this represents a considerable time saving."
       },
       {
-        "title": "2. Criteria for Choosing the Right Tool",
+        "title": "Criteria for Choosing the Right Tool",
         "body": "Selecting an AI tool without clear criteria is like going to market without a shopping list: you risk coming back with unnecessary items or overspending. Four essential criteria should guide your choice.\n\nFirst criterion: cost. Most tools offer a free (freemium) version with limited features and a paid version. For many local organisations and NGOs in sub-Saharan Africa, the free version is enough to get started. Second criterion: offline capability. In rural areas of the Sahel where 3G connectivity is intermittent, a tool that requires a permanent connection can become unusable. Some tools allow partial use without internet.\n\nThird criterion: privacy. If your data concerns vulnerable beneficiaries — refugees, patients, survivors of violence — you must check where that data is stored and who has access to it. Never enter personally identifiable information into a general-purpose tool without checking its privacy policy. Fourth criterion: supported languages. A tool that excels in English may perform poorly in Hausa or Bambara. Always test the tool in the language of your actual work before adopting it."
       },
       {
-        "title": "3. Combining Tools in a Workflow",
+        "title": "Combining Tools in a Workflow",
         "body": "A single AI tool can help you. Several tools well combined can transform the way you work. Think of a craft production chain: each artisan handles one step, and together they produce a result that none could have achieved alone.\n\nHere is a concrete workflow example for a field team: Step 1 — record your community meeting on your phone. Step 2 — use a transcription tool (such as Whisper) to convert the audio to text. Step 3 — paste that text into a conversational assistant (Claude or ChatGPT) to extract a structured summary and action points. Step 4 — translate that summary into French or English for your report using DeepL or Google Translate. Step 5 — upload the report to NotebookLM to archive it and allow your team to retrieve and query it later.\n\nThis workflow, which would have taken a full day to complete manually, can be done in one to two hours. Humanitarian teams in the Sahel have reported similar time savings on their monitoring reports. The key is to define your workflow in advance and test each step before using it with sensitive data."
       },
       {
-        "title": "4. Starting for Free and Building Skills",
+        "title": "Starting for Free and Building Skills",
         "body": "Learning to use AI tools is like learning to grow a new crop: at first you fumble, make a few mistakes, then find your rhythm. The good news is that most learning resources are free and accessible from a smartphone.\n\nTo get started without a budget, you can use the free versions of ChatGPT, Claude, Gemini or Perplexity for your daily questions. OpenAI's Whisper is available online for free for transcription. Google's NotebookLM is free for document analysis. DeepL offers quality translation with a reasonable monthly limit in its free version. Platforms such as YouTube, Coursera (with free audit) or WhatsApp learning communities allow you to progress at your own pace, even with limited connectivity.\n\nRegular practice is more effective than rare long sessions. Spend ten to fifteen minutes a day testing a tool on a real task from your work — drafting an email, summarising a report, preparing an agenda. Within a month, you will have genuine practical mastery. Community health workers in Niger began by transcribing their visit notes via WhatsApp Business before moving on to more complete tools. Every small step counts."
       }
     ],
@@ -383,8 +383,8 @@ export const iaLessonC7: Record<Language, LessonContent> = {
   "ha": {
     "id": "c7",
     "lessonNumber": 7,
-    "title": "Kayan aikinku na AI — Zaɓar da haɗa kayan aiki masu dacewa",
-    "objective": "Bayan wannan darasi, za ku iya kwatanta kayan aiki na AI da yawa bisa ga bukatunku na ainihi, kasafin kuɗi, da ƙuntatawa a filin aiki. Za ku san yadda ake zaɓar kayan aiki da ya dace da harshen aikinku, damar intanet, da sirrin bayananku. Hakanan za ku iya haɗa kayan aiki da yawa a cikin tsari mai sauki don adana lokaci akan ayyukan gudanarwa. A ƙarshe, za ku iya farawa kyauta kuma ku ci gaba a sauri naku.",
+    "title": "Kayan aikinku na AI — Zabar da hada kayan aiki masu dacewa",
+    "objective": "Bayan wannan darasi, za ku iya kwatanta kayan aiki na AI da yawa bisa ga bukatunku na ainihi, kasafin kudi, da kuntatawa a filin aiki. Za ku san yadda ake zabar kayan aiki da ya dace da harshen aikinku, damar intanet, da sirrin bayananku. Hakanan za ku iya hada kayan aiki da yawa a cikin tsari mai sauki don adana lokaci akan ayyukan gudanarwa. A karshe, za ku iya farawa kyauta kuma ku ci gaba a sauri naku.",
     "video": {
       "fr": "",
       "en": "",
@@ -392,40 +392,40 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
     "content": [
       {
-        "title": "1. Duba kayan aiki na AI da ake da su",
-        "body": "Ka yi tunanin akwatin kayan aikin masaƙi: akwai guduma, zarto, da ma'auni. Kowane kayan aiki yana da aikinsa na musamman. Kayan aiki na AI suna aiki haka — akwai nau'i da yawa, kuma kowannensu yana magance bukata daban-daban.\n\nMataimakan tattaunawa (kamar ChatGPT, Claude ko Gemini) suna amsa tambayoyinku, rubuta rubutu, taƙaita takaddun, kuma suna taimaka muku shirya tarurruka. Kayan aikin rubuta magana zuwa rubutu da fassara (kamar Whisper ko DeepL) suna canza magana zuwa rubutu ko fassara rahotanninku daga Faransanci zuwa Hausa ko Ingilishi. Wannan yana da amfani musamman a lokacin tarurrukan al'umma a yankunan karkara, inda tattaunawar kan yiwuwa ta kasance a harshen gida.\n\nKayan aikin ƙirƙirar hotuna (kamar DALL·E ko Canva AI) suna ƙirƙirar hotuna don kayan wayar da kan jama'a ko poster na lafiyar al'umma. Kayan aikin nazarin takaddun, kamar NotebookLM na Google, suna baku damar tambaya kai tsaye game da rahoto na shafuka 80, kamar dai kuna magana da abokin aiki wanda ya karanta shi a madadinku. Ga ƙungiyar PNUD a Niger da ke sarrafa dozin rahotanni na filin aiki kowace wata, wannan babbar tanadin lokaci ne."
+        "title": "Duba kayan aiki na AI da ake da su",
+        "body": "Ka yi tunanin akwatin kayan aikin masaki: akwai guduma, zarto, da ma'auni. Kowane kayan aiki yana da aikinsa na musamman. Kayan aiki na AI suna aiki haka — akwai nau'i da yawa, kuma kowannensu yana magance bukata daban-daban.\n\nMataimakan tattaunawa (kamar ChatGPT, Claude ko Gemini) suna amsa tambayoyinku, rubuta rubutu, takaita takaddun, kuma suna taimaka muku shirya tarurruka. Kayan aikin rubuta magana zuwa rubutu da fassara (kamar Whisper ko DeepL) suna canza magana zuwa rubutu ko fassara rahotanninku daga Faransanci zuwa Hausa ko Ingilishi. Wannan yana da amfani musamman a lokacin tarurrukan al'umma a yankunan karkara, inda tattaunawar kan yiwuwa ta kasance a harshen gida.\n\nKayan aikin kirkirar hotuna (kamar DALL·E ko Canva AI) suna kirkirar hotuna don kayan wayar da kan jama'a ko poster na lafiyar al'umma. Kayan aikin nazarin takaddun, kamar NotebookLM na Google, suna baku damar tambaya kai tsaye game da rahoto na shafuka 80, kamar dai kuna magana da abokin aiki wanda ya karanta shi a madadinku. Ga kungiyar PNUD a Niger da ke sarrafa dozin rahotanni na filin aiki kowace wata, wannan babbar tanadin lokaci ne."
       },
       {
-        "title": "2. Ma'aunai don zaɓar kayan aiki mafi dacewa",
-        "body": "Zaɓar kayan aiki na AI ba tare da ma'auni a fili ba, kamar zuwa kasuwa ba tare da jerin abubuwan siya ba: kuna iya dawowa da abubuwa marasa amfani ko kuma kuɗin ya wuce iyaka. Ma'aunai huɗu masu muhimmanci ya kamata su jagoranci zaɓinku.\n\nMa'aunin farko: farashin. Yawancin kayan aiki suna ba da sigar kyauta (freemium) mai iyakantaccen ayyuka, da kuma sigar da ake biya. Ga ƙungiyoyi na gida da yawa da NGO a Afirka ta kudu da hamadar Sahara, sigar kyauta ta isa don fara. Ma'aunin biyu: ikon aiki ba tare da intanet ba. A yankunan karkara na Sahel inda haɗin 3G ya katse-katse, kayan aiki da ke buƙatar haɗin dindindin na iya zama marar amfani. Wasu kayan aiki suna ba da damar amfani da su a bangare ba tare da intanet ba.\n\nMa'aunin uku: sirri. Idan bayananku sun shafi masu amfana da rauni — 'yan gudun hijira, majinyata, waɗanda suka tsira daga tashin hankali — dole ne ku bincika inda aka adana waɗannan bayanai kuma wanda ke da damar shiga su. Kada ku taɓa shigar da bayanan mutum-mutumi a cikin kayan aiki na jama'a ba tare da bincika manufar sirrinsa ba. Ma'aunin huɗu: harsunan da aka goyi baya. Kayan aiki mai kyau a Ingilishi na iya zama mara kyau a Hausa ko Bambara. Koyaushe gwada kayan aikin a harshen aikinku na ainihi kafin ɗaukarsa."
+        "title": "Ma'aunai don zabar kayan aiki mafi dacewa",
+        "body": "Zabar kayan aiki na AI ba tare da ma'auni a fili ba, kamar zuwa kasuwa ba tare da jerin abubuwan siya ba: kuna iya dawowa da abubuwa marasa amfani ko kuma kudin ya wuce iyaka. Ma'aunai hudu masu muhimmanci ya kamata su jagoranci zabinku.\n\nMa'aunin farko: farashin. Yawancin kayan aiki suna ba da sigar kyauta (freemium) mai iyakantaccen ayyuka, da kuma sigar da ake biya. Ga kungiyoyi na gida da yawa da NGO a Afirka ta kudu da hamadar Sahara, sigar kyauta ta isa don fara. Ma'aunin biyu: ikon aiki ba tare da intanet ba. A yankunan karkara na Sahel inda hadin 3G ya katse-katse, kayan aiki da ke bukatar hadin dindindin na iya zama marar amfani. Wasu kayan aiki suna ba da damar amfani da su a bangare ba tare da intanet ba.\n\nMa'aunin uku: sirri. Idan bayananku sun shafi masu amfana da rauni — 'yan gudun hijira, majinyata, wadanda suka tsira daga tashin hankali — dole ne ku bincika inda aka adana wadannan bayanai kuma wanda ke da damar shiga su. Kada ku taba shigar da bayanan mutum-mutumi a cikin kayan aiki na jama'a ba tare da bincika manufar sirrinsa ba. Ma'aunin hudu: harsunan da aka goyi baya. Kayan aiki mai kyau a Ingilishi na iya zama mara kyau a Hausa ko Bambara. Koyaushe gwada kayan aikin a harshen aikinku na ainihi kafin daukarsa."
       },
       {
-        "title": "3. Haɗa kayan aiki a cikin tsari na aiki",
-        "body": "Kayan aiki guda ɗaya na AI na iya taimakonku. Kayan aiki da yawa da aka haɗa da kyau na iya canza yadda kuke aiki. Ka yi tunanin sarkar samarwa ta hannu: kowane mai sana'a yana sarrafa mataki ɗaya, kuma tare suna samar da sakamakon da babu wanda zai iya cimmawa shi kaɗai.\n\nGa misalin tsarin aiki na musamman ga ƙungiyar filin aiki: Mataki na 1 — yi rikodin taron al'ummarku a wayar hannu. Mataki na 2 — yi amfani da kayan aikin rubuta magana (kamar Whisper) don canza sauti zuwa rubutu. Mataki na 3 — liƙa wannan rubutu a cikin mataimakiyar tattaunawa (Claude ko ChatGPT) don fitar da taƙaitaccen rahoto da matakai na aiki. Mataki na 4 — fassara wannan taƙaitaccen rahoto zuwa Faransanci ko Ingilishi don rahotanninku ta amfani da DeepL ko Google Translate. Mataki na 5 — loda rahoton zuwa NotebookLM don adanawa kuma ku ba ƙungiyarku damar nemo shi da tambaya a baya.\n\nWannan tsari, wanda zai ɗauki dukan yini don kammala ta hannu, ana iya yi a cikin sa'a ɗaya zuwa biyu. Ƙungiyoyin agaji a Sahel sun ba da rahoton tanadin lokaci iri ɗaya a kan rahotanninsu na sa ido. Muhimmin abu shi ne a ayyana tsarinku a gaba da kuma gwada kowane mataki kafin amfani da shi tare da bayanan sirri."
+        "title": "Hada kayan aiki a cikin tsari na aiki",
+        "body": "Kayan aiki guda daya na AI na iya taimakonku. Kayan aiki da yawa da aka hada da kyau na iya canza yadda kuke aiki. Ka yi tunanin sarkar samarwa ta hannu: kowane mai sana'a yana sarrafa mataki daya, kuma tare suna samar da sakamakon da babu wanda zai iya cimmawa shi kadai.\n\nGa misalin tsarin aiki na musamman ga kungiyar filin aiki: Mataki na 1 — yi rikodin taron al'ummarku a wayar hannu. Mataki na 2 — yi amfani da kayan aikin rubuta magana (kamar Whisper) don canza sauti zuwa rubutu. Mataki na 3 — lika wannan rubutu a cikin mataimakiyar tattaunawa (Claude ko ChatGPT) don fitar da takaitaccen rahoto da matakai na aiki. Mataki na 4 — fassara wannan takaitaccen rahoto zuwa Faransanci ko Ingilishi don rahotanninku ta amfani da DeepL ko Google Translate. Mataki na 5 — loda rahoton zuwa NotebookLM don adanawa kuma ku ba kungiyarku damar nemo shi da tambaya a baya.\n\nWannan tsari, wanda zai dauki dukan yini don kammala ta hannu, ana iya yi a cikin sa'a daya zuwa biyu. Kungiyoyin agaji a Sahel sun ba da rahoton tanadin lokaci iri daya a kan rahotanninsu na sa ido. Muhimmin abu shi ne a ayyana tsarinku a gaba da kuma gwada kowane mataki kafin amfani da shi tare da bayanan sirri."
       },
       {
-        "title": "4. Farawa kyauta da bunƙasa ƙwarewa",
-        "body": "Koyon amfani da kayan aiki na AI kamar koyon noman sabon amfanin gona ne: a farko kuna yawo-yawo, kuna yin kuskure kaɗan, sa'an nan kuna samun saurin daidai. Labari mai dadi shi ne cewa yawancin albarkatu don koyo kyauta ne kuma ana iya samun su daga wayar hannu.\n\nDon farawa ba tare da kasafin kuɗi ba, kuna iya amfani da sigogin kyauta na ChatGPT, Claude, Gemini ko Perplexity don tambayoyinku na yau da kullun. Whisper na OpenAI yana samu akan layi kyauta don rubuta magana. NotebookLM na Google kyauta ne don nazarin takaddun. DeepL yana ba da ingantacciyar fassara tare da iyakancin wata mai ma'ana a sigar kyautarsa. Dandamali kamar YouTube, Coursera (tare da audit kyauta) ko al'ummomin koyo na WhatsApp suna baku damar ci gaba a sauri naku, ko da haɗin intanet yana da iyaka.\n\nPractice na yau da kullun ya fi tasiri fiye da zamanai masu tsawo da wuya. Sadaukar da minti goma zuwa goma sha biyar kowace rana don gwada kayan aiki akan ainihin aikin ku — rubuta imel, taƙaita rahoto, shirya jerin abubuwa na taro. A cikin wata ɗaya, za ku sami ƙwarewar ainihi ta aiki. Ma'aikatan lafiya na al'umma a Niger sun fara ta rubuta bayanansu na ziyara ta WhatsApp Business kafin ci gaba zuwa ƙarin kayan aiki masu cikakken aiki. Kowane ƙaramin mataki yana ƙidaya."
+        "title": "Farawa kyauta da bunkasa kwarewa",
+        "body": "Koyon amfani da kayan aiki na AI kamar koyon noman sabon amfanin gona ne: a farko kuna yawo-yawo, kuna yin kuskure kadan, sa'an nan kuna samun saurin daidai. Labari mai dadi shi ne cewa yawancin albarkatu don koyo kyauta ne kuma ana iya samun su daga wayar hannu.\n\nDon farawa ba tare da kasafin kudi ba, kuna iya amfani da sigogin kyauta na ChatGPT, Claude, Gemini ko Perplexity don tambayoyinku na yau da kullun. Whisper na OpenAI yana samu akan layi kyauta don rubuta magana. NotebookLM na Google kyauta ne don nazarin takaddun. DeepL yana ba da ingantacciyar fassara tare da iyakancin wata mai ma'ana a sigar kyautarsa. Dandamali kamar YouTube, Coursera (tare da audit kyauta) ko al'ummomin koyo na WhatsApp suna baku damar ci gaba a sauri naku, ko da hadin intanet yana da iyaka.\n\nPractice na yau da kullun ya fi tasiri fiye da zamanai masu tsawo da wuya. Sadaukar da minti goma zuwa goma sha biyar kowace rana don gwada kayan aiki akan ainihin aikin ku — rubuta imel, takaita rahoto, shirya jerin abubuwa na taro. A cikin wata daya, za ku sami kwarewar ainihi ta aiki. Ma'aikatan lafiya na al'umma a Niger sun fara ta rubuta bayanansu na ziyara ta WhatsApp Business kafin ci gaba zuwa karin kayan aiki masu cikakken aiki. Kowane karamin mataki yana kidaya."
       }
     ],
     "example": {
-      "title": "Ƙungiyar filin aiki ta NGO SantéSahel tana ƙirƙirar akwatin kayan aiki na AI kyauta",
-      "challenge": "Ƙungiyar daidaitawa ta SantéSahel, mai tushe a Tahoua, Niger, tana samar da kusan rahotanni ashirin na ziyartar filin aiki, bayanan tarurrukan al'umma da fassarar fom kowace wata. Masu daidaitawa uku suna kashe awowi goma sha biyu matsakaita kowanensu kowace mako akan waɗannan ayyukan gudanarwa, a maimakon bibiyar masu amfana.",
-      "solution": "Ƙungiyar ta aiwatar da tsari mai matakai huɗu, gaba ɗaya tare da kayan aiki kyauta: (1) rikodin sauti na tarurruka a wayoyin Android, (2) rubuta magana da Whisper ta hanyar interface na yanar gizo kyauta, (3) taƙaitawa da fitar da matakai na aiki da Claude (sigar kyauta), (4) fassarar Faransanci-Hausa da Google Translate don fom da aka nufa ga ma'aikatan lafiya na gida. An ƙara NotebookLM don adana rahotanni na baya da samun su da sauri.",
-      "impact": "A cikin makonni shida, lokacin da ake kashewa akan ayyukan gudanarwa ya ragu da kashi 40 cikin ɗari, wanda ke wakiltar tanadin awowi biyar kowace mako ga kowane mai daidaitawa. Rahotannin wata-wata yanzu ana samar da su kwana biyu da wuri, wanda ke 'yantar da lokaci don ƙarin ziyarar filin aiki. Ingancin bayanan tarurruka ya kuma inganta, tunda rubuce-rubucen magana sun fi daidai fiye da bayanan da aka rubuta da hannu a cikin taro."
+      "title": "Kungiyar filin aiki ta NGO SantéSahel tana kirkirar akwatin kayan aiki na AI kyauta",
+      "challenge": "Kungiyar daidaitawa ta SantéSahel, mai tushe a Tahoua, Niger, tana samar da kusan rahotanni ashirin na ziyartar filin aiki, bayanan tarurrukan al'umma da fassarar fom kowace wata. Masu daidaitawa uku suna kashe awowi goma sha biyu matsakaita kowanensu kowace mako akan wadannan ayyukan gudanarwa, a maimakon bibiyar masu amfana.",
+      "solution": "Kungiyar ta aiwatar da tsari mai matakai hudu, gaba daya tare da kayan aiki kyauta: (1) rikodin sauti na tarurruka a wayoyin Android, (2) rubuta magana da Whisper ta hanyar interface na yanar gizo kyauta, (3) takaitawa da fitar da matakai na aiki da Claude (sigar kyauta), (4) fassarar Faransanci-Hausa da Google Translate don fom da aka nufa ga ma'aikatan lafiya na gida. An kara NotebookLM don adana rahotanni na baya da samun su da sauri.",
+      "impact": "A cikin makonni shida, lokacin da ake kashewa akan ayyukan gudanarwa ya ragu da kashi 40 cikin dari, wanda ke wakiltar tanadin awowi biyar kowace mako ga kowane mai daidaitawa. Rahotannin wata-wata yanzu ana samar da su kwana biyu da wuri, wanda ke 'yantar da lokaci don karin ziyarar filin aiki. Ingancin bayanan tarurruka ya kuma inganta, tunda rubuce-rubucen magana sun fi daidai fiye da bayanan da aka rubuta da hannu a cikin taro."
     },
     "practice": {
       "title": "Kwatanta kayan aiki biyu na AI don aiki a cikin aikinku",
       "instructions": [
-        "Zaɓi aikin gudanarwa mai maimaitawa a cikin aikinku (misali: rubuta taƙaitaccen taro, fassara gajeren fom, rubuta bayanan muryar sauti). Rubuta shi a cikin jimla ɗaya a wayar hannu.",
-        "Gwada wannan aiki da kayan aiki biyu daban-daban da ake samu kyauta akan wayar hannu (misalai: Claude da ChatGPT, ko Google Translate da DeepL). Ga kowane kayan aiki, rubuta da kalmomi kaɗan: farashin (kyauta ko biyan kuɗi), harshen da yake goyan baya mafi kyau, da kuma ko da za ku ji daɗin shigar da bayanan masu amfana a ciki (sirri).",
-        "Zaɓi kayan aikin da ya fi dacewa da ma'aunin ku guda uku kuma ku tabbatar da zaɓinku a cikin jimloli biyu. Raba wannan tabbatarwa da abokin aiki ko kuma rubuta shi a cikin memo ga ƙungiyarku."
+        "Zabi aikin gudanarwa mai maimaitawa a cikin aikinku (misali: rubuta takaitaccen taro, fassara gajeren fom, rubuta bayanan muryar sauti). Rubuta shi a cikin jimla daya a wayar hannu.",
+        "Gwada wannan aiki da kayan aiki biyu daban-daban da ake samu kyauta akan wayar hannu (misalai: Claude da ChatGPT, ko Google Translate da DeepL). Ga kowane kayan aiki, rubuta da kalmomi kadan: farashin (kyauta ko biyan kudi), harshen da yake goyan baya mafi kyau, da kuma ko da za ku ji dadin shigar da bayanan masu amfana a ciki (sirri).",
+        "Zabi kayan aikin da ya fi dacewa da ma'aunin ku guda uku kuma ku tabbatar da zabinku a cikin jimloli biyu. Raba wannan tabbatarwa da abokin aiki ko kuma rubuta shi a cikin memo ga kungiyarku."
       ],
-      "observation": "Za ku lura cewa kayan aiki biyu na iya yin aiki iri ɗaya tare da sakamako daban-daban sosai dangane da harshe ko sirrin bayanai. Babu kayan aiki ɗaya na duniya mafi kyau: kayan aikin da ya dace shi ne wanda ya dace da yanayin ku na musamman."
+      "observation": "Za ku lura cewa kayan aiki biyu na iya yin aiki iri daya tare da sakamako daban-daban sosai dangane da harshe ko sirrin bayanai. Babu kayan aiki daya na duniya mafi kyau: kayan aikin da ya dace shi ne wanda ya dace da yanayin ku na musamman."
     },
     "quiz": [
       {
-        "question": "Ma'aikacin lafiya na al'umma a yankin karkara yana son rubuta magana daga hirarrakin da aka yi rikodin a wayar hannu. Haɗin intanet ɗinsa bai tsaya ba. Wane ma'auni ya kamata ya fifita lokacin zaɓan kayan aikin?",
+        "question": "Ma'aikacin lafiya na al'umma a yankin karkara yana son rubuta magana daga hirarrakin da aka yi rikodin a wayar hannu. Hadin intanet dinsa bai tsaya ba. Wane ma'auni ya kamata ya fifita lokacin zaban kayan aikin?",
         "options": [
           {
             "key": "A",
@@ -437,7 +437,7 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Ikon kayan aikin na aiki ba tare da haɗin dindindin ba"
+            "text": "Ikon kayan aikin na aiki ba tare da hadin dindindin ba"
           },
           {
             "key": "D",
@@ -445,22 +445,22 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           }
         ],
         "answer": "C",
-        "explanation": "A yankunan da haɗin intanet ke da rauni, ikon aiki ba tare da intanet ko da haɗin kaɗan ba shi ne ma'aunin yanke hukunci. Kayan aiki mai kyau a hotuna amma ba za a iya amfani da shi ba tare da 4G ba bai dace da filin aiki na Sahel ba."
+        "explanation": "A yankunan da hadin intanet ke da rauni, ikon aiki ba tare da intanet ko da hadin kadan ba shi ne ma'aunin yanke hukunci. Kayan aiki mai kyau a hotuna amma ba za a iya amfani da shi ba tare da 4G ba bai dace da filin aiki na Sahel ba."
       },
       {
         "question": "Menene ma'anar daidai na kayan aiki 'freemium'?",
         "options": [
           {
             "key": "A",
-            "text": "Kayan aiki da ake biya gaba ɗaya tare da lokacin gwaji na kwana 7"
+            "text": "Kayan aiki da ake biya gaba daya tare da lokacin gwaji na kwana 7"
           },
           {
             "key": "B",
-            "text": "Kayan aiki da ake samu ne kawai ga manyan ƙungiyoyi"
+            "text": "Kayan aiki da ake samu ne kawai ga manyan kungiyoyi"
           },
           {
             "key": "C",
-            "text": "Kayan aiki da gwamnatocin Afirka ne kawai suka ƙera"
+            "text": "Kayan aiki da gwamnatocin Afirka ne kawai suka kera"
           },
           {
             "key": "D",
@@ -468,14 +468,14 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           }
         ],
         "answer": "D",
-        "explanation": "Tsarin freemium yana ba da sigar kyauta mai isa don farawa, da kuma sigar premium mai ƙarin ayyuka. Wannan shi ne tsari mafi kowa a cikin kayan aiki na AI na jama'a kamar ChatGPT, Claude ko Canva."
+        "explanation": "Tsarin freemium yana ba da sigar kyauta mai isa don farawa, da kuma sigar premium mai karin ayyuka. Wannan shi ne tsari mafi kowa a cikin kayan aiki na AI na jama'a kamar ChatGPT, Claude ko Canva."
       },
       {
         "question": "Mai daidaita NGO yana son nazarin rahoto mai shafuka 60 don fitar da shawarwarin da suka fi muhimmanci. Wane nau'i na kayan aiki na AI ya fi dacewa?",
         "options": [
           {
             "key": "A",
-            "text": "Kayan aikin ƙirƙirar hotuna"
+            "text": "Kayan aikin kirkirar hotuna"
           },
           {
             "key": "B",
@@ -487,11 +487,11 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Kayan aikin ƙirƙirar gabatarwar gani"
+            "text": "Kayan aikin kirkirar gabatarwar gani"
           }
         ],
         "answer": "B",
-        "explanation": "Kayan aikin nazarin takaddun kamar NotebookLM suna baka damar tambaya game da dogon takarda kuma a fitar da takamaiman bayanai. Wannan daidai yake da bukata da aka bayyana: taƙaita babban rahoto."
+        "explanation": "Kayan aikin nazarin takaddun kamar NotebookLM suna baka damar tambaya game da dogon takarda kuma a fitar da takamaiman bayanai. Wannan daidai yake da bukata da aka bayyana: takaita babban rahoto."
       },
       {
         "question": "Me ya sa ba ya kamata a shigar da bayanan mutum-mutumi na masu amfana a cikin kayan aiki na AI na jama'a ba tare da tsaro ba?",
@@ -510,14 +510,14 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Domin kayan aiki na AI sun ƙi bayanan a harsunan gida"
+            "text": "Domin kayan aiki na AI sun ki bayanan a harsunan gida"
           }
         ],
         "answer": "C",
         "explanation": "Yawancin kayan aiki na jama'a suna adana bayanan da aka shigar a kan sabobin su kuma na iya amfani da su don inganta samfuransu. Ga bayanan sirri (masu amfana masu rauni, majinyata), dole ne a bincika manufar sirri ko amfani da kayan aikin da aka yi wa musamman."
       },
       {
-        "question": "A cikin tsari na aiki da ke haɗa kayan aiki da yawa na AI, menene matakin farko da aka ba da shawarar kafin sarrafa bayanan ainihi?",
+        "question": "A cikin tsari na aiki da ke hada kayan aiki da yawa na AI, menene matakin farko da aka ba da shawarar kafin sarrafa bayanan ainihi?",
         "options": [
           {
             "key": "A",
@@ -525,22 +525,22 @@ export const iaLessonC7: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Gwada tsarin gaba ɗaya da bayanan ƙirƙira ko marasa wuyar gaske"
+            "text": "Gwada tsarin gaba daya da bayanan kirkira ko marasa wuyar gaske"
           },
           {
             "key": "C",
-            "text": "Neman izinin dukan ƙungiya ga kowane mataki"
+            "text": "Neman izinin dukan kungiya ga kowane mataki"
           },
           {
             "key": "D",
-            "text": "Amfani da kayan aiki da aka ƙera a Afirka ne kawai"
+            "text": "Amfani da kayan aiki da aka kera a Afirka ne kawai"
           }
         ],
         "answer": "B",
-        "explanation": "Kafin haɗa bayanan ainihi da masu iya zama sirri a cikin tsari mai kayan aiki da yawa, yana da muhimmanci a gwada dukan tsarin da bayanan ƙirƙira. Wannan yana baka damar gano kurakurai, asarar inganci ko haɗarin sirri ba tare da barazana ga masu amfana ba."
+        "explanation": "Kafin hada bayanan ainihi da masu iya zama sirri a cikin tsari mai kayan aiki da yawa, yana da muhimmanci a gwada dukan tsarin da bayanan kirkira. Wannan yana baka damar gano kurakurai, asarar inganci ko hadarin sirri ba tare da barazana ga masu amfana ba."
       }
     ],
-    "reflection": "Daga cikin nau'i huɗu na kayan aiki da aka gabatar (mataimakan tattaunawa, rubuta magana, ƙirƙirar hotuna, nazarin takaddun), wanne zai fi dacewa da aikin da ke maimaituwa kuma mai ɗaukar lokaci mai yawa a cikin aikinku na yanzu? Menene manyan cikas biyu ga ɗaukarsa a cikin ƙungiyarku — kuma ta yaya za ku iya shawo kan su?",
+    "reflection": "Daga cikin nau'i hudu na kayan aiki da aka gabatar (mataimakan tattaunawa, rubuta magana, kirkirar hotuna, nazarin takaddun), wanne zai fi dacewa da aikin da ke maimaituwa kuma mai daukar lokaci mai yawa a cikin aikinku na yanzu? Menene manyan cikas biyu ga daukarsa a cikin kungiyarku — kuma ta yaya za ku iya shawo kan su?",
     "glossary": [
       {
         "term": "Mataimakiyar tattaunawa",
@@ -548,7 +548,7 @@ export const iaLessonC7: Record<Language, LessonContent> = {
       },
       {
         "term": "Rubuta magana (Transcription)",
-        "definition": "Canza rikodin sauti ko bidiyo zuwa rubutu ta atomatik. Yana da amfani don rubuta tarurruka, hirarraki ko saƙonni na murya ba tare da buga su da hannu ba."
+        "definition": "Canza rikodin sauti ko bidiyo zuwa rubutu ta atomatik. Yana da amfani don rubuta tarurruka, hirarraki ko sakonni na murya ba tare da buga su da hannu ba."
       },
       {
         "term": "NotebookLM",
@@ -556,15 +556,15 @@ export const iaLessonC7: Record<Language, LessonContent> = {
       },
       {
         "term": "Kayan aiki no-code",
-        "definition": "Kayan aiki na dijital da ake iya amfani da shi ba tare da rubuta code na kwamfuta ba. Ana samun sa ta hanyar sauƙaƙen interface na gani, yana ba marasa masu fasaha damar ƙirƙirar atomatik ko tsarin aiki."
+        "definition": "Kayan aiki na dijital da ake iya amfani da shi ba tare da rubuta code na kwamfuta ba. Ana samun sa ta hanyar saukaken interface na gani, yana ba marasa masu fasaha damar kirkirar atomatik ko tsarin aiki."
       },
       {
         "term": "Freemium",
-        "definition": "Tsarin kasuwanci da ke ba da sigar asali kyauta da sigar da ake biya mai ƙarin ayyuka. Yana baka damar farawa ba tare da kasafin kuɗi ba kuma ka ci gaba gwargwadon bukatunka."
+        "definition": "Tsarin kasuwanci da ke ba da sigar asali kyauta da sigar da ake biya mai karin ayyuka. Yana baka damar farawa ba tare da kasafin kudi ba kuma ka ci gaba gwargwadon bukatunka."
       },
       {
         "term": "API",
-        "definition": "Mahaɗin shirye-shirye (Application Programming Interface): gadar da ke bawa software guda biyu damar sadarwa. Misali, NGO na iya haɗa tsarin gudanar da bayananta zuwa kayan aiki na AI ta API don atomatik ayyuka ba tare da tsoma baki na hannu ba."
+        "definition": "Mahadin shirye-shirye (Application Programming Interface): gadar da ke bawa software guda biyu damar sadarwa. Misali, NGO na iya hada tsarin gudanar da bayananta zuwa kayan aiki na AI ta API don atomatik ayyuka ba tare da tsoma baki na hannu ba."
       }
     ]
   }

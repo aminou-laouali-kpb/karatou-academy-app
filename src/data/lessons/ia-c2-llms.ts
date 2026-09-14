@@ -25,7 +25,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
       },
       {
         "title": "Forces et limites — fluidité oui, mais vérification toujours",
-        "body": "Les LLMs ont des forces réelles : ils rédigent rapidement, reformulent dans plusieurs langues, résument de longs documents, et s'adaptent à des styles variés. Pour une coordinatrice d'ONG à Niamey qui doit rédiger un rapport bailleur en anglais alors que sa langue de travail est le français, c'est un gain de temps considérable — environ 30 à 50 % selon les études sur l'adoption de l'IA dans les organisations humanitaires (Humanitarian AI Report, 2024).\n\nMais les LLMs ont aussi des limites sérieuses. La première est l'hallucination : le modèle peut générer des informations fausses avec une apparente confiance. Il peut citer un article scientifique qui n'existe pas, ou donner un chiffre de bénéficiaires qui ne correspond à aucune réalité. Confiance ne signifie pas exactitude — c'est la règle d'or à retenir. La deuxième limite est la date de coupure (knowledge cutoff) : le modèle ne connaît pas les événements survenus après sa dernière mise à jour. Si une épidémie ou une crise humanitaire a éclaté récemment au Tchad, le LLM pourrait vous donner des informations obsolètes.\n\nIl existe aussi des biais : les LLMs ont été entraînés principalement sur des textes en anglais, produits majoritairement par des auteurs du Nord global. Leurs réponses sur les réalités africaines — les systèmes de tontine, les pratiques agricoles locales, les langues comme le haoussa ou le bambara — peuvent être moins précises, incomplètes, voire stéréotypées. Cela ne les rend pas inutiles, mais cela impose une vigilance supplémentaire."
+        "body": "Les LLMs ont des forces réelles : ils rédigent rapidement, reformulent dans plusieurs langues, résument de longs documents, et s'adaptent à des styles variés. Pour une coordinatrice d'ONG à Niamey qui doit rédiger un rapport bailleur en anglais alors que sa langue de travail est le français, c'est un gain de temps considérable : plusieurs heures économisées sur un seul document, comme le montre l'exemple de cette leçon.\n\nMais les LLMs ont aussi des limites sérieuses. La première est l'hallucination : le modèle peut générer des informations fausses avec une apparente confiance. Il peut citer un article scientifique qui n'existe pas, ou donner un chiffre de bénéficiaires qui ne correspond à aucune réalité. Confiance ne signifie pas exactitude — c'est la règle d'or à retenir. La deuxième limite est la date de coupure (knowledge cutoff) : le modèle ne connaît pas les événements survenus après sa dernière mise à jour. Si une épidémie ou une crise humanitaire a éclaté récemment au Tchad, le LLM pourrait vous donner des informations obsolètes.\n\nIl existe aussi des biais : les LLMs ont été entraînés principalement sur des textes en anglais, produits majoritairement par des auteurs du Nord global. Leurs réponses sur les réalités africaines — les systèmes de tontine, les pratiques agricoles locales, les langues comme le haoussa ou le bambara — peuvent être moins précises, incomplètes, voire stéréotypées. Cela ne les rend pas inutiles, mais cela impose une vigilance supplémentaire."
       },
       {
         "title": "Bien utiliser un LLM en contexte africain — vérification et protection des données",
@@ -213,7 +213,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
       },
       {
         "title": "Strengths and limitations — fluency yes, but always verify",
-        "body": "LLMs have real strengths: they write quickly, rephrase in multiple languages, summarize long documents, and adapt to various styles. For an NGO coordinator in Niamey who must write a donor report in English when her working language is French, this represents a significant time saving — approximately 30 to 50% according to studies on AI adoption in humanitarian organizations (Humanitarian AI Report, 2024).\n\nBut LLMs also have serious limitations. The first is hallucination: the model can generate false information with apparent confidence. It may cite a scientific article that does not exist, or give a beneficiary figure that corresponds to no reality. Confidence does not mean accuracy — that is the golden rule to remember. The second limitation is the knowledge cutoff: the model does not know about events that occurred after its last update. If an epidemic or humanitarian crisis recently broke out in Chad, the LLM might give you outdated information.\n\nThere are also biases: LLMs were trained primarily on English-language texts, produced mainly by authors from the Global North. Their responses about African realities — tontine savings systems, local agricultural practices, languages like Hausa or Bambara — may be less accurate, incomplete, or even stereotyped. This does not make them useless, but it requires extra vigilance."
+        "body": "LLMs have real strengths: they write quickly, rephrase in multiple languages, summarize long documents, and adapt to various styles. For an NGO coordinator in Niamey who must write a donor report in English when her working language is French, this represents a significant time saving: several hours saved on a single document, as the example in this lesson shows.\n\nBut LLMs also have serious limitations. The first is hallucination: the model can generate false information with apparent confidence. It may cite a scientific article that does not exist, or give a beneficiary figure that corresponds to no reality. Confidence does not mean accuracy — that is the golden rule to remember. The second limitation is the knowledge cutoff: the model does not know about events that occurred after its last update. If an epidemic or humanitarian crisis recently broke out in Chad, the LLM might give you outdated information.\n\nThere are also biases: LLMs were trained primarily on English-language texts, produced mainly by authors from the Global North. Their responses about African realities — tontine savings systems, local agricultural practices, languages like Hausa or Bambara — may be less accurate, incomplete, or even stereotyped. This does not make them useless, but it requires extra vigilance."
       },
       {
         "title": "Using an LLM effectively in the African context — verification and data protection",
@@ -384,7 +384,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
     "id": "c2",
     "lessonNumber": 2,
     "title": "Fahimtar LLMs — yadda ChatGPT da Claude suke 'magana' gaskiya",
-    "objective": "A ƙarshen wannan darasi, za ku iya bayyana abin da babban ƙirar harshe (LLM) yake da kuma yadda take haifar da rubutu ta hanyar hasashe. Za ku iya gane ƙarfinta da iyakokinta, musamman hallucination da ranar yanke ilimi. Za ku san yadda ake amfani da ita da hikima a yanayin aikinku na ƙwararru a Afirka, inda kuke kare bayanai masu mahimmanci na masu amfana da ku.",
+    "objective": "A karshen wannan darasi, za ku iya bayyana abin da babban kirar harshe (LLM) yake da kuma yadda take haifar da rubutu ta hanyar hasashe. Za ku iya gane karfinta da iyakokinta, musamman hallucination da ranar yanke ilimi. Za ku san yadda ake amfani da ita da hikima a yanayin aikinku na kwararru a Afirka, inda kuke kare bayanai masu mahimmanci na masu amfana da ku.",
     "video": {
       "fr": "",
       "en": "",
@@ -393,35 +393,35 @@ export const iaLessonC2: Record<Language, LessonContent> = {
     "content": [
       {
         "title": "Menene LLM? Ba encyclopedia ba ne, ba kuma mai annabta ba",
-        "body": "ChatGPT, Claude, Gemini — waɗannan kayan aiki suna cikin dangin Manyan Ƙirar Harshe, ko LLM (Large Language Models). LLM shiri ne na kwamfuta da aka horar da shi kan fiye da biliyoyin shafuka na rubutu: labarai, litattafai, tattaunawa, gidajen yanar gizo, rahotannin ƙungiyoyin agaji. Ta hanyar wannan horarwa mai yawa, ta koyi tsarin harshe — kamar yaro da ke koyon magana ta hanyar sauraron dubunnan tattaunawa.\n\nAma a lura: LLM ba ta 'sani' komai a ma'anar ɗan Adam. Ba ta tuntuɓar wata ma'ajiyar bayanai ta encyclopedia don amsa muku. Tana hasashen kalmar da ta fi yiwuwa a kowane matakai, kamar dai idan ka roƙi wani ya kammala jumla da ka fara. Ka yi tunanin wani ɗan tarihi mai fasaha wanda ya haddace dubunnan labarai: zai iya ba da sabon labari mai kayatarwa, amma kuma zai iya gauraya bayanai ko ƙirƙira wasu.\n\nA aikace, lokacin da kuka roƙi Claude ya rubuta rahoto kan abinci mai gina jiki a yankin Sahel, ba ya nema a wata ma'ajiyar bayanai ta hukuma ta FAO. Yana haifar da rubutu da ya yi kama da abin da rahoto kan wannan batu ya kamata ya ƙunsa, bisa rubutun da aka horar da shi kansu. Wannan yana da ƙarfi — kuma shine tushen iyakokinsa."
+        "body": "ChatGPT, Claude, Gemini — wadannan kayan aiki suna cikin dangin Manyan Kirar Harshe, ko LLM (Large Language Models). LLM shiri ne na kwamfuta da aka horar da shi kan fiye da biliyoyin shafuka na rubutu: labarai, litattafai, tattaunawa, gidajen yanar gizo, rahotannin kungiyoyin agaji. Ta hanyar wannan horarwa mai yawa, ta koyi tsarin harshe — kamar yaro da ke koyon magana ta hanyar sauraron dubunnan tattaunawa.\n\nAma a lura: LLM ba ta 'sani' komai a ma'anar dan Adam. Ba ta tuntubar wata ma'ajiyar bayanai ta encyclopedia don amsa muku. Tana hasashen kalmar da ta fi yiwuwa a kowane matakai, kamar dai idan ka roki wani ya kammala jumla da ka fara. Ka yi tunanin wani dan tarihi mai fasaha wanda ya haddace dubunnan labarai: zai iya ba da sabon labari mai kayatarwa, amma kuma zai iya gauraya bayanai ko kirkira wasu.\n\nA aikace, lokacin da kuka roki Claude ya rubuta rahoto kan abinci mai gina jiki a yankin Sahel, ba ya nema a wata ma'ajiyar bayanai ta hukuma ta FAO. Yana haifar da rubutu da ya yi kama da abin da rahoto kan wannan batu ya kamata ya kunsa, bisa rubutun da aka horar da shi kansu. Wannan yana da karfi — kuma shine tushen iyakokinsa."
       },
       {
-        "title": "Yadda yake 'karanta' saƙonku — tokens da taga mahallin",
-        "body": "Kafin ya amsa muku, LLM yana raba saƙonku zuwa ƙananan guntaye da ake kira tokens. Token ɗaya yayi daidai da kalma gajera ko wani ɓangare na dogon kalma. Misali, 'rogo' (cassava) na iya zama tokens biyu, yayin da 'salama' na iya zama ɗaya. Wannan rarrabuwa ba a bayyane yake gare ku ba, amma yana da mahimmanci ga inji.\n\nLLM na iya sarrafa adadin tokens kawai a lokaci ɗaya: ana kiran wannan taga mahallin (context window). Ku yi tunanin ƙwaƙwalwar aiki ta abokin aiki: idan kun ba shi takarda mai shafuka 200 don karatu yayin da kuke tattaunawa, zai fara manta shafukan farko yayin da yake karanta na ƙarshe. Haka nan, idan tattaunawarku da LLM ta yi tsawo, yana iya 'mantawa' da abin da kun faɗa masa a farko.\n\nA aikace, ga wakilai na filin aiki waɗanda ke amfani da wayar hannu tare da iyakantaccen haɗin yanar gizo: ku sanya saƙonku a taƙaice kuma a tsari. Idan kuna tambaya mai rikitarwa kan rarraba abinci a wata ƙauye a Nijar, ku ba da mahallin da ake bukata a cikin buƙata ɗaya maimakon a cikin saƙonni goma daban-daban. LLM zai zama daidai kuma ku rage amfani da bayanai."
+        "title": "Yadda yake 'karanta' sakonku — tokens da taga mahallin",
+        "body": "Kafin ya amsa muku, LLM yana raba sakonku zuwa kananan guntaye da ake kira tokens. Token daya yayi daidai da kalma gajera ko wani bangare na dogon kalma. Misali, 'rogo' (cassava) na iya zama tokens biyu, yayin da 'salama' na iya zama daya. Wannan rarrabuwa ba a bayyane yake gare ku ba, amma yana da mahimmanci ga inji.\n\nLLM na iya sarrafa adadin tokens kawai a lokaci daya: ana kiran wannan taga mahallin (context window). Ku yi tunanin kwakwalwar aiki ta abokin aiki: idan kun ba shi takarda mai shafuka 200 don karatu yayin da kuke tattaunawa, zai fara manta shafukan farko yayin da yake karanta na karshe. Haka nan, idan tattaunawarku da LLM ta yi tsawo, yana iya 'mantawa' da abin da kun fada masa a farko.\n\nA aikace, ga wakilai na filin aiki wadanda ke amfani da wayar hannu tare da iyakantaccen hadin yanar gizo: ku sanya sakonku a takaice kuma a tsari. Idan kuna tambaya mai rikitarwa kan rarraba abinci a wata kauye a Nijar, ku ba da mahallin da ake bukata a cikin bukata daya maimakon a cikin sakonni goma daban-daban. LLM zai zama daidai kuma ku rage amfani da bayanai."
       },
       {
-        "title": "Ƙarfi da iyakoki — fasaha haka ne, amma duba koyaushe",
-        "body": "LLMs suna da gaske ƙarfi: suna rubuta da sauri, suna sake tsara a harsunan da dama, suna takaitawa manyan takaddun, kuma suna daidaitawa da salon daban-daban. Ga masu daidaita ƙungiyoyin agaji a Niamey waɗanda dole ne su rubuta rahoto na masu ba da taimako a Turanci yayin da harshen aikinsu shi ne Faransanci, wannan yana nuna tasarrufin lokaci mai yawa — kusan kashi 30 zuwa 50 bisa dari bisa ga bincike kan karɓar AI a ƙungiyoyin taimakon ɗan adam (Humanitarian AI Report, 2024).\n\nAma LLMs kuma suna da iyakoki masu muhimmanci. Na farko shine hallucination: ƙirar na iya haifar da bayanan ƙarya tare da alama ta amincewa. Na iya ambaton wata takarda ta kimiyya da ba ta wanzu ba, ko ba da adadin masu amfana da bai dace da gaskiya ba. Amincewa baya nufin daidaito — wannan shi ne dokar zinariya da za a tuna. Iyaka ta biyu ita ce ranar yanke ilimi (knowledge cutoff): ƙirar ba ta san abubuwan da suka faru bayan sabunta ta na ƙarshe ba. Idan annoba ko rikicin agaji ya ɓarke kwanan nan a Chadi, LLM na iya ba ku bayanan da suka shuɗe.\n\nAkwai kuma son zuciya: LLMs sun samu horarwa musamman a rubutun Turanci, wanda marubutan Arewacin duniya suka samar da yawa. Amsoshinsu game da gaskiyar Afirka — tsarin tontine na ajiya, ayyukan noma na gida, harsunan kamar Hausa ko Bambara — na iya zama ƙasa da daidaito, ba cikakke ba, ko kuma masu ƙunsar ra'ayin da ba daidai ba. Wannan ba ya sanya su banza, amma yana buƙatar ƙarin tsarki."
+        "title": "Karfi da iyakoki — fasaha haka ne, amma duba koyaushe",
+        "body": "LLMs suna da gaske karfi: suna rubuta da sauri, suna sake tsara a harsunan da dama, suna takaitawa manyan takaddun, kuma suna daidaitawa da salon daban-daban. Ga masu daidaita kungiyoyin agaji a Niamey wadanda dole ne su rubuta rahoto na masu ba da taimako a Turanci yayin da harshen aikinsu shi ne Faransanci, wannan yana nuna tasarrufin lokaci mai yawa: sa'o'i da dama da aka ceto kan takarda guda, kamar yadda misalin wannan darasi ya nuna.\n\nAma LLMs kuma suna da iyakoki masu muhimmanci. Na farko shine hallucination: kirar na iya haifar da bayanan karya tare da alama ta amincewa. Na iya ambaton wata takarda ta kimiyya da ba ta wanzu ba, ko ba da adadin masu amfana da bai dace da gaskiya ba. Amincewa baya nufin daidaito — wannan shi ne dokar zinariya da za a tuna. Iyaka ta biyu ita ce ranar yanke ilimi (knowledge cutoff): kirar ba ta san abubuwan da suka faru bayan sabunta ta na karshe ba. Idan annoba ko rikicin agaji ya barke kwanan nan a Chadi, LLM na iya ba ku bayanan da suka shude.\n\nAkwai kuma son zuciya: LLMs sun samu horarwa musamman a rubutun Turanci, wanda marubutan Arewacin duniya suka samar da yawa. Amsoshinsu game da gaskiyar Afirka — tsarin tontine na ajiya, ayyukan noma na gida, harsunan kamar Hausa ko Bambara — na iya zama kasa da daidaito, ba cikakke ba, ko kuma masu kunsar ra'ayin da ba daidai ba. Wannan ba ya sanya su banza, amma yana bukatar karin tsarki."
       },
       {
         "title": "Kyakkyawan amfani da LLM a yanayin Afirka — duba da kare bayanai",
-        "body": "Don samun mafi kyau daga LLM a yanayin aikinku na ƙwararru, akwai ƙa'idodi guda uku masu mahimmanci. Ƙa'ida ta farko: ku tabbatar da gaskiyar bayanai koyaushe. Kamar yadda kuke yi da taƙaitaccen rahoto da wani mai horon aiki mai himma amma ƙarancin ƙwarewa ya rubuta, ku sake karanta kowace muhimmiyar jigo. Idan LLM ya ambaci yawan allurar rigakafi ko adadin masu amfana, ku yi kwatankwacin bayanan da wata hukuma mai aminci (OCHA, PNUD, Ministiriyar Lafiya).\n\nƘa'ida ta biyu: kada ku taɓa shigar da bayanai na musamman na masu amfana da ku. Sunayen, ƙauyuka, halin lafiya, da yanayin iyali na mutanen da suke cikin haɗari ba za a kwafa su zuwa LLM na jama'a ba. Yawancin waɗannan kayan aikin suna adana tattaunawarku don inganta ƙirarsu. Idan kuna aiki da bayanai masu mahimmanci — kamar yadda yawanci yake ga wakilai na filin aiki waɗanda ke sarrafa rarrabar abinci ko fayilolin kare — ku yi amfani da bayanai marasa sunan ko wakilan misalai waɗanda ba na gaskiya ba.\n\nƘa'ida ta uku: ku yi hankali da harsunan gida. Idan kun yi ƙoƙarin haifar da saƙo a Hausa ko Mooré don sadarwa da al'ummomin karkara, sakamakon na iya bayyana daidai ba tare da kasancewa haka ba. LLM ya yi horarwa kadan sosai a waɗannan harsunan fiye da Faransanci ko Turanci. Ku sanya wanda yake magana da harshen na asali ya tabbatar da abun cikin koyaushe kafin rarraba. Kamar yadda ba za ku raba magani ba tare da takarda mai tabbatarwa ba, kada ku yada saƙon al'umma ba tare da tabbatarwa na gida ba."
+        "body": "Don samun mafi kyau daga LLM a yanayin aikinku na kwararru, akwai ka'idodi guda uku masu mahimmanci. Ka'ida ta farko: ku tabbatar da gaskiyar bayanai koyaushe. Kamar yadda kuke yi da takaitaccen rahoto da wani mai horon aiki mai himma amma karancin kwarewa ya rubuta, ku sake karanta kowace muhimmiyar jigo. Idan LLM ya ambaci yawan allurar rigakafi ko adadin masu amfana, ku yi kwatankwacin bayanan da wata hukuma mai aminci (OCHA, PNUD, Ministiriyar Lafiya).\n\nKa'ida ta biyu: kada ku taba shigar da bayanai na musamman na masu amfana da ku. Sunayen, kauyuka, halin lafiya, da yanayin iyali na mutanen da suke cikin hadari ba za a kwafa su zuwa LLM na jama'a ba. Yawancin wadannan kayan aikin suna adana tattaunawarku don inganta kirarsu. Idan kuna aiki da bayanai masu mahimmanci — kamar yadda yawanci yake ga wakilai na filin aiki wadanda ke sarrafa rarrabar abinci ko fayilolin kare — ku yi amfani da bayanai marasa sunan ko wakilan misalai wadanda ba na gaskiya ba.\n\nKa'ida ta uku: ku yi hankali da harsunan gida. Idan kun yi kokarin haifar da sako a Hausa ko Mooré don sadarwa da al'ummomin karkara, sakamakon na iya bayyana daidai ba tare da kasancewa haka ba. LLM ya yi horarwa kadan sosai a wadannan harsunan fiye da Faransanci ko Turanci. Ku sanya wanda yake magana da harshen na asali ya tabbatar da abun cikin koyaushe kafin rarraba. Kamar yadda ba za ku raba magani ba tare da takarda mai tabbatarwa ba, kada ku yada sakon al'umma ba tare da tabbatarwa na gida ba."
       }
     ],
     "example": {
-      "title": "Ƙungiyar agaji SahelAid da rahoto na masu ba da taimako: tsakanin tasarrufin lokaci da tsarki",
-      "challenge": "Ƙungiyar daidaita SahelAid (ƙungiyar agaji mai hedikwata a Agadez) dole ne ta gabatar da rahoto na kwata-kwata ga mai ba da taimako na Turai a cikin sa'o'i 48. Mai daidaitawa dole ne ta rubuta shafuka 15 a Turanci, ta haɗa bayanai na filin aiki a Faransanci da Hausa. Ba ta taɓa amfani da LLM ba kafin kuma tana jin tsoron rashin lokaci.",
-      "solution": "Tana amfani da Claude don tsara da rubuta farkon sigar a Turanci daga bayanan filin aikin da take da su a Faransanci. Tana ba da LLM kawai bayanai masu taƙaitawa kuma marasa sunan (babu sunayen masu amfana). Sannan tana roƙi LLM ya sake tsara sassan fasaha a cikin tsarin da ya dace da masu ba da taimako na hukuma. Haka kuma, tana roƙi abokin aikinta mai magana da Hausa ya duba kalmomin al'adu da aka fassara.",
-      "impact": "Ana samar da rahoto a cikin sa'o'i 6 maimakon sa'o'i 18 na yau da kullun — tasarrufin sa'o'i 12 na aiki. A lokacin sake karanta ɗan adam, ƙungiyar ta gano wani lambar allurar rigakafi da aka hallucinate (kashi 87 bisa dari maimakon ainihin kashi 62 bisa dari daga bayanai na filin aiki). Ana gyara kafin gabatarwa. Bayan wannan lamari, SahelAid ta karɓi tsari na yau da kullun: kowane lamba da AI ta samar an haskaka shi da rawaya kuma wani mutum na biyu ya tabbatar da shi kafin amincewa da rahoto."
+      "title": "Kungiyar agaji SahelAid da rahoto na masu ba da taimako: tsakanin tasarrufin lokaci da tsarki",
+      "challenge": "Kungiyar daidaita SahelAid (kungiyar agaji mai hedikwata a Agadez) dole ne ta gabatar da rahoto na kwata-kwata ga mai ba da taimako na Turai a cikin sa'o'i 48. Mai daidaitawa dole ne ta rubuta shafuka 15 a Turanci, ta hada bayanai na filin aiki a Faransanci da Hausa. Ba ta taba amfani da LLM ba kafin kuma tana jin tsoron rashin lokaci.",
+      "solution": "Tana amfani da Claude don tsara da rubuta farkon sigar a Turanci daga bayanan filin aikin da take da su a Faransanci. Tana ba da LLM kawai bayanai masu takaitawa kuma marasa sunan (babu sunayen masu amfana). Sannan tana roki LLM ya sake tsara sassan fasaha a cikin tsarin da ya dace da masu ba da taimako na hukuma. Haka kuma, tana roki abokin aikinta mai magana da Hausa ya duba kalmomin al'adu da aka fassara.",
+      "impact": "Ana samar da rahoto a cikin sa'o'i 6 maimakon sa'o'i 18 na yau da kullun — tasarrufin sa'o'i 12 na aiki. A lokacin sake karanta dan adam, kungiyar ta gano wani lambar allurar rigakafi da aka hallucinate (kashi 87 bisa dari maimakon ainihin kashi 62 bisa dari daga bayanai na filin aiki). Ana gyara kafin gabatarwa. Bayan wannan lamari, SahelAid ta karbi tsari na yau da kullun: kowane lamba da AI ta samar an haskaka shi da rawaya kuma wani mutum na biyu ya tabbatar da shi kafin amincewa da rahoto."
     },
     "practice": {
       "title": "Ganowa hallucination a yanayi na gaskiya",
       "instructions": [
-        "Ku buɗe mataimakan AI (Claude, ChatGPT, ko wani) a wayar hannu kuma ku yi masa tambaya ta gaskiya mai takaici game da sashenku ko ƙasarku — misali: 'Menene yawan ruwan sha mai tsafta a Nijar a 2023?' ko 'Masu amfana nawa ne PAM ta taimaka a Mali a 2024?'",
-        "Ku rubuta amsar da AI ta ba, musamman lambobi, tushe da aka ambata, da kwanakin da aka ambata. Ku lura ko ƙirar ta nuna rashin tabbas ko ta amsa da cikakken amincewa.",
-        "Ku tabbatar da aƙalla wani muhimmin gaskiya daga amsar ta hanyar duba tushe mai aminci da za a iya samun ta a wayar hannu: gidan yanar gizon OCHA (reliefweb.int), gidan yanar gizon PNUD, ko rahoto na hukuma na ministiriya. Ku lura ko bayanan an tabbatar da su, kusan daidai, ko ba daidai ba, kuma ku yi tunani game da abin da wannan ke nufi ga amfaninku na ƙwararru."
+        "Ku bude mataimakan AI (Claude, ChatGPT, ko wani) a wayar hannu kuma ku yi masa tambaya ta gaskiya mai takaici game da sashenku ko kasarku — misali: 'Menene yawan ruwan sha mai tsafta a Nijar a 2023?' ko 'Masu amfana nawa ne PAM ta taimaka a Mali a 2024?'",
+        "Ku rubuta amsar da AI ta ba, musamman lambobi, tushe da aka ambata, da kwanakin da aka ambata. Ku lura ko kirar ta nuna rashin tabbas ko ta amsa da cikakken amincewa.",
+        "Ku tabbatar da akalla wani muhimmin gaskiya daga amsar ta hanyar duba tushe mai aminci da za a iya samun ta a wayar hannu: gidan yanar gizon OCHA (reliefweb.int), gidan yanar gizon PNUD, ko rahoto na hukuma na ministiriya. Ku lura ko bayanan an tabbatar da su, kusan daidai, ko ba daidai ba, kuma ku yi tunani game da abin da wannan ke nufi ga amfaninku na kwararru."
       ],
-      "observation": "A mafi yawan lokuta, za ku gano cewa LLM yana ba da amsa mai ruwa ta baki da amincewa — ko da yake wani abu ɗaya ko fiye ba daidai ba ne ko kusan ya shuɗe. Wannan gwaji yana nuna dokar asali: ruwan tafsiri na harshe baya tabbatar da amincin bayanai. Ku karɓi al'adar tabbatarwa biyu-biyu ga kowace lamba ko gaskiya da aka yi amfani da ita a cikin takarda ta ƙwararru daga yanzu."
+      "observation": "A mafi yawan lokuta, za ku gano cewa LLM yana ba da amsa mai ruwa ta baki da amincewa — ko da yake wani abu daya ko fiye ba daidai ba ne ko kusan ya shude. Wannan gwaji yana nuna dokar asali: ruwan tafsiri na harshe baya tabbatar da amincin bayanai. Ku karbi al'adar tabbatarwa biyu-biyu ga kowace lamba ko gaskiya da aka yi amfani da ita a cikin takarda ta kwararru daga yanzu."
     },
     "quiz": [
       {
@@ -429,7 +429,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
         "options": [
           {
             "key": "A",
-            "text": "Tuntuɓar encyclopedia ta yanar gizo da ake sabuntawa a lokaci na gaskiya"
+            "text": "Tuntubar encyclopedia ta yanar gizo da ake sabuntawa a lokaci na gaskiya"
           },
           {
             "key": "B",
@@ -437,15 +437,15 @@ export const iaLessonC2: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Kwafa jimloli kai tsaye daga takaddun hukuma na Majalisar Ɗinkin Duniya"
+            "text": "Kwafa jimloli kai tsaye daga takaddun hukuma na Majalisar Dinkin Duniya"
           },
           {
             "key": "D",
-            "text": "Ƙididdige amsar da ta dace da lissafi daga gaskiyar da aka tabbatar"
+            "text": "Kididdige amsar da ta dace da lissafi daga gaskiyar da aka tabbatar"
           }
         ],
         "answer": "B",
-        "explanation": "LLM yana haifar da rubutu ta hanyar hasashe na ƙididdiga: a kowane mataki, yana zaɓar token mafi yiwuwa bisa fiye da biliyoyin rubutun da aka horar da shi kansu. Ba ya tuntuɓar ma'ajiyar bayanai a lokaci na gaskiya kuma ba ya tabbatar da daidaiton gaskiya."
+        "explanation": "LLM yana haifar da rubutu ta hanyar hasashe na kididdiga: a kowane mataki, yana zabar token mafi yiwuwa bisa fiye da biliyoyin rubutun da aka horar da shi kansu. Ba ya tuntubar ma'ajiyar bayanai a lokaci na gaskiya kuma ba ya tabbatar da daidaiton gaskiya."
       },
       {
         "question": "Menene hallucination a mahallin LLM?",
@@ -460,18 +460,18 @@ export const iaLessonC2: Record<Language, LessonContent> = {
           },
           {
             "key": "C",
-            "text": "Bayanan ƙarya ko na ƙirƙira da ƙirar ta samar tare da alama ta amincewa"
+            "text": "Bayanan karya ko na kirkira da kirar ta samar tare da alama ta amincewa"
           },
           {
             "key": "D",
-            "text": "Saƙon kuskure lokacin da haɗin yanar gizo ya yi ƙanƙanta"
+            "text": "Sakon kuskure lokacin da hadin yanar gizo ya yi kankanta"
           }
         ],
         "answer": "C",
-        "explanation": "Hallucination ta faru ne lokacin da LLM ya samar da wata jigo ta ƙarya — lamba da aka ƙirƙira, wani tushe da ba ya wanzuwa, wani taron almara — amma da sautin amincewa. Wannan yana daya daga cikin haɗurra mafi muhimmanci ga amfani da ƙwararru: alama ta amincewa ta ƙirar ba ta tabbatar da daidaito."
+        "explanation": "Hallucination ta faru ne lokacin da LLM ya samar da wata jigo ta karya — lamba da aka kirkira, wani tushe da ba ya wanzuwa, wani taron almara — amma da sautin amincewa. Wannan yana daya daga cikin hadurra mafi muhimmanci ga amfani da kwararru: alama ta amincewa ta kirar ba ta tabbatar da daidaito."
       },
       {
-        "question": "Me ya sa ba za ku taɓa shigar da sunayen mutane da bayanai na musamman na masu amfana da ku cikin LLM na jama'a ba?",
+        "question": "Me ya sa ba za ku taba shigar da sunayen mutane da bayanai na musamman na masu amfana da ku cikin LLM na jama'a ba?",
         "options": [
           {
             "key": "A",
@@ -487,11 +487,11 @@ export const iaLessonC2: Record<Language, LessonContent> = {
           },
           {
             "key": "D",
-            "text": "Domin LLM zai buga waɗannan bayanai kai tsaye a yanar gizo"
+            "text": "Domin LLM zai buga wadannan bayanai kai tsaye a yanar gizo"
           }
         ],
         "answer": "C",
-        "explanation": "LLMs na jama'a kamar ChatGPT gaba ɗaya suna adana tattaunawa don inganta ƙirarsu. Shigar da bayanai na mutane masu rauni (sunayen, ƙauyuka, yanayin lafiya) yana keta ƙa'idodin kare bayanai kuma yana fallasa waɗannan mutane ga haɗurra. Ku yi amfani da bayanai marasa sunan koyaushe."
+        "explanation": "LLMs na jama'a kamar ChatGPT gaba daya suna adana tattaunawa don inganta kirarsu. Shigar da bayanai na mutane masu rauni (sunayen, kauyuka, yanayin lafiya) yana keta ka'idodin kare bayanai kuma yana fallasa wadannan mutane ga hadurra. Ku yi amfani da bayanai marasa sunan koyaushe."
       },
       {
         "question": "Taga mahallin (context window) na LLM yana nufin:",
@@ -502,69 +502,69 @@ export const iaLessonC2: Record<Language, LessonContent> = {
           },
           {
             "key": "B",
-            "text": "Sauri na haɗin yanar gizo da ake bukata don amfani da kayan aiki"
+            "text": "Sauri na hadin yanar gizo da ake bukata don amfani da kayan aiki"
           },
           {
             "key": "C",
-            "text": "Yawan harsunan da ƙirar take iya fahimtarsu"
+            "text": "Yawan harsunan da kirar take iya fahimtarsu"
           },
           {
             "key": "D",
-            "text": "Mafi yawan rubutu (tokens) da ƙirar za ta iya sarrafa a lokaci ɗaya"
+            "text": "Mafi yawan rubutu (tokens) da kirar za ta iya sarrafa a lokaci daya"
           }
         ],
         "answer": "D",
-        "explanation": "Taga mahallin ita ce iyaka ta ƙwaƙwalwar aiki ta LLM: fiye da wani adadin tokens (kalmomi da sassan kalmomi), ƙirar ba za ta iya la'akari da bayanan da suka gabata a tattaunawar ba. Shi ya sa musayar tsayi sosai na iya ragewa ingancin amsoshi."
+        "explanation": "Taga mahallin ita ce iyaka ta kwakwalwar aiki ta LLM: fiye da wani adadin tokens (kalmomi da sassan kalmomi), kirar ba za ta iya la'akari da bayanan da suka gabata a tattaunawar ba. Shi ya sa musayar tsayi sosai na iya ragewa ingancin amsoshi."
       },
       {
         "question": "Me ya sa ya kamata ku yi musamman hankali game da amsoshin LLM a Hausa ko Mooré?",
         "options": [
           {
             "key": "A",
-            "text": "Waɗannan harsunan an hana su amfani da su a kayan aiki na AI"
+            "text": "Wadannan harsunan an hana su amfani da su a kayan aiki na AI"
           },
           {
             "key": "B",
-            "text": "LLMs an horar da su a rubutu ƙasa da yawa a harsunan Afirka, wanda ke sanya amsoshinsu ƙasa da aminci"
+            "text": "LLMs an horar da su a rubutu kasa da yawa a harsunan Afirka, wanda ke sanya amsoshinsu kasa da aminci"
           },
           {
             "key": "C",
-            "text": "Wayoyin hannu na Afirka ba za su iya nuna waɗannan haruffa daidai ba"
+            "text": "Wayoyin hannu na Afirka ba za su iya nuna wadannan haruffa daidai ba"
           },
           {
             "key": "D",
-            "text": "Fassarar ta atomatik koyaushe cikakkiya ce ga waɗannan harsunan"
+            "text": "Fassarar ta atomatik koyaushe cikakkiya ce ga wadannan harsunan"
           }
         ],
         "answer": "B",
-        "explanation": "An horar da LLMs musamman a rubutun Turanci da manyan harsunan Turai. Harsunan Afirka kamar Hausa, Mooré, ko Bambara ba su cika wakiltar ba a cikin waɗannan kundin horarwa, wanda ke sanya amsoshi ƙasa da daidaito kuma mai yiwuwa cike da kuskure. Tabbatarwa da wanda yake magana da harshen na asali yana da mahimmanci."
+        "explanation": "An horar da LLMs musamman a rubutun Turanci da manyan harsunan Turai. Harsunan Afirka kamar Hausa, Mooré, ko Bambara ba su cika wakiltar ba a cikin wadannan kundin horarwa, wanda ke sanya amsoshi kasa da daidaito kuma mai yiwuwa cike da kuskure. Tabbatarwa da wanda yake magana da harshen na asali yana da mahimmanci."
       }
     ],
-    "reflection": "Ku yi tunani kan ayyukan ƙwararru da kuke yin koyaushe — rubuta rahoto, fassara saƙo ga al'umma, nazarin bayanai na filin aiki. Ta yaya za ku yi amfani da LLM don taimakonku a wannan aiki, kuma waɗanne matakan kariya za ku ɗauka don tabbatar da sakamakonsa da kare bayanan masu mahimmanci?",
+    "reflection": "Ku yi tunani kan ayyukan kwararru da kuke yin koyaushe — rubuta rahoto, fassara sako ga al'umma, nazarin bayanai na filin aiki. Ta yaya za ku yi amfani da LLM don taimakonku a wannan aiki, kuma wadanne matakan kariya za ku dauka don tabbatar da sakamakonsa da kare bayanan masu mahimmanci?",
     "glossary": [
       {
-        "term": "LLM (Babban Ƙirar Harshe)",
-        "definition": "Shirin hankali na wucin gadi da aka horar da shi a kan adadi mai yawa na rubutu don haifar da harshen ɗan Adam. ChatGPT, Claude, da Gemini sune misalai na LLMs."
+        "term": "LLM (Babban Kirar Harshe)",
+        "definition": "Shirin hankali na wucin gadi da aka horar da shi a kan adadi mai yawa na rubutu don haifar da harshen dan Adam. ChatGPT, Claude, da Gemini sune misalai na LLMs."
       },
       {
         "term": "Token",
-        "definition": "Mafi ƙaramin naúrar rubutu da LLM ke sarrafa, kimanin daidai da gajeren kalma ko wani ɓangare na kalma. LLM yana hasashen tokens ɗaya bayan ɗaya don gina amsarsa."
+        "definition": "Mafi karamin naúrar rubutu da LLM ke sarrafa, kimanin daidai da gajeren kalma ko wani bangare na kalma. LLM yana hasashen tokens daya bayan daya don gina amsarsa."
       },
       {
         "term": "Hallucination",
-        "definition": "Lamari da LLM ke haifar da bayanan ƙarya ko na ƙirƙira tare da sautin amincewa ba tare da gargaɗi ba — misali, ambaton rahoto da ba ya wanzuwa ko ba da lamba mara daidaito."
+        "definition": "Lamari da LLM ke haifar da bayanan karya ko na kirkira tare da sautin amincewa ba tare da gargadi ba — misali, ambaton rahoto da ba ya wanzuwa ko ba da lamba mara daidaito."
       },
       {
         "term": "Taga Mahallin (Context Window)",
-        "definition": "Iyaka ta ƙwaƙwalwar aiki ta LLM: mafi yawan rubutu da za ta iya la'akari da shi a musayar. Fiye da wannan iyaka, na iya 'mantawa' da bayanan da suka gabata a tattaunawar."
+        "definition": "Iyaka ta kwakwalwar aiki ta LLM: mafi yawan rubutu da za ta iya la'akari da shi a musayar. Fiye da wannan iyaka, na iya 'mantawa' da bayanan da suka gabata a tattaunawar."
       },
       {
         "term": "Ranar Yanke Ilimi (Knowledge Cutoff)",
-        "definition": "Ranar bayan da LLM ba ta ƙara karɓar sabbin bayanai na horarwa ba. Abubuwan da suka faru bayan wannan ranar ba ta san su ba, wanda na iya sanya amsoshinsa na tsufa."
+        "definition": "Ranar bayan da LLM ba ta kara karbar sabbin bayanai na horarwa ba. Abubuwan da suka faru bayan wannan ranar ba ta san su ba, wanda na iya sanya amsoshinsa na tsufa."
       },
       {
         "term": "Fine-tuning",
-        "definition": "Dabarar yin horarwa ga LLM na gaba ɗaya a kan kundin bayanai na musamman (misali, rubutun likitanci ko rahotannin agaji na ɗan adam) don daidaita ta ga wani fanni na musamman da inganta daidaitonta a wannan mahallin."
+        "definition": "Dabarar yin horarwa ga LLM na gaba daya a kan kundin bayanai na musamman (misali, rubutun likitanci ko rahotannin agaji na dan adam) don daidaita ta ga wani fanni na musamman da inganta daidaitonta a wannan mahallin."
       }
     ]
   }
