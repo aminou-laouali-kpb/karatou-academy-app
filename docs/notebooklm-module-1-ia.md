@@ -2,6 +2,9 @@
 
 > **Fichier genere.** Il est produit par `node scripts/build-notebooklm-module-1.mjs` a partir du
 > contenu reel des lecons. Ne le modifiez pas a la main : corrigez la lecon, puis relancez le script.
+> Le script resout chaque lecon comme le lecteur : la base de donnees d'abord (texte publie depuis
+> `/admin/lecons`), le registre du depot ensuite. Sans variables d'environnement Supabase, il ne voit
+> que le registre et vous en avertit.
 
 Pour chaque lecon vous trouverez ci-dessous **la source a charger dans NotebookLM** (version francaise
 et version anglaise) et **le prompt de generation** correspondant. Une video par lecon et par langue,

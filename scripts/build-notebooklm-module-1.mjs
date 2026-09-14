@@ -321,13 +321,30 @@ async function main() {
     appType: 'custom',
     logLevel: 'error',
   });
-  const { loadAuthoredLesson } = await server.ssrLoadModule('/src/data/localizedContent.ts');
+  // Le lecteur resout le contenu base de donnees d'abord, registre TypeScript
+  // ensuite : un texte publie depuis /admin/lecons prime sur le fichier du
+  // depot. On emprunte le meme chemin, sans quoi une lecon editee au CMS
+  // produirait des videos a partir d'un texte perime.
+  const { resolveLessonContent } = await server.ssrLoadModule(
+    '/src/services/lessonContentRepository.ts'
+  );
+  const { isSupabaseConfigured } = await server.ssrLoadModule('/src/lib/supabaseClient.ts');
+  if (!isSupabaseConfigured) {
+    console.warn(
+      'Supabase n\'est pas configure : le document est genere depuis le registre du depot.\n'
+      + 'Si des lecons ont ete publiees depuis /admin/lecons, relancez avec les variables\n'
+      + "d'environnement Supabase pour que les sources refletent le texte reellement affiche."
+    );
+  }
 
   const parts = [];
   parts.push(`# Videos NotebookLM — Module 1 « Intelligence Artificielle » (c1 → c8)
 
 > **Fichier genere.** Il est produit par \`node scripts/build-notebooklm-module-1.mjs\` a partir du
 > contenu reel des lecons. Ne le modifiez pas a la main : corrigez la lecon, puis relancez le script.
+> Le script resout chaque lecon comme le lecteur : la base de donnees d'abord (texte publie depuis
+> \`/admin/lecons\`), le registre du depot ensuite. Sans variables d'environnement Supabase, il ne voit
+> que le registre et vous en avertit.
 
 Pour chaque lecon vous trouverez ci-dessous **la source a charger dans NotebookLM** (version francaise
 et version anglaise) et **le prompt de generation** correspondant. Une video par lecon et par langue,
@@ -373,8 +390,8 @@ une decision projet. Le texte de la lecon, lui, est integralement disponible en 
 
   const lessons = {};
   for (const id of IDS) {
-    const fr = await loadAuthoredLesson(SLUG, id, 'fr');
-    const en = await loadAuthoredLesson(SLUG, id, 'en');
+    const fr = await resolveLessonContent(SLUG, id, 'fr');
+    const en = await resolveLessonContent(SLUG, id, 'en');
     if (!fr || !en) throw new Error(`Lecon ${id} introuvable dans le registre`);
     lessons[id] = { fr, en };
     parts.push(`| ${id} | ${fr.title} | ${PROMPTS[id].minutes} min | \`${FILES[id]}\` |`);

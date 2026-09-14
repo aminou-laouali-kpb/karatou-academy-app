@@ -49,6 +49,24 @@ describe('module intelligence-artificielle', () => {
     });
   });
 
+  it('les bonnes reponses ne se concentrent pas sur une seule position', async () => {
+    for (const id of IDS) {
+      for (const lang of LANGS) {
+        const lesson = await loadAuthoredLesson(SLUG, id, lang);
+        const answers = lesson?.quiz.map((q) => q.answer) ?? [];
+        const counts = new Map<string, number>();
+        answers.forEach((a) => counts.set(a, (counts.get(a) ?? 0) + 1));
+        // un apprenant ne doit pas pouvoir reussir en cochant toujours la meme lettre
+        expect(counts.size, `${id}/${lang} une seule position correcte`).toBeGreaterThan(1);
+        const dominant = Math.max(...counts.values());
+        expect(
+          dominant / answers.length,
+          `${id}/${lang} position correcte trop dominante (${answers.join('')})`
+        ).toBeLessThanOrEqual(0.6);
+      }
+    }
+  });
+
   it('les trois langues ont la meme structure', async () => {
     for (const id of IDS) {
       const [fr, en, ha] = await Promise.all(
