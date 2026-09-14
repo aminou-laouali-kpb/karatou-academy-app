@@ -5,6 +5,11 @@
 -- certificat : karatou_issue_certificate compte les lignes de karatou_courses
 -- du module pour verifier que tout est termine. Sans elles, pas de certificat.
 --
+-- Le module est cree en 'draft' : la structure vient de Supabase, mais le contenu
+-- des lecons vient du bundle front. Tant que la PR qui embarque le registre n'est
+-- pas deployee, un module publie afficherait le gabarit auto-genere a la place des
+-- six chapitres. Passer en 'published' apres le deploiement.
+--
 -- Les libelles reprennent mockData.ts au caractere pres (sans accents, comme les
 -- modules deja en base), pour qu'un passage ulterieur de scripts/seed-supabase-content.mjs
 -- ne produise aucune divergence. translations reste vide : la copie EN/HA vient
@@ -19,7 +24,7 @@ values
    'Utiliser un assistant IA au quotidien',
    'Prendre en main Claude pas a pas : formuler une demande claire, traiter ses propres documents et verifier les reponses avant de les utiliser.',
    '💬', 'from-orange-600 to-amber-500', '1h 20min', 'Debutant',
-   0, 0, true, 4, 'published', '{}'::jsonb)
+   0, 0, true, 4, 'draft', '{}'::jsonb)
 on conflict (id) do update set
   rubrique_id = excluded.rubrique_id,
   slug        = excluded.slug,
@@ -32,8 +37,9 @@ on conflict (id) do update set
   level       = excluded.level,
   is_free     = excluded.is_free,
   display_order = excluded.display_order,
-  status      = excluded.status,
   updated_at  = now();
+-- status volontairement absent du DO UPDATE : la publication est une decision
+-- editoriale, une rejoue de migration ne doit jamais la reprendre a son compte.
 
 insert into karatou_courses (id, module_id, title, duration, description, display_order, status)
 values
