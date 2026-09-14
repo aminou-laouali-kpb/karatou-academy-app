@@ -72,8 +72,11 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
 
 **Contenu**
 - `content` : exactement 4 sections, chacune avec un titre parlant (pas « Section 1 »).
-- `example` : cas concret africain avec `impact` chiffré mais prudent
-  (« ~3 semaines économisées », « environ 1 500 000 FCFA évités », avec réserve si estimé).
+- `example` : cas concret avec `impact` chiffré mais prudent (« ~3 semaines économisées »,
+  « environ 1 500 000 FCFA évités », avec réserve si estimé). **Varier les cas d'une leçon à
+  l'autre** : secteurs (entreprise, administration, école, association, ONG, indépendant) et
+  régions (Afrique, Asie, Amérique latine, Europe). Un module entier de cas sahéliens exclut
+  une partie du public.
 - `practice` : 3 instructions numérotables, réalisables sur téléphone ou papier avec des
   outils gratuits ; `observation` = ce que l'apprenant doit constater.
 - `quiz` : 5 questions ; 4 options A–D plausibles ; `answer` VARIE d'une question à l'autre
@@ -83,12 +86,15 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
   « Darasi 2 », jamais « leçon p2 ». (Seul le champ `id` porte l'identifiant.)
 
 **Ton et pédagogie**
-- Audience : professionnels africains francophones, souvent sur mobile, connectivité
-  limitée, budgets FCFA. Vouvoiement. Phrases courtes. Zéro jargon non expliqué —
-  chaque terme technique reçoit une analogie du quotidien (griot, marché, récolte,
-  tontine, chantier, campagne agricole…).
-- Ancrage africain dans CHAQUE section : ONG, coopératives, M&E, bailleurs, saison des
-  pluies, coordination WhatsApp, hors-ligne, Orange Money…
+- Audience : **toute personne curieuse du sujet, partout dans le monde** — salariés,
+  étudiants, indépendants, agents de terrain, bénévoles — souvent sur mobile, avec une
+  connectivité limitée et un petit budget. Vouvoiement. Phrases courtes. Zéro jargon non
+  expliqué — chaque terme technique reçoit une analogie du quotidien (marché, récolte,
+  tontine, chantier, atelier, salle de classe…).
+- Ancrage concret dans CHAQUE section, mais **varié** : ONG et coopératives, mais aussi PME,
+  administration, école, cabinet indépendant ; Orange Money et M-Pesa, mais aussi UPI, Pix ou
+  une carte bancaire ; hors-ligne et faible connectivité, du Sahel aux Andes. Les exemples
+  africains restent bienvenus et nombreux — ils ne doivent jamais être les seuls.
 - Honnêteté : dire quand un outil/méthode est excessif pour un petit besoin, signaler
   les limites et les risques. Pas de chiffre inventé.
 
@@ -97,7 +103,8 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
 - EN et HA = traductions complètes et fidèles (mêmes 4 sections, mêmes 5 questions,
   même exemple, mêmes 6 termes dans le même ordre). Les extraits de code restent
   identiques dans les 3 langues.
-- HA : haoussa naturel (boko), caractères ƙ ɗ ɓ corrects. Les termes de glossaire dont le
+- HA : haoussa naturel (boko), **sans lettres crochetées** — écrire k, d, b, y au lieu de
+  ƙ ɗ ɓ ƴ (convention retenue dans tout le dépôt). Les termes de glossaire dont le
   libellé canonique est français/anglais gardent ce libellé avec une glose haoussa entre
   parenthèses. Toujours signaler en commentaire d'en-tête que le HA doit être validé par
   un locuteur natif.
@@ -120,4 +127,5 @@ que la réussite débloque le certificat numérique vérifiable.
 - [ ] Bloc `video` vide + commentaire TODO présent
 - [ ] Aucun id interne (`grep -E '"(Leçon|Lesson|Darasi[n]?) [a-z][0-9]"'` ne rend rien)
 - [ ] Apostrophes typographiques en FR/HA ; guillemets « » ; pas de markdown dans les chaînes
-- [ ] Exemple avec impact chiffré prudent ; ancrage africain dans chaque section
+- [ ] Exemple avec impact chiffré prudent ; ancrage concret et varié (secteurs et régions)
+      dans chaque section, jamais un module entier centré sur une seule région

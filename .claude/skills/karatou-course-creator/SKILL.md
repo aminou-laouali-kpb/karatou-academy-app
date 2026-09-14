@@ -6,9 +6,11 @@ description: Création de cours complets pour la web app Karatou Academy — mod
 # Karatou Course Creator
 
 Assistant de création de cours pour **Karatou Academy**, la plateforme de formation certifiante
-trilingue (français / anglais / haoussa) destinée aux professionnels africains francophones
-(ONG, coopératives, secteur humanitaire et développement, petites structures — souvent sur
-mobile, avec connectivité limitée et budgets en FCFA).
+trilingue (français / anglais / haoussa) ouverte à **toute personne curieuse du sujet, partout
+dans le monde** : salariés, étudiants, indépendants, agents de terrain, bénévoles — souvent sur
+mobile, avec une connectivité limitée et un petit budget. Le public francophone d'Afrique de
+l'Ouest reste le cœur historique de la plateforme : ses réalités nourrissent les exemples, elles
+ne bornent pas l'audience.
 
 Ce skill transforme une idée de cours en **paquet d'intégration complet** : fichiers de leçons
 TypeScript prêts à brancher, snippets de registre, entrée de catalogue, instructions Supabase
