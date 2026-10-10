@@ -47,7 +47,7 @@ export const lesson1: LessonContent = {
   objective:
     "L'objectif de cette leçon est de démystifier l'intelligence artificielle en définissant ses principes de base, son fonctionnement simplifié et ses applications concrètes — dans la vie quotidienne, au travail et dans les projets de développement, partout dans le monde.",
   video: {
-    fr: "https://www.youtube.com/embed/kmSmJwpZAmY",
+    fr: "https://www.youtube.com/embed/OlHLuouQCP8",
     en: "https://www.youtube.com/embed/BOLBYpEU190",
     ha: "https://www.youtube.com/embed/oeWtnEDdgeg",
   },

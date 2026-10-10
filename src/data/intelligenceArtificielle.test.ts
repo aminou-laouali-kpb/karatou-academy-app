@@ -49,6 +49,20 @@ describe('module intelligence-artificielle', () => {
     });
   });
 
+  it('chaque lecon a sa video francaise, au format que le lecteur sait integrer', async () => {
+    // le lecteur affiche la video dans une iframe : un lien youtu.be ou watch?v= y reste vide
+    const EMBED = /^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]{11}$/;
+    for (const id of IDS) {
+      for (const lang of LANGS) {
+        const lesson = await loadAuthoredLesson(SLUG, id, lang);
+        expect(lesson?.video.fr, `${id}/${lang} video.fr`).toMatch(EMBED);
+        for (const url of Object.values(lesson?.video ?? {})) {
+          if (url) expect(url, `${id}/${lang} ${url}`).toMatch(EMBED);
+        }
+      }
+    }
+  });
+
   it('les bonnes reponses ne se concentrent pas sur une seule position', async () => {
     for (const id of IDS) {
       for (const lang of LANGS) {

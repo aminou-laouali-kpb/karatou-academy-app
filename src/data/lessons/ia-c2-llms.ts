@@ -10,7 +10,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
     "title": "Comprendre les LLMs — comment ChatGPT et Claude « parlent » vraiment",
     "objective": "À la fin de cette leçon, vous saurez expliquer ce qu'est un grand modèle de langage (LLM) et comment il génère du texte par prédiction. Vous serez capable d'identifier ses forces et ses limites, notamment les hallucinations et la date de coupure. Vous saurez l'utiliser avec discernement dans votre travail, quel que soit votre pays ou votre secteur, en protégeant les données sensibles des personnes que vous servez : bénéficiaires, clients, patients, élèves ou usagers.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/HAQ6tPUf924",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
     "title": "Understanding LLMs — how ChatGPT and Claude really \"speak\"",
     "objective": "By the end of this lesson, you will be able to explain what a large language model (LLM) is and how it generates text through prediction. You will be able to identify its strengths and limitations, including hallucinations and the knowledge cutoff. You will know how to use it wisely in your own work, whatever your country or sector, while protecting the sensitive data of the people you serve: beneficiaries, clients, patients, students or service users.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/HAQ6tPUf924",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC2: Record<Language, LessonContent> = {
     "title": "Fahimtar LLMs — yadda ChatGPT da Claude suke « magana » gaskiya",
     "objective": "A karshen wannan darasi, za ku iya bayyana abin da babban kirar harshe (LLM) yake da kuma yadda take haifar da rubutu ta hanyar hasashe. Za ku iya gane karfinta da iyakokinta, musamman hallucination da ranar yanke ilimi. Za ku san yadda ake amfani da ita da hikima a aikinku, ko a wace kasa ko wane fanni kuke, kuna kare bayanai masu mahimmanci na mutanen da kuke hidima: masu amfana, abokan ciniki, majiyyata, dalibai ko masu neman hidima.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/HAQ6tPUf924",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,

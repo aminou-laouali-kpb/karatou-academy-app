@@ -10,7 +10,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "title": "L'IA dans votre organisation — choisir les bons cas d'usage",
     "objective": "À la fin de cette leçon, vous serez capable d'identifier les activités où l'IA peut apporter une réelle valeur, dans l'organisation qui est la vôtre : entreprise, administration, école, hôpital, coopérative, association, ONG ou activité indépendante. Vous saurez évaluer la faisabilité de chaque opportunité en tenant compte des données disponibles, des contraintes concrètes de votre environnement de travail et du niveau de risque. Vous pourrez prioriser un premier cas d'usage pilote et préparer votre équipe à l'adopter progressivement.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/Jw4d59hMLgk",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "title": "AI in Your Organization — Choosing the Right Use Cases",
     "objective": "By the end of this lesson, you will be able to identify the activities where AI can bring real value in whichever organization is yours: a company, a public administration, a school, a hospital, a cooperative, an association, an NGO, or your own independent practice. You will know how to assess the feasibility of each opportunity, taking into account available data, the concrete constraints of your working environment, and the level of risk. You will be able to prioritize a first pilot use case and prepare your team to adopt it gradually.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/Jw4d59hMLgk",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC4: Record<Language, LessonContent> = {
     "title": "AI a Cikin Kungiyarku — Zabar Ayyukan da Suka Dace",
     "objective": "A karshen wannan darasi, za ku iya gano ayyukan da AI zai iya kawo fa'ida ta gaske a cikin kungiyar da ku ke ciki: kamfani, ma'aikatar gwamnati, makaranta, asibiti, kungiyar hadin gwiwa, kungiyar agaji, NGO, ko sana'ar ku ta kanku. Za ku san yadda ake kimanta yiwuwar kowane dama, tare da la'akari da bayanan da ake da su, kalubalen gaske na wurin aikin ku, da matakin hadari. Za ku iya zabar harka ta farko ta jarrabawa kuma ku shirya kungiyarku don karbar canjin a hankali.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/Jw4d59hMLgk",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,

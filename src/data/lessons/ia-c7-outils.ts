@@ -10,7 +10,7 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     "title": "Votre boîte à outils IA — choisir et combiner les bons outils",
     "objective": "À l'issue de cette leçon, vous serez capable de comparer plusieurs outils IA selon vos besoins concrets, votre budget et vos contraintes pratiques. Vous saurez choisir un outil adapté à votre langue de travail, à votre connexion et à la sensibilité de vos données. Vous serez également en mesure de combiner plusieurs outils dans un flux de travail simple pour gagner du temps sur les tâches administratives. Enfin, vous pourrez démarrer gratuitement et progresser à votre rythme.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/oqeulSfIgf4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     "title": "Your AI Toolkit — Choosing and Combining the Right Tools",
     "objective": "By the end of this lesson, you will be able to compare several AI tools based on your concrete needs, budget, and practical constraints. You will know how to select a tool suited to your working language, connectivity level, and data sensitivity. You will also be able to combine several tools into a simple workflow to save time on administrative tasks. Finally, you will be ready to start for free and progress at your own pace.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/oqeulSfIgf4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC7: Record<Language, LessonContent> = {
     "title": "Kayan aikinku na AI — Zabar da hada kayan aiki masu dacewa",
     "objective": "Bayan wannan darasi, za ku iya kwatanta kayan aiki na AI da yawa bisa ga bukatunku na ainihi, kasafin kudi, da kuntatawa na aiki. Za ku san yadda ake zabar kayan aiki da ya dace da harshen aikinku, damar intanet, da sirrin bayananku. Hakanan za ku iya hada kayan aiki da yawa a cikin tsari mai sauki don adana lokaci akan ayyukan gudanarwa. A karshe, za ku iya farawa kyauta kuma ku ci gaba a sauri naku.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/oqeulSfIgf4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
