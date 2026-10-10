@@ -10,7 +10,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "title": "Prompt Engineering — donner les bonnes consignes à l'IA",
     "objective": "À la fin de cette leçon, vous saurez rédiger des consignes (prompts) structurées et efficaces pour obtenir des résultats fiables, professionnels et directement utilisables. Vous maîtriserez les quatre composantes clés d'un bon prompt : le rôle, le contexte, la tâche et le format. Vous serez capable d'améliorer vos prompts par itération et de les adapter aux situations concrètes de votre métier, que vous soyez salarié, étudiant, indépendant, agent d'une administration ou bénévole.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/XIRBvjP4_NU",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "title": "Prompt Engineering — Giving the Right Instructions to AI",
     "objective": "By the end of this lesson, you will know how to write structured, effective prompts to get reliable, professional, and directly usable results. You will master the four key components of a good prompt: role, context, task, and format. You will be able to improve your prompts through iteration and adapt them to the real situations of your own work, whether you are an employee, a student, self-employed, a public administration officer, or a volunteer.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/XIRBvjP4_NU",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC3: Record<Language, LessonContent> = {
     "title": "Prompt Engineering — Yadda Ake Ba AI Umurni Daidai",
     "objective": "A karshen wannan darasi, za ku san yadda ake rubuta umurnai (prompts) da ke da tsari kuma masu amfani don samun sakamako ingantacce, na sana'a, kuma za a iya amfani da shi nan take. Za ku koyi ginshikan hudu na prompt mai kyau: rawa, mahallin aiki, aikin da ake son yi, da tsarin amsa. Za ku iya inganta promptoci ku ta hanyar gyara mataki-mataki, kuma ku daidaita su ga ayyukan ku na gaske, ko kai ma'aikaci ne, dalibi, mai sana'ar kansa, ma'aikacin hukumar gwamnati ko mai aikin sa kai.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/XIRBvjP4_NU",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,

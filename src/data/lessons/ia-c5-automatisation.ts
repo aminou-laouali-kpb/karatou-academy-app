@@ -10,7 +10,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "title": "Automatiser sans perdre le contrôle — l'humain dans la boucle",
     "objective": "À l'issue de cette leçon, vous serez capable d'identifier les tâches répétitives de votre quotidien — au bureau, en classe, en boutique, dans un cabinet ou sur le terrain — qui se prêtent à l'automatisation. Vous saurez choisir des outils simples et accessibles pour mettre en place un premier workflow automatisé. Vous apprendrez à maintenir un contrôle humain sur les étapes sensibles et à mesurer honnêtement le temps gagné par rapport aux risques introduits.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YaWMmZwExj4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "title": "Automating Without Losing Control — Keeping the Human in the Loop",
     "objective": "By the end of this lesson, you will be able to identify the repetitive tasks in your daily life — in an office, a classroom, a shop, a practice, or out in the field — that are suitable for automation. You will know how to choose simple, accessible tools to set up your first automated workflow. You will learn to maintain human oversight at sensitive steps and to honestly measure the time saved against the risks introduced.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YaWMmZwExj4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC5: Record<Language, LessonContent> = {
     "title": "Yin Aiki ta Atomatik ba tare da Rasa Iko ba — Dan Adam Ya Kasance a Tsakiya",
     "objective": "Bayan kammala wannan darasi, za ku iya gano ayyukan da kuke maimaita su kowace rana — a ofis, a aji, a shago, a ofishin kwararre ko a filin aiki — wadanda suka dace da atomatik. Za ku san yadda ake zabar kayan aiki mai sauki don kafa tsarin atomatik na farko. Za ku koyi yadda ake kiyaye iko na dan adam a matakan mahimmi, kuma za ku iya aunawa gaskiya awa da aka adana idan aka kwatanta da hadarurrukan da aka samar.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YaWMmZwExj4",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,

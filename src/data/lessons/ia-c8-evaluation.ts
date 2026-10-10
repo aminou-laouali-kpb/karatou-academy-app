@@ -10,7 +10,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
     "title": "Évaluation finale — validez vos acquis et obtenez votre certificat",
     "objective": "À l'issue de cette leçon, vous serez capable de mobiliser l'ensemble des connaissances acquises dans les leçons 1 à 7 pour répondre à des situations concrètes de votre travail, quel que soit votre métier : entreprise, administration, école, association, activité indépendante ou terrain humanitaire. Vous démontrerez votre compréhension de l'intelligence artificielle, des grands modèles de langage, des cas d'usage pratiques et des enjeux éthiques. Cette évaluation valide votre maîtrise du module complet et débloque votre certificat numérique vérifiable Karatou Academy.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/gppAE45AUMs",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -294,7 +294,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
     "title": "Final Assessment — Validate Your Learning and Earn Your Certificate",
     "objective": "By the end of this lesson, you will be able to draw on all the knowledge acquired in lessons 1 through 7 to respond to concrete situations in your own work, whatever your field: a company, a public administration, a school, an association, an independent practice, or humanitarian field work. You will demonstrate your understanding of artificial intelligence, large language models, practical use cases, and ethical issues. This assessment validates your mastery of the complete module and unlocks your verifiable digital certificate from Karatou Academy.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/gppAE45AUMs",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -578,7 +578,7 @@ export const iaLessonC8: Record<Language, LessonContent> = {
     "title": "Karshen Jarrabawa — Tabbatar da Abin da Ka Koya kuma Ka Sami Takardar Shedar Ka",
     "objective": "Bayan kammala wannan darasin, za ku iya amfani da dukan ilimin da kuka samu a darussan 1 zuwa 7 don magance matsalolin aiki na gaske a wurin aikinku, kowace sana'a kuke yi: kamfani, ma'aikatar gwamnati, makaranta, kungiya, aikin kai, ko filin agaji. Za ku nuna fahimtarku game da hankali na wucin gadi, manyan samfuran harshe, amfani na aiki, da tambayoyin da'a. Wannan jarrabawa tana tabbatar da cewa kun kware a dukan sashen, kuma tana bude takardar shedar dijital da za a iya tabbatar da ita ta Karatou Academy.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/gppAE45AUMs",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,

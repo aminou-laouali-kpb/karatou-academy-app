@@ -10,7 +10,7 @@ export const iaLessonC6: Record<Language, LessonContent> = {
     "title": "Éthique, biais et protection des données — utiliser l'IA de façon responsable",
     "objective": "À l'issue de cette leçon, vous serez capable d'identifier les principales sources de biais dans les systèmes d'IA et leurs effets concrets sur des groupes de personnes très différents, partout dans le monde. Vous saurez protéger les données personnelles des personnes dont vous traitez les dossiers — clients, patients, élèves, usagers, candidats, collègues, bénéficiaires — en appliquant les principes de confidentialité et de consentement éclairé. Vous pourrez détecter la désinformation générée par l'IA et adopter les bonnes pratiques de vérification. Vous mettrez en place des garde-fous pour éviter un usage non encadré de l'IA dans votre équipe, votre entreprise, votre école ou votre association.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/_TAD_V9kxGo",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -198,7 +198,7 @@ export const iaLessonC6: Record<Language, LessonContent> = {
     "title": "Ethics, Bias, and Data Protection — Using AI Responsibly",
     "objective": "By the end of this lesson, you will be able to identify the main sources of bias in AI systems and their concrete effects on very different groups of people, anywhere in the world. You will know how to protect the personal data of the people whose records you handle — customers, patients, students, service users, job applicants, colleagues, beneficiaries — by applying the principles of confidentiality and informed consent. You will be able to detect AI-generated misinformation and adopt good verification practices. You will put safeguards in place to prevent uncontrolled use of AI in your team, your company, your school, or your association.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/_TAD_V9kxGo",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
@@ -386,7 +386,7 @@ export const iaLessonC6: Record<Language, LessonContent> = {
     "title": "Dabi'a, Nuna Bambanci, da Kare Bayanan Sirri — Amfani da AI da Hikima",
     "objective": "A karshen wannan darasin, za ku iya gane manyan abubuwan da ke haifar da nuna bambanci a cikin tsarin AI da tasirinsu kai tsaye kan kungiyoyin mutane mabambanta a duk fadin duniya. Za ku san yadda za ku kare bayanan sirri na mutanen da kuke sarrafa bayanansu — abokan ciniki, marasa lafiya, dalibai, masu amfani da sabis, masu neman aiki, abokan aiki, masu amfani da taimako — ta hanyar aiwatar da ka'idodin asiri da yarda da sani. Za ku iya gano karya da AI ke kirkira da kuma amfani da hanyoyin tabbatarwa masu kyau. Za ku aza tsare-tsare don hana amfani da AI ba tare da kulawa ba a kungiyarku, kamfaninku, makarantarku ko kungiyar sa kai.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/_TAD_V9kxGo",
       "en": "",
       "ha": ""
     } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
