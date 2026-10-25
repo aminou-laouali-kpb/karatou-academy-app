@@ -69,6 +69,6 @@ plateforme : ces vidéos sont produites et gardées en attente.
 | 12 | Étudier et rédiger avec l'IA | Motion | à désigner | `12-etudier-rediger-ia_CLAUDE.md` |
 | 13 | IA pour l'administration | Motion | Idriss | `13-ia-administration_CLAUDE.md` |
 | 14 | IA et santé communautaire | Motion | à désigner | `14-ia-sante-communautaire_CLAUDE.md` |
-| 15 | Choisir le bon outil IA gratuit | Motion | Idriss | `15-outils-ia-gratuits_CLAUDE.md` |
+| 15 | Choisir le bon outil IA gratuit et installer une IA open source (fusionné avec « Comment installer une IA gratuite ») | Motion | Idriss | `15-outils-ia-gratuits_CLAUDE.md` |
 
 Version 1.0 — 18 octobre 2026.
