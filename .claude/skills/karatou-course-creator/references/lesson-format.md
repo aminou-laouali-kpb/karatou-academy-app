@@ -72,6 +72,9 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
 
 **Contenu**
 - `content` : exactement 4 sections, chacune avec un titre parlant (pas « Section 1 »).
+- **Titres clairs et explicites** (règle du client) : le titre de la leçon et ceux des sections disent
+  concrètement ce que l'apprenant fait ou obtient (« Méthode 4 : automatiser une suite de tâches avec n8n »),
+  jamais un mot vague ou une formule d'accroche (« Le secret », « La magie », « Les bases »).
 - `example` : cas concret avec `impact` chiffré mais prudent (« ~3 semaines économisées »,
   « environ 1 500 000 FCFA évités », avec réserve si estimé). **Varier les cas d'une leçon à
   l'autre** : secteurs (entreprise, administration, école, association, ONG, indépendant) et

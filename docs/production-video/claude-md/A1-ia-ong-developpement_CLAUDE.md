@@ -404,6 +404,8 @@ safe_areas:
   ou à copier suit ces quatre blocs ; un cours qui enseigne la rédaction de consignes enseigne RCTF.
 - **Le quiz n'apparaît jamais dans la vidéo** : ni question, ni réponse, ni renvoi au quiz. Il vit dans
   l'onglet Quiz de la leçon, sur le site.
+- **Titres clairs et explicites** : titres de leçons, de cartes et d'unités de notion disent concrètement ce que
+  l'apprenant fait ou obtient ; aucun mot vague ni formule d'accroche (« Le secret », « La magie »…).
 - Structure en 6 temps (B1 accroche · B2 cadrage · B3 notion · B4 application · B5 consolidation · B6 clôture),
   détaillée dans chaque leçon de la Partie 2. Cartes d'ouverture et de clôture en plus.
 - **Promesse** à la 2ᵉ personne avant 0:12, reprise mot pour mot sur la carte de rappel. **Un seul cas** ouvert en
