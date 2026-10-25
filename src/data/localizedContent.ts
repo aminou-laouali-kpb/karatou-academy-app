@@ -478,6 +478,13 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'ia-administration/ad3': () => import('./lessons/ia-administration/ad3').then((m) => m.adLesson3),
   'ia-administration/ad4': () => import('./lessons/ia-administration/ad4').then((m) => m.adLesson4),
   'ia-administration/ad5': () => import('./lessons/ia-administration/ad5').then((m) => m.adLesson5),
+  'outils-ia-gratuits/og1': () => import('./lessons/outils-ia-gratuits/og1').then((m) => m.ogLesson1),
+  'outils-ia-gratuits/og2': () => import('./lessons/outils-ia-gratuits/og2').then((m) => m.ogLesson2),
+  'outils-ia-gratuits/og3': () => import('./lessons/outils-ia-gratuits/og3').then((m) => m.ogLesson3),
+  'outils-ia-gratuits/og4': () => import('./lessons/outils-ia-gratuits/og4').then((m) => m.ogLesson4),
+  'outils-ia-gratuits/og5': () => import('./lessons/outils-ia-gratuits/og5').then((m) => m.ogLesson5),
+  'outils-ia-gratuits/og6': () => import('./lessons/outils-ia-gratuits/og6').then((m) => m.ogLesson6),
+  'outils-ia-gratuits/og7': () => import('./lessons/outils-ia-gratuits/og7').then((m) => m.ogLesson7),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the
