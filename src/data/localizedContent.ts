@@ -473,6 +473,11 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'creer-agents-ia/ag6': () => import('./lessons/creer-agents-ia/ag6').then((m) => m.agLesson6),
   'creer-agents-ia/ag7': () => import('./lessons/creer-agents-ia/ag7').then((m) => m.agLesson7),
   'creer-agents-ia/ag8': () => import('./lessons/creer-agents-ia/ag8').then((m) => m.agLesson8),
+  'ia-administration/ad1': () => import('./lessons/ia-administration/ad1').then((m) => m.adLesson1),
+  'ia-administration/ad2': () => import('./lessons/ia-administration/ad2').then((m) => m.adLesson2),
+  'ia-administration/ad3': () => import('./lessons/ia-administration/ad3').then((m) => m.adLesson3),
+  'ia-administration/ad4': () => import('./lessons/ia-administration/ad4').then((m) => m.adLesson4),
+  'ia-administration/ad5': () => import('./lessons/ia-administration/ad5').then((m) => m.adLesson5),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the

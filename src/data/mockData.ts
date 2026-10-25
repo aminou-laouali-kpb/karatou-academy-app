@@ -257,6 +257,33 @@ export const modules: LearningModule[] = [
       { id: 'ag8', title: 'Projet final : creer, tester et documenter votre propre agent', duration: '30 min', description: 'Creer, tester et documenter votre agent, et obtenir le certificat.' },
     ],
   },
+  {
+    id: '7',
+    rubriqueId: 'rubrique-ai-data',
+    slug: 'ia-administration',
+    title: "IA pour l'administration",
+    subtitle: 'Courriers, proces-verbaux, syntheses et rapports',
+    description: "Preparer courriers, proces-verbaux, syntheses de textes reglementaires et rapports d'activites avec l'IA, sans rien divulguer et en gardant la main : l'IA prepare, l'agent verifie, le signataire engage.",
+    emoji: '\u{1F3DB}\u{FE0F}',
+    color: 'from-slate-700 to-blue-600',
+    lessons: 5,
+    duration: '1h 20min',
+    level: 'Debutant',
+    enrolled: 0,
+    rating: 0,
+    progress: 0,
+    certified: false,
+    isFree: true,
+    order: 7,
+    status: 'draft',
+    courses: [
+      { id: 'ad1', title: "Rediger un courrier administratif avec l'IA, sans divulguer de donnees", duration: '15 min', description: 'Un brouillon de courrier au bon registre, a partir d elements anonymises et du modele du service.' },
+      { id: 'ad2', title: "Transformer vos notes de reunion en proces-verbal avec l'IA", duration: '15 min', description: 'Un proces-verbal fidele avec tableau des actions, pret a faire valider.' },
+      { id: 'ad3', title: "Resumer un texte reglementaire avec l'IA et verifier chaque article", duration: '15 min', description: 'Une synthese d un texte public, chaque point verifie dans le texte en vigueur.' },
+      { id: 'ad4', title: "Rediger un rapport d'activites avec l'IA, a partir de vos chiffres verifies", duration: '15 min', description: 'Un rapport qui separe faits, analyse et recommandations, sur des chiffres recalcules.' },
+      { id: 'ad5', title: "Projet final : preparer le dossier complet d'une reunion avec l'IA", duration: '20 min', description: 'Le dossier complet d une reunion et sa fiche de controle, pour obtenir le certificat.' },
+    ],
+  },
 ];
 
 export const certificates: Certificate[] = [
