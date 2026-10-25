@@ -465,6 +465,14 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'ia-expliquee-simplement/is5': () => import('./lessons/ia-expliquee-simplement/is5').then((m) => m.isLesson5),
   'ia-expliquee-simplement/is6': () => import('./lessons/ia-expliquee-simplement/is6').then((m) => m.isLesson6),
   'ia-expliquee-simplement/is7': () => import('./lessons/ia-expliquee-simplement/is7').then((m) => m.isLesson7),
+  'creer-agents-ia/ag1': () => import('./lessons/creer-agents-ia/ag1').then((m) => m.agLesson1),
+  'creer-agents-ia/ag2': () => import('./lessons/creer-agents-ia/ag2').then((m) => m.agLesson2),
+  'creer-agents-ia/ag3': () => import('./lessons/creer-agents-ia/ag3').then((m) => m.agLesson3),
+  'creer-agents-ia/ag4': () => import('./lessons/creer-agents-ia/ag4').then((m) => m.agLesson4),
+  'creer-agents-ia/ag5': () => import('./lessons/creer-agents-ia/ag5').then((m) => m.agLesson5),
+  'creer-agents-ia/ag6': () => import('./lessons/creer-agents-ia/ag6').then((m) => m.agLesson6),
+  'creer-agents-ia/ag7': () => import('./lessons/creer-agents-ia/ag7').then((m) => m.agLesson7),
+  'creer-agents-ia/ag8': () => import('./lessons/creer-agents-ia/ag8').then((m) => m.agLesson8),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the
