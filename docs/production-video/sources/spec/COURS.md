@@ -33,7 +33,7 @@ ils seront confirmés à l'intégration dans le site (skill `karatou-course-crea
 | 12 | 12-etudier-rediger-ia | Étudier et rédiger avec l'IA | Motion | à désigner | Employabilité | Étudiants | `etudier-rediger-ia` | `et` | 5 | 3–5 min (cible 4:00) |
 | 13 | 13-ia-administration | IA pour l'administration | Motion | Idriss | IA & Données | Fonctionnaires / agents de projet | `ia-administration` | `ad` | 5 | 3–5 min (cible 4:00) |
 | 14 | 14-ia-sante-communautaire | IA et santé communautaire | Motion | à désigner | IA & Données | Agents de santé | `ia-sante-communautaire` | `sa` | 5 | 3–5 min (cible 4:00) |
-| 15 | 15-outils-ia-gratuits | Choisir le bon outil IA gratuit et installer une IA open source | Motion | Idriss | Culture numérique | Grand public | `outils-ia-gratuits` | `og` | 5 | 3–5 min (cible 4:00) |
+| 15 | 15-outils-ia-gratuits | Choisir le bon outil IA gratuit et installer une IA open source | Motion | Idriss | Culture numérique | Grand public | `outils-ia-gratuits` | `og` | 7 | 3–5 min (cible 4:00) |
 
 Identifiants de leçon : `<préfixe><n>` (ex. `ag1` … `ag7`). Jamais visibles par l'apprenant : à l'écran et dans
 la voix, on dit « Leçon 2 ».
