@@ -458,6 +458,13 @@ const authoredLessonLoaders: Record<string, () => Promise<LessonBundle>> = {
   'introduction-claude-ai/cl4': () => import('./lessons/introduction-claude-ai/cl4').then((m) => m.claudeLesson4ByLanguage),
   'introduction-claude-ai/cl5': () => import('./lessons/introduction-claude-ai/cl5').then((m) => m.claudeLesson5ByLanguage),
   'introduction-claude-ai/cl6': () => import('./lessons/introduction-claude-ai/cl6').then((m) => m.claudeLesson6ByLanguage),
+  'ia-expliquee-simplement/is1': () => import('./lessons/ia-expliquee-simplement/is1').then((m) => m.isLesson1),
+  'ia-expliquee-simplement/is2': () => import('./lessons/ia-expliquee-simplement/is2').then((m) => m.isLesson2),
+  'ia-expliquee-simplement/is3': () => import('./lessons/ia-expliquee-simplement/is3').then((m) => m.isLesson3),
+  'ia-expliquee-simplement/is4': () => import('./lessons/ia-expliquee-simplement/is4').then((m) => m.isLesson4),
+  'ia-expliquee-simplement/is5': () => import('./lessons/ia-expliquee-simplement/is5').then((m) => m.isLesson5),
+  'ia-expliquee-simplement/is6': () => import('./lessons/ia-expliquee-simplement/is6').then((m) => m.isLesson6),
+  'ia-expliquee-simplement/is7': () => import('./lessons/ia-expliquee-simplement/is7').then((m) => m.isLesson7),
 };
 
 // Lesson 1 of module 1 ships with the shell: it is the entry point of the
