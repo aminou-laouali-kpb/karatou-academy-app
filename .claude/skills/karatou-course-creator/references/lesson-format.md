@@ -72,11 +72,15 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
 
 **Contenu**
 - `content` : exactement 4 sections, chacune avec un titre parlant (pas « Section 1 »).
+- **Titres clairs et explicites** (règle du client) : le titre de la leçon et ceux des sections disent
+  concrètement ce que l'apprenant fait ou obtient (« Méthode 4 : automatiser une suite de tâches avec n8n »),
+  jamais un mot vague ou une formule d'accroche (« Le secret », « La magie », « Les bases »).
 - `example` : cas concret avec `impact` chiffré mais prudent (« ~3 semaines économisées »,
   « environ 1 500 000 FCFA évités », avec réserve si estimé). **Varier les cas d'une leçon à
   l'autre** : secteurs (entreprise, administration, école, association, ONG, indépendant) et
-  régions (Afrique, Asie, Amérique latine, Europe). Un module entier de cas sahéliens exclut
-  une partie du public.
+  **pays d'Afrique** (Niger, Sénégal, Côte d'Ivoire, Cameroun, Bénin, Burkina Faso, Mali, Togo,
+  Guinée, RDC, Nigeria, Kenya, Maroc…). Le Niger est un pays parmi d'autres : jamais tous les
+  cas d'un module dans un seul pays. Montants dans la monnaie du pays du cas.
 - `practice` : 3 instructions numérotables, réalisables sur téléphone ou papier avec des
   outils gratuits ; `observation` = ce que l'apprenant doit constater.
 - `quiz` : 5 questions ; 4 options A–D plausibles ; `answer` VARIE d'une question à l'autre
@@ -91,10 +95,14 @@ Le bloc vidéo, dans chaque langue, s'écrit exactement :
   connectivité limitée et un petit budget. Vouvoiement. Phrases courtes. Zéro jargon non
   expliqué — chaque terme technique reçoit une analogie du quotidien (marché, récolte,
   tontine, chantier, atelier, salle de classe…).
-- Ancrage concret dans CHAQUE section, mais **varié** : ONG et coopératives, mais aussi PME,
-  administration, école, cabinet indépendant ; Orange Money et M-Pesa, mais aussi UPI, Pix ou
-  une carte bancaire ; hors-ligne et faible connectivité, du Sahel aux Andes. Les exemples
-  africains restent bienvenus et nombreux — ils ne doivent jamais être les seuls.
+- Ancrage concret dans CHAQUE section, **en Afrique et sur plusieurs pays** : ONG et
+  coopératives, mais aussi PME, administration, école, cabinet indépendant ; Orange Money,
+  Wave, M-Pesa ou MTN MoMo selon le pays ; hors-ligne et faible connectivité. Le Niger est un
+  pays parmi d'autres, jamais le seul ; le texte reste compréhensible par un apprenant hors
+  d'Afrique.
+- **Méthode de consigne maison : RCTF** (Rôle · Contexte · Tâche · Format). Toute consigne
+  donnée en exemple ou à copier suit ces quatre blocs ; une leçon qui enseigne la rédaction
+  de consignes enseigne RCTF (jamais une autre méthode concurrente).
 - Honnêteté : dire quand un outil/méthode est excessif pour un petit besoin, signaler
   les limites et les risques. Pas de chiffre inventé.
 
@@ -127,5 +135,6 @@ que la réussite débloque le certificat numérique vérifiable.
 - [ ] Bloc `video` vide + commentaire TODO présent
 - [ ] Aucun id interne (`grep -E '"(Leçon|Lesson|Darasi[n]?) [a-z][0-9]"'` ne rend rien)
 - [ ] Apostrophes typographiques en FR/HA ; guillemets « » ; pas de markdown dans les chaînes
-- [ ] Exemple avec impact chiffré prudent ; ancrage concret et varié (secteurs et régions)
-      dans chaque section, jamais un module entier centré sur une seule région
+- [ ] Exemple avec impact chiffré prudent ; ancrage concret et varié (secteurs et pays
+      d'Afrique) dans chaque section, jamais un module entier centré sur un seul pays
+- [ ] Consignes en exemple ou à copier structurées en RCTF
