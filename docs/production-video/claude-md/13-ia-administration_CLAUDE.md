@@ -14,7 +14,7 @@
 | | |
 |---|---|
 | Format | Motion graphics et captures d'écran, voix off clonée de l'owner |
-| Owner | à désigner (son nom et sa photo figureront sur les cartes présentateur) |
+| Owner | Idriss (son nom et sa photo figurent sur les cartes présentateur ; voix clonée) |
 | Vidéos | 5 vidéos · 3 à 5 min (cible 4:00) chacune |
 | Langues | FR (référence) · EN · HA (haoussa) · DJE (zarma) |
 | Outils | Claude Code · HyperFrames · VoiceStudio (ou API de voix) |
@@ -601,9 +601,9 @@ Dernière mise à jour : <date> · Prochaine action : <…>
 | Numéro | 13 |
 | Titre | IA pour l'administration |
 | Format | Motion graphics + captures d'écran, voix off (voix clonée de l'owner) |
-| Owner / voix | à désigner — nom complet et titre exact demandés au premier lancement |
+| Owner / voix | Idriss — nom complet et titre exact demandés au premier lancement |
 | Rubrique | IA & Données |
-| Public | Fonctionnaires et agents de l'État et des collectivités, agents de projet, secrétariats et assistants de direction. Au Niger et en Afrique de l'Ouest, sur ordinateur de bureau ou téléphone, avec des outils gratuits ou ceux que fournit l'administration. |
+| Public | Fonctionnaires et agents des administrations d'Afrique francophone (et au-delà) : agents de l'État et des collectivités, agents de projet, secrétariats et assistants de direction. Sur ordinateur de bureau ou téléphone, avec des outils gratuits ou ceux que fournit l'administration. |
 | Slug du module (provisoire) | `ia-administration` |
 | Préfixe des leçons | `ad` |
 | Nombre de vidéos | 5 (dont la dernière = projet final certifiant) |
@@ -612,17 +612,19 @@ Dernière mise à jour : <date> · Prochaine action : <…>
 | Prérequis | Savoir utiliser un assistant conversationnel. Connaître les modèles de documents de son service (lettre, procès-verbal, note, rapport). Aucun module préalable. |
 | Promesse du cours | Vous apprendrez à préparer courriers, procès-verbaux, synthèses et rapports avec l'IA, sans rien divulguer, et en gardant la main. |
 | Positionnement | L'IA prépare un brouillon ; l'agent vérifie, la hiérarchie vise, le signataire engage. Le cours respecte la culture administrative (registre, formules, circuit du parapheur) et place la confidentialité avant tout usage. Aucun gain de temps chiffré. Prolonge la leçon c4 du module `intelligence-artificielle` et la leçon cl5 de `introduction-claude-ai` ; distinct du cours A1 (ONG) et du cours 11 (Excel + IA). |
-| Fil rouge | Une direction régionale fictive, à Tahoua. Zeinabou, secrétaire de direction (leçons 1 et 2), et Souleymane, chef de service (leçons 3 et 4), montent ensemble le dossier de la leçon 5. Abdoul-Aziz et Rahila, agents d'autres services, servent aux contre-exemples. Cas fictifs. |
+| Fil rouge | Deux administrations fictives, dans deux pays. Zeinabou, secrétaire de direction dans une direction régionale fictive de Tahoua (Niger) : leçons 1 et 2 ; son dossier sert d'exemple complet en leçon 5. Souleymane, chef de service dans une direction régionale fictive de Bouaké (Côte d'Ivoire) : leçons 3 et 4 ; en leçon 5, il partage sa méthode avec Zeinabou, en pair (vérification article par article, chiffres recalculés). Contre-exemples : Abdoul-Aziz, agent d'une mairie fictive de Garoua (Cameroun), en leçon 1 ; Rahila, agente d'une direction départementale fictive de Parakou (Bénin), en leçon 5. Montants éventuels en FCFA (monnaie des quatre pays). Cas fictifs, anonymisation du § 5.9. |
 | Marques citées | Gemini, Gemini Notebook (anciennement NotebookLM) (Google) |
 
 **Outils montrés et point d'actualité (vérifié en octobre 2026).** Les démonstrations utilisent Gemini (version gratuite, navigateur d'ordinateur) et Gemini Notebook, nouveau nom de NotebookLM depuis le 16 juillet 2026 : même produit, mêmes carnets. La vidéo dit « Gemini Notebook, l'outil qu'on appelait NotebookLM » à sa première mention. Si l'administration de l'apprenant fournit un outil d'IA validé, celui-ci passe en priorité : le cours le dit en leçon 5. Aucun outil de transcription automatique n'est montré : leur disponibilité et leurs conditions n'ont pas pu être vérifiées pour ce cours, et une réunion administrative ne s'enregistre qu'avec l'accord des participants.
 
-**Cadre de confidentialité (vérifié en octobre 2026).** Le décret n° 2008-244/PRN/MFP/T, pris pour l'application du statut général de la fonction publique de l'État, impose à l'agent, en son article 9, une obligation de discrétion professionnelle sur les documents, faits et informations connus en service ; la loi n° 2019-26 prévoit secret et discrétion pour le personnel des collectivités territoriales. La Haute Autorité de protection des données à caractère personnel (HAPDP) a été supprimée par le décret n° 2026-310/PRN/PM du 8 juin 2026, ses attributions étant réparties entre ministères selon la presse. La vidéo ne cite ni numéro de texte ni autorité : elle dit « les textes de la fonction publique » et « la loi ». [à vérifier au moment de la production : textes en vigueur et autorité compétente]
+**Cadre de confidentialité.** La vidéo et les fiches parlent « des textes de la fonction publique de votre pays » et « de la loi », sans citer de décret, de numéro de texte ni d'autorité d'un seul pays : l'apprenant applique les textes de son propre pays.
+
+*Note pour l'owner, à ne pas reprendre dans les scripts — un exemple, le Niger (vérifié en octobre 2026)* : le décret n° 2008-244/PRN/MFP/T, pris pour l'application du statut général de la fonction publique de l'État, impose à l'agent, en son article 9, une obligation de discrétion professionnelle sur les documents, faits et informations connus en service ; la loi n° 2019-26 prévoit secret et discrétion pour le personnel des collectivités territoriales ; la Haute Autorité de protection des données à caractère personnel (HAPDP) a été supprimée par le décret n° 2026-310/PRN/PM du 8 juin 2026, ses attributions étant réparties entre ministères selon la presse. Les autres pays du cours (Côte d'Ivoire, Cameroun, Bénin…) ont leurs propres statuts de la fonction publique et leurs propres lois et autorités de protection des données : ce sont les textes du pays de chaque apprenant qui s'appliquent. [à vérifier au moment de la production : textes en vigueur et autorités compétentes, pays par pays]
 
 ## 2.2 Ce que l'apprenant saura faire
 
 - Distinguer ce qui peut entrer dans un outil d'IA grand public (éléments anonymisés, textes publics, totaux) de ce qui n'y entre jamais (données personnelles d'usagers, documents classés ou non publics).
-- Faire préparer par l'IA le brouillon d'un courrier administratif au bon registre, à partir d'éléments anonymisés et du modèle de son service, puis le vérifier.
+- Faire préparer par l'IA le brouillon d'un courrier administratif au bon registre, avec une consigne en quatre blocs (RCTF : Rôle, Contexte, Tâche, Format), à partir d'éléments anonymisés et du modèle de son service, puis le vérifier.
 - Transformer ses notes de réunion en procès-verbal fidèle, avec un tableau des actions, prêt à faire valider par le président de séance.
 - Résumer un texte réglementaire public et vérifier chaque point, article par article, dans le texte en vigueur.
 - Construire un rapport d'activités à partir de ses propres chiffres, recalculés, en séparant faits, analyse et recommandations.
@@ -632,49 +634,50 @@ Dernière mise à jour : <date> · Prochaine action : <…>
 
 | Leçon | Id | Titre | Promesse (objectif) | Cas réel (B1) | Démo (B4) | Durée cible |
 |---|---|---|---|---|---|---|
-| 1 | `ad1` | Courriers et notes administratifs | Préparer un courrier administratif avec l'IA, sans rien divulguer | Zeinabou, secrétaire de direction à Tahoua, doit préparer la lettre d'invitation à la réunion de coordination | Gemini : éléments anonymisés et modèle du service → brouillon → contrôle des dates et des formules → noms ajoutés hors de l'outil | 4:00 |
-| 2 | `ad2` | Comptes rendus et procès-verbaux | Transformer vos notes en procès-verbal fidèle, prêt à valider | La réunion a eu lieu ; Zeinabou a trois pages de notes et doit produire le PV | Gemini : notes avec fonctions au lieu des noms → PV structuré avec « [À COMPLÉTER] » → comparaison avec les notes → modèle du service et validation | 4:00 |
-| 3 | `ad3` | Synthétiser un texte réglementaire, et le vérifier | Résumer un texte réglementaire avec l'IA, et vérifier chaque point | Souleymane, chef de service, doit présenter un long décret au directeur | Gemini Notebook : dépôt du texte public, liste des obligations avec articles, vérification dans le PDF, note d'une page | 4:00 |
-| 4 | `ad4` | Rédiger un rapport d'activités | Construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés | Le rapport trimestriel du service est attendu vendredi | Gemini : tableau anonymisé et notes → sections du rapport avec calculs montrés → recalcul → recommandations réécrites | 4:00 |
-| 5 | `ad5` | Projet final : le dossier d'une réunion | Constituer et déposer le dossier complet d'une réunion | Zeinabou et Souleymane préparent la réunion suivante | Le dossier exemple : courrier, PV, note de synthèse, page de rapport, fiche de contrôle, puis relecture critère par critère | 4:00 |
+| 1 | `ad1` | Rédiger un courrier administratif avec l'IA, sans divulguer de données | Préparer un courrier administratif avec l'IA, sans rien divulguer | Zeinabou, secrétaire de direction dans une direction régionale fictive de Tahoua (Niger), doit préparer la lettre d'invitation à la réunion de coordination | Gemini : consigne RCTF avec éléments anonymisés et modèle du service → brouillon → contrôle des dates et des formules → noms ajoutés hors de l'outil | 4:00 |
+| 2 | `ad2` | Transformer vos notes de réunion en procès-verbal avec l'IA | Transformer vos notes en procès-verbal fidèle, prêt à valider | À Tahoua, la réunion a eu lieu ; Zeinabou a trois pages de notes et doit produire le PV | Gemini : consigne RCTF, notes avec fonctions au lieu des noms → PV structuré avec « [À COMPLÉTER] » → comparaison avec les notes → modèle du service et validation | 4:00 |
+| 3 | `ad3` | Résumer un texte réglementaire avec l'IA et vérifier chaque article | Résumer un texte réglementaire avec l'IA, et vérifier chaque point | Souleymane, chef de service dans une direction régionale fictive de Bouaké (Côte d'Ivoire), doit présenter un long texte réglementaire public au directeur | Gemini Notebook : dépôt du texte public, consigne RCTF, liste des obligations avec articles, vérification dans le PDF, note d'une page | 4:00 |
+| 4 | `ad4` | Rédiger un rapport d'activités avec l'IA, à partir de vos chiffres vérifiés | Construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés | À Bouaké, le rapport trimestriel du service de Souleymane est attendu vendredi | Gemini : consigne RCTF, tableau anonymisé et notes → sections du rapport avec calculs montrés → recalcul → recommandations réécrites | 4:00 |
+| 5 | `ad5` | Projet final : préparer le dossier complet d'une réunion avec l'IA | Constituer et déposer le dossier complet d'une réunion | À Tahoua, Zeinabou prépare le dossier de la réunion suivante de sa direction ; Souleymane, chef de service à Bouaké, lui partage sa méthode | Le dossier exemple de Zeinabou : courrier, PV, note de synthèse, page de rapport, fiche de contrôle, puis relecture critère par critère avec une consigne RCTF | 4:00 |
 
 ## 2.4 Direction artistique du cours
 
 - **Motif récurrent : le parapheur.** Une chemise de parapheur stylisée, à fenêtres, où chaque leçon ajoute son document (courrier, PV, note, rapport, fiche de contrôle). Les sorties de l'IA portent une étiquette générique « BROUILLON », remplacée par une case « Visa » cochée après la vérification humaine. Aucun emblème national, aucun sceau, aucun en-tête ni nom de service réels : l'en-tête des documents fictifs est « [EN-TÊTE DU SERVICE] » et chaque document porte la mention « Exemple fictif ».
-- **Personas.** Formes simples en aplats, sans photoréalisme et sans imiter une personne réelle. Zeinabou : secrétaire de direction, foulard, bureau avec registre du courrier et ordinateur. Souleymane : chef de service, chemise ou boubou, classeurs, calculatrice. Mêmes silhouettes et mêmes couleurs d'une leçon à l'autre. Abdoul-Aziz et Rahila n'apparaissent qu'en silhouette secondaire. Ton sobre et respectueux : aucune caricature de l'administration.
+- **Personas et pays.** Formes simples en aplats, sans photoréalisme et sans imiter une personne réelle. Zeinabou : secrétaire de direction dans une direction régionale fictive de Tahoua (Niger), foulard, bureau avec registre du courrier et ordinateur (leçons 1, 2 et 5). Souleymane : chef de service dans une direction régionale fictive de Bouaké (Côte d'Ivoire), chemise ou boubou, classeurs, calculatrice (leçons 3 et 4 ; en leçon 5, en pair, dans une vignette « Bouaké »). Mêmes silhouettes et mêmes couleurs d'une leçon à l'autre. Abdoul-Aziz (mairie fictive de Garoua, Cameroun, leçon 1) et Rahila (direction départementale fictive de Parakou, Bénin, leçon 5) n'apparaissent qu'en silhouette secondaire. Le lieu est donné par l'écran texte (« Tahoua · Niger », « Bouaké · Côte d'Ivoire »…) ; les décors restent génériques : aucun monument, drapeau, emblème ni bâtiment réel. Ton sobre et respectueux : aucune caricature de l'administration.
 - **Trois schémas types réutilisés (C).**
   1. « Le filtre » : une porte avec un cadenas. Passent (coche) : éléments anonymisés, fonctions, textes publics, totaux. Ne passent jamais (croix) : noms et numéros d'usagers, documents classés ou non publics, projets internes. Leçons 1, 3, 4, 5.
   2. « La chaîne de validation » : Brouillon → Vérification par l'agent → Visa de la hiérarchie → Signature → Enregistrement. Leçons 1, 2, 5.
   3. « Du texte à l'article » : une ligne de synthèse reliée par un trait à son article, loupe sur le passage. Leçons 3 et 5.
 - **Iconographie.** Pictogrammes au trait : parapheur, registre, cadenas, loupe, calculatrice, stylo, case à cocher. Toute validation ou erreur portée par une forme (coche, croix, cadre), jamais par la couleur seule.
 - **Captures (A).** Ordinateur, navigateur en français, pour Gemini et Gemini Notebook ; traitement de texte avec barre d'outils recadrée hors champ ; téléphone seulement pour la calculatrice (leçon 4). Noms de compte, sélecteur de modèle et bandeaux masqués.
-- **Ce qui reste fixe** : le parapheur, les deux personas, les trois schémas, la place de la carte de rappel. **Ce qui change** : le document ajouté au parapheur, le persona de la leçon, l'outil capturé.
+- **Consignes à l'écran.** Toute consigne montrée suit la méthode RCTF : quatre blocs étiquetés « Rôle », « Contexte », « Tâche », « Format », chacun sur sa ligne, l'étiquette en gras ; le garde-fou souligné (crochets, « [À COMPLÉTER] », « N'invente aucun… »).
+- **Ce qui reste fixe** : le parapheur, les deux personas, les trois schémas, la carte de consigne RCTF, la place de la carte de rappel. **Ce qui change** : le document ajouté au parapheur, le persona et le pays de la leçon, l'outil capturé.
 - **Son.** Aucune musique sous la voix. Un court habillage sonore possible sur les cartes uniquement.
 
 ## 2.5 Les leçons
 
-### Leçon 1 — Courriers et notes administratifs (`ad1`)
+### Leçon 1 — Rédiger un courrier administratif avec l'IA, sans divulguer de données (`ad1`)
 
 #### Fiche
 
 - **Promesse** : « À la fin de cette leçon, vous saurez préparer un courrier administratif avec l'IA, sans rien divulguer. »
-- **Cas réel (B1 → B6)** : Zeinabou, secrétaire de direction dans une direction régionale à Tahoua, doit préparer pour demain la lettre qui invite les services techniques, la mairie et deux ONG partenaires à la réunion de coordination trimestrielle. Elle a la note manuscrite du directeur : noms, numéros de téléphone, et un passage confidentiel sur un différend avec un partenaire. Tentation : tout coller dans l'assistant. Enjeu : une lettre correcte, au bon registre, sans qu'aucune information ne sorte du service. Fermeture en B6 (champ `example`) : la lettre passe au parapheur, le directeur la signe, elle part enregistrée au courrier départ.
-- **Unités de notion (B3)** : 1. Rien de confidentiel dans l'outil — ni document classé ou non public, ni donnée personnelle d'usager ; ce qu'on colle dans un outil grand public sort du service ; la discrétion professionnelle s'applique ; en cas de doute, la hiérarchie tranche. · 2. Des éléments et un modèle, pas le dossier — des fonctions au lieu des noms, des crochets au lieu des numéros, et le modèle de lettre du service, anonymisé. · 3. Registre et formules vérifiés — « J'ai l'honneur de… » ouvre la lettre ; la formule finale dépend du rang du destinataire ; le modèle du service tranche.
-- **Démo (B4)** : Gemini, version gratuite, dans le navigateur d'un ordinateur. 1. Nouvelle conversation. 2. Coller la consigne remplie avec les éléments de la réunion : fonction de l'expéditeur, fonctions des destinataires, objet, date, heure, lieu, ordre du jour, demande de confirmation. 3. Coller à la suite le modèle de lettre du service, anonymisé. 4. Lire le brouillon : objet, références entre crochets, « J'ai l'honneur de vous inviter… », formule finale. 5. Contrôler date, heure, ordre du jour et formule finale. 6. Copier le texte dans le modèle du service, sur l'ordinateur, et y ajouter hors de l'outil le numéro du registre et les mentions nominatives. Résultat attendu à l'écran : un brouillon fidèle au modèle, sans aucun nom ni numéro inventé.
-- **Consolidation (B5)** : prédiction. « Au service voisin, Abdoul-Aziz colle la requête d'un usager : nom, adresse, téléphone. Il demande une réponse. Quel est le problème ? » — 3 s de silence — « Des données personnelles d'usager sont sorties du service. Il fallait écrire “un usager demande…”, puis remettre le nom hors de l'outil. »
+- **Cas réel (B1 → B6)** : Zeinabou, secrétaire de direction dans une direction régionale fictive de Tahoua (Niger), doit préparer pour demain la lettre qui invite les services techniques, la mairie et deux ONG partenaires à la réunion de coordination trimestrielle. Elle a la note manuscrite du directeur : noms, numéros de téléphone, et un passage confidentiel sur un différend avec un partenaire. Tentation : tout coller dans l'assistant. Enjeu : une lettre correcte, au bon registre, sans qu'aucune information ne sorte du service. Fermeture en B6 (champ `example`) : la lettre passe au parapheur, le directeur la signe, elle part enregistrée au courrier départ.
+- **Unités de notion (B3)** : 1. Rien de confidentiel dans l'outil — ni document classé ou non public, ni donnée personnelle d'usager ; ce qu'on colle dans un outil grand public sort du service ; les textes de la fonction publique de votre pays imposent la discrétion professionnelle ; en cas de doute, la hiérarchie tranche. · 2. Des éléments et un modèle, pas le dossier — des fonctions au lieu des noms, des crochets au lieu des numéros, et le modèle de lettre du service, anonymisé. · 3. Registre et formules vérifiés — « J'ai l'honneur de… » ouvre la lettre ; la formule finale dépend du rang du destinataire ; le modèle du service tranche.
+- **Démo (B4)** : Gemini, version gratuite, dans le navigateur d'un ordinateur. 1. Nouvelle conversation. 2. Coller la consigne RCTF remplie : Rôle, puis Contexte avec les éléments de la réunion (fonction de l'expéditeur, fonctions des destinataires, objet, date, heure, lieu, ordre du jour, demande de confirmation), puis Tâche. 3. Dans le bloc Format, coller le modèle de lettre du service, anonymisé, puis la ligne des garde-fous. 4. Lire le brouillon : objet, références entre crochets, « J'ai l'honneur de vous inviter… », formule finale. 5. Contrôler date, heure, ordre du jour et formule finale. 6. Copier le texte dans le modèle du service, sur l'ordinateur, et y ajouter hors de l'outil le numéro du registre et les mentions nominatives. Résultat attendu à l'écran : un brouillon fidèle au modèle, sans aucun nom ni numéro inventé.
+- **Consolidation (B5)** : prédiction. « Dans une mairie de Garoua, au Cameroun, Abdoul-Aziz colle la requête d'un usager : nom, adresse, téléphone. Il demande une réponse. Quel est le problème ? » — 3 s de silence — « Des données personnelles d'usager sont sorties du service. Il fallait écrire “un usager demande…”, puis remettre le nom hors de l'outil. »
 - **Consigne à copier** :
 
 ```text
-Tu es secrétaire de direction dans une administration publique d'Afrique de l'Ouest.
-Rédige le brouillon d'une lettre administrative, au registre administratif, avec les formules d'usage.
-Expéditeur : [fonction, sans nom]. Destinataires : [fonctions, sans noms].
-Objet : [objet]. Références : [laisser entre crochets].
-Contenu : [faits, date, heure, lieu, ce qui est demandé, délai de réponse].
-Suis la structure de ce modèle de mon service : [collez un modèle anonymisé].
+Rôle : tu es secrétaire de direction dans une administration publique.
+Contexte : je prépare un courrier de mon service. Expéditeur : [fonction, sans nom]. Destinataires : [fonctions, sans noms]. Objet : [objet]. Références : [laisser entre crochets]. Contenu : [faits, date, heure, lieu, ce qui est demandé, délai de réponse].
+Tâche : rédige le brouillon de cette lettre, au registre administratif, avec les formules d'usage.
+Format : suis la structure de ce modèle de mon service : [collez un modèle anonymisé].
 Garde tous les crochets tels quels. N'invente aucun nom, aucun numéro, aucune référence.
 ```
 
-- **Exercice** : « Rédigez un courrier sans rien divulguer » — 1. Choisissez un courrier courant de votre service (invitation, transmission, demande d'information). 2. Listez ses éléments en remplaçant chaque nom par une fonction et chaque numéro par des crochets. 3. Utilisez la consigne avec un modèle anonymisé de votre service. 4. Vérifiez dates, références, registre et formule finale ; complétez les crochets dans votre traitement de texte, puis présentez la lettre au parapheur.
+  *(Quatre blocs RCTF ; la dernière ligne, celle des garde-fous, appartient au bloc Format.)*
+
+- **Exercice** : « Rédigez un courrier sans rien divulguer » — 1. Choisissez un courrier courant de votre service (invitation, transmission, demande d'information). 2. Listez ses éléments en remplaçant chaque nom par une fonction et chaque numéro par des crochets. 3. Remplissez les quatre blocs de la consigne (Rôle, Contexte, Tâche, Format), avec un modèle anonymisé de votre service dans le bloc Format. 4. Vérifiez dates, références, registre et formule finale ; complétez les crochets dans votre traitement de texte, puis présentez la lettre au parapheur.
 - **Carte de rappel** : 1. Rien de confidentiel 2. Des éléments, un modèle 3. Registre et formules vérifiés
 - **Quiz** :
   1. Que pouvez-vous coller dans un assistant grand public ? — A) La requête d'un usager, avec son nom B) Un document classé, pour le résumer C) Les éléments d'un courrier, noms remplacés par des fonctions et des crochets D) Le fichier du personnel — **Réponse : C**
@@ -686,84 +689,84 @@ Garde tous les crochets tels quels. N'invente aucun nom, aucun numéro, aucune r
 
 #### Script v1 (à valider par l'owner)
 
-Durée estimée : 3:53 · Mots de voix off : 384
+Durée estimée : 4:05 · Mots de voix off : 406
 
-**Scène 1 — B1 Accroche · 0:00–0:08 · E**
-- Visuel : illustration en aplats, bureau de secrétariat d'une direction régionale à Tahoua. Zeinabou à son poste, registre du courrier ouvert, note manuscrite du directeur posée à côté. Le parapheur du cours apparaît en bas à droite.
-- Écran : « Zeinabou · secrétaire de direction · Tahoua »
-- VO : « Tahoua. Zeinabou est secrétaire de direction dans une direction régionale. Le directeur lui demande une lettre. »
+**Scène 1 — B1 Accroche · 0:00–0:09 · E**
+- Visuel : illustration en aplats, bureau de secrétariat d'une direction régionale fictive à Tahoua (décor générique, aucun bâtiment réel). Zeinabou à son poste, registre du courrier ouvert, note manuscrite du directeur posée à côté. Le parapheur du cours apparaît en bas à droite.
+- Écran : « Zeinabou · secrétaire de direction · Tahoua, Niger »
+- VO : « Tahoua, au Niger. Zeinabou est secrétaire de direction dans une direction régionale. Le directeur lui demande une lettre. »
 
-**Scène 2 — B1 Accroche · 0:08–0:18 · B**
+**Scène 2 — B1 Accroche · 0:09–0:19 · B**
 - Visuel : carte de promesse posée sur la chemise du parapheur.
 - Écran : « Préparer un courrier administratif avec l'IA, sans rien divulguer »
 - VO : « À la fin de cette leçon, vous saurez préparer un courrier administratif avec l'IA, sans rien divulguer. »
 
-**Scène 3 — B2 Cadrage · 0:18–0:36 · C**
+**Scène 3 — B2 Cadrage · 0:19–0:37 · C**
 - Visuel : la note du directeur glisse vers une fenêtre d'assistant ; deux étiquettes s'allument l'une après l'autre : « tout coller » (croix) et « l'IA connaît nos usages » (croix).
-- Écran : « Deux erreurs »
+- Écran : « Deux erreurs : tout coller · croire que l'IA connaît nos usages »
 - VO : « Il s'agit d'inviter les partenaires à la réunion de coordination. Elle pense coller la note du directeur, telle quelle. Elle pense aussi que l'IA connaît les usages de l'administration. Deux erreurs. »
 
-**Scène 4 — B2 Cadrage · 0:36–0:48 · A**
+**Scène 4 — B2 Cadrage · 0:37–0:49 · A**
 - Visuel : capture `ad1-01` — la note fictive du directeur dans le traitement de texte. Les noms, les numéros et le passage confidentiel sont couverts d'aplats annotés « nom », « téléphone », « passage confidentiel », révélés un à un.
 - Écran : « Noms · numéros · passage confidentiel »
 - VO : « La note contient des noms, des numéros, et un passage confidentiel. Et l'IA ignore les usages de votre service. »
 
-**Scène 5 — B3 Notion · 0:48–1:06 · C**
+**Scène 5 — B3 Notion · 0:49–1:07 · C**
 - Visuel : schéma « Le filtre ». À gauche, ce qui passe (coche) : éléments, fonctions. À droite, ce qui ne passe jamais (croix) : document classé ou non public, données d'usager.
 - Écran : « 1 · Rien de confidentiel dans l'outil »
 - VO : « Première règle : rien de confidentiel dans l'outil. Ni document classé ou non public. Ni donnée personnelle d'usager. Ce que vous collez dans un outil grand public sort du service. »
 
-**Scène 6 — B3 Notion · 1:06–1:18 · B**
+**Scène 6 — B3 Notion · 1:07–1:21 · B**
 - Visuel : carte typographique sur la chemise du parapheur ; un cadenas se ferme.
 - Écran : « Discrétion professionnelle · En cas de doute : la hiérarchie »
-- VO : « Les textes de la fonction publique vous imposent d'ailleurs la discrétion professionnelle. En cas de doute, demandez à votre hiérarchie. »
+- VO : « Les textes de la fonction publique de votre pays vous imposent d'ailleurs la discrétion professionnelle. En cas de doute, demandez à votre hiérarchie. »
 
-**Scène 7 — B3 Notion · 1:18–1:36 · A**
-- Visuel : capture `ad1-02` — dans Gemini, la consigne remplie avec les éléments de Zeinabou. Cadres successifs sur les fonctions et sur les crochets.
+**Scène 7 — B3 Notion · 1:21–1:39 · A**
+- Visuel : capture `ad1-02` — dans Gemini, la consigne RCTF remplie avec les éléments de Zeinabou (blocs Rôle, Contexte, Tâche). Cadres successifs sur les fonctions et sur les crochets.
 - Écran : « 2 · Des éléments et un modèle, pas le dossier »
 - VO : « Deuxième règle : donnez des éléments et un modèle, pas le dossier. Les fonctions plutôt que les noms. Des crochets à la place des numéros. Et un modèle de lettre de votre service, anonymisé. »
 
-**Scène 8 — B3 Notion · 1:36–1:50 · G**
-- Visuel : carte de consigne, fond clair, consigne complète. La dernière ligne est soulignée.
-- Écran : la consigne à copier de la fiche, en entier.
-- VO : « Voici la consigne. Sa dernière ligne compte : garder les crochets, et n'inventer ni nom, ni numéro, ni référence. »
+**Scène 8 — B3 Notion · 1:39–1:59 · G**
+- Visuel : carte de consigne RCTF, fond clair, consigne complète ; les étiquettes « Rôle », « Contexte », « Tâche », « Format » s'allument au rythme de la voix. La dernière ligne (bloc Format) est soulignée.
+- Écran : « La consigne en quatre blocs : méthode RCTF », puis la consigne à copier de la fiche, en entier, avec ses quatre blocs.
+- VO : « Voici la consigne, en quatre blocs : Rôle, Contexte, Tâche, Format. C'est la méthode RCTF. Sa dernière ligne compte : garder les crochets, et n'inventer ni nom, ni numéro, ni référence. »
 
-**Scène 9 — B3 Notion · 1:50–2:08 · B**
+**Scène 9 — B3 Notion · 1:59–2:17 · B**
 - Visuel : carte typographique ; la formule d'ouverture s'écrit, puis une échelle à trois marches illustre le rang du destinataire.
 - Écran : « 3 · “J'ai l'honneur de…” · Formule finale selon le rang »
 - VO : « Troisième règle : le registre et les formules, vous les vérifiez. “J'ai l'honneur de…” ouvre la lettre. La formule finale dépend du rang du destinataire. En cas de doute, suivez le modèle du service. »
 
-**Scène 10 — B4 Application · 2:08–2:20 · A**
-- Visuel : capture `ad1-03` — le modèle de lettre anonymisé collé sous la consigne, puis l'envoi.
-- Écran : « Consigne + modèle du service »
-- VO : « Zeinabou colle la consigne : expéditeur, destinataires, objet, date, lieu, ordre du jour. Puis le modèle du service. »
+**Scène 10 — B4 Application · 2:17–2:30 · A**
+- Visuel : capture `ad1-03` — le modèle de lettre anonymisé collé dans le bloc Format, la ligne des garde-fous, puis l'envoi.
+- Écran : « Consigne RCTF + modèle du service »
+- VO : « Zeinabou remplit le contexte : expéditeur, destinataires, objet, date, lieu, ordre du jour. Puis elle colle le modèle du service. »
 
-**Scène 11 — B4 Application · 2:20–2:34 · A**
+**Scène 11 — B4 Application · 2:30–2:44 · A**
 - Visuel : capture `ad1-04` — le brouillon. Cadres successifs sur l'objet, les références entre crochets, la formule d'ouverture, la formule finale. Étiquette « BROUILLON » sur le côté.
 - Écran : « Objet · [Références] · formules d'usage »
 - VO : « Le brouillon arrive. Objet, références entre crochets, “J'ai l'honneur de vous inviter”, formule finale. La structure suit son modèle. »
 
-**Scène 12 — B4 Application · 2:34–2:48 · A**
+**Scène 12 — B4 Application · 2:44–2:58 · A**
 - Visuel : capture `ad1-05` — le brouillon et la note du directeur en alternance ; coche sur la date, l'heure et chacun des trois points de l'ordre du jour, puis cadre sur la formule finale.
 - Écran : « Date ✓ · Heure ✓ · Ordre du jour ✓ · Formule finale »
 - VO : « Elle vérifie la date, l'heure, l'ordre du jour. Elle contrôle la formule finale, selon le rang des destinataires. »
 
-**Scène 13 — B4 Application · 2:48–3:02 · A**
+**Scène 13 — B4 Application · 2:58–3:12 · A**
 - Visuel : capture `ad1-06` — le texte collé dans le modèle du service (« [EN-TÊTE DU SERVICE] », mention « Exemple fictif ») ; les crochets sont complétés au clavier.
 - Écran : « Les crochets se remplissent hors de l'outil »
 - VO : « Puis elle copie le texte dans le modèle du service, sur son ordinateur. Les noms et le numéro du registre s'ajoutent là, hors de l'outil. »
 
-**Scène 14 — B5 Consolidation · 3:02–3:28 · B**
-- Visuel : carte question. La silhouette d'Abdoul-Aziz colle un document où apparaissent les étiquettes « nom », « adresse », « téléphone ». Silence de 3 s, puis une croix, et la formulation correcte s'inscrit.
+**Scène 14 — B5 Consolidation · 3:12–3:40 · B**
+- Visuel : carte question, vignette « Garoua · Cameroun ». La silhouette d'Abdoul-Aziz colle un document où apparaissent les étiquettes « nom », « adresse », « téléphone ». Silence de 3 s, puis une croix, et la formulation correcte s'inscrit.
 - Écran : temps 1 « Nom · adresse · téléphone d'un usager → dans l'outil ? » ; temps 2 « “Un usager demande…” »
-- VO : « À vous. Au service voisin, Abdoul-Aziz colle la requête d'un usager : nom, adresse, téléphone. Il demande une réponse. Quel est le problème ? » [silence 3 s] « Des données personnelles d'usager sont sorties du service. Il fallait écrire : “un usager demande…”. Le nom se remet ensuite, hors de l'outil. »
+- VO : « À vous. Dans une mairie de Garoua, au Cameroun, Abdoul-Aziz colle la requête d'un usager : nom, adresse, téléphone. Il demande une réponse. Quel est le problème ? » [silence 3 s] « Des données personnelles d'usager sont sorties du service. Il fallait écrire : “un usager demande…”. Le nom se remet ensuite, hors de l'outil. »
 
-**Scène 15 — B6 Clôture · 3:28–3:38 · B (rappel de la promesse)**
+**Scène 15 — B6 Clôture · 3:40–3:50 · B (rappel de la promesse)**
 - Visuel : la lettre entre dans le parapheur ; la case « Visa » se coche, puis la signature (trait stylisé, illisible) ; tampon générique « Courrier départ ». La promesse revient, mot pour mot.
 - Écran : « Préparer un courrier administratif avec l'IA, sans rien divulguer »
 - VO : « Le lendemain, la lettre passe au parapheur. Le directeur la signe. Elle part, enregistrée au courrier départ. »
 
-**Scène 16 — B6 Clôture · 3:38–3:53 · B (carte de rappel)**
+**Scène 16 — B6 Clôture · 3:50–4:05 · B (carte de rappel)**
 - Visuel : carte de rappel, points révélés au rythme de la voix ; tenue ≥ 4 s après le dernier point.
 - Écran : « 1. Rien de confidentiel » « 2. Des éléments, un modèle » « 3. Registre et formules vérifiés »
 - VO : « Retenez : rien de confidentiel dans l'outil. Des éléments et un modèle, pas le dossier. Un registre et des formules que vous vérifiez. Rédigez un courrier sans rien divulguer. »
@@ -773,43 +776,41 @@ Durée estimée : 3:53 · Mots de voix off : 384
 Ordinateur, navigateur en français, zoom 125 %, barre d'adresse recadrée hors champ. Compte Google de tournage pour Gemini. Traitement de texte avec barre d'outils recadrée hors champ. Tous les documents sont fictifs, préparés à l'avance (voir 2.6) : en-tête « [EN-TÊTE DU SERVICE] », mention « Exemple fictif », aucun emblème, aucun nom de service réel. À masquer : compte, sélecteur de modèle, bandeaux.
 
 - **`ad1-01` (scène 4)** — Ouvrir la « Note du directeur » fictive. Poser sur les noms, les numéros de téléphone et le passage confidentiel des aplats annotés « nom », « téléphone », « passage confidentiel ». Durée utile : 8 s.
-- **`ad1-02` (scène 7)** — Gemini, nouvelle conversation. Taper la consigne remplie, sans l'envoyer : « Tu es secrétaire de direction dans une administration publique d'Afrique de l'Ouest. Rédige le brouillon d'une lettre administrative, au registre administratif, avec les formules d'usage. Expéditeur : le Directeur régional. Destinataires : les chefs des services techniques régionaux, le Maire de la commune, les responsables des ONG partenaires. Objet : réunion de coordination trimestrielle. Références : [N° de référence]. Contenu : réunion le [date], à 9 heures, dans la salle de réunion de la direction ; ordre du jour : bilan du trimestre, programmation du trimestre suivant, divers ; chaque structure confirme sa participation et désigne un représentant avant le [date limite]. Suis la structure de ce modèle de mon service : » Durée utile : 10 s.
-- **`ad1-03` (scène 10)** — Coller à la suite le modèle de lettre fictif, puis la dernière ligne : « Garde tous les crochets tels quels. N'invente aucun nom, aucun numéro, aucune référence. » Envoyer. Durée utile : 8 s.
+- **`ad1-02` (scène 7)** — Gemini, nouvelle conversation. Taper la consigne remplie, un bloc par ligne, sans l'envoyer : « Rôle : tu es secrétaire de direction dans une administration publique. » / « Contexte : je prépare un courrier de mon service. Expéditeur : le Directeur régional. Destinataires : les chefs des services techniques régionaux, le Maire de la commune, les responsables des ONG partenaires. Objet : réunion de coordination trimestrielle. Références : [N° de référence]. Contenu : réunion le [date], à 9 heures, dans la salle de réunion de la direction ; ordre du jour : bilan du trimestre, programmation du trimestre suivant, divers ; chaque structure confirme sa participation et désigne un représentant avant le [date limite]. » / « Tâche : rédige le brouillon de cette lettre, au registre administratif, avec les formules d'usage. » / « Format : suis la structure de ce modèle de mon service : » Durée utile : 10 s.
+- **`ad1-03` (scène 10)** — Coller à la suite, dans le bloc Format, le modèle de lettre fictif, puis la dernière ligne : « Garde tous les crochets tels quels. N'invente aucun nom, aucun numéro, aucune référence. » Envoyer. Durée utile : 8 s.
 - **`ad1-04` (scène 11)** — Filmer l'arrivée du brouillon, puis un défilement lent jusqu'à la formule finale. Si le brouillon invente un numéro ou un nom, garder la prise : elle sert le propos ; ajuster seulement la phrase de VO de la scène 11 à la validation. Durée utile : 12 s.
 - **`ad1-05` (scène 12)** — Alterner le brouillon et la note du directeur ; pointer avec le curseur la date, l'heure et les trois points de l'ordre du jour, puis la formule finale. Durée utile : 10 s.
 - **`ad1-06` (scène 13)** — Copier le brouillon dans le modèle fictif du service, puis remplacer au clavier « [N° de référence] » par « N° 000/EXEMPLE » et les crochets de date par des dates. Durée utile : 12 s.
 
 #### Notes de script
 
-- **Prononciation** : Gemini « jé-mi-ni » (fixer au premier lancement, identique dans tout le cours) ; Tahoua « ta-houa ».
+- **Prononciation** : Gemini « jé-mi-ni » (fixer au premier lancement, identique dans tout le cours) ; Tahoua « ta-houa » ; Garoua « ga-rou-a » ; RCTF « èr-cé-té-èf », lettre par lettre.
 - **Registre** : formules à montrer telles que le modèle du service les donne. Exemples courants, à adapter au rang du destinataire et aux usages du service : « Veuillez agréer, Monsieur le Maire, l'expression de ma considération distinguée » ; pour une haute autorité, « … de ma haute considération ». Ne jamais présenter une formule comme la règle unique.
-- **Exactitude** : « les textes de la fonction publique » renvoie au décret n° 2008-244/PRN/MFP/T (article 9, discrétion professionnelle) et, pour les collectivités, à la loi n° 2019-26 ; ne pas citer ces numéros dans la VO. « Ce que vous collez dans un outil grand public sort du service » est un principe de prudence : ne rien affirmer sur l'usage que fait un éditeur des données.
+- **Exactitude** : « les textes de la fonction publique de votre pays » renvoie au statut de la fonction publique de chaque pays. Exemple du Niger et textes des autres pays : voir la note pour l'owner du § 2.1. Ne citer aucun numéro de texte ni aucune autorité dans la VO ni à l'écran. « Ce que vous collez dans un outil grand public sort du service » est un principe de prudence : ne rien affirmer sur l'usage que fait un éditeur des données.
 - **Pièges** : aucun vrai en-tête, sceau, emblème ou nom de service ; aucune vraie signature. Le passage confidentiel de la note fictive reste masqué même s'il est inventé : c'est le geste qu'on enseigne. Si l'administration de l'owner interdit tout outil grand public, le dire en Notes de validation et proposer un outil validé à la place de Gemini.
 - **Termes à gloser** : « parapheur » et « courrier départ » sont connus du public ; « registre » est employé dans ses deux sens (registre du courrier, registre de langue) : l'écran précise lequel.
-- **Adaptation EN** : « J'ai l'honneur de… » n'a pas d'équivalent courant ; garder la formule française à l'écran, sous-titrée « I have the honour to… (formal French administrative opening) ». « Parapheur » = « signature folder » ; « courrier départ » = « outgoing mail register ».
-- **Adaptation HA / DJE** : les lettres restent rédigées en français ; garder les formules en français à l'écran et les expliquer à l'oral. « Discrétion professionnelle » : dire « ne pas révéler ce qu'on apprend au travail ».
+- **Adaptation EN** : « J'ai l'honneur de… » n'a pas d'équivalent courant ; garder la formule française à l'écran, sous-titrée « I have the honour to… (formal French administrative opening) ». « Parapheur » = « signature folder » ; « courrier départ » = « outgoing mail register ». RCTF = « Role, Context, Task, Format » : le sigle reste RCTF, les étiquettes des blocs sont traduites.
+- **Adaptation HA / DJE** : les lettres restent rédigées en français ; garder les formules en français à l'écran et les expliquer à l'oral. « Discrétion professionnelle » : dire « ne pas révéler ce qu'on apprend au travail ». La consigne reste en français à l'écran (le courrier est en français) ; le sigle RCTF et le rôle de chaque bloc sont expliqués à l'oral.
 
-### Leçon 2 — Comptes rendus et procès-verbaux (`ad2`)
+### Leçon 2 — Transformer vos notes de réunion en procès-verbal avec l'IA (`ad2`)
 
 #### Fiche
 
 - **Promesse** : « À la fin de cette leçon, vous saurez transformer vos notes en procès-verbal fidèle, prêt à valider. »
-- **Cas réel (B1 → B6)** : la réunion de coordination a eu lieu (acquis de la leçon 1 : la lettre d'invitation est partie sans rien divulguer). Dix participants, trois points à l'ordre du jour. Zeinabou, secrétaire de séance, a trois pages de notes ; le procès-verbal doit être signé par le président de séance et par elle. Tentation : tout enregistrer la prochaine fois et laisser l'IA écrire. Enjeu : un PV engage les services ; une décision inventée ou oubliée crée des conflits. Fermeture en B6 (champ `example`) : le PV est signé ; à la réunion suivante, le suivi part du tableau des actions.
+- **Cas réel (B1 → B6)** : à la direction régionale fictive de Tahoua (Niger), la réunion de coordination a eu lieu (acquis de la leçon 1 : la lettre d'invitation est partie sans rien divulguer). Dix participants, trois points à l'ordre du jour. Zeinabou, secrétaire de séance, a trois pages de notes ; le procès-verbal doit être signé par le président de séance et par elle. Tentation : tout enregistrer la prochaine fois et laisser l'IA écrire. Enjeu : un PV engage les services ; une décision inventée ou oubliée crée des conflits. Fermeture en B6 (champ `example`) : le PV est signé ; à la réunion suivante, le suivi part du tableau des actions.
 - **Unités de notion (B3)** : 1. Le procès-verbal fait foi, une fois signé — le compte rendu informe les absents ; le procès-verbal constate officiellement débats et décisions. · 2. Rien que vos notes — l'IA met en forme, elle n'ajoute rien ; les noms sont remplacés par les fonctions avant de coller, et reviennent dans le document final ; une information manquante devient « [À COMPLÉTER] ». · 3. Qui, quoi, quand — le PV se termine par un tableau des actions (action, responsable, échéance), relu à la réunion suivante ; le président de séance valide avant les signatures.
-- **Démo (B4)** : Gemini, version gratuite, navigateur d'ordinateur. 1. Coller la consigne, le modèle de PV du service (sans noms) et les notes, où chaque participant est désigné par sa fonction. 2. Lire le brouillon : participants, ordre du jour, déroulement, décisions, tableau des actions, ton neutre. 3. Repérer la mention « [À COMPLÉTER] » (heure de levée de séance, absente des notes) et la compléter depuis l'agenda. 4. Comparer chaque décision du brouillon avec les notes. 5. Copier dans le modèle du service, remettre les noms, transmettre au président de séance. Résultat attendu à l'écran : un PV structuré, fidèle aux notes, avec son tableau des actions.
+- **Démo (B4)** : Gemini, version gratuite, navigateur d'ordinateur. 1. Coller la consigne RCTF : Rôle ; Contexte avec les notes, où chaque participant est désigné par sa fonction ; Tâche ; Format avec le modèle de PV du service (sans noms). 2. Lire le brouillon : participants, ordre du jour, déroulement, décisions, tableau des actions, ton neutre. 3. Repérer la mention « [À COMPLÉTER] » (heure de levée de séance, absente des notes) et la compléter depuis l'agenda. 4. Comparer chaque décision du brouillon avec les notes. 5. Copier dans le modèle du service, remettre les noms, transmettre au président de séance. Résultat attendu à l'écran : un PV structuré, fidèle aux notes, avec son tableau des actions.
 - **Consolidation (B5)** : prédiction. « Le brouillon contient : “Il a été décidé de reporter la campagne.” Vos notes n'en disent rien. Que faites-vous ? » — 3 s de silence — « Vous supprimez la phrase, ou vous la faites confirmer par le président de séance. Un procès-verbal ne contient que ce qui a été dit et décidé. »
 - **Consigne à copier** :
 
 ```text
-Voici mes notes d'une réunion. Les participants sont désignés par leur fonction.
-Rédige le brouillon d'un procès-verbal, dans un style neutre, à la troisième personne.
-Structure : date et lieu, participants (fonctions), ordre du jour, déroulement point par point, décisions, tableau des actions (action, responsable, échéance), levée de séance.
-Suis la présentation de ce modèle de mon service : [collez un modèle de PV sans noms].
-N'ajoute rien qui ne figure pas dans mes notes. Si une information manque, écris [À COMPLÉTER].
-Notes : [collez vos notes, sans noms ni données personnelles]
+Rôle : tu es secrétaire de séance dans une administration publique.
+Contexte : voici mes notes d'une réunion. Les participants sont désignés par leur fonction. Notes : [collez vos notes, sans noms ni données personnelles]
+Tâche : rédige le brouillon du procès-verbal, dans un style neutre, à la troisième personne. N'ajoute rien qui ne figure pas dans mes notes. Si une information manque, écris [À COMPLÉTER].
+Format : date et lieu, participants (fonctions), ordre du jour, déroulement point par point, décisions, tableau des actions (action, responsable, échéance), levée de séance. Suis la présentation de ce modèle de mon service : [collez un modèle de PV sans noms].
 ```
 
-- **Exercice** : « Transformez vos notes en procès-verbal » — 1. Reprenez les notes d'une réunion récente et non confidentielle, ou les notes fictives fournies avec le cours. 2. Remplacez chaque nom par une fonction. 3. Utilisez la consigne, puis comparez chaque décision du brouillon avec vos notes. 4. Complétez les « [À COMPLÉTER] », remettez les noms dans le modèle du service et transmettez au président de séance.
+- **Exercice** : « Transformez vos notes en procès-verbal » — 1. Reprenez les notes d'une réunion récente et non confidentielle, ou les notes fictives fournies avec le cours. 2. Remplacez chaque nom par une fonction. 3. Remplissez les quatre blocs de la consigne (Rôle, Contexte, Tâche, Format), puis comparez chaque décision du brouillon avec vos notes. 4. Complétez les « [À COMPLÉTER] », remettez les noms dans le modèle du service et transmettez au président de séance.
 - **Carte de rappel** : 1. Le PV fait foi une fois signé 2. Rien que vos notes 3. Qui, quoi, quand
 - **Quiz** :
   1. Quelle est la différence entre un compte rendu et un procès-verbal ? — A) Aucune, ce sont deux noms du même document B) Le compte rendu informe ; le procès-verbal constate officiellement débats et décisions C) Le procès-verbal est toujours plus court D) Le compte rendu doit être signé par tous les participants — **Réponse : B**
@@ -821,84 +822,84 @@ Notes : [collez vos notes, sans noms ni données personnelles]
 
 #### Script v1 (à valider par l'owner)
 
-Durée estimée : 3:52 · Mots de voix off : 373
+Durée estimée : 4:01 · Mots de voix off : 389
 
-**Scène 1 — B1 Accroche · 0:00–0:08 · E**
-- Visuel : illustration en aplats, salle de réunion de la direction régionale : une table en U, des chevalets de fonction sans nom, Zeinabou en bout de table, cahier de notes ouvert. Le parapheur reçoit un second document vide.
-- Écran : « Réunion de coordination · Zeinabou, secrétaire de séance »
-- VO : « La lettre de Zeinabou est partie sans rien divulguer. La réunion de coordination a eu lieu. »
+**Scène 1 — B1 Accroche · 0:00–0:09 · E**
+- Visuel : illustration en aplats, salle de réunion de la direction régionale de Tahoua (décor générique) : une table en U, des chevalets de fonction sans nom, Zeinabou en bout de table, cahier de notes ouvert. Le parapheur reçoit un second document vide.
+- Écran : « Réunion de coordination · Tahoua, Niger · Zeinabou, secrétaire de séance »
+- VO : « La lettre de Zeinabou est partie sans rien divulguer. La réunion de coordination a eu lieu, à Tahoua. »
 
-**Scène 2 — B1 Accroche · 0:08–0:18 · B**
+**Scène 2 — B1 Accroche · 0:09–0:19 · B**
 - Visuel : carte de promesse sur la chemise du parapheur.
 - Écran : « Transformer vos notes en procès-verbal fidèle, prêt à valider »
 - VO : « À la fin de cette leçon, vous saurez transformer vos notes en procès-verbal fidèle, prêt à valider. »
 
-**Scène 3 — B2 Cadrage · 0:18–0:38 · C**
+**Scène 3 — B2 Cadrage · 0:19–0:39 · C**
 - Visuel : un micro dessiné relié à une fenêtre d'assistant. Deux conditions s'affichent devant lui : « accord des participants » et « règles du service » ; puis une étiquette « réunion sensible » barre la flèche d'une croix.
 - Écran : « Enregistrer ? Accord, règles, et jamais une réunion sensible »
 - VO : « Zeinabou a trois pages de notes. Un collègue lui conseille : “Enregistre, et l'IA écrira tout.” Deux problèmes. Enregistrer exige l'accord des participants, et des règles claires. Et une réunion sensible n'a rien à faire dans un outil grand public. »
 
-**Scène 4 — B2 Cadrage · 0:38–0:48 · A**
+**Scène 4 — B2 Cadrage · 0:39–0:49 · A**
 - Visuel : capture `ad2-01` — les notes de Zeinabou, saisies dans le traitement de texte, défilement lent ; les noms sont couverts d'aplats annotés « nom ».
 - Écran : « Une transcription n'est pas un procès-verbal »
 - VO : « Et une transcription n'est pas un procès-verbal. Le procès-verbal retient les décisions, et engage ceux qui le signent. »
 
-**Scène 5 — B3 Notion · 0:48–1:08 · B**
+**Scène 5 — B3 Notion · 0:49–1:09 · B**
 - Visuel : carte typographique en deux colonnes : « Compte rendu : informe les absents » / « Procès-verbal : constate, fait foi une fois signé ».
 - Écran : « 1 · Compte rendu : informe · Procès-verbal : fait foi »
 - VO : « Première règle : le procès-verbal fait foi, une fois signé. On dit souvent “PV”. Le compte rendu informe ceux qui étaient absents. Le procès-verbal constate officiellement les débats et les décisions. »
 
-**Scène 6 — B3 Notion · 1:08–1:26 · A**
+**Scène 6 — B3 Notion · 1:09–1:27 · A**
 - Visuel : capture `ad2-02` — les mêmes notes, où chaque nom a été remplacé par une fonction (« Chef du service de l'hydraulique », « Représentant de la mairie », « ONG A »). Cadre sur deux remplacements.
 - Écran : « 2 · Rien que vos notes · fonctions au lieu des noms »
 - VO : « Deuxième règle : rien que vos notes. L'IA met en forme ; elle ne doit rien ajouter. Avant de coller, remplacez les noms par les fonctions. Les noms reviendront dans le document final. »
 
-**Scène 7 — B3 Notion · 1:26–1:40 · G**
-- Visuel : carte de consigne, fond clair, consigne complète. Soulignés : « N'ajoute rien », « [À COMPLÉTER] ».
-- Écran : la consigne à copier de la fiche, en entier.
-- VO : « La consigne le dit noir sur blanc. Rien d'ajouté. Et si une information manque : “À compléter”, entre crochets. »
+**Scène 7 — B3 Notion · 1:27–1:47 · G**
+- Visuel : carte de consigne RCTF, fond clair, consigne complète ; les étiquettes « Rôle », « Contexte », « Tâche », « Format » s'allument une à une. Soulignés, dans le bloc Tâche : « N'ajoute rien », « [À COMPLÉTER] ».
+- Écran : « Consigne RCTF : Rôle · Contexte · Tâche · Format », puis la consigne à copier de la fiche, en entier, avec ses quatre blocs.
+- VO : « La consigne suit la méthode RCTF : Rôle, Contexte, Tâche, Format. Son bloc Tâche le dit noir sur blanc. Rien d'ajouté. Et si une information manque : “À compléter”, entre crochets. »
 
-**Scène 8 — B3 Notion · 1:40–2:00 · C**
+**Scène 8 — B3 Notion · 1:47–2:07 · C**
 - Visuel : schéma d'un tableau à trois colonnes « Action · Responsable · Échéance » qui se remplit ligne à ligne ; puis la chaîne de validation : président de séance (visa), puis deux signatures stylisées.
-- Écran : « 3 · Qui · quoi · quand »
+- Écran : « 3 · Le tableau des actions : qui · quoi · quand »
 - VO : « Troisième règle : terminez par un tableau. Qui fait quoi, et pour quand. C'est lui qu'on relit à la réunion suivante. Ensuite, le président de séance relit et valide. Les signatures viennent après. »
 
-**Scène 9 — B4 Application · 2:00–2:12 · A**
-- Visuel : capture `ad2-03` — dans Gemini, la consigne, le modèle de PV sans noms et les notes anonymisées, puis l'envoi.
-- Écran : « Consigne + modèle + notes anonymisées »
-- VO : « Zeinabou colle la consigne, puis ses notes. Les participants y sont désignés par leur fonction. »
+**Scène 9 — B4 Application · 2:07–2:21 · A**
+- Visuel : capture `ad2-03` — dans Gemini, la consigne RCTF : les notes anonymisées dans le bloc Contexte, le modèle de PV sans noms dans le bloc Format, puis l'envoi.
+- Écran : « Consigne RCTF : notes anonymisées + modèle de PV »
+- VO : « Zeinabou remplit les quatre blocs. Dans le contexte, ses notes : les participants y sont désignés par leur fonction. »
 
-**Scène 10 — B4 Application · 2:12–2:24 · A**
+**Scène 10 — B4 Application · 2:21–2:33 · A**
 - Visuel : capture `ad2-04` — le brouillon, défilement lent ; cadres successifs sur « Participants », « Ordre du jour », « Déroulement », « Décisions », puis sur le tableau des actions. Étiquette « BROUILLON ».
 - Écran : « Structure du PV · tableau des actions »
 - VO : « Le brouillon suit la structure : participants, ordre du jour, déroulement, décisions. Puis le tableau des actions. Le ton est neutre, à la troisième personne. »
 
-**Scène 11 — B4 Application · 2:24–2:38 · A**
+**Scène 11 — B4 Application · 2:33–2:47 · A**
 - Visuel : capture `ad2-05` — cadre sur « [À COMPLÉTER] » à la ligne de levée de séance ; puis l'agenda de Zeinabou (fictif) et l'heure saisie dans le texte.
 - Écran : « [À COMPLÉTER] → l'heure retrouvée »
 - VO : « Une mention “À compléter” apparaît : l'heure de levée de séance, absente des notes. Zeinabou la retrouve dans son agenda. »
 
-**Scène 12 — B4 Application · 2:38–2:50 · A**
+**Scène 12 — B4 Application · 2:47–2:59 · A**
 - Visuel : capture `ad2-06` — décisions du brouillon et notes en alternance ; une coche dessinée à chaque décision retrouvée dans les notes.
 - Écran : « Chaque décision ↔ les notes »
 - VO : « Elle compare chaque décision du brouillon avec ses notes, une par une. »
 
-**Scène 13 — B4 Application · 2:50–3:02 · A**
+**Scène 13 — B4 Application · 2:59–3:11 · A**
 - Visuel : capture `ad2-07` — le texte collé dans le modèle de PV du service (« [EN-TÊTE DU SERVICE] », « Exemple fictif ») ; les fonctions redeviennent des noms fictifs ; blocs de signature « Le Président de séance » et « La Secrétaire de séance ».
 - Écran : « Les noms reviennent hors de l'outil · visa du président »
 - VO : « Dans le modèle du service, elle remet les noms. Puis elle transmet au président de séance, pour validation. »
 
-**Scène 14 — B5 Consolidation · 3:02–3:28 · B**
+**Scène 14 — B5 Consolidation · 3:11–3:37 · B**
 - Visuel : carte question. Une phrase du brouillon est encadrée : « Il a été décidé de reporter la campagne. » À côté, le cahier de notes : aucune ligne correspondante. Silence de 3 s, puis la phrase est barrée d'une croix.
 - Écran : « “Il a été décidé de reporter la campagne.” · Dans vos notes : rien »
 - VO : « À vous. Le brouillon contient : “Il a été décidé de reporter la campagne.” Vos notes n'en disent rien. Que faites-vous ? » [silence 3 s] « Vous supprimez la phrase, ou vous la faites confirmer par le président de séance. Un procès-verbal ne contient que ce qui a été dit et décidé. »
 
-**Scène 15 — B6 Clôture · 3:28–3:38 · B (rappel de la promesse)**
+**Scène 15 — B6 Clôture · 3:37–3:47 · B (rappel de la promesse)**
 - Visuel : le PV entre dans le parapheur ; la case « Visa » se coche ; deux signatures stylisées, illisibles. La promesse revient, mot pour mot.
 - Écran : « Transformer vos notes en procès-verbal fidèle, prêt à valider »
 - VO : « Le procès-verbal est signé. À la réunion suivante, le suivi part du tableau des actions. »
 
-**Scène 16 — B6 Clôture · 3:38–3:52 · B (carte de rappel)**
+**Scène 16 — B6 Clôture · 3:47–4:01 · B (carte de rappel)**
 - Visuel : carte de rappel, points révélés au rythme de la voix ; tenue ≥ 4 s après le dernier point.
 - Écran : « 1. Le PV fait foi une fois signé » « 2. Rien que vos notes » « 3. Qui, quoi, quand »
 - VO : « Retenez : le procès-verbal fait foi, une fois signé. Rien que vos notes. Et un tableau : qui, quoi, quand. Transformez vos notes en procès-verbal. »
@@ -909,7 +910,7 @@ Ordinateur, navigateur en français, zoom 125 %. Compte Google de tournage pour 
 
 - **`ad2-01` (scène 4)** — Les notes brutes dans le traitement de texte, noms couverts d'aplats annotés « nom ». Défilement lent sur les trois pages. Durée utile : 8 s.
 - **`ad2-02` (scène 6)** — La version anonymisée des mêmes notes, où chaque nom est remplacé par une fonction. Marquer une pause sur deux remplacements. Durée utile : 8 s.
-- **`ad2-03` (scène 9)** — Gemini, nouvelle conversation. Coller la consigne de la fiche, le modèle de PV après « modèle de mon service : », puis les notes anonymisées après « Notes : ». Envoyer. Durée utile : 10 s.
+- **`ad2-03` (scène 9)** — Gemini, nouvelle conversation. Coller la consigne de la fiche, un bloc par ligne : les notes anonymisées après « Notes : » (bloc Contexte), puis le modèle de PV après « modèle de mon service : » (bloc Format). Envoyer. Durée utile : 10 s.
 - **`ad2-04` (scène 10)** — Filmer l'arrivée du brouillon, puis un défilement lent jusqu'au tableau des actions. Durée utile : 12 s.
 - **`ad2-05` (scène 11)** — Cadrer la ligne de levée de séance avec « [À COMPLÉTER] » ; puis montrer l'agenda fictif et taper l'heure dans le texte copié. Si la mention n'apparaît pas, recommencer dans une nouvelle conversation. Durée utile : 10 s.
 - **`ad2-06` (scène 12)** — Alterner décisions du brouillon et notes ; pointer chaque décision avec le curseur. Si le brouillon contient un élément absent des notes, garder la prise et le signaler à la validation : la VO de la scène 12 sera ajustée. Durée utile : 10 s.
@@ -918,32 +919,32 @@ Ordinateur, navigateur en français, zoom 125 %. Compte Google de tournage pour 
 #### Notes de script
 
 - **Prononciation** : « PV » « pé-vé » ; « procès-verbal » sans élision.
-- **Exactitude** : la distinction compte rendu / procès-verbal suit l'usage administratif courant ; certains services nomment autrement leurs documents : le modèle du service prime. Beaucoup d'administrations du Sahel ouvrent le PV par une formule du type « L'an deux mille vingt-six, le …, s'est tenue … sous la présidence de … » : si c'est l'usage du service, elle figure dans le modèle collé, pas dans la VO.
+- **Exactitude** : la distinction compte rendu / procès-verbal suit l'usage administratif courant ; certains services nomment autrement leurs documents : le modèle du service prime. Beaucoup d'administrations d'Afrique francophone ouvrent le PV par une formule du type « L'an deux mille vingt-six, le …, s'est tenue … sous la présidence de … » : si c'est l'usage du service, elle figure dans le modèle collé, pas dans la VO.
 - **Enregistrement et transcription** : aucun outil de transcription n'est montré ni nommé. Si l'owner souhaite en citer un, vérifier son existence, ses conditions et son traitement des données. [à vérifier au moment de la production] La règle de la scène 3 s'applique dans tous les cas : accord des participants, règles du service, jamais de réunion sensible dans un outil grand public.
 - **Pièges** : l'IA peut embellir ou « compléter » une décision ; c'est l'objet de B5. Les chevalets et documents ne portent aucun nom réel.
 - **Termes à gloser** : « PV » est dit une fois en toutes lettres puis abrégé ; « levée de séance » est montré par l'exemple ; « noir sur blanc » est une image familière.
-- **Adaptation EN** : « procès-verbal » = « official minutes » ; « compte rendu » = « meeting summary » ; « président de séance » = « chair » ; « secrétaire de séance » = « meeting secretary » ; « levée de séance » = « close of the meeting » ; « noir sur blanc » = « in black and white ».
+- **Adaptation EN** : « procès-verbal » = « official minutes » ; « compte rendu » = « meeting summary » ; « président de séance » = « chair » ; « secrétaire de séance » = « meeting secretary » ; « levée de séance » = « close of the meeting » ; « noir sur blanc » = « in black and white » ; blocs RCTF : « Role, Context, Task, Format ».
 - **Adaptation HA / DJE** : garder « procès-verbal » et « PV » en français, expliquer la différence avec le compte rendu par l'exemple (« le PV engage, le compte rendu informe »). « Noir sur blanc » : dire « clairement, par écrit ».
 
-### Leçon 3 — Synthétiser un texte réglementaire, et le vérifier (`ad3`)
+### Leçon 3 — Résumer un texte réglementaire avec l'IA et vérifier chaque article (`ad3`)
 
 #### Fiche
 
 - **Promesse** : « À la fin de cette leçon, vous saurez résumer un texte réglementaire avec l'IA, et vérifier chaque point. »
-- **Cas réel (B1 → B6)** : le PV de Zeinabou est signé (acquis de la leçon 2). Souleymane, chef de service dans la même direction régionale, doit présenter lundi au directeur les obligations que fixe aux agents le décret d'application du statut général de la fonction publique : un texte long, un week-end court. Tentation : se contenter d'un résumé de l'IA. Enjeu : une erreur dans une synthèse devient une consigne fausse donnée aux agents. Fermeture en B6 (champ `example`) : lundi, le directeur demande « Où est-ce écrit ? » ; Souleymane ouvre l'article ; sa note tient en une page.
+- **Cas réel (B1 → B6)** : après le PV de Zeinabou à Tahoua (acquis de la leçon 2), le cours change de pays. Souleymane, chef de service dans une direction régionale fictive de Bouaké (Côte d'Ivoire), doit présenter lundi à son directeur les obligations que fixe aux agents publics un long décret (texte fictif pour la démonstration, voir Captures) : un texte long, un week-end court. Tentation : se contenter d'un résumé de l'IA. Enjeu : une erreur dans une synthèse devient une consigne fausse donnée aux agents. Fermeture en B6 (champ `example`) : lundi, le directeur demande « Où est-ce écrit ? » ; Souleymane ouvre l'article ; sa note tient en une page.
 - **Unités de notion (B3)** : 1. Textes publics seulement — un texte publié au Journal officiel peut aller dans l'outil ; une note interne, un projet de texte, un document classé, jamais. · 2. Un point, un article — exiger le numéro d'article pour chaque point et les mots exacts pour délais, montants, conditions et exceptions ; Gemini Notebook (anciennement NotebookLM) ajoute des citations cliquables. · 3. Le texte officiel fait foi — vérifier chaque point dans l'article, et vérifier que le texte est en vigueur, ni modifié ni abrogé.
-- **Démo (B4)** : Gemini Notebook dans le navigateur d'un ordinateur. 1. Créer un carnet « Textes RH ». 2. Ajouter comme source le PDF du décret, téléchargé depuis une source officielle. 3. Coller la consigne : les obligations des agents, une ligne par point, avec l'article. 4. La liste arrive, chaque ligne avec sa citation. 5. Toucher la citation de la ligne sur la discrétion professionnelle : le passage s'affiche ; ouvrir le PDF à l'article 9 et comparer les mots. 6. Faire de même pour chaque ligne ; retirer toute ligne sans article. 7. Rédiger la note d'une page dans le modèle du service : objet, points clés avec articles, deux questions à clarifier. Résultat attendu à l'écran : une note dont chaque point renvoie à un article vérifié.
+- **Démo (B4)** : Gemini Notebook dans le navigateur d'un ordinateur. 1. Créer un carnet « Textes RH ». 2. Ajouter comme source le PDF du décret (texte fictif de la démonstration ; dans l'exercice, l'apprenant télécharge un texte depuis une source officielle de son pays). 3. Coller la consigne RCTF : Rôle, Contexte, Tâche (les obligations des agents), Format (une ligne par point, avec l'article). 4. La liste arrive, chaque ligne avec sa citation. 5. Toucher la citation de la ligne sur la discrétion professionnelle : le passage s'affiche ; ouvrir le PDF à l'article correspondant (article 9 du texte fictif) et comparer les mots. 6. Faire de même pour chaque ligne ; retirer toute ligne sans article. 7. Rédiger la note d'une page dans le modèle du service : objet, points clés avec articles, deux questions à clarifier. Résultat attendu à l'écran : une note dont chaque point renvoie à un article vérifié.
 - **Consolidation (B5)** : prédiction, exemple fictif affiché comme tel. « La synthèse indique “délai de trente jours”. L'article dit “quinze jours”. Que retenez-vous ? » — 3 s de silence — « Quinze jours : le texte officiel fait toujours foi. Vous corrigez la synthèse avant de la transmettre, et vous vérifiez les autres points. »
 - **Consigne à copier** :
 
 ```text
-À partir de ce texte uniquement, liste les [obligations / procédures / délais] qu'il fixe pour [public concerné].
-Une ligne par point, avec le numéro de l'article entre parenthèses.
-Garde les mots exacts du texte pour les délais, montants, conditions et exceptions.
-N'ajoute rien qui ne figure pas dans le texte. Si un point est ambigu, signale-le.
+Rôle : tu aides un chef de service d'une administration publique à lire un texte réglementaire.
+Contexte : je dois présenter à mon directeur ce texte réglementaire public, déposé comme source. Il concerne [public concerné].
+Tâche : à partir de ce texte uniquement, liste les [obligations / procédures / délais] qu'il fixe pour [public concerné]. N'ajoute rien qui ne figure pas dans le texte. Si un point est ambigu, signale-le.
+Format : une ligne par point, avec le numéro de l'article entre parenthèses. Garde les mots exacts du texte pour les délais, montants, conditions et exceptions.
 ```
 
-- **Exercice** : « Synthétisez un texte public, article par article » — 1. Téléchargez, depuis une source officielle, un texte réglementaire public lié à votre travail. 2. Déposez-le dans Gemini Notebook et utilisez la consigne. 3. Vérifiez chaque point dans le texte, article par article, et vérifiez que le texte est toujours en vigueur. 4. Rédigez une note d'une page : objet, points clés avec leurs articles, questions à clarifier.
+- **Exercice** : « Synthétisez un texte public, article par article » — 1. Téléchargez, depuis une source officielle de votre pays, un texte réglementaire public lié à votre travail. 2. Déposez-le dans Gemini Notebook et remplissez les quatre blocs de la consigne (Rôle, Contexte, Tâche, Format). 3. Vérifiez chaque point dans le texte, article par article, et vérifiez que le texte est toujours en vigueur. 4. Rédigez une note d'une page : objet, points clés avec leurs articles, questions à clarifier.
 - **Carte de rappel** : 1. Textes publics seulement 2. Un point, un article 3. Le texte officiel fait foi
 - **Quiz** :
   1. Lequel de ces documents pouvez-vous déposer dans un outil grand public ? — A) Un décret publié au Journal officiel B) Un projet de note confidentielle C) Le dossier disciplinaire d'un agent D) Un rapport interne classé — **Réponse : A**
@@ -955,131 +956,129 @@ N'ajoute rien qui ne figure pas dans le texte. Si un point est ambigu, signale-l
 
 #### Script v1 (à valider par l'owner)
 
-Durée estimée : 3:56 · Mots de voix off : 372
+Durée estimée : 4:02 · Mots de voix off : 383
 
-**Scène 1 — B1 Accroche · 0:00–0:08 · E**
-- Visuel : illustration en aplats, bureau de Souleymane le vendredi soir, un épais document relié devant lui, calendrier ouvert sur « lundi ». Le parapheur reçoit un troisième document vide.
-- Écran : « Souleymane · chef de service · lundi : le décret »
-- VO : « Le procès-verbal de Zeinabou est signé. Lundi, Souleymane doit présenter un long décret au directeur. »
+**Scène 1 — B1 Accroche · 0:00–0:09 · E**
+- Visuel : illustration en aplats, bureau de Souleymane à Bouaké (décor générique) le vendredi soir, un épais document relié devant lui, calendrier ouvert sur « lundi ». Le parapheur reçoit un troisième document vide.
+- Écran : « Souleymane · chef de service · Bouaké, Côte d'Ivoire · un décret à présenter lundi »
+- VO : « Bouaké, en Côte d'Ivoire. Lundi, Souleymane, chef de service, doit présenter un long décret à son directeur. »
 
-**Scène 2 — B1 Accroche · 0:08–0:18 · B**
+**Scène 2 — B1 Accroche · 0:09–0:19 · B**
 - Visuel : carte de promesse sur la chemise du parapheur.
 - Écran : « Résumer un texte réglementaire avec l'IA, et vérifier chaque point »
 - VO : « À la fin de cette leçon, vous saurez résumer un texte réglementaire avec l'IA, et vérifier chaque point. »
 
-**Scène 3 — B2 Cadrage · 0:18–0:36 · C**
+**Scène 3 — B2 Cadrage · 0:19–0:37 · C**
 - Visuel : un long texte se comprime en un court résumé ; trois mots tombent en route (« sauf », « au plus tard », « sous réserve »), chacun marqué d'une croix.
 - Écran : « Un résumé omet, arrondit, inverse »
 - VO : « Le texte est long, le temps court. Il pense : “Le résumé de l'IA, c'est le texte en plus court.” C'est faux. Un résumé omet, arrondit, et peut inverser une condition. »
 
-**Scène 4 — B2 Cadrage · 0:36–0:48 · A**
+**Scène 4 — B2 Cadrage · 0:37–0:49 · A**
 - Visuel : capture `ad3-01` — la première page du PDF du décret. Cadre sur l'intitulé.
 - Écran : « “sauf” · “au plus tard” · “sous réserve” »
 - VO : « Dans un texte réglementaire, un seul mot change tout : “sauf”, “au plus tard”, “sous réserve”. Le résumé ne remplace pas le texte. »
 
-**Scène 5 — B3 Notion · 0:48–1:06 · C**
+**Scène 5 — B3 Notion · 0:49–1:07 · C**
 - Visuel : schéma « Le filtre ». Passe (coche) : « texte publié au Journal officiel ». Ne passent jamais (croix) : « note interne », « projet de texte », « document classé ».
 - Écran : « 1 · Textes publics seulement »
 - VO : « Première règle : seulement des textes publics. Un décret publié au Journal officiel peut aller dans l'outil. Une note interne, un projet de texte, un document classé : jamais. »
 
-**Scène 6 — B3 Notion · 1:06–1:26 · A**
+**Scène 6 — B3 Notion · 1:07–1:27 · A**
 - Visuel : capture `ad3-02` — Gemini Notebook, une réponse avec numéros de citation ; le toucher d'un numéro affiche le passage. Encart : « anciennement NotebookLM ».
 - Écran : « 2 · Un point, un article »
 - VO : « Deuxième règle : un point, un article. Exigez le numéro d'article pour chaque point. Gemini Notebook, l'outil qu'on appelait NotebookLM, ajoute des citations : touchez-les pour voir le passage. »
 
-**Scène 7 — B3 Notion · 1:26–1:40 · G**
-- Visuel : carte de consigne, fond clair, consigne complète. Soulignés : « numéro de l'article », « mots exacts », « signale-le ».
-- Écran : la consigne à copier de la fiche, en entier.
-- VO : « La consigne demande aussi de garder les mots exacts : délais, montants, conditions, exceptions. Et de signaler ce qui est ambigu. »
+**Scène 7 — B3 Notion · 1:27–1:46 · G**
+- Visuel : carte de consigne RCTF, fond clair, consigne complète ; les étiquettes « Rôle », « Contexte », « Tâche », « Format » s'allument une à une. Soulignés : « signale-le » (bloc Tâche), « numéro de l'article », « mots exacts » (bloc Format).
+- Écran : « Consigne RCTF : Rôle · Contexte · Tâche · Format », puis la consigne à copier de la fiche, en entier, avec ses quatre blocs.
+- VO : « La consigne suit la méthode RCTF : Rôle, Contexte, Tâche, Format. Le format exige les mots exacts : délais, montants, conditions, exceptions. Et la tâche, de signaler ce qui est ambigu. »
 
-**Scène 8 — B3 Notion · 1:40–2:00 · B**
+**Scène 8 — B3 Notion · 1:46–2:06 · B**
 - Visuel : carte typographique ; une balance penche du côté « Texte officiel » contre « Synthèse » ; puis deux cases à cocher : « en vigueur », « ni modifié ni abrogé ».
 - Écran : « 3 · Le texte officiel fait foi · en vigueur ? »
 - VO : « Troisième règle : le texte officiel fait foi. Pas la synthèse. Vérifiez chaque point dans l'article. Et vérifiez que le texte est toujours en vigueur : ni modifié, ni abrogé. Abrogé, c'est-à-dire supprimé par un texte plus récent. »
 
-**Scène 9 — B4 Application · 2:00–2:12 · A**
+**Scène 9 — B4 Application · 2:06–2:18 · A**
 - Visuel : capture `ad3-03` — création du carnet « Textes RH » et ajout du PDF comme source.
 - Écran : « Carnet “Textes RH” · source : le décret en PDF »
 - VO : « Souleymane crée un carnet, “Textes RH”. Il y dépose le décret, en PDF, téléchargé d'une source officielle. »
 
-**Scène 10 — B4 Application · 2:12–2:26 · A**
-- Visuel : capture `ad3-04` — la consigne envoyée, puis la liste des obligations, chaque ligne terminée par un article et une citation. Étiquette « BROUILLON ».
+**Scène 10 — B4 Application · 2:18–2:32 · A**
+- Visuel : capture `ad3-04` — la consigne RCTF envoyée, puis la liste des obligations, chaque ligne terminée par un article et une citation. Étiquette « BROUILLON ».
 - Écran : « Une ligne = un point + son article »
 - VO : « Il colle la consigne : les obligations des agents, avec les articles. La liste arrive, chaque ligne avec sa citation. »
 
-**Scène 11 — B4 Application · 2:26–2:40 · A**
-- Visuel : capture `ad3-05` — toucher de la citation sur la discrétion professionnelle, passage affiché ; puis le PDF ouvert à l'article 9, mot recherché surligné ; trait reliant les deux.
-- Écran : « Citation ↔ article 9 du texte »
-- VO : « Il touche une citation : article neuf, la discrétion professionnelle. Puis il ouvre le PDF à cet article, et compare. »
+**Scène 11 — B4 Application · 2:32–2:46 · A**
+- Visuel : capture `ad3-05` — toucher de la citation sur la discrétion professionnelle, passage affiché ; puis le PDF ouvert à l'article correspondant, mot recherché surligné ; trait reliant les deux.
+- Écran : « La citation ↔ l'article du texte »
+- VO : « Il touche une citation : l'article sur la discrétion professionnelle. Puis il ouvre le PDF à cet article, et compare. »
 
-**Scène 12 — B4 Application · 2:40–2:52 · A**
+**Scène 12 — B4 Application · 2:46–2:58 · A**
 - Visuel : capture `ad3-06` — défilement de la liste ; une coche à chaque ligne vérifiée ; une ligne sans article est barrée.
 - Écran : « Ligne vérifiée ✓ · ligne sans article ✗ »
 - VO : « Les mots concordent. Il fait de même pour chaque ligne, une par une. Une ligne sans article ? Il la retire. »
 
-**Scène 13 — B4 Application · 2:52–3:06 · A**
+**Scène 13 — B4 Application · 2:58–3:12 · A**
 - Visuel : capture `ad3-07` — la note d'une page dans le modèle du service (« [EN-TÊTE DU SERVICE] », « Exemple fictif ») : objet, points clés avec articles, deux questions à clarifier.
 - Écran : « Note d'une page : objet · points + articles · questions »
 - VO : « Enfin, il rédige sa note d'une page : objet, points clés avec leurs articles, et deux questions à clarifier. Il la colle dans le modèle de note du service. »
 
-**Scène 14 — B5 Consolidation · 3:06–3:32 · B**
+**Scène 14 — B5 Consolidation · 3:12–3:38 · B**
 - Visuel : carte question, mention « Exemple fictif ». Deux étiquettes face à face : « Synthèse : 30 jours » / « Article : 15 jours ». Silence de 3 s, puis croix sur la synthèse, cadre sur l'article.
 - Écran : « Exemple fictif · Synthèse : 30 jours · Article : 15 jours »
 - VO : « À vous. La synthèse indique : “délai de trente jours”. L'article dit : “quinze jours”. Que retenez-vous ? » [silence 3 s] « Quinze jours. Le texte officiel fait toujours foi. Vous corrigez la synthèse avant de la transmettre, et vous vérifiez les autres points. »
 
-**Scène 15 — B6 Clôture · 3:32–3:42 · B (rappel de la promesse)**
+**Scène 15 — B6 Clôture · 3:38–3:48 · B (rappel de la promesse)**
 - Visuel : bureau du directeur ; une bulle « Où est-ce écrit ? » ; Souleymane pointe l'article sur son écran. La promesse revient, mot pour mot.
 - Écran : « Résumer un texte réglementaire avec l'IA, et vérifier chaque point »
 - VO : « Lundi, le directeur demande : “Où est-ce écrit ?” Souleymane ouvre l'article. La note tient en une page. »
 
-**Scène 16 — B6 Clôture · 3:42–3:56 · B (carte de rappel)**
+**Scène 16 — B6 Clôture · 3:48–4:02 · B (carte de rappel)**
 - Visuel : carte de rappel, points révélés au rythme de la voix ; tenue ≥ 4 s après le dernier point.
 - Écran : « 1. Textes publics seulement » « 2. Un point, un article » « 3. Le texte officiel fait foi »
 - VO : « Retenez : des textes publics seulement. Un point, un article. Le texte officiel fait foi. Synthétisez un texte public, article par article. »
 
 #### Captures à fournir par l'owner
 
-Ordinateur, navigateur en français, zoom 125 %. Compte Google de tournage pour Gemini Notebook, sans autre carnet. Texte utilisé : le décret n° 2008-244/PRN/MFP/T portant application de la loi sur le statut général de la fonction publique de l'État, en PDF, téléchargé depuis une source officielle. [à vérifier au moment de la production : texte toujours en vigueur, numérotation de l'article sur la discrétion, adresse de la source officielle ; sinon, choisir un autre texte public en vigueur et adapter la VO des scènes 10 et 11]. À masquer : compte, bandeaux.
+Ordinateur, navigateur en français, zoom 125 %. Compte Google de tournage pour Gemini Notebook, sans autre carnet. Texte utilisé : un décret **fictif et générique**, rédigé par Claude et relu par l'owner (voir 2.6), en PDF : « Décret portant obligations des agents publics — Exemple fictif ». Une douzaine de pages, une vingtaine d'articles, dont l'article 9 sur la discrétion professionnelle, et au moins un délai, une condition et une exception (« sauf », « au plus tard », « sous réserve »). Aucun emblème, aucune devise, aucune mention « République de… », aucun numéro de texte réel, aucune signature ; mention « Exemple fictif » en tête de chaque page. Variante, au choix de l'owner : un texte réglementaire public ivoirien en vigueur, téléchargé depuis une source officielle [à vérifier au moment de la production : en vigueur, article sur la discrétion, adresse de la source] ; la VO ne cite aucun numéro d'article et reste valable. À masquer : compte, bandeaux.
 
 - **`ad3-01` (scène 4)** — Ouvrir le PDF dans le navigateur, première page, intitulé lisible. Durée utile : 6 s.
 - **`ad3-02` (scène 6)** — Dans le carnet de la démo, poser d'abord : « Quel est l'objet de ce décret ? Cite l'article. » Toucher le numéro de citation ; laisser le passage affiché. Durée utile : 10 s.
 - **`ad3-03` (scène 9)** — Depuis l'accueil de Gemini Notebook : créer un carnet, le nommer « Textes RH », ajouter le PDF comme source, attendre qu'il apparaisse. Durée utile : 10 s.
-- **`ad3-04` (scène 10)** — Coller ce texte exact et l'envoyer : « À partir de ce texte uniquement, liste les obligations qu'il fixe pour les agents. Une ligne par point, avec le numéro de l'article entre parenthèses. Garde les mots exacts du texte pour les délais, montants, conditions et exceptions. N'ajoute rien qui ne figure pas dans le texte. Si un point est ambigu, signale-le. » Filmer la liste. Durée utile : 12 s.
+- **`ad3-04` (scène 10)** — Coller ce texte exact, un bloc par ligne, et l'envoyer : « Rôle : tu aides un chef de service d'une administration publique à lire un texte réglementaire. » / « Contexte : je dois présenter à mon directeur ce texte réglementaire public, déposé comme source. Il concerne les agents publics. » / « Tâche : à partir de ce texte uniquement, liste les obligations qu'il fixe pour les agents publics. N'ajoute rien qui ne figure pas dans le texte. Si un point est ambigu, signale-le. » / « Format : une ligne par point, avec le numéro de l'article entre parenthèses. Garde les mots exacts du texte pour les délais, montants, conditions et exceptions. » Filmer la liste. Durée utile : 12 s.
 - **`ad3-05` (scène 11)** — Toucher la citation de la ligne sur la discrétion professionnelle ; puis, dans le PDF, lancer la recherche du mot « discrétion » et s'arrêter sur l'article. Durée utile : 12 s.
 - **`ad3-06` (scène 12)** — Copier la liste dans un document ; défiler en pointant chaque ligne ; supprimer une ligne sans article s'il y en a une. Durée utile : 8 s.
 - **`ad3-07` (scène 13)** — La note d'une page dans le modèle fictif du service. Durée utile : 10 s.
 
 #### Notes de script
 
-- **Prononciation** : « NotebookLM » « note-bouk-èl-ème » ; « Journal officiel » sans abréviation.
-- **Exactitude** : l'article 9 du décret n° 2008-244/PRN/MFP/T porte l'obligation de discrétion professionnelle (vérifié en octobre 2026 sur une reproduction du texte). La VO de la scène 11 n'est juste que pour ce texte. Le principe « le texte publié au Journal officiel fait foi » est général ; ne pas citer d'adresse de site officiel dans la VO. [à vérifier au moment de la production : adresse en ligne du Journal officiel ou du Secrétariat général du Gouvernement]
+- **Prononciation** : « NotebookLM » « note-bouk-èl-ème » ; « Journal officiel » sans abréviation ; Bouaké « bou-a-ké » ; RCTF lettre par lettre.
+- **Exactitude** : le décret de la démonstration est fictif ; la VO ne cite aucun numéro d'article ni aucun texte réel d'un pays, et reste juste si l'owner choisit la variante d'un texte ivoirien réel. Le principe « le texte publié au Journal officiel fait foi » est général ; ne citer aucune adresse de site officiel dans la VO. Dans l'exercice, chaque apprenant télécharge un texte de son pays.
 - **Point d'actualité** : Gemini Notebook est le nom de NotebookLM depuis le 16 juillet 2026. [à vérifier au moment de la production : libellés du bouton d'ajout de source et de la citation]
-- **Pièges** : l'exemple « trente jours / quinze jours » est fictif et doit porter la mention à l'écran. Ne jamais déposer un projet de texte ni une note interne, même pour la démo. Si la liste produite contient une ligne sans article, c'est un bon moment de capture : la scène 12 le montre.
+- **Pièges** : le décret fictif ne reproduit aucun statut réel d'un pays (aucune copie d'article existant). L'exemple « trente jours / quinze jours » est fictif et doit porter la mention à l'écran. Ne jamais déposer un projet de texte ni une note interne, même pour la démo. Si la liste produite contient une ligne sans article, c'est un bon moment de capture : la scène 12 le montre.
 - **Termes à gloser** : « abrogé » est glosé dans la VO ; « en vigueur » est montré par la case à cocher.
-- **Adaptation EN** : « Journal officiel » = « Official Gazette » ; « abrogé » = « repealed » ; « note de synthèse » = « briefing note » ; « décret d'application » = « implementing decree ».
+- **Adaptation EN** : « Journal officiel » = « Official Gazette » ; « abrogé » = « repealed » ; « note de synthèse » = « briefing note » ; « décret » = « decree » ; blocs RCTF : « Role, Context, Task, Format ».
 - **Adaptation HA / DJE** : garder « décret », « article » et « Journal officiel » en français ; expliquer « abrogé » (« qui ne s'applique plus ») et « en vigueur » (« qui s'applique aujourd'hui »).
 
-### Leçon 4 — Rédiger un rapport d'activités (`ad4`)
+### Leçon 4 — Rédiger un rapport d'activités avec l'IA, à partir de vos chiffres vérifiés (`ad4`)
 
 #### Fiche
 
 - **Promesse** : « À la fin de cette leçon, vous saurez construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés. »
-- **Cas réel (B1 → B6)** : Souleymane sait désormais vérifier une synthèse article par article (acquis de la leçon 3). Vendredi, il doit rendre le rapport d'activités trimestriel de son service. Il dispose d'un tableau d'activités (exemple fictif : vingt prévues, dix-sept réalisées) et de notes sur les difficultés. Tentation : demander « Écris-moi un rapport ». Enjeu : le rapport remonte la hiérarchie ; un chiffre faux engage le service. Fermeture en B6 (champ `example`) : vendredi, le rapport part à l'heure, chaque chiffre recalculé ; le directeur le vise et le transmet.
+- **Cas réel (B1 → B6)** : Souleymane sait désormais vérifier une synthèse article par article (acquis de la leçon 3). Vendredi, il doit rendre le rapport d'activités trimestriel de son service, à la direction régionale fictive de Bouaké (Côte d'Ivoire). Il dispose d'un tableau d'activités (exemple fictif : vingt prévues, dix-sept réalisées) et de notes sur les difficultés. Tentation : demander « Écris-moi un rapport ». Enjeu : le rapport remonte la hiérarchie ; un chiffre faux engage le service. Fermeture en B6 (champ `example`) : vendredi, le rapport part à l'heure, chaque chiffre recalculé ; le directeur le vise et le transmet.
 - **Unités de notion (B3)** : 1. Le plan d'abord — contexte, activités réalisées, résultats, difficultés, recommandations ; le modèle imposé par le ministère prime ; le plan est donné à l'IA avec les données. · 2. Vos chiffres, recalculés — l'IA peut se tromper ou arrondir sans le dire ; elle montre chaque calcul, l'agent le refait ; chaque chiffre est marqué « [À VÉRIFIER] » jusqu'au contrôle. · 3. Faits, analyse, recommandations — un fait se constate, une analyse s'argumente, une recommandation dit qui fait quoi et quand ; des totaux, jamais de listes de noms.
-- **Démo (B4)** : Gemini, version gratuite, navigateur d'ordinateur ; calculatrice du téléphone. 1. Coller la consigne avec le trimestre et le plan du service, puis le tableau anonymisé et les notes. 2. Lire le brouillon : il suit le plan ; le taux de réalisation apparaît avec son calcul (dix-sept divisé par vingt). 3. Refaire le calcul sur la calculatrice : quatre-vingt-cinq pour cent ; retirer la mention « [À VÉRIFIER] ». 4. Réécrire une recommandation vague (« renforcer le suivi ») en qui, quoi, quand. 5. Coller les sections dans le modèle de rapport du service, feuille de calcul en annexe, et soumettre. Résultat attendu à l'écran : des sections fidèles au plan, des chiffres recalculés, des recommandations précises.
+- **Démo (B4)** : Gemini, version gratuite, navigateur d'ordinateur ; calculatrice du téléphone. 1. Coller la consigne RCTF : Rôle (avec le trimestre), Contexte (le tableau anonymisé et les notes), Tâche, Format (le plan du service). 2. Lire le brouillon : il suit le plan ; le taux de réalisation apparaît avec son calcul (dix-sept divisé par vingt). 3. Refaire le calcul sur la calculatrice : quatre-vingt-cinq pour cent ; retirer la mention « [À VÉRIFIER] ». 4. Réécrire une recommandation vague (« renforcer le suivi ») en qui, quoi, quand. 5. Coller les sections dans le modèle de rapport du service, feuille de calcul en annexe, et soumettre. Résultat attendu à l'écran : des sections fidèles au plan, des chiffres recalculés, des recommandations précises.
 - **Consolidation (B5)** : prédiction, exemple fictif affiché comme tel. « Dans un autre brouillon, l'IA écrit “taux de réalisation : 90 %”. Le tableau dit dix-sept sur vingt. Juste ? » — 3 s de silence — « Non : dix-sept sur vingt, c'est 85 %. Un seul chiffre faux, et tout le rapport perd sa crédibilité. »
 - **Consigne à copier** :
 
 ```text
-Tu aides un chef de service à rédiger le rapport d'activités du [trimestre] de son service.
-Voici le tableau des activités (prévu, réalisé) et mes notes. Les données sont anonymisées.
-Rédige les sections suivantes en suivant ce plan : [collez le plan ou le modèle imposé].
-N'invente aucun chiffre. Montre chaque calcul. Marque chaque chiffre [À VÉRIFIER].
-Sépare les faits de l'analyse. Pour chaque recommandation, précise qui, quoi, quand.
-Tableau et notes : [collez vos données, sans aucun nom]
+Rôle : tu aides un chef de service d'une administration publique à rédiger le rapport d'activités du [trimestre] de son service.
+Contexte : voici le tableau des activités (prévu, réalisé) et mes notes sur les difficultés. Les données sont anonymisées. Tableau et notes : [collez vos données, sans aucun nom]
+Tâche : rédige les sections du rapport. N'invente aucun chiffre. Montre chaque calcul. Sépare les faits de l'analyse. Pour chaque recommandation, précise qui, quoi, quand.
+Format : suis ce plan : [collez le plan ou le modèle imposé]. Marque chaque chiffre [À VÉRIFIER].
 ```
 
-- **Exercice** : « Rédigez une page de rapport vérifiée » — 1. Préparez votre tableau d'activités (prévu, réalisé), sans aucun nom de personne. 2. Utilisez la consigne avec le plan de votre service et vos notes. 3. Recalculez chaque chiffre vous-même et retirez chaque « [À VÉRIFIER] » après contrôle. 4. Réécrivez les recommandations (qui, quoi, quand), puis collez la page dans le modèle de votre service.
+- **Exercice** : « Rédigez une page de rapport vérifiée » — 1. Préparez votre tableau d'activités (prévu, réalisé), sans aucun nom de personne. 2. Remplissez les quatre blocs de la consigne (Rôle, Contexte, Tâche, Format) avec votre tableau, vos notes et le plan de votre service. 3. Recalculez chaque chiffre vous-même et retirez chaque « [À VÉRIFIER] » après contrôle. 4. Réécrivez les recommandations (qui, quoi, quand), puis collez la page dans le modèle de votre service.
 - **Carte de rappel** : 1. Le plan d'abord 2. Vos chiffres, recalculés 3. Faits, analyse, recommandations
 - **Quiz** :
   1. Par quoi commencer un rapport d'activités avec l'IA ? — A) Par la conclusion B) Par le plan, ou le modèle imposé par votre ministère C) Par la mise en page D) Par les annexes — **Réponse : B**
@@ -1091,84 +1090,84 @@ Tableau et notes : [collez vos données, sans aucun nom]
 
 #### Script v1 (à valider par l'owner)
 
-Durée estimée : 3:56 · Mots de voix off : 361
+Durée estimée : 4:05 · Mots de voix off : 377
 
-**Scène 1 — B1 Accroche · 0:00–0:08 · E**
-- Visuel : illustration en aplats, bureau de Souleymane ; un calendrier entoure « vendredi » ; classeurs et calculatrice. Le parapheur reçoit un quatrième document vide.
-- Écran : « Souleymane · rapport trimestriel · vendredi »
-- VO : « Souleymane sait vérifier une synthèse, article par article. Vendredi, il rend le rapport trimestriel. »
+**Scène 1 — B1 Accroche · 0:00–0:09 · E**
+- Visuel : illustration en aplats, bureau de Souleymane à Bouaké (décor générique) ; un calendrier entoure « vendredi » ; classeurs et calculatrice. Le parapheur reçoit un quatrième document vide.
+- Écran : « Souleymane · Bouaké, Côte d'Ivoire · rapport trimestriel à rendre vendredi »
+- VO : « Souleymane sait vérifier une synthèse, article par article. Vendredi, à Bouaké, il rend le rapport trimestriel. »
 
-**Scène 2 — B1 Accroche · 0:08–0:18 · B**
+**Scène 2 — B1 Accroche · 0:09–0:19 · B**
 - Visuel : carte de promesse sur la chemise du parapheur.
 - Écran : « Construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés »
 - VO : « À la fin de cette leçon, vous saurez construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés. »
 
-**Scène 3 — B2 Cadrage · 0:18–0:34 · C**
+**Scène 3 — B2 Cadrage · 0:19–0:35 · C**
 - Visuel : une fenêtre d'assistant produit un rapport « plausible » ; trois étiquettes s'y collent : « activités imaginaires », « chiffres ronds », « difficultés génériques », chacune avec une croix.
 - Écran : « Sans vos données : plausible, et faux »
 - VO : « Il est tenté de demander : “Écris-moi un rapport d'activités.” Sans ses données, l'IA produira un rapport plausible. Et faux. Des activités imaginaires, des chiffres ronds, des difficultés génériques. »
 
-**Scène 4 — B2 Cadrage · 0:34–0:48 · A**
+**Scène 4 — B2 Cadrage · 0:35–0:49 · A**
 - Visuel : capture `ad4-01` — le tableau d'activités fictif dans un tableur (Activité, Prévu, Réalisé, Observations). Cadre sur les totaux : 20 et 17.
-- Écran : « La matière : le tableau et les notes · Exemple fictif »
+- Écran : « Le rapport part de votre tableau et de vos notes · Exemple fictif »
 - VO : « La matière du rapport, c'est son tableau d'activités et ses notes. Rien d'autre. Le tableau ne contient aucun nom : des activités et des totaux. »
 
-**Scène 5 — B3 Notion · 0:48–1:08 · B**
+**Scène 5 — B3 Notion · 0:49–1:09 · B**
 - Visuel : carte typographique ; le plan s'empile en cinq intercalaires (contexte, activités, résultats, difficultés, recommandations), puis un cachet générique « Modèle du ministère » se pose dessus.
 - Écran : « 1 · Le plan d'abord · le modèle du ministère prime »
 - VO : « Première règle : le plan d'abord. Contexte, activités réalisées, résultats, difficultés, recommandations. Si votre ministère impose un modèle, c'est lui qui s'applique. Donnez ce plan à l'IA, avec vos données. »
 
-**Scène 6 — B3 Notion · 1:08–1:26 · C**
+**Scène 6 — B3 Notion · 1:09–1:27 · C**
 - Visuel : une ligne de rapport « Taux de réalisation : … » ; à côté, une calculatrice dessinée qui refait le calcul ; une coche quand les deux concordent.
 - Écran : « 2 · Vos chiffres, recalculés »
 - VO : « Deuxième règle : vos chiffres, recalculés. L'IA peut se tromper dans un calcul, ou arrondir sans le dire. Exigez qu'elle montre chaque calcul. Puis refaites-le vous-même. »
 
-**Scène 7 — B3 Notion · 1:26–1:40 · G**
-- Visuel : carte de consigne, fond clair, consigne complète. Soulignés : « N'invente aucun chiffre », « Montre chaque calcul », « [À VÉRIFIER] ».
-- Écran : la consigne à copier de la fiche, en entier.
-- VO : « Cette consigne interdit d'inventer un chiffre. Elle marque chaque chiffre “À vérifier”. Vous retirez la mention après contrôle. »
+**Scène 7 — B3 Notion · 1:27–1:47 · G**
+- Visuel : carte de consigne RCTF, fond clair, consigne complète ; les étiquettes « Rôle », « Contexte », « Tâche », « Format » s'allument une à une. Soulignés : « N'invente aucun chiffre », « Montre chaque calcul » (bloc Tâche), « [À VÉRIFIER] » (bloc Format).
+- Écran : « Consigne RCTF : Rôle · Contexte · Tâche · Format », puis la consigne à copier de la fiche, en entier, avec ses quatre blocs.
+- VO : « Cette consigne suit la méthode RCTF : Rôle, Contexte, Tâche, Format. Sa tâche interdit d'inventer un chiffre. Son format marque chaque chiffre “À vérifier”. Vous retirez la mention après contrôle. »
 
-**Scène 8 — B3 Notion · 1:40–2:00 · C**
+**Scène 8 — B3 Notion · 1:47–2:07 · C**
 - Visuel : trois colonnes : « Faits : se constatent » (loupe), « Analyse : s'argumente » (balance), « Recommandations : qui, quoi, quand » (calendrier). En bas, le schéma « Le filtre » : « totaux » (coche), « listes de noms » (croix).
 - Écran : « 3 · Faits · analyse · recommandations »
 - VO : « Troisième règle : séparez les faits, l'analyse et les recommandations. Un fait se constate. Une analyse s'argumente. Une recommandation dit qui fait quoi, et quand. Et jamais de listes de noms : des totaux seulement. »
 
-**Scène 9 — B4 Application · 2:00–2:12 · A**
-- Visuel : capture `ad4-02` — dans Gemini, la consigne, le plan du service, puis le tableau et les notes collés, et l'envoi.
-- Écran : « Consigne + plan + tableau + notes »
-- VO : « Souleymane colle la consigne, puis son tableau : vingt activités prévues, dix-sept réalisées. Et ses notes sur les difficultés. »
+**Scène 9 — B4 Application · 2:07–2:21 · A**
+- Visuel : capture `ad4-02` — dans Gemini, la consigne RCTF : le tableau et les notes collés dans le bloc Contexte, le plan du service dans le bloc Format, puis l'envoi.
+- Écran : « Consigne RCTF : tableau + notes + plan du service »
+- VO : « Souleymane remplit les quatre blocs. Dans le contexte, son tableau : vingt activités prévues, dix-sept réalisées. Et ses notes sur les difficultés. »
 
-**Scène 10 — B4 Application · 2:12–2:26 · A**
+**Scène 10 — B4 Application · 2:21–2:35 · A**
 - Visuel : capture `ad4-03` — le brouillon ; cadres successifs sur les titres du plan, puis sur la ligne du taux de réalisation et son calcul. Étiquette « BROUILLON ».
 - Écran : « Taux de réalisation : 17 ÷ 20 [À VÉRIFIER] »
 - VO : « Le brouillon suit son plan. Le taux de réalisation apparaît, avec son calcul : dix-sept divisé par vingt. »
 
-**Scène 11 — B4 Application · 2:26–2:40 · A**
+**Scène 11 — B4 Application · 2:35–2:49 · A**
 - Visuel : capture `ad4-04` — la calculatrice du téléphone : 17 ÷ 20 × 100 = 85 ; puis, dans le texte copié, la mention « [À VÉRIFIER] » supprimée. Coche.
 - Écran : « 17 ÷ 20 = 85 % ✓ »
 - VO : « Il refait le calcul sur sa calculatrice : quatre-vingt-cinq pour cent. Le chiffre est juste. Il retire la mention “À vérifier”. »
 
-**Scène 12 — B4 Application · 2:40–2:52 · A**
+**Scène 12 — B4 Application · 2:49–3:01 · A**
 - Visuel : capture `ad4-05` — la recommandation « renforcer le suivi » encadrée, puis réécrite au clavier en une phrase avec responsable, action et date.
 - Écran : « “Renforcer le suivi” → qui, quoi, quand »
 - VO : « Il relit les recommandations. L'une dit seulement : “renforcer le suivi”. Il la réécrit : qui, quoi, quand. »
 
-**Scène 13 — B4 Application · 2:52–3:06 · A**
+**Scène 13 — B4 Application · 3:01–3:15 · A**
 - Visuel : capture `ad4-06` — les sections collées dans le modèle de rapport du service (« [EN-TÊTE DU SERVICE] », « Exemple fictif ») ; page « Annexe : tableau de calcul ».
 - Écran : « Modèle du service · annexe : le calcul »
 - VO : « Enfin, il colle les sections dans le modèle de rapport du service, et le soumet au directeur. Il garde sa feuille de calcul en annexe. »
 
-**Scène 14 — B5 Consolidation · 3:06–3:32 · B**
+**Scène 14 — B5 Consolidation · 3:15–3:41 · B**
 - Visuel : carte question, mention « Exemple fictif ». Étiquette « IA : 90 % » face au tableau « 17 / 20 ». Silence de 3 s, puis croix sur « 90 % » et cadre sur « 85 % ».
 - Écran : « Exemple fictif · IA : 90 % · Tableau : 17 sur 20 »
 - VO : « À vous. Dans un autre brouillon, l'IA écrit : “taux de réalisation : quatre-vingt-dix pour cent”. Le tableau dit dix-sept sur vingt. Juste ? » [silence 3 s] « Non. Dix-sept sur vingt, c'est quatre-vingt-cinq pour cent. Un seul chiffre faux, et tout le rapport perd sa crédibilité. »
 
-**Scène 15 — B6 Clôture · 3:32–3:42 · B (rappel de la promesse)**
+**Scène 15 — B6 Clôture · 3:41–3:51 · B (rappel de la promesse)**
 - Visuel : le rapport entre dans le parapheur ; la case « Visa » se coche ; flèche « Transmis ». La promesse revient, mot pour mot.
 - Écran : « Construire un rapport d'activités avec l'IA, sur vos chiffres vérifiés »
 - VO : « Vendredi, le rapport part à l'heure. Chaque chiffre a été recalculé. Le directeur le vise et le transmet. »
 
-**Scène 16 — B6 Clôture · 3:42–3:56 · B (carte de rappel)**
+**Scène 16 — B6 Clôture · 3:51–4:05 · B (carte de rappel)**
 - Visuel : carte de rappel, points révélés au rythme de la voix ; tenue ≥ 4 s après le dernier point.
 - Écran : « 1. Le plan d'abord » « 2. Vos chiffres, recalculés » « 3. Faits, analyse, recommandations »
 - VO : « Retenez : le plan d'abord. Vos chiffres, recalculés. Faits, analyse et recommandations, séparés. Rédigez une page de rapport vérifiée. »
@@ -1178,7 +1177,7 @@ Durée estimée : 3:56 · Mots de voix off : 361
 Ordinateur, navigateur en français, zoom 125 % ; tableur et traitement de texte avec barre d'outils recadrée hors champ ; téléphone pour la calculatrice. Compte Google de tournage pour Gemini. Documents fictifs préparés à l'avance (voir 2.6) : tableau de vingt activités dont dix-sept réalisées, notes sur les difficultés, plan et modèle de rapport du service. À masquer : compte, sélecteur de modèle, bandeaux.
 
 - **`ad4-01` (scène 4)** — Le tableau fictif dans le tableur, totaux visibles. Durée utile : 8 s.
-- **`ad4-02` (scène 9)** — Gemini, nouvelle conversation. Coller la consigne de la fiche avec « deuxième trimestre », le plan du service à la place du crochet, puis le tableau (copié en texte) et les notes après « Tableau et notes : ». Envoyer. Durée utile : 10 s.
+- **`ad4-02` (scène 9)** — Gemini, nouvelle conversation. Coller la consigne de la fiche, un bloc par ligne : « deuxième trimestre » dans le bloc Rôle, le tableau (copié en texte) et les notes après « Tableau et notes : » (bloc Contexte), le plan du service à la place du crochet du bloc Format. Envoyer. Durée utile : 10 s.
 - **`ad4-03` (scène 10)** — Filmer le brouillon, défilement lent ; s'arrêter sur la ligne du taux de réalisation et son calcul. Si le calcul n'est pas montré, recommencer dans une nouvelle conversation. Durée utile : 12 s.
 - **`ad4-04` (scène 11)** — Calculatrice du téléphone : taper 17 ÷ 20 × 100. Puis, dans le texte copié dans le traitement de texte, supprimer « [À VÉRIFIER] » sur cette ligne. Durée utile : 12 s.
 - **`ad4-05` (scène 12)** — Encadrer la recommandation la plus vague du brouillon, puis la réécrire au clavier, par exemple : « Le chef de service organisera une visite de suivi par mois dans chaque commune, à partir de juillet. » Si aucune recommandation n'est vague, ajuster la VO de la scène 12 à la validation. Durée utile : 10 s.
@@ -1186,33 +1185,33 @@ Ordinateur, navigateur en français, zoom 125 % ; tableur et traitement de texte
 
 #### Notes de script
 
-- **Prononciation** : dire lentement « dix-sept », « vingt », « quatre-vingt-cinq pour cent » ; à l'écran, les chiffres restent en chiffres.
+- **Prononciation** : dire lentement « dix-sept », « vingt », « quatre-vingt-cinq pour cent » ; à l'écran, les chiffres restent en chiffres ; Bouaké « bou-a-ké ». Si l'owner ajoute un montant au tableau fictif, il est en FCFA.
 - **Exactitude** : taux de réalisation = activités réalisées ÷ activités prévues. Les chiffres sont fictifs et signalés comme tels. Le plan proposé est un plan courant ; le modèle imposé par le ministère ou le partenaire prime toujours.
 - **Pièges** : l'IA calcule souvent juste sur un cas simple ; la démonstration montre le recalcul quand même, c'est le geste qui compte. L'erreur est montrée en B5, comme exemple fictif, jamais en fausse capture.
 - **Confidentialité** : aucune liste nominative de bénéficiaires, aucune évaluation individuelle d'agent, aucun numéro de téléphone de partenaire dans l'outil : des totaux et des notes sans nom.
 - **Termes à gloser** : « taux de réalisation » est montré par le calcul ; « viser » (le directeur vise) est familier du public.
-- **Adaptation EN** : « rapport d'activités » = « activity report » ; « taux de réalisation » = « completion rate » ; « viser » = « to initial and approve ».
+- **Adaptation EN** : « rapport d'activités » = « activity report » ; « taux de réalisation » = « completion rate » ; « viser » = « to initial and approve » ; blocs RCTF : « Role, Context, Task, Format ».
 - **Adaptation HA / DJE** : dire les nombres lentement et les répéter à l'écran ; « taux de réalisation » : « combien d'activités faites sur combien prévues ».
 
-### Leçon 5 — Projet final : le dossier d'une réunion (`ad5`)
+### Leçon 5 — Projet final : préparer le dossier complet d'une réunion avec l'IA (`ad5`)
 
 #### Fiche
 
 - **Promesse** : « À la fin de cette leçon, vous saurez constituer et déposer le dossier complet d'une réunion. »
-- **Cas réel (B1 → B6)** : Zeinabou et Souleymane (acquis de la leçon 4 : chaque chiffre est recalculé) préparent la réunion trimestrielle suivante de la direction régionale de Tahoua. Ils croient qu'il suffit de bien rédiger. Enjeu : un dossier que l'on peut contrôler, sans rien divulguer. Fermeture en B6 (champ `example`) : ils assemblent leurs pièces en un seul PDF et le déposent selon la consigne.
+- **Cas réel (B1 → B6)** : à Tahoua (Niger), Zeinabou prépare le dossier de la réunion trimestrielle suivante de sa direction régionale fictive. Souleymane, chef de service à Bouaké (Côte d'Ivoire), n'est pas dans son service : en pair, il lui partage sa méthode (vérifier chaque point article par article, recalculer chaque chiffre, acquis des leçons 3 et 4). Zeinabou croit qu'il suffit de bien rédiger. Enjeu : un dossier que l'on peut contrôler, sans rien divulguer. Fermeture en B6 (champ `example`) : elle assemble ses pièces en un seul PDF et le dépose selon la consigne.
 - **Unités de notion (B3)** : *(livrables et critères)* 1. Cinq pièces, une par leçon — un courrier ; un procès-verbal avec son tableau des actions ; une note de synthèse d'un texte public, avec articles ; une page de rapport avec ses calculs ; une fiche de contrôle. · 2. Cinq critères d'évaluation — confidentialité, fidélité, exactitude, registre, vérification humaine. · 3. Trois erreurs qui font échouer — un nom ou un numéro d'usager dans une pièce, un chiffre ou un article non vérifié, une décision absente des notes.
-- **Démo (B4)** : exemple de projet réussi, de bout en bout : le dossier fictif, ouvert sur ordinateur. 1. Sommaire et fiche de contrôle. 2. Pièce 1 : le courrier et son modèle. 3. Pièce 2 : le PV et le tableau des actions. 4. Pièce 3 : la note de synthèse, chaque point avec son article. 5. Pièce 4 : la page de rapport et son tableau de calcul. 6. Relecture avec la consigne : l'assistant signale un chiffre sans calcul joint ; il est ajouté. Résultat attendu à l'écran : un dossier complet, chaque critère visible.
-- **Consolidation (B5)** : contre-exemple sous forme de prédiction. « Le dossier de Rahila est soigné, mais la pièce 2 contient le nom d'un usager et la note cite un article qu'elle n'a pas vérifié. Quels critères échouent ? » — 3 s de silence — « La confidentialité et l'exactitude. Un beau dossier ne compense pas. »
+- **Démo (B4)** : exemple de projet réussi, de bout en bout : le dossier fictif de Zeinabou, ouvert sur ordinateur. 1. Sommaire et fiche de contrôle. 2. Pièce 1 : le courrier et son modèle. 3. Pièce 2 : le PV et le tableau des actions. 4. Pièce 3 : la note de synthèse, chaque point avec son article. 5. Pièce 4 : la page de rapport et son tableau de calcul. 6. Relecture avec la consigne RCTF : l'assistant signale un chiffre sans calcul joint ; il est ajouté. Résultat attendu à l'écran : un dossier complet, chaque critère visible.
+- **Consolidation (B5)** : contre-exemple sous forme de prédiction. « À Parakou, au Bénin, le dossier de Rahila est soigné, mais la pièce 2 contient le nom d'un usager et la note cite un article qu'elle n'a pas vérifié. Quels critères échouent ? » — 3 s de silence — « La confidentialité et l'exactitude. Un beau dossier ne compense pas. »
 - **Consigne à copier** :
 
 ```text
-Voici les critères de mon dossier : confidentialité, fidélité aux notes, exactitude, registre administratif, vérification humaine.
-Voici mes pièces : [collez le texte, sans aucun nom d'usager ni donnée personnelle].
-Ne réécris rien. Pour chaque critère, dis-moi ce qui manque ou ce qui est fragile, en citant le passage concerné.
-Termine par trois questions que mon directeur pourrait me poser.
+Rôle : tu es un relecteur exigeant dans une administration publique.
+Contexte : voici les pièces du dossier d'une réunion : [collez le texte, sans aucun nom d'usager ni donnée personnelle]. Critères : confidentialité, fidélité aux notes, exactitude, registre administratif, vérification humaine.
+Tâche : ne réécris rien. Pour chaque critère, dis-moi ce qui manque ou ce qui est fragile, en citant le passage concerné.
+Format : un court paragraphe par critère, dans l'ordre de la liste, puis trois questions que mon directeur pourrait me poser.
 ```
 
-- **Exercice** : « Constituez et déposez le dossier d'une réunion » — 1. Préparez vos cinq pièces (courrier, PV avec tableau des actions, note de synthèse d'un texte public avec articles, page de rapport avec calculs, fiche de contrôle), sur un cas non confidentiel ou fictif. 2. Retirez tout nom d'usager et toute donnée personnelle. 3. Relisez avec la consigne et les cinq critères. 4. Assemblez un seul PDF et déposez-le selon la consigne affichée sous la vidéo.
+- **Exercice** : « Constituez et déposez le dossier d'une réunion » — 1. Préparez vos cinq pièces (courrier, PV avec tableau des actions, note de synthèse d'un texte public avec articles, page de rapport avec calculs, fiche de contrôle), sur un cas non confidentiel ou fictif. 2. Retirez tout nom d'usager et toute donnée personnelle. 3. Relisez avec la consigne de relecture (Rôle, Contexte, Tâche, Format) et les cinq critères. 4. Assemblez un seul PDF et déposez-le selon la consigne affichée sous la vidéo.
 - **Carte de rappel** : 1. Rien de confidentiel 2. Rien que vos notes 3. L'article fait foi 4. Chiffres recalculés
 - **Quiz** :
   1. Que pouvez-vous coller dans un assistant grand public pour votre dossier ? — A) La requête d'un usager B) Un projet de texte non publié C) Des éléments sans noms, avec des fonctions et des crochets D) Un document classé — **Réponse : C**
@@ -1224,84 +1223,84 @@ Termine par trois questions que mon directeur pourrait me poser.
 
 #### Script v1 (à valider par l'owner)
 
-Durée estimée : 3:46 · Mots de voix off : 350
+Durée estimée : 3:57 · Mots de voix off : 370
 
-**Scène 1 — B1 Accroche · 0:00–0:08 · E**
-- Visuel : illustration en aplats, Zeinabou et Souleymane devant le parapheur, qui contient quatre documents. Une cinquième pochette, vide, attend.
-- Écran : « Zeinabou et Souleymane · le projet final »
-- VO : « Zeinabou et Souleymane recalculent chaque chiffre. Aujourd'hui, ils préparent la prochaine réunion. »
+**Scène 1 — B1 Accroche · 0:00–0:09 · E**
+- Visuel : illustration en aplats, Zeinabou à son bureau de Tahoua, devant le parapheur, qui contient quatre documents ; une cinquième pochette, vide, attend. En vignette, Souleymane à son bureau de Bouaké, téléphone à la main.
+- Écran : « Projet final : préparer le dossier complet d'une réunion · Zeinabou, Tahoua (Niger) · Souleymane, Bouaké (Côte d'Ivoire) »
+- VO : « À Tahoua, Zeinabou prépare la prochaine réunion. Depuis Bouaké, Souleymane lui partage sa méthode. »
 
-**Scène 2 — B1 Accroche · 0:08–0:18 · B**
+**Scène 2 — B1 Accroche · 0:09–0:19 · B**
 - Visuel : carte de promesse sur la chemise du parapheur.
 - Écran : « Constituer et déposer le dossier complet d'une réunion »
 - VO : « À la fin de cette leçon, vous saurez constituer et déposer le dossier complet d'une réunion. »
 
-**Scène 3 — B2 Cadrage · 0:18–0:34 · B**
-- Visuel : une belle couverture s'efface au profit de pièces cochées.
+**Scène 3 — B2 Cadrage · 0:19–0:37 · B**
+- Visuel : une belle couverture s'efface au profit de pièces cochées ; la vignette de Souleymane affiche une bulle « contrôlable ? ».
 - Écran : « Ce qui est évalué : un dossier qu'on peut contrôler »
-- VO : « Ils croient qu'il suffit de bien rédiger. Ce n'est pas l'essentiel. Ce qui est évalué, c'est un dossier que l'on peut contrôler, sans rien divulguer. »
+- VO : « Elle croit qu'il suffit de bien rédiger. Souleymane la reprend : ce n'est pas l'essentiel. Ce qui est évalué, c'est un dossier que l'on peut contrôler, sans rien divulguer. »
 
-**Scène 4 — B2 Cadrage · 0:34–0:46 · A**
+**Scène 4 — B2 Cadrage · 0:37–0:49 · A**
 - Visuel : capture `ad5-01` — sommaire du dossier exemple en PDF, cinq pièces cadrées une à une. Mention « Exemple fictif ».
 - Écran : « Un seul PDF · 5 pièces »
 - VO : « Le dossier tient en un seul fichier PDF. Cinq pièces, une par leçon, plus une fiche de contrôle. Chaque pièce se contrôle. »
 
-**Scène 5 — B3 Notion · 0:46–1:08 · C**
+**Scène 5 — B3 Notion · 0:49–1:11 · C**
 - Visuel : le parapheur s'ouvre ; cinq pièces apparaissent avec leur pictogramme (lettre, PV, loupe, calculatrice, case à cocher).
-- Écran : « Courrier · PV · Note · Rapport · Fiche »
+- Écran : « Les 5 pièces du dossier : courrier · PV · note · rapport · fiche de contrôle »
 - VO : « Les livrables. Un courrier. Un procès-verbal, avec son tableau des actions. Une note de synthèse d'un texte public, article par article. Une page de rapport, avec ses calculs. Et une fiche de contrôle. »
 
-**Scène 6 — B3 Notion · 1:08–1:28 · C**
+**Scène 6 — B3 Notion · 1:11–1:31 · C**
 - Visuel : grille de cinq critères, chacun avec un pictogramme et une case à cocher.
-- Écran : « Confidentialité · Fidélité · Exactitude · Registre · Vérification »
+- Écran : « Les 5 critères d'évaluation : confidentialité · fidélité · exactitude · registre · vérification humaine »
 - VO : « Cinq critères. Confidentialité : aucun nom d'usager. Fidélité : rien d'ajouté aux notes. Exactitude : chiffres et articles vérifiés. Registre : les formules d'usage. Vérification humaine : un visa. »
 
-**Scène 7 — B3 Notion · 1:28–1:42 · C**
+**Scène 7 — B3 Notion · 1:31–1:45 · C**
 - Visuel : trois cases « erreur », chacune barrée d'une croix quand elle est dite.
-- Écran : « Un nom · un chiffre non vérifié · une décision inventée »
+- Écran : « 3 erreurs qui font échouer : un nom d'usager · un chiffre non vérifié · une décision inventée »
 - VO : « Trois erreurs font échouer un dossier. Un nom d'usager. Un chiffre ou un article non vérifié. Une décision absente des notes. »
 
-**Scène 8 — B3 Notion · 1:42–1:56 · G**
-- Visuel : carte de consigne, fond clair, consigne complète. Soulignés : « Ne réécris rien », « pour chaque critère ».
-- Écran : la consigne à copier de la fiche, en entier.
-- VO : « Avant de déposer, faites relire le dossier avec cette consigne. L'assistant ne réécrit rien. Il signale ce qui manque, critère par critère. »
+**Scène 8 — B3 Notion · 1:45–2:02 · G**
+- Visuel : carte de consigne RCTF, fond clair, consigne complète ; les étiquettes « Rôle », « Contexte », « Tâche », « Format » s'allument une à une. Soulignés, dans le bloc Tâche : « Ne réécris rien », « Pour chaque critère ».
+- Écran : « Consigne de relecture RCTF : Rôle · Contexte · Tâche · Format », puis la consigne à copier de la fiche, en entier, avec ses quatre blocs.
+- VO : « Avant de déposer, faites relire le dossier avec cette consigne en quatre blocs, la méthode RCTF. L'assistant ne réécrit rien. Il signale ce qui manque, critère par critère. »
 
-**Scène 9 — B4 Application · 1:56–2:08 · A**
+**Scène 9 — B4 Application · 2:02–2:14 · A**
 - Visuel : capture `ad5-02` — la fiche de contrôle et le sommaire du dossier exemple.
 - Écran : « Fiche de contrôle · 5 critères »
-- VO : « Voici leur dossier. La fiche de contrôle liste les cinq critères, pièce par pièce. Elle sert de repère avant le dépôt. »
+- VO : « Voici son dossier. La fiche de contrôle liste les cinq critères, pièce par pièce. Elle sert de repère avant le dépôt. »
 
-**Scène 10 — B4 Application · 2:08–2:20 · A**
+**Scène 10 — B4 Application · 2:14–2:26 · A**
 - Visuel : capture `ad5-03` — pièce 1 (courrier) et pièce 2 (PV, tableau des actions). Cadre sur « [EN-TÊTE DU SERVICE] » et sur les fonctions.
 - Écran : « Pièces 1 et 2 · courrier · PV »
 - VO : « Pièce un : le courrier. Pièce deux : le procès-verbal, avec le tableau des actions. Des fonctions, aucun nom d'usager. »
 
-**Scène 11 — B4 Application · 2:20–2:32 · A**
+**Scène 11 — B4 Application · 2:26–2:41 · A**
 - Visuel : capture `ad5-04` — pièce 3 : note de synthèse, chaque point suivi de son article. Coche à chaque ligne.
-- Écran : « Pièce 3 · chaque point, son article »
-- VO : « Pièce trois : la note de synthèse. Chaque point renvoie à son article, vérifié dans le texte. »
+- Écran : « Pièce 3 · chaque point, son article · méthode de Souleymane »
+- VO : « Pièce trois : la note de synthèse. Avec la méthode de Souleymane, chaque point renvoie à son article, vérifié dans le texte. »
 
-**Scène 12 — B4 Application · 2:32–2:44 · A**
+**Scène 12 — B4 Application · 2:41–2:53 · A**
 - Visuel : capture `ad5-05` — pièce 4 : la page de rapport et son tableau de calcul en annexe.
 - Écran : « Pièce 4 · rapport + calculs »
 - VO : « Pièce quatre : la page de rapport. Les calculs sont joints, recalculés à la main, un par un. Rien n'est laissé au hasard. »
 
-**Scène 13 — B4 Application · 2:44–2:56 · A**
-- Visuel : capture `ad5-06` — la consigne de relecture dans Gemini ; réponse critère par critère ; cadre sur « calcul non joint » ; l'annexe est complétée.
-- Écran : « Relecture : un manque repéré, puis corrigé »
-- VO : « Enfin, ils collent la consigne de relecture. L'assistant repère un chiffre sans calcul joint. Ils l'ajoutent. »
+**Scène 13 — B4 Application · 2:53–3:05 · A**
+- Visuel : capture `ad5-06` — la consigne de relecture RCTF dans Gemini ; réponse critère par critère ; cadre sur « calcul non joint » ; l'annexe est complétée.
+- Écran : « Relecture : un calcul manquant repéré, puis ajouté »
+- VO : « Enfin, elle colle la consigne de relecture. L'assistant repère un chiffre sans calcul joint. Elle l'ajoute. »
 
-**Scène 14 — B5 Consolidation · 2:56–3:22 · B**
-- Visuel : carte question. Dossier de Rahila, soigné ; étiquettes « nom d'usager » et « article non vérifié ». Silence de 3 s, puis deux critères reçoivent une croix.
+**Scène 14 — B5 Consolidation · 3:05–3:33 · B**
+- Visuel : carte question, vignette « Parakou · Bénin ». Dossier de Rahila, soigné ; étiquettes « nom d'usager » et « article non vérifié ». Silence de 3 s, puis deux critères reçoivent une croix.
 - Écran : « Dossier soigné, mais : un nom d'usager · un article non vérifié »
-- VO : « À vous. Le dossier de Rahila est soigné. Mais la pièce deux contient le nom d'un usager, et la note cite un article non vérifié. Quels critères échouent ? » [silence 3 s] « La confidentialité, et l'exactitude. Un beau dossier ne compense pas. »
+- VO : « À vous. À Parakou, au Bénin, le dossier de Rahila est soigné. Mais la pièce deux contient le nom d'un usager, et la note cite un article non vérifié. Quels critères échouent ? » [silence 3 s] « La confidentialité, et l'exactitude. Un beau dossier ne compense pas. »
 
-**Scène 15 — B6 Clôture · 3:22–3:32 · B (rappel de la promesse)**
+**Scène 15 — B6 Clôture · 3:33–3:43 · B (rappel de la promesse)**
 - Visuel : les pièces forment un seul PDF qui part vers « Dépôt ». La promesse revient, mot pour mot.
 - Écran : « Constituer et déposer le dossier complet d'une réunion »
-- VO : « Ils assemblent leurs pièces en un seul PDF. Ils le déposent selon la consigne affichée sous la vidéo. »
+- VO : « Zeinabou assemble ses pièces en un seul PDF. Elle le dépose selon la consigne affichée sous la vidéo. »
 
-**Scène 16 — B6 Clôture · 3:32–3:46 · B (carte de rappel)**
+**Scène 16 — B6 Clôture · 3:43–3:57 · B (carte de rappel)**
 - Visuel : carte de rappel du cours, un point par leçon, révélés au rythme de la voix ; tenue ≥ 4 s après le dernier point.
 - Écran : « 1. Rien de confidentiel » « 2. Rien que vos notes » « 3. L'article fait foi » « 4. Chiffres recalculés »
 - VO : « Retenez le cours en quatre gestes. Rien de confidentiel. Rien que vos notes. L'article fait foi. Des chiffres recalculés. Constituez et déposez le dossier d'une réunion. »
@@ -1315,16 +1314,18 @@ Ordinateur, lecteur PDF, zoom lisible, mention « Exemple fictif » en haut de c
 - **`ad5-03` (scène 10)** — Pièces 1 et 2, défilement lent. Durée utile : 10 s.
 - **`ad5-04` (scène 11)** — Pièce 3, ligne par ligne. Durée utile : 10 s.
 - **`ad5-05` (scène 12)** — Pièce 4 et son annexe de calcul. Durée utile : 10 s.
-- **`ad5-06` (scène 13)** — Gemini : coller la consigne de la fiche puis le texte du dossier dont un calcul a été retiré. Envoyer, filmer la réponse. Durée utile : 10 s.
+- **`ad5-06` (scène 13)** — Gemini : coller la consigne RCTF de la fiche, un bloc par ligne, avec, à la place du crochet du bloc Contexte, le texte du dossier dont un calcul a été retiré. Envoyer, filmer la réponse. Durée utile : 10 s.
 
 #### Notes de script
 
 - **Structure de projet final** : B3 présente livrables et critères, B4 un exemple réussi, B6 le récapitulatif (un point par leçon) et la consigne de dépôt.
 - **Dépôt** : aucun dépôt de fichier n'est visible dans la plateforme à ce jour ; la VO renvoie à « la consigne affichée sous la vidéo ». [à vérifier au moment de la production : mode de dépôt et d'évaluation du projet final]
-- **Dossier exemple** : entièrement fictif ; la note de la pièce 3 porte sur un texte public réel dont les articles doivent être vérifiés. [à vérifier au moment de la production]
+- **Dossier exemple** : c'est celui de Zeinabou, entièrement fictif : courrier et PV de sa direction de Tahoua (leçons 1 et 2), note de synthèse sur le décret fictif de la leçon 3 (mention « Exemple fictif »), page de rapport sur les activités de sa direction (chiffres fictifs ; montants éventuels en FCFA), fiche de contrôle. Variante, au choix de l'owner : une note sur un texte public réel, articles vérifiés. [à vérifier au moment de la production si la variante est retenue]
+- **Narration** : Zeinabou et Souleymane ne travaillent ni dans le même service ni dans le même pays. Souleymane apparaît en vignette « Bouaké », comme un pair qui partage sa méthode (échange fictif, à distance) ; il ne vise ni ne signe aucune pièce du dossier.
+- **Prononciation** : Parakou « pa-ra-kou » ; Bouaké « bou-a-ké ».
 - **Outil de l'administration** : si le service fournit un outil validé, il passe avant Gemini ; à dire dans le texte de la leçon.
 - **Pas de promesse** : le dossier prouve une démarche, il ne garantit rien.
-- **Adaptation EN** : « dossier de réunion » = « meeting file » ; « fiche de contrôle » = « checklist ».
+- **Adaptation EN** : « dossier de réunion » = « meeting file » ; « fiche de contrôle » = « checklist » ; blocs RCTF : « Role, Context, Task, Format ».
 - **Adaptation HA / DJE** : garder les cinq critères en français à l'écran, avec une explication orale courte.
 
 ## 2.6 Captures et éléments à préparer
@@ -1332,16 +1333,16 @@ Ordinateur, lecteur PDF, zoom lisible, mention « Exemple fictif » en haut de c
 | Leçon | Élément | Comment l'obtenir | Qui |
 |---|---|---|---|
 | Toutes | Compte Google de tournage (Gemini, Gemini Notebook), interface en français, sans historique | Créer un compte dédié | Owner |
-| Toutes | Illustrations (Zeinabou, Souleymane, silhouettes), parapheur, étiquettes « BROUILLON » et « Visa » | Aplats, charte Karatou, aucun emblème ni sceau | Claude |
+| Toutes | Illustrations (Zeinabou, Souleymane, silhouettes d'Abdoul-Aziz et de Rahila), vignettes de lieu « Tahoua · Niger », « Bouaké · Côte d'Ivoire », « Garoua · Cameroun », « Parakou · Bénin », parapheur, étiquettes « BROUILLON » et « Visa », carte de consigne RCTF (quatre blocs étiquetés) | Aplats, charte Karatou, décors génériques, aucun emblème, drapeau ni sceau | Claude |
 | Toutes | Prononciation de « Gemini » | Fixée au premier lancement | Owner |
 | 1 | Note du directeur fictive, modèle de lettre anonymisé, modèle de service fictif | Rédigés par Claude, relus par l'owner (aucun vrai en-tête) | Claude + owner |
 | 1 | Captures `ad1-01` à `ad1-06` | Gemini sur ordinateur | Owner |
 | 2 | Notes de réunion fictives (3 pages, heure de fin absente), version anonymisée, modèle de PV | Rédigés par Claude, relus par l'owner | Claude + owner |
 | 2 | Captures `ad2-01` à `ad2-07` | Gemini, traitement de texte | Owner |
-| 3 | PDF du décret n° 2008-244/PRN/MFP/T, source officielle | Téléchargé et vérifié (en vigueur, article sur la discrétion) | Owner |
+| 3 | PDF du décret fictif « Décret portant obligations des agents publics — Exemple fictif » (une vingtaine d'articles, article 9 sur la discrétion, un délai, une condition, une exception) | Rédigé par Claude, relu par l'owner ; variante : texte public ivoirien en vigueur, téléchargé d'une source officielle et vérifié | Claude + owner |
 | 3 | Captures `ad3-01` à `ad3-07` | Gemini Notebook, carnet « Textes RH » | Owner |
 | 4 | Tableau fictif (20 activités, 17 réalisées), notes, plan et modèle de rapport | Rédigés par Claude | Claude + owner |
 | 4 | Captures `ad4-01` à `ad4-06` | Tableur, Gemini, calculatrice du téléphone | Owner |
-| 5 | Dossier exemple PDF (5 pièces) « Exemple fictif » | Pièces rédigées par Claude, texte public vérifié | Claude + owner |
+| 5 | Dossier exemple de Zeinabou, PDF (5 pièces) « Exemple fictif » | Pièces rédigées par Claude (note sur le décret fictif de la leçon 3), relues par l'owner | Claude + owner |
 | 5 | Captures `ad5-01` à `ad5-06` | PDF, Gemini | Owner |
 | 5 | Mode de dépôt et d'évaluation du projet final | À confirmer avant le rendu | Équipe Karatou |

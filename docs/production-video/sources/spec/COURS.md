@@ -31,9 +31,9 @@ ils seront confirmés à l'intégration dans le site (skill `karatou-course-crea
 | 10 | 10-securite-numerique-ia | Arnaques, deepfakes et sécurité numérique | Motion | à désigner | Culture numérique | Grand public | `securite-numerique-ia` | `sn` | 5 | 3–5 min (cible 4:00) |
 | 11 | 11-excel-ia | Excel + IA : analyser ses données en une heure | Motion | à désigner | IA & Données | Pros / ONG / administration | `excel-ia` | `xl` | 5 | 3–5 min (cible 4:00) |
 | 12 | 12-etudier-rediger-ia | Étudier et rédiger avec l'IA | Motion | à désigner | Employabilité | Étudiants | `etudier-rediger-ia` | `et` | 5 | 3–5 min (cible 4:00) |
-| 13 | 13-ia-administration | IA pour l'administration | Motion | à désigner | IA & Données | Fonctionnaires / agents de projet | `ia-administration` | `ad` | 5 | 3–5 min (cible 4:00) |
+| 13 | 13-ia-administration | IA pour l'administration | Motion | Idriss | IA & Données | Fonctionnaires / agents de projet | `ia-administration` | `ad` | 5 | 3–5 min (cible 4:00) |
 | 14 | 14-ia-sante-communautaire | IA et santé communautaire | Motion | à désigner | IA & Données | Agents de santé | `ia-sante-communautaire` | `sa` | 5 | 3–5 min (cible 4:00) |
-| 15 | 15-outils-ia-gratuits | Choisir le bon outil IA gratuit | Motion | à désigner | Culture numérique | Grand public | `outils-ia-gratuits` | `og` | 5 | 3–5 min (cible 4:00) |
+| 15 | 15-outils-ia-gratuits | Choisir le bon outil IA gratuit | Motion | Idriss | Culture numérique | Grand public | `outils-ia-gratuits` | `og` | 5 | 3–5 min (cible 4:00) |
 
 Identifiants de leçon : `<préfixe><n>` (ex. `ag1` … `ag7`). Jamais visibles par l'apprenant : à l'écran et dans
 la voix, on dit « Leçon 2 ».
@@ -167,7 +167,7 @@ exemple de rendu réussi et les critères d'évaluation, et récapitule le cours
   réviser → rechercher et vérifier ses sources (citer) → rédiger son mémoire avec l'IA (plan, reformulation,
   plagiat, déclaration d'usage) → projet final.
 
-### 13 · IA pour l'administration — motion, owner à désigner, 5 vidéos
+### 13 · IA pour l'administration — motion, owner Idriss, 5 vidéos
 - Contenu clé : notes, PV, courriers, rapports, synthèse de documents.
 - Fil possible : notes et courriers administratifs (registre, formules) → comptes rendus et PV de réunion →
   synthèse de documents longs (textes réglementaires : vérifier) → rapports → confidentialité et règles de
@@ -182,7 +182,7 @@ exemple de rendu réussi et les critères d'évaluation, et récapitule le cours
   adapter en haoussa et en zarma, avec validation humaine → organiser l'information et préparer une référence
   selon le protocole → confidentialité + projet final : une campagne de sensibilisation.
 
-### 15 · Choisir le bon outil IA gratuit — motion, owner à désigner, 5 vidéos
+### 15 · Choisir le bon outil IA gratuit — motion, owner Idriss, 5 vidéos
 - Contenu clé : Gemini, Claude, ChatGPT, Copilot, Perplexity : lequel pour quoi, gratuit vs payant.
 - Différent de la leçon c7 du module IA : ici, un guide de choix pratique et un test comparatif sur la même tâche.
 - Fil possible : les familles d'outils (assistants, recherche, image, audio, documents) → les grands assistants sur

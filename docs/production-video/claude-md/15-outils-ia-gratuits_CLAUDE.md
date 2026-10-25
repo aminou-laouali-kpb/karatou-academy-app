@@ -14,7 +14,7 @@
 | | |
 |---|---|
 | Format | Motion graphics et captures d'écran, voix off clonée de l'owner |
-| Owner | à désigner (son nom et sa photo figureront sur les cartes présentateur) |
+| Owner | Idriss (son nom et sa photo figurent sur les cartes présentateur ; voix clonée) |
 | Vidéos | 5 vidéos · 3 à 5 min (cible 4:00) chacune |
 | Langues | FR (référence) · EN · HA (haoussa) · DJE (zarma) |
 | Outils | Claude Code · HyperFrames · VoiceStudio (ou API de voix) |
@@ -601,7 +601,7 @@ Dernière mise à jour : <date> · Prochaine action : <…>
 | Numéro | 15 |
 | Titre | Choisir le bon outil IA gratuit |
 | Format | Motion graphics + captures d'écran, voix off (voix clonée de l'owner) |
-| Owner / voix | à désigner — nom complet et titre exact demandés au premier lancement |
+| Owner / voix | Idriss — nom complet et titre exact demandés au premier lancement |
 | Rubrique | Culture numérique |
 | Public | Grand public : étudiants, commerçants et artisans, agents d'ONG, fonctionnaires, qui utilisent l'IA sur téléphone, souvent en 3G, avec des outils gratuits. |
 | Slug du module (provisoire) | `outils-ia-gratuits` |
