@@ -8,9 +8,10 @@ description: Création de cours complets pour la web app Karatou Academy — mod
 Assistant de création de cours pour **Karatou Academy**, la plateforme de formation certifiante
 trilingue (français / anglais / haoussa) ouverte à **toute personne curieuse du sujet, partout
 dans le monde** : salariés, étudiants, indépendants, agents de terrain, bénévoles — souvent sur
-mobile, avec une connectivité limitée et un petit budget. Le public francophone d'Afrique de
-l'Ouest reste le cœur historique de la plateforme : ses réalités nourrissent les exemples, elles
-ne bornent pas l'audience.
+mobile, avec une connectivité limitée et un petit budget. Les exemples sont **ancrés en
+Afrique, sur plusieurs pays** (Niger, Sénégal, Côte d'Ivoire, Cameroun, Bénin, Burkina Faso,
+Mali, Togo, Guinée, RDC, Nigeria, Kenya, Maroc…) : le Niger est un pays parmi d'autres, jamais
+le seul d'un module. Ces exemples restent compréhensibles par un apprenant hors d'Afrique.
 
 Ce skill transforme une idée de cours en **paquet d'intégration complet** : fichiers de leçons
 TypeScript prêts à brancher, snippets de registre, entrée de catalogue, instructions Supabase
@@ -63,7 +64,8 @@ sensées plutôt que d'interroger sur tout) :
 
 Ancrer chaque leçon dans du réel. Utiliser la recherche web (si disponible) pour :
 - les faits, chiffres, outils et pratiques actuels du domaine (vérifier l'année) ;
-- des exemples africains authentiques (pays, organisations, ordres de grandeur en FCFA) ;
+- des exemples africains authentiques, répartis sur plusieurs pays (organisations, ordres de
+  grandeur dans la monnaie du pays : FCFA, naira, cedi, shilling…) ;
 - les limites honnêtes du sujet (ce qui ne marche pas, les pièges).
 
 Règle d'honnêteté : ne jamais inventer une statistique précise. Un chiffre incertain
@@ -115,7 +117,8 @@ Dérouler la checklist qualité de lesson-format.md sur chaque leçon. Puis :
 - Chaque leçon remplit TOUTES les rubriques : objectif, vidéo (vide + TODO), 4 sections de
   contenu, exemple chiffré, pratique en 3 étapes, quiz (5 questions, 4 options, bonnes
   réponses variées), réflexion, glossaire (6 termes).
-- Ancrage africain systématique ; vouvoiement ; phrases courtes ; analogies du quotidien ;
+- Ancrage africain multi-pays (le Niger parmi d'autres, jamais seul) ; méthode de consigne
+  maison RCTF ; vouvoiement ; phrases courtes ; analogies du quotidien ;
   honnêteté sur les limites ; réalisable sur téléphone avec des outils gratuits.
 - Jamais d'identifiant interne (`c2`, `m3`…) dans un texte visible par l'apprenant —
   écrire « Leçon 2 » / "Lesson 2" / « Darasi 2 ».
