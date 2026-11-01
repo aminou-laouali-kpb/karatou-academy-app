@@ -14,7 +14,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
     <div
       role="group"
       aria-label={t('language')}
-      className="flex items-center gap-0.5 bg-gray-100/80 rounded-full p-0.5"
+      className={`flex items-center gap-0.5 rounded-full p-0.5 ${variant === 'dark' ? 'bg-white/10' : 'bg-gray-100/80'}`}
     >
       {languages.map((l) => (
         <button
@@ -28,9 +28,9 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
                 ? 'bg-white text-blue-900'
                 : 'bg-blue-500 text-white'
               : variant === 'dark'
-                ? 'text-gray-300 hover:text-white'
+                ? 'text-gray-100 hover:text-white'
                 : 'text-gray-500 hover:text-gray-700'
-          }`}
+          } ${variant === 'dark' ? 'focus-visible:ring-offset-blue-900' : ''}`}
         >
           {labels[l]}
         </button>

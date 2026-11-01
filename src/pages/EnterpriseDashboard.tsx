@@ -131,7 +131,7 @@ export function EnterpriseDashboard() {
             <p className="font-semibold text-gray-900">{t('seatsUsed')}</p>
             <p className="text-body text-gray-500">{seatsUsed} / {seatsTotal}</p>
           </div>
-          <ProgressBar value={(seatsUsed / seatsTotal) * 100} height="md" />
+          <ProgressBar ariaLabel={t('progress')} value={(seatsUsed / seatsTotal) * 100} height="md" />
           <p className="text-meta text-gray-500 mt-3">
             {scholarships.filter((scholarship) => scholarship.status === 'pending').length} {t('scholarshipsAvailable')}
           </p>

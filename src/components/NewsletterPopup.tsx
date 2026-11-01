@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Mail, X } from 'lucide-react';
 import { Button } from './Button';
 import { addSubscribers, POPUP_SEEN_KEY } from '../services/newsletterService';
@@ -69,17 +69,50 @@ export function NewsletterPopup() {
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
+  const panelRef = useRef<HTMLElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (localStorage.getItem(POPUP_SEEN_KEY)) return;
-    const timer = setTimeout(() => setVisible(true), 4000);
+    try {
+      if (localStorage.getItem(POPUP_SEEN_KEY)) return;
+    } catch {
+      // Storage may be disabled; the panel still works for this visit.
+    }
+    const timer = setTimeout(() => {
+      previousFocusRef.current = document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+      setVisible(true);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
-  const dismiss = () => {
-    localStorage.setItem(POPUP_SEEN_KEY, '1');
+  const dismiss = useCallback(() => {
+    const shouldRestoreFocus = panelRef.current?.contains(document.activeElement);
+    try {
+      localStorage.setItem(POPUP_SEEN_KEY, '1');
+    } catch {
+      // Dismissal remains available even when browser storage is unavailable.
+    }
     setVisible(false);
-  };
+    if (shouldRestoreFocus) {
+      requestAnimationFrame(() => {
+        const previousFocus = previousFocusRef.current;
+        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      dismiss();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [visible, dismiss]);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -89,18 +122,22 @@ export function NewsletterPopup() {
       return;
     }
     addSubscribers([{ name: name.trim() || trimmedEmail, email: trimmedEmail, source: 'popup' }]);
-    localStorage.setItem(POPUP_SEEN_KEY, '1');
+    try {
+      localStorage.setItem(POPUP_SEEN_KEY, '1');
+    } catch {
+      // Confirmation is still shown for the current visit.
+    }
     setDone(true);
-    setTimeout(() => setVisible(false), 2200);
+    setTimeout(dismiss, 2200);
   };
 
   if (!visible) return null;
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
+    <section
+      ref={panelRef}
       aria-label={t.ariaLabel}
+      role="region"
       className="fixed bottom-5 right-5 z-50 w-[340px] max-w-[calc(100vw-2rem)] rounded-2xl bg-white border border-gray-200 shadow-2xl animate-slide-up"
     >
       <div className="bg-blue-900 rounded-t-2xl px-5 pt-5 pb-4 relative">
@@ -165,6 +202,6 @@ export function NewsletterPopup() {
           </form>
         )}
       </div>
-    </div>
+    </section>
   );
 }

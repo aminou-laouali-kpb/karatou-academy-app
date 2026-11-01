@@ -217,7 +217,7 @@ export function Certificates() {
                     <div className="flex items-center gap-3">
                       <BookOpen size={14} className="text-gray-400" />
                       <div className="flex-1">
-                        <ProgressBar value={progress} />
+                        <ProgressBar ariaLabel={t('moduleProgress')} value={progress} />
                       </div>
                       <span className="text-meta text-gray-500">{progress}%</span>
                     </div>

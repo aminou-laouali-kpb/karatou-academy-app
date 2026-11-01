@@ -162,7 +162,9 @@ export function Register() {
               <p className="text-meta text-blue-700/80 mb-3">{t('demographicsHelp')}</p>
               <div className="grid sm:grid-cols-2 gap-3">
                 <label className="block">
-                  <span className="text-meta font-medium text-gray-700">{t('countryLabel')}</span>
+                  <span className="text-meta font-medium text-gray-700">
+                    {t('countryLabel')} <span className="text-red-700">({t('requiredField')})</span>
+                  </span>
                   <select
                     value={country}
                     onChange={(event) => setCountry(event.target.value)}
@@ -181,7 +183,9 @@ export function Register() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-meta font-medium text-gray-700">{t('genderLabel')}</span>
+                  <span className="text-meta font-medium text-gray-700">
+                    {t('genderLabel')} <span className="text-gray-600">({t('optionalField')})</span>
+                  </span>
                   <select
                     value={gender}
                     onChange={(event) => setGender(event.target.value)}

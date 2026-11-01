@@ -68,7 +68,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
               <span>{t('progress')}</span>
               <span className="font-medium tabular-nums text-blue-600">{localizedModule.progress}%</span>
             </div>
-            <ProgressBar value={localizedModule.progress} />
+            <ProgressBar ariaLabel={t('moduleProgress')} value={localizedModule.progress} />
           </div>
         )}
 

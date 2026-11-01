@@ -445,7 +445,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     if (supabase) {
-      await supabase.auth.signOut().catch(() => undefined);
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
     }
 
     demoSessionActive.current = false;

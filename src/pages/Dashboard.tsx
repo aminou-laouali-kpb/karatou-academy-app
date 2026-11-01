@@ -94,7 +94,7 @@ export function Dashboard() {
               <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-2">
                 <span className="text-meta text-blue-100">{t('progress')}</span>
                 <div className="w-32">
-                  <ProgressBar value={activeModule.progress} variant="gold" height="md" />
+                  <ProgressBar ariaLabel={t('progress')} value={activeModule.progress} variant="gold" height="md" />
                 </div>
                 <span className="text-body font-semibold text-white">{activeModule.progress}%</span>
               </div>
@@ -145,7 +145,7 @@ export function Dashboard() {
               </h3>
               <div className="flex items-center gap-3 mb-3">
                 <div className="flex-1 max-w-xs">
-                  <ProgressBar value={activeModule.progress} />
+                  <ProgressBar ariaLabel={t('progress')} value={activeModule.progress} />
                 </div>
                 <span className="text-meta text-gray-500">{activeModule.progress}%</span>
               </div>

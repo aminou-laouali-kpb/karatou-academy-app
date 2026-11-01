@@ -1,10 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { Button } from '../components/Button';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { useLanguage } from '../hooks/useLanguage';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+
+const COMMERCIAL_EMAIL = 'mailto:commercial@karatou.academy';
 
 export function MarketingNav() {
   const { t } = useLanguage();
@@ -19,7 +21,7 @@ export function MarketingNav() {
         <div className="hidden md:flex items-center gap-8">
           <a href="#modules" className="text-body text-gray-200 hover:text-white transition-colors">{t('modules')}</a>
           <a href="#pricing" className="text-body text-gray-200 hover:text-white transition-colors">{t('pricing')}</a>
-          <Link to="/enterprise" className="text-body text-gray-200 hover:text-white transition-colors">{t('enterprise')}</Link>
+          <a href={COMMERCIAL_EMAIL} className="text-body text-gray-200 hover:text-white transition-colors">{t('enterprise')}</a>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -44,9 +46,9 @@ export function MarketingNav() {
 
       {open && (
         <div className="md:hidden bg-blue-900 border-t border-white/10 px-4 py-4 space-y-3">
-          <a href="#modules" className="block text-body text-gray-200">{t('modules')}</a>
-          <a href="#pricing" className="block text-body text-gray-200">{t('pricing')}</a>
-          <Link to="/enterprise" className="block text-body text-gray-200">{t('enterprise')}</Link>
+          <a href="#modules" onClick={() => setOpen(false)} className="block text-body text-gray-200 hover:text-white">{t('modules')}</a>
+          <a href="#pricing" onClick={() => setOpen(false)} className="block text-body text-gray-200 hover:text-white">{t('pricing')}</a>
+          <a href={COMMERCIAL_EMAIL} onClick={() => setOpen(false)} className="block text-body text-gray-200 hover:text-white">{t('enterprise')}</a>
           <div className="pt-3 flex gap-2">
             <Button variant="primary" size="sm" onClick={() => navigate('/register')}>
               {t('start')}

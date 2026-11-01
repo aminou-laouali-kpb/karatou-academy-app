@@ -11,11 +11,11 @@ import { isSupabaseConfigured } from '../lib/supabaseClient';
 import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
+import { useLessonNote } from '../hooks/useLessonNote';
 import { Language } from '../data/translations';
 import {
   Check,
   Play,
-  Lock,
   ChevronLeft,
   ChevronRight,
   Menu,
@@ -260,13 +260,23 @@ export function LessonPlayer() {
   }, [activeTab]);
 
   const module = useMemo(() => {
-    const sourceModule = modules.find((candidate) => candidate.slug === moduleSlug) || modules[0];
-    return sourceModule ? localizeModule(sourceModule, lang) : null;
+    const sourceModule = moduleSlug
+      ? modules.find((candidate) => candidate.slug === moduleSlug)
+      : modules[0];
+    if (!sourceModule || sourceModule.status === 'draft') return null;
+    const localized = localizeModule(sourceModule, lang);
+    return {
+      ...localized,
+      courses: localized.courses.filter((candidate) => candidate.status !== 'draft'),
+    };
   }, [modules, moduleSlug, lang]);
-  const courseIndex = module ? Math.max(0, module.courses.findIndex((candidate) => candidate.id === courseId)) : 0;
-  const course = module ? module.courses[courseIndex] || module.courses[0] : undefined;
+  const courseIndex = module ? (courseId ? module.courses.findIndex((candidate) => candidate.id === courseId) : 0) : -1;
+  const course = module && courseIndex >= 0 ? module.courses[courseIndex] : undefined;
   const completedIds = module ? getCompletedCourseIds(module.slug) : [];
   const progress = module ? getProgress(module.slug) : 0;
+  const hasModuleAccess = Boolean(module && (module.isFree || progress > 0));
+  const practiceNote = useLessonNote(user?.id, module?.slug, course?.id, 'practice');
+  const reflectionNote = useLessonNote(user?.id, module?.slug, course?.id, 'reflection');
   // A lesson body can come from the CMS (karatou_courses.lesson_content) or
   // from the per-lesson chunks of the TypeScript registry. `resolveLessonContent`
   // tries them in that order; the one lesson bundled with the shell also renders
@@ -277,13 +287,13 @@ export function LessonPlayer() {
   >(null);
 
   useEffect(() => {
-    if (!module || !course || !lessonKey) return;
+    if (!module || !course || !lessonKey || !hasModuleAccess) return;
     let active = true;
     resolveLessonContent(module.slug, course.id, lang).then((content) => {
       if (active) setLoadedLesson({ key: lessonKey, lang, content });
     });
     return () => { active = false; };
-  }, [module, course, lessonKey, lang]);
+  }, [module, course, lessonKey, lang, hasModuleAccess]);
 
   const resolvedLesson =
     loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
@@ -311,6 +321,21 @@ export function LessonPlayer() {
         : null,
     [module, course, courseIndex, lang, authoredLesson, lessonPending]
   );
+
+  if (module && !hasModuleAccess) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <h1 className="font-heading text-h2 text-gray-900">{t('subscription')}</h1>
+          <p className="text-body text-gray-600 mt-3">{t('lockedSubscription')}</p>
+          <Button variant="outline" className="mt-6" onClick={() => navigate('/dashboard')}>
+            {t('home')}
+          </Button>
+        </main>
+      </div>
+    );
+  }
 
   // Empty production tenant (no published modules / course): clean empty state.
   // While the catalog fetch is still in flight (hard refresh), show a loading
@@ -405,29 +430,24 @@ export function LessonPlayer() {
                 <span className="text-meta text-gray-500">{t('moduleProgress')}</span>
                 <span className="text-meta font-semibold text-blue-600">{progress}%</span>
               </div>
-              <ProgressBar value={progress} />
+              <ProgressBar value={progress} ariaLabel={t('moduleProgress')} />
             </div>
 
             <div className="space-y-1">
               {module.courses.map((item, index) => {
                 const isCurrent = item.id === course.id;
                 const isCompleted = isCourseCompleted(module.slug, item.id);
-                const previous = module.courses[index - 1];
-                const isUnlocked = index === 0 || isCompleted || (previous ? isCourseCompleted(module.slug, previous.id) : false);
 
                 return (
                   <button
                     key={item.id}
-                    onClick={() => isUnlocked && goToCourse(item.id)}
-                    disabled={!isUnlocked}
+                    onClick={() => goToCourse(item.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-body transition-colors text-left ${
                       isCurrent
                         ? 'bg-blue-50 text-blue-700 font-medium'
                         : isCompleted
                           ? 'text-gray-600 hover:bg-gray-50'
-                          : isUnlocked
-                            ? 'text-gray-600 hover:bg-gray-50'
-                            : 'text-gray-400'
+                          : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
                     <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
@@ -435,10 +455,8 @@ export function LessonPlayer() {
                         <Check size={16} className="text-emerald-500" />
                       ) : isCurrent ? (
                         <Play size={14} className="text-blue-600" />
-                      ) : isUnlocked ? (
-                        <BookOpen size={13} className="text-gray-400" />
                       ) : (
-                        <Lock size={13} className="text-gray-300" />
+                        <BookOpen size={13} className="text-gray-400" />
                       )}
                     </span>
                     <span className="flex-1 truncate">{t('lesson')} {index + 1} - {item.title}</span>
@@ -681,10 +699,16 @@ export function LessonPlayer() {
                   </p>
                 </div>
                 <textarea
+                  aria-label={t('practice')}
+                  value={practiceNote.value}
+                  onChange={(event) => practiceNote.change(event.target.value)}
                   className="w-full h-40 border border-gray-200 rounded-xl p-4 text-body text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
                   placeholder={t('notesPlaceholder')}
                 />
-                <p className="text-meta text-gray-400 mt-2">{t('localSave')}</p>
+                <p className="text-meta text-gray-500 mt-2">
+                  {practiceNote.status === 'saved' ? t('noteSaved') : practiceNote.status === 'error' ? t('noteSaveFailed') : ''}
+                </p>
+                <p className="text-meta text-gray-500 mt-1">{t('localSave')}</p>
               </div>
             )}
 
@@ -788,10 +812,16 @@ export function LessonPlayer() {
                   <p className="font-semibold text-gray-900 leading-relaxed">{lesson.reflection}</p>
                 </div>
                 <textarea
+                  aria-label={t('reflection')}
+                  value={reflectionNote.value}
+                  onChange={(event) => reflectionNote.change(event.target.value)}
                   className="w-full h-48 border border-gray-200 rounded-xl p-4 text-body text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
                   placeholder={t('reflectionPlaceholder')}
                 />
-                <p className="text-meta text-gray-400 mt-2">{t('localSave')}</p>
+                <p className="text-meta text-gray-500 mt-2">
+                  {reflectionNote.status === 'saved' ? t('noteSaved') : reflectionNote.status === 'error' ? t('noteSaveFailed') : ''}
+                </p>
+                <p className="text-meta text-gray-500 mt-1">{t('localSave')}</p>
               </div>
             )}
 
@@ -812,7 +842,7 @@ export function LessonPlayer() {
               <ChevronLeft size={16} /> {t('previous')}
             </Button>
             <div className="hidden sm:flex items-center gap-3">
-              <ProgressBar value={progress} className="w-32" />
+              <ProgressBar value={progress} ariaLabel={t('moduleProgress')} className="w-32" />
               <span className="text-meta text-gray-500 font-mono">{completedIds.length}/{module.courses.length}</span>
             </div>
             <div className="flex items-center gap-2">

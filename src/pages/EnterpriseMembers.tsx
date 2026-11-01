@@ -287,7 +287,7 @@ export function EnterpriseMembers() {
                     </td>
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-2">
-                        <ProgressBar value={member.progress} variant={member.progress === 100 ? 'green' : 'blue'} className="w-16" />
+                        <ProgressBar ariaLabel={`${t('progress')} ${member.name}`} value={member.progress} variant={member.progress === 100 ? 'green' : 'blue'} className="w-16" />
                         <span className="text-meta text-gray-500">{member.progress}%</span>
                       </div>
                     </td>

@@ -7,13 +7,17 @@ import { NewsletterPopup } from '../components/NewsletterPopup';
 import { ImpactStats } from '../components/ImpactStats';
 import { useLanguage } from '../hooks/useLanguage';
 import { useLearning } from '../hooks/useLearning';
+import { localizeModules } from '../data/localizedContent';
 import { GraduationCap, Globe, Building2, Check, Star } from 'lucide-react';
 
 export function Landing() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { modules } = useLearning();
-  const publishedModules = modules.filter((module) => module.status !== 'draft');
+  const publishedModules = localizeModules(
+    modules.filter((module) => module.status !== 'draft'),
+    lang,
+  );
 
   return (
     <div className="min-h-screen">
@@ -38,7 +42,7 @@ export function Landing() {
             <Button variant="primary" size="lg" onClick={() => navigate('/dashboard')}>
               {t('startFree')}
             </Button>
-            <Button variant="outline" size="lg" onClick={() => navigate('/dashboard')} className="border-white/30 text-white hover:bg-white/10">
+            <Button variant="outline" size="lg" onClick={() => document.getElementById('modules')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="border-white/30 text-white hover:bg-white/10">
               {t('seeModules')}
             </Button>
           </div>
@@ -92,7 +96,7 @@ export function Landing() {
       </section>
 
       {/* Modules */}
-      <section id="modules" className="py-20 px-4 bg-gray-50">
+      <section id="modules" className="scroll-mt-20 py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-heading text-h1 text-center text-gray-900 mb-3">
             {t('ourModules')}
@@ -107,7 +111,7 @@ export function Landing() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-20 px-4 bg-white">
+      <section id="pricing" className="scroll-mt-20 py-20 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-heading text-h1 text-center text-gray-900 mb-3">
             {t('pricingTitle')}
@@ -176,7 +180,7 @@ export function Landing() {
           </div>
 
           <p className="text-center text-body text-gray-500 mt-8">
-            {t('orgPricing')} → <button onClick={() => navigate('/enterprise')} className="text-blue-500 font-medium hover:underline">{t('contactEnterprise')}</button>
+            {t('orgPricing')} → <a href="mailto:commercial@karatou.academy" className="text-blue-700 font-medium underline underline-offset-2 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm">{t('contactEnterprise')}</a>
           </p>
         </div>
       </section>
@@ -203,13 +207,11 @@ export function Landing() {
               <Logo variant="dark" />
               <p className="text-gray-400 text-body mt-3">{t('footerTagline')}</p>
             </div>
-            <div className="flex flex-wrap gap-6 justify-center">
-              {[t('modules'), t('pricing'), t('enterprise'), t('about')].map((link) => (
-                <a key={link} href="#" className="text-body text-gray-400 hover:text-white transition-colors">
-                  {link}
-                </a>
-              ))}
-            </div>
+            <nav aria-label={t('footerNavigation')} className="flex flex-wrap gap-6 justify-center">
+              <a href="#modules" className="text-body text-gray-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm transition-colors">{t('modules')}</a>
+              <a href="#pricing" className="text-body text-gray-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm transition-colors">{t('pricing')}</a>
+              <a href="mailto:commercial@karatou.academy" className="text-body text-gray-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm transition-colors">{t('enterprise')}</a>
+            </nav>
             <div className="text-right">
               <p className="text-body text-gray-300">karatou.academy</p>
               <p className="text-meta text-gray-500 mt-1">FR · EN · HA</p>

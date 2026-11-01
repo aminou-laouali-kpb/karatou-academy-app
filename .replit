@@ -1,4 +1,4 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-24"]
 entrypoint = "src/main.tsx"
 run = "npm run dev"
 
@@ -38,12 +38,6 @@ publicDir = "dist"
 from = "/*"
 to = "/index.html"
 
-# Map the Vite dev server (5173) to the public preview.
-[[ports]]
-localPort = 5173
-externalPort = 80
-
-# The two Playwright servers: demo mode on 4317, production mode on 4318.
 [[ports]]
 localPort = 4317
 externalPort = 3003
@@ -53,6 +47,10 @@ exposeLocalhost = true
 localPort = 4318
 externalPort = 4200
 exposeLocalhost = true
+
+[[ports]]
+localPort = 5173
+externalPort = 80
 
 # Reinstall dependencies after pulling `main`: a merge that adds a package
 # (the Unicode PDF fonts, for instance) otherwise breaks the next build with an
