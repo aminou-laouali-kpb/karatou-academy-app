@@ -1,0 +1,1 @@
+- [Isolation des tests navigateur](browser-test-isolation.md) — les tests hors connexion doivent rester séparés du build publiable et de Supabase réel.

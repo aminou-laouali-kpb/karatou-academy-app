@@ -12,26 +12,27 @@ test.describe('public navigation and localization', () => {
     await expect(page.getByRole('heading', { name: 'Artificial Intelligence' })).toBeVisible();
     await expect(page.locator('a[href="#modules"]')).toHaveCount(2);
     await expect(page.locator('a[href="#pricing"]')).toHaveCount(2);
-    await expect(page.locator('a[href="mailto:commercial@karatou.academy"]')).toHaveCount(2);
+    await expect(page.locator('a[href="mailto:commercial@karatou.academy"]')).toHaveCount(3);
     await expect(page.getByRole('link', { name: 'About', exact: true })).toHaveCount(0);
   });
 
   test('registration explains required country and optional gender in all languages', async ({ page }) => {
-    await page.goto('/register');
     const messages = [
       { code: 'FR', copy: 'Le pays est obligatoire. Le genre est facultatif.' },
       { code: 'EN', copy: 'Country is required. Gender is optional.' },
       { code: 'HA', copy: 'Ƙasa wajibi ce. Jinsi na zaɓi ne.' },
     ];
     for (const { code, copy } of messages) {
+      await page.goto('/');
       await page.getByRole('button', { name: code, exact: true }).click();
+      await page.goto('/register');
       await expect(page.getByText(new RegExp(copy))).toBeVisible();
       await expect(page.locator('fieldset label').nth(0)).toContainText(/\(.*\)/);
       await expect(page.locator('fieldset label').nth(1)).toContainText(/\(.*\)/);
       await expect(page.getByRole('combobox').nth(0)).toHaveJSProperty('required', true);
       await expect(page.getByRole('combobox').nth(1)).toHaveJSProperty('required', false);
     }
-    await expect(page.getByRole('button', { name: 'Create my account' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Kirkiri asusuna' })).toBeVisible();
   });
 });
 
@@ -39,23 +40,42 @@ test.describe('learner notes and account menu', () => {
   test('notes survive lesson changes, language changes, and reloads', async ({ page }) => {
     await demoLogin(page, 'learner');
     await page.goto('/learn/data-analysis/d1');
-    await page.getByRole('button', { name: 'Pratique', exact: true }).click();
+    await page.getByRole('button', { name: /Pratique$/ }).click();
     const note = page.getByRole('textbox', { name: 'Pratique' });
     await note.fill('Dernière phrase conservée');
     await expect(page.getByText('Enregistré dans ce navigateur.')).toBeVisible();
 
-    await page.goto('/learn/data-analysis/d2');
-    await expect(page.getByRole('button', { name: 'Pratique', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: /Leçon 2 - Tableaux/ }).click();
+    await expect(page).toHaveURL(/\/learn\/data-analysis\/d2$/);
+    await page.getByRole('button', { name: /Pratique$/ }).click();
+    await expect(page.getByRole('textbox', { name: 'Pratique' })).toHaveValue('');
     await page.goto('/learn/data-analysis/d1');
-    await page.getByRole('button', { name: 'Pratique', exact: true }).click();
+    await page.getByRole('button', { name: /Pratique$/ }).click();
     await expect(page.getByRole('textbox', { name: 'Pratique' })).toHaveValue('Dernière phrase conservée');
     await page.reload();
-    await page.getByRole('button', { name: 'Pratique', exact: true }).click();
+    await page.getByRole('button', { name: /Pratique$/ }).click();
     await expect(page.getByRole('textbox', { name: 'Pratique' })).toHaveValue('Dernière phrase conservée');
 
     await page.getByRole('button', { name: 'EN', exact: true }).click();
-    await page.getByRole('button', { name: 'Practice', exact: true }).click();
+    await page.getByRole('button', { name: /Practice$/ }).click();
     await expect(page.getByRole('textbox', { name: 'Practice' })).toHaveValue('Dernière phrase conservée');
+  });
+
+  test('storage failure is shown truthfully without losing the current text', async ({ page }) => {
+    await demoLogin(page, 'learner');
+    await page.goto('/learn/data-analysis/d1');
+    await page.getByRole('button', { name: /Pratique$/ }).click();
+    await page.evaluate(() => {
+      const original = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (key: string, value: string) {
+        if (key.startsWith('karatou.lesson-note.v1:')) throw new DOMException('Full', 'QuotaExceededError');
+        return original.call(this, key, value);
+      };
+    });
+    await page.getByRole('textbox', { name: 'Pratique' }).fill('Texte non enregistré');
+    await expect(page.getByText(/Enregistrement impossible/)).toBeVisible();
+    await expect(page.getByText('Enregistré dans ce navigateur.')).toHaveCount(0);
+    await expect(page.getByRole('textbox', { name: 'Pratique' })).toHaveValue('Texte non enregistré');
   });
 
   test('the learner account menu works at 375px and logout protects routes', async ({ page }) => {
@@ -64,7 +84,7 @@ test.describe('learner notes and account menu', () => {
     const trigger = page.locator('button[aria-haspopup="menu"]');
     await trigger.click();
     const menu = page.getByRole('menu');
-    await expect(menu.getByRole('link', { name: 'Certificats' })).toBeVisible();
+    await expect(menu.getByRole('menuitem', { name: 'Certifications' })).toBeFocused();
     const box = await menu.boundingBox();
     expect(box).not.toBeNull();
     expect(box!.x).toBeGreaterThanOrEqual(0);
@@ -75,7 +95,7 @@ test.describe('learner notes and account menu', () => {
     await trigger.click();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(page).toHaveURL(/\/login$/);
+    await expect(page).toHaveURL(/\/login(?:\?|$)/);
     await page.goto('/dashboard');
     await expect(page).toHaveURL(/\/login/);
   });

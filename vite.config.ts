@@ -12,6 +12,9 @@ const isE2E = (mode: string) => mode === 'e2e' || mode === 'e2e-prod';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // The preview and two hermetic E2E servers can run together. Sharing an
+  // optimizer directory lets one mode invalidate another server's imports.
+  cacheDir: isE2E(mode) ? `node_modules/.vite-${mode}` : 'node_modules/.vite',
   plugins: [
     react(),
     VitePWA({
@@ -133,7 +136,11 @@ export default defineConfig(({ mode }) => ({
     // Allow the dev server to be served through hosted preview domains.
     allowedHosts: true,
     // On Replit the public HTTPS proxy terminates on 443, so HMR must target it.
-    ...(isReplit ? { hmr: { clientPort: 443 } } : {}),
+    ...(isE2E(mode)
+      ? { hmr: false as const }
+      : isReplit && process.env.REPLIT_DEV_DOMAIN
+        ? { hmr: { host: process.env.REPLIT_DEV_DOMAIN, protocol: 'wss' as const, clientPort: 443 } }
+        : {}),
     // Directories the workspace writes to but that are never sources. Watching
     // them exhausts the host's file-watcher limit, and the e2e servers then die
     // before Playwright can start a browser.

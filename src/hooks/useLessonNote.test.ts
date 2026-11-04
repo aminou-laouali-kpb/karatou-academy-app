@@ -14,6 +14,11 @@ describe('account-scoped lesson notes', () => {
     const a = lessonNoteStorageKey('account-a', 'module', 'lesson', 'practice');
     const b = lessonNoteStorageKey('account-b', 'module', 'lesson', 'practice');
     expect(a).not.toBe(b);
+    const storage = memoryStorage();
+    writeLessonNote(storage, a, 'Private account A draft');
+    expect(readLessonNote(storage, b)).toEqual({ value: '', status: 'idle' });
+    writeLessonNote(storage, b, 'Private account B draft');
+    expect(readLessonNote(storage, a).value).toBe('Private account A draft');
     expect(a).not.toBe(lessonNoteStorageKey('account-a', 'other', 'lesson', 'practice'));
     expect(a).not.toBe(lessonNoteStorageKey('account-a', 'module', 'other', 'practice'));
     expect(a).not.toBe(lessonNoteStorageKey('account-a', 'module', 'lesson', 'reflection'));

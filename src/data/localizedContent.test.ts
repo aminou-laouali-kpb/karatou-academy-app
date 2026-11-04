@@ -27,4 +27,13 @@ describe('public catalogue localization', () => {
       expect(module.courses[0].title).not.toBe(modules[0].courses[0].title);
     }
   });
+
+  it('retains understandable source content when no translation exists', () => {
+    const source = { ...modules[0], slug: 'source-only-module', translations: undefined };
+    const result = localizeModules([source], 'ha')[0];
+    expect(result.title).toBe(source.title);
+    expect(result.description).toBe(source.description);
+    expect(result.level).toBe(source.level);
+    expect(result.courses[0].title).toBe(source.courses[0].title);
+  });
 });

@@ -26,9 +26,9 @@ export function MarketingNav() {
 
         <div className="hidden md:flex items-center gap-3">
           <LanguageSwitcher variant="dark" />
-          <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="text-gray-200 hover:text-white hover:bg-white/10">
+          <button type="button" onClick={() => navigate('/login')} className="px-4 py-2 rounded-xl text-body-sm font-semibold text-gray-100 hover:text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900">
             {t('login')}
-          </Button>
+          </button>
           <Button variant="primary" size="sm" onClick={() => navigate('/register')}>
             {t('start')}
           </Button>
