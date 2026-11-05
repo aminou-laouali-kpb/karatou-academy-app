@@ -4,7 +4,13 @@ import { Color, PDFDocument, PDFFont, PDFPage } from 'pdf-lib';
 // undefined — pdf-lib then throws "fontkit.create is not a function" on the
 // first embed, i.e. on every certificate.
 import fontkit from '@pdf-lib/fontkit';
-import latinFontUrl from '@fontsource/noto-sans/files/noto-sans-latin-ext-400-normal.woff?url';
+// Fontsource ships Noto Sans as unicode-range slices: the `latin` file holds
+// U+0000-00FF (A-Z, a-z, é, à…) and `latin-ext` holds U+0100+ (ɓ ɗ ƙ ƴ…).
+// Neither covers a Hausa name on its own — embedding latin-ext alone rendered
+// every plain Latin letter as a .notdef box. Both are embedded and each
+// character is routed to the slice that actually contains its glyph.
+import latinFontUrl from '@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff?url';
+import latinExtFontUrl from '@fontsource/noto-sans/files/noto-sans-latin-ext-400-normal.woff?url';
 import arabicFontUrl from '@fontsource/noto-sans-arabic/files/noto-sans-arabic-arabic-400-normal.woff?url';
 
 /**
@@ -19,7 +25,6 @@ import arabicFontUrl from '@fontsource/noto-sans-arabic/files/noto-sans-arabic-a
  */
 
 const ARABIC_CHAR_RE = /[؀-ۿݐ-ݿࢠ-ࣿ]/;
-const ARABIC_RUN_RE = /[؀-ۿݐ-ݿࢠ-ࣿ]+|[^؀-ۿݐ-ݿࢠ-ࣿ]+/g;
 
 const fontBytes = new Map<string, Promise<ArrayBuffer>>();
 
@@ -39,6 +44,7 @@ function loadFont(url: string): Promise<ArrayBuffer> {
 
 export interface EmbeddedNameFonts {
   latin: PDFFont;
+  latinExt: PDFFont;
   arabic: PDFFont;
 }
 
@@ -49,25 +55,59 @@ export interface UnicodeNameRun {
 }
 
 /**
- * Embeds complementary Unicode subsets. Noto Sans Latin Extended covers Hausa
- * letters, while Noto Sans Arabic contains the Arabic glyphs and shaping data.
+ * Embeds complementary Unicode subsets: Noto Sans Latin (basic Latin +
+ * Latin-1), Latin Extended (Hausa hooked letters) and Arabic (glyphs and
+ * shaping data).
  */
 export async function embedNameFonts(document: PDFDocument): Promise<EmbeddedNameFonts> {
   document.registerFontkit(fontkit);
-  const [latinBytes, arabicBytes] = await Promise.all([loadFont(latinFontUrl), loadFont(arabicFontUrl)]);
-  const [latin, arabic] = await Promise.all([
+  const [latinBytes, latinExtBytes, arabicBytes] = await Promise.all([
+    loadFont(latinFontUrl),
+    loadFont(latinExtFontUrl),
+    loadFont(arabicFontUrl),
+  ]);
+  const [latin, latinExt, arabic] = await Promise.all([
     document.embedFont(latinBytes, { subset: true }),
+    document.embedFont(latinExtBytes, { subset: true }),
     document.embedFont(arabicBytes, { subset: true }),
   ]);
-  return { latin, arabic };
+  return { latin, latinExt, arabic };
 }
 
+const characterSets = new WeakMap<PDFFont, Set<number>>();
+
+function hasGlyph(font: PDFFont, codePoint: number): boolean {
+  let set = characterSets.get(font);
+  if (!set) {
+    set = new Set(font.getCharacterSet());
+    characterSets.set(font, set);
+  }
+  return set.has(codePoint);
+}
+
+function fontFor(char: string, fonts: EmbeddedNameFonts): PDFFont {
+  if (ARABIC_CHAR_RE.test(char)) return fonts.arabic;
+  const codePoint = char.codePointAt(0) ?? 0;
+  if (hasGlyph(fonts.latin, codePoint)) return fonts.latin;
+  if (hasGlyph(fonts.latinExt, codePoint)) return fonts.latinExt;
+  return fonts.latin;
+}
+
+/** Splits a name into consecutive runs that share the font holding their glyphs. */
 export function unicodeNameRuns(value: string, fonts: EmbeddedNameFonts): UnicodeNameRun[] {
-  return (value.normalize('NFC').match(ARABIC_RUN_RE) || []).map((part) => ({
-    value: part,
-    isArabic: ARABIC_CHAR_RE.test(part),
-    font: ARABIC_CHAR_RE.test(part) ? fonts.arabic : fonts.latin,
-  }));
+  const runs: UnicodeNameRun[] = [];
+  for (const char of value.normalize('NFC')) {
+    // Spaces and combining marks stay with the preceding run so Arabic words
+    // keep shaping together and runs are not needlessly fragmented.
+    const last = runs[runs.length - 1];
+    const font = last && /\s|\p{M}/u.test(char) ? last.font : fontFor(char, fonts);
+    if (last && last.font === font) {
+      last.value += char;
+    } else {
+      runs.push({ value: char, font, isArabic: font === fonts.arabic });
+    }
+  }
+  return runs;
 }
 
 export function unicodeNameWidth(value: string, fonts: EmbeddedNameFonts, size: number): number {
