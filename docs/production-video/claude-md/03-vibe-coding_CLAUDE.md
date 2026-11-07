@@ -1,5 +1,5 @@
 # CLAUDE.md — Karatou Academy · Production vidéo
-# Cours 3 — Vibe coding : créer une app sans savoir coder
+# Cours 3 — Vibe coding : créer un site web avec l'IA, sans coder
 
 > **Pour l'owner — mode d'emploi**
 > 1. Créez un dossier vide sur votre ordinateur, par exemple `karatou-vibe-coding`.
@@ -15,7 +15,7 @@
 |---|---|
 | Format | Filmé — face caméra, captures d'écran et motion graphics |
 | Owner | Aminou Laouali Abdou |
-| Vidéos | 6 vidéos · 5 à 8 min (cible 6:30) chacune |
+| Vidéos | 5 vidéos · 4 à 6:30 min (≈ 25 min au total) chacune |
 | Langues | FR (référence) · EN · HA (haoussa) · DJE (zarma) |
 | Outils | Claude Code · HyperFrames · VoiceStudio (ou API de voix) |
 | Version | 1.0 — 18 octobre 2026 · Partie 1 commune à tous les cours, Partie 2 propre à ce cours |
@@ -214,7 +214,7 @@ note ce choix dans `PROGRESS.md`.
 
 ### 5.1 Format et contrainte fondatrice
 
-- Master **1920 × 1080, 30 images/s, 16:9**. Une vidéo par leçon. Durée : 5 à 8 min (cible 6:30).
+- Master **1920 × 1080, 30 images/s, 16:9**. Une vidéo par leçon. Durée : 4 à 6:30 min (≈ 25 min au total).
 - Public sur téléphone, en 3G, avec un forfait compté. Donc : **le sens passe sans le son** (toute information dite
   est aussi écrite à l'écran, sous-titres compris) ; lisibilité mobile d'abord ; aplats et typographie plutôt que
   vidéo plein cadre ; rien d'essentiel dans une animation rapide.
@@ -538,7 +538,7 @@ crochets) · `RECETTE.md`.
 ### 9.3 Mise en ligne
 
 Chaîne YouTube **Karatou Academy**, vidéos **non répertoriées**, une vidéo par langue, sous-titres `.srt` ajoutés
-comme piste. Titre : « Karatou Academy — Vibe coding : créer une app sans savoir coder — Leçon N : <titre> (<LANGUE>) ». Le site lit des **URL
+comme piste. Titre : « Karatou Academy — Vibe coding : créer un site web avec l'IA, sans coder — Leçon N : <titre> (<LANGUE>) ». Le site lit des **URL
 d'intégration** : `https://www.youtube.com/embed/<ID>` (jamais `watch?v=` ni `youtu.be/`). Teste chaque URL dans un
 navigateur avant de la consigner.
 
@@ -562,7 +562,7 @@ supprimée. Consigne chaque version dans le journal de `PROGRESS.md`.
 ## 10. `PROGRESS.md` — modèle
 
 ```markdown
-# PROGRESS — Cours 3 · Vibe coding : créer une app sans savoir coder
+# PROGRESS — Cours 3 · Vibe coding : créer un site web avec l'IA, sans coder
 Dernière mise à jour : <date> · Prochaine action : <…>
 
 ## Démarrage
@@ -600,1051 +600,726 @@ Dernière mise à jour : <date> · Prochaine action : <…>
 | Champ | Valeur |
 |---|---|
 | Numéro | 3 |
-| Titre | Vibe coding : créer une app sans savoir coder |
+| Titre | Vibe coding : créer un site web avec l'IA, sans coder |
 | Format | Filmé (humain face caméra + captures + motion graphics) |
-| Owner / présentateur | Aminou — Aminou Laouali Abdou, Consultant en IA et Innovation, Google Generative AI Leader (nom et titre fournis par le brief, à confirmer au premier lancement) |
+| Owner / présentateur | Aminou — Aminou Laouali Abdou ; titre exact à confirmer au premier lancement |
 | Rubrique | Culture numérique |
-| Public | Étudiants, jeunes entrepreneurs et professionnels francophones (Niger, Afrique de l'Ouest) sans formation en programmation, qui ont l'idée d'un outil simple pour leurs études ou leur activité, et savent utiliser un navigateur et un téléphone |
+| Public | Commerçants, artisans, étudiants, jeunes entrepreneurs et agents d'ONG francophones (Niger, Afrique de l'Ouest), sans aucune formation en programmation, qui veulent un site pour leur activité et savent utiliser un navigateur et un téléphone |
 | Slug du module (provisoire) | `vibe-coding` |
-| Préfixe des leçons | `vc` (ex. `vc1` … `vc6`) |
-| Nombre de vidéos | 6 (dont la dernière = projet final certifiant) |
-| Durée par vidéo | 5–8 min (cible 6:30) |
+| Préfixe des leçons | `vc` (ex. `vc1` … `vc5`) |
+| Nombre de vidéos | 5 (dont la dernière = projet final certifiant) |
+| Durée par vidéo | 4:00 à 6:30 (cibles : vc1 4:00 · vc2 4:30 · vc3 6:00 · vc4 6:30 · vc5 4:00 ; ≈ 25 min au total) |
 | Langues | FR (tournage, référence) · EN · HA · DJE |
-| Prérequis | Une adresse e-mail ; un compte gratuit Lovable ou Bolt ; de préférence un ordinateur avec un navigateur récent (indispensable pour Bolt), sinon un téléphone avec l'application mobile de Lovable [à vérifier au moment du tournage : fonctions disponibles sur mobile] ; une connexion stable pendant les séances de construction ; un assistant conversationnel gratuit (leçons 2 et 6). Claude Code (leçon 5) : facultatif, version payante. Aucune connaissance en programmation. |
-| Promesse du cours | Vous saurez décrire, construire, tester et publier une petite application utile, sans écrire de code, en connaissant ses limites. |
-| Positionnement | Seul cours de la plateforme où l'on construit une application complète (écrans, données, comptes, publication). Il ne refait pas le module `intelligence-artificielle` (c3 Prompt engineering, c5 Automatisation) : la consigne y sert à construire. La leçon 2 applique `gestion-projet` (p1 Cadrer, p2 Prioriser le MVP) : y renvoyer. Il s'appuie sur `introduction-claude-ai` (cl2 Bien formuler sa demande, cl5 Limites, vérification, confidentialité). Différent du cours 8 (flux automatisés, sans application à soi) et du cours 2 (agents qui agissent seuls). Pour aller plus loin : cours 10 (sécurité des comptes), cours 8 (brancher des automatisations), cours 4 (lancer une activité). |
-| Fil rouge | **Hadiza**, 24 ans, étudiante à Niamey, construit son application de suivi de bourses de la leçon 1 à la leçon 5. **Rahila**, sa camarade de promotion, conseille, teste et sert de seconde utilisatrice (leçons 3 à 5). **Moussa**, quincaillier à Zinder, choisit son projet en leçon 1 et sert d'exemple de projet final en leçon 6. **Ibrahim**, apprenant, sert de contre-exemple en leçon 6. Aminou montre son propre travail (Karatou Academy, développée avec Claude Code) en leçons 1 et 5. |
-| Marques citées | Lovable (dont Lovable Cloud), Bolt, Claude, Claude Code, GitHub, WhatsApp, Collins (dictionnaire) ; Google (titre du présentateur sur la carte d'ouverture). Organisme cité, hors marques : HAPDP (Niger). Personne citée : Andrej Karpathy. |
+| Prérequis | Une adresse e-mail ; un compte gratuit Canva et un compte gratuit Lovable ; un assistant conversationnel gratuit (Claude ou Gemini) ; de préférence un ordinateur avec un navigateur récent, et un téléphone pour vérifier le site. Aucune connaissance en programmation. |
+| Promesse du cours | Vous saurez décrire votre site à une IA, le construire avec Canva ou Lovable, le vérifier sur téléphone et le publier. |
+| Positionnement | Premier cours de la série vibe coding (niveau 1 : un site web). Le niveau 2 portera sur les applications : comptes, données, base de données (Replit y est approfondi). Ce cours ne connecte donc ni base de données ni clé. Il ne refait pas le cours de consignes du module `intelligence-artificielle` : ici, la consigne sert à construire. Pour aller plus loin : cours 10 (sécurité des comptes), cours 4 (lancer une activité). |
+| Fil rouge | **Hadiza**, couturière à Maradi, veut un site pour son atelier « Hadiza Couture » ; ses clientes la trouvent aujourd'hui sur WhatsApp. Elle choisit son site (vc1), écrit sa fiche avec l'IA (vc2), la colle dans Canva (vc3) puis dans Lovable (vc4) pour comparer les deux résultats, puis vérifie et publie (vc5). Toutes ses données sont fictives ; numéro affiché : `+227 00 00 00 00`. |
+| Marques citées | Canva (Canva Code), Lovable, Bolt, Replit, Claude, Gemini, WhatsApp. |
 
 ## 2.2 Ce que l'apprenant saura faire
 
-- Expliquer ce qu'est le vibe coding, ce qu'il permet et où il s'arrête, à partir d'une application réelle.
-- Choisir un premier projet réaliste avec la grille des trois feux (nombre d'utilisateurs, argent, données sensibles).
-- Rédiger le cahier des charges d'une page d'une application : problème, personne, écrans, données gardées et jamais gardées, version 1, critères testables.
-- Construire dans Lovable ou Bolt un prototype, puis une application avec base de données et comptes, une étape par consigne, en revenant à une version antérieure si besoin.
-- Tester son application et corriger un défaut en le décrivant (problème, attendu, étapes), faire le test des deux comptes, puis publier après le contrôle de sécurité.
-- Livrer une mini-application utile avec son lien et sa fiche produit d'une page, en sachant quand passer à Claude Code ou faire appel à un développeur.
+- Expliquer le vibe coding : vous décrivez, l'IA construit, vous vérifiez et vous corrigez.
+- Choisir l'outil adapté à son site : Canva pour un site simple, Lovable ou Bolt pour un site plus riche.
+- Écrire avec l'IA la fiche de son site à partir de cinq questions : qui, quoi, sections, contenu réel, style.
+- Créer et publier un site d'une page avec Canva Code, en corrigeant une demande à la fois.
+- Créer avec Lovable un site à plusieurs sections avec un formulaire de commande, vérifié en vue téléphone.
+- Vérifier son site publié sur téléphone avec une check-list, puis présenter le lien pour le projet final.
 
 ## 2.3 Plan du cours
 
 | Leçon | Id | Titre | Promesse (objectif) | Cas réel (B1) | Démo (B4) | Durée cible |
 |---|---|---|---|---|---|---|
-| 1 | `vc1` | Vibe coding : ce que c'est, où ça s'arrête | Expliquer le vibe coding et choisir un premier projet réaliste | Hadiza (Niamey) a raté une bourse : date limite dépassée, informations éparpillées | Lovable : une consigne courte → page des échéances (données d'exemple) → une amélioration décrite → vue téléphone | 6:30 |
-| 2 | `vc2` | Le cahier des charges d'une page | Écrire le cahier des charges d'une page de votre application | « Fais-moi une application de bourses » : Lovable devine à la place de Hadiza | Claude (version gratuite) interviewe Hadiza question par question → page de six rubriques, relue et corrigée | 6:30 |
-| 3 | `vc3` | Premier prototype avec Lovable ou Bolt | Transformer votre cahier des charges en un premier prototype | Hadiza ouvre Lovable avec sa page et un quota gratuit limité | Lovable, mode Plan → plan vérifié → trois étapes (tableau de bord, fiche, formulaire), un test après chacune, vue téléphone | 6:30 |
-| 4 | `vc4` | Démo complète : l'app de suivi de bourses | Construire étape par étape une application qui enregistre vos données | Sur le téléphone de sa sœur, les candidatures de Hadiza n'existent pas | Lovable : base intégrée (Lovable Cloud) → test de mémoire → connexion et règles d'accès → test sur deux appareils → test des deux comptes | 6:30 |
-| 5 | `vc5` | Corriger, sécuriser, publier et aller plus loin | Corriger en décrivant, vérifier la sécurité et publier votre application | Rahila signale une bourse passée marquée « Urgent », avec des jours négatifs | Lovable : reproduire le défaut → signalement en trois parties → retest → contrôle de sécurité → publication → lien testé sur un autre téléphone | 6:30 |
-| 6 | `vc6` | Projet final : livrer votre mini-application | Livrer une mini-application utile, avec son lien et sa fiche | Moussa (Zinder) a terminé le carnet de ses commandes aux fournisseurs | Le projet de Moussa de bout en bout : cahier des charges → Bolt → publication → test d'évaluateur → fiche produit → dépôt | 6:30 |
+| 1 | `vc1` | Le vibe coding : vous décrivez, l'IA construit | Savoir ce qu'est le vibe coding et quel outil choisir pour votre premier site | Hadiza, couturière à Maradi, n'a pas de site : un développeur coûte trop cher, apprendre à coder prend trop de temps | Panorama à l'écran des pages d'accueil de Canva (rubrique Code), Lovable, Bolt et Replit | 4:00 |
+| 2 | `vc2` | Avant d'ouvrir l'outil : la fiche de votre site | Savoir écrire la fiche qui fait réussir votre site du premier coup | « Fais-moi un site pour mon atelier » : l'IA devine, et elle devine mal | Claude (ou Gemini) interviewe Hadiza question par question → fiche finale prête à coller | 4:30 |
+| 3 | `vc3` | Démo Canva : votre site en quelques minutes | Savoir créer et publier un site gratuit avec Canva, à partir de votre fiche | Hadiza a sa fiche : que va en faire Canva ? | Canva Code : fiche collée → génération → une correction par la parole → aperçu → publication → lien ouvert | 6:00 |
+| 4 | `vc4` | Démo Lovable : un site plus riche, avec formulaire | Savoir créer avec Lovable un site à plusieurs sections, avec un formulaire de commande | Hadiza veut que ses clientes envoient leurs mesures par un formulaire | Lovable : fiche + formulaire → plan → construction → vue téléphone → deux corrections → test du formulaire | 6:30 |
+| 5 | `vc5` | Projet final : corriger, publier, partager | Savoir publier votre site, le vérifier et le présenter pour obtenir votre certificat | Avant d'envoyer son site à ses clientes, Hadiza fait trois vérifications | Lovable → Publier → lien ouvert sur un téléphone → check-list en quatre questions | 4:00 |
 
 ## 2.4 Plan de tournage idéal
 
 ### Matériel et réglages
 
-- **A-cam** : téléphone récent sur trépied avec pince (objectif principal, jamais l'ultra grand-angle), ou hybride si disponible. Captation 4K si possible, sinon 1080p ; cadence fixée par la Partie 1 ; obturateur au double de la cadence (1/50 s en 25 i/s, 1/60 s en 30 i/s). Exposition, mise au point et balance des blancs verrouillées ; HDR, mode portrait et stabilisation désactivés. Mode avion. Au moins 64 Go libres.
-- **B-cam** (optionnelle) : second téléphone à 30–45°, plan taille, mêmes réglages. Elle sert aux apartés de B5 et à masquer les coupes.
-- **Son** : micro-cravate (filaire vers l'A-cam, ou kit sans fil) ; enregistrement de secours sur un second appareil ; 48 kHz ; crêtes vers −12 dBFS ; 30 s de silence de la pièce au début de chaque session.
-- **Lumière** : deux panneaux LED avec diffuseur, même température de couleur (vers 5 600 K), sans scintillement ; un réflecteur blanc pour déboucher. Faire un essai de 10 s avant la première prise : aucune bande ni scintillement (réseau électrique à 50 Hz).
-- **Écran** : un ordinateur pour Lovable (web), Bolt et Claude Code ; un logiciel gratuit d'enregistrement d'écran en 1920×1080 ; l'enregistrement d'écran natif du téléphone pour l'application mobile de Lovable et les tests de l'application publiée. Un second téléphone pour les tests « autre appareil » et « deux comptes ».
-- **Téléprompteur** : application gratuite sur une tablette ou un téléphone placé contre l'objectif ; texte chargé bloc par bloc ; défilement réglé vers 125 mots par minute.
-- **Énergie et réseau** : batterie externe, onduleur pour l'ordinateur et la box ; partage de connexion 4G en secours (délestages, coupures).
+- **A-cam** : téléphone récent sur trépied (objectif principal, jamais l'ultra grand-angle) ou hybride. 16:9, 1080p minimum (4K si possible). Exposition, mise au point et balance des blancs verrouillées ; HDR, mode portrait et stabilisation désactivés. Mode avion.
+- **B-cam** (optionnelle) : second téléphone à 30–45°, plan taille, mêmes réglages. Elle sert aux questions de consolidation (B5) et à masquer les coupes.
+- **Son** : micro-cravate ou micro proche ; enregistrement de secours sur un second appareil. **Un clap des mains au début de chaque prise** (synchro A-cam, B-cam, micro, écran).
+- **Lumière** : deux panneaux LED avec diffuseur, même température de couleur ; lumière face au présentateur. Essai de 10 s pour vérifier l'absence de scintillement.
+- **Écran** : un ordinateur, enregistrement 1920 × 1080, curseur visible. Le téléphone de démonstration pour la vidéo 5 (insert filmé ou miroir d'écran).
+- **Énergie et réseau** : batterie externe, onduleur pour l'ordinateur et la box ; partage de connexion 4G en secours.
+- **Dépôt des rushes pour HyperFrames** : `lecons/L0N/rushes/camA-<n>.mp4` (face caméra) et `lecons/L0N/rushes/ecran-<n>.mp4` (écran), N = numéro de la vidéo (1 à 5).
 
 ### Décor, lumière, son
 
-- **Décor « atelier »** : un bureau avec l'ordinateur portable (logo masqué par une pastille neutre), un téléphone sur support, un carnet. Au mur, à 1,5–2 m derrière Aminou : un tableau en liège avec la page imprimée du cahier des charges de Hadiza (fictive) et cinq papillons « Problème · Personne · Écrans · Données · Critères » ; un calendrier mural avec trois dates entourées (fictives). Une plante, quelques livres. Couleurs Karatou par petites touches (charte en Partie 1). Aucun logo de marque non citée.
-- Si l'écran de l'ordinateur est dans le champ, il affiche une image fixe neutre : jamais de contenu lisible (moiré, confidentialité).
-- **Lumière** : principale à 45°, un peu au-dessus des yeux ; seconde en débouchage doux ou en contre-jour léger. Occulter la fenêtre si le soleil tourne pendant la session (raccords).
-- **Son** : petite pièce meublée (tapis, rideaux, coussins). Ventilateur et climatisation coupés pendant les prises : aérer entre les blocs et tourner tôt le matin, quand il fait moins chaud. Groupe électrogène éteint ou éloigné. Prévoir les prises en dehors des appels à la prière et des heures de forte circulation. Téléphones en silencieux.
+- **Décor « atelier de couture »** cohérent avec le fil rouge : derrière Aminou, à 1,5–2 m, quelques pagnes pliés ou un rouleau de tissu, un mètre ruban, une plante. Un ordinateur portable fermé ou affichant une image neutre (logo masqué). Couleurs Karatou par petites touches (charte en Partie 1). Aucun logo de marque.
+- **Lumière** : principale face au présentateur, un peu au-dessus des yeux ; fond calme, sans contre-jour de fenêtre.
+- **Son** : pièce calme et meublée ; ventilateur et climatisation coupés pendant les prises ; téléphones en silencieux ; éviter les heures de forte circulation et les appels à la prière.
 
 ### Cadrages
 
-- **A-cam** : plan poitrine 16:9, regard caméra, yeux sur la ligne du tiers supérieur. Aminou légèrement à droite du cadre, pour laisser la gauche aux incrustations (même côté pendant tout le cours). Le bas du cadre (environ 20 %) reste libre de gestes et d'objets importants : il est réservé aux sous-titres.
-- **B-cam** : 30–45°, plan taille, pour les apartés (B5 de chaque leçon) et quelques phrases de B3 signalées dans les scripts.
-- **Inserts** (5–8 s chacun, tournés en fin de session) : mains qui collent une consigne au clavier ; pouce qui coche une case sur le téléphone ; doigt qui entoure une date sur le calendrier ; page du cahier des charges posée à côté du clavier ; deux téléphones côte à côte (test « deux comptes »). Le contenu des écrans passe toujours par les captures (type A) : on ne filme jamais un écran à la caméra pour le lire.
+- **A-cam** : plan poitrine 16:9, regard caméra, visage dans le tiers haut. Le bas du cadre reste libre : il est réservé aux sous-titres. Même côté du cadre pendant tout le cours, pour laisser la place aux incrustations.
+- **B-cam** : plan taille de trois quarts, pour les questions de B5.
+- **Inserts** (5–8 s, en fin de session) : mains qui collent la fiche au clavier ; pouce qui fait défiler le site sur le téléphone ; doigt qui touche le bouton « Commander sur WhatsApp » ; mètre ruban et tissu (couverture pour le fil rouge). On ne filme jamais un écran d'ordinateur à la caméra pour le lire : les écrans passent par les captures (type A). Seule exception : le téléphone de la vidéo 5, en insert, si le miroir d'écran n'est pas possible.
 
 ### Captures d'écran
 
-- **Ordinateur** : 1920×1080 (ou 2560×1440 réduit), navigateur en plein écran, zoom 125–150 % pour une lecture confortable sur téléphone, profil de navigateur dédié « Karatou démo » sans favoris, extensions ni notifications, curseur agrandi, thème clair.
-- **Téléphone** : enregistrement natif, mode « Ne pas déranger », barre d'état sans notification (recadrer si besoin).
-- **Comptes** : une adresse e-mail réservée au tournage ; comptes gratuits Lovable, Bolt et Claude ; Claude Code sur l'abonnement payant de l'owner. Comptes de test de l'application (« Hadiza », « Rahila », « Moussa », « évaluateur ») créés avec des adresses de test du tournage.
-- **Données** : uniquement inventées et étiquetées « exemple » ; noms de bourses génériques (« Bourse de master en santé publique (exemple) », « Programme de recherche en agronomie (exemple) », « Bourse d'été en informatique (exemple) ») ; dates calculées à partir du jour du tournage. Aucune donnée d'apprenant, aucune clé, aucun fichier de configuration, aucun identifiant de projet visible (flouter au besoin).
-- **Langue des interfaces** : elles peuvent être en anglais [à vérifier au moment du tournage]. On annote en français, une annotation à la fois, au moins 2,5 s, toujours doublée d'une forme (cadre, coche, croix).
-- **Méthode** : chaque séquence de construction est enregistrée en continu (pour l'accéléré), puis les écrans clés sont rejoués lentement pour les annotations. Les réponses de l'IA varient d'un essai à l'autre : enregistrer d'abord, puis ajuster la voix off des captures au résultat réel (phrases signalées dans les fiches).
+- **Navigateur propre** : profil Chrome dédié, sans favoris, sans extensions visibles, notifications coupées, aucun onglet personnel. **Zoom du navigateur à 125 %.** Thème clair.
+- **Comptes prêts et connectés** avant d'enregistrer : Canva (compte Karatou), Lovable, Claude ou Gemini. Dans Lovable, on part de la page d'accueil, jamais d'un projet vide déjà ouvert.
+- **À masquer** : le solde de crédits ou le plan d'abonnement s'ils s'affichent. Sinon, flou au montage.
+- **Données** : uniquement fictives. Atelier « Hadiza Couture », Maradi ; numéro `+227 00 00 00 00` ; aucune vraie donnée personnelle dans le formulaire de test (vidéo 4).
+- **Pas de tarif à l'écran**, pas de numéro de version, pas de page de prix.
+- **Note pour l'owner** : l'abonnement Canva ONG de Karatou couvre une équipe restreinte ; ce n'est pas un moyen de donner un compte à chaque apprenant. La création de site fonctionne en version gratuite. Ne promettez aucun accès offert dans les vidéos tant que le dispositif n'est pas défini.
 - Liste détaillée par leçon : section 2.6.
 
 ### Organisation du tournage
 
-- **Ordre** : les captures d'abord, le face caméra ensuite. La voix des captures doit coller au résultat réel.
-- **Session 1 — captures des leçons 1 à 3** (une demi-journée) : micro-application (L1) ; phrase vague et entretien avec Claude (L2) ; mode Plan et prototype (L3) ; écrans d'accueil de Lovable, Bolt, de l'application mobile de Lovable et de l'onglet Code de Claude ; session Claude Code sur Karatou Academy (L1 et L5).
-- **Session 2 — captures des leçons 4 à 6** (une demi-journée) : base de données, connexion, deux comptes (L4) ; défaut, contrôle de sécurité, publication (L5) ; application de Moussa dans Bolt, publication, fiche, formulaire de dépôt (L6). L'application de Moussa est construite avant cette session.
-- **Session 3 — face caméra** (une journée) : par blocs, toutes leçons confondues. Toutes les ouvertures B1 (énergie un cran au-dessus), puis les B2, les B3, les phrases de B4, les B5 en CAM B, les B6. Les inserts en fin de journée.
-- **Session 4 — langues** (une à deux heures) : ouvertures et conclusions EN, HA, DJE, même tenue, même décor.
-- **Prises de sécurité** : deux bonnes prises par bloc ; 1 s de silence avant et après chaque bloc ; annoncer le bloc avant la prise (« vc3, B2, prise 2 ») ; un clap des mains pour synchroniser A-cam, B-cam et micro.
-- **Ton constant** : calme, direct, chaleureux ; même distance au micro ; même tenue pour tout le cours (couleur unie, sans rayures fines ni logo) ; repères au sol pour le siège et les pieds de lumière.
-- **Durée estimée** : deux demi-journées de captures, une journée de face caméra, deux heures pour les langues, plus une demi-journée de réserve pour les reprises.
+Une seule session d'environ une heure, plus dix minutes de préparation.
+
+1. **0:00–0:15 — Toutes les parties face caméra** (CAM), vidéos 1 à 5 à la suite : même lumière, même tenue.
+2. **0:15–0:20 — Vidéo 1, écran** : tour rapide des quatre pages d'accueil.
+3. **0:20–0:28 — Vidéo 2, écran** : la fiche générée dans Claude ou Gemini. **Garder la fiche** : elle sert ensuite.
+4. **0:28–0:40 — Vidéo 3, écran** : Canva, en parlant pendant les gestes.
+5. **0:40–0:55 — Vidéos 4 et 5, écran** : Lovable, puis correction et publication, puis le site sur téléphone.
+6. **0:55–1:00 — Prises de secours** : relire à voix haute la carte de rappel de chaque vidéo.
+
+- **Pendant les démos, parler en faisant.** Les attentes de génération seront accélérées au montage : ne pas meubler, dire simplement « L'IA construit, on attend » et laisser tourner.
+- **Le présentateur improvise un peu** à partir des points des scripts : les scripts ci-dessous sont la référence. Le sens et les phrases clés (promesse, carte de rappel, dernière phrase) restent mot pour mot.
+- **À ne jamais dire** : un prix, une limite chiffrée, un numéro de version de modèle, aucun superlatif sur un outil. On dit « version gratuite », « version payante ».
+- **Prises de sécurité** : une seconde prise des promesses et des dernières phrases ; 1 s de silence avant et après chaque bloc ; annoncer le bloc (« vc3, accroche, prise 2 ») puis clap.
+- **Ton constant** : calme, direct, chaleureux ; même distance au micro ; tenue unie, sans rayures fines ni logo.
+- **Langues** : ouvertures et conclusions EN, HA, DJE juste après la session, même tenue, même décor (environ vingt minutes).
 
 ### Checklist du jour J
 
-- [ ] Batteries chargées, batterie externe, onduleur ; stockage libre sur les deux caméras.
-- [ ] Mode avion sur les caméras ; notifications coupées sur l'ordinateur et les téléphones de capture.
-- [ ] Micro testé ; 30 s de silence de la pièce enregistrées ; ventilateur et climatisation coupés.
-- [ ] Lumières à la même température ; essai anti-scintillement de 10 s.
-- [ ] Repères au sol ; cadrage vérifié avec la zone des sous-titres libre.
-- [ ] Téléprompteur chargé avec la dernière version des scripts (après ajustement aux captures).
-- [ ] Profil de navigateur « Karatou démo » ouvert ; comptes connectés ; données d'exemple prêtes.
-- [ ] Aucune clé, aucun fichier de configuration, aucune donnée réelle visible à l'écran.
-- [ ] Mentions « [à vérifier au moment du tournage] » contrôlées dans l'interface du jour (libellés, versions gratuites).
-- [ ] Autorisations écrites des personnes photographiées pour les plans E.
-- [ ] Eau, tenue de rechange, poudre matifiante.
+- [ ] Batteries chargées, batterie externe, onduleur ; stockage libre sur les caméras.
+- [ ] Mode avion sur les caméras ; notifications coupées sur l'ordinateur et le téléphone de démonstration.
+- [ ] Micro testé ; clap prévu à chaque prise ; ventilateur et climatisation coupés.
+- [ ] Cadrage vérifié : visage dans le tiers haut, bas du cadre libre.
+- [ ] Profil Chrome dédié ouvert, zoom à 125 %, aucun onglet personnel, rien de personnel sur le bureau.
+- [ ] Comptes Canva, Lovable, Claude ou Gemini connectés ; Lovable sur sa page d'accueil.
+- [ ] Solde de crédits et plan d'abonnement masqués ou repérés pour le flou.
+- [ ] Réponses fictives d'Hadiza prêtes (vidéo 2) ; faux numéro `+227 00 00 00 00`.
+- [ ] Mentions « [à vérifier au moment du tournage] » contrôlées dans l'interface du jour (libellés, version gratuite, publication gratuite).
+- [ ] Téléphone de démonstration prêt pour la vidéo 5 (miroir d'écran ou insert).
+- [ ] Eau, poudre matifiante.
 
 ## 2.5 Les leçons
 
-### Leçon 1 — Vibe coding : ce que c'est, où ça s'arrête (`vc1`)
+### Leçon 1 — Le vibe coding : vous décrivez, l'IA construit (`vc1`)
 
 #### Fiche
 
-- **Promesse** : « À la fin de cette leçon, vous saurez expliquer le vibe coding et choisir un premier projet réaliste. »
-- **Cas réel (B1 → B6)** : Hadiza, 24 ans, étudiante à Niamey, a raté une bourse l'an dernier : la date limite était passée de deux jours. Ses informations étaient éparpillées entre des messages WhatsApp, des captures d'écran et un cahier. Enjeu : peut-elle créer elle-même un outil de suivi, sans savoir coder, et lequel ? En B6, elle passe ses idées aux trois feux : le suivi de ses candidatures est au vert, c'est son projet pour tout le cours.
-- **Unités de notion (B3)** : 1. Vous décrivez, l'IA écrit le code — Vous dites en langage courant ce que l'application doit faire ; l'IA écrit le texte que l'ordinateur exécute. · 2. Décrire, regarder, corriger — On avance par petites boucles, une demande à la fois ; la compétence, c'est décrire avec précision et tester. · 3. Trois outils, deux familles — Lovable et Bolt construisent dans le navigateur (version gratuite limitée ; Lovable a une application mobile ; Bolt fonctionne mieux sur ordinateur) ; Claude Code est un agent de code, payant, pour aller plus loin. · 4. Les trois feux pour choisir — Vert : peu d'utilisateurs, ni argent ni données sensibles ; orange : données personnelles simples ; rouge : argent, santé, identité, enfants, donc un développeur.
-- **Démo (B4)** : Lovable (web, ordinateur), compte gratuit de démonstration du tournage. 1. Se connecter, ouvrir un nouveau projet. 2. Coller la consigne avec trois candidatures inventées (dates à J+3, J+12 et J+40 par rapport au jour du tournage). 3. Lancer ; laisser l'IA construire (accéléré au montage). 4. Lire l'aperçu ; vérifier à la main un nombre de jours restants. 5. Envoyer l'amélioration : « Trie de la plus urgente à la moins urgente. Sous sept jours, ajoute le mot Urgent et une icône. » 6. Vérifier la nouvelle version, puis passer en vue téléphone [à vérifier au moment du tournage : emplacement du sélecteur d'appareil dans l'aperçu]. Résultat attendu : trois cartes triées par échéance, la plus proche marquée « Urgent » avec une icône, lisibles en vue téléphone. Si le premier essai trie déjà ou signale déjà l'urgence, choisir une autre amélioration visible (par exemple les dates au format jour/mois/année) et adapter la phrase « Je veux voir l'urgence d'un coup d'œil ».
-- **Consolidation (B5)** : prédiction. Moussa, quincaillier à Zinder, hésite entre deux idées : A, un carnet de ses commandes aux fournisseurs, pour lui seul ; B, un crédit client payé par mobile money, avec la pièce d'identité des clients. Laquelle choisir pour commencer ? Réponse : A (feu vert : un utilisateur, ni argent ni données sensibles) ; B est au rouge (argent et identité) et demande un développeur et le respect de la loi sur les données.
-- **Consigne à copier** :
+- **Promesse** : « À la fin de cette vidéo, vous saurez ce qu'est le vibe coding et quel outil choisir pour créer votre premier site. »
+- **Cas réel (B1 → B6)** : Hadiza, couturière à Maradi. Ses clientes la trouvent sur WhatsApp, mais elle n'a pas de site. Un développeur coûte trop cher ; apprendre à coder prend trop de temps. Enjeu : peut-elle créer son site en le décrivant, et avec quel outil ? En B6, la réponse est posée : pour une page de présentation de son atelier, Canva suffit ; la prochaine vidéo prépare la fiche de son site.
+- **Unités de notion (B3)** : 1. Vous décrivez, l'IA construit — Vous dites ce que vous voulez avec vos mots ; l'IA écrit le code ; vous regardez et vous corrigez en parlant. · 2. Canva : le plus simple pour commencer — Connu pour les affiches, il crée aussi des sites à partir d'une simple description. · 3. Lovable et Bolt : des sites plus riches — Formulaires, pages multiples ; Bolt fait le même travail que Lovable et marche surtout sur ordinateur. · 4. Replit : vers les vraies applications — Il va plus loin ; on le verra dans un prochain cours.
+- **Démo (B4)** : pas de construction dans cette vidéo (elle arrive en vidéo 3). Le panorama à l'écran tient lieu de démonstration. 1. Page d'accueil de canva.com, rubrique Code [à vérifier au moment du tournage : libellé exact]. 2. lovable.dev. 3. bolt.new. 4. replit.com. Pour chacune : 10 s immobile, puis un léger défilement. Pas de connexion, pas de tarif à l'écran. Résultat attendu : l'apprenant reconnaît les quatre outils et sait lequel ouvrir pour un site simple.
+- **Consolidation (B5)** : prédiction. « Pour une page de présentation de son atelier, Hadiza a-t-elle besoin de Lovable ? » [2 s de silence] Réponse : non, Canva suffit. Lovable sert quand on veut plus : un formulaire, plusieurs pages, une base de données.
+- **Consigne à copier** : pas de consigne à construire dans cette vidéo ; la phrase de l'exercice sert de point de départ pour la vidéo 2.
 
 ```text
-Crée une page simple, lisible sur téléphone, qui affiche mes prochaines dates limites de candidature.
-Pour chacune : le nom, la date limite et le nombre de jours restants.
-Utilise ces données d'exemple, inventées : [candidature 1 – date], [candidature 2 – date], [candidature 3 – date].
+Mon site sera pour [qui : mes clients, mon association, mon école…].
+Il servira à [ce que les visiteurs doivent pouvoir faire : voir mes services, me contacter, commander…].
 ```
 
-- **Exercice** : « Choisissez votre premier projet » — 1. Copiez la consigne dans Lovable ou Bolt (version gratuite) avec trois candidatures inventées, puis demandez une amélioration de votre choix. 2. Notez trois tâches qui vous font perdre du temps chaque semaine. 3. Passez chaque idée aux trois feux et gardez une idée feu vert, décrite en une phrase.
-- **Carte de rappel** : 1. Expliquer le vibe coding et choisir un premier projet réaliste 2. Décrire, regarder, corriger : on avance par petites boucles 3. Lovable et Bolt pour démarrer, Claude Code pour aller loin 4. Argent, santé, identité : feu rouge, appelez un développeur
+- **Exercice** : « Choisissez le site que vous allez créer » — 1. Pensez à une personne ou à une activité réelle : la vôtre, celle d'un proche, d'une association. 2. Écrivez une phrase : pour qui est le site, et pour quoi faire. 3. Décidez : site simple (Canva) ou site riche (Lovable) ? Gardez cette phrase pour la vidéo 2.
+- **Carte de rappel** : 1. Vous décrivez, l'IA construit, vous corrigez. 2. Site simple : Canva. 3. Site riche : Lovable ou Bolt.
 - **Quiz** :
-  1. Qu'est-ce que le vibe coding ? — A) Apprendre un langage de programmation pas à pas B) Copier le code d'une autre application C) Décrire en langage courant ce que l'application doit faire, pendant que l'IA écrit le code D) Télécharger une application toute faite — **Réponse : C**
-  2. Votre premier essai ne donne pas tout à fait ce que vous voulez. Que faites-vous ? — A) Vous regardez le résultat et décrivez précisément l'amélioration voulue B) Vous abandonnez l'outil C) Vous recollez exactement la même consigne D) Vous attendez une mise à jour de l'outil — **Réponse : A**
-  3. Quel outil est un agent de code, qui modifie les fichiers de votre projet avec votre accord et demande une version payante ? — A) Lovable B) Bolt C) Un tableur D) Claude Code — **Réponse : D**
-  4. Quelle idée est « feu vert » pour un premier projet ? — A) Une application de paiement par mobile money B) Un carnet de commandes aux fournisseurs, pour soi seul C) Un registre des dossiers médicaux d'un centre de santé D) Un fichier des pièces d'identité des clients — **Réponse : B**
-  5. Dans le vibe coding, qui reste responsable de l'application et de ses risques ? — A) L'IA qui écrit le code B) L'outil utilisé C) Vous D) Personne, tout est automatique — **Réponse : C**
-- **Marques citées** : Lovable, Bolt, Claude, Claude Code, Collins (dictionnaire), WhatsApp.
+  1. Qu'est-ce que le vibe coding ? — A) Apprendre un langage de programmation pas à pas B) Décrire ce que vous voulez avec vos mots, pendant que l'IA écrit le code C) Copier le code d'un autre site D) Acheter un site tout fait — **Réponse : B**
+  2. Le premier résultat de l'IA ne vous convient pas. Que faites-vous ? — A) Vous abandonnez B) Vous attendez une mise à jour de l'outil C) Vous regardez le résultat et vous corrigez en décrivant ce que vous voulez D) Vous recommencez avec exactement la même phrase — **Réponse : C**
+  3. Quel outil choisir pour une simple page de présentation d'un atelier ? — A) Canva B) Replit C) Un tableur D) Aucun, il faut un développeur — **Réponse : A**
+  4. Hadiza veut que ses clientes remplissent un formulaire de commande. Quel type d'outil lui faut-il ? — A) Un outil d'affiches seulement B) Un appareil photo C) Un outil pour sites plus riches, comme Lovable ou Bolt D) Une imprimante — **Réponse : C**
+  5. L'IA a construit le site. Qui décide s'il est prêt ? — A) L'IA B) L'outil C) Personne, c'est automatique D) Vous — **Réponse : D**
+- **Marques citées** : Canva, Lovable, Bolt, Replit, WhatsApp.
 
 #### Script
 
-Durée estimée : 6:32 · Mots dits : 750
+Durée estimée : 4:00 · Mots dits : ≈ 460 (format court : environ 100 s de captures avec temps immobiles)
 
-**[B1 — Accroche · 0:00–0:28]**
+**[B1 — Accroche · 0:00–0:25]**
 
-**[E · SITUATION]** « Niamey — Hadiza, 24 ans, étudiante » — VO : L'an dernier, Hadiza a raté une bourse.
+**[E · SITUATION]** « Maradi — Hadiza, couturière » — VO : Hadiza est couturière à Maradi.
 
-**[F · CAM A]** À la fin de cette leçon, vous saurez expliquer le vibe coding et choisir un premier projet réaliste. Hadiza étudie à Niamey. Sa date limite était passée de deux jours. Ses informations étaient éparpillées : messages WhatsApp, captures, un cahier. Peut-elle créer sa propre application, sans savoir coder ?
-
-[PAUSE 1 s]
-
-**[B2 — Cadrage · 0:28–1:17]**
-
-**[F · CAM A]** Je vous réponds par une preuve. Karatou Academy, la plateforme de ce cours, je la développe de cette façon.
-
-**[A · ÉCRAN]** Je décris ce que je veux, en français. Une IA écrit le code. Je teste, puis je corrige. Parfois, ça échoue, et je recommence. Cette façon de faire a un nom : le vibe coding. L'expression vient du chercheur Andrej Karpathy, en février deux mille vingt-cinq. Le dictionnaire Collins en a fait son mot de l'année.
-
-**[F · CAM A]** Attention à un malentendu. « Sans savoir coder » ne veut pas dire « sans travailler ». Vous restez le chef de projet. Vous décidez, vous testez, vous répondez des risques.
+**[F · CAM A]** Ses clientes la trouvent sur WhatsApp. Mais elle n'a pas de site. À la fin de cette vidéo, vous saurez ce qu'est le vibe coding et quel outil choisir pour créer votre premier site. Un développeur ? Trop cher pour elle. Apprendre à coder ? Trop long. Aujourd'hui, elle peut décrire son site en français. Et l'IA le construit.
 
 [PAUSE 1 s]
 
-**[B3 — Notion · 1:17–3:39]**
+**[B2 — Cadrage · 0:25–1:00]**
 
-**[C · SCHÉMA]** « 1. Vous décrivez, l'IA écrit le code » — VO : Première idée : vous décrivez, l'IA écrit le code.
+**[F · CAM A]** Le vibe coding, c'est ça. Vous décrivez ce que vous voulez, avec vos mots. L'IA écrit le code à votre place. Le code, c'est le texte qui fait fonctionner un site. Vous n'avez pas besoin de le lire.
 
-**[F · CAM A]** Vous dites ce que l'application doit faire, en langage courant. L'IA écrit le code, c'est-à-dire le texte que l'ordinateur exécute. Autrement dit : vous parlez, l'IA programme. Par exemple : « Affiche mes candidatures, la plus urgente en haut. » L'IA en tire des pages de code.
+**[B · CARTE]** « Vibe coding = vous décrivez, l'IA code » — VO : Vous, vous regardez le résultat. Et vous corrigez en parlant. Comme vous le feriez avec une apprentie : « Plus grand, ici. Change cette couleur. »
 
-**[C · SCHÉMA]** « 2. Décrire, regarder, corriger » — VO : Deuxième idée : la boucle. Décrire, regarder, corriger.
-
-**[F · CAM A]** Le premier essai est rarement le bon. Vous regardez le résultat. Vous corrigez en décrivant mieux. Puis vous recommencez, une demande à la fois. Attention : l'IA peut annoncer « c'est corrigé » alors que rien n'a changé. Vérifiez toujours vous-même.
-
-**[F · CAM B]** Votre vraie compétence est là : décrire avec précision, et tester sans complaisance.
+**[F · CAM A]** Attention : ce n'est pas de la magie. L'IA se trompe parfois. C'est vous qui vérifiez. C'est vous qui décidez.
 
 [PAUSE 1 s]
 
-**[C · SCHÉMA]** « 3. Trois outils, deux familles » — VO : Troisième idée : trois outils, deux familles.
+**[B3/B4 — Notion et panorama des outils · 1:00–2:40]**
 
-**[A · ÉCRAN]** Lovable et Bolt construisent des applications dans le navigateur. Écrans, données, publication : tout est au même endroit. Les deux ont une version gratuite, limitée en nombre de messages. Chaque consigne en consomme : réfléchissez avant d'écrire. Lovable a aussi une application mobile. Bolt fonctionne mieux sur ordinateur.
+**[C · SCHÉMA]** « Quatre outils · Canva · Lovable · Bolt · Replit » — VO : Voyons quatre outils, un par un.
 
-**[A · ÉCRAN]** Claude Code est d'une autre famille : c'est un agent de code. Autrement dit, un programme qui modifie les fichiers de votre projet, avec votre accord. Il demande une version payante. On le retrouve en leçon cinq.
+**[A · ÉCRAN]** Canva. Vous connaissez Canva pour les affiches. Il crée aussi des sites, à partir d'une simple description. Cela se passe dans la rubrique Code. Vous écrivez ce que vous voulez, et la page apparaît. Pour commencer, c'est le plus simple.
 
-[PAUSE 1 s]
+**[A · ÉCRAN]** Lovable. Lovable crée des sites et des applications plus riches. Par exemple, un formulaire de commande, ou plusieurs pages. Vous lui parlez, et il construit. Il demande un peu plus de précision, mais il va plus loin.
 
-**[C · SCHÉMA]** « 4. Les trois feux pour choisir » — VO : Quatrième idée : passez votre projet aux trois feux. Vert : peu d'utilisateurs, pas d'argent, pas de données sensibles. Orange : des données personnelles simples, comme un nom ou un e-mail. Rouge : argent, santé, pièces d'identité, données d'enfants.
+**[A · ÉCRAN]** Bolt. Bolt fait le même travail que Lovable. Il marche surtout sur ordinateur. C'est une autre porte vers le même résultat.
 
-**[F · CAM A]** À l'orange, prudence : appliquez les règles de la leçon cinq. Au rouge, faites appel à un développeur. Pour un premier projet, visez le vert. Un outil pour vous, ou pour quelques personnes, qui règle un vrai problème. Vert ne veut pas dire inutile. Il veut dire : sans risque grave pour les autres. Passons à l'écran.
+**[A · ÉCRAN]** Replit. Replit va plus loin, vers les vraies applications. Avec des comptes, des données, des utilisateurs. On le verra dans un prochain cours.
 
-[PAUSE 1 s]
-
-**[B4 — Application · 3:39–5:19]**
-
-**[A · ÉCRAN]** Je construis un premier essai pour Hadiza. J'ouvre Lovable, avec un compte gratuit de démonstration. Je colle une consigne courte.
-
-**[G · CONSIGNE]** « Crée une page simple, lisible sur téléphone, qui affiche mes prochaines dates limites de candidature. Pour chacune : le nom, la date limite et le nombre de jours restants. Utilise ces données d'exemple, inventées : [candidature 1 – date], [candidature 2 – date], [candidature 3 – date]. » — VO : La voici. Les candidatures sont des exemples inventés. Jamais de vraies données personnelles dans une consigne. Mettez la vidéo en pause pour la recopier.
-
-**[A · ÉCRAN]** Je lance. L'IA écrit le code, et j'accélère l'image. Voici l'aperçu : trois candidatures, avec leurs jours restants. Je vérifie un calcul à la main : trois jours, c'est juste. Je regarde, et je décide d'une amélioration. Je veux voir l'urgence d'un coup d'œil. Je l'écris : « Trie de la plus urgente à la moins urgente. Sous sept jours, ajoute le mot Urgent et une icône. » Nouvelle version. La plus proche porte le mot Urgent, avec son icône. Je passe en vue téléphone : c'est lisible.
-
-**[F · CAM A]** Ce n'est pas encore une vraie application. Rien n'est enregistré, rien n'est protégé. Mais vous avez vu la boucle entière : décrire, regarder, corriger. Le reste du cours fait de cet essai une vraie application, étape par étape.
+**[B · CARTE]** « Canva : site simple · Lovable : site riche » — VO : Retenez ce tableau. Pour un site simple, Canva. Pour un site riche, Lovable. Ou Bolt, qui fait le même travail.
 
 [PAUSE 1 s]
 
-**[B5 — Consolidation · 5:19–6:03]**
+**[B5 — Consolidation · 2:40–3:20]**
 
-**[F · CAM B]** À vous de jouer. Moussa tient une quincaillerie à Zinder. Il hésite entre deux idées d'application.
-
-**[B · CARTE]** « Quel premier projet ? · A — Ses commandes fournisseurs · B — Crédit client + mobile money » — VO : Idée A : un carnet de ses commandes aux fournisseurs, pour lui seul. Idée B : un crédit pour ses clients, payé par mobile money, avec leur pièce d'identité. Laquelle choisir pour commencer ?
+**[F · CAM B]** Une question pour vous. Hadiza veut une page qui présente son atelier. Ses tenues, ses services, son contact. A-t-elle besoin de Lovable ?
 
 **[SILENCE 2 s]**
 
-**[F · CAM B]** L'idée A. Feu vert : un seul utilisateur, pas d'argent, pas de données sensibles. L'idée B touche à l'argent et à l'identité de ses clients. Feu rouge. Elle demande un développeur, et le respect de la loi sur les données.
+**[F · CAM B]** Non. Canva suffit. Lovable sert quand on veut plus. Un formulaire, plusieurs pages, une base de données. Commencez simple. Un site simple, en ligne, vaut mieux qu'un grand projet jamais fini. Vous pourrez toujours aller plus loin.
 
 [PAUSE 1 s]
 
-**[B6 — Clôture · 6:03–6:32]**
+**[B6 — Clôture · 3:20–4:00]**
 
-**[B · CARTE DE RAPPEL]** « 1. Expliquer le vibe coding et choisir un premier projet réaliste » « 2. Décrire, regarder, corriger : on avance par petites boucles » « 3. Lovable et Bolt pour démarrer, Claude Code pour aller loin » « 4. Argent, santé, identité : feu rouge, appelez un développeur » — VO : Retenez quatre points. Le vibe coding : vous décrivez, l'IA code. On avance par petites boucles. Lovable et Bolt pour démarrer, Claude Code pour aller plus loin. Et au feu rouge, un développeur.
+**[B · CARTE DE RAPPEL]** « 1. Vous décrivez, l'IA construit, vous corrigez. » « 2. Site simple : Canva. » « 3. Site riche : Lovable ou Bolt. » — VO : Trois points à retenir. Vous décrivez, l'IA construit, vous corrigez. Pour un site simple, Canva. Pour un site riche, Lovable ou Bolt.
 
-**[F · CAM A]** Et Hadiza ? Elle a passé ses idées aux trois feux. Le suivi de ses candidatures est au vert : c'est son projet. À votre tour. Choisissez votre premier projet.
+**[F · CAM A]** Hadiza a fait son choix : une page pour son atelier, avec Canva. Dans la prochaine vidéo, on prépare la fiche de son site. Et vous ? Pour qui sera votre site, et pour quoi faire ? Écrivez-le en une phrase. Votre exercice : choisissez le site que vous allez créer.
 
 #### Liste des plans
 
 | # | Type | Cadre / source | Contenu | Durée | Notes |
 |---|---|---|---|---|---|
-| 1 | E | Photo mise en scène ou illustration | Hadiza à son bureau à Niamey, téléphone en main, papiers et captures épars ; surtitre « Niamey — Hadiza, 24 ans, étudiante » | 4 s | B1. Pas de faux écran de messagerie : l'éparpillement passe par les papiers et le geste |
-| 2 | F | CAM A, plan poitrine | Promesse (dès 0:04), date limite dépassée, question de Hadiza | 24 s | B1 |
-| 3 | F | CAM A | « Je vous réponds par une preuve… », puis le malentendu « sans savoir coder ≠ sans travailler » | 23 s | B2, deux passages |
-| 4 | A | Navigateur + application Claude (onglet Code) + page Collins | Karatou Academy (pages publiques), session Claude Code réelle sur son dépôt, page du mot de l'année 2025 du dictionnaire Collins | 26 s | B2. Annoter « Source : Collins, 2025 ». Aucune clé, aucun fichier de configuration, aucune donnée d'apprenant |
-| 5 | C | Schémas animés | Cartes des unités 1 et 2 : bulle de texte → lignes de code → écran ; boucle décrire → regarder → corriger | 8 s | B3, deux cartes |
-| 6 | F | CAM A, puis CAM B | Explications des unités 1 et 2 ; « Votre vraie compétence est là… » en CAM B | 46 s | B3 |
-| 7 | C | Schéma comparatif | Carte de l'unité 3 : « constructeurs dans le navigateur » (Lovable, Bolt) / « agent de code » (Claude Code) | 4 s | B3 |
-| 8 | A | Navigateur + téléphone + application Claude | Accueils de Lovable (web), de l'application mobile de Lovable et de Bolt ; onglet Code de Claude | 40 s | B3. Annoter « version gratuite limitée », puis « version payante » |
-| 9 | C | Schéma animé | Carte de l'unité 4 : trois feux, chacun avec pictogramme, mot (« Vert », « Orange », « Rouge ») et critères | 17 s | B3. Jamais la couleur seule |
-| 10 | F | CAM A | Conclusion des trois feux, puis « Passons à l'écran » | 27 s | B3 |
-| 11 | G | Carte de consigne | Consigne de la fiche, texte exact | 12 s | B4. Fond clair, lisible sur téléphone |
-| 12 | A | Lovable web, compte de démo | Ouverture → consigne collée → génération accélérée → aperçu → calcul vérifié → amélioration → nouvelle version → vue téléphone | 69 s | B4. Environ 18 s d'accéléré sans voix ; cadre sur « Urgent » + icône |
-| 13 | F | CAM A | Bilan de B4, puis clôture de B6 | 32 s | B4 et B6 |
-| 14 | F | CAM B | Question de Moussa, puis réponse « L'idée A… » | 27 s | B5. Respiration gardée avant la réponse |
-| 15 | B | Cartes | « Quel premier projet ? » (A/B) avec 2 s de silence ; carte de rappel (4 points révélés un par un) | 32 s | B5 et B6 |
+| 1 | E | Photo mise en scène ou illustration | Hadiza dans son atelier à Maradi, tissu et machine à coudre ; surtitre « Maradi — Hadiza, couturière » | 4 s | B1. Pas de faux écran WhatsApp |
+| 2 | F | CAM A, plan poitrine | Clientes sur WhatsApp, promesse (avant 0:12), « Trop cher ? Trop long ? » | 21 s | B1 |
+| 3 | F | CAM A | Définition du vibe coding | 12 s | B2 |
+| 4 | B | Carte | « Vibe coding = vous décrivez, l'IA code » | 6 s | B2 |
+| 5 | F | CAM A | « Ce n'est pas de la magie… c'est vous qui décidez » | 10 s | B2 |
+| 6 | C | Schéma | Quatre cartes-noms en texte : Canva · Lovable · Bolt · Replit (pas de logo tiers) | 4 s | B3 |
+| 7 | A | canva.com, rubrique Code | 10 s immobile + léger défilement | 22 s | B3. Sans connexion, sans tarif |
+| 8 | A | lovable.dev | 10 s immobile + léger défilement | 20 s | B3 |
+| 9 | A | bolt.new | 10 s immobile + léger défilement | 18 s | B3 |
+| 10 | A | replit.com | 10 s immobile + léger défilement | 20 s | B3 |
+| 11 | B | Carte tableau | « Canva : site simple · Lovable : site riche » | 12 s | B3 |
+| 12 | F | CAM B | Question sur Hadiza, 2 s de silence, réponse | 38 s | B5. Respiration gardée avant « Non » |
+| 13 | B | Carte de rappel | Trois points révélés un par un | 15 s | B6 |
+| 14 | F | CAM A | Choix d'Hadiza, annonce de la vidéo 2, exercice | 22 s | B6 |
+| 15 | B | Carte mentions légales | Texte des marques (voir Montage idéal) | 3 s | Fin de vidéo |
 
 #### Montage idéal
 
 | Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
 |---|---|---|---|---|---|---|
-| B1 | 0:00–0:28 | E (Hadiza), puis F CAM A | Surtitre persona ; promesse en incrustation discrète à gauche | « Niamey — Hadiza, 24 ans, étudiante » ; promesse | voix seule | coupe |
-| B2 | 0:28–1:17 | F CAM A ; A (Karatou Academy → Claude Code → page Collins) ; F CAM A | Cadre sur la demande en français, puis sur le code produit ; mention de source | « Vibe coding — Andrej Karpathy, février 2025 » ; « Source : Collins, 2025 » | voix ; nappe discrète sous les captures (Partie 1) | coupe |
-| B3 | 1:17–3:39 | C (cartes des unités 1 à 4), F CAM A/B, A (accueils des outils, onglet Code de Claude) | Indicateur d'unité 1/4 → 4/4 ; boucle animée ; feux avec pictogrammes et mots | Titres des unités ; « Version gratuite limitée » ; « Version payante » | voix seule | coupe ; glissement de carte entre unités |
-| B4 | 3:39–5:19 | A (démo Lovable), G (consigne), F CAM A | Compteur d'étapes ; pictogramme « accéléré » ; cadre sur « Urgent » + icône ; zoom ≤ 6 % sur l'aperçu | Consigne (G) ; « Accéléré » ; « Vue téléphone » | voix ; nappe légère pendant l'accéléré | coupe |
-| B5 | 5:19–6:03 | F CAM B ; B (carte A/B) ; F CAM B | Carte A/B ; repère visuel pendant les 2 s de silence ; feu vert / feu rouge (pictogramme + mot) | « Quel premier projet ? » ; « A — Ses commandes fournisseurs » ; « B — Crédit client + mobile money » | voix ; silence total 2 s | coupe |
-| B6 | 6:03–6:32 | B (carte de rappel), F CAM A | Points révélés un par un, au rythme de la voix | 4 points de la carte | voix seule | coupe, puis carte de clôture (Partie 1) |
+| B1 | 0:00–0:25 | E (Hadiza), puis F CAM A | Surtitre persona ; promesse en incrustation discrète sur le côté libre | « Maradi — Hadiza, couturière » ; promesse | voix seule | coupe |
+| B2 | 0:25–1:00 | F CAM A ; B (carte définition) ; F CAM A | Carte typographique ; flèche « décrire → l'IA code → corriger » | « Vibe coding = vous décrivez, l'IA code » | voix seule | coupe |
+| B3/B4 | 1:00–2:40 | C (4 noms), A (4 pages d'accueil), B (tableau) | Nom de l'outil en surtitre sur chaque capture ; indicateur 1/4 → 4/4 ; tableau à deux lignes | « Canva », « Lovable », « Bolt », « Replit » ; « Canva : site simple / Lovable : site riche » | voix ; nappe discrète sous les captures (Partie 1) | coupe ; glissement entre outils |
+| B5 | 2:40–3:20 | F CAM B | Question en surtitre pendant le silence | « Hadiza a-t-elle besoin de Lovable ? » | voix ; silence total 2 s | coupe |
+| B6 | 3:20–4:00 | B (carte de rappel), F CAM A, B (mentions) | Points révélés au rythme de la voix ; dernière phrase en incrustation | 3 points ; « Exercice : choisissez le site que vous allez créer » | voix seule | coupe, mentions légales 3 s, puis carte de clôture (Partie 1) |
 
-**Notes de montage** : la promesse démarre vers 0:04 : couper le plan E dès la fin de sa phrase. Changer d'image toutes les 4 à 8 s sans agitation ; en B3, une carte-titre courte puis le face caméra ou la capture. Couper les hésitations et les redites ; garder la respiration avant « L'idée A ». Zooms sur capture limités à 6 %. Pendant les captures qui occupent le bas de l'écran (aperçu en vue téléphone), réduire la capture à 85 % dans un cadre et garder les sous-titres en bas. Plans de couverture disponibles : inserts mains et téléphone, B-cam, captures d'accueil des outils. L'accéléré est signalé à l'écran, jamais caché.
+**Notes de montage** : couper le plan E dès « Maradi » ; la promesse doit tomber avant 0:12. Changer d'image toutes les 4 à 8 s sans agitation. Sur chaque page d'accueil : garder les 10 s immobiles en entier, puis le défilement ; zoom ≤ 6 % sur la zone de saisie de Canva et de Lovable. Aucun logo tiers en carte : noms en texte seulement. Flouter tout tarif ou bandeau de prix visible. Couper les hésitations et les redites ; garder la respiration avant « Non. Canva suffit. » **Carte de rappel** à 3:20, avant la dernière phrase face caméra. **Mentions légales** (3 s) après la dernière phrase, avant la carte de clôture : « Canva, Lovable, Bolt, Replit, Claude et Gemini sont des marques de leurs détenteurs. Karatou Academy n'est affiliée à aucun de ces éditeurs. » + mois et année (ajouter WhatsApp, cité dans la vidéo). Plans de couverture : inserts tissu et mètre ruban, B-cam.
 
 #### Versions EN / HA / DJE
 
-- **À re-filmer dans la langue** (≈ 30 s) : ouverture (B1, plan 2) — « À la fin de cette leçon, vous saurez expliquer le vibe coding et choisir un premier projet réaliste. Peut-elle créer sa propre application, sans savoir coder ? » ; conclusion (B6) — « Et Hadiza ? Elle a passé ses idées aux trois feux. Le suivi de ses candidatures est au vert : c'est son projet. À votre tour. Choisissez votre premier projet. »
-- **Doublé en voix clonée** : B2 (plan 3) → « Je vous réponds par une preuve » couvert par la capture Karatou Academy (plan 4), malentendu couvert par une carte « Sans savoir coder ≠ sans travailler » ; B3 unités 1–2 (plan 6) → schémas des unités 1 et 2 (plan 5) prolongés ; B3 conclusion des feux (plan 10) → schéma des trois feux (plan 9) prolongé ; B4 bilan (plan 13, première partie) → aperçu final en vue téléphone ; B5 (plan 14) → carte A/B, puis schéma des trois feux avec le vert allumé.
-- **Notes d'adaptation** : garder « vibe coding » en anglais dans les trois langues ; en HA et en DJE, le gloser par une périphrase validée par un locuteur (« on décrit l'application avec des mots, l'IA écrit le code »). « Chef de projet » et « répondre des risques » : préférer « c'est vous qui décidez et qui êtes responsable ». En EN, dire « Collins English Dictionary ». « Quincaillerie » : en EN « hardware store ». « Mobile money » se dit ainsi dans les trois langues. Les trois feux sont une image universelle : la garder.
+- **À re-filmer dans la langue** (≈ 30 s) : ouverture (plan 2) — « Ses clientes la trouvent sur WhatsApp. Mais elle n'a pas de site. À la fin de cette vidéo, vous saurez ce qu'est le vibe coding et quel outil choisir pour créer votre premier site. » ; conclusion (plan 14) — « Hadiza a fait son choix… Votre exercice : choisissez le site que vous allez créer. »
+- **Doublé en voix clonée** : B2 (plans 3 et 5) → couverts par la carte « Vibe coding = vous décrivez, l'IA code » prolongée et un insert tissu ; B5 (plan 12) → carte question, puis tableau « Canva : site simple » ; fin de B1 (« Un développeur ? ») → plan E prolongé.
+- **Notes d'adaptation** : garder « vibe coding » en anglais dans les trois langues ; en HA et DJE, le gloser par une périphrase validée par un locuteur (« on décrit le site avec des mots, l'IA écrit le code »). « Une autre porte vers le même résultat » : image simple, à garder ou remplacer par « fait la même chose ». Les noms d'outils ne se traduisent pas.
 
-### Leçon 2 — Le cahier des charges d'une page (`vc2`)
+### Leçon 2 — Avant d'ouvrir l'outil : la fiche de votre site (`vc2`)
 
 #### Fiche
 
-- **Promesse** : « À la fin de cette leçon, vous saurez écrire le cahier des charges d'une page de votre application. »
-- **Cas réel (B1 → B6)** : Hadiza a tapé « Fais-moi une application de bourses » dans Lovable : le résultat est soigné mais générique, et l'essai a consommé une part de son quota gratuit. Enjeu : décrire son besoin avant de construire, pour que l'IA ne devine pas à sa place. En B6, elle a sa page de six rubriques, relue et corrigée, prête pour la leçon 3.
-- **Unités de notion (B3)** : 1. Le problème et la personne — Une phrase chacun ; si le problème ne tient pas en une phrase, le projet n'est pas mûr. · 2. Les écrans et les actions — Deux ou trois écrans, décrits avec des verbes ; un croquis au crayon peut accompagner la consigne en photo [à vérifier au moment du tournage : dépôt d'image dans la version gratuite de Lovable et de Bolt]. · 3. Données gardées, données jamais gardées — Ce que l'application enregistre, et ce qu'elle ne garde jamais (pièces d'identité, copies de documents, mots de passe). · 4. La version 1 et ses critères — Ce qui attend la version 2, et trois critères vérifiables par oui ou par non.
-- **Démo (B4)** : Claude, version gratuite (navigateur), compte de démo du tournage. 1. Nouvelle conversation ; coller la consigne avec l'idée de Hadiza : « Une application pour suivre mes candidatures de bourses : les échéances et les documents à fournir. » 2. Répondre aux questions une par une, avec les réponses préparées ci-dessous. 3. Recevoir la page. 4. Relire rubrique par rubrique : compléter la liste « jamais gardées », supprimer tout champ sensible proposé, rendre testable tout critère vague. 5. Copier la page dans un fichier texte pour la leçon 3. Résultat attendu (page de référence, à réutiliser en leçons 3 à 5) : **Problème** — je perds le fil de mes candidatures et je rate des dates limites. **Personne** — moi, Hadiza, étudiante, surtout sur mon téléphone. **Écrans** — 1) tableau de bord : candidatures triées par date limite, jours restants, mention « Urgent » sous 7 jours ; 2) fiche d'une candidature : informations, documents à fournir à cocher, progression ; 3) ajouter ou modifier une candidature. **Données gardées** — nom de la bourse, organisme, pays, lien officiel, date limite, statut (à préparer, envoyée, résultat), documents à fournir (cochés ou non), courte note. **Jamais gardées** — numéro de passeport ou de pièce d'identité, copies de documents, mots de passe, informations sur d'autres personnes. **Pas maintenant (version 2)** — rappels par SMS ou e-mail, partage, envoi de fichiers. **Critères** — 1) sur mon téléphone, je vois la candidature la plus urgente en premier, sans faire défiler ; 2) je coche un document en un seul geste ; 3) seuls le nom et la date limite sont obligatoires pour ajouter une candidature. Ne pas ajouter de critère sur les dates passées : ce cas oublié est le défaut de la leçon 5. Captures complémentaires pour B3 : la page finale affichée rubrique par rubrique (problème et personne, écrans, données). Adapter les phrases de VO « Quelques questions plus tard » et « Si l'assistant propose un champ sensible » au déroulé réel.
-- **Consolidation (B5)** : prédiction. Dans son premier jet, Hadiza a écrit « L'application doit être simple et moderne. » L'IA va-t-elle comprendre ce qu'elle veut ? Réponse : non, elle devine ; il faut un critère vérifiable (« Je coche un document en un seul geste », « Je vois la date limite sans faire défiler »).
+- **Promesse** : « À la fin de cette vidéo, vous saurez écrire la fiche qui fait réussir votre site du premier coup. »
+- **Cas réel (B1 → B6)** : Hadiza a choisi son site : une page pour « Hadiza Couture ». Si elle écrit seulement « fais-moi un site pour mon atelier », l'IA devine, et elle devine mal. Enjeu : décrire son site avant d'ouvrir l'outil. En B6, Hadiza a sa fiche finale, qu'elle collera dans Canva (vidéo 3) puis dans Lovable (vidéo 4).
+- **Unités de notion (B3)** : 1. Pour qui ? — Les clientes d'Hadiza, sur téléphone. · 2. Pour faire quoi ? — Voir les modèles, commander sur WhatsApp. · 3. Quelles sections ? — Accueil, services, galerie, avis, contact. · 4. Quel contenu réel, quel style ? — Textes, photos, numéro, horaires ; couleurs et ambiance.
+- **Démo (B4)** : Claude (ou Gemini), version gratuite, navigateur, compte de démonstration. 1. Nouvelle conversation ; coller la consigne ci-dessous. 2. Répondre à trois ou quatre questions comme Hadiza (réponses fictives) : « Atelier Hadiza Couture, Maradi » · « tenues de mariage, pagnes cousus sur mesure, retouches » · « commander sur WhatsApp » · « tons chauds, élégant ». Numéro : `+227 00 00 00 00` (jamais un vrai numéro). 3. Obtenir la fiche finale. 4. La relire : les cinq questions ont-elles une réponse ? 5. La copier dans un fichier texte : elle sert en vidéos 3 et 4. Résultat attendu : une fiche courte, prête à coller dans Canva ou Lovable. Adapter la voix off au déroulé réel (nombre et ordre des questions de l'IA).
+- **Consolidation (B5)** : contre-exemple. À l'écran, côte à côte : A « Fais-moi un site de couture » / B la fiche d'Hadiza. « Laquelle donnera un site qui ressemble vraiment à Hadiza ? » [2 s] Réponse : la B. La A laisse l'IA tout inventer : le nom, les services, le style.
 - **Consigne à copier** :
 
 ```text
-Tu m'aides à écrire le cahier des charges d'une petite application web, en français simple.
-Pose-moi une seule question à la fois, et attends ma réponse avant la suivante.
-Couvre ces rubriques : le problème ; la personne qui utilise l'application ; les écrans et ce qu'on y fait ; les données gardées et celles qu'on ne garde jamais ; ce qui attend la version 2 ; trois critères de réussite que je peux tester moi-même.
-Ne me demande aucune donnée personnelle réelle.
-Quand tu as assez d'informations, rédige le tout sur une page, avec ces rubriques pour titres.
-Mon idée en une phrase : [décrivez votre idée].
+Je veux créer un site web simple avec un outil d'IA. Pose-moi une question à la fois pour remplir une fiche :
+pour qui est le site, ce qu'il doit permettre de faire, les sections, le contenu réel (textes, contact,
+horaires), le style. Quand tu as tout, écris la fiche finale en moins de 200 mots, prête à être collée dans
+un outil comme Canva ou Lovable.
 ```
 
-- **Exercice** : « Écrivez votre cahier des charges d'une page » — 1. Copiez la consigne dans un assistant conversationnel gratuit et répondez aux questions, une par une. 2. Relisez : supprimez tout champ sensible et complétez la liste « jamais gardées ». 3. Vérifiez que vos trois critères se testent par oui ou par non, puis gardez la page pour la leçon 3.
-- **Carte de rappel** : 1. Écrire le cahier des charges d'une page de votre application 2. Problème, personne, écrans, données, version 1, critères 3. Notez aussi les données que l'app ne garde jamais 4. Un critère de réussite doit pouvoir se tester
+- **Exercice** : « Écrivez la fiche de votre site avec l'IA » — 1. Copiez la consigne dans Claude ou Gemini (version gratuite). 2. Répondez aux questions une par une, avec votre phrase de la vidéo 1 comme point de départ. 3. Relisez la fiche : qui, quoi, sections, contenu, style. Gardez-la pour la vidéo 3.
+- **Carte de rappel** : 1. La demande compte plus que l'outil. 2. Cinq questions : qui, quoi, sections, contenu, style. 3. Faites-vous interviewer par l'IA.
 - **Quiz** :
-  1. Pourquoi écrire un cahier des charges avant la première consigne ? — A) Parce que l'outil l'exige B) Pour que l'IA ne devine pas à votre place, et pour ne pas gaspiller votre quota gratuit C) Pour éviter d'avoir à tester D) Pour remplacer la version 1 — **Réponse : B**
-  2. Laquelle de ces rubriques fait partie du cahier des charges d'une page ? — A) Le logo définitif B) Le code à utiliser C) Les écrans et ce qu'on y fait D) Le nom du serveur — **Réponse : C**
-  3. Quelle donnée l'application de Hadiza ne doit-elle jamais garder ? — A) Le numéro de son passeport B) La date limite de la bourse C) Le lien officiel de l'appel D) Le statut de la candidature — **Réponse : A**
-  4. Lequel de ces critères de réussite peut se tester ? — A) « L'application doit être moderne. » B) « L'application doit être agréable. » C) « L'application doit être simple. » D) « Sur mon téléphone, je vois la candidature la plus urgente en premier. » — **Réponse : D**
-  5. Où Hadiza range-t-elle « rappels par SMS » ? — A) Dans les données gardées B) Dans « Pas maintenant », pour la version 2 C) Dans les données jamais gardées D) Dans les critères de réussite — **Réponse : B**
-- **Marques citées** : Lovable, Claude.
+  1. Qu'est-ce qui fait le plus réussir un site créé avec l'IA ? — A) La demande que vous écrivez B) L'outil le plus connu C) La vitesse de votre connexion D) Le nombre de couleurs — **Réponse : A**
+  2. Laquelle de ces questions fait partie de la fiche du site ? — A) Quel serveur utiliser ? B) Quel langage de programmation ? C) Quelles sections ? D) Combien de lignes de code ? — **Réponse : C**
+  3. « Tons chauds, élégant » répond à quelle question de la fiche ? — A) Pour qui ? B) Quel style ? C) Pour faire quoi ? D) Quelles sections ? — **Réponse : B**
+  4. Pourquoi demander à l'IA de vous interviewer, une question à la fois ? — A) Pour qu'elle écrive le site sans vous B) Pour ne rien oublier et répondre avec précision C) Pour aller plus vite en sautant des étapes D) Parce que c'est obligatoire — **Réponse : B**
+  5. Quel numéro Aminou utilise-t-il dans la démonstration ? — A) Le sien B) Celui d'une vraie couturière C) Un faux numéro, `+227 00 00 00 00` D) Aucun, le site n'a pas de contact — **Réponse : C**
+- **Marques citées** : Claude, Gemini, Canva, Lovable, WhatsApp.
 
 #### Script
 
-Durée estimée : 6:41 · Mots dits : 755
+Durée estimée : 4:30 · Mots dits : ≈ 490 (format court ; réponses de l'IA accélérées sans voix)
 
-**[B1 — Accroche · 0:00–0:28]**
+**[B1 — Accroche · 0:00–0:25]**
 
-**[E · SITUATION]** « Niamey — Hadiza devant son ordinateur » — VO : Hadiza a tapé : « Fais-moi une application de bourses. »
-
-**[F · CAM A]** À la fin de cette leçon, vous saurez écrire le cahier des charges d'une page de votre application. Son essai dans Lovable ne répond pas à son besoin. En leçon un, vous avez choisi un projet feu vert. Maintenant, il faut le décrire, avant la première consigne.
+**[F · CAM A]** La dernière fois, vous avez choisi votre site. À la fin de cette vidéo, vous saurez écrire la fiche qui fait réussir votre site du premier coup. Pourquoi une fiche ? Si vous écrivez juste « fais-moi un site pour mon atelier », l'IA va deviner. Et elle devine mal.
 
 [PAUSE 1 s]
 
-**[B2 — Cadrage · 0:28–1:13]**
+**[B2 — Cadrage · 0:25–0:50]**
 
-**[A · ÉCRAN]** Voici ce que Lovable a produit avec cette phrase. Une page soignée, mais générique. L'IA a deviné à la place de Hadiza. Et chaque essai consomme une part du quota gratuit.
-
-**[F · CAM A]** Le malentendu, c'est de croire qu'un cahier des charges est un gros document d'ingénieur. Non. C'est une page, en langage simple. Elle dit à l'IA quoi construire, et pour qui. Autrement dit : c'est la description de votre application, avant le code. Si vous avez suivi le module de gestion de projet, c'est l'étape « Cadrer ».
-
-**[B · CARTE]** « Le cahier des charges · Une page · Six rubriques » — VO : Une page, six rubriques. Voyons-les.
+**[F · CAM A]** Le secret n'est pas l'outil. C'est la demande. Une bonne demande tient sur une page. Pas besoin d'un gros document. C'est la fiche de votre site. Elle répond à cinq questions. Prenons celles d'Hadiza.
 
 [PAUSE 1 s]
 
-**[B3 — Notion · 1:13–3:41]**
+**[B3 — Notion : les cinq questions · 0:50–1:50]**
 
-**[C · SCHÉMA]** « 1. Le problème et la personne » — VO : Première rubrique : le problème et la personne, en une phrase chacun.
+**[B · CARTE]** « 1. Pour qui ? » — VO : Première question : pour qui ? Pour les clientes d'Hadiza. Et elles regardent sur leur téléphone.
 
-**[A · ÉCRAN]** Voici ces deux lignes sur la page de Hadiza. Le problème : « Je perds le fil de mes candidatures, et je rate des dates limites. » La personne : elle-même, sur son téléphone. Ce problème est précis : il parle de dates limites, pas de « gestion ».
+**[B · CARTE]** « 2. Pour faire quoi ? » — VO : Deuxième question : pour faire quoi ? Voir ses modèles, et commander sur WhatsApp.
 
-**[F · CAM A]** Si le problème ne tient pas en une phrase, le projet n'est pas encore mûr. Attention au piège : « Je veux une application » n'est pas un problème. C'est déjà une solution.
+**[B · CARTE]** « 3. Quelles sections ? » — VO : Troisième : quelles sections ? Une section, c'est une partie de la page. Ici : accueil, services, galerie, avis, contact.
 
-**[C · SCHÉMA]** « 2. Les écrans et les actions » — VO : Deuxième rubrique : les écrans, et ce qu'on y fait.
+**[B · CARTE]** « 4. Quel contenu réel ? » — VO : Quatrième : quel contenu réel ? Les vrais textes, les photos, le numéro, les horaires. Sinon, l'IA invente.
 
-**[A · ÉCRAN]** Utilisez des verbes. Écran un, le tableau de bord : voir la prochaine échéance. Écran deux, la fiche d'une candidature : cocher les documents fournis. Écran trois : ajouter ou modifier une candidature.
-
-**[F · CAM A]** Trois écrans suffisent pour commencer. Dessinez-les au crayon, trois cases sur une feuille. Vous pouvez même joindre la photo du croquis à votre consigne.
+**[B · CARTE]** « 5. Quel style ? » — VO : Cinquième : quel style ? Les couleurs, l'ambiance. Pour Hadiza : des tons chauds, un style élégant.
 
 [PAUSE 1 s]
 
-**[C · SCHÉMA]** « 3. Données gardées, données jamais gardées » — VO : Troisième rubrique : les données. Ce sont les informations que l'application enregistre.
+**[B4 — Démo : la fiche avec l'IA · 1:50–3:20]**
 
-**[A · ÉCRAN]** Voici cette rubrique sur la page de Hadiza. L'application garde le nom de la bourse, l'organisme et le lien officiel. Puis la date limite, le statut, et les documents à fournir. Hadiza écrit aussi ce que l'application ne garde jamais. Pas de numéro de passeport. Pas de copie de diplôme. Pas de mot de passe.
+**[A · ÉCRAN]** Je n'écris pas la fiche seul. Je demande à Claude de m'interviewer. Gemini fait aussi l'affaire. Je colle cette consigne.
 
-**[F · CAM A]** Moins vous gardez, moins vous risquez. Une donnée que vous ne gardez pas ne peut pas fuiter.
+**[G · CONSIGNE]** « Je veux créer un site web simple avec un outil d'IA. Pose-moi une question à la fois pour remplir une fiche : pour qui est le site, ce qu'il doit permettre de faire, les sections, le contenu réel (textes, contact, horaires), le style. Quand tu as tout, écris la fiche finale en moins de 200 mots, prête à être collée dans un outil comme Canva ou Lovable. » — VO : Mettez la vidéo en pause pour la recopier.
 
-[PAUSE 1 s]
-
-**[C · SCHÉMA]** « 4. La version 1 et ses critères » — VO : Quatrième rubrique : la version un, et ses critères de réussite.
-
-**[F · CAM B]** Listez ce qui attend la version deux : rappels par SMS, partage, envoi de fichiers. Ce qui part en version deux n'est pas abandonné. C'est rangé pour plus tard. Puis écrivez trois critères que vous pouvez tester vous-même. Un critère, c'est une phrase qu'on vérifie par oui ou par non. Par exemple : « Sur mon téléphone, je vois la candidature la plus urgente en premier. »
+**[A · ÉCRAN]** Claude pose sa première question. Je réponds comme Hadiza : « Atelier Hadiza Couture, à Maradi. » Question suivante. « Tenues de mariage, pagnes cousus sur mesure, retouches. » Ensuite : « Les clientes doivent pouvoir commander sur WhatsApp. » Et le style : « Tons chauds, élégant. » Pour le contact, je mets un faux numéro : c'est une démonstration. Voici la fiche finale. Je la relis. Pour qui, pour quoi, sections, contenu, style : tout y est. Si une réponse est fausse, je la corrige tout de suite dans la conversation. Je copie la fiche et je la garde. Elle servira dans Canva, puis dans Lovable.
 
 [PAUSE 1 s]
 
-**[B4 — Application · 3:41–5:31]**
+**[B5 — Consolidation · 3:20–3:55]**
 
-**[F · CAM A]** Écrivons celui de Hadiza. Je me fais aider par un assistant conversationnel gratuit, ici Claude. Il va m'interviewer, comme un ami qui pose les bonnes questions avant d'aider.
-
-**[A · ÉCRAN]** Je colle la consigne. Elle demande une seule question à la fois, et une page à la fin.
-
-**[G · CONSIGNE]** « Tu m'aides à écrire le cahier des charges d'une petite application web, en français simple. Pose-moi une seule question à la fois, et attends ma réponse avant la suivante. Couvre ces rubriques : le problème ; la personne qui utilise l'application ; les écrans et ce qu'on y fait ; les données gardées et celles qu'on ne garde jamais ; ce qui attend la version 2 ; trois critères de réussite que je peux tester moi-même. Ne me demande aucune donnée personnelle réelle. Quand tu as assez d'informations, rédige le tout sur une page, avec ces rubriques pour titres. Mon idée en une phrase : [décrivez votre idée]. » — VO : La voici. Mettez la vidéo en pause pour la recopier.
-
-**[A · ÉCRAN]** Première question : qui utilise l'application ? Je réponds : Hadiza, seule, sur son téléphone. Deuxième question : quels écrans ? Je donne mes trois écrans. Troisième question : quelles données ne jamais garder ? Je réponds : aucun numéro de pièce d'identité, aucune copie de document. J'accélère. Quelques questions plus tard, la page arrive.
-
-**[A · ÉCRAN]** Je relis, rubrique par rubrique. Le problème tient-il en une phrase ? Oui. Dans les données, je cherche la liste « jamais gardées ». Si l'assistant propose un champ sensible, je le supprime. Si un critère est vague, je le rends testable. Voilà la page de Hadiza. Je la garde dans un fichier texte, pour la leçon trois.
-
-**[F · CAM A]** Remarquez : je n'ai pas encore ouvert Lovable. Réfléchir avec un assistant gratuit ne consomme aucun crédit de construction.
-
-[PAUSE 1 s]
-
-**[B5 — Consolidation · 5:31–6:12]**
-
-**[F · CAM B]** Un petit test. Dans son premier jet, Hadiza avait écrit : « L'application doit être simple et moderne. »
-
-**[B · CARTE]** « Simple et moderne : l'IA va-t-elle comprendre ? » — VO : L'IA va-t-elle comprendre ce qu'elle veut ?
+**[B · CARTE]** « A — Fais-moi un site de couture · B — La fiche d'Hadiza » — VO : Comparez ces deux demandes. Laquelle donnera un site qui ressemble vraiment à Hadiza ?
 
 **[SILENCE 2 s]**
 
-**[F · CAM B]** Non. Elle va deviner. « Simple », pour vous et pour l'IA, ce n'est pas la même chose. Écrivez plutôt : « Je coche un document en un seul geste. » Ou : « Je vois la date limite sans faire défiler. » Ça, vous pouvez le vérifier. Même piège avec « rapide » ou « intuitive ». Remplacez-les par un geste que vous pouvez vérifier.
+**[F · CAM B]** La B, bien sûr. Avec la A, l'IA invente tout : le nom, les services, les couleurs. Avec la B, elle construit le site d'Hadiza. Une bonne fiche, c'est moins de corrections ensuite.
 
 [PAUSE 1 s]
 
-**[B6 — Clôture · 6:12–6:41]**
+**[B6 — Clôture · 3:55–4:30]**
 
-**[B · CARTE DE RAPPEL]** « 1. Écrire le cahier des charges d'une page de votre application » « 2. Problème, personne, écrans, données, version 1, critères » « 3. Notez aussi les données que l'app ne garde jamais » « 4. Un critère de réussite doit pouvoir se tester » — VO : Retenez quatre points. Une page avant la première consigne. Six rubriques. Les données jamais gardées. Et des critères qu'on peut tester.
+**[B · CARTE DE RAPPEL]** « 1. La demande compte plus que l'outil. » « 2. Cinq questions : qui, quoi, sections, contenu, style. » « 3. Faites-vous interviewer par l'IA. » — VO : À retenir. La demande compte plus que l'outil. Cinq questions : qui, quoi, sections, contenu, style. Et faites-vous interviewer par l'IA.
 
-**[F · CAM A]** Hadiza a maintenant sa page. Elle la relit d'un trait, et elle sait quoi demander. Ce qui attend la version deux est écrit, noir sur blanc. À vous. Écrivez votre cahier des charges d'une page.
+**[F · CAM A]** Hadiza a sa fiche. Dans la prochaine vidéo, on la colle dans Canva. Votre exercice : écrivez la fiche de votre site avec l'IA.
 
 #### Liste des plans
 
 | # | Type | Cadre / source | Contenu | Durée | Notes |
 |---|---|---|---|---|---|
-| 1 | E | Photo mise en scène ou illustration | Hadiza devant son ordinateur, l'air déçu ; surtitre « Niamey — Hadiza devant son ordinateur » | 4 s | B1 |
-| 2 | F | CAM A | Promesse, résultat décevant, rappel de la leçon 1 | 24 s | B1 |
-| 3 | A | Lovable web, compte de démo | Résultat réel de la phrase vague « Fais-moi une application de bourses » | 15 s | B2. Adapter la VO si le résultat diffère ; croix sur ce qui ne répond pas au besoin |
-| 4 | F | CAM A | Malentendu « gros document d'ingénieur » → « une page » ; renvoi au module de gestion de projet | 26 s | B2 |
-| 5 | B | Carte | « Le cahier des charges · Une page · Six rubriques » | 5 s | B2 |
-| 6 | C | Schémas animés | Cartes-titres des unités 1 à 4, sur une page stylisée dont les rubriques s'allument | 20 s | B3, quatre cartes |
-| 7 | A | Éditeur de texte ou notes du téléphone | La page de Hadiza (résultat de la démo) : problème et personne, écrans, données gardées et jamais gardées | 60 s | B3. Surtitre « Résultat de la démo » ; coche sur « gardées », croix sur « jamais gardées » |
-| 8 | F | CAM A | Commentaires des unités 1 à 3 : piège de la solution, croquis au crayon, « une donnée non gardée ne fuit pas » | 36 s | B3. Insert possible : croquis à trois cases |
-| 9 | F | CAM B | Unité 4 : version 2 et critères testables | 31 s | B3 |
-| 10 | F | CAM A | Annonce de la démo, puis remarque sur les crédits | 24 s | B4, deux passages |
-| 11 | G | Carte de consigne | Consigne de la fiche, texte exact | 12 s | B4. Deux cartes successives si plus de 6 lignes |
-| 12 | A | Claude, version gratuite, navigateur | Consigne collée → questions et réponses (accéléré) → page finale → relecture → copie dans un fichier texte | 75 s | B4. Environ 12 s d'accéléré sans voix ; une annotation à la fois |
-| 13 | F | CAM B | Question « simple et moderne », puis réponse | 35 s | B5 |
-| 14 | B | Cartes | « Simple et moderne : l'IA va-t-elle comprendre ? » (2 s de silence) ; carte de rappel (4 points) | 18 s | B5 et B6 |
-| 15 | F | CAM A | Clôture : Hadiza a sa page ; titre de l'exercice | 17 s | B6 |
+| 1 | F | CAM A | Rappel vidéo 1, promesse, « l'IA devine mal » | 25 s | B1. Promesse avant 0:12 |
+| 2 | F | CAM A | « Le secret n'est pas l'outil… cinq questions » | 18 s | B2 |
+| 3 | B | Cinq cartes | « 1. Pour qui ? » … « 5. Quel style ? », avec l'exemple d'Hadiza en ligne 2 | 60 s | B3. Une carte par question, ≈ 12 s chacune |
+| 4 | A | Claude (ou Gemini), navigateur | Nouvelle conversation, collage de la consigne | 10 s | B4 |
+| 5 | G | Carte de consigne | Consigne exacte | 14 s | B4. Fond clair, lisible sur téléphone |
+| 6 | A | Claude (ou Gemini) | Questions et réponses d'Hadiza, fiche finale, relecture, copie | 60 s | B4. Réponses longues de l'IA accélérées |
+| 7 | B | Carte comparaison | A « Fais-moi un site de couture » / B extrait de la fiche | 12 s | B5 |
+| 8 | F | CAM B | « La B, bien sûr… » | 15 s | B5 |
+| 9 | B | Carte de rappel | Trois points | 18 s | B6 |
+| 10 | F | CAM A | Annonce de la vidéo 3, exercice | 10 s | B6 |
+| 11 | B | Carte mentions légales | Texte des marques | 3 s | Fin de vidéo |
 
 #### Montage idéal
 
 | Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
 |---|---|---|---|---|---|---|
-| B1 | 0:00–0:28 | E (Hadiza devant son ordinateur), puis F CAM A | Surtitre persona ; la phrase vague tapée en surimpression sur l'image E | « Fais-moi une application de bourses » ; promesse | voix seule | coupe |
-| B2 | 0:28–1:13 | A (résultat générique), F CAM A, B | Croix sur ce qui ne répond pas au besoin ; carte « une page, six rubriques » | « L'IA a deviné » ; « Une page · Six rubriques » | voix ; nappe discrète sous la capture | coupe |
-| B3 | 1:13–3:41 | C (page stylisée qui se remplit), A (page de Hadiza), F CAM A/B | Rubriques qui s'allument une à une ; coche sur « gardées », croix sur « jamais gardées » | Titres des rubriques ; « Résultat de la démo » | voix seule | coupe ; glissement entre unités |
-| B4 | 3:41–5:31 | F CAM A, A (Claude), G | Compteur de questions ; pictogramme « accéléré » ; cadre sur la rubrique « jamais gardées » | Consigne (G) ; « Accéléré » | voix ; nappe légère pendant l'accéléré | coupe |
-| B5 | 5:31–6:12 | F CAM B, B, F CAM B | Carte de prédiction ; repère visuel pendant le silence ; critères testables en incrustation | « Simple et moderne ? » ; « Je coche un document en un seul geste » | voix ; silence total 2 s | coupe |
-| B6 | 6:12–6:41 | B (carte de rappel), F CAM A | Points révélés un par un | 4 points de la carte | voix seule | coupe, puis carte de clôture (Partie 1) |
+| B1 | 0:00–0:25 | F CAM A | Citation « fais-moi un site pour mon atelier » en incrustation barrée d'une croix | Promesse ; « Fais-moi un site pour mon atelier » | voix seule | coupe |
+| B2 | 0:25–0:50 | F CAM A | Mot « La demande » mis en valeur | « Le secret : la demande » | voix seule | coupe |
+| B3 | 0:50–1:50 | B (5 cartes) | Compteur 1/5 → 5/5 ; la fiche se remplit ligne par ligne en vignette | Les cinq questions + réponse d'Hadiza sous chacune | voix ; nappe discrète | glissement de carte |
+| B4 | 1:50–3:20 | A (Claude), G (consigne), A | Cadre sur chaque question de l'IA, puis sur chaque réponse ; coche sur les 5 rubriques de la fiche finale ; pictogramme « accéléré » | Consigne (G) ; « Accéléré » ; « Numéro fictif » sur `+227 00 00 00 00` | voix ; nappe légère pendant l'accéléré | coupe |
+| B5 | 3:20–3:55 | B (A/B), F CAM B | Croix sur A, coche sur B, après le silence | « A — Fais-moi un site de couture » ; « B — La fiche d'Hadiza » | voix ; silence total 2 s | coupe |
+| B6 | 3:55–4:30 | B (carte de rappel), F CAM A, B (mentions) | Points révélés un par un | 3 points ; « Exercice : écrivez la fiche de votre site avec l'IA » | voix seule | coupe, mentions légales 3 s, carte de clôture (Partie 1) |
 
-**Notes de montage** : rythme posé en B3 (une rubrique = une carte, puis la page réelle ou le face caméra). En B3, la page de Hadiza apparaît avant sa fabrication (B4) : le surtitre « Résultat de la démo » l'annonce. Couper les temps de saisie dans Claude ; garder lisibles au moins une question et une réponse (≥ 2,5 s chacune). Zooms ≤ 6 % sur la page finale. Quand la capture occupe tout l'écran, la réduire à 85 % pour garder les sous-titres en bas. Le résultat de la phrase vague doit rester réel : ne pas le retoucher. Plans de couverture : page imprimée, papillons au mur, croquis à trois cases.
+**Notes de montage** : accélérer l'écriture des réponses de l'IA (×4 à ×8, mention « Accéléré » visible) ; garder en vitesse réelle le collage de la consigne, chaque réponse d'Hadiza et la fiche finale. Zoom ≤ 6 % sur la question en cours et sur la fiche finale. Si la fiche finale déborde, la faire défiler lentement plutôt que la réduire. Annotations une à la fois, ≥ 2,5 s, toujours doublées d'une forme. Flouter tout solde ou plan d'abonnement visible dans Claude ou Gemini. **Carte de rappel** à 3:55. **Mentions légales** (3 s) après la dernière phrase : texte standard (voir vc1) + mois et année. Plans de couverture : inserts mains au clavier, B-cam.
 
 #### Versions EN / HA / DJE
 
-- **À re-filmer dans la langue** (≈ 25 s) : ouverture — « À la fin de cette leçon, vous saurez écrire le cahier des charges d'une page de votre application. En leçon un, vous avez choisi un projet feu vert. » ; conclusion — « Hadiza a maintenant sa page. Elle la relit d'un trait, et elle sait quoi demander. À vous. Écrivez votre cahier des charges d'une page. »
-- **Doublé en voix clonée** : B2 malentendu (plan 4) → capture du résultat générique (plan 3) prolongée, puis carte « une page, six rubriques » (plan 5) ; B3 (plans 8 et 9) → page de Hadiza (plan 7) prolongée, croquis à trois cases, schéma de la page stylisée qui se remplit ; B4 (plan 10) → capture de la page finale ; B5 (plan 13) → carte de prédiction, puis incrustation des deux critères testables.
-- **Notes d'adaptation** : « cahier des charges » : en EN « one-page brief » ou « spec » ; en HA et DJE, périphrase à valider (« la feuille qui décrit l'application »). « Feu vert » renvoie à la leçon 1 : garder l'image. « SMS » se dit ainsi partout. Le contraste « simple et moderne » / critère testable fonctionne dans toutes les langues ; traduire les deux critères d'exemple mot à mot.
+- **À re-filmer dans la langue** (≈ 25 s) : ouverture (plan 1, deux premières phrases) et conclusion (plan 10) — « Hadiza a sa fiche… Votre exercice : écrivez la fiche de votre site avec l'IA. »
+- **Doublé en voix clonée** : fin de B1 (« Si vous écrivez juste… ») → incrustation de la phrase barrée en plein écran ; B2 (plan 2) → carte « Le secret : la demande » ; B5 (plan 8) → carte A/B avec la coche sur B.
+- **Notes d'adaptation** : la consigne (plan 5) est traduite intégralement dans chaque langue, et la démo garde l'interface en français : préciser en VO que la consigne marche dans toutes les langues. « Pagnes cousus sur mesure » : en EN « tailor-made wrappers / outfits » ; en HA et DJE, termes locaux du métier à valider par un locuteur. « Fiche » : en EN « site brief ».
 
-### Leçon 3 — Premier prototype avec Lovable ou Bolt (`vc3`)
+### Leçon 3 — Démo Canva : votre site en quelques minutes (`vc3`)
 
 #### Fiche
 
-- **Promesse** : « À la fin de cette leçon, vous saurez transformer votre cahier des charges en un premier prototype. »
-- **Cas réel (B1 → B6)** : Hadiza ouvre Lovable, sa page de la leçon 2 posée à côté du clavier, avec un quota gratuit limité. Rahila, sa camarade, lui conseille de tout demander en une seule fois. Enjeu : obtenir un premier prototype sans gaspiller ses crédits. En B6, Hadiza montre à Rahila un prototype de trois écrans ; Rahila en veut un aussi, ce qui demande des comptes et une mémoire (leçon 4).
-- **Unités de notion (B3)** : 1. Choisir l'outil selon son matériel — Même logique dans les deux outils ; Bolt fonctionne mieux sur ordinateur, Lovable sur ordinateur et sur téléphone (application mobile, consigne dictée possible). · 2. Le plan avant le code — Le mode Plan propose des étapes sans toucher à l'application ; on corrige, puis on fait exécuter. · 3. Une étape par consigne — Une demande, un test, une version ; l'historique permet de revenir en arrière. · 4. Tester avec des données d'exemple — Données inventées, vue téléphone, critères du cahier des charges.
-- **Démo (B4)** : Lovable (web, ordinateur), même compte de démo. 1. Nouveau projet ; activer le mode Plan [à vérifier au moment du tournage : emplacement du sélecteur Plan / Agent]. 2. Coller la consigne puis le cahier des charges de la leçon 2. 3. Lire le plan ; vérifier qu'il ne prévoit ni connexion ni base de données (sinon, demander de les retirer). 4. Faire exécuter l'étape 1, le tableau de bord [à vérifier au moment du tournage : libellé du bouton d'exécution du plan]. 5. Tester le critère 1 dans l'aperçu. 6. Consigne de l'étape 2 : « Construis l'étape deux : la fiche d'une candidature, avec ses documents à cocher et une barre de progression. » ; tester en vue téléphone. 7. Étape 3, le formulaire d'ajout ; ajouter une candidature d'exemple. 8. Ouvrir l'historique des versions sans restaurer. Résultat attendu : prototype de trois écrans avec des données d'exemple, utilisable en vue téléphone ; trois versions visibles dans l'historique. Capture complémentaire pour B3 : le même cahier des charges en mode Plan dans Bolt, jusqu'au premier aperçu. Si le plan proposé diffère (ordre des étapes), suivre l'ordre de Lovable et adapter les noms d'étapes dans la VO.
-- **Consolidation (B5)** : prédiction. Rahila conseille à Hadiza de tout demander en une seule consigne : connexion, rappels par SMS, envoi de fichiers, mode sombre. Que va-t-il se passer ? Réponse : l'IA tente tout à la fois ; une partie marche, une autre casse, on ne sait plus laquelle, et les crédits partent en réparations. Une étape, un test, puis la suivante.
+- **Promesse** : « À la fin de cette vidéo, vous saurez créer et publier un site gratuit avec Canva, à partir de votre fiche. »
+- **Cas réel (B1 → B6)** : Hadiza a sa fiche. Que va en faire Canva ? Enjeu : obtenir une vraie page en ligne, gratuite, adaptée au téléphone, avec un bouton pour commander sur WhatsApp. En B6, le site d'Hadiza est publié et son lien s'ouvre dans un nouvel onglet.
+- **Unités de notion (B3)** : 1. Canva Code : site simple, gratuit, en ligne — La fonction existe dans la version gratuite ; les utilisations de l'IA y sont limitées. · 2. Une correction à la fois — Dix changements d'un coup, l'IA en oublie la moitié. · 3. Publier, puis tester le lien — Le site n'existe pour vos clientes que quand le lien s'ouvre.
+- **Démo (B4)** : Canva, compte Karatou, navigateur. 1. Page d'accueil Canva → **Code** (ou Canva AI → option Code) [à vérifier au moment du tournage : libellé et emplacement]. 2. Coller la fiche d'Hadiza et ajouter : « Crée un site d'une page, adapté au téléphone, avec un bouton "Commander sur WhatsApp". » 3. Laisser générer : « L'IA construit. On attend. » 4. Regarder le résultat et le commenter : ce qui va, ce qui ne va pas. 5. Une correction par la parole : « Remplace la couleur principale par un orange chaud et agrandis le bouton WhatsApp. » 6. Vérifier l'aperçu (version téléphone si disponible). 7. **Publier** (bouton en haut à droite) → domaine Canva gratuit → copier le lien. 8. Ouvrir le lien dans un nouvel onglet : le site est en ligne. Toute la séquence en une prise. Si une génération échoue, la garder : « Ça arrive. On reformule. » Résultat attendu : une page en tons chauds, un bouton WhatsApp bien visible, en ligne à une adresse Canva gratuite.
+- **Consolidation (B5)** : prédiction. « Hadiza envoie dix changements dans le même message. Que va faire l'IA ? » [2 s] Réponse : elle en oublie une partie. Une correction à la fois, et on vérifie après chacune.
 - **Consigne à copier** :
 
 ```text
-Voici le cahier des charges de mon application : [collez votre cahier des charges].
-Ne code rien pour l'instant.
-Propose-moi un plan de construction en étapes courtes, pour une première version avec des données d'exemple uniquement.
-Pas de connexion ni de base de données à cette étape.
-Commence par l'écran : [nom de l'écran principal].
+[Collez ici la fiche de votre site.]
+Crée un site d'une page, adapté au téléphone, avec un bouton "[Commander sur WhatsApp / Me contacter / …]".
 ```
 
-- **Exercice** : « Construisez votre premier prototype » — 1. Choisissez Lovable ou Bolt selon votre matériel et créez un compte gratuit. 2. Collez la consigne et votre cahier des charges en mode Plan ; corrigez le plan, puis faites exécuter la première étape. 3. Construisez les étapes suivantes une par une, testez chacune en vue téléphone, et notez ce qui manque.
-- **Carte de rappel** : 1. Transformer votre cahier des charges en un premier prototype 2. Demandez un plan avant le code 3. Une étape par consigne, un test après chaque étape 4. Le prototype utilise des données d'exemple, jamais de vraies
+- **Exercice** : « Créez et publiez votre site avec Canva » — 1. Ouvrez Canva (version gratuite), rubrique Code, et collez votre fiche avec la phrase ci-dessus. 2. Faites une seule correction à la fois, puis vérifiez l'aperçu sur téléphone. 3. Publiez, copiez le lien et ouvrez-le dans un nouvel onglet.
+- **Carte de rappel** : 1. Canva Code : site simple, gratuit, en ligne. 2. Une correction à la fois. 3. Publier, puis tester le lien.
 - **Quiz** :
-  1. Qu'est-ce qu'un prototype ? — A) L'application finie, prête à publier B) Un brouillon qu'on peut toucher, avec des données d'exemple C) Le cahier des charges D) Une copie de sauvegarde — **Réponse : B**
-  2. À quoi sert le mode Plan au début ? — A) L'IA propose des étapes sans toucher à l'application ; vous les corrigez avant de les faire exécuter B) À publier l'application C) À éviter de créer un compte D) À laisser l'IA travailler sans vous — **Réponse : A**
-  3. Rahila conseille de tout demander en une seule consigne. Quel est le risque ? — A) Aucun B) L'IA refuse toujours C) Une partie marche, une autre casse, et on ne sait plus laquelle D) Le prototype devient public — **Réponse : C**
-  4. Quelles données utiliser dans un prototype ? — A) Les vraies informations de ses camarades B) Ses numéros de documents officiels C) Ses mots de passe D) Des données d'exemple, inventées — **Réponse : D**
-  5. Lequel de ces outils propose une application mobile pour construire depuis son téléphone ? — A) Bolt B) Lovable C) Un tableur D) Aucun — **Réponse : B**
-- **Marques citées** : Lovable, Bolt.
+  1. Que permet Canva Code dans sa version gratuite ? — A) Rien, il faut payer B) Créer et publier un site simple à partir d'une description C) Seulement imprimer des affiches D) Créer une application avec comptes et base de données — **Réponse : B**
+  2. Pourquoi garder vos demandes à l'IA pour les vraies corrections ? — A) Parce que les utilisations de l'IA sont limitées dans la version gratuite B) Parce que l'IA se fatigue C) Parce que c'est interdit D) Parce que le site se supprime — **Réponse : A**
+  3. Vous voulez changer la couleur, le titre et dix autres détails. Que faites-vous ? — A) Tout dans un seul message B) Vous recommencez le site C) Une correction à la fois, en vérifiant après chacune D) Vous ne changez rien — **Réponse : C**
+  4. Après avoir cliqué sur Publier, que faites-vous ? — A) Vous fermez Canva B) Vous attendez le lendemain C) Vous supprimez le brouillon D) Vous copiez le lien et l'ouvrez dans un nouvel onglet — **Réponse : D**
+  5. Une génération échoue pendant la démo. Que dit Aminou ? — A) « L'outil ne marche pas » B) « Ça arrive, on reformule » C) « Il faut un développeur » D) « Passez à un autre outil » — **Réponse : B**
+- **Marques citées** : Canva (Canva Code), WhatsApp.
 
 #### Script
 
-Durée estimée : 6:32 · Mots dits : 729
+Durée estimée : 6:00 · Mots dits : ≈ 510 (plus environ 60 s d'attentes accélérées et de gestes sans voix ; le présentateur complète en parlant pendant les gestes)
 
-**[B1 — Accroche · 0:00–0:26]**
+**[B1 — Accroche · 0:00–0:25]**
 
-**[E · SITUATION]** « Niamey — Hadiza, sa page à côté du clavier » — VO : Ce soir, Hadiza ouvre Lovable.
-
-**[F · CAM A]** À la fin de cette leçon, vous saurez transformer votre cahier des charges en un premier prototype. Sa page de la leçon deux est à côté du clavier : six rubriques, des critères testables. Son quota gratuit est limité : pas question de le gaspiller.
+**[F · CAM A]** Vous avez votre fiche. Voyons ce que Canva en fait. À la fin de cette vidéo, vous saurez créer et publier un site gratuit avec Canva, à partir de votre fiche. Je reprends celle d'Hadiza, la couturière de Maradi.
 
 [PAUSE 1 s]
 
-**[B2 — Cadrage · 0:26–1:06]**
+**[B2 — Cadrage · 0:25–0:55]**
 
-**[F · CAM A]** Un malentendu d'abord. Un prototype n'est pas l'application finie. C'est un brouillon qu'on peut toucher : des écrans qui réagissent, avec des données d'exemple.
-
-**[A · ÉCRAN]** Voici à quoi ressemble un prototype sur téléphone. Il sert à vérifier l'idée avant d'aller plus loin. Les écrans sont-ils les bons ? L'ordre est-il logique ? On le sait en touchant, pas en imaginant.
-
-**[F · CAM A]** Un prototype se jette sans regret : c'est fait pour ça. Rien n'y est encore enregistré pour de bon. C'est le sujet de la leçon quatre.
+**[F · CAM A]** Une bonne nouvelle d'abord. Canva propose cette fonction dans sa version gratuite. Mais le nombre d'utilisations de l'IA y est limité. Alors gardez vos demandes pour les vraies corrections. Pas de demande au hasard.
 
 [PAUSE 1 s]
 
-**[B3 — Notion · 1:06–3:21]**
+**[B3 — Notion · 0:55–1:15]**
 
-**[C · SCHÉMA]** « 1. Choisir l'outil selon son matériel » — VO : Première idée : choisissez l'outil selon votre matériel.
-
-**[F · CAM A]** Lovable et Bolt suivent la même logique. Vous décrivez, ils construisent, vous voyez l'aperçu. Les deux comprennent une consigne en français.
-
-**[A · ÉCRAN]** Les deux ont une version gratuite, limitée en messages. Bolt fonctionne mieux sur ordinateur, dans un navigateur récent. Lovable marche sur ordinateur, et propose une application mobile. On peut même y dicter sa consigne à la voix.
-
-**[F · CAM A]** Il n'y a pas de bon choix absolu. Il y a l'outil qui marche avec votre matériel. Sur téléphone seulement ? Commencez avec Lovable. Avec un ordinateur, les deux conviennent. Ici, je montre Lovable. Les gestes sont les mêmes dans Bolt.
+**[B · CARTE]** « Générer · Corriger · Publier » — VO : Le chemin tient en trois gestes. Générer le site avec votre fiche. Corriger, une demande à la fois. Puis publier, et tester le lien.
 
 [PAUSE 1 s]
 
-**[C · SCHÉMA]** « 2. Le plan avant le code » — VO : Deuxième idée : le plan avant le code.
+**[B4 — Démo Canva · 1:15–4:45]**
 
-**[A · ÉCRAN]** Les deux outils ont un mode Plan. L'IA y discute avec vous, sans toucher à l'application. Elle propose des étapes, vous les corrigez. Ensuite seulement, vous lui demandez d'exécuter.
+**[A · ÉCRAN]** Je suis sur la page d'accueil de Canva. Je choisis Code. Selon votre écran, cela peut passer par Canva AI. Cette zone attend ma description.
 
-**[F · CAM A]** Le plan, c'est votre cahier des charges découpé en petites marches. Lisez ce plan comme un devis. S'il prévoit une fonction absente de votre page, demandez de la retirer.
+**[A · ÉCRAN]** Je colle la fiche d'Hadiza, celle de la vidéo précédente. Je ne la réécris pas : je la reprends telle quelle. Et j'ajoute une phrase.
 
-[PAUSE 1 s]
+**[G · CONSIGNE]** « [Collez ici la fiche de votre site.] Crée un site d'une page, adapté au téléphone, avec un bouton "Commander sur WhatsApp". » — VO : Une page, adaptée au téléphone, avec un bouton WhatsApp. Ses clientes commandent déjà par là.
 
-**[C · SCHÉMA]** « 3. Une étape par consigne » — VO : Troisième idée : une étape par consigne.
+**[A · ÉCRAN]** J'envoie. L'IA construit. On attend. Cela prend un peu de temps : c'est normal.
 
-**[F · CAM B]** Vous demandez une seule chose. Vous testez. Puis vous passez à la suivante.
+**[A · ÉCRAN]** Voici le résultat. Regardons ensemble. Le nom de l'atelier est là. Les services aussi : tenues de mariage, pagnes sur mesure, retouches. Le bouton WhatsApp existe. Ce qui ne va pas ? La couleur principale est trop froide pour Hadiza. Et le bouton WhatsApp est petit. On le voit mal sur un téléphone. Or c'est le bouton le plus important : c'est lui qui apporte les commandes.
 
-**[A · ÉCRAN]** Chaque étape crée une version. Si une étape casse la précédente, vous revenez à la version d'avant, dans l'historique. Notez sur papier la dernière version qui marche, avec sa date.
+**[A · ÉCRAN]** Je corrige en parlant. Une seule demande : « Remplace la couleur principale par un orange chaud et agrandis le bouton WhatsApp. » Je ne demande rien d'autre. J'envoie. On attend.
 
-[PAUSE 1 s]
+**[A · ÉCRAN]** Voilà. Les tons sont chauds. Le bouton se voit tout de suite. Je vérifie l'aperçu en version téléphone. Les textes sont lisibles. Le bouton tombe sous le pouce.
 
-**[C · SCHÉMA]** « 4. Tester avec des données d'exemple » — VO : Quatrième idée : testez avec des données d'exemple.
+**[A · ÉCRAN]** Maintenant, je publie. Le bouton est en haut à droite. Je choisis le domaine Canva gratuit. Pas besoin d'acheter un nom de domaine pour commencer. Je publie, puis je copie le lien.
 
-**[F · CAM A]** Des bourses inventées, des dates inventées. Jamais vos vraies informations à ce stade. Et testez dans la vue téléphone : c'est là que Hadiza se sert de son application. Reprenez aussi les critères de votre page, un par un. Cochez ceux qui passent.
-
-[PAUSE 1 s]
-
-**[B4 — Application · 3:21–5:20]**
-
-**[A · ÉCRAN]** J'ouvre Lovable avec un compte gratuit de démonstration. J'active le mode Plan. Je colle la consigne, puis le cahier des charges de Hadiza.
-
-**[G · CONSIGNE]** « Voici le cahier des charges de mon application : [collez votre cahier des charges]. Ne code rien pour l'instant. Propose-moi un plan de construction en étapes courtes, pour une première version avec des données d'exemple uniquement. Pas de connexion ni de base de données à cette étape. Commence par l'écran : [nom de l'écran principal]. » — VO : Notez la phrase clé : « Ne code rien pour l'instant. » Mettez la vidéo en pause pour recopier.
-
-**[A · ÉCRAN]** Lovable propose un plan en étapes. Je le lis. Je vérifie qu'il ne prévoit ni connexion ni base de données : c'est pour la leçon quatre. Je garde l'ordre proposé. Je fais exécuter la première étape : le tableau de bord. L'IA construit ; j'accélère. Voici l'aperçu, avec les bourses d'exemple. Je teste mon premier critère : la plus urgente est en haut.
-
-**[A · ÉCRAN]** Deuxième consigne. « Construis l'étape deux : la fiche d'une candidature, avec ses documents à cocher et une barre de progression. » J'accélère. Je passe en vue téléphone. Je touche une candidature, je coche un document. La barre avance. Critère deux : je coche un document en un seul geste. Oui. Je vérifie aussi les dates : jour, mois, année. C'est bon. Étape trois, le formulaire d'ajout : même chemin, même test.
-
-**[F · CAM A]** Trois étapes, trois tests, trois versions. Et je n'ai rien écrit de technique : seulement des phrases claires. Si une étape casse la précédente, je reviens à la version d'avant, dans l'historique.
+**[A · ÉCRAN]** Dernier geste, le plus important. J'ouvre le lien dans un nouvel onglet. Le site d'Hadiza est en ligne. N'importe qui peut l'ouvrir avec ce lien. Hadiza peut le mettre dans son statut WhatsApp, ou l'envoyer à ses clientes.
 
 [PAUSE 1 s]
 
-**[B5 — Consolidation · 5:20–6:04]**
+**[B5 — Consolidation · 4:45–5:25]**
 
-**[F · CAM B]** Rahila, une camarade de Hadiza, lui donne un conseil : « Demande tout d'un coup. La connexion, les rappels par SMS, l'envoi de fichiers, le mode sombre. »
-
-**[B · CARTE]** « Tout demander en une consigne : que se passe-t-il ? » — VO : Que va-t-il se passer ?
+**[F · CAM B]** Une question. Hadiza a dix changements en tête. Elle les envoie tous dans le même message. Que va faire l'IA ?
 
 **[SILENCE 2 s]**
 
-**[F · CAM B]** L'IA tente tout à la fois. Une partie marche, une autre casse. Et Hadiza ne sait plus laquelle. Ses crédits partent en réparations. La règle reste la même : une étape, un test, puis la suivante. Rahila n'a pas tort sur le fond : ces fonctions ont leur place. Mais une par une.
+**[F · CAM B]** Elle en oublie la moitié. Une correction à la fois. Vous vérifiez, puis vous passez à la suivante. Et si une génération échoue ? Ça arrive. On reformule, simplement.
 
 [PAUSE 1 s]
 
-**[B6 — Clôture · 6:04–6:32]**
+**[B6 — Clôture · 5:25–6:00]**
 
-**[B · CARTE DE RAPPEL]** « 1. Transformer votre cahier des charges en un premier prototype » « 2. Demandez un plan avant le code » « 3. Une étape par consigne, un test après chaque étape » « 4. Le prototype utilise des données d'exemple, jamais de vraies » — VO : Retenez quatre points. Le prototype, c'est un brouillon qu'on touche. Le plan avant le code. Une étape, un test. Et des données d'exemple.
+**[B · CARTE DE RAPPEL]** « 1. Canva Code : site simple, gratuit, en ligne. » « 2. Une correction à la fois. » « 3. Publier, puis tester le lien. » — VO : À retenir. Canva Code : un site simple, gratuit, en ligne. Une correction à la fois. Et après la publication, testez toujours le lien.
 
-**[F · CAM A]** Hadiza montre son prototype à Rahila. Rahila touche, coche, revient. Puis elle dit : « Je veux la même. » Pour cela, il faut des comptes et une mémoire : c'est la leçon quatre. Construisez votre premier prototype.
+**[F · CAM A]** Hadiza a son site. Il est joli, et il est en ligne. Mais elle voudra bientôt plus. On le verra avec Lovable. Votre exercice : créez et publiez votre site avec Canva.
 
 #### Liste des plans
 
 | # | Type | Cadre / source | Contenu | Durée | Notes |
 |---|---|---|---|---|---|
-| 1 | E | Photo mise en scène ou illustration | Hadiza le soir, la page du cahier des charges à côté du clavier ; surtitre « Niamey — Hadiza, sa page à côté du clavier » | 4 s | B1 |
-| 2 | F | CAM A | Promesse, rappel de la leçon 2, quota limité | 22 s | B1 |
-| 3 | F | CAM A | Malentendu « prototype ≠ application finie », « se jette sans regret », « rien n'y est enregistré » | 24 s | B2, deux passages |
-| 4 | A | Téléphone, enregistrement natif | Le prototype final de la leçon (tourné en session 1) parcouru au doigt | 16 s | B2. Annoter « données d'exemple » |
-| 5 | C | Schémas animés | Cartes-titres des unités 1 à 4 (matériel, plan, étapes, données d'exemple) | 16 s | B3, quatre cartes |
-| 6 | F | CAM A | Explications des unités 1, 2 et 4 | 66 s | B3 |
-| 7 | A | Navigateur + téléphone | Bolt sur ordinateur et application mobile de Lovable (consigne dictée) ; mode Plan de Lovable avec un plan proposé ; historique des versions | 47 s | B3. Annoter « ordinateur » / « téléphone », puis « Plan », puis « Historique » |
-| 8 | F | CAM B | Unité 3 : « Vous demandez une seule chose… » | 6 s | B3 |
-| 9 | G | Carte de consigne | Consigne de la fiche, texte exact | 12 s | B4 |
-| 10 | A | Lovable web, compte de démo | Mode Plan → consigne et cahier des charges → plan vérifié → étape 1 → critère 1 → étape 2 → vue téléphone, case cochée, dates vérifiées → étape 3 | 91 s | B4. Environ 20 s d'accéléré sans voix ; compteur d'étapes 1/3 → 3/3 |
-| 11 | F | CAM A | Bilan « Trois étapes, trois tests, trois versions » | 16 s | B4 |
-| 12 | F | CAM B | Conseil de Rahila, puis réponse | 37 s | B5 |
-| 13 | B | Carte | « Tout demander en une consigne : que se passe-t-il ? » + 2 s de silence | 6 s | B5 |
-| 14 | B | Carte de rappel | 4 points révélés un par un | 12 s | B6 |
-| 15 | F | CAM A | Clôture : Rahila veut la même ; titre de l'exercice | 16 s | B6 |
+| 1 | F | CAM A | « Vous avez votre fiche… », promesse | 25 s | B1. Promesse avant 0:12 |
+| 2 | F | CAM A | Version gratuite, utilisations de l'IA limitées | 28 s | B2. Aucun chiffre |
+| 3 | B | Carte | « Générer · Corriger · Publier » | 18 s | B3 |
+| 4 | A | Canva, page d'accueil → Code | Choix de Code, zone de saisie | 12 s | B4. Zoom ≤ 6 % sur la zone de saisie |
+| 5 | A + G | Canva + carte de consigne | Collage de la fiche, phrase ajoutée | 20 s | B4. Carte G en surimpression |
+| 6 | A | Canva | Génération | 25 s à l'écran (accéléré) | B4. ×4 à ×8, « Accéléré » |
+| 7 | A | Canva | Résultat commenté : ce qui va, ce qui ne va pas | 35 s | B4. Coche sur ce qui va, cadre sur ce qui ne va pas |
+| 8 | A | Canva | Correction par la parole, génération | 25 s | B4. Attente accélérée |
+| 9 | A | Canva | Nouvelle version, aperçu téléphone | 25 s | B4 |
+| 10 | A | Canva | Publier → domaine gratuit → copier le lien | 30 s | B4. Zoom ≤ 6 % sur le bouton Publier |
+| 11 | A | Navigateur, nouvel onglet | Site en ligne, défilement complet | 20 s | B4 |
+| 12 | F | CAM B | Question des dix changements, silence, réponse | 40 s | B5 |
+| 13 | B | Carte de rappel | Trois points | 18 s | B6 |
+| 14 | F | CAM A | « Hadiza a son site… », exercice | 17 s | B6 |
+| 15 | B | Carte mentions légales | Texte des marques | 3 s | Fin de vidéo |
 
 #### Montage idéal
 
 | Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
 |---|---|---|---|---|---|---|
-| B1 | 0:00–0:26 | E (Hadiza, sa page), puis F CAM A | Surtitre persona ; jauge stylisée « quota gratuit » (sans chiffre) | Promesse | voix seule | coupe |
-| B2 | 0:26–1:06 | F CAM A, A (prototype sur téléphone), F CAM A | Cadre sur les données d'exemple | « Prototype = brouillon qu'on touche » | voix ; nappe discrète sous la capture | coupe |
-| B3 | 1:06–3:21 | C (cartes des unités), F CAM A/B, A (Bolt, Lovable mobile, mode Plan, historique) | Comparaison ordinateur / téléphone avec pictogrammes ; escalier « petites marches » ; liste de versions | Titres des unités ; « Mode Plan » ; « Historique » | voix seule | coupe ; glissement entre unités |
-| B4 | 3:21–5:20 | A (Lovable), G, F CAM A | Compteur d'étapes 1/3 → 3/3 ; pictogramme « accéléré » ; coches sur les critères vérifiés | Consigne (G) ; « Ne code rien pour l'instant » ; « Accéléré » | voix ; nappe légère pendant l'accéléré | coupe ; zoom ≤ 6 % sur le plan proposé |
-| B5 | 5:20–6:04 | F CAM B, B, F CAM B | Les quatre demandes de Rahila s'empilent ; repère pendant le silence | « Tout d'un coup ? » | voix ; silence total 2 s | coupe |
-| B6 | 6:04–6:32 | B (carte de rappel), F CAM A | Points révélés un par un | 4 points de la carte | voix seule | coupe, puis carte de clôture (Partie 1) |
+| B1 | 0:00–0:25 | F CAM A | Vignette de la fiche d'Hadiza en incrustation | Promesse | voix seule | coupe |
+| B2 | 0:25–0:55 | F CAM A | Étiquette « Version gratuite » | « Version gratuite · IA limitée : gardez vos demandes » | voix seule | coupe |
+| B3 | 0:55–1:15 | B (3 gestes) | Trois étapes révélées au rythme de la voix | « Générer · Corriger · Publier » | voix ; nappe discrète | glissement |
+| B4 | 1:15–4:45 | A (Canva), G (consigne) | Compteur d'étapes 1/8 → 8/8 ; pictogramme « accéléré » ; coches et cadres sur le résultat ; flèche vers le bouton Publier | Consigne (G) ; « Accéléré » ; « Correction 1 » ; « Vue téléphone » ; « En ligne » | voix ; nappe légère pendant l'accéléré | coupe |
+| B5 | 4:45–5:25 | F CAM B | « 10 changements → la moitié oubliée » (pictogramme liste barrée) | « Une correction à la fois » | voix ; silence total 2 s | coupe |
+| B6 | 5:25–6:00 | B (carte de rappel), F CAM A, B (mentions) | Points révélés un par un | 3 points ; « Exercice : créez et publiez votre site avec Canva » | voix seule | coupe, mentions légales 3 s, carte de clôture (Partie 1) |
 
-**Notes de montage** : B4 est le cœur de la leçon : garder lisibles le plan proposé (≥ 4 s, zoom ≤ 6 %) et chaque test (≥ 2,5 s). Couper les temps d'attente de génération en accéléré signalé. Ne jamais montrer de vraies données. Les captures de Bolt et de l'application mobile de Lovable restent courtes : elles illustrent le choix de l'outil, pas une seconde démo. Quand l'aperçu en vue téléphone occupe le bas de l'écran, le placer dans un cadre à 85 % pour libérer les sous-titres. Plans de couverture : inserts du clavier et de la page, B-cam.
+**Notes de montage** : accélérer chaque attente de génération ×4 à ×8, avec la mention « Accéléré » visible tant que l'accéléré dure ; garder en vitesse réelle le collage, la phrase ajoutée, la correction, le clic sur Publier et l'ouverture du lien. Zooms ≤ 6 % : sur le champ de saisie et sur le bouton Publier. Si une génération a échoué au tournage, la garder (raccourcie) avec la VO « Ça arrive. On reformule. » Flouter tout bandeau de crédits, de plan d'abonnement ou de mise à niveau. Pendant l'aperçu téléphone (bas de l'écran occupé), réduire la capture à 85 % dans un cadre et garder les sous-titres en bas. **Carte de rappel** à 5:25. **Mentions légales** (3 s) après la dernière phrase : texte standard + mois et année. Plans de couverture : insert mains qui collent la fiche, B-cam.
 
 #### Versions EN / HA / DJE
 
-- **À re-filmer dans la langue** (≈ 30 s) : ouverture — « À la fin de cette leçon, vous saurez transformer votre cahier des charges en un premier prototype. Son quota gratuit est limité : pas question de le gaspiller. » ; conclusion — « Hadiza montre son prototype à Rahila… Pour cela, il faut des comptes et une mémoire : c'est la leçon quatre. Construisez votre premier prototype. »
-- **Doublé en voix clonée** : B2 (plan 3) → capture du prototype sur téléphone prolongée ; B3 (plans 6 et 8) → cartes des unités prolongées, captures de Bolt et de l'application mobile de Lovable, schéma de l'escalier pour le plan, capture de l'historique des versions ; B4 bilan (plan 11) → historique avec trois versions ; B5 (plan 12) → carte des demandes de Rahila qui s'empilent, puis carte « une étape, un test ».
-- **Notes d'adaptation** : « prototype » se dit ainsi en EN ; en HA et DJE, périphrase « premier essai qu'on peut toucher ». « Mode Plan » : garder le nom de l'interface tel qu'il s'affiche. « Mode sombre » : en EN « dark mode ». L'expression « petites marches » est une image : la garder si elle existe dans la langue, sinon « petites étapes ».
+- **À re-filmer dans la langue** (≈ 30 s) : ouverture (plan 1) et conclusion (plan 14), textes FR ci-dessus.
+- **Doublé en voix clonée** : B2 (plan 2) → carte « Version gratuite · IA limitée » prolongée, ou plan 4 (page d'accueil Canva) ; B5 (plan 12) → carte « Une correction à la fois » avec le pictogramme de liste barrée.
+- **Notes d'adaptation** : la démo reste filmée en français ; en EN, HA et DJE, la VO précise que la consigne peut être écrite dans la langue de l'apprenant, mais que le contenu du site doit être dans la langue de ses clientes. Le libellé du bouton (« Commander sur WhatsApp ») est traduit à l'écran par un sous-titre. « Le bouton tombe sous le pouce » : image à garder si elle passe, sinon « on le touche facilement ».
 
-### Leçon 4 — Démo complète : l'app de suivi de bourses (`vc4`)
+### Leçon 4 — Démo Lovable : un site plus riche, avec formulaire (`vc4`)
 
 #### Fiche
 
-- **Promesse** : « À la fin de cette leçon, vous saurez construire étape par étape une application qui enregistre vos données. »
-- **Cas réel (B1 → B6)** : Hadiza ouvre son prototype sur le téléphone de sa sœur : ses candidatures n'y sont pas, car rien n'est enregistré. Enjeu : une application qui se souvient, et où chacun garde ses données pour soi. En B6, ses candidatures la suivent d'un téléphone à l'autre, et Rahila, connectée avec son propre compte, ne voit que les siennes.
-- **Unités de notion (B3)** : 1. La base de données, registre de l'app — Les informations sont rangées sur un serveur et suivent l'utilisatrice ; Lovable et Bolt en intègrent une. · 2. Les comptes : chacun ses données — Connexion par e-mail ; des règles d'accès disent qui peut lire ou modifier chaque ligne du registre. · 3. L'ordre : écrans, mémoire, comptes — Les écrans d'abord (prototype), puis la base de données, puis les comptes, une étape par consigne. · 4. Tester comme une vraie utilisatrice — Ajouter, modifier, supprimer, rouvrir, changer d'appareil, essayer les cas limites.
-- **Démo (B4)** : Lovable (web), projet de la leçon 3, même compte de démo ; un second téléphone. 1. Envoyer la consigne 1 (base de données). 2. Accepter l'activation de Lovable Cloud [à vérifier au moment du tournage : forme exacte de la demande d'activation]. 3. Ouvrir l'onglet Cloud et montrer les tableaux créés (candidatures, documents) [à vérifier au moment du tournage : nom de l'onglet et des sections]. 4. Tester la mémoire : ajouter « Bourse de master en santé publique (exemple) », fermer, rouvrir. 5. Envoyer la consigne 2 (connexion et accès). 6. Montrer les règles d'accès créées, en lisant leur nom (pas le code) [à vérifier au moment du tournage : chemin vers les règles d'accès dans l'onglet Cloud]. 7. Créer le compte de test « Hadiza » (adresse de test du tournage) [à vérifier au moment du tournage : confirmation par e-mail demandée ou non]. 8. Sur ordinateur : ajouter une candidature, cocher deux documents. 9. Sur le second téléphone, même compte : tout est là. 10. (B5) Créer le compte « Rahila » : liste vide. Résultat attendu : application avec mémoire et connexion ; un compte ne voit que ses candidatures.
-- **Consolidation (B5)** : prédiction. Rahila crée son propre compte sur l'application de Hadiza. Que doit-elle voir ? Réponse : une liste vide, rien de Hadiza. Si elle voit une seule candidature de Hadiza, on arrête tout et on corrige avant de partager. C'est le test des deux comptes.
+- **Promesse** : « À la fin de cette vidéo, vous saurez créer avec Lovable un site à plusieurs sections, avec un formulaire de commande. »
+- **Cas réel (B1 → B6)** : Le site Canva d'Hadiza est joli. Mais elle veut plus : que ses clientes envoient leurs mesures par un formulaire. Enjeu : un site plus riche, toujours sans coder. En B6, Hadiza a un site Lovable avec galerie et formulaire testé, et sait quand choisir Canva ou Lovable.
+- **Unités de notion (B3)** : 1. Lovable : formulaires et sites plus riches — Il écrit un vrai code de site ; vous ne le lisez pas, vous parlez avec lui. · 2. Demander le plan avant de construire — L'IA annonce ce qu'elle va faire ; vous validez ou vous corrigez. · 3. Toujours vérifier en vue téléphone — Les clientes d'Hadiza regardent sur leur téléphone.
+- **Démo (B4)** : Lovable, compte de démonstration, navigateur, en partant de la page d'accueil. 1. lovable.dev → zone de saisie de la page d'accueil. 2. Coller la fiche d'Hadiza + : « Ajoute un formulaire de commande : nom, téléphone, type de tenue, mesures, date souhaitée. Le site doit être parfait sur téléphone. » 3. Si disponible, **mode Plan** : « Je lui demande d'abord son plan, avant de construire. » Lire et valider le plan [à vérifier au moment du tournage : disponibilité du mode Plan]. 4. Laisser construire ; commenter l'aperçu. 5. Basculer en **vue téléphone**. 6. Deux corrections par la parole, une à la fois : « Dans la galerie, mets six emplacements de photos avec une légende. » puis « Après l'envoi du formulaire, affiche "Merci, Hadiza vous rappelle sous 24 heures". » 7. Tester le formulaire avec de fausses données. Puis 10 s du site Canva et 10 s du site Lovable, côte à côte. **Ne connecter ni base de données ni clé** (c'est le niveau 2). Résultat attendu : un site à plusieurs sections, une galerie légendée, un formulaire qui affiche le message de remerciement.
+- **Consolidation (B5)** : comparaison. « Canva ou Lovable ? » Les deux sites côte à côte. Réponse : pour une vitrine, Canva. Pour un formulaire, plusieurs pages ou des données, Lovable.
 - **Consigne à copier** :
 
 ```text
-Consigne 1 :
-Étape suivante, et seulement celle-ci : enregistre les [candidatures] dans la base de données intégrée, pour qu'elles restent après fermeture.
-Garde exactement l'apparence actuelle des écrans.
-À la fin, explique-moi en trois phrases simples ce qui est enregistré.
-
-Consigne 2, après avoir testé la première :
-Ajoute une connexion par e-mail et mot de passe.
-Chaque personne ne voit, ne modifie et ne supprime que ses propres [candidatures].
-Ne change rien d'autre.
+[Collez ici la fiche de votre site.]
+Ajoute un formulaire de [commande / inscription / contact] : [champ 1], [champ 2], [champ 3]…
+Le site doit être parfait sur téléphone.
 ```
 
-- **Exercice** : « Donnez une mémoire à votre application » — 1. Envoyez la consigne 1, puis testez : fermez, rouvrez, changez d'appareil. 2. Envoyez la consigne 2 et lisez le nom des règles d'accès créées. 3. Faites le test des deux comptes : le second compte ne doit rien voir du premier.
-- **Carte de rappel** : 1. Construire étape par étape une application qui enregistre vos données 2. La base de données est le registre de l'application 3. Chaque compte ne voit que ses propres données 4. Testez avec deux comptes avant de partager
+- **Exercice** : « Ajoutez un formulaire à votre site avec Lovable » — 1. Ouvrez Lovable (version gratuite) depuis sa page d'accueil et collez votre fiche avec la consigne ci-dessus. 2. Demandez le plan avant de construire, si l'option existe, puis validez-le. 3. Vérifiez en vue téléphone et testez le formulaire avec de fausses données.
+- **Carte de rappel** : 1. Lovable : formulaires et sites plus riches. 2. Demander le plan avant de construire. 3. Toujours vérifier en vue téléphone.
 - **Quiz** :
-  1. Dans ce cours, qu'est-ce qu'une base de données ? — A) Le registre où l'application range ses informations, sur un serveur B) Un fichier sur votre téléphone C) La liste des écrans D) Un mot de passe — **Réponse : A**
-  2. Dans quel ordre Hadiza construit-elle son application ? — A) Comptes, puis base de données, puis écrans B) Écrans avec données d'exemple, puis base de données, puis comptes C) Tout en une seule consigne D) Base de données seulement — **Réponse : B**
-  3. À quoi servent les règles d'accès ? — A) À accélérer l'application B) À changer les couleurs C) À dire qui peut lire ou modifier chaque ligne du registre D) À publier l'application — **Réponse : C**
-  4. Rahila se connecte avec son propre compte. Que doit-elle voir ? — A) Une liste vide B) Les candidatures de Hadiza C) Un message d'erreur D) Les candidatures de toute la promotion — **Réponse : A**
-  5. Quel test faire avant de partager l'application ? — A) Aucun, si elle s'affiche bien B) Changer les couleurs C) Demander à l'IA si tout va bien D) Le test des deux comptes, et le test sur un autre appareil — **Réponse : D**
-- **Marques citées** : Lovable (Lovable Cloud), Bolt.
+  1. Pourquoi Hadiza passe-t-elle de Canva à Lovable ? — A) Canva ne publie pas B) Elle veut un formulaire pour recevoir les mesures de ses clientes C) Lovable est obligatoire D) Elle veut changer de couleur — **Réponse : B**
+  2. À quoi sert le mode Plan ? — A) À voir ce que l'IA va construire, avant qu'elle construise B) À payer moins cher C) À supprimer le site D) À écrire le code soi-même — **Réponse : A**
+  3. Pourquoi basculer en vue téléphone ? — A) Pour publier plus vite B) Parce que l'ordinateur ne montre rien C) Pour changer d'outil D) Parce que les clientes regardent le site sur leur téléphone — **Réponse : D**
+  4. Avec quelles données teste-t-on le formulaire ? — A) Les vraies mesures d'une cliente B) Son propre numéro de carte C) De fausses données inventées D) Le mot de passe de Lovable — **Réponse : C**
+  5. Pour une simple vitrine de son atelier, quel outil suffit ? — A) Canva B) Lovable avec base de données C) Un développeur D) Replit — **Réponse : A**
+- **Marques citées** : Lovable, Canva, WhatsApp.
 
 #### Script
 
-Durée estimée : 6:29 · Mots dits : 743
+Durée estimée : 6:30 · Mots dits : ≈ 500 (plus environ 70 s d'attentes accélérées, de lecture du plan et de saisie sans voix ; le présentateur complète en parlant pendant les gestes)
 
-**[B1 — Accroche · 0:00–0:28]**
+**[B1 — Accroche · 0:00–0:25]**
 
-**[E · SITUATION]** « Niamey — Hadiza, deux téléphones » — VO : Hadiza change de téléphone.
-
-**[F · CAM A]** À la fin de cette leçon, vous saurez construire étape par étape une application qui enregistre vos données. Sur le téléphone de sa sœur, son prototype n'affiche que les bourses d'exemple. En leçon trois, vous avez construit ce prototype. Aujourd'hui, on lui donne une mémoire et des comptes.
+**[F · CAM A]** Le site Canva d'Hadiza est joli. Mais elle veut plus. À la fin de cette vidéo, vous saurez créer avec Lovable un site à plusieurs sections, avec un formulaire de commande. Hadiza veut que ses clientes envoient leurs mesures par un formulaire. Pour ça, on passe à Lovable.
 
 [PAUSE 1 s]
 
-**[B2 — Cadrage · 0:28–1:10]**
+**[B2 — Cadrage · 0:25–0:55]**
 
-**[F · CAM A]** Le malentendu du jour : une application, ce ne sont pas seulement des écrans. Derrière les écrans, il y a des données, et des règles. Une application sans mémoire, c'est un tableau effacé chaque soir.
-
-**[C · SCHÉMA]** « Écrans · Base de données · Comptes » — VO : Les écrans montrent. La base de données garde. Les comptes disent qui voit quoi.
-
-**[F · CAM A]** Sans base de données, ce que Hadiza saisit reste coincé sur un seul appareil, ou disparaît. Avec elle, ses candidatures la suivent partout.
-
-**[C · SCHÉMA]** « Le cahier de crédit de la boutique » — VO : Pensez au cahier de crédit d'une boutique : sans lui, le commerçant oublie qui doit quoi.
+**[F · CAM A]** Lovable écrit un vrai code de site. Vous ne le lisez pas : vous parlez avec lui. Comme avec Canva, vous décrivez, et il construit. Il a une version gratuite pour essayer. La différence avec Canva ? Lovable va plus loin : formulaires, plusieurs sections, plusieurs pages.
 
 [PAUSE 1 s]
 
-**[B3 — Notion · 1:10–3:15]**
+**[B3 — Notion · 0:55–1:20]**
 
-**[C · SCHÉMA]** « 1. La base de données, registre de l'app » — VO : Première idée : la base de données, le registre de l'application.
-
-**[F · CAM A]** C'est là que l'application range ses informations. Ce registre est sur un serveur, pas dans votre téléphone. Vous ouvrez l'application ailleurs : tout est là.
-
-**[A · ÉCRAN]** Imaginez un registre : chaque ligne est une candidature, chaque colonne une information. Lovable et Bolt ont chacun une base de données intégrée. Dans Lovable, elle s'appelle Lovable Cloud. Vous n'avez rien à installer. Leur part gratuite est limitée. Si votre application grandit, la base peut devenir payante.
+**[B · CARTE]** « Fiche + formulaire · Plan · Vue téléphone » — VO : Trois réflexes aujourd'hui. Ajouter le formulaire à votre fiche. Demander le plan avant de construire. Et vérifier sur téléphone.
 
 [PAUSE 1 s]
 
-**[C · SCHÉMA]** « 2. Les comptes : chacun ses données » — VO : Deuxième idée : les comptes. Chacun ses données.
+**[B4 — Démo Lovable · 1:20–5:10]**
 
-**[F · CAM A]** Hadiza se connecte avec son e-mail, Rahila avec le sien. Chacune ne voit que ses candidatures. Ce sont des règles d'accès qui s'en chargent. Une règle d'accès dit qui peut lire ou modifier chaque ligne du registre. Sans ces règles, un compte peut lire les candidatures des autres. Sur une même application, chacun doit rester chez soi.
+**[A · ÉCRAN]** Je suis sur la page d'accueil de Lovable. Voici la zone de saisie. Je colle la même fiche que dans Canva. Puis j'ajoute le formulaire.
 
-[PAUSE 1 s]
+**[G · CONSIGNE]** « [Collez ici la fiche de votre site.] Ajoute un formulaire de commande : nom, téléphone, type de tenue, mesures, date souhaitée. Le site doit être parfait sur téléphone. » — VO : Cinq champs : nom, téléphone, type de tenue, mesures, date souhaitée. Un champ, c'est une case à remplir.
 
-**[C · SCHÉMA]** « 3. L'ordre : écrans, mémoire, comptes » — VO : Troisième idée : l'ordre de construction.
+**[A · ÉCRAN]** Avant d'envoyer, j'active le mode Plan. Je lui demande d'abord son plan, avant de construire. Voici son plan. Je le lis. Les sections sont là. Le formulaire aussi, avec ses cinq champs. C'est bon : je valide.
 
-**[F · CAM B]** D'abord les écrans, avec des données d'exemple : c'est le prototype. Puis la mémoire : la base de données. Puis les comptes. Toujours une étape par consigne, et un test après chaque étape. Pourquoi cet ordre ? Chaque étape s'appuie sur la précédente, comme les murs sur les fondations.
+**[A · ÉCRAN]** L'IA construit. On attend.
 
-[PAUSE 1 s]
+**[A · ÉCRAN]** Voici l'aperçu. Accueil, services, galerie, avis, contact. Et le formulaire de commande. Les tons chauds de la fiche sont repris. Je compare avec la fiche : rien ne manque.
 
-**[C · SCHÉMA]** « 4. Tester comme une vraie utilisatrice » — VO : Quatrième idée : testez comme une vraie utilisatrice. Ajoutez, modifiez, supprimez. Fermez, rouvrez, changez d'appareil.
+**[A · ÉCRAN]** Je bascule en vue téléphone. C'est là que les clientes d'Hadiza le verront. Le menu se replie. Le formulaire tient sur l'écran.
 
-**[F · CAM A]** Essayez les cas limites : une date limite aujourd'hui, une date déjà passée. Un test que vous ne faites pas, votre utilisatrice le fait à votre place. Notez chaque test et son résultat sur une feuille : réussi ou raté.
+**[A · ÉCRAN]** Première correction. Une seule à la fois. « Dans la galerie, mets six emplacements de photos avec une légende. » On attend. Voilà : six emplacements, chacun avec sa légende. Hadiza y mettra ses photos de tenues. Ses propres photos, prises dans son atelier.
 
-[PAUSE 1 s]
+**[A · ÉCRAN]** Deuxième correction. « Après l'envoi du formulaire, affiche : Merci, Hadiza vous rappelle sous vingt-quatre heures. » On attend.
 
-**[B4 — Application · 3:15–5:20]**
-
-**[A · ÉCRAN]** Je reprends le prototype de la leçon trois, dans le même compte de démonstration. Première consigne : enregistrer les candidatures dans la base de données, sans changer l'apparence.
-
-**[G · CONSIGNE]** « Consigne 1 : Étape suivante, et seulement celle-ci : enregistre les [candidatures] dans la base de données intégrée, pour qu'elles restent après fermeture. Garde exactement l'apparence actuelle des écrans. À la fin, explique-moi en trois phrases simples ce qui est enregistré. — Consigne 2, après avoir testé la première : Ajoute une connexion par e-mail et mot de passe. Chaque personne ne voit, ne modifie et ne supprime que ses propres [candidatures]. Ne change rien d'autre. » — VO : Les deux consignes sont ici. Mettez la vidéo en pause pour les recopier.
-
-**[A · ÉCRAN]** Lovable propose d'activer Lovable Cloud. J'accepte, et j'accélère. Dans l'onglet Cloud, je vois les tableaux créés : les candidatures, et les documents. C'est le registre. Je lis l'explication de Lovable : trois phrases sur ce qui est enregistré. Rien de sensible. Je teste : j'ajoute une bourse de master en santé publique. C'est un exemple. Je ferme, je rouvre : elle est toujours là. Dans le registre, je la retrouve sur une ligne : nom, date limite, statut.
-
-**[A · ÉCRAN]** Deuxième consigne : la connexion par e-mail. Chaque personne ne voit et ne modifie que ses candidatures. Lovable ajoute l'écran de connexion et les règles d'accès. Je vérifie ces règles dans l'onglet Cloud. Je ne lis pas le code : je lis le nom de chaque règle.
-
-**[A · ÉCRAN]** Je crée le compte de Hadiza, et je me connecte sur ordinateur. J'ajoute une candidature, je coche deux documents. Puis j'ouvre l'application sur un téléphone, avec le même compte. Tout est là. Je supprime une candidature d'essai : elle disparaît aussi sur le téléphone.
-
-**[F · CAM A]** Deux consignes, deux tests. L'application se souvient, et chacun a son compte. Et je n'ai pas lu une ligne de code : j'ai lu des résultats.
+**[A · ÉCRAN]** Je teste le formulaire. Avec de fausses données, jamais les vraies mesures d'une cliente. Un nom inventé. Le faux numéro. Une robe de mariage. J'envoie. Le message de remerciement s'affiche. Le formulaire marche. Dans ce cours, on s'arrête là : on ne branche ni base de données ni clé. Ce sera pour le niveau deux.
 
 [PAUSE 1 s]
 
-**[B5 — Consolidation · 5:20–6:02]**
+**[B5 — Consolidation · 5:10–5:55]**
 
-**[F · CAM B]** Reste un test essentiel. Rahila crée son propre compte sur l'application de Hadiza.
+**[A · ÉCRAN]** Voici les deux sites d'Hadiza, côte à côte. À gauche, Canva. À droite, Lovable.
 
-**[B · CARTE]** « Rahila se connecte : que doit-elle voir ? » — VO : Que doit-elle voir ?
-
-**[SILENCE 2 s]**
-
-**[A · ÉCRAN]** Une liste vide. Rien de Hadiza. C'est exactement le résultat voulu.
-
-**[F · CAM B]** Si Rahila voit une seule candidature de Hadiza, on arrête tout, et on corrige avant de partager. Ce test a un nom : le test des deux comptes. Refaites-le après chaque changement important. Si le test échoue, décrivez précisément ce que Rahila voit. Puis demandez de corriger les règles d'accès.
+**[F · CAM B]** Alors, Canva ou Lovable ? Pour une vitrine, Canva. Pour un formulaire, plusieurs pages, ou des données : Lovable. Le bon outil dépend de ce que votre site doit faire.
 
 [PAUSE 1 s]
 
-**[B6 — Clôture · 6:02–6:29]**
+**[B6 — Clôture · 5:55–6:30]**
 
-**[B · CARTE DE RAPPEL]** « 1. Construire étape par étape une application qui enregistre vos données » « 2. La base de données est le registre de l'application » « 3. Chaque compte ne voit que ses propres données » « 4. Testez avec deux comptes avant de partager » — VO : Retenez quatre points. Une étape par consigne. La base de données, c'est le registre. Chacun ne voit que ses données. Et le test des deux comptes.
+**[B · CARTE DE RAPPEL]** « 1. Lovable : formulaires et sites plus riches. » « 2. Demander le plan avant de construire. » « 3. Toujours vérifier en vue téléphone. » — VO : À retenir. Lovable pour les formulaires et les sites plus riches. Demandez le plan avant de construire. Et vérifiez toujours en vue téléphone.
 
-**[F · CAM A]** Hadiza peut changer de téléphone : ses candidatures la suivent. Rahila a les siennes, et ne voit qu'elles. Leurs données restent séparées, comme prévu. Donnez une mémoire à votre application.
+**[F · CAM A]** Hadiza peut maintenant recevoir des commandes. Dans la dernière vidéo, on corrige, on publie, on partage. Votre exercice : ajoutez un formulaire à votre site avec Lovable.
 
 #### Liste des plans
 
 | # | Type | Cadre / source | Contenu | Durée | Notes |
 |---|---|---|---|---|---|
-| 1 | E | Photo mise en scène ou illustration | Hadiza avec deux téléphones, l'un sans ses candidatures ; surtitre « Niamey — Hadiza, deux téléphones » | 4 s | B1 |
-| 2 | F | CAM A | Promesse, prototype sur le téléphone de sa sœur, rappel de la leçon 3 | 24 s | B1 |
-| 3 | F | CAM A | Malentendu « pas seulement des écrans », « tableau effacé chaque soir », « sans base de données… » | 27 s | B2, deux passages |
-| 4 | C | Schémas animés | « Écrans · Base de données · Comptes » (montrer, garder, autoriser) ; « Le cahier de crédit de la boutique » | 15 s | B2 |
-| 5 | C | Schémas animés | Cartes-titres des unités 1 à 4 ; unité 2 : registre dont chaque ligne porte un cadenas ; unité 4 : liste de tests cochée | 20 s | B3, quatre cartes |
-| 6 | F | CAM A | Explications des unités 1, 2 et 4 | 59 s | B3 |
-| 7 | A | Lovable web | Onglet Cloud d'un projet de démo, vue tableau (lignes et colonnes), sans donnée réelle | 24 s | B3. Annoter « une ligne = une candidature » |
-| 8 | F | CAM B | Unité 3 : l'ordre écrans → mémoire → comptes | 23 s | B3 |
-| 9 | G | Carte de consigne | Consignes 1 et 2, texte exact | 12 s | B4. Deux cartes successives |
-| 10 | A | Lovable web, compte de démo | Consigne 1 → activation de Lovable Cloud → tableaux → explication → test de mémoire → ligne du registre → consigne 2 → écran de connexion → règles d'accès lues par leur nom | 78 s | B4. Environ 10 s d'accéléré sans voix ; une annotation à la fois |
-| 11 | A | Ordinateur puis second téléphone | Compte « Hadiza » : ajout, deux documents cochés ; même compte sur le téléphone ; suppression ; puis (B5) compte « Rahila » : liste vide | 28 s | B4 et B5. Insert possible : deux téléphones côte à côte |
-| 12 | F | CAM A | Bilan de B4, puis clôture de B6 | 27 s | B4 et B6 |
-| 13 | F | CAM B | Annonce du test, puis « Si Rahila voit une seule candidature… » | 31 s | B5 |
-| 14 | B | Cartes | « Rahila se connecte : que doit-elle voir ? » (2 s de silence) ; carte de rappel (4 points) | 18 s | B5 et B6 |
+| 1 | F | CAM A | Site Canva joli, promesse, besoin du formulaire | 25 s | B1. Promesse avant 0:12 |
+| 2 | F | CAM A | « Lovable écrit un vrai code de site… version gratuite » | 25 s | B2. [à vérifier au moment du tournage : version gratuite et publication gratuite] |
+| 3 | B | Carte | « Fiche + formulaire · Plan · Vue téléphone » | 15 s | B3 |
+| 4 | A | lovable.dev, page d'accueil | Zone de saisie, collage de la fiche | 15 s | B4. Partir de la page d'accueil, jamais d'un projet ouvert |
+| 5 | G | Carte de consigne | Consigne exacte | 15 s | B4 |
+| 6 | A | Lovable | Mode Plan, lecture et validation du plan | 30 s | B4. Si le mode Plan est absent, couper et adapter la VO |
+| 7 | A | Lovable | Construction | 20 s à l'écran (accéléré) | B4. ×4 à ×8 |
+| 8 | A | Lovable | Aperçu commenté | 20 s | B4 |
+| 9 | A | Lovable | Vue téléphone | 15 s | B4 |
+| 10 | A | Lovable | Correction 1 (galerie), attente, résultat | 30 s | B4 |
+| 11 | A | Lovable | Correction 2 (message de remerciement), attente | 20 s | B4 |
+| 12 | A | Lovable | Test du formulaire avec fausses données, message affiché | 30 s | B4. Aucune donnée réelle |
+| 13 | A | Deux captures côte à côte | 10 s site Canva + 10 s site Lovable | 12 s | B5 |
+| 14 | F | CAM B | « Canva ou Lovable ? … » | 25 s | B5 |
+| 15 | B | Carte de rappel | Trois points | 18 s | B6 |
+| 16 | F | CAM A | « Hadiza peut maintenant… », exercice | 15 s | B6 |
+| 17 | B | Carte mentions légales | Texte des marques | 3 s | Fin de vidéo |
 
 #### Montage idéal
 
 | Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
 |---|---|---|---|---|---|---|
-| B1 | 0:00–0:28 | E (deux téléphones), puis F CAM A | Surtitre persona ; croix sur le téléphone sans les candidatures | Promesse | voix seule | coupe |
-| B2 | 0:28–1:10 | F CAM A, C (trois blocs), F CAM A, C (cahier de crédit) | Trois blocs qui s'allument avec leur verbe ; cahier de crédit illustré | « Montrer · Garder · Autoriser » | voix seule | coupe |
-| B3 | 1:10–3:15 | C (cartes des unités), F CAM A/B, A (onglet Cloud) | Registre à cadenas ; frise écrans → mémoire → comptes ; liste de tests cochée | Titres des unités ; « Une ligne = une candidature » ; « Règle d'accès : qui lit, qui modifie » | voix seule | coupe ; glissement entre unités |
-| B4 | 3:15–5:20 | G, A (Lovable, puis second téléphone), F CAM A | Compteur « consigne 1/2 → 2/2 » ; pictogramme « accéléré » ; coche quand la candidature réapparaît | Consignes (G) ; « Accéléré » ; nom d'une règle d'accès encadré | voix ; nappe légère pendant l'accéléré | coupe ; zoom ≤ 6 % sur le nom des règles |
-| B5 | 5:20–6:02 | F CAM B, B, A (liste vide), F CAM B | Repère pendant le silence ; coche sur la liste vide | « Que doit-elle voir ? » ; « Test des deux comptes » | voix ; silence total 2 s | coupe |
-| B6 | 6:02–6:29 | B (carte de rappel), F CAM A | Points révélés un par un | 4 points de la carte | voix seule | coupe, puis carte de clôture (Partie 1) |
+| B1 | 0:00–0:25 | F CAM A | Vignette du site Canva d'Hadiza | Promesse | voix seule | coupe |
+| B2 | 0:25–0:55 | F CAM A | Étiquette « Version gratuite pour essayer » | « Vous ne lisez pas le code : vous parlez avec lui » | voix seule | coupe |
+| B3 | 0:55–1:20 | B (3 réflexes) | Trois réflexes révélés un par un | « Fiche + formulaire · Plan · Vue téléphone » | voix ; nappe discrète | glissement |
+| B4 | 1:20–5:10 | A (Lovable), G (consigne) | Compteur d'étapes 1/7 → 7/7 ; cadre sur le plan, puis sur chaque section ; pictogramme « accéléré » ; cadres successifs sur les 5 champs du formulaire | Consigne (G) ; « Mode Plan » ; « Accéléré » ; « Vue téléphone » ; « Correction 1 » ; « Correction 2 » ; « Données fictives » | voix ; nappe légère pendant l'accéléré | coupe |
+| B5 | 5:10–5:55 | A (deux sites côte à côte), F CAM B | Écran partagé avec étiquettes ; tableau « Vitrine : Canva / Formulaire, pages, données : Lovable » | « Canva » / « Lovable » ; tableau | voix seule | coupe |
+| B6 | 5:55–6:30 | B (carte de rappel), F CAM A, B (mentions) | Points révélés un par un | 3 points ; « Exercice : ajoutez un formulaire à votre site avec Lovable » | voix seule | coupe, mentions légales 3 s, carte de clôture (Partie 1) |
 
-**Notes de montage** : la démo enchaîne beaucoup d'écrans : un écran clé toutes les 5 à 8 s, le reste en accéléré signalé. Le nom de chaque règle d'accès doit rester lisible au moins 3 s (zoom ≤ 6 %). Masquer toute adresse e-mail de test complète (ne garder que le prénom du compte). Le passage ordinateur → téléphone se fait par une coupe franche avec le pictogramme « autre appareil ». Plans de couverture : insert des deux téléphones côte à côte, B-cam.
+**Notes de montage** : accélérer la construction et chaque attente de correction ×4 à ×8, mention « Accéléré » visible ; garder en vitesse réelle le collage, l'activation du mode Plan, la lecture du plan (raccourcie si longue, avec cadre sur les sections et le formulaire), la bascule en vue téléphone et l'envoi du formulaire. Zooms ≤ 6 % : sur le plan, sur le formulaire et sur le message de remerciement. Flouter le solde de crédits, le plan d'abonnement et tout identifiant de projet visible. Vérifier qu'aucune invitation à connecter une base de données ou une clé n'est mise en avant ; si elle apparaît, ne pas l'annoter. En vue téléphone, réduire la capture à 85 % dans un cadre pour garder les sous-titres en bas. **Carte de rappel** à 5:55. **Mentions légales** (3 s) après la dernière phrase : texte standard + mois et année. Plans de couverture : insert mètre ruban (mesures), B-cam.
 
 #### Versions EN / HA / DJE
 
-- **À re-filmer dans la langue** (≈ 25 s) : ouverture — « À la fin de cette leçon, vous saurez construire étape par étape une application qui enregistre vos données. Aujourd'hui, on lui donne une mémoire et des comptes. » ; conclusion — « Hadiza peut changer de téléphone : ses candidatures la suivent. Rahila a les siennes, et ne voit qu'elles. Leurs données restent séparées, comme prévu. Donnez une mémoire à votre application. »
-- **Doublé en voix clonée** : B2 (plan 3) → schémas des trois blocs et du cahier de crédit (plan 4) prolongés ; B3 (plans 6 et 8) → registre à cadenas, capture de l'onglet Cloud, frise de l'ordre de construction ; B4 bilan (plan 12) → capture du second téléphone ; B5 (plan 13) → insert des deux téléphones côte à côte, puis liste vide.
-- **Notes d'adaptation** : « registre » est l'image clé : la traduire par le mot du cahier de compte ou du registre de la mairie dans chaque langue. « Règle d'accès » : en EN « access rule » ; en HA et DJE, périphrase « qui a le droit de voir quoi ». « Le test des deux comptes » doit garder un nom court et mémorisable dans chaque langue.
+- **À re-filmer dans la langue** (≈ 30 s) : ouverture (plan 1) et conclusion (plan 16).
+- **Doublé en voix clonée** : B2 (plan 2) → plan 4 (page d'accueil Lovable) avancé ; B5 (plan 14) → écran partagé des deux sites (plan 13) prolongé, puis tableau.
+- **Notes d'adaptation** : « mesures » (de couture) : en EN « measurements » ; en HA et DJE, terme du métier à valider. Le message « Merci, Hadiza vous rappelle sous 24 heures » est sous-titré dans chaque langue. « Champ » : en EN « field », gloser une fois. « Vitrine » : en EN « showcase site ».
 
-### Leçon 5 — Corriger, sécuriser, publier et aller plus loin (`vc5`)
+### Leçon 5 — Projet final : corriger, publier, partager (`vc5`)
 
 #### Fiche
 
-- **Promesse** : « À la fin de cette leçon, vous saurez corriger en décrivant, vérifier la sécurité et publier votre application. »
-- **Cas réel (B1 → B6)** : Rahila signale un défaut à Hadiza : une bourse de l'an dernier, dont la date est passée, s'affiche « Urgent » avec des jours négatifs. Le cahier des charges n'avait pas prévu ce cas. La promotion de Hadiza veut utiliser l'application. Enjeu : corriger, vérifier la sécurité et publier sans exposer de données. En B6, le lien circule dans le groupe WhatsApp de la promotion ; chacun crée son compte et ne voit que ses candidatures.
-- **Unités de notion (B3)** : 1. Corriger : problème, attendu, étapes — Un signalement en trois parties ; revenir à la version d'avant si une correction casse autre chose. · 2. Les secrets et les données personnelles — Une clé d'API va dans l'espace des secrets, jamais dans une consigne ni dans le code ; on garde le minimum de données ; au Niger, la HAPDP veille à leur protection. · 3. Sauvegarder : versions, données, code — Historique des versions, bouton « Exporter » pour les données, copie du code sur GitHub [à vérifier au moment du tournage : copie vers GitHub disponible en version gratuite, dans Lovable et dans Bolt]. · 4. Aller plus loin : Claude Code — Un agent de code, en version payante, qui propose un plan et modifie les fichiers avec votre accord ; pour l'argent, la santé ou beaucoup d'utilisateurs, un développeur relit.
-- **Démo (B4)** : Lovable (web), projet de la leçon 4 ; second téléphone. 1. Ajouter une candidature datée d'hier ; constater l'affichage. 2. Envoyer le signalement (consigne à copier, remplie). 3. Lire l'explication de Lovable ; retester ; refaire le test des deux comptes. 4. Cliquer sur le bouton de publication : adresse proposée en lovable.app, contrôle de sécurité de la base de données pendant l'ouverture de la fenêtre [à vérifier au moment du tournage : libellés de la fenêtre et du résultat du contrôle]. 5. Lire le résultat ; s'il signale un problème, demander la correction et relancer. 6. Publier ; ouvrir le lien sur le second téléphone ; se connecter avec un compte de test. Résultat attendu : la candidature passée affiche « Date passée », en bas de liste, en gris avec une icône ; l'application est publiée et fonctionne sur un autre téléphone. Si le défaut de date passée n'apparaît pas, prendre le premier vrai défaut trouvé pendant les tests de cas limites et adapter les phrases de VO correspondantes. Captures complémentaires pour B3 : historique des versions ; bouton « Exporter » ajouté à l'application ; espace des secrets de Lovable Cloud, vide de toute clé, comme plan de couverture des versions doublées [à vérifier au moment du tournage : emplacement] ; session Claude Code réelle sur le dépôt Karatou Academy (demande → plan → accord → modification → test).
-- **Consolidation (B5)** : prédiction. Hadiza veut des rappels par e-mail ; l'application a besoin de la clé d'un service d'envoi. Elle colle sa clé directement dans la conversation avec l'IA. Bonne idée ? Réponse : non. Une clé se garde comme le code secret d'un compte mobile money : on la colle seulement dans l'espace prévu pour les secrets. Et si l'application touche un jour à l'argent, on fait appel à un développeur.
-- **Consigne à copier** :
+- **Promesse** : « À la fin de cette vidéo, vous saurez publier votre site, le vérifier et le présenter pour obtenir votre certificat. »
+- **Cas réel (B1 → B6)** : Hadiza a son site. Avant de l'envoyer à ses clientes, trois vérifications. Enjeu : un site publié, qui marche vraiment sur téléphone, sans faute ni donnée personnelle. En B6, le site d'Hadiza est en ligne et vérifié ; l'apprenant connaît son projet final et les cinq points du cours.
+- **Unités de notion (B3)** : 1. Publier et ouvrir le lien sur téléphone — Le site doit marcher là où vos clients le regardent. · 2. La check-list en quatre questions — Lisible ? Textes vrais, sans faute ? Bouton et formulaire qui marchent ? Aucune donnée personnelle ni mot de passe ? · 3. Le projet final — Un site publié pour une personne ou une activité réelle ; à déposer : le lien, la fiche, trois phrases sur ce que vous avez corrigé.
+- **Démo (B4)** : Lovable, projet d'Hadiza de la vidéo 4, puis téléphone. 1. Lovable → **Publier** → adresse en lovable.app → copier le lien [à vérifier au moment du tournage : publication gratuite]. 2. Ouvrir le lien **sur un téléphone** (insert filmé ou miroir d'écran). 3. La check-list, en parlant : tout est lisible sur téléphone ? les textes sont vrais, sans faute ? le bouton WhatsApp et le formulaire marchent ? aucune donnée personnelle ni mot de passe dans le site ? Défilement complet, test du bouton WhatsApp. Résultat attendu : le site d'Hadiza ouvert sur un téléphone, les quatre questions cochées.
+- **Consolidation (B5)** : le projet final, livrables et critères. « Un site publié, pour une personne ou une activité réelle. Vous déposez : le lien, votre fiche, et trois phrases sur ce que vous avez corrigé. » [mode de dépôt à préciser]
+- **Consigne à copier** (pour rédiger les trois phrases du dépôt) :
 
 ```text
-Problème : [ce qui se passe, avec un exemple précis].
-Résultat attendu : [ce qui devrait se passer].
-Étapes pour reproduire : 1. [première action] 2. [deuxième action] 3. [ce que je vois].
-Corrige seulement ce problème, sans rien changer d'autre.
-Puis explique-moi en deux phrases ce que tu as modifié, et comment le vérifier.
+Voici les corrections que j'ai faites sur mon site : [listez vos corrections].
+Aide-moi à les résumer en trois phrases simples : ce qui n'allait pas, ce que j'ai demandé, ce qui a changé.
+N'invente rien.
 ```
 
-- **Exercice** : « Vérifiez, puis publiez votre application » — 1. Testez trois cas limites (date du jour, date passée, champ vide) et corrigez un défaut avec le modèle Problème / Attendu / Étapes ; ajoutez ce cas à vos critères. 2. Vérifiez qu'aucune clé ni donnée sensible ne figure dans vos consignes ou votre application, ajoutez un bouton « Exporter », et refaites le test des deux comptes. 3. Publiez, lisez le contrôle de sécurité, ouvrez le lien sur un autre téléphone et notez l'adresse pour le projet final.
-- **Carte de rappel** : 1. Corriger en décrivant, vérifier la sécurité et publier votre application 2. Signalez : problème, résultat attendu, étapes pour reproduire 3. Les clés vont dans le coffre des secrets, jamais ailleurs 4. Projet qui grandit : Claude Code ; données sensibles : un développeur
+- **Exercice** : « Publiez votre site et partagez le lien » — 1. Publiez votre site (Canva ou Lovable) et ouvrez le lien sur un téléphone. 2. Passez la check-list des quatre questions et corrigez ce qui ne va pas. 3. Déposez le lien, votre fiche et trois phrases sur vos corrections [mode de dépôt à préciser].
+- **Carte de rappel (récap du cours)** : 1. Vous décrivez, l'IA construit. 2. Une bonne fiche avant l'outil. 3. Canva pour un site simple. 4. Lovable pour un site riche. 5. Vérifier sur téléphone, puis publier.
 - **Quiz** :
-  1. Quel signalement aide l'IA à corriger ? — A) « Ça ne marche pas. » B) « Problème : une date passée s'affiche en Urgent. Attendu : “Date passée”, en bas. Étapes : ajouter une candidature datée d'hier. » C) « Refais tout. » D) « Corrige les défauts. » — **Réponse : B**
-  2. Que fait Lovable quand vous ouvrez la fenêtre de publication ? — A) Il supprime vos données de test B) Il envoie le lien à vos contacts C) Il double votre quota gratuit D) Il vérifie la sécurité de la base de données et signale les problèmes — **Réponse : D**
-  3. Où ranger une clé d'API ? — A) Dans la consigne B) Dans le code C) Dans l'espace prévu pour les secrets de l'outil D) Dans le groupe WhatsApp de la promotion — **Réponse : C**
-  4. Votre projet grandit et vous voulez qu'une IA travaille sur ses fichiers, avec votre accord à chaque étape. Quel outil ? — A) Claude Code, en version payante B) Un tableur C) Le mode sombre D) Aucun outil n'existe — **Réponse : A**
-  5. Moussa veut ajouter le paiement par mobile money à son application. Que doit-il faire ? — A) L'ajouter seul, en une consigne B) Faire appel à un développeur C) Coller sa clé dans la conversation D) Publier sans tester — **Réponse : B**
-- **Marques citées** : Lovable (Lovable Cloud), Bolt, GitHub, Claude, Claude Code, WhatsApp.
+  1. Après avoir publié, où vérifier d'abord votre site ? — A) Sur un téléphone, là où vos clients le regardent B) Seulement dans l'éditeur C) Nulle part, c'est inutile D) Sur une imprimante — **Réponse : A**
+  2. Laquelle de ces questions fait partie de la check-list ? — A) Le site a-t-il beaucoup de couleurs ? B) Y a-t-il une donnée personnelle ou un mot de passe dans le site ? C) Le site a-t-il coûté cher ? D) Combien de lignes de code ? — **Réponse : B**
+  3. Que déposez-vous pour le projet final ? — A) Seulement une capture d'écran B) Votre mot de passe Lovable C) Le lien, votre fiche, et trois phrases sur ce que vous avez corrigé D) Le code du site — **Réponse : C**
+  4. Que faut-il faire avant d'ouvrir l'outil ? — A) Payer une version B) Écrire une bonne fiche de son site C) Appeler un développeur D) Choisir un nom de domaine payant — **Réponse : B**
+  5. Quel outil pour un site simple, et lequel pour un site riche ? — A) Lovable pour les deux B) Replit puis Canva C) Canva pour le simple, Lovable pour le riche D) Aucun des deux — **Réponse : C**
+- **Marques citées** : Lovable, Canva, WhatsApp.
 
 #### Script
 
-Durée estimée : 6:41 · Mots dits : 760
+Durée estimée : 4:00 · Mots dits : ≈ 385 (format court ; défilements et tests sur téléphone en partie sans voix)
 
-**[B1 — Accroche · 0:00–0:29]**
+**[B1 — Accroche · 0:00–0:20]**
 
-**[E · SITUATION]** « Niamey — un message de Rahila » — VO : Un message de Rahila.
-
-**[F · CAM A]** À la fin de cette leçon, vous saurez corriger en décrivant, vérifier la sécurité et publier votre application. Rahila a écrit : « Ta bourse de l'an dernier est marquée Urgent, avec des jours négatifs ! » En leçon quatre, l'application de Hadiza a gagné une mémoire et des comptes. Sa promotion veut l'utiliser.
+**[F · CAM A]** Hadiza a son site. Avant de l'envoyer à ses clientes, trois vérifications. À la fin de cette vidéo, vous saurez publier votre site, le vérifier et le présenter pour obtenir votre certificat.
 
 [PAUSE 1 s]
 
-**[B2 — Cadrage · 0:29–1:05]**
+**[B2/B3 — Cadrage et notion : publier, puis vérifier · 0:20–0:35]**
 
-**[F · CAM A]** Le malentendu : « Ça marche sur mon téléphone, donc c'est prêt. » Non. Publier, c'est ouvrir votre porte à tout internet.
-
-**[A · ÉCRAN]** Une fois en ligne, l'adresse peut circuler, et n'importe qui peut essayer d'entrer. Des programmes automatiques parcourent internet à la recherche de sites mal protégés. Votre application doit fonctionner. Elle doit aussi protéger ce qu'elle garde.
-
-**[F · CAM A]** Donc trois gestes, dans cet ordre : corriger, vérifier, publier. Puis, quand le projet grandit, aller plus loin.
+**[F · CAM A]** Publier, ce n'est pas la fin. Un site publié avec une faute, ou un bouton cassé, fait fuir les clientes. Alors on publie, puis on vérifie.
 
 [PAUSE 1 s]
 
-**[B3 — Notion · 1:05–3:26]**
+**[B4 — Démo : publier et vérifier · 0:35–2:30]**
 
-**[C · SCHÉMA]** « 1. Corriger : problème, attendu, étapes » — VO : Première idée : corriger en décrivant.
+**[A · ÉCRAN]** Je suis dans Lovable, sur le site d'Hadiza. Je clique sur Publier. Le site reçoit une adresse en lovable.app. Je copie le lien. C'est ce lien que Hadiza partagera.
 
-**[F · CAM A]** Jamais « ça ne marche pas ». Dites le problème, le résultat attendu, et les étapes pour le reproduire. Comme chez le mécanicien : vous décrivez le bruit, et quand il apparaît. Si une correction casse autre chose, revenez à la version d'avant. Ajoutez aussi ce cas oublié à votre cahier des charges. La prochaine fois, il est prévu.
+**[A · ÉCRAN]** Maintenant, je l'ouvre sur un téléphone. C'est là que les clientes le verront.
 
-[PAUSE 1 s]
+**[B · CARTE]** « Check-list · 4 questions » — VO : Et je passe la check-list. Quatre questions.
 
-**[C · SCHÉMA]** « 2. Les secrets et les données personnelles » — VO : Deuxième idée : protéger les secrets et les données.
+**[A · ÉCRAN]** Un : tout est lisible sur téléphone ? Je fais défiler. Les titres, les textes, la galerie : oui.
 
-**[F · CAM A]** Une clé d'API, c'est le mot de passe qu'un service donne à votre application. Elle se range dans l'espace des secrets de l'outil. Jamais dans une consigne, jamais dans le code. Pour les données personnelles, gardez le minimum. Ne testez jamais avec les vraies données de vos camarades. Dites à vos utilisateurs, en une phrase, ce que l'application garde. Au Niger, la loi protège les données personnelles, et une autorité veille : la HAPDP.
+**[A · ÉCRAN]** Deux : les textes sont vrais, sans faute ? Je relis. Les services, les horaires. Tout ce qui est écrit doit être vrai. L'IA invente parfois un avis ou un horaire : supprimez-le.
 
-[PAUSE 1 s]
+**[A · ÉCRAN]** Trois : le bouton WhatsApp et le formulaire marchent ? Je touche le bouton. WhatsApp s'ouvre. Le formulaire a été testé dans la vidéo précédente : je le revérifie.
 
-**[C · SCHÉMA]** « 3. Sauvegarder : versions, données, code » — VO : Troisième idée : sauvegarder.
-
-**[A · ÉCRAN]** L'historique garde chaque version de l'application. Pour vos données, demandez un bouton « Exporter », qui crée un fichier pour tableur. Une fois par mois, exportez vos données, et gardez le fichier ailleurs. Et Lovable comme Bolt peuvent copier votre code sur GitHub, un site qui garde l'historique du code.
+**[A · ÉCRAN]** Quatre : aucune donnée personnelle ni mot de passe dans le site ? Je cherche. Rien. Si vous trouvez un problème, corrigez-le dans l'outil, une demande à la fois. Puis publiez à nouveau.
 
 [PAUSE 1 s]
 
-**[C · SCHÉMA]** « 4. Aller plus loin : Claude Code » — VO : Quatrième idée : quand le projet grandit, Claude Code.
+**[B5 — Le projet final · 2:30–3:15]**
 
-**[A · ÉCRAN]** C'est l'outil que j'utilise pour Karatou Academy. Je décris une fonction. Il propose un plan. Je valide. Il modifie les fichiers, avec mon accord. Puis je teste. Il demande une version payante. On y travaille sur les fichiers du projet, le plus souvent sur ordinateur.
+**[F · CAM A]** Maintenant, votre projet final. Un site publié, pour une personne ou une activité réelle. La vôtre, celle d'un proche, d'une association.
 
-**[F · CAM A]** Claude Code ne décide pas à votre place : vous validez chaque étape. Et pour l'argent, la santé, ou beaucoup d'utilisateurs : faites relire par un développeur. Ce n'est pas un échec. C'est le bon réflexe.
+**[B · CARTE]** « À déposer · Le lien · Votre fiche · 3 phrases sur vos corrections » — VO : Vous déposez trois choses. Le lien de votre site. Votre fiche. Et trois phrases sur ce que vous avez corrigé.
 
-[PAUSE 1 s]
-
-**[B4 — Application · 3:26–5:30]**
-
-**[A · ÉCRAN]** Reprenons le défaut signalé par Rahila. Je le reproduis : j'ajoute une candidature datée d'hier. Elle s'affiche en haut, en Urgent, avec des jours négatifs.
-
-**[A · ÉCRAN]** J'écris le signalement. Problème : une date passée s'affiche comme urgente. Attendu : la mention « Date passée », en bas de liste, en gris, avec une icône. Étapes : ajouter une candidature datée d'hier. J'ajoute aussi ce cas aux critères de la page de Hadiza.
-
-**[G · CONSIGNE]** « Problème : [ce qui se passe, avec un exemple précis]. Résultat attendu : [ce qui devrait se passer]. Étapes pour reproduire : 1. [première action] 2. [deuxième action] 3. [ce que je vois]. Corrige seulement ce problème, sans rien changer d'autre. Puis explique-moi en deux phrases ce que tu as modifié, et comment le vérifier. » — VO : Voici le modèle. Mettez la vidéo en pause pour le recopier.
-
-**[A · ÉCRAN]** Lovable corrige, et explique ce qu'il a changé. Je reteste : la candidature passée descend, avec sa mention. Je refais aussi le test des deux comptes.
-
-**[A · ÉCRAN]** Maintenant, je publie. Lovable propose une adresse en lovable.app. Pendant ce temps, il vérifie la sécurité de la base de données. Je lis les alertes une par une. Je n'en ignore aucune sans la comprendre. S'il y a un problème, je demande la correction avant de publier. Ce contrôle attrape des erreurs courantes. Il ne remplace pas une vraie revue de sécurité.
-
-**[A · ÉCRAN]** Je publie. J'ouvre le lien sur un autre téléphone. Je me connecte avec un compte de test. Tout fonctionne.
-
-**[F · CAM A]** En version gratuite, l'adresse finit par lovable.app, ou par bolt.host chez Bolt. Un nom de domaine à vous demande une version payante. Et si l'application grandit, l'hébergement peut devenir payant.
+**[F · CAM A]** Ces trois phrases montrent votre travail. Ce qui n'allait pas, ce que vous avez demandé, ce qui a changé. Le mode de dépôt est indiqué sur la page du cours.
 
 [PAUSE 1 s]
 
-**[B5 — Consolidation · 5:30–6:13]**
+**[B6 — Clôture · 3:15–4:00]**
 
-**[F · CAM B]** Hadiza veut maintenant des rappels par e-mail. Pour cela, l'application a besoin de la clé d'un service d'envoi.
+**[B · CARTE DE RAPPEL]** « 1. Vous décrivez, l'IA construit. » « 2. Une bonne fiche avant l'outil. » « 3. Canva pour un site simple. » « 4. Lovable pour un site riche. » « 5. Vérifier sur téléphone, puis publier. » — VO : Le cours en cinq points. Vous décrivez, l'IA construit. Une bonne fiche avant l'outil. Canva pour un site simple. Lovable pour un site riche. Et vérifier sur téléphone, puis publier.
 
-**[B · CARTE]** « Coller la clé dans la conversation : bonne idée ? » — VO : Hadiza colle sa clé directement dans la conversation avec l'IA. Bonne idée ?
-
-**[SILENCE 2 s]**
-
-**[F · CAM B]** Non. Une clé, c'est comme le code secret de votre compte mobile money. On ne le donne à personne. Collez-la seulement dans l'espace prévu pour les secrets. Si une clé a fuité, changez-la tout de suite dans le service concerné. Et si un jour votre application touche à l'argent, appelez un développeur.
-
-[PAUSE 1 s]
-
-**[B6 — Clôture · 6:13–6:41]**
-
-**[B · CARTE DE RAPPEL]** « 1. Corriger en décrivant, vérifier la sécurité et publier votre application » « 2. Signalez : problème, résultat attendu, étapes pour reproduire » « 3. Les clés vont dans le coffre des secrets, jamais ailleurs » « 4. Projet qui grandit : Claude Code ; données sensibles : un développeur » — VO : Retenez quatre points. Corriger, vérifier, publier. Un signalement en trois parties. Les clés au coffre. Et les bons renforts quand le projet grandit.
-
-**[F · CAM A]** Le lien de Hadiza circule dans le groupe WhatsApp de sa promotion. Rahila a déjà ajouté ses trois bourses. Chacun crée son compte, et ne voit que ses candidatures. Vérifiez, puis publiez votre application.
+**[F · CAM A]** Hadiza peut envoyer son lien à ses clientes. Prochain cours : transformer un site en vraie application. Votre exercice : publiez votre site et partagez le lien.
 
 #### Liste des plans
 
 | # | Type | Cadre / source | Contenu | Durée | Notes |
 |---|---|---|---|---|---|
-| 1 | E | Photo mise en scène ou illustration | Hadiza lit un message sur son téléphone ; bulle de texte ajoutée en graphique (pas de fausse interface) ; surtitre « Niamey — un message de Rahila » | 4 s | B1 |
-| 2 | F | CAM A | Promesse, message de Rahila, rappel de la leçon 4 | 25 s | B1 |
-| 3 | F | CAM A | Malentendu « ça marche donc c'est prêt », puis « trois gestes » | 18 s | B2, deux passages |
-| 4 | A | Navigateur | Application de Hadiza ouverte depuis un lien, écran de connexion | 17 s | B2. Annoter « en ligne : visible de partout » |
-| 5 | C | Schémas animés | Cartes-titres des unités 1 à 4 (signalement en trois cases, coffre des secrets, trois sauvegardes, Claude Code) | 16 s | B3, quatre cartes |
-| 6 | F | CAM A | Explications des unités 1 et 2, puis « Claude Code ne décide pas à votre place » et « faites relire par un développeur » | 80 s | B3. Carte HAPDP en incrustation (nom complet, « Niger »), au moins 4 s |
-| 7 | A | Lovable web + compte GitHub de démo | Historique des versions ; bouton « Exporter » ajouté à l'application ; copie du code sur GitHub | 24 s | B3. Aucun identifiant de projet visible |
-| 8 | A | Application Claude, onglet Code | Session réelle sur le dépôt Karatou Academy : demande → plan → accord → fichiers modifiés → test | 22 s | B3. Aucune clé, aucun fichier de configuration à l'écran |
-| 9 | G | Carte de consigne | Modèle de signalement, texte exact | 12 s | B4 |
-| 10 | A | Lovable web, compte de démo | Défaut reproduit → signalement → correction expliquée → retest → test des deux comptes → fenêtre de publication et contrôle de sécurité → alertes lues → publication | 86 s | B4. Environ 13 s d'accéléré sans voix ; cadre sur le résultat du contrôle |
-| 11 | A | Second téléphone, enregistrement natif | Lien ouvert, connexion avec un compte de test, application fonctionnelle | 9 s | B4 |
-| 12 | F | CAM A | Adresses gratuites, nom de domaine et hébergement payants | 16 s | B4 |
-| 13 | F | CAM B | Rappels par e-mail et clé, puis réponse « Non. Une clé… » | 35 s | B5 |
-| 14 | B | Cartes | « Coller la clé dans la conversation : bonne idée ? » (2 s de silence) ; carte de rappel (4 points) | 20 s | B5 et B6 |
-| 15 | F | CAM A | Clôture : le lien circule ; titre de l'exercice | 16 s | B6 |
+| 1 | F | CAM A | « Hadiza a son site… », promesse | 20 s | B1. Promesse avant 0:12 |
+| 2 | F | CAM A | « Publier, ce n'est pas la fin… » | 15 s | B2/B3 |
+| 3 | A | Lovable | Publier → adresse lovable.app → copier le lien | 20 s | B4. Zoom ≤ 6 % sur le bouton Publier |
+| 4 | A | Téléphone (miroir d'écran) ou insert filmé | Ouverture du lien sur le téléphone | 10 s | B4 |
+| 5 | B | Carte | « Check-list · 4 questions » | 4 s | B4 |
+| 6 | A | Téléphone | Question 1 : défilement complet | 18 s | B4 |
+| 7 | A | Téléphone | Question 2 : relecture des textes | 18 s | B4 |
+| 8 | A | Téléphone + insert doigt | Question 3 : bouton WhatsApp touché, formulaire | 22 s | B4. Ne pas montrer de conversation WhatsApp réelle : couper à l'ouverture |
+| 9 | A | Téléphone | Question 4 : recherche de données personnelles | 22 s | B4 |
+| 10 | F | CAM A | Projet final : pour qui | 12 s | B5 |
+| 11 | B | Carte | « À déposer : le lien · votre fiche · 3 phrases » | 12 s | B5 |
+| 12 | F | CAM A | « Ces trois phrases montrent votre travail… » | 18 s | B5. [mode de dépôt à préciser] |
+| 13 | B | Carte récap du cours | Cinq points | 30 s | B6 |
+| 14 | F | CAM A | « Hadiza peut envoyer son lien… », annonce du niveau 2, exercice | 15 s | B6 |
+| 15 | B | Carte mentions légales | Texte des marques | 3 s | Fin de vidéo |
 
 #### Montage idéal
 
 | Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
 |---|---|---|---|---|---|---|
-| B1 | 0:00–0:29 | E (message de Rahila), puis F CAM A | Bulle de message animée (graphique, sans logo) ; surtitre | « Urgent… avec des jours négatifs ! » ; promesse | voix seule | coupe |
-| B2 | 0:29–1:05 | F CAM A, A (lien ouvert), F CAM A | Porte qui s'ouvre sur une carte du monde stylisée ; puis les trois gestes | « Corriger · Vérifier · Publier » | voix seule | coupe |
-| B3 | 1:05–3:26 | C (cartes), F CAM A, A (historique, export, GitHub, Claude Code) | Signalement en trois cases ; coffre pour les secrets ; incrustation HAPDP | Titres des unités ; « HAPDP — Haute Autorité de Protection des Données à caractère Personnel (Niger) » ; « Version payante » | voix seule | coupe ; glissement entre unités |
-| B4 | 3:26–5:30 | A (Lovable), G, A (second téléphone), F CAM A | Signalement en trois cases rempli en direct ; pictogramme « accéléré » ; cadre sur l'adresse lovable.app et sur le résultat du contrôle | Modèle (G) ; « Problème · Attendu · Étapes » ; « Contrôle de sécurité » | voix ; nappe légère pendant l'accéléré | coupe ; zoom ≤ 6 % sur le résultat du contrôle |
-| B5 | 5:30–6:13 | F CAM B, B, F CAM B | Clé qui va dans le coffre, et non dans la bulle de conversation (barrée d'une croix) | « Bonne idée ? » ; « Les clés au coffre » | voix ; silence total 2 s | coupe |
-| B6 | 6:13–6:41 | B (carte de rappel), F CAM A | Points révélés un par un | 4 points de la carte | voix seule | coupe, puis carte de clôture (Partie 1) |
+| B1 | 0:00–0:20 | F CAM A | Vignette du site d'Hadiza | Promesse | voix seule | coupe |
+| B2/B3 | 0:20–0:35 | F CAM A | « Publier → vérifier » | « Publier, puis vérifier » | voix seule | coupe |
+| B4 | 0:35–2:30 | A (Lovable, puis téléphone), B (check-list) | Check-list en colonne latérale, chaque question cochée à son tour ; cadre sur l'adresse lovable.app ; téléphone dans un cadre de smartphone | « Publier » ; « Question 1/4 » … « 4/4 » ; « Lisible ? » « Vrai, sans faute ? » « Bouton et formulaire ? » « Aucune donnée personnelle ? » | voix ; nappe discrète | coupe |
+| B5 | 2:30–3:15 | F CAM A, B (livrables) | Trois livrables en pictogrammes (lien, fiche, texte) | « À déposer : le lien · votre fiche · 3 phrases » | voix seule | coupe |
+| B6 | 3:15–4:00 | B (récap du cours), F CAM A, B (mentions) | Cinq points révélés un par un ; mention « Prochain cours : du site à l'application » | 5 points ; « Exercice : publiez votre site et partagez le lien » | voix ; nappe de fin (Partie 1) | coupe, mentions légales 3 s, carte de clôture (Partie 1) |
 
-**Notes de montage** : B3 est dense : une carte courte par unité, puis le face caméra ou la capture ; ne jamais empiler deux annotations. La carte HAPDP reste au moins 4 s. Ne jamais montrer de clé réelle, même floutée : utiliser un compte sans clé, ou masquer la zone par une forme pleine. Dans la capture Claude Code, rester sur la conversation et la liste des fichiers modifiés. Garder la respiration avant « Non. » en B5. Plans de couverture : inserts téléphone, B-cam, captures de l'historique.
-
-#### Versions EN / HA / DJE
-
-- **À re-filmer dans la langue** (≈ 25 s) : ouverture — « À la fin de cette leçon, vous saurez corriger en décrivant, vérifier la sécurité et publier votre application. Sa promotion veut l'utiliser. » ; conclusion — « Le lien de Hadiza circule dans le groupe WhatsApp de sa promotion. Rahila a déjà ajouté ses trois bourses. Chacun crée son compte, et ne voit que ses candidatures. Vérifiez, puis publiez votre application. »
-- **Doublé en voix clonée** : B2 (plan 3) → schéma de la porte ouverte, puis carte des trois gestes ; B3 (plan 6) → schéma du signalement en trois cases, schéma du coffre, carte HAPDP, capture Claude Code prolongée ; B4 (plan 12) → capture de l'application publiée sur téléphone avec l'adresse encadrée ; B5 (plan 13) → schéma de la clé et du coffre, puis carte « Les clés au coffre ».
-- **Notes d'adaptation** : « clé d'API » : en EN « API key » ; en HA et DJE, garder « API » et gloser « mot de passe d'un service ». La comparaison avec le code secret du mobile money est locale et parlante : la garder telle quelle. « Mécanicien » : image universelle. HAPDP : en EN, dire « Niger's data protection authority (HAPDP) ». « Nom de domaine » : en EN « your own domain name ».
-
-### Leçon 6 — Projet final : livrer votre mini-application (`vc6`)
-
-#### Fiche
-
-- **Promesse** : « À la fin de cette leçon, vous saurez livrer une mini-application utile, avec son lien et sa fiche. »
-- **Cas réel (B1 → B6)** : À Zinder, Moussa, quincaillier, a terminé le carnet de ses commandes aux fournisseurs, l'idée « feu vert » choisie en leçon 1. Enjeu : livrer un projet certifiant que l'évaluateur peut ouvrir, tester et comprendre. Contre-exemple en B5 : Ibrahim, apprenant, dépose une application sans compte de test. En B6, Moussa et Hadiza ont déposé leur projet ; c'est au tour de l'apprenant.
-- **Unités de notion (B3)** : 1. Livrable un : le lien publié — Il s'ouvre sur un téléphone ; si l'application demande une connexion, un compte de test avec des données inventées est donné au dépôt. · 2. Livrable deux : la fiche produit — Une page, huit rubriques : nom, problème, pour qui, trois fonctions, comment tester, données gardées et jamais gardées, limites connues, prochaine étape. · 3. Cinq critères d'évaluation — Utile, fonctionnel sur téléphone, prudent (aucune donnée sensible, aucune clé visible), testé (deux comptes s'il y a une connexion), honnête (limites écrites) ; causes d'échec : lien mort, fiche absente, vraies données d'autres personnes [à valider par l'owner : grille et seuil de réussite].
-- **Démo (B4)** : le projet de Moussa, construit avant la session 2 dans Bolt (ordinateur), compte de démo. 1. Montrer son cahier des charges d'une page (problème : il oublie quelles commandes sont en route ; personne : lui seul ; données jamais gardées : rien sur ses clients). 2. Montrer en accéléré quelques moments de la construction dans Bolt : mode Plan, puis une étape par consigne. 3. Montrer la publication : adresse en bolt.host, contrôle de sécurité au moment de publier [à vérifier au moment du tournage : libellés]. 4. Tester comme un évaluateur sur un téléphone : ouvrir le lien, se connecter avec le compte de test, ajouter une commande d'exemple (montant en FCFA présenté comme fictif), la marquer « reçue », la voir passer dans l'historique. 5. Montrer la fiche produit d'une page (huit rubriques). 6. Montrer le dépôt dans l'espace du projet final : lien, fiche, compte de test [à vérifier au moment du tournage : mécanisme de dépôt sur la plateforme]. Résultat attendu : une mini-application publiée, testable, documentée, déposée.
-- **Consolidation (B5)** : prédiction. Ibrahim dépose une application impressionnante, mais elle demande une connexion et il ne fournit aucun compte de test. Son projet peut-il être validé ? Réponse : non ; l'évaluateur ne peut pas entrer, donc rien tester. Il faut un compte de test avec des données inventées, donné dans le formulaire de dépôt, jamais dans une consigne d'IA.
-- **Consigne à copier** :
-
-```text
-Aide-moi à rédiger la fiche produit d'une page de mon application, en français simple.
-Rubriques : nom ; problème résolu ; pour qui ; trois fonctions principales ; comment la tester ; données gardées et données jamais gardées ; limites connues ; prochaine étape.
-Voici mes notes : [collez vos notes et votre cahier des charges].
-N'invente rien : si une information manque, pose-moi la question.
-N'écris aucun mot de passe et aucune donnée personnelle.
-```
-
-- **Exercice** : « Livrez votre mini-application » — 1. Vérifiez que votre lien s'ouvre sur un autre téléphone ; si l'application demande une connexion, créez un compte de test avec des données inventées. 2. Rédigez votre fiche produit d'une page avec la consigne, puis relisez et corrigez chaque ligne. 3. Déposez le lien, la fiche et le compte de test dans l'espace du projet final [à vérifier au moment du tournage : mécanisme de dépôt].
-- **Carte de rappel** : 1. Livrer une mini-application utile, avec son lien et sa fiche 2. Deux livrables : le lien publié et la fiche d'une page 3. Données inventées, compte de test, aucune clé visible
-- **Quiz** :
-  1. Quels sont les deux livrables du projet final ? — A) Une vidéo et un CV B) Le lien de l'application publiée et la fiche produit d'une page C) Le code complet et une facture D) Une capture d'écran et un mot de passe — **Réponse : B**
-  2. Votre application demande une connexion. Que fournir à l'évaluateur ? — A) Votre mot de passe personnel B) Rien C) Un compte de test avec des données inventées, dans le formulaire de dépôt D) Les comptes de vos camarades — **Réponse : C**
-  3. Laquelle de ces rubriques fait partie de la fiche produit ? — A) Les limites connues B) Le salaire visé C) La liste de vos contacts D) Le code complet — **Réponse : A**
-  4. Lequel de ces éléments fait échouer un projet ? — A) Une application petite mais utile B) Des données inventées C) Une fiche d'une page D) De vraies données personnelles d'autres personnes, visibles dans l'application — **Réponse : D**
-  5. Lequel de ces critères fait partie de l'évaluation ? — A) L'application est grande B) Le parcours principal fonctionne sur téléphone C) L'application utilise le plus d'outils possible D) La fiche fait au moins dix pages — **Réponse : B**
-- **Marques citées** : Bolt (et l'assistant utilisé pour la fiche, s'il est visible à l'écran : Claude).
-
-#### Script
-
-Durée estimée : 6:23 · Mots dits : 732
-
-**[B1 — Accroche · 0:00–0:28]**
-
-**[E · SITUATION]** « Zinder — la quincaillerie de Moussa » — VO : À Zinder, Moussa a terminé son application.
-
-**[F · CAM A]** À la fin de cette leçon, vous saurez livrer une mini-application utile, avec son lien et sa fiche. L'idée de Moussa était au vert dès la leçon un. En leçon cinq, Hadiza a vérifié, puis publié son application. Aujourd'hui, c'est votre projet final, celui qui mène au certificat.
-
-[PAUSE 1 s]
-
-**[B2 — Cadrage · 0:28–1:12]**
-
-**[F · CAM A]** Un malentendu fréquent : un projet certifiant doit être gros et impressionnant. Non. Il doit être utile, fonctionner, et rester honnête sur ses limites. Un outil qui sert vraiment à une personne vaut plus qu'une démonstration que personne n'ouvre.
-
-**[A · ÉCRAN]** Son carnet de commandes aux fournisseurs tient en trois écrans. Ses commandes en cours, les dates de livraison prévues, et ce qui est arrivé. C'est petit, mais il s'en sert chaque semaine. Celui de Hadiza aussi : trois écrans, et une promotion qui s'en sert.
-
-**[F · CAM A]** Petit, utile, honnête : c'est ce qu'on attend de vous.
-
-[PAUSE 1 s]
-
-**[B3 — Notion · 1:12–3:02]**
-
-**[C · SCHÉMA]** « 1. Livrable un : le lien publié » — VO : Premier livrable : le lien de votre application publiée.
-
-**[F · CAM A]** Il doit s'ouvrir sur un téléphone. Si l'application demande une connexion, créez un compte de test, avec des données inventées. Vous le donnez au moment du dépôt. Le compte de test : une adresse et un mot de passe créés pour l'évaluation, jamais les vôtres. Testez ce lien sur un autre téléphone, avec une autre connexion, avant de déposer.
-
-[PAUSE 1 s]
-
-**[C · SCHÉMA]** « 2. Livrable deux : la fiche produit » — VO : Deuxième livrable : la fiche produit, sur une page. Huit rubriques. Le nom, le problème, et pour qui. Trois fonctions, et comment la tester. Les données gardées et jamais gardées. Les limites connues, et la prochaine étape.
-
-**[F · CAM A]** C'est la carte d'identité de votre application. Écrivez-la pour quelqu'un qui ne vous connaît pas. En une lecture, il comprend à quoi sert votre application.
-
-[PAUSE 1 s]
-
-**[C · SCHÉMA]** « 3. Cinq critères d'évaluation » — VO : Troisième point : les cinq critères.
-
-**[F · CAM B]** Un, utile : le problème est réel, et clairement décrit. Deux, fonctionnel : le parcours principal marche sur téléphone. Trois, prudent : aucune donnée sensible, aucune clé visible. Quatre, testé : avec deux comptes, s'il y a une connexion. Cinq, honnête : les limites sont écrites. Ces critères ne jugent pas la beauté. Ils jugent l'utilité, la prudence et l'honnêteté.
-
-**[F · CAM A]** Ce qui fait échouer ? Un lien qui ne s'ouvre pas, une fiche absente, ou de vraies données personnelles d'autres personnes. Et choisissez votre propre problème, pas une copie de l'application de Hadiza.
-
-[PAUSE 1 s]
-
-**[B4 — Application · 3:02–5:04]**
-
-**[A · ÉCRAN]** Voyons le projet de Moussa, du début à la fin. D'abord, son cahier des charges. Une page. Le problème : il oublie quelles commandes sont en route. La personne : lui seul. Données jamais gardées : rien sur ses clients.
-
-**[A · ÉCRAN]** Il a construit dans Bolt, sur son ordinateur portable. Mode Plan, puis une étape par consigne. Dans le plan, il a retiré deux fonctions : les comptes clients et les paiements. Feu rouge. Avant de publier, il a fait le test des deux comptes et lu le contrôle de sécurité. Ensuite, il a publié : son adresse finit par bolt.host.
-
-**[A · ÉCRAN]** Testons comme un évaluateur. J'ouvre le lien sur un téléphone. Je me connecte avec le compte de test. J'ajoute une commande, puis je la marque « reçue ». Elle passe dans l'historique. Le parcours principal fonctionne sur téléphone : critère deux, vérifié.
-
-**[A · ÉCRAN]** Voici sa fiche produit. Huit rubriques, une page. Dans les limites, il a écrit : « Pas de sauvegarde automatique : j'exporte chaque fin de mois. » Et dans la prochaine étape : « Ajouter mes fournisseurs de Kano. »
-
-**[G · CONSIGNE]** « Aide-moi à rédiger la fiche produit d'une page de mon application, en français simple. Rubriques : nom ; problème résolu ; pour qui ; trois fonctions principales ; comment la tester ; données gardées et données jamais gardées ; limites connues ; prochaine étape. Voici mes notes : [collez vos notes et votre cahier des charges]. N'invente rien : si une information manque, pose-moi la question. N'écris aucun mot de passe et aucune donnée personnelle. » — VO : Pour rédiger la vôtre, utilisez cette consigne avec un assistant gratuit. Puis vérifiez chaque ligne : c'est vous qui signez la fiche.
-
-**[A · ÉCRAN]** Enfin, le dépôt. Dans l'espace du projet final, Moussa colle son lien, joint sa fiche, et indique son compte de test. Il relit tout une dernière fois, puis il envoie.
-
-[PAUSE 1 s]
-
-**[B5 — Consolidation · 5:04–5:50]**
-
-**[F · CAM B]** Ibrahim, un autre apprenant, dépose une application impressionnante. Mais elle demande une connexion, et il ne fournit aucun compte de test.
-
-**[B · CARTE]** « Aucun compte de test : projet validé ? » — VO : Son projet peut-il être validé ?
-
-**[SILENCE 2 s]**
-
-**[F · CAM B]** Non. L'évaluateur ne peut pas entrer, donc il ne peut rien tester. Donnez un compte de test, avec des données inventées. Dans le formulaire de dépôt, jamais dans une consigne d'IA. Pensez à l'évaluateur comme à un client : il doit pouvoir entrer tout seul. Faites le test vous-même : ouvrez le lien sur un téléphone qui n'est pas le vôtre.
-
-[PAUSE 1 s]
-
-**[B6 — Clôture · 5:50–6:23]**
-
-**[C · SCHÉMA]** « Le parcours : 1. Choisir · 2. Décrire · 3. Prototyper · 4. Mémoriser · 5. Publier » — VO : Le parcours en cinq étapes. Choisir un projet feu vert. Le décrire sur une page. Prototyper, une étape par consigne. Lui donner une mémoire et des comptes. Corriger, vérifier, publier.
-
-**[B · CARTE DE RAPPEL]** « 1. Livrer une mini-application utile, avec son lien et sa fiche » « 2. Deux livrables : le lien publié et la fiche d'une page » « 3. Données inventées, compte de test, aucune clé visible » — VO : Pour votre dépôt : le lien, la fiche, et un compte de test.
-
-**[F · CAM A]** Moussa a déposé son projet. Hadiza aussi. Déposez votre lien et votre fiche dans l'espace du projet final. Livrez votre mini-application.
-
-#### Liste des plans
-
-| # | Type | Cadre / source | Contenu | Durée | Notes |
-|---|---|---|---|---|---|
-| 1 | E | Photo de lieu ou illustration | La quincaillerie de Moussa à Zinder (aucun visage identifiable sans autorisation) ; surtitre « Zinder — la quincaillerie de Moussa » | 4 s | B1 |
-| 2 | F | CAM A | Promesse, idée feu vert de la leçon 1, rappel de la leçon 5 | 24 s | B1 |
-| 3 | F | CAM A | Malentendu « gros et impressionnant », puis « Petit, utile, honnête » | 24 s | B2, deux passages |
-| 4 | A | Téléphone, enregistrement natif | Les trois écrans de l'application de Moussa, puis un plan sur celle de Hadiza | 21 s | B2. Annoter « 3 écrans » |
-| 5 | C | Schémas animés | Cartes des trois points : le lien ; la fiche (huit rubriques qui s'allument) ; les cinq critères | 25 s | B3, trois cartes |
-| 6 | F | CAM A | Explications du lien et de la fiche, causes d'échec, choix de son propre problème | 58 s | B3 |
-| 7 | F | CAM B | Les cinq critères, comptés sur les doigts | 26 s | B3. Incrustation des cinq mots : utile, fonctionnel, prudent, testé, honnête |
-| 8 | A | Document + Bolt (ordinateur) | Cahier des charges de Moussa ; moments clés de la construction dans Bolt (mode Plan, fonctions retirées) ; publication en bolt.host | 56 s | B4. Environ 10 s d'accéléré sans voix |
-| 9 | A | Téléphone, enregistrement natif | Test d'évaluateur : lien, connexion, commande ajoutée et marquée « reçue », historique | 23 s | B4. Montant en FCFA étiqueté « fictif » |
-| 10 | A | Document PDF | Fiche produit de Moussa, rubrique par rubrique | 16 s | B4. Zoom ≤ 6 % sur « Limites connues » |
-| 11 | G | Carte de consigne | Consigne de la fiche produit, texte exact | 12 s | B4 |
-| 12 | A | Navigateur, Karatou Academy | Formulaire de dépôt du projet final rempli avec les éléments de Moussa | 15 s | B4. Mécanisme à confirmer |
-| 13 | F | CAM B | Cas d'Ibrahim, puis réponse | 39 s | B5 |
-| 14 | B / C | Cartes et schéma | « Aucun compte de test : projet validé ? » (2 s de silence) ; parcours en cinq étapes (une par leçon) ; carte de rappel (3 points) | 29 s | B5 et B6 |
-| 15 | F | CAM A | Clôture, consigne de dépôt, titre de l'exercice | 10 s | B6 |
-
-#### Montage idéal
-
-| Temps | Timecode cible | Image principale | Habillage (motion graphics) | Texte à l'écran | Son | Transition |
-|---|---|---|---|---|---|---|
-| B1 | 0:00–0:28 | E (quincaillerie), puis F CAM A | Surtitre lieu ; rappel visuel du feu vert de la leçon 1 | Promesse | voix seule | coupe |
-| B2 | 0:28–1:12 | F CAM A, A (écrans de Moussa, puis de Hadiza), F CAM A | Trois écrans alignés ; mots « petit · utile · honnête » | « Petit, utile, honnête » | voix seule | coupe |
-| B3 | 1:12–3:02 | C (cartes), F CAM A/B | Fiche stylisée dont les huit rubriques s'allument ; cinq critères avec pictogramme et mot | « Livrable 1 · Livrable 2 » ; « Utile · Fonctionnel · Prudent · Testé · Honnête » | voix seule | coupe ; glissement entre points |
-| B4 | 3:02–5:04 | A (document, Bolt, téléphone, fiche, dépôt), G | Frise du projet de Moussa (cahier → construction → publication → test → fiche → dépôt) ; pictogramme « accéléré » | Consigne (G) ; « Montant fictif » ; adresse bolt.host encadrée | voix ; nappe légère | coupe |
-| B5 | 5:04–5:50 | F CAM B, B, F CAM B | Cadenas fermé sur l'application d'Ibrahim ; repère pendant le silence | « Projet validé ? » | voix ; silence total 2 s | coupe |
-| B6 | 5:50–6:23 | C (parcours en cinq étapes), B (carte de rappel), F CAM A | Les cinq étapes s'allument une par une (une par leçon), puis les trois points | Parcours ; 3 points ; « Espace du projet final » | voix ; nappe de fin (Partie 1) | coupe, puis carte de clôture (Partie 1) |
-
-**Notes de montage** : B4 doit montrer chaque livrable assez longtemps pour être compris (≥ 3 s par écran clé) sans devenir un tutoriel Bolt. Le récapitulatif de B6 reprend la frise du cours (même style que les cartes des unités). Aucune donnée réelle : clients, fournisseurs et montants de Moussa sont inventés et étiquetés. Si le mécanisme de dépôt change, remplacer le plan 12 sans toucher à la voix (formulation générique « l'espace du projet final »).
+**Notes de montage** : pas d'accéléré nécessaire, sauf l'éventuelle attente de publication (×4 à ×8, « Accéléré »). Pour le téléphone : préférer le miroir d'écran, intégré dans un cadre de smartphone sobre ; à défaut, l'insert filmé, stabilisé, sans reflet. Couper avant l'ouverture d'une vraie conversation WhatsApp. Zooms ≤ 6 % sur le bouton Publier et sur l'adresse du site. Flouter crédits, plan d'abonnement et identifiants de projet. Garder la check-list visible en colonne pendant toute la démo, la question en cours mise en valeur par un cadre et une coche (jamais par la seule couleur). **Carte récap** (carte de rappel finale, cinq points) à 3:15. **Mentions légales** (3 s) après la dernière phrase : texte standard + mois et année. Plans de couverture : inserts pouce qui fait défiler, doigt sur le bouton WhatsApp.
 
 #### Versions EN / HA / DJE
 
-- **À re-filmer dans la langue** (≈ 25 s) : ouverture — « À la fin de cette leçon, vous saurez livrer une mini-application utile, avec son lien et sa fiche. Aujourd'hui, c'est votre projet final, celui qui mène au certificat. » ; conclusion — « Moussa a déposé son projet. Hadiza aussi. Déposez votre lien et votre fiche dans l'espace du projet final. Livrez votre mini-application. »
-- **Doublé en voix clonée** : B2 (plan 3) → les trois écrans de Moussa prolongés ; B3 (plans 6 et 7) → fiche stylisée aux huit rubriques, pictogrammes des cinq critères, schéma des causes d'échec ; B5 (plan 13) → cadenas sur l'application d'Ibrahim, puis carte « compte de test ».
-- **Notes d'adaptation** : « fiche produit » : en EN « one-page product sheet » ; en HA et DJE, périphrase « la feuille qui présente l'application ». « Projet certifiant » : en EN « certification project ». Les cinq critères doivent rester cinq mots courts dans chaque langue, faciles à compter sur les doigts. FCFA se dit ainsi dans les trois langues.
+- **À re-filmer dans la langue** (≈ 30 s) : ouverture (plan 1) et conclusion (plan 14), dont l'annonce « Prochain cours : transformer un site en vraie application ».
+- **Doublé en voix clonée** : B2/B3 (plan 2) → plan 3 (Lovable, bouton Publier) avancé ; B5 (plans 10 et 12) → carte des livrables prolongée et pictogrammes ; ou insert du téléphone.
+- **Notes d'adaptation** : la check-list est traduite à l'écran dans chaque langue. « Certificat » : préciser en HA et DJE le terme utilisé par la plateforme. Le mode de dépôt doit être le même dans toutes les langues : mettre à jour les quatre versions dès qu'il est fixé.
 
 ## 2.6 Captures et éléments à préparer
 
 | Leçon | Élément | Comment l'obtenir | Qui |
 |---|---|---|---|
-| 1 | Photo ou illustration : Hadiza à son bureau à Niamey, téléphone en main, papiers épars | Photo mise en scène avec une personne consentante (autorisation écrite), ou illustration selon la charte de la Partie 1 | owner / Claude |
-| 1 | Capture : pages publiques de Karatou Academy | Navigateur, profil « Karatou démo », aucune donnée d'apprenant | owner |
-| 1, 5 | Capture : session Claude Code réelle sur le dépôt Karatou Academy (demande en français → plan → accord → fichiers modifiés → test) | Application Claude, onglet Code, branche de travail ; aucune clé, aucun fichier de configuration, aucun identifiant de projet à l'écran | owner |
-| 1 | Capture : page du dictionnaire Collins sur le mot de l'année 2025 (« vibe coding ») | Navigateur ; source affichée à l'écran | Claude ou owner |
-| 1 | Captures : accueils de Lovable (web) et de Bolt, application mobile de Lovable, onglet Code de l'application Claude | Comptes de démo ; écrans d'accueil seulement | owner |
-| 1 | Capture : démo micro-application (consigne → aperçu → amélioration → vue téléphone) | Lovable, compte gratuit de démo, enregistrement continu | owner |
-| 2 | Photo ou illustration : Hadiza déçue devant son ordinateur | Comme en leçon 1 | owner / Claude |
-| 2 | Capture : résultat réel de la phrase « Fais-moi une application de bourses » | Lovable, nouveau projet, compte de démo | owner |
-| 2 | Capture : entretien avec Claude (consigne → questions → page finale → relecture) | Claude version gratuite ; réponses préparées (fiche de la leçon 2) | owner |
-| 2 | Cahier des charges de Hadiza : fichier texte, capture rubrique par rubrique (B3) et version imprimée pour le décor | Issu de la démo, relu par l'owner ; capture dans un éditeur de texte ou les notes du téléphone | owner |
-| 2 | Insert : croquis au crayon des trois écrans (trois cases sur une feuille) | Dessiné par l'owner, filmé en insert | owner |
-| 3 | Captures : mode Plan, plan proposé, étapes 1 à 3, vue téléphone, historique des versions | Lovable, projet de démo | owner |
-| 3 | Capture : même cahier des charges en mode Plan dans Bolt, jusqu'au premier aperçu | Bolt sur ordinateur, navigateur récent | owner |
-| 3 | Capture : application mobile de Lovable, consigne dictée à la voix | Téléphone, enregistrement natif [à vérifier au moment du tournage : fonction disponible] | owner |
-| 3 | Capture : le prototype terminé, parcouru au doigt sur téléphone (B2) | Enregistrement natif, à la fin de la démo | owner |
-| 4 | Captures : activation de Lovable Cloud, tableaux, test de mémoire, écran de connexion, règles d'accès, compte « Hadiza » | Lovable, projet de démo ; adresses de test du tournage | owner |
-| 4 | Captures : même compte sur un second téléphone ; compte « Rahila » avec liste vide | Second téléphone, enregistrement natif | owner |
-| 5 | Photo ou illustration : Hadiza lit un message sur son téléphone | Comme en leçon 1 ; la bulle de message est ajoutée en graphique | owner / Claude |
-| 5 | Captures : défaut de date passée, signalement, correction, retest, fenêtre de publication et contrôle de sécurité, publication | Lovable, projet de démo | owner |
-| 5 | Capture : l'application de Hadiza ouverte depuis son lien, écran de connexion (B2) ; espace des secrets vide (couverture) | Navigateur, après publication ; Lovable Cloud [à vérifier au moment du tournage : emplacement des secrets] | owner |
-| 5 | Captures : historique des versions, bouton « Exporter » ajouté, copie du code sur GitHub | Lovable + compte GitHub de démo [à vérifier au moment du tournage : disponible en version gratuite] | owner |
-| 5 | Carte HAPDP : nom complet et pays | Vérifier l'intitulé sur le site officiel de l'autorité [à vérifier au moment du tournage : texte de loi en vigueur, sans le citer à l'écran] | Claude |
-| 6 | Application de Moussa dans Bolt : cahier des charges, construction (moments clés), publication en bolt.host, compte de test, données inventées ; ses trois écrans sur téléphone (B2) | Construite avant la session 2 par l'owner | owner |
-| 6 | Photo ou illustration : la quincaillerie de Moussa à Zinder | Photo de lieu sans visage identifiable, ou illustration | owner / Claude |
-| 6 | Fiche produit de Moussa (PDF d'une page) | Rédigée avec la consigne de la leçon 6, relue | owner + Claude |
-| 6 | Capture : formulaire de dépôt du projet final sur Karatou Academy | Plateforme, compte de démo [à vérifier au moment du tournage : mécanisme de dépôt] | owner |
-| Toutes | Inserts : mains au clavier, pouce qui coche, calendrier, page imprimée, deux téléphones côte à côte | Fin de la session 3 | owner |
-| Toutes | Cartes (B, G), schémas (C), cartes de rappel, frise du parcours | HyperFrames, selon la Partie 1 | Claude |
+| 1 | Photo ou illustration : Hadiza dans son atelier à Maradi | Photo mise en scène (autorisation écrite) ou illustration ; pas de faux écran WhatsApp | owner / Claude |
+| 1 | Captures : pages d'accueil de canva.com (rubrique Code), lovable.dev, bolt.new, replit.com | Profil Chrome dédié, zoom 125 % ; 10 s immobile + léger défilement chacune ; sans connexion, sans tarif | owner |
+| 2 | Capture : conversation complète dans Claude (ou Gemini), du collage de la consigne à la fiche finale | Compte de démo, version gratuite ; réponses fictives d'Hadiza (fiche vc2) ; numéro `+227 00 00 00 00` | owner |
+| 2 | Fiche finale d'Hadiza en fichier texte | Copiée à la fin de la démo ; réutilisée en vc3 et vc4 | owner |
+| 3 | Capture : séquence Canva complète, étapes 1 à 8, en une prise | Compte Canva Karatou ; garder une éventuelle génération ratée | owner |
+| 4 | Capture : séquence Lovable complète, étapes 1 à 7, en une prise, depuis la page d'accueil | Compte de démo ; fausses données dans le formulaire ; aucune base de données ni clé | owner |
+| 4 | Captures : 10 s du site Canva et 10 s du site Lovable, pour l'écran partagé | Liens publiés (Canva) et aperçu ou lien (Lovable) | owner |
+| 5 | Capture : publication dans Lovable, adresse lovable.app, copie du lien | Projet d'Hadiza de vc4 | owner |
+| 5 | Capture téléphone : le site ouvert, défilement complet, test du bouton WhatsApp | Miroir d'écran ou insert filmé ; téléphone en « Ne pas déranger » | owner |
+| 5 | Page ou formulaire de dépôt du projet final | Plateforme Karatou [mode de dépôt à préciser] | owner |
+| Toutes | Inserts : mains qui collent la fiche, pouce qui fait défiler, doigt sur le bouton WhatsApp, tissu et mètre ruban | Fin de la session | owner |
+| Toutes | Cartes (B, G), schémas (C), cartes de rappel, check-list, écran partagé, mentions légales | HyperFrames, selon la Partie 1 | Claude |
+| Toutes | Rushes déposés : `lecons/L0N/rushes/camA-<n>.mp4` et `lecons/L0N/rushes/ecran-<n>.mp4` | Après la session | owner |

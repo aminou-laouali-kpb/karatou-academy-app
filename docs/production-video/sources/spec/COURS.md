@@ -20,7 +20,7 @@ ils seront confirmés à l'intégration dans le site (skill `karatou-course-crea
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | 01-ia-expliquee-simplement | L'IA expliquée simplement | Filmé | Idriss | IA & Données | Grand public | `ia-expliquee-simplement` | `is` | 7 | 5–8 min (cible 6:00) |
 | 2 | 02-agents-ia | Agents IA : construire son premier agent | Filmé | Idriss | IA & Données | Pros / ONG / PME | `agents-ia` | `ag` | 7 | 5–8 min (cible 6:30) |
-| 3 | 03-vibe-coding | Vibe coding : créer une app sans savoir coder | Filmé | Aminou | Culture numérique | Étudiants / entrepreneurs / pros | `vibe-coding` | `vc` | 6 | 5–8 min (cible 6:30) |
+| 3 | 03-vibe-coding | Vibe coding : créer un site web avec l'IA, sans coder | Filmé | Aminou | Culture numérique | Étudiants / entrepreneurs / pros | `vibe-coding` | `vc` | 5 | 4–6:30 min (≈ 25 min au total) |
 | 4 | 04-business-ia | Lancer et développer son business avec l'IA | Filmé | Aminou | Entrepreneuriat | Entrepreneurs / commerçants | `business-ia` | `bz` | 6 | 5–8 min (cible 6:00) |
 | 5 | 05-visuels-videos-ia | Créer visuels et vidéos avec l'IA | Filmé | Aminou | Employabilité | Étudiants / jeunes diplômés | `visuels-videos-ia` | `vv` | 6 | 5–8 min (cible 6:00) |
 | Alt | A1-ia-ong-developpement | IA pour les ONG et le développement | Filmé | Aminou | IA & Données | ONG / agences / PNUD | `ia-ong-developpement` | `on` | 6 | 5–8 min (cible 6:00) |
@@ -68,7 +68,7 @@ exemple de rendu réussi et les critères d'évaluation, et récapitule le cours
   tester et documenter son agent (fiche agent + démo).
 - Pas de promesse de « remplacer un employé ». Pas de chiffre de gain de temps.
 
-### 3 · Vibe coding : créer une app sans savoir coder — filmé, Aminou, 6 vidéos
+### 3 · Vibe coding : créer un site web avec l'IA, sans coder — filmé, Aminou, 6 vidéos
 - Contenu clé : Lovable, Bolt, Claude Code ; démo : une app de suivi de bourses construite en direct.
 - Rôle : très « preuve », fort effet d'autorité (Aminou construit réellement des apps ainsi, dont Karatou Academy).
 - Fil possible : ce qu'est le vibe coding (décrire → l'IA code) et ses limites → écrire un cahier des charges d'une

@@ -56,7 +56,7 @@ plateforme : ces vidéos sont produites et gardées en attente.
 |---|---|---|---|---|
 | 1 | L'IA expliquée simplement | Filmé | Idriss | `01-ia-expliquee-simplement_CLAUDE.md` |
 | 2 | Agents IA : construire son premier agent | Filmé | Idriss | `02-agents-ia_CLAUDE.md` |
-| 3 | Vibe coding : créer une app sans savoir coder | Filmé | Aminou | `03-vibe-coding_CLAUDE.md` |
+| 3 | Vibe coding : créer un site web avec l'IA, sans coder | Filmé | Aminou | `03-vibe-coding_CLAUDE.md` |
 | 4 | Lancer et développer son business avec l'IA | Filmé | Aminou | `04-business-ia_CLAUDE.md` |
 | 5 | Créer visuels et vidéos avec l'IA | Filmé | Aminou | `05-visuels-videos-ia_CLAUDE.md` |
 | Alt | IA pour les ONG et le développement | Filmé | Aminou | `A1-ia-ong-developpement_CLAUDE.md` |
