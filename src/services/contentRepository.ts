@@ -38,6 +38,7 @@ interface ModuleRow {
   display_order: number;
   status: DbStatus;
   translations: LearningModule['translations'];
+  intro_video?: LearningModule['introVideo'] | null;
 }
 
 interface CourseRow {
@@ -121,6 +122,7 @@ function mapModule(row: ModuleRow, courses: Course[]): LearningModule {
     order: row.display_order,
     status: row.status,
     translations: row.translations || {},
+    introVideo: row.intro_video || {},
     courses,
   };
 }
@@ -179,6 +181,11 @@ function moduleToRow(module: LearningModule) {
     display_order: module.order || 0,
     status: module.status || 'draft',
     translations: module.translations || {},
+    // Envoyé seulement s'il a été renseigné : une ligne déjà en base garde sa vidéo,
+    // et l'enregistrement fonctionne même avant la migration intro_video.
+    ...(module.introVideo && Object.keys(module.introVideo).length > 0
+      ? { intro_video: module.introVideo }
+      : {}),
   };
 }
 

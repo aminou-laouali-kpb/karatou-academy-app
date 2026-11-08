@@ -82,6 +82,8 @@ export interface LearningModule {
   order?: number;
   status?: PublicationStatus;
   translations?: Partial<Record<Language, ModuleTranslation>>;
+  /** Vidéo d'introduction du cours (URL YouTube embed), par langue. */
+  introVideo?: Partial<Record<Language, string>>;
   courses: Course[];
 }
 

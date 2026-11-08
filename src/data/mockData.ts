@@ -216,7 +216,7 @@ export const modules: LearningModule[] = [
     certified: false,
     isFree: true,
     order: 5,
-    status: 'draft',
+    status: 'published',
     courses: [
       { id: 'is1', title: "L'IA, vous l'utilisez deja", duration: '20 min', description: "Reperer l'IA dans son telephone et l'expliquer simplement." },
       { id: 'is2', title: 'Comment une IA apprend', duration: '20 min', description: "Comprendre qu'une IA apprend a partir d'exemples et donne la reponse la plus probable." },
@@ -245,7 +245,7 @@ export const modules: LearningModule[] = [
     certified: false,
     isFree: true,
     order: 6,
-    status: 'draft',
+    status: 'published',
     courses: [
       { id: 'ag1', title: 'Agent IA ou simple assistant : la difference, et les 5 methodes pour creer un agent', duration: '20 min', description: "Reconnaitre un agent, le decrire en six pieces et choisir la methode pour creer le votre." },
       { id: 'ag2', title: 'Methode 1 : creer un agent avec un projet Claude, un GPT ou un Gem', duration: '20 min', description: 'Un agent a la demande, avec des instructions et des fichiers poses une fois pour toutes.' },
@@ -275,7 +275,7 @@ export const modules: LearningModule[] = [
     certified: false,
     isFree: true,
     order: 7,
-    status: 'draft',
+    status: 'published',
     courses: [
       { id: 'ad1', title: "Rediger un courrier administratif avec l'IA, sans divulguer de donnees", duration: '15 min', description: 'Un brouillon de courrier au bon registre, a partir d elements anonymises et du modele du service.' },
       { id: 'ad2', title: "Transformer vos notes de reunion en proces-verbal avec l'IA", duration: '15 min', description: 'Un proces-verbal fidele avec tableau des actions, pret a faire valider.' },
@@ -302,7 +302,7 @@ export const modules: LearningModule[] = [
     certified: false,
     isFree: true,
     order: 8,
-    status: 'draft',
+    status: 'published',
     courses: [
       { id: 'og1', title: "Choisir la bonne famille d'outils IA pour chaque tache", duration: '15 min', description: "Les cinq familles d'outils IA, et la difference entre l'application et le modele." },
       { id: 'og2', title: 'Comparer Gemini, ChatGPT, Claude et Copilot sur votre propre tache', duration: '15 min', description: 'La meme consigne dans quatre assistants, une grille de quatre criteres et un plan B.' },
