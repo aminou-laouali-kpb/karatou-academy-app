@@ -11,10 +11,10 @@ export const ogLesson6: Record<Language, LessonContent> = {
     "title": "Installer une IA open source sur votre ordinateur avec LM Studio",
     "objective": "À la fin de cette leçon, vous saurez installer LM Studio et faire tourner un modèle open source sur votre ordinateur, même sans connexion. Vous saurez lire le « B » dans le nom d’un modèle, vérifier votre mémoire vive et choisir un modèle que votre machine supporte. Vous saurez rechercher, télécharger, charger et tester ce modèle avec une consigne RCTF, en connaissant ses limites et les pistes pour aller plus loin.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/nwyi4-qAFcw",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Faire tourner une IA chez vous avec LM Studio, sans être informaticien",
@@ -121,10 +121,10 @@ export const ogLesson6: Record<Language, LessonContent> = {
     "title": "Install an open-source AI on your computer with LM Studio",
     "objective": "By the end of this lesson, you will be able to install LM Studio and run an open-source model on your computer, even without a connection. You will know how to read the “B” in a model’s name, check your RAM and choose a model your machine can handle. You will be able to search for, download, load and test that model with an RCTF prompt, knowing its limits and where to go further.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/nwyi4-qAFcw",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Run an AI at home with LM Studio, without being a computer expert",
@@ -231,10 +231,10 @@ export const ogLesson6: Record<Language, LessonContent> = {
     "title": "Sanya AI mai budadden tushe (open source) a kwamfutarku da LM Studio",
     "objective": "A karshen wannan darasi, za ku iya sanya LM Studio kuma ku gudanar da samfurin AI mai budadden tushe a kwamfutarku, ko babu intanet. Za ku iya karanta « B » da ke cikin sunan samfuri, ku duba memorin aiki (RAM) na kwamfutarku, sannan ku zabi samfurin da na’urarku za ta iya dauka. Za ku iya nemo samfurin, ku sauke shi, ku loda shi, ku gwada shi da umarnin RCTF, tare da sanin iyakokinsa da hanyoyin zurfafa gaba.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/nwyi4-qAFcw",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Gudanar da AI a gida da LM Studio, ba tare da zama kwararren kwamfuta ba",

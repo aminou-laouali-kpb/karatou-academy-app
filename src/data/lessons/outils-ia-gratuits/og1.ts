@@ -11,10 +11,10 @@ export const ogLesson1: Record<Language, LessonContent> = {
     "title": "Choisir la bonne famille d’outils IA pour chaque tâche",
     "objective": "À la fin de cette leçon, vous saurez relier chaque tâche à une famille d’outils IA. Vous saurez partir de la tâche plutôt que de l’outil, et reconnaître les cinq familles retenues dans ce cours : les assistants, la recherche sourcée, l’image, l’audio et vos propres documents. Vous saurez faire préparer une fiche de révision à NotebookLM avec une consigne RCTF, puis vérifier chaque point grâce à sa citation. Vous saurez aussi distinguer une application, comme ChatGPT ou Gemini, du modèle qui répond derrière elle.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/MRu7-FK2PJg",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Commencer par la tâche, pas par l’outil",
@@ -139,10 +139,10 @@ export const ogLesson1: Record<Language, LessonContent> = {
     "title": "Choosing the right AI tool family for each task",
     "objective": "By the end of this lesson, you will know how to match each task to an AI tool family. You will know how to start from the task rather than the tool, and recognise the five families used in this course: assistants, sourced search, image, audio and your own documents. You will be able to have NotebookLM prepare a revision sheet with an RCTF prompt, then check each point using its citation. You will also be able to tell an app, such as ChatGPT or Gemini, apart from the model that answers behind it.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/MRu7-FK2PJg",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Start with the task, not the tool",
@@ -267,10 +267,10 @@ export const ogLesson1: Record<Language, LessonContent> = {
     "title": "Zabar nau’in kayan aikin AI da ya dace da kowane aiki",
     "objective": "A karshen wannan darasi, za ku san yadda ake hada kowane aiki da nau’in kayan aikin AI da ya dace da shi. Za ku san yadda ake farawa daga aikin, ba daga kayan aikin ba, kuma ku gane nau’o’i biyar da wannan kwas ya zaba: mataimakan AI, bincike mai tushe, hoto, sauti da takardunku na kanku. Za ku iya sa NotebookLM ya shirya takardar bita da umarnin RCTF, sannan ku duba kowane batu ta hanyar lambar nuninsa. Za ku kuma iya bambance manhaja, kamar ChatGPT ko Gemini, da model din da ke amsawa a bayanta.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/MRu7-FK2PJg",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Fara da aikin, ba da kayan aikin ba",

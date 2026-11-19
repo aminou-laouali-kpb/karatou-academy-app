@@ -696,6 +696,26 @@ export function AdminContent() {
                     className="mt-1.5 h-24 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                   />
                 </label>
+                <div className="md:col-span-2">
+                  <span className="text-body font-medium text-gray-700">{t('cmsIntroVideo')}</span>
+                  <p className="mt-0.5 text-caption text-gray-500">{t('cmsIntroVideoHelp')}</p>
+                  <div className="mt-1.5 grid gap-2 md:grid-cols-3">
+                    {(['fr', 'en', 'ha'] as const).map((lang) => (
+                      <label key={lang} className="flex items-center gap-2">
+                        <span className="w-7 text-caption font-semibold uppercase text-gray-500">{lang}</span>
+                        <input
+                          type="url"
+                          value={draft.introVideo?.[lang] || ''}
+                          onChange={(event) =>
+                            patchDraft({ introVideo: { ...draft.introVideo, [lang]: event.target.value.trim() } })
+                          }
+                          placeholder="https://www.youtube.com/embed/…"
+                          className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4 mt-5">

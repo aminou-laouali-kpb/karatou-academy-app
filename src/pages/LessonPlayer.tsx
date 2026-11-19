@@ -227,6 +227,8 @@ export function LessonPlayer() {
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const [quizSubmitted, setQuizSubmitted] = useState<Record<number, boolean>>({});
   const [videoLang, setVideoLang] = useState<Language>(lang);
+  // null = choix automatique : la présentation s'ouvre quand on arrive sur le cours sans leçon choisie.
+  const [introOpen, setIntroOpen] = useState<boolean | null>(null);
   const [expandedBloc, setExpandedBloc] = useState<number | null>(0);
   const [issuedUid, setIssuedUid] = useState('');
   const openSidebarBtnRef = useRef<HTMLButtonElement>(null);
@@ -360,6 +362,8 @@ export function LessonPlayer() {
   const previousCourse = module.courses[courseIndex - 1];
   const nextCourse = module.courses[courseIndex + 1];
   const videoUrl = lesson.video[videoLang];
+  const introUrl = module.introVideo?.[lang] || module.introVideo?.fr || '';
+  const showIntro = Boolean(introUrl) && (introOpen ?? !courseId);
 
   const handleComplete = async () => {
     if (!user) {
@@ -377,7 +381,13 @@ export function LessonPlayer() {
     }
   };
 
+  const openIntro = () => {
+    setIntroOpen(true);
+    setSidebarOpen(false);
+  };
+
   const goToCourse = (targetCourseId: string) => {
+    setIntroOpen(false);
     navigate(`/learn/${module.slug}/${targetCourseId}`);
     setActiveTab('objective');
     setCurrentQuiz(0);
@@ -434,8 +444,22 @@ export function LessonPlayer() {
             </div>
 
             <div className="space-y-1">
+              {introUrl && (
+                <button
+                  onClick={openIntro}
+                  aria-current={showIntro ? 'page' : undefined}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-body transition-colors text-left ${
+                    showIntro ? 'bg-amber-50 text-amber-800 font-medium' : 'text-gray-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                    <Play size={14} className={showIntro ? 'text-amber-600' : 'text-gray-400'} />
+                  </span>
+                  <span className="flex-1 truncate">{t('courseIntro')}</span>
+                </button>
+              )}
               {module.courses.map((item, index) => {
-                const isCurrent = item.id === course.id;
+                const isCurrent = !showIntro && item.id === course.id;
                 const isCompleted = isCourseCompleted(module.slug, item.id);
 
                 return (
@@ -479,6 +503,26 @@ export function LessonPlayer() {
         </aside>
 
         <main id="main-content" className="flex-1 min-w-0 pb-24">
+          {showIntro ? (
+            <div className="px-4 sm:px-8 py-6 max-w-4xl">
+              <p className="text-eyebrow text-amber-600">{t('courseIntro')}</p>
+              <h1 className="font-heading text-h3 sm:text-h2 text-gray-900 mb-4">{module.title}</h1>
+              <div className="aspect-video rounded-2xl overflow-hidden mb-4 bg-gray-900">
+                <iframe
+                  src={introUrl}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={`${t('courseIntro')} - ${module.title}`}
+                />
+              </div>
+              <p className="text-body text-gray-600 mb-6">{module.description}</p>
+              <Button variant="gold" onClick={() => goToCourse(module.courses[0].id)}>
+                {t('start')} - {t('lesson')} 1 <ChevronRight size={16} />
+              </Button>
+            </div>
+          ) : (
+          <>
           <div className="bg-white border-b border-gray-100 px-4 sm:px-8 py-4">
             <div className="flex flex-wrap items-center gap-2 mb-1">
               <p className="text-eyebrow text-blue-500">{t('lesson')} {courseIndex + 1}</p>
@@ -854,6 +898,8 @@ export function LessonPlayer() {
               </Button>
             </div>
           </div>
+          </>
+          )}
         </main>
       </div>
     </div>

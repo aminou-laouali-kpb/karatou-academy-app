@@ -11,10 +11,10 @@ export const ogLesson5: Record<Language, LessonContent> = {
     "title": "Installer une IA open source sur votre téléphone, pour l’utiliser hors connexion",
     "objective": "À la fin de cette leçon, vous saurez installer une IA open source sur votre téléphone et l’utiliser sans connexion, même en mode avion. Vous saurez expliquer pourquoi un modèle installé garde vos questions dans votre téléphone, choisir le plus petit modèle que votre appareil supporte et le télécharger une seule fois, en wifi. Vous connaîtrez aussi ses limites : des réponses plus simples, à vérifier, de la place et de la batterie consommées, et aucune information récente sans Internet.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/v4biRhCmuHI",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Sans réseau, une IA installée sur votre téléphone continue de répondre",
@@ -121,10 +121,10 @@ export const ogLesson5: Record<Language, LessonContent> = {
     "title": "Install an open source AI on your phone, to use it offline",
     "objective": "By the end of this lesson, you will know how to install an open source AI on your phone and use it without a connection, even in airplane mode. You will be able to explain why an installed model keeps your questions on your phone, choose the smallest model your device can handle and download it only once, over wifi. You will also know its limits: simpler answers that need checking, storage and battery use, and no recent information without the Internet.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/v4biRhCmuHI",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "With no network, an AI installed on your phone keeps answering",
@@ -231,10 +231,10 @@ export const ogLesson5: Record<Language, LessonContent> = {
     "title": "Shigar da AI na open source a wayarku, don amfani da ita ba tare da intanet ba",
     "objective": "A karshen wannan darasi, za ku san yadda ake shigar da AI na open source a wayarku, ku kuma yi amfani da ita ba tare da intanet ba, har ma a cikin mode avion (yanayin jirgin sama). Za ku iya bayyana dalilin da ya sa samfurin da aka shigar yake barin tambayoyinku a cikin wayarku, ku zabi mafi karamin samfurin da wayarku za ta iya dauka, ku kuma sauke shi sau daya kawai, ta wifi. Za ku kuma san iyakokinsa: amsoshi masu sauki da dole a tantance su, wurin ajiya da batir da yake cinyewa, kuma babu sabon labari idan babu intanet.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/v4biRhCmuHI",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Babu sadarwa, AI da aka shigar a wayarku tana ci gaba da amsawa",

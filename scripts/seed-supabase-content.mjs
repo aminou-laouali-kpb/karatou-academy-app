@@ -116,6 +116,10 @@ function moduleToRow(module) {
     display_order: module.order || 0,
     status: module.status || 'draft',
     translations: module.translations || {},
+    // Le seed n'écrase jamais une vidéo d'introduction saisie dans l'admin.
+    ...(module.introVideo && Object.keys(module.introVideo).length > 0
+      ? { intro_video: module.introVideo }
+      : {}),
   };
 }
 

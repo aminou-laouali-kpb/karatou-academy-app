@@ -16,6 +16,25 @@ describe('module outils-ia-gratuits (cours de lancement 15)', () => {
     expect(module?.lessons).toBe(IDS.length);
   });
 
+  it('chaque lecon a sa video francaise, au format que le lecteur sait integrer', async () => {
+    // le lecteur affiche la video dans une iframe : un lien youtu.be ou watch?v= y reste vide
+    const EMBED = /^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]{11}$/;
+    for (const id of IDS) {
+      for (const lang of LANGS) {
+        const lesson = await loadAuthoredLesson(SLUG, id, lang);
+        expect(lesson?.video.fr, `${id}/${lang} video.fr`).toMatch(EMBED);
+      }
+    }
+  });
+
+  it('les cours 1, 5, 6, 7 et 8 ont une video de presentation integrable', () => {
+    const EMBED = /^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]{11}$/;
+    for (const id of ['1', '5', '6', '7', '8']) {
+      const module = modules.find((m) => m.id === id);
+      expect(module?.introVideo?.fr, `module ${id} introVideo.fr`).toMatch(EMBED);
+    }
+  });
+
   IDS.forEach((id, index) => {
     LANGS.forEach((lang) => {
       it(`${id}/${lang} est coherent`, async () => {
