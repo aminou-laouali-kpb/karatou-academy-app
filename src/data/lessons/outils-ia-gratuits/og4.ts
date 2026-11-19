@@ -14,7 +14,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
       "fr": "",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Gratuit ne veut pas dire sans prix : vous payez en données et en attention",
@@ -142,7 +142,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
       "fr": "",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Free does not mean no price: you pay with your data and your attention",
@@ -270,7 +270,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
       "fr": "",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Kyauta ba ya nufin babu farashi: kuna biya da bayananku da hankalinku",

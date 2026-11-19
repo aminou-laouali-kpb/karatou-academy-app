@@ -11,10 +11,10 @@ export const ogLesson3: Record<Language, LessonContent> = {
     "title": "Obtenir une réponse sourcée avec l’IA et vérifier chaque source",
     "objective": "À la fin de cette leçon, vous saurez obtenir de l’IA une réponse sourcée, c’est-à-dire un résumé dont chaque information renvoie à une page que vous pouvez ouvrir. Vous saurez rédiger une consigne RCTF qui exige des sources officielles et datées, puis vérifier chaque source avec trois questions : qui parle, quand, et est-ce bien écrit dedans. Vous saurez enfin écarter une source ancienne ou non officielle, et noter l’information retenue avec son lien et sa date.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YwLhETG2JqA",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Une date précise n’est pas une date vérifiée",
@@ -139,10 +139,10 @@ export const ogLesson3: Record<Language, LessonContent> = {
     "title": "Getting a Sourced Answer from AI and Checking Every Source",
     "objective": "By the end of this lesson, you will know how to get a sourced answer from AI, meaning a summary in which every piece of information points to a page you can open. You will know how to write an RCTF prompt that requires official, dated sources, then check each source with three questions: who is speaking, when, and is it really written there. Finally, you will know how to set aside an old or unofficial source, and note down the information you keep with its link and its date.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YwLhETG2JqA",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "A Precise Date Is Not a Verified Date",
@@ -267,10 +267,10 @@ export const ogLesson3: Record<Language, LessonContent> = {
     "title": "Samun amsa mai majiya daga AI da duba kowace majiya",
     "objective": "A karshen wannan darasi, za ku san yadda ake samun amsa mai majiya daga AI, wato takaitaccen bayani wanda kowane labari a cikinsa yake nuna shafin da za ku iya budewa. Za ku san yadda ake rubuta umurnin RCTF da ke neman majiyoyin hukuma masu kwanan wata, sannan ku duba kowace majiya da tambayoyi uku: wa ke magana, yaushe, kuma shin an rubuta hakan a ciki. A karshe, za ku san yadda ake ajiye majiyar da ta tsufa ko wadda ba ta hukuma ba a gefe, ku kuma rubuta labarin da kuka rike tare da mahadarsa da kwanan watansa.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/YwLhETG2JqA",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Kwanan wata mai daidaito ba kwanan wata da aka tabbatar ba ne",

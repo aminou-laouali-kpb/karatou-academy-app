@@ -11,10 +11,10 @@ export const ogLesson7: Record<Language, LessonContent> = {
     "title": "Projet final : construire votre boîte à outils IA, en ligne et installée",
     "objective": "À la fin de cette leçon, vous saurez construire et justifier votre boîte à outils IA : une fiche d’une page qui relie cinq tâches réelles à une famille d’outils, un outil, une raison et un plan B, avec au moins un outil installé sur votre téléphone ou votre ordinateur. Vous saurez appuyer chaque choix sur trois preuves (un test à consigne égale, une source vérifiée, une capture de protection) et sur une règle de données tenue en une phrase. Vous saurez vérifier votre dossier avec les cinq critères du certificat, puis l’exporter en un seul PDF et le déposer. Ce projet final reprend le fil des Leçons 1 à 6 et, avec le quiz cumulatif, débloque votre certificat numérique vérifiable.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/JySYIN6diRs",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Les trois livrables du projet : une fiche justifiée, pas une longue liste d’applications",
@@ -176,10 +176,10 @@ export const ogLesson7: Record<Language, LessonContent> = {
     "title": "Final project: build your AI toolkit, online and installed",
     "objective": "By the end of this lesson, you will know how to build and justify your AI toolkit: a one-page sheet that links five real tasks to a tool family, a tool, a reason and a plan B, with at least one tool installed on your phone or computer. You will know how to back each choice with three pieces of evidence (a same-prompt test, a verified source, a protection screenshot) and with a one-sentence data rule. You will know how to check your file against the five certificate criteria, then export it as a single PDF and submit it. This final project pulls together the thread of Lessons 1 to 6 and, with the cumulative quiz, unlocks your verifiable digital certificate.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/JySYIN6diRs",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "The three project deliverables: a justified sheet, not a long list of apps",
@@ -341,10 +341,10 @@ export const ogLesson7: Record<Language, LessonContent> = {
     "title": "Aikin karshe: ku gina akwatin kayan aikin AI naku, na kan layi da wanda aka girka",
     "objective": "A karshen wannan darasi, za ku iya ginawa da kuma bayyana dalilan akwatin kayan aikin AI naku: takarda shafi daya da ke danganta ayyuka biyar na gaske da rukunin kayan aiki, kayan aiki, dalili da zabi na biyu (plan B), tare da akalla kayan aiki daya da aka girka a wayarku ko kwamfutarku. Za ku iya tallafa wa kowane zabi da hujjoji uku (gwaji da umarni iri daya, majiya da aka tantance, hoton allo na kariya) da kuma dokar bayanai a jumla daya. Za ku iya duba fayil dinku da ma’auni biyar na takardar shaida, sannan ku fitar da shi a PDF guda daya ku mika shi. Wannan aikin karshe yana tattara zaren Darasi 1 zuwa 6, kuma tare da tambayoyin jarrabawa na tattarawa, yana bude muku takardar shaida ta dijital da za a iya tantancewa.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/JySYIN6diRs",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Abubuwa uku da za a mika a aikin: takarda mai dalilai, ba dogon jerin manhajoji ba",

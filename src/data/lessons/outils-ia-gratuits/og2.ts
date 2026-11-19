@@ -11,10 +11,10 @@ export const ogLesson2: Record<Language, LessonContent> = {
     "title": "Comparer Gemini, ChatGPT, Claude et Copilot sur votre propre tâche",
     "objective": "À la fin de cette leçon, vous saurez tester plusieurs assistants sur votre propre tâche. Vous saurez coller la même consigne RCTF, mot pour mot, dans plusieurs assistants gratuits, chaque fois dans une nouvelle conversation. Vous saurez remplir une grille de quatre critères (consigne respectée, rien d’inventé, clarté, langue) sans faire de classement. Et vous saurez retenir un choix pour cette tâche, avec un plan B, en sachant qu’il faut refaire le test de temps en temps.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/P_MezyT6ClY",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Pourquoi « celui que tout le monde utilise » ne suffit pas pour choisir un assistant",
@@ -139,10 +139,10 @@ export const ogLesson2: Record<Language, LessonContent> = {
     "title": "Compare Gemini, ChatGPT, Claude and Copilot on your own task",
     "objective": "By the end of this lesson, you will know how to test several assistants on your own task. You will know how to paste the same RCTF prompt, word for word, into several free assistants, each time in a new conversation. You will know how to fill in a four-criterion test grid (prompt followed, nothing made up, clarity, language) without ranking anything. And you will know how to settle on a choice for that task, with a backup option, knowing that the test needs to be repeated from time to time.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/P_MezyT6ClY",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Why “the one everybody uses” is not enough to choose an assistant",
@@ -267,10 +267,10 @@ export const ogLesson2: Record<Language, LessonContent> = {
     "title": "Kwatanta Gemini, ChatGPT, Claude da Copilot a kan aikinku na kanku",
     "objective": "A karshen wannan darasi, za ku san yadda ake gwada mataimakan AI da dama a kan aikinku na kanku. Za ku san yadda ake manna umarnin RCTF iri daya, kalma da kalma, a cikin mataimakan AI kyauta da dama, kowane lokaci a cikin sabuwar tattaunawa. Za ku san yadda ake cike teburin gwaji mai ma’auni hudu (an bi umarni, ba a kirkiri komai ba, bayyananne, harshe) ba tare da jera su a matsayi ba. Kuma za ku san yadda ake zabar kayan aiki don wannan aiki, tare da plan B, kuna sane cewa dole a sake gwajin lokaci zuwa lokaci.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/P_MezyT6ClY",
       "en": "",
       "ha": ""
-    } /* TODO: URL NotebookLM/YouTube — format https://www.youtube.com/embed/VIDEO_ID */,
+    },
     "content": [
       {
         "title": "Dalilin da ya sa « wanda kowa ke amfani da shi » bai isa ba don zabar mataimaki",
