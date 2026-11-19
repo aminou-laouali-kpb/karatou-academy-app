@@ -19,9 +19,7 @@ describe('module outils-ia-gratuits (cours de lancement 15)', () => {
   it('chaque lecon a sa video francaise, au format que le lecteur sait integrer', async () => {
     // le lecteur affiche la video dans une iframe : un lien youtu.be ou watch?v= y reste vide
     const EMBED = /^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]{11}$/;
-    // og4 : la video 3:21 n'est pas encore en ligne (le lien recu etait une copie de og3)
-    const EN_ATTENTE = ['og4'];
-    for (const id of IDS.filter((i) => !EN_ATTENTE.includes(i))) {
+    for (const id of IDS) {
       for (const lang of LANGS) {
         const lesson = await loadAuthoredLesson(SLUG, id, lang);
         expect(lesson?.video.fr, `${id}/${lang} video.fr`).toMatch(EMBED);

@@ -11,7 +11,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
     "title": "IA gratuite ou payante : ce que vous échangez vraiment, et comment protéger vos données",
     "objective": "À la fin de cette leçon, vous saurez ce que vous échangez contre un outil IA gratuit : pas d’argent, mais vos données, votre attention et des limites d’usage. Vous saurez aussi qu’une version payante ajoute des fonctions sans protéger automatiquement vos informations. Enfin, vous saurez régler votre assistant, utiliser la conversation temporaire, nettoyer votre historique et écrire votre propre règle de données en une phrase.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/IRqQReIAhoY",
       "en": "",
       "ha": ""
     },
@@ -139,7 +139,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
     "title": "Free or paid AI: what you really trade, and how to protect your data",
     "objective": "By the end of this lesson, you will know what you trade for a free AI tool: not money, but your data, your attention and usage limits. You will also know that a paid version adds features without automatically protecting your information. Finally, you will know how to adjust your assistant’s settings, use a temporary chat, clean up your chat history and write your own one-sentence data rule.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/IRqQReIAhoY",
       "en": "",
       "ha": ""
     },
@@ -267,7 +267,7 @@ export const ogLesson4: Record<Language, LessonContent> = {
     "title": "AI kyauta ko ta biya: abin da kuke musanyawa da gaske, da yadda za ku kare bayananku",
     "objective": "A karshen wannan darasi, za ku san abin da kuke bayarwa a madadin kayan aikin AI na kyauta: ba kudi ba, sai dai bayananku, hankalinku da iyakokin amfani. Za ku kuma san cewa sigar biya tana kara ayyuka, amma ba ta kare bayananku kai tsaye. A karshe, za ku san yadda ake daidaita saitunan mataimakinku, amfani da hira ta wucin gadi, tsaftace tarihin hirarrakinku, da rubuta dokar bayananku a jumla daya.",
     "video": {
-      "fr": "",
+      "fr": "https://www.youtube.com/embed/IRqQReIAhoY",
       "en": "",
       "ha": ""
     },
