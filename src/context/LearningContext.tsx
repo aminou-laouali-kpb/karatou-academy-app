@@ -27,6 +27,7 @@ import {
   saveOrganizationRecord,
   saveScholarshipRecord,
 } from '../services/enterpriseRepository';
+import { generateScholarshipCode, scholarshipExpiry } from '../lib/scholarship';
 
 // Namespaced per mode so a demo-populated store can never be read in production.
 const LEARNING_STORAGE_KEY = isDemoEnabled ? 'karatou.learning.v6.demo' : 'karatou.learning.v6.prod';
@@ -183,9 +184,11 @@ function normalizeScholarshipCode(code: string) {
 }
 
 function isScholarshipExpired(scholarship: Scholarship) {
-  const expiry = scholarship.expiresAtDate || '2026-12-31';
-  return new Date(`${expiry}T23:59:59`).getTime() < Date.now();
+  // No date: the server is the authority (its RPC checks expires_at_date).
+  if (!scholarship.expiresAtDate) return false;
+  return new Date(`${scholarship.expiresAtDate}T23:59:59`).getTime() < Date.now();
 }
+
 
 function createRedeemResult(
   status: RedeemScholarshipResult['status'],
@@ -951,15 +954,16 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     if (!organizationId) {
       return null;
     }
-    const code = `KA-SCH-PNUD-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    // The "PNUD" prefix and the 2026-12-31 expiry used to be hard-coded for
+    // every organization: all codes would have died on 2027-01-01.
+    const code = generateScholarshipCode(state.organization?.name || organizationId);
     const scholarship: Scholarship = {
       id: `scholarship-${Date.now()}`,
       organizationId,
       code,
       status: 'pending',
       claimedBy: null,
-      expiresAt: '31 dec 2026',
-      expiresAtDate: '2026-12-31',
+      ...scholarshipExpiry(),
     };
 
     commit((current) => ({

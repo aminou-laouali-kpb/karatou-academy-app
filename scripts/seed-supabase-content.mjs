@@ -186,7 +186,8 @@ function scholarshipToRow(scholarship) {
     claimed_by_email: scholarship.claimedByEmail || null,
     claimed_at: scholarship.claimedAt || null,
     expires_at: scholarship.expiresAt,
-    expires_at_date: scholarship.expiresAtDate || '2026-12-31',
+    // No fallback date: the column default (creation + 1 year) applies.
+    expires_at_date: scholarship.expiresAtDate || undefined,
   };
 }
 

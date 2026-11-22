@@ -31,7 +31,7 @@ const tabs = ['objective', 'video', 'content', 'example', 'practice', 'quiz', 'r
 type LessonTab = typeof tabs[number];
 
 /** Share of correct answers needed to complete a lesson. */
-export const QUIZ_PASS_RATIO = 0.7;
+const QUIZ_PASS_RATIO = 0.7;
 
 function buildLesson(moduleTitle: string, courseTitle: string, courseIndex: number, description: string, lang: Language): LessonContent {
   const generated = {
