@@ -4,6 +4,7 @@ type TranslationMap = Record<string, string>;
 
 export const translations: Record<Language, TranslationMap> = {
   fr: {
+    teamExistingAccount: 'compte existant : son mot de passe n\'a pas été modifié, la personne se connecte avec le sien.',
     noActivityYet: 'Aucune activité pour l\'instant : elle apparaîtra dès qu\'un membre terminera une leçon.',
     scholarshipCreateFailed: 'La bourse n\'a pas pu être créée (connexion, ou plus de places disponibles). Réessayez.',
     lessonUnavailableTitle: 'Leçon pas encore téléchargée',
@@ -540,6 +541,7 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   en: {
+    teamExistingAccount: 'existing account: its password was not changed, the person signs in with their own.',
     noActivityYet: 'No activity yet: it will appear as soon as a member completes a lesson.',
     scholarshipCreateFailed: 'The scholarship could not be created (connection issue, or no seats left). Try again.',
     lessonUnavailableTitle: 'Lesson not downloaded yet',
@@ -1076,6 +1078,7 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   ha: {
+    teamExistingAccount: 'asusu da ke akwai: ba a canza kalmar sirrinsa ba, mutumin zai shiga da tasa.',
     noActivityYet: 'Babu wani aiki tukuna: zai bayyana da zarar wani memba ya kammala darasi.',
     scholarshipCreateFailed: 'Ba a iya ƙirƙirar tallafin ba (matsalar haɗi, ko babu sauran gurbi). Sake gwadawa.',
     lessonUnavailableTitle: 'Ba a sauke darasin ba tukuna',

@@ -11,6 +11,8 @@ export interface ProvisionResult {
   ok: boolean;
   message: string;
   updated?: boolean;
+  /** The account already existed: its password was NOT changed. */
+  passwordUnchanged?: boolean;
 }
 
 // Calls the admin-provision-enterprise-admin Edge Function. The function holds
@@ -41,10 +43,15 @@ export async function provisionEnterpriseAdmin(
     return { ok: false, message };
   }
 
-  const payload = data as { ok?: boolean; error?: string; email?: string; orgName?: string; updated?: boolean };
+  const payload = data as { ok?: boolean; error?: string; email?: string; orgName?: string; updated?: boolean; passwordUnchanged?: boolean };
   if (!payload?.ok) {
     return { ok: false, message: payload?.error || 'Creation impossible.' };
   }
 
-  return { ok: true, updated: payload.updated, message: `${payload.email} - ${payload.orgName}` };
+  return {
+    ok: true,
+    updated: payload.updated,
+    passwordUnchanged: payload.passwordUnchanged,
+    message: `${payload.email} - ${payload.orgName}`,
+  };
 }

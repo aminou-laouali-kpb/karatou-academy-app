@@ -63,7 +63,9 @@ export function AdminTeam() {
     setPending(false);
     setNotice({
       tone: result.ok ? 'success' : 'error',
-      message: result.ok ? `${t('teamCreated')}: ${result.message}` : result.message,
+      message: result.ok
+        ? `${t('teamCreated')}: ${result.message}${result.passwordUnchanged ? ` — ${t('teamExistingAccount')}` : ''}`
+        : result.message,
     });
     if (result.ok) {
       setName('');
