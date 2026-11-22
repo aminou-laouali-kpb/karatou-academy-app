@@ -20,6 +20,8 @@ export default defineConfig({
     { name: 'chromium', testDir: './e2e', use: { ...devices['Desktop Chrome'], locale: 'fr-FR', baseURL } },
     // Production-mode suite (VITE_DEMO_ENABLED=false): proves access gating.
     { name: 'chromium-prod', testDir: './e2e-prod', use: { ...devices['Desktop Chrome'], locale: 'fr-FR', baseURL: prodURL } },
+    // Phone-width smoke tests (Chromium, touch): most learners use cheap Android phones.
+    { name: 'mobile', testDir: './e2e-mobile', use: { ...devices['Pixel 5'], locale: 'fr-FR', baseURL } },
   ],
   webServer: [
     { command: 'npm run dev:e2e', url: baseURL, reuseExistingServer: !process.env.CI, timeout: 120_000 },

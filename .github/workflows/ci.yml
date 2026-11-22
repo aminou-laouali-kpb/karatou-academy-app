@@ -59,6 +59,8 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
       - run: npm run test:e2e
+      # Production build with the service worker: a visited lesson must open offline.
+      - run: npm run test:e2e:pwa
       - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v4
