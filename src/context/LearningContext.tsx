@@ -969,6 +969,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       }
     }
 
+    // Production never falls back to the demo rules: a code the server could
+    // not confirm is not redeemed.
+    if (authMode === 'supabase') {
+      return createRedeemResult('error', 'Activation de la bourse impossible.', normalizeScholarshipCode(code));
+    }
     return redeemLocalScholarship(code, user);
   };
 

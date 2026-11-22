@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AlertCircle, Ban, CheckCircle2, ShieldCheck, XCircle } from 'lucide-react';
@@ -15,7 +16,7 @@ const inputClass =
 
 export function VerifyAttestation() {
   const { hash } = useLocation();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [manual, setManual] = useState('');
   const [manualResult, setManualResult] = useState<VerificationResult | null>(null);
   const [hashResult, setHashResult] = useState<VerificationResult | null>(null);
@@ -104,11 +105,11 @@ export function VerifyAttestation() {
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('issued')}</span>
-                  <span className="text-body text-gray-700">{cert.issuedAt}</span>
+                  <span className="text-body text-gray-700">{formatLongDate(cert.issuedAt, lang)}</span>
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('validUntil')}</span>
-                  <span className="text-body text-gray-700">{cert.expiresAt}</span>
+                  <span className="text-body text-gray-700">{formatLongDate(cert.expiresAt, lang)}</span>
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('status')}</span>

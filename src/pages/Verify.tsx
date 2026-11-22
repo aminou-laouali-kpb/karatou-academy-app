@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Logo } from '../components/Logo';
@@ -198,7 +199,7 @@ function CertificateVerdict({ uid }: { uid: string }) {
                     : isRevoked
                       ? t('revokedCertificateBody')
                       : isExpired
-                        ? `${t('expiredCertificateBody')} ${cert?.expiresAt || '-'}`
+                        ? `${t('expiredCertificateBody')} ${formatLongDate(cert?.expiresAtIso || cert?.expiresAt, lang) || '-'}`
                         : t('invalidCertBody')}
                 </p>
               </>
@@ -216,11 +217,11 @@ function CertificateVerdict({ uid }: { uid: string }) {
             </div>
             <div className="flex justify-between items-start">
               <span className="text-body text-gray-500">{t('issued')}</span>
-              <span className="text-body text-gray-700">{cert?.issuedAt || '-'}</span>
+              <span className="text-body text-gray-700">{formatLongDate(cert?.issuedAtIso || cert?.issuedAt, lang) || '-'}</span>
             </div>
             <div className="flex justify-between items-start">
               <span className="text-body text-gray-500">{t('validUntil')}</span>
-              <span className="text-body text-gray-700">{cert?.expiresAt || '-'}</span>
+              <span className="text-body text-gray-700">{formatLongDate(cert?.expiresAtIso || cert?.expiresAt, lang) || '-'}</span>
             </div>
             <div className="flex justify-between items-start">
               <span className="text-body text-gray-500">{t('status')}</span>

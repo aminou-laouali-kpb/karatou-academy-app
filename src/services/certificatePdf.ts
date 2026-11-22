@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 import { saveAs } from 'file-saver';
@@ -50,21 +51,11 @@ const PDF_COPY: Record<Language, {
   },
 };
 
-// Locale code used for Intl.DateTimeFormat per app language.
-const DATE_LOCALE: Record<Language, string> = { fr: 'fr-FR', en: 'en-US', ha: 'ha-NE' };
 
 export function formatCertificateDate(isoOrDate: string, lang: Language = 'fr'): string {
-  const d = new Date(isoOrDate);
-  if (Number.isNaN(d.getTime())) return isoOrDate;
-  try {
-    return new Intl.DateTimeFormat(DATE_LOCALE[lang], {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(d);
-  } catch {
-    return d.toISOString().slice(0, 10);
-  }
+  // Shared with the screens; spells out Hausa months, which browsers lack
+  // (an HA certificate printed "22 November 2026" or "22 novembre 2026").
+  return formatLongDate(isoOrDate, lang);
 }
 
 // A4 landscape, points. The layout is authored in the 680x480 mockup coordinate

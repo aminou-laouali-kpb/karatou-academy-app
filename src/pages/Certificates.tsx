@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
@@ -171,11 +172,11 @@ export function Certificates() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('issued')}</p>
-                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.issuedAt}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{formatLongDate(primaryCert.issuedAtIso || primaryCert.issuedAt, lang)}</p>
                   </div>
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('validUntil')}</p>
-                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.expiresAt}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{formatLongDate(primaryCert.expiresAtIso || primaryCert.expiresAt, lang)}</p>
                   </div>
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('status')}</p>

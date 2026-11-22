@@ -4,6 +4,15 @@ type TranslationMap = Record<string, string>;
 
 export const translations: Record<Language, TranslationMap> = {
   fr: {
+    redeemMsg_redeemed: 'La bourse est activée sur votre compte : les cours sponsorisés sont accessibles.',
+    redeemMsg_already_claimed: 'Cette bourse est déjà active sur votre compte.',
+    redeemMsg_claimed: 'Ce code a déjà été utilisé par une autre personne.',
+    redeemMsg_expired: 'Ce code a expiré. Demandez un nouveau code à l\'organisation qui vous l\'a donné.',
+    redeemMsg_invalid: 'Ce code est introuvable. Vérifiez-le, ou demandez-le à nouveau.',
+    redeemMsg_auth_required: 'Connectez-vous ou créez un compte pour activer cette bourse.',
+    redeemMsg_role_not_allowed: 'Utilisez un compte apprenant pour activer une bourse.',
+    redeemMsg_rate_limited: 'Trop de tentatives. Réessayez dans une heure.',
+    redeemMsg_error: 'Activation impossible pour le moment. Vérifiez votre connexion et réessayez.',
     teamExistingAccount: 'compte existant : son mot de passe n\'a pas été modifié, la personne se connecte avec le sien.',
     noActivityYet: 'Aucune activité pour l\'instant : elle apparaîtra dès qu\'un membre terminera une leçon.',
     scholarshipCreateFailed: 'La bourse n\'a pas pu être créée (connexion, ou plus de places disponibles). Réessayez.',
@@ -541,6 +550,15 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   en: {
+    redeemMsg_redeemed: 'The scholarship is active on your account: the sponsored courses are open.',
+    redeemMsg_already_claimed: 'This scholarship is already active on your account.',
+    redeemMsg_claimed: 'This code has already been used by someone else.',
+    redeemMsg_expired: 'This code has expired. Ask the organization that gave it to you for a new one.',
+    redeemMsg_invalid: 'This code was not found. Check it, or ask for it again.',
+    redeemMsg_auth_required: 'Sign in or create an account to activate this scholarship.',
+    redeemMsg_role_not_allowed: 'Use a learner account to activate a scholarship.',
+    redeemMsg_rate_limited: 'Too many attempts. Try again in an hour.',
+    redeemMsg_error: 'Activation is not possible right now. Check your connection and try again.',
     teamExistingAccount: 'existing account: its password was not changed, the person signs in with their own.',
     noActivityYet: 'No activity yet: it will appear as soon as a member completes a lesson.',
     scholarshipCreateFailed: 'The scholarship could not be created (connection issue, or no seats left). Try again.',
@@ -1078,6 +1096,15 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   ha: {
+    redeemMsg_redeemed: 'An kunna tallafin a asusunka: darussan da aka dauki nauyinsu sun bude.',
+    redeemMsg_already_claimed: 'Wannan tallafin ya riga ya kunnu a asusunka.',
+    redeemMsg_claimed: 'Wani ya riga ya yi amfani da wannan lambar.',
+    redeemMsg_expired: 'Wannan lambar ta kare. Nemi sabuwar lamba daga kungiyar da ta ba ka.',
+    redeemMsg_invalid: 'Ba a sami wannan lambar ba. Duba ta, ko sake nemanta.',
+    redeemMsg_auth_required: 'Shiga ko bude asusu don kunna wannan tallafin.',
+    redeemMsg_role_not_allowed: 'Yi amfani da asusun dalibi don kunna tallafi.',
+    redeemMsg_rate_limited: 'Kun yi kokari da yawa. Sake gwadawa bayan awa daya.',
+    redeemMsg_error: 'Ba a iya kunnawa yanzu ba. Duba haɗin intanet sannan a sake gwadawa.',
     teamExistingAccount: 'asusu da ke akwai: ba a canza kalmar sirrinsa ba, mutumin zai shiga da tasa.',
     noActivityYet: 'Babu wani aiki tukuna: zai bayyana da zarar wani memba ya kammala darasi.',
     scholarshipCreateFailed: 'Ba a iya ƙirƙirar tallafin ba (matsalar haɗi, ko babu sauran gurbi). Sake gwadawa.',
