@@ -24,6 +24,7 @@ export function Landing() {
   return (
     <div className="min-h-screen">
       <MarketingNav />
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <NewsletterPopup />
 
       {/* Hero */}
@@ -189,6 +190,8 @@ export function Landing() {
 
       {/* No "they trust us" logos: the names shown were not partners. Real
           partners can be listed here once they have agreed to it. */}
+
+      </main>
 
       {/* Footer */}
       <footer className="bg-blue-900 py-12 px-4">

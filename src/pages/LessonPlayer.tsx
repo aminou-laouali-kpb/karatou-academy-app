@@ -227,6 +227,20 @@ export function LessonPlayer() {
   } = useLearning();
   const [activeTab, setActiveTab] = useState<LessonTab>('objective');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  // On phones the lesson list is an off-screen drawer: while closed it must be
+  // unreachable by keyboard and screen readers (its 7+ buttons took focus first).
+  const sidebarRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const aside = sidebarRef.current;
+    if (!aside || typeof window.matchMedia !== 'function') return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const apply = () => {
+      aside.inert = !sidebarOpen && !desktop.matches;
+    };
+    apply();
+    desktop.addEventListener?.('change', apply);
+    return () => desktop.removeEventListener?.('change', apply);
+  });
   const [currentQuiz, setCurrentQuiz] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const [quizSubmitted, setQuizSubmitted] = useState<Record<number, boolean>>({});
@@ -488,7 +502,7 @@ export function LessonPlayer() {
           <Menu size={18} aria-hidden="true" />
         </button>
 
-        <aside className={`
+        <aside ref={sidebarRef} className={`
           fixed lg:sticky top-16 left-0 z-30 h-[calc(100vh-4rem)] w-80 bg-white border-r border-gray-200 overflow-y-auto
           transition-transform duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}

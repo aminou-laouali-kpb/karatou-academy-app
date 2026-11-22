@@ -25,8 +25,8 @@ async function contrast(locator: Locator) {
 test('dark-header language and sign-in text meet 4.5:1 in normal, hover and focus states', async ({ page }) => {
   await page.goto('/');
   for (const control of [
-    page.getByRole('button', { name: 'FR', exact: true }),
-    page.getByRole('button', { name: 'EN', exact: true }),
+    page.getByRole('button', { name: 'Français', exact: true }),
+    page.getByRole('button', { name: 'English', exact: true }),
     page.getByRole('button', { name: 'Se connecter', exact: true }),
   ]) {
     expect(await contrast(control)).toBeGreaterThanOrEqual(4.5);
@@ -41,7 +41,7 @@ test('375px mobile and 200%-equivalent desktop reflow work in all three language
   // 640 CSS px is the reflow width of a 1280px desktop viewport at 200% zoom.
   for (const width of [375, 640]) {
     await page.setViewportSize({ width, height: 812 });
-    for (const code of ['FR', 'EN', 'HA']) {
+    for (const code of ['Français', 'English', 'Hausa']) {
       await page.goto('/');
       await page.locator('nav button[aria-expanded]').click();
       await page.getByRole('button', { name: code, exact: true }).click();

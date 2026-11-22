@@ -10,6 +10,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { isVerificationHost } from './lib/runtimeConfig';
 import { OfflineBanner } from './components/OfflineBanner';
 import { PublicLanguageBar } from './components/PublicLanguageBar';
+import { RouteFocus } from './components/RouteFocus';
 import { reloadOnceForStaleBuild } from './lib/chunkRecovery';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
@@ -86,6 +87,7 @@ function App() {
         <AuthProvider>
           <LearningProvider>
             <SkipLink />
+            <RouteFocus />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<RootEntry />} />

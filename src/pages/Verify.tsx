@@ -144,8 +144,8 @@ function CertificateVerdict({ uid }: { uid: string }) {
     gray: 'text-gray-700',
   }[statusTone];
   const statusBodyClass = {
-    emerald: 'text-emerald-600',
-    amber: 'text-amber-600',
+    emerald: 'text-emerald-700',
+    amber: 'text-amber-800',
     red: 'text-red-600',
     gray: 'text-gray-600',
   }[statusTone];
@@ -175,7 +175,7 @@ function CertificateVerdict({ uid }: { uid: string }) {
               <>
                 <CheckCircle2 size={40} className="text-emerald-500 mx-auto mb-2" />
                 <h1 className="font-heading text-h3 text-emerald-700">{t('verifiedCertificate')}</h1>
-                <p className="text-body text-emerald-600 mt-1">{t('validCertificateBody')}</p>
+                <p className="text-body text-emerald-700 mt-1">{t('validCertificateBody')}</p>
               </>
             ) : (
               <>

@@ -71,6 +71,9 @@ export default {
           500: '#E8960C',
           600: '#C47D0A',
           700: '#A06608',
+          // 800 : texte or sur fond or clair, au contraste AA (gold-600 sur
+          // gold-100 n'atteignait que 3:1).
+          800: '#7C4F05',
         },
         // Gris, sémantiques (emerald/amber/red) et identité décorative
         // (rose/cyan/orange) sont alignés sur le design system ; les nuances

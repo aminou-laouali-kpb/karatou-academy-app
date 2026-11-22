@@ -90,7 +90,7 @@ export function Certificates() {
     <div className="min-h-screen bg-gray-50">
       <StudentNav />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" tabIndex={-1} className="max-w-4xl mx-auto px-4 sm:px-6 py-8 focus:outline-none">
         <div className="mb-8">
           <h1 className="font-heading text-h1 text-gray-900">{t('certificatesTitle')}</h1>
           <p className="text-gray-500 mt-1">{t('certificatesSubtitle')}</p>

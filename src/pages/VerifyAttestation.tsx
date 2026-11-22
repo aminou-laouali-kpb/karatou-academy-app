@@ -70,7 +70,7 @@ export function VerifyAttestation() {
 
   const headerClass = isUnavailable ? 'bg-gray-100' : isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
   const titleClass = isUnavailable ? 'text-gray-700' : isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : 'text-red-700';
-  const bodyClass = isUnavailable ? 'text-gray-600' : isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : 'text-red-600';
+  const bodyClass = isUnavailable ? 'text-gray-600' : isValid ? 'text-emerald-700' : isExpired ? 'text-amber-800' : 'text-red-700';
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
