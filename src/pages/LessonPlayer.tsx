@@ -30,6 +30,9 @@ import {
 const tabs = ['objective', 'video', 'content', 'example', 'practice', 'quiz', 'reflection', 'glossary'] as const;
 type LessonTab = typeof tabs[number];
 
+/** Share of correct answers needed to complete a lesson. */
+export const QUIZ_PASS_RATIO = 0.7;
+
 function buildLesson(moduleTitle: string, courseTitle: string, courseIndex: number, description: string, lang: Language): LessonContent {
   const generated = {
     fr: {
@@ -284,6 +287,17 @@ export function LessonPlayer() {
   // tries them in that order; the one lesson bundled with the shell also renders
   // synchronously so the entry point never waits on a round trip.
   const lessonKey = module && course ? `${module.slug}/${course.id}` : null;
+  // Quiz answers belong to one lesson. Browser back/forward changes the lesson
+  // without going through goToCourse, so reset here — adjusting state during
+  // render is React's recommended alternative to an effect for this.
+  const quizScopeKey = `${lessonKey ?? ''}|${lang}`;
+  const [quizScope, setQuizScope] = useState(quizScopeKey);
+  if (quizScope !== quizScopeKey) {
+    setQuizScope(quizScopeKey);
+    setCurrentQuiz(0);
+    setQuizAnswers({});
+    setQuizSubmitted({});
+  }
   const [loadedLesson, setLoadedLesson] = useState<
     { key: string; lang: Language; content: LessonContent | null } | null
   >(null);
@@ -359,6 +373,24 @@ export function LessonPlayer() {
     (certificate) => certificate.moduleSlug === module.slug && certificate.status === 'active'
   );
   const currentDone = isCourseCompleted(module.slug, course.id);
+  // A lesson is completed only once its quiz is passed: answering every
+  // question with at least QUIZ_PASS_RATIO correct. (Server-side grading is the
+  // next step; this already stops "5 clicks = certificate" in the app.)
+  const quizTotal = lesson.quiz.length;
+  const quizIndex = quizTotal > 0 ? Math.min(currentQuiz, quizTotal - 1) : 0;
+  const quizQuestion = quizTotal > 0 ? lesson.quiz[quizIndex] : null;
+  const quizAnsweredCount = lesson.quiz.filter((_, index) => quizSubmitted[index]).length;
+  const quizCorrectCount = lesson.quiz.filter(
+    (question, index) => quizSubmitted[index] && quizAnswers[index] === question.answer
+  ).length;
+  const quizFinished = quizTotal > 0 && quizAnsweredCount === quizTotal;
+  const quizPassed = quizTotal === 0 || (quizFinished && quizCorrectCount / quizTotal >= QUIZ_PASS_RATIO);
+  const quizScorePercent = quizTotal > 0 ? Math.round((quizCorrectCount / quizTotal) * 100) : 100;
+  const retakeQuiz = () => {
+    setCurrentQuiz(0);
+    setQuizAnswers({});
+    setQuizSubmitted({});
+  };
   const previousCourse = module.courses[courseIndex - 1];
   const nextCourse = module.courses[courseIndex + 1];
   const videoUrl = lesson.video[videoLang];
@@ -367,6 +399,11 @@ export function LessonPlayer() {
 
   const handleComplete = async () => {
     if (!user) {
+      return;
+    }
+    if (!quizPassed) {
+      // Send the learner to the quiz instead of silently refusing.
+      setActiveTab('quiz');
       return;
     }
 
@@ -756,15 +793,38 @@ export function LessonPlayer() {
               </div>
             )}
 
-            {activeTab === 'quiz' && (
+            {activeTab === 'quiz' && quizQuestion && (
               <div>
+                {!currentDone && (
+                  <p
+                    role="status"
+                    className={`mb-5 rounded-xl border px-4 py-3 text-body ${
+                      quizPassed
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                        : quizFinished
+                          ? 'border-amber-200 bg-amber-50 text-amber-800'
+                          : 'border-blue-100 bg-blue-50 text-blue-800'
+                    }`}
+                  >
+                    {quizPassed
+                      ? `${t('quizPassed')} — ${t('quizScore')} : ${quizScorePercent} %`
+                      : quizFinished
+                        ? `${t('quizScore')} : ${quizScorePercent} %. ${t('quizRequiredHint')}`
+                        : t('quizRequiredHint')}
+                    {quizFinished && !quizPassed && (
+                      <button type="button" onClick={retakeQuiz} className="ml-2 font-semibold underline">
+                        {t('quizRetry')}
+                      </button>
+                    )}
+                  </p>
+                )}
                 <div className="flex items-center gap-2 mb-6">
                   {lesson.quiz.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentQuiz(index)}
                       className={`w-8 h-8 rounded-full text-meta font-bold flex items-center justify-center transition-all ${
-                        index === currentQuiz
+                        index === quizIndex
                           ? 'bg-blue-500 text-white'
                           : quizSubmitted[index]
                             ? quizAnswers[index] === lesson.quiz[index].answer
@@ -777,16 +837,16 @@ export function LessonPlayer() {
                     </button>
                   ))}
                   <span className="text-meta text-gray-500 ml-2">
-                    {Object.keys(quizSubmitted).length}/{lesson.quiz.length} {t('answered')}
+                    {quizAnsweredCount}/{quizTotal} {t('answered')}
                   </span>
                 </div>
 
-                <p id="quiz-question" className="text-title text-gray-900 mb-5">{lesson.quiz[currentQuiz].question}</p>
+                <p id="quiz-question" className="text-title text-gray-900 mb-5">{quizQuestion.question}</p>
                 <div className="space-y-3 mb-6" role="radiogroup" aria-labelledby="quiz-question">
-                  {lesson.quiz[currentQuiz].options.map((option) => {
-                    const isCorrect = option.key === lesson.quiz[currentQuiz].answer;
-                    const isSelected = quizAnswers[currentQuiz] === option.key;
-                    const isSubmitted = quizSubmitted[currentQuiz];
+                  {quizQuestion.options.map((option) => {
+                    const isCorrect = option.key === quizQuestion.answer;
+                    const isSelected = quizAnswers[quizIndex] === option.key;
+                    const isSubmitted = quizSubmitted[quizIndex];
 
                     return (
                       <label
@@ -803,10 +863,10 @@ export function LessonPlayer() {
                       >
                         <input
                           type="radio"
-                          name={`quiz-${currentQuiz}`}
+                          name={`quiz-${quizIndex}`}
                           value={option.key}
                           checked={isSelected}
-                          onChange={() => !isSubmitted && setQuizAnswers({ ...quizAnswers, [currentQuiz]: option.key })}
+                          onChange={() => !isSubmitted && setQuizAnswers({ ...quizAnswers, [quizIndex]: option.key })}
                           className="w-4 h-4 text-blue-500"
                         />
                         <span className="text-body text-gray-700">
@@ -817,31 +877,31 @@ export function LessonPlayer() {
                   })}
                 </div>
 
-                {!quizSubmitted[currentQuiz] ? (
+                {!quizSubmitted[quizIndex] ? (
                   <Button
                     variant="primary"
                     size="md"
-                    onClick={() => setQuizSubmitted({ ...quizSubmitted, [currentQuiz]: true })}
-                    disabled={!quizAnswers[currentQuiz]}
+                    onClick={() => setQuizSubmitted({ ...quizSubmitted, [quizIndex]: true })}
+                    disabled={!quizAnswers[quizIndex]}
                   >
                     {t('validateAnswer')}
                   </Button>
                 ) : (
                   <div className="space-y-3">
                     <p className={`text-body font-medium ${
-                      quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer ? 'text-emerald-600' : 'text-red-600'
+                      quizAnswers[quizIndex] === quizQuestion.answer ? 'text-emerald-600' : 'text-red-600'
                     }`}>
-                      {quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer
+                      {quizAnswers[quizIndex] === quizQuestion.answer
                         ? t('goodAnswer')
-                        : `${t('wrongAnswer')} ${lesson.quiz[currentQuiz].answer}.`}
+                        : `${t('wrongAnswer')} ${quizQuestion.answer}.`}
                     </p>
                     <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
                       <p className="text-body text-gray-700 leading-relaxed">
-                        <strong>{t('explanation')} :</strong> {lesson.quiz[currentQuiz].explanation}
+                        <strong>{t('explanation')} :</strong> {quizQuestion.explanation}
                       </p>
                     </div>
-                    {currentQuiz < lesson.quiz.length - 1 && (
-                      <Button variant="outline" size="sm" onClick={() => setCurrentQuiz(currentQuiz + 1)}>
+                    {quizIndex < quizTotal - 1 && (
+                      <Button variant="outline" size="sm" onClick={() => setCurrentQuiz(quizIndex + 1)}>
                         {t('nextQuestion')} <ChevronRight size={14} />
                       </Button>
                     )}
