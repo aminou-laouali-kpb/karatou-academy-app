@@ -85,6 +85,9 @@ export function AdminAttestations() {
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState('');
+  // Off by default: participants are added to the newsletter only when the
+  // operator confirms they agreed to it (personal data reused for marketing).
+  const [subscribeParticipants, setSubscribeParticipants] = useState(false);
 
   const [name, setName] = useState<NamePlacement>({
     xRatio: 0.25, yRatio: 0.45, widthRatio: 0.5, fontSize: 28, colorHex: '#1e3a8a', align: 'center',
@@ -232,9 +235,10 @@ export function AdminAttestations() {
         onProgress: (d, total) => setProgress(Math.round((d / total) * 100)),
       });
 
-      // Auto-subscribe participants who provided an email (source: 'attestation').
-      // Best-effort: failure is silent so the certified batch still ships.
-      const withEmail = participants.filter((p) => p.email);
+      // Subscribe participants who provided an email (source: 'attestation'),
+      // only when the operator ticked the consent box. Best-effort: a failure
+      // must not break the certified batch.
+      const withEmail = subscribeParticipants ? participants.filter((p) => p.email) : [];
       let extra = '';
       if (withEmail.length > 0) {
         try {
@@ -311,6 +315,15 @@ export function AdminAttestations() {
               </div>
             </section>
 
+            <label className="flex items-start gap-2 text-meta text-gray-600">
+              <input
+                type="checkbox"
+                className="mt-0.5"
+                checked={subscribeParticipants}
+                onChange={(event) => setSubscribeParticipants(event.target.checked)}
+              />
+              <span>Inscrire à la newsletter les participants qui y ont consenti (e-mail fourni dans le fichier).</span>
+            </label>
             <Button variant="primary" size="md" className="w-full" onClick={handleGenerate} disabled={!templateBuffer || participants.length === 0 || generating}>
               {generating ? <><Loader2 size={16} className="animate-spin" /> Generation {progress}%</> : <><Download size={16} /> Generer ({participants.length})</>}
             </Button>
