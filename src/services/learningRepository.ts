@@ -137,10 +137,33 @@ export async function saveCompletedCourseRecord(userId: string, moduleSlug: stri
   if (error) throw error;
 }
 
-export async function saveCompletedCourseRecords(userId: string, moduleSlug: string, courseIds: string[]) {
-  if (!isSupabaseConfigured || courseIds.length === 0) return;
+/**
+ * One bulk insert for several completions. `ignoreDuplicates` keeps the date a
+ * lesson was first completed (the previous N parallel upserts rewrote it), and
+ * a single request is far more likely to get through a 2G link than N.
+ */
+export async function saveCompletedCourseRecords(
+  userId: string,
+  moduleSlug: string,
+  courses: Array<string | { courseId: string; completedAt?: string }>
+) {
+  if (!isSupabaseConfigured || courses.length === 0) return;
 
-  await Promise.all(courseIds.map((courseId) => saveCompletedCourseRecord(userId, moduleSlug, courseId)));
+  const now = new Date().toISOString();
+  const rows = courses.map((course) => {
+    const item = typeof course === 'string' ? { courseId: course } : course;
+    return {
+      user_id: userId,
+      module_slug: moduleSlug,
+      course_id: item.courseId,
+      completed_at: item.completedAt || now,
+    };
+  });
+  const { error } = await requireClient()
+    .from(TABLES.learnerProgress)
+    .upsert(rows, { onConflict: 'user_id,module_slug,course_id', ignoreDuplicates: true });
+
+  if (error) throw error;
 }
 
 // Server-authoritative issuance: the RPC verifies the caller completed the

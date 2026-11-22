@@ -71,8 +71,8 @@ export function AdminNav() {
           </button>
           <button
             onClick={() => {
-              logout();
-              navigate('/login');
+              // Wait for the session to end before leaving (shared devices).
+              void logout().catch(() => undefined).finally(() => navigate('/login'));
             }}
             className="hidden sm:flex w-8 h-8 items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
             title={t('logout')}

@@ -4,6 +4,8 @@ type TranslationMap = Record<string, string>;
 
 export const translations: Record<Language, TranslationMap> = {
   fr: {
+    lessonUnavailableTitle: 'Leçon pas encore téléchargée',
+    lessonUnavailableBody: 'Cette leçon n\'a pas pu être chargée : la connexion semble interrompue. Elle s\'ouvrira dès que le réseau revient, ou réessayez maintenant.',
     retry: 'Réessayer',
     yourCertificates: 'Vos certificats',
     quiz: 'Quiz',
@@ -536,6 +538,8 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   en: {
+    lessonUnavailableTitle: 'Lesson not downloaded yet',
+    lessonUnavailableBody: 'This lesson could not be loaded: the connection seems to be down. It will open as soon as the network is back, or try again now.',
     retry: 'Try again',
     yourCertificates: 'Your certificates',
     quiz: 'Quiz',
@@ -1068,6 +1072,8 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   ha: {
+    lessonUnavailableTitle: 'Ba a sauke darasin ba tukuna',
+    lessonUnavailableBody: 'Ba a iya buɗe wannan darasi ba: kamar haɗin yanar gizo ya katse. Zai buɗe da zarar intanet ya dawo, ko a sake gwadawa yanzu.',
     retry: 'Sake gwadawa',
     yourCertificates: 'Takardun shaidarku',
     quiz: 'Tambayoyi',

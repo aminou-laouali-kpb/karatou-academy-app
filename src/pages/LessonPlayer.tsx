@@ -301,6 +301,9 @@ export function LessonPlayer() {
   const [loadedLesson, setLoadedLesson] = useState<
     { key: string; lang: Language; content: LessonContent | null } | null
   >(null);
+  // Bumped by "Try again" (and by the connection coming back) when a lesson
+  // that ships with the app could not be downloaded.
+  const [lessonAttempt, setLessonAttempt] = useState(0);
 
   useEffect(() => {
     if (!module || !course || !lessonKey || !hasModuleAccess) return;
@@ -309,7 +312,7 @@ export function LessonPlayer() {
       if (active) setLoadedLesson({ key: lessonKey, lang, content });
     });
     return () => { active = false; };
-  }, [module, course, lessonKey, lang, hasModuleAccess]);
+  }, [module, course, lessonKey, lang, hasModuleAccess, lessonAttempt]);
 
   const resolvedLesson =
     loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
@@ -329,13 +332,25 @@ export function LessonPlayer() {
       resolvedLesson === undefined &&
       (isSupabaseConfigured || hasAuthoredLesson(module.slug, course.id))
   );
+  // A real lesson exists but its file could not be fetched (offline, 2G drop,
+  // stale deploy). Showing the generic template here let learners "complete" a
+  // fake lesson; say what happened and offer to try again instead.
+  const lessonMissing = Boolean(
+    module && course && resolvedLesson === null && !eagerLesson && hasAuthoredLesson(module.slug, course.id)
+  );
+  useEffect(() => {
+    if (!lessonMissing) return;
+    const retry = () => setLessonAttempt((value) => value + 1);
+    window.addEventListener('online', retry);
+    return () => window.removeEventListener('online', retry);
+  }, [lessonMissing]);
   const lesson = useMemo(
     () =>
-      module && course && !lessonPending
+      module && course && !lessonPending && !lessonMissing
         ? authoredLesson ||
           buildLesson(module.title, course.title, courseIndex, course.description, lang)
         : null,
-    [module, course, courseIndex, lang, authoredLesson, lessonPending]
+    [module, course, courseIndex, lang, authoredLesson, lessonPending, lessonMissing]
   );
 
   if (module && !hasModuleAccess) {
@@ -356,6 +371,21 @@ export function LessonPlayer() {
   // Empty production tenant (no published modules / course): clean empty state.
   // While the catalog fetch is still in flight (hard refresh), show a loading
   // message instead of the misleading "no courses yet".
+  if (lessonMissing) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <h1 className="font-heading text-h3 text-gray-900">{t('lessonUnavailableTitle')}</h1>
+          <p role="status" className="text-body text-gray-600 mt-3">{t('lessonUnavailableBody')}</p>
+          <Button variant="primary" className="mt-6" onClick={() => setLessonAttempt((value) => value + 1)}>
+            {t('retry')}
+          </Button>
+        </main>
+      </div>
+    );
+  }
+
   if (!module || !course || !lesson) {
     return (
       <div className="min-h-screen bg-gray-50">

@@ -77,6 +77,42 @@ function persistUser(user: DemoUser | null) {
   }
 }
 
+// Last signed-in LEARNER profile, used only while the device is offline.
+// Opening the installed app without network after the access token expired made
+// Supabase report "no user", and the learner was sent to /login, unable to reach
+// the lessons already downloaded. Admin roles are never restored from here: their
+// screens need the network anyway, and a crafted entry must not grant anything.
+const OFFLINE_PROFILE_KEY = 'karatou.auth.offlineProfile.v1';
+
+function readOfflineProfile(): DemoUser | null {
+  if (typeof window === 'undefined' || isDemoEnabled) return null;
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(OFFLINE_PROFILE_KEY) || 'null') as DemoUser | null;
+    if (!parsed || typeof parsed.id !== 'string' || typeof parsed.name !== 'string') return null;
+    return { ...parsed, password: '', role: 'learner' };
+  } catch {
+    return null;
+  }
+}
+
+function writeOfflineProfile(user: DemoUser | null) {
+  if (typeof window === 'undefined' || isDemoEnabled) return;
+  try {
+    if (user && user.role === 'learner') {
+      const { id, name, email, initials, country } = user;
+      window.localStorage.setItem(OFFLINE_PROFILE_KEY, JSON.stringify({ id, name, email, initials, country, role: 'learner' }));
+    } else {
+      window.localStorage.removeItem(OFFLINE_PROFILE_KEY);
+    }
+  } catch {
+    // Storage unavailable: offline re-entry simply is not offered.
+  }
+}
+
+function isOffline() {
+  return typeof navigator !== 'undefined' && navigator.onLine === false;
+}
+
 function getInitials(name: string) {
   return name
     .split(/\s+/)
@@ -191,6 +227,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // (which fires on the demo sign-out) doesn't clear it. Initialized from a
   // stored demo user so a page reload preserves it.
   const demoSessionActive = useRef<boolean>(Boolean(readStoredUser()?.password));
+  // Current user, readable from the auth listener without re-subscribing.
+  const userRef = useRef<DemoUser | null>(user);
+  useEffect(() => {
+    userRef.current = user;
+  }, [user]);
 
   const setLocalSession = (nextUser: DemoUser | null) => {
     setUser(nextUser);
@@ -204,28 +245,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     let active = true;
 
-    const hydrate = async (authUser: SupabaseAuthUser | null) => {
+    // Each rebuild gets a sequence number: a slow rebuild that finishes after a
+    // newer event (e.g. logout) must not put a stale user back.
+    let sequence = 0;
+
+    const hydrate = async (authUser: SupabaseAuthUser | null, event: string) => {
+      const run = ++sequence;
       if (!authUser) {
-        if (active) {
-          // Preserve an active local demo session (it has no Supabase JWT).
-          if (!demoSessionActive.current) {
-            setUser(null);
-          }
-          setAuthReady(true);
+        if (!active) return;
+        if (event === 'SIGNED_OUT') {
+          writeOfflineProfile(null);
         }
+        // Preserve an active local demo session (it has no Supabase JWT).
+        if (!demoSessionActive.current) {
+          // Offline and the token could not be refreshed: keep the last learner
+          // so downloaded lessons stay reachable. Supabase refreshes the session
+          // itself once the network is back.
+          let nextUser: DemoUser | null = null;
+          if (event !== 'SIGNED_OUT' && isOffline()) {
+            nextUser = userRef.current?.role === 'learner' ? userRef.current : readOfflineProfile();
+          }
+          userRef.current = nextUser;
+          setUser(nextUser);
+        }
+        setAuthReady(true);
+        return;
+      }
+
+      // Same person, new token (hourly TOKEN_REFRESHED, or the INITIAL_SESSION
+      // that follows getUser): rebuilding re-queried the organization, and a
+      // failed query on 2G silently downgraded an enterprise admin to learner.
+      if (userRef.current?.id === authUser.id && event !== 'USER_UPDATED') {
+        if (active) setAuthReady(true);
         return;
       }
 
       try {
         const mappedUser = await buildSupabaseUser(authUser);
-        if (active) {
+        if (active && run === sequence) {
           demoSessionActive.current = false;
           persistUser(null);
+          userRef.current = mappedUser;
           setUser(mappedUser);
+          writeOfflineProfile(mappedUser);
           setAuthReady(true);
         }
       } catch {
-        if (active) {
+        if (active && run === sequence) {
           setUser(null);
           setAuthReady(true);
         }
@@ -234,12 +300,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     supabase.auth
       .getUser()
-      .then(({ data }) => hydrate(data.user))
-      .catch(() => {
-        if (active) setAuthReady(true);
-      });
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      hydrate(session?.user || null);
+      .then(({ data }) => hydrate(data.user, 'INITIAL_USER'))
+      .catch(() => hydrate(null, 'INITIAL_USER'));
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      void hydrate(session?.user || null, event);
     });
 
     return () => {
@@ -445,9 +509,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
+    writeOfflineProfile(null);
     if (supabase) {
       const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      if (error) {
+        // Offline or server unreachable: still end the session on THIS device
+        // (shared phones, cybercafés). The server token simply expires.
+        await supabase.auth.signOut({ scope: 'local' }).catch(() => undefined);
+      }
     }
 
     demoSessionActive.current = false;
