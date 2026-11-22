@@ -38,6 +38,9 @@ function loadFont(url: string): Promise<ArrayBuffer> {
     }
     return response.arrayBuffer();
   });
+  // A failed download must not stay cached, or "try again" could never succeed
+  // before a full reload (common on a dropped 2G link).
+  request.catch(() => fontBytes.delete(url));
   fontBytes.set(url, request);
   return request;
 }

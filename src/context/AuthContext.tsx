@@ -9,6 +9,7 @@ import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { DemoUser, UserRole } from '../types';
 import { AuthContext } from './authCore';
 import type { AuthResult } from './authCore';
+import { purgeSessionDataCaches } from '../lib/swCache';
 
 const AUTH_STORAGE_KEY = 'karatou.auth.v1';
 
@@ -452,6 +453,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     demoSessionActive.current = false;
     setLocalSession(null);
     setAuthReady(true);
+    void purgeSessionDataCaches();
   };
 
   const value = {

@@ -5,7 +5,8 @@ import { Logo } from '../components/Logo';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { useLanguage } from '../hooks/useLanguage';
-import { verifyAttestation, CertificatePayload, VerificationResult } from '../services/attestationGenerator';
+import { verifyAttestation, VerificationResult } from '../services/attestationVerify';
+import type { AttestationPayload as CertificatePayload } from '../lib/attestationPayload';
 import { decodeAttestationPayload } from '../lib/attestationPayload';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 

@@ -23,7 +23,8 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       disable: isE2E(mode),
-      includeAssets: ['favicon.svg', 'opengraph.jpg', 'robots.txt'],
+      // opengraph.jpg is only for link previews (crawlers): never precached.
+      includeAssets: ['favicon.svg', 'robots.txt'],
       manifest: {
         name: 'Karatou Academy',
         short_name: 'Karatou',
@@ -52,15 +53,25 @@ export default defineConfig(({ mode }) => ({
         // first use instead (the runtime rule below), which is the promise the
         // PWA actually makes: shell precached, visited content available offline.
         globIgnores: [
-          'assets/ia-c*.js',
-          'assets/pm-p*.js',
-          'assets/da-d*.js',
+          // Lesson bodies (~15 kB gzip each, 52 of them): named `lesson-*` by
+          // `chunkFileNames` below, whatever folder they live in, so a new
+          // module can no longer slip into the precache by accident.
+          'assets/lesson-*.js',
           'assets/attestationGenerator-*.js',
           // fontkit + the Noto subsets: ~500 KiB gzip, needed only when a PDF is
           // actually generated. The runtime /assets/ rule caches it on first use.
           'assets/pdfFonts-*.js',
+          'assets/certificatePdf-*.js',
           'assets/AdminAttestations-*.js',
           'assets/FileSaver.min-*.js',
+          // Font subsets FR/EN/HA never use (the browser would not download
+          // them either: unicode-range). Hausa letters live in latin-ext.
+          'assets/*-cyrillic-*.woff2',
+          'assets/*-cyrillic-ext-*.woff2',
+          'assets/*-greek-*.woff2',
+          'assets/*-greek-ext-*.woff2',
+          'assets/*-vietnamese-*.woff2',
+          'opengraph.jpg',
         ],
         // Bigger PDF/Excel chunks may exceed the default 2 MiB cap — bump it
         // so any large precached asset still fits.
@@ -95,19 +106,29 @@ export default defineConfig(({ mode }) => ({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
-          // Karatou content tables — let learners revisit what they've already
-          // loaded when the network drops. GET-only queries to /rest/v1/karatou_*.
+          // Public catalogue only (rubriques, modules, courses): lets learners
+          // revisit what they already loaded when the network drops. NetworkFirst
+          // with a short timeout, so a fresh answer wins whenever the link holds.
+          // Personal tables (progress, certificates, members, scholarships,
+          // memberships, organizations) are NEVER cached: a stale copy made
+          // progress look lost, and on a shared phone or cybercafé PC the next
+          // person could read the previous account's data in Cache Storage.
           {
             urlPattern: ({ url, request }) =>
               request.method === 'GET' &&
               url.hostname.endsWith('.supabase.co') &&
-              /\/rest\/v1\/karatou_/.test(url.pathname),
-            handler: 'StaleWhileRevalidate',
+              /\/rest\/v1\/karatou_(rubriques|modules|courses)$/.test(url.pathname),
+            handler: 'NetworkFirst',
             options: {
-              cacheName: 'supabase-rest-content',
-              expiration: { maxEntries: 80, maxAgeSeconds: 60 * 60 * 24 * 7 },
+              cacheName: 'supabase-catalog',
+              networkTimeoutSeconds: 4,
+              expiration: { maxEntries: 40, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [0, 200] },
             },
+          },
+          {
+            urlPattern: ({ url }) => url.hostname.endsWith('.supabase.co') && url.pathname.startsWith('/rest/v1/'),
+            handler: 'NetworkOnly',
           },
           // NEVER cache auth / Edge Functions (sign-in, certificate issuance,
           // attestation signing). They must hit the network.
@@ -127,6 +148,19 @@ export default defineConfig(({ mode }) => ({
       },
     }),
   ],
+  build: {
+    rolldownOptions: {
+      output: {
+        // Every lesson body gets a stable `lesson-` prefix so the service worker
+        // can exclude them from the precache with a single pattern (see
+        // globIgnores above and scripts/validate-release.mjs).
+        chunkFileNames: (chunk) =>
+          chunk.facadeModuleId && /[\\/]src[\\/]data[\\/]lessons[\\/]/.test(chunk.facadeModuleId)
+            ? 'assets/lesson-[name]-[hash].js'
+            : 'assets/[name]-[hash].js',
+      },
+    },
+  },
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
