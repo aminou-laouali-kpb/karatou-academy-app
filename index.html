@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b1c4b" />
+    <!-- Politique de sécurité partielle (une balise <meta> ne peut pas porter
+         frame-ancestors : voir public/_headers et docs/go-live-runbook.md).
+         script-src n'est pas restreint : l'hôte injecte son propre traceur. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <title>Karatou Academy — Certifiez vos compétences IA en Afrique</title>
     <meta

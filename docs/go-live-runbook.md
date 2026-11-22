@@ -524,3 +524,20 @@ doit rester servi (ou redirigé en 301) : c'est l'URL gravée dans les QR imprim
 À noter pour qui reprendra le dossier : la zone DNS de `karatou.academy` est chez
 **n0c.com** (PlanetHoster), pas chez Hostinger — le compte Hostinger connecté ne
 gère que `kpbeducation.cloud`.
+
+### En-têtes de sécurité (ajouté le 22 novembre 2026)
+
+L'hébergement statique Replit ne permet pas, à notre connaissance, de fixer des
+en-têtes HTTP (non vérifié : la documentation Replit n'était pas joignable au
+moment de l'audit). En attendant :
+
+- `index.html` porte une CSP partielle en `<meta>` (`object-src`, `base-uri`,
+  `form-action`, `frame-src` limité à YouTube) et `Referrer-Policy`. `script-src`
+  n'y est pas restreint, car l'hôte injecte son traceur Umami.
+- `src/lib/frameGuard.ts` refuse d'afficher `/redeem`, `/admin`, `/enterprise` et
+  `/reset-password` dans le cadre d'un autre site (clickjacking).
+- `public/_headers` contient les en-têtes complets (`X-Frame-Options: DENY`,
+  `frame-ancestors 'none'`, `nosniff`, `Permissions-Policy`). Il est appliqué tel
+  quel par Netlify et Cloudflare Pages. Si Replit permet des en-têtes de réponse
+  dans `.replit`, y reporter les mêmes valeurs, puis vérifier avec
+  `curl -I https://course.karatou.academy/redeem`.
