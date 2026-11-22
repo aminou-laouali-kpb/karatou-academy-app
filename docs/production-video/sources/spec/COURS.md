@@ -21,7 +21,7 @@ ils seront confirmés à l'intégration dans le site (skill `karatou-course-crea
 | 1 | 01-ia-expliquee-simplement | L'IA expliquée simplement | Filmé | Idriss | IA & Données | Grand public | `ia-expliquee-simplement` | `is` | 7 | 5–8 min (cible 6:00) |
 | 2 | 02-agents-ia | Agents IA : construire son premier agent | Filmé | Idriss | IA & Données | Pros / ONG / PME | `agents-ia` | `ag` | 7 | 5–8 min (cible 6:30) |
 | 3 | 03-vibe-coding | Vibe coding : créer un site web avec l'IA, sans coder | Filmé | Aminou | Culture numérique | Étudiants / entrepreneurs / pros | `vibe-coding` | `vc` | 5 | 4–6:30 min (≈ 25 min au total) |
-| 4 | 04-business-ia | Lancer et développer son business avec l'IA | Filmé | Aminou | Entrepreneuriat | Entrepreneurs / commerçants | `business-ia` | `bz` | 6 | 5–8 min (cible 6:00) |
+| 4 | 04-business-ia | Lancer et développer son business avec l'IA | Motion | Aminou | Entrepreneuriat | Entrepreneurs / commerçants d'Afrique de l'Ouest | `business-ia` | `bz` | 6 | 3–5 min (cible 4:00) |
 | 5 | 05-visuels-videos-ia | Créer visuels et vidéos avec l'IA | Filmé | Aminou | Employabilité | Étudiants / jeunes diplômés | `visuels-videos-ia` | `vv` | 6 | 5–8 min (cible 6:00) |
 | Alt | A1-ia-ong-developpement | IA pour les ONG et le développement | Filmé | Aminou | IA & Données | ONG / agences / PNUD | `ia-ong-developpement` | `on` | 6 | 5–8 min (cible 6:00) |
 | 6 | 06-ia-educateurs | IA pour les éducateurs | Motion | à désigner | IA & Données | Enseignants / formateurs | `ia-educateurs` | `ed` | 5 | 3–5 min (cible 4:00) |
@@ -78,7 +78,7 @@ exemple de rendu réussi et les critères d'évaluation, et récapitule le cours
   fiche produit d'une page).
 - Démo « 40 minutes » : ne pas promettre une durée dans la vidéo (règle : pas de gain de temps chiffré) ; montrer.
 
-### 4 · Lancer et développer son business avec l'IA — filmé, Aminou, 6 vidéos
+### 4 · Lancer et développer son business avec l'IA — motion, Aminou, 6 vidéos (personas de toute l'Afrique de l'Ouest)
 - Contenu clé : business plan, étude de marché, visuels, WhatsApp Business, comptabilité.
 - Fil possible : trouver et tester une idée (problème client, interviews) → étude de marché express avec l'IA
   (recherche web sourcée, concurrence locale, prudence sur les chiffres) → business model / plan d'une page →
