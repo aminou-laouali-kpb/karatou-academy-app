@@ -24,7 +24,7 @@ import {
   redeemScholarshipRecord,
   saveEnterpriseMemberRecord,
   saveOrganizationRecord,
-  saveScholarshipRecord,
+  createScholarshipRecord,
 } from '../services/enterpriseRepository';
 import { generateScholarshipCode, scholarshipExpiry } from '../lib/scholarship';
 import {
@@ -994,13 +994,28 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     syncEnterprise(saveEnterpriseMemberRecord(member), `Membre synchronise: ${member.email}`);
   };
 
-  const createScholarship = () => {
+  const createScholarship = async (): Promise<Scholarship | null> => {
     // Falling back to the demo organization would mint a code that RLS refuses
     // to persist, leaving the admin with a reference that verifies nowhere.
     const organizationId = state.organization?.id || user?.orgId;
     if (!organizationId) {
       return null;
     }
+
+    // Production: the server generates the code (within the seat limit) and
+    // only then is it shown — a code displayed but never saved used to give
+    // learners "invalid code" later.
+    if (authMode === 'supabase') {
+      try {
+        const created = await createScholarshipRecord(organizationId);
+        commit((current) => ({ ...current, scholarships: [created, ...current.scholarships] }));
+        return created;
+      } catch (error) {
+        setContentSyncStatus(`Echec creation bourse: ${error instanceof Error ? error.message : 'erreur inconnue'}`);
+        return null;
+      }
+    }
+
     // The "PNUD" prefix and the 2026-12-31 expiry used to be hard-coded for
     // every organization: all codes would have died on 2027-01-01.
     const code = generateScholarshipCode(state.organization?.name || organizationId);
@@ -1017,7 +1032,6 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       ...current,
       scholarships: [scholarship, ...current.scholarships],
     }));
-    syncEnterprise(saveScholarshipRecord(scholarship), `Bourse synchronisee: ${scholarship.code}`);
 
     return scholarship;
   };

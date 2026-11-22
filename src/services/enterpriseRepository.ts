@@ -105,7 +105,8 @@ function memberToRow(member: EnterpriseMember) {
   return {
     id: member.id,
     organization_id: member.organizationId,
-    user_id: member.userId || null,
+    // No user_id: only the redemption RPC links a member to an account. A
+    // client-chosen user_id let an org admin read any learner's progress.
     name: member.name,
     email: member.email.trim().toLowerCase(),
     role: member.role,
@@ -220,12 +221,60 @@ export async function loadEnterpriseSnapshot(user?: DemoUser | null): Promise<En
     throw scholarshipsResult.error;
   }
 
+  const members = ((membersResult.data || []) as EnterpriseMemberRow[]).map(mapMember);
   return {
     organizations,
     organization,
-    members: ((membersResult.data || []) as EnterpriseMemberRow[]).map(mapMember),
+    members: organization ? await withLiveMemberStats(organization.id, members) : members,
     scholarships: ((scholarshipsResult.data || []) as ScholarshipRow[]).map(mapScholarship),
   };
+}
+
+interface MemberStatsRow {
+  member_id: string;
+  progress: number;
+  certificates: number;
+  certificate_uid: string | null;
+  status: EnterpriseMember['status'];
+  last_activity_at: string | null;
+}
+
+/**
+ * Progress, certificates and status computed from the learners' real activity
+ * (karatou_org_member_stats). The stored columns were never updated after a
+ * scholarship was redeemed, so sponsors saw 0 % forever. If the function is not
+ * deployed yet, the stored values are kept.
+ */
+async function withLiveMemberStats(organizationId: string, members: EnterpriseMember[]) {
+  const { data, error } = await requireClient().rpc('karatou_org_member_stats', {
+    input_organization_id: organizationId,
+  });
+  if (error || !Array.isArray(data)) return members;
+  const stats = new Map((data as MemberStatsRow[]).map((row) => [row.member_id, row]));
+  return members.map((member) => {
+    const row = stats.get(member.id);
+    return row
+      ? {
+          ...member,
+          progress: row.progress,
+          certificates: row.certificates,
+          certificateUid: row.certificate_uid || member.certificateUid,
+          status: row.status,
+          lastActivityAt: row.last_activity_at,
+        }
+      : member;
+  });
+}
+
+/** Server-generated code, within the organization's seat limit (karatou_create_scholarship). */
+export async function createScholarshipRecord(organizationId: string): Promise<Scholarship> {
+  const { data, error } = await requireClient().rpc('karatou_create_scholarship', {
+    input_organization_id: organizationId,
+  });
+  if (error) throw error;
+  const row = (Array.isArray(data) ? data[0] : data) as ScholarshipRow | undefined;
+  if (!row) throw new Error('scholarship not created');
+  return mapScholarship(row);
 }
 
 export async function saveEnterpriseMemberRecord(member: EnterpriseMember) {

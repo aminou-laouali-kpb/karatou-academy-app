@@ -113,6 +113,8 @@ export interface EnterpriseMember {
   certificates: number;
   certificateUid?: string;
   lastActivity: string;
+  /** ISO timestamp of the latest completion or certificate (server-computed). */
+  lastActivityAt?: string | null;
   status: 'certified' | 'in_progress' | 'not_started';
 }
 
@@ -137,6 +139,7 @@ export type RedeemScholarshipStatus =
   | 'invalid'
   | 'auth_required'
   | 'role_not_allowed'
+  | 'rate_limited'
   | 'error';
 
 export interface RedeemScholarshipResult {

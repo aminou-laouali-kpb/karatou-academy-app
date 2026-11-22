@@ -4,6 +4,8 @@ type TranslationMap = Record<string, string>;
 
 export const translations: Record<Language, TranslationMap> = {
   fr: {
+    noActivityYet: 'Aucune activité pour l\'instant : elle apparaîtra dès qu\'un membre terminera une leçon.',
+    scholarshipCreateFailed: 'La bourse n\'a pas pu être créée (connexion, ou plus de places disponibles). Réessayez.',
     lessonUnavailableTitle: 'Leçon pas encore téléchargée',
     lessonUnavailableBody: 'Cette leçon n\'a pas pu être chargée : la connexion semble interrompue. Elle s\'ouvrira dès que le réseau revient, ou réessayez maintenant.',
     retry: 'Réessayer',
@@ -538,6 +540,8 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   en: {
+    noActivityYet: 'No activity yet: it will appear as soon as a member completes a lesson.',
+    scholarshipCreateFailed: 'The scholarship could not be created (connection issue, or no seats left). Try again.',
     lessonUnavailableTitle: 'Lesson not downloaded yet',
     lessonUnavailableBody: 'This lesson could not be loaded: the connection seems to be down. It will open as soon as the network is back, or try again now.',
     retry: 'Try again',
@@ -1072,6 +1076,8 @@ export const translations: Record<Language, TranslationMap> = {
   },
 
   ha: {
+    noActivityYet: 'Babu wani aiki tukuna: zai bayyana da zarar wani memba ya kammala darasi.',
+    scholarshipCreateFailed: 'Ba a iya ƙirƙirar tallafin ba (matsalar haɗi, ko babu sauran gurbi). Sake gwadawa.',
     lessonUnavailableTitle: 'Ba a sauke darasin ba tukuna',
     lessonUnavailableBody: 'Ba a iya buɗe wannan darasi ba: kamar haɗin yanar gizo ya katse. Zai buɗe da zarar intanet ya dawo, ko a sake gwadawa yanzu.',
     retry: 'Sake gwadawa',

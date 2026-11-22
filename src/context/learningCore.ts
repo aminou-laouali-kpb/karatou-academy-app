@@ -27,7 +27,7 @@ export interface LearningContextValue {
   getUserCertificates: (userId: string) => Certificate[];
   addMember: (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => void;
   /** null when the session has no real organization to attach the code to. */
-  createScholarship: () => Scholarship | null;
+  createScholarship: () => Promise<Scholarship | null>;
   createOrganization: (payload: { name: string; country?: string; industry?: string; seatsTotal?: number }) => Organization;
   redeemScholarship: (code: string) => Promise<RedeemScholarshipResult>;
   resetDemoData: () => void;
