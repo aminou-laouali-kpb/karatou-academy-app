@@ -53,7 +53,7 @@ create policy "Karatou users can update own lesson completions"
 
 -- ---------------------------------------------------------------------------
 -- (2) Issuance RPC — JOIN on karatou_courses so only real course rows count.
---     Identical signature/behavior to 20260616130000, except the completion
+--     Identical signature/behavior to 20260616114717, except the completion
 --     query is JOINed; pre-existing rogue progress rows no longer count.
 -- ---------------------------------------------------------------------------
 

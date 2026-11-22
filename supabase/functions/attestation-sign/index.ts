@@ -1,10 +1,13 @@
 // Server-side attestation signing, revocation and registry search.
-// The HMAC secret stays on the server (derived from the service-role key, or
-// ATTESTATION_SECRET if set), so signatures cannot be forged from the client.
+// The HMAC secret stays on the server. An explicitly activated v2 key is
+// independent of the service-role key; older signatures remain archived.
 // Every signed attestation is archived in `karatou_attestations`, which makes
 // verification authoritative (see attestation-verify) and revocation possible.
 // Platform-admin only — the caller's JWT is re-checked here, so the function is
 // deployed with `verify_jwt = false` and does its own authentication.
+//
+// Source synchronisée avec la version déployée en production (v8, 23/09/2026).
+// Déployer : supabase functions deploy attestation-sign --no-verify-jwt
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const corsHeaders = {
@@ -18,7 +21,21 @@ function json(body: unknown, status: number) {
 }
 
 function attestationSecret(): string {
-  return Deno.env.get('ATTESTATION_SECRET') || `attestation:${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? 'fallback'}`;
+  const secret = Deno.env.get('ATTESTATION_SECRET');
+  if (secret) return secret;
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  if (!serviceKey) throw new Error('signing configuration unavailable');
+  return `attestation:${serviceKey}`;
+}
+
+function activeSigningKey(id: string): { id: 'archive-v1' | 'hmac-v2'; secret: string } {
+  if (id === 'hmac-v2') {
+    const secret = Deno.env.get('ATTESTATION_SIGNING_KEY_V2');
+    if (!secret || secret.length < 32) throw new Error('v2 signing key unavailable');
+    return { id, secret };
+  }
+  if (id !== 'archive-v1') throw new Error('unknown signing key version');
+  return { id, secret: attestationSecret() };
 }
 
 async function hmacHex(message: string, secret: string): Promise<string> {
@@ -75,15 +92,28 @@ Deno.serve(async (req) => {
       }
       const { data, error: archiveError } = await request;
       if (archiveError) return json({ error: 'archive search failed' }, 500);
-      return json({ attestations: data || [] }, 200);
+      let historicalRequest = archive
+        .from('karatou_legacy_attestations')
+        .select('id,recipient_name,issued_at,expires_at,imported_at,status,revoked_at,revocation_reason')
+        .order('imported_at', { ascending: false })
+        .limit(50);
+      if (query) historicalRequest = historicalRequest.or(`id.ilike.%${query}%,recipient_name.ilike.%${query}%`);
+      const { data: historical, error: historicalError } = await historicalRequest;
+      if (historicalError) return json({ error: 'historical archive search failed' }, 500);
+      const attestations = [
+        ...(data || []),
+        ...(historical || []).map((row) => ({ ...row, issued_on: row.issued_at, legacy: true })),
+      ].sort((a, b) => b.issued_on.localeCompare(a.issued_on)).slice(0, 50);
+      return json({ attestations }, 200);
     }
 
     if (action === 'revoke') {
       const id = typeof body.id === 'string' ? body.id.trim().toUpperCase() : '';
       const reason = typeof body.reason === 'string' ? body.reason.normalize('NFC').trim().slice(0, 500) : null;
-      if (!/^KA-ATT-\d{4}-[A-F0-9]{10}$/.test(id)) return json({ error: 'invalid attestation id' }, 400);
+      const legacy = /^KA-ATT-\d{4}-[A-F0-9]{12}$/.test(id);
+      if (!legacy && !/^KA-ATT-\d{4}-[A-F0-9]{10}$/.test(id)) return json({ error: 'invalid attestation id' }, 400);
       const { data, error: archiveError } = await archive
-        .from('karatou_attestations')
+        .from(legacy ? 'karatou_legacy_attestations' : 'karatou_attestations')
         .update({
           status: 'revoked',
           revoked_at: new Date().toISOString(),
@@ -92,11 +122,13 @@ Deno.serve(async (req) => {
         })
         .eq('id', id)
         .neq('status', 'revoked')
-        .select('id,recipient_name,issued_at,expires_at,issued_on,status,revoked_at,revocation_reason')
+        .select(legacy
+          ? 'id,recipient_name,issued_at,expires_at,imported_at,status,revoked_at,revocation_reason'
+          : 'id,recipient_name,issued_at,expires_at,issued_on,status,revoked_at,revocation_reason')
         .maybeSingle();
       if (archiveError) return json({ error: 'attestation revocation failed' }, 500);
       if (!data) return json({ error: 'attestation not found or already revoked' }, 404);
-      return json({ attestation: data }, 200);
+      return json({ attestation: legacy ? { ...data, issued_on: data.issued_at, legacy: true } : data }, 200);
     }
 
     if (action !== 'sign') return json({ error: 'unknown action' }, 400);
@@ -105,7 +137,13 @@ Deno.serve(async (req) => {
     const clean = names.map(normalizedName);
     if (clean.some((name) => !name)) return json({ error: 'each name must be a non-empty text of 240 characters or fewer' }, 400);
 
-    const secret = attestationSecret();
+    // Database policy persists across deploys and is enforced again by a
+    // trigger in the same transaction as the insert, preventing races.
+    const { data: policy, error: policyError } = await archive
+      .from('karatou_attestation_signing_policy')
+      .select('active_key_id').eq('id', true).single();
+    if (policyError || !policy) return json({ error: 'signing policy unavailable' }, 503);
+    const active = activeSigningKey(policy.active_key_id);
     const issuedAt = new Date().toISOString().slice(0, 10);
     const expiry = new Date();
     expiry.setFullYear(expiry.getFullYear() + 1);
@@ -114,7 +152,7 @@ Deno.serve(async (req) => {
     const payloads = [];
     for (const name of clean as string[]) {
       const id = `KA-ATT-${issuedAt.slice(0, 4)}-${crypto.randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
-      const signature = await hmacHex(JSON.stringify({ id, name, issuedAt, expiresAt }), secret);
+      const signature = await hmacHex(JSON.stringify({ id, name, issuedAt, expiresAt }), active.secret);
       payloads.push({ id, name, issuedAt, expiresAt, signature });
     }
 
@@ -125,6 +163,7 @@ Deno.serve(async (req) => {
         issued_at: payload.issuedAt,
         expires_at: payload.expiresAt,
         signature: payload.signature,
+        signing_key_id: active.id,
         issued_by: user.id,
       }))
     );

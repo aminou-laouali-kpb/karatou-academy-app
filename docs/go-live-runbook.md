@@ -195,7 +195,7 @@ Replit/Supabase, le registrar DNS, ou une décision produit.
    Conséquence mesurée en production le 2026-09-11 : 9 profils, 0 avec un
    genre, alors que cinq personnes l'avaient bien déclaré à l'inscription. Le
    déclencheur ne recopiait que `full_name` et `country`. Corrigé par la
-   migration `20260911104500_s08`, qui recopie aussi le genre et restitue les
+   migration `20260911093924_s08`, qui recopie aussi le genre et restitue les
    valeurs perdues. Contrôle : `npm run test:signup-trigger`.
 
    👉 **Règle à retenir** : tout nouveau champ collecté à l'inscription doit

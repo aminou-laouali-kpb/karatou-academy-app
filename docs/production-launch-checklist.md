@@ -81,30 +81,11 @@ npm run supabase:push       # supabase db push --linked --yes
 
 Migration order (the CLI handles this automatically):
 
-1. `202606120001_content_cms.sql` - content CMS tables (`karatou_rubriques/modules/courses/content_imports`)
-2. `20260612111129_learner_activity_and_certificates.sql` - learner progress + certificates
-3. `20260612225233_namespaced_karatou_app_tables.sql`
-4. `20260612225800_harden_karatou_app_tables.sql`
-5. `20260612232749_enterprise_members_and_scholarships.sql`
-6. `20260614010456_s01_02_role_model_cleanup.sql` - role model `platform_admin | enterprise_admin | learner`
-7. `20260614081648_s01_03_organization_data_model.sql` - organizations + memberships + RLS
-8. `20260614165334_s01_04_bourse_redemption_flow.sql`
-9. `20260614170140_s01_04_bourse_redemption_role_guard.sql`
-10. `20260614170328_s01_04_bourse_redemption_conflict_fix.sql`
-11. `20260614170524_s01_04_bourse_redemption_role_guard_fix.sql`
-12. `20260615093513_s01_06_certificate_verification_hardening.sql`
-13. `20260616120000_s03_security_certificate_progress_hardening.sql`
-14. `20260616120500_s03_security_revoke_legacy_exposure.sql`
-15. `20260616130000_s02_03_certificate_issuance_rpc.sql` - server-authoritative issuance
-16. `20260617140000_s04_org_logo_storage.sql`
-17. `20260622120000_newsletter_subscribers.sql`
-18. `20260622130000_progress_integrity_hardening.sql`
-19. `20260622140000_public_impact_stats.sql`
-20. `20260819164745_attestation_archive.sql` - `karatou_attestations` registry (idempotent:
-    it back-fills into the repo a table created directly on production on 2026-08-19)
-21. `20260903162346_s05_launch_hardening.sql` - advisor fixes (attestation read policy,
-    `anon` execute revoked on the issuance RPC, pinned `search_path` on the two legacy
-    SECURITY DEFINER functions, newsletter policies realigned on the JWT role, FK indexes)
+`supabase/migrations/` mirrors the production history table exactly (38 versions,
+aligned on 2026-11-22). The first eight files (`20260606…` to `20260607…`) are the
+legacy Next.js schema and `20260727002436` belongs to another product sharing the
+project; they are kept so that `supabase db push` finds every remote version locally.
+Never apply a migration to production that is not committed here first.
 
 A private profile-bootstrap trigger creates a `profiles` row for each new Auth user.
 
