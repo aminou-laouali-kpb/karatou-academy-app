@@ -82,7 +82,7 @@ export function Dashboard() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
           <div className="relative">
             <h1 className="font-heading text-h2 sm:text-h1 text-white mb-2">
-              {t('hello')}, {user?.name.split(' ')[0] || 'Amadou'}
+              {user?.name ? `${t('hello')}, ${user.name.split(' ')[0]}` : t('hello')}
             </h1>
             <p className="text-blue-100 mb-5">
               {t('youAreAt')} {activeModule.progress}% {t('ofModule')} {activeModule.title}.
@@ -122,12 +122,14 @@ export function Dashboard() {
             label={t('activeCertificates')}
             iconBg="bg-gold-100"
           />
+          {/* Real figure: the active course's progress (the "5-day streak"
+              shown here was a constant, displayed to every learner). */}
           <KpiCard
             icon={<Flame size={20} className="text-orange-500" />}
-            value={5}
-            label={t('streakDays')}
+            value={activeModule.progress}
+            suffix="%"
+            label={t('moduleProgress')}
             iconBg="bg-orange-100"
-            trend={t('thisWeek')}
           />
         </div>
 
