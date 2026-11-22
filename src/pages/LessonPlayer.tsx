@@ -1,3 +1,4 @@
+import { toPlayerUrl } from '../lib/videoUrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
@@ -423,8 +424,9 @@ export function LessonPlayer() {
   };
   const previousCourse = module.courses[courseIndex - 1];
   const nextCourse = module.courses[courseIndex + 1];
-  const videoUrl = lesson.video[videoLang];
-  const introUrl = module.introVideo?.[lang] || module.introVideo?.fr || '';
+  // Rebuilt from the YouTube id: never pass an admin-supplied string to <iframe src>.
+  const videoUrl = toPlayerUrl(lesson.video[videoLang]);
+  const introUrl = toPlayerUrl(module.introVideo?.[lang] || module.introVideo?.fr);
   const showIntro = Boolean(introUrl) && (introOpen ?? !courseId);
 
   const handleComplete = async () => {
