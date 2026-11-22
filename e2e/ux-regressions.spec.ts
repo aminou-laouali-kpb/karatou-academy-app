@@ -8,7 +8,7 @@ test.describe('public navigation and localization', () => {
     await expect(page).toHaveURL(/#modules$/);
     await expect(page.locator('#modules')).toBeVisible();
 
-    await page.getByRole('button', { name: 'EN', exact: true }).click();
+    await page.getByRole('button', { name: 'English', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Artificial Intelligence' })).toBeVisible();
     await expect(page.locator('a[href="#modules"]')).toHaveCount(2);
     await expect(page.locator('a[href="#pricing"]')).toHaveCount(2);
@@ -18,9 +18,9 @@ test.describe('public navigation and localization', () => {
 
   test('registration explains required country and optional gender in all languages', async ({ page }) => {
     const messages = [
-      { code: 'FR', copy: 'Le pays est obligatoire. Le genre est facultatif.' },
-      { code: 'EN', copy: 'Country is required. Gender is optional.' },
-      { code: 'HA', copy: 'Ƙasa wajibi ce. Jinsi na zaɓi ne.' },
+      { code: 'Français', copy: 'Le pays est obligatoire. Le genre est facultatif.' },
+      { code: 'English', copy: 'Country is required. Gender is optional.' },
+      { code: 'Hausa', copy: 'Ƙasa wajibi ce. Jinsi na zaɓi ne.' },
     ];
     for (const { code, copy } of messages) {
       await page.goto('/');
@@ -56,7 +56,7 @@ test.describe('learner notes and account menu', () => {
     await page.getByRole('button', { name: /Pratique$/ }).click();
     await expect(page.getByRole('textbox', { name: 'Pratique' })).toHaveValue('Dernière phrase conservée');
 
-    await page.getByRole('button', { name: 'EN', exact: true }).click();
+    await page.getByRole('button', { name: 'English', exact: true }).click();
     await page.getByRole('button', { name: /Practice$/ }).click();
     await expect(page.getByRole('textbox', { name: 'Practice' })).toHaveValue('Dernière phrase conservée');
   });

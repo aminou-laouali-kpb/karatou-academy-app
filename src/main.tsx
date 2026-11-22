@@ -2,6 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { initMonitoring } from './lib/monitoring';
 import { applyBootRedirect } from './lib/spaRedirect';
+import { installChunkRecovery } from './lib/chunkRecovery';
+import { purgeLegacyDataCache } from './lib/swCache';
+import { guardAgainstFraming } from './lib/frameGuard';
 // Self-hosted fonts (bundled, no CDN). Variable fonts ship the whole weight axis
 // in a single woff2, so Inter/Literata cover all weights with one file each.
 // DM Mono is not yet variable on fontsource, so only the weights we actually use.
@@ -17,11 +20,20 @@ import './index.css';
 // router reads the location.
 applyBootRedirect();
 
+// Reload once (guarded) when a lazy chunk from a previous deploy is gone.
+installChunkRecovery();
+
+// Builds before 2026-11-22 cached personal Supabase reads in this cache.
+void purgeLegacyDataCache();
+
 // Opt-in: no-op unless VITE_SENTRY_DSN is set in the environment.
 initMonitoring();
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// Sensitive pages refuse to run inside another site's frame (clickjacking).
+if (!guardAgainstFraming()) {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+}

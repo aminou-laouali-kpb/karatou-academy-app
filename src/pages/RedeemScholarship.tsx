@@ -45,6 +45,8 @@ export function RedeemScholarship() {
           result?.status === 'expired' ||
           result?.status === 'invalid' ||
           result?.status === 'role_not_allowed' ||
+          result?.status === 'rate_limited' ||
+          result?.status === 'auth_required' ||
           result?.status === 'error'
         ? {
             icon: <XCircle size={22} />,
@@ -82,7 +84,7 @@ export function RedeemScholarship() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <main id="main-content" tabIndex={-1} className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 focus:outline-none">
         <section className="grid lg:grid-cols-[0.95fr_1.05fr] gap-6 items-start">
           <div className="pt-2">
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-100 text-gold-600 mb-5">
@@ -138,7 +140,9 @@ export function RedeemScholarship() {
                 <div>
                   <p className="font-semibold">{statusTone.title}</p>
                   <p className="text-body mt-1">
-                    {result?.message || t('redeemPendingBody')}
+                    {/* Status codes, not the server's prose (English in SQL, French
+                        in the local fallback), so the message follows the learner's language. */}
+                    {result ? t(`redeemMsg_${result.status}`) : t('redeemPendingBody')}
                   </p>
                   {result?.organizationName && (
                     <p className="text-body mt-2">

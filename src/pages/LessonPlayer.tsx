@@ -1,3 +1,4 @@
+import { toPlayerUrl } from '../lib/videoUrl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
@@ -29,6 +30,9 @@ import {
 
 const tabs = ['objective', 'video', 'content', 'example', 'practice', 'quiz', 'reflection', 'glossary'] as const;
 type LessonTab = typeof tabs[number];
+
+/** Share of correct answers needed to complete a lesson. */
+const QUIZ_PASS_RATIO = 0.7;
 
 function buildLesson(moduleTitle: string, courseTitle: string, courseIndex: number, description: string, lang: Language): LessonContent {
   const generated = {
@@ -223,6 +227,20 @@ export function LessonPlayer() {
   } = useLearning();
   const [activeTab, setActiveTab] = useState<LessonTab>('objective');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  // On phones the lesson list is an off-screen drawer: while closed it must be
+  // unreachable by keyboard and screen readers (its 7+ buttons took focus first).
+  const sidebarRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const aside = sidebarRef.current;
+    if (!aside || typeof window.matchMedia !== 'function') return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const apply = () => {
+      aside.inert = !sidebarOpen && !desktop.matches;
+    };
+    apply();
+    desktop.addEventListener?.('change', apply);
+    return () => desktop.removeEventListener?.('change', apply);
+  });
   const [currentQuiz, setCurrentQuiz] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const [quizSubmitted, setQuizSubmitted] = useState<Record<number, boolean>>({});
@@ -284,9 +302,23 @@ export function LessonPlayer() {
   // tries them in that order; the one lesson bundled with the shell also renders
   // synchronously so the entry point never waits on a round trip.
   const lessonKey = module && course ? `${module.slug}/${course.id}` : null;
+  // Quiz answers belong to one lesson. Browser back/forward changes the lesson
+  // without going through goToCourse, so reset here — adjusting state during
+  // render is React's recommended alternative to an effect for this.
+  const quizScopeKey = `${lessonKey ?? ''}|${lang}`;
+  const [quizScope, setQuizScope] = useState(quizScopeKey);
+  if (quizScope !== quizScopeKey) {
+    setQuizScope(quizScopeKey);
+    setCurrentQuiz(0);
+    setQuizAnswers({});
+    setQuizSubmitted({});
+  }
   const [loadedLesson, setLoadedLesson] = useState<
     { key: string; lang: Language; content: LessonContent | null } | null
   >(null);
+  // Bumped by "Try again" (and by the connection coming back) when a lesson
+  // that ships with the app could not be downloaded.
+  const [lessonAttempt, setLessonAttempt] = useState(0);
 
   useEffect(() => {
     if (!module || !course || !lessonKey || !hasModuleAccess) return;
@@ -295,7 +327,7 @@ export function LessonPlayer() {
       if (active) setLoadedLesson({ key: lessonKey, lang, content });
     });
     return () => { active = false; };
-  }, [module, course, lessonKey, lang, hasModuleAccess]);
+  }, [module, course, lessonKey, lang, hasModuleAccess, lessonAttempt]);
 
   const resolvedLesson =
     loadedLesson && loadedLesson.key === lessonKey && loadedLesson.lang === lang
@@ -315,13 +347,25 @@ export function LessonPlayer() {
       resolvedLesson === undefined &&
       (isSupabaseConfigured || hasAuthoredLesson(module.slug, course.id))
   );
+  // A real lesson exists but its file could not be fetched (offline, 2G drop,
+  // stale deploy). Showing the generic template here let learners "complete" a
+  // fake lesson; say what happened and offer to try again instead.
+  const lessonMissing = Boolean(
+    module && course && resolvedLesson === null && !eagerLesson && hasAuthoredLesson(module.slug, course.id)
+  );
+  useEffect(() => {
+    if (!lessonMissing) return;
+    const retry = () => setLessonAttempt((value) => value + 1);
+    window.addEventListener('online', retry);
+    return () => window.removeEventListener('online', retry);
+  }, [lessonMissing]);
   const lesson = useMemo(
     () =>
-      module && course && !lessonPending
+      module && course && !lessonPending && !lessonMissing
         ? authoredLesson ||
           buildLesson(module.title, course.title, courseIndex, course.description, lang)
         : null,
-    [module, course, courseIndex, lang, authoredLesson, lessonPending]
+    [module, course, courseIndex, lang, authoredLesson, lessonPending, lessonMissing]
   );
 
   if (module && !hasModuleAccess) {
@@ -342,6 +386,21 @@ export function LessonPlayer() {
   // Empty production tenant (no published modules / course): clean empty state.
   // While the catalog fetch is still in flight (hard refresh), show a loading
   // message instead of the misleading "no courses yet".
+  if (lessonMissing) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <StudentNav />
+        <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <h1 className="font-heading text-h3 text-gray-900">{t('lessonUnavailableTitle')}</h1>
+          <p role="status" className="text-body text-gray-600 mt-3">{t('lessonUnavailableBody')}</p>
+          <Button variant="primary" className="mt-6" onClick={() => setLessonAttempt((value) => value + 1)}>
+            {t('retry')}
+          </Button>
+        </main>
+      </div>
+    );
+  }
+
   if (!module || !course || !lesson) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -359,14 +418,38 @@ export function LessonPlayer() {
     (certificate) => certificate.moduleSlug === module.slug && certificate.status === 'active'
   );
   const currentDone = isCourseCompleted(module.slug, course.id);
+  // A lesson is completed only once its quiz is passed: answering every
+  // question with at least QUIZ_PASS_RATIO correct. (Server-side grading is the
+  // next step; this already stops "5 clicks = certificate" in the app.)
+  const quizTotal = lesson.quiz.length;
+  const quizIndex = quizTotal > 0 ? Math.min(currentQuiz, quizTotal - 1) : 0;
+  const quizQuestion = quizTotal > 0 ? lesson.quiz[quizIndex] : null;
+  const quizAnsweredCount = lesson.quiz.filter((_, index) => quizSubmitted[index]).length;
+  const quizCorrectCount = lesson.quiz.filter(
+    (question, index) => quizSubmitted[index] && quizAnswers[index] === question.answer
+  ).length;
+  const quizFinished = quizTotal > 0 && quizAnsweredCount === quizTotal;
+  const quizPassed = quizTotal === 0 || (quizFinished && quizCorrectCount / quizTotal >= QUIZ_PASS_RATIO);
+  const quizScorePercent = quizTotal > 0 ? Math.round((quizCorrectCount / quizTotal) * 100) : 100;
+  const retakeQuiz = () => {
+    setCurrentQuiz(0);
+    setQuizAnswers({});
+    setQuizSubmitted({});
+  };
   const previousCourse = module.courses[courseIndex - 1];
   const nextCourse = module.courses[courseIndex + 1];
-  const videoUrl = lesson.video[videoLang];
-  const introUrl = module.introVideo?.[lang] || module.introVideo?.fr || '';
+  // Rebuilt from the YouTube id: never pass an admin-supplied string to <iframe src>.
+  const videoUrl = toPlayerUrl(lesson.video[videoLang]);
+  const introUrl = toPlayerUrl(module.introVideo?.[lang] || module.introVideo?.fr);
   const showIntro = Boolean(introUrl) && (introOpen ?? !courseId);
 
   const handleComplete = async () => {
     if (!user) {
+      return;
+    }
+    if (!quizPassed) {
+      // Send the learner to the quiz instead of silently refusing.
+      setActiveTab('quiz');
       return;
     }
 
@@ -419,7 +502,7 @@ export function LessonPlayer() {
           <Menu size={18} aria-hidden="true" />
         </button>
 
-        <aside className={`
+        <aside ref={sidebarRef} className={`
           fixed lg:sticky top-16 left-0 z-30 h-[calc(100vh-4rem)] w-80 bg-white border-r border-gray-200 overflow-y-auto
           transition-transform duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -756,15 +839,38 @@ export function LessonPlayer() {
               </div>
             )}
 
-            {activeTab === 'quiz' && (
+            {activeTab === 'quiz' && quizQuestion && (
               <div>
+                {!currentDone && (
+                  <p
+                    role="status"
+                    className={`mb-5 rounded-xl border px-4 py-3 text-body ${
+                      quizPassed
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                        : quizFinished
+                          ? 'border-amber-200 bg-amber-50 text-amber-800'
+                          : 'border-blue-100 bg-blue-50 text-blue-800'
+                    }`}
+                  >
+                    {quizPassed
+                      ? `${t('quizPassed')} — ${t('quizScore')} : ${quizScorePercent} %`
+                      : quizFinished
+                        ? `${t('quizScore')} : ${quizScorePercent} %. ${t('quizRequiredHint')}`
+                        : t('quizRequiredHint')}
+                    {quizFinished && !quizPassed && (
+                      <button type="button" onClick={retakeQuiz} className="ml-2 font-semibold underline">
+                        {t('quizRetry')}
+                      </button>
+                    )}
+                  </p>
+                )}
                 <div className="flex items-center gap-2 mb-6">
                   {lesson.quiz.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentQuiz(index)}
                       className={`w-8 h-8 rounded-full text-meta font-bold flex items-center justify-center transition-all ${
-                        index === currentQuiz
+                        index === quizIndex
                           ? 'bg-blue-500 text-white'
                           : quizSubmitted[index]
                             ? quizAnswers[index] === lesson.quiz[index].answer
@@ -777,16 +883,16 @@ export function LessonPlayer() {
                     </button>
                   ))}
                   <span className="text-meta text-gray-500 ml-2">
-                    {Object.keys(quizSubmitted).length}/{lesson.quiz.length} {t('answered')}
+                    {quizAnsweredCount}/{quizTotal} {t('answered')}
                   </span>
                 </div>
 
-                <p id="quiz-question" className="text-title text-gray-900 mb-5">{lesson.quiz[currentQuiz].question}</p>
+                <p id="quiz-question" className="text-title text-gray-900 mb-5">{quizQuestion.question}</p>
                 <div className="space-y-3 mb-6" role="radiogroup" aria-labelledby="quiz-question">
-                  {lesson.quiz[currentQuiz].options.map((option) => {
-                    const isCorrect = option.key === lesson.quiz[currentQuiz].answer;
-                    const isSelected = quizAnswers[currentQuiz] === option.key;
-                    const isSubmitted = quizSubmitted[currentQuiz];
+                  {quizQuestion.options.map((option) => {
+                    const isCorrect = option.key === quizQuestion.answer;
+                    const isSelected = quizAnswers[quizIndex] === option.key;
+                    const isSubmitted = quizSubmitted[quizIndex];
 
                     return (
                       <label
@@ -803,10 +909,10 @@ export function LessonPlayer() {
                       >
                         <input
                           type="radio"
-                          name={`quiz-${currentQuiz}`}
+                          name={`quiz-${quizIndex}`}
                           value={option.key}
                           checked={isSelected}
-                          onChange={() => !isSubmitted && setQuizAnswers({ ...quizAnswers, [currentQuiz]: option.key })}
+                          onChange={() => !isSubmitted && setQuizAnswers({ ...quizAnswers, [quizIndex]: option.key })}
                           className="w-4 h-4 text-blue-500"
                         />
                         <span className="text-body text-gray-700">
@@ -817,31 +923,31 @@ export function LessonPlayer() {
                   })}
                 </div>
 
-                {!quizSubmitted[currentQuiz] ? (
+                {!quizSubmitted[quizIndex] ? (
                   <Button
                     variant="primary"
                     size="md"
-                    onClick={() => setQuizSubmitted({ ...quizSubmitted, [currentQuiz]: true })}
-                    disabled={!quizAnswers[currentQuiz]}
+                    onClick={() => setQuizSubmitted({ ...quizSubmitted, [quizIndex]: true })}
+                    disabled={!quizAnswers[quizIndex]}
                   >
                     {t('validateAnswer')}
                   </Button>
                 ) : (
                   <div className="space-y-3">
                     <p className={`text-body font-medium ${
-                      quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer ? 'text-emerald-600' : 'text-red-600'
+                      quizAnswers[quizIndex] === quizQuestion.answer ? 'text-emerald-600' : 'text-red-600'
                     }`}>
-                      {quizAnswers[currentQuiz] === lesson.quiz[currentQuiz].answer
+                      {quizAnswers[quizIndex] === quizQuestion.answer
                         ? t('goodAnswer')
-                        : `${t('wrongAnswer')} ${lesson.quiz[currentQuiz].answer}.`}
+                        : `${t('wrongAnswer')} ${quizQuestion.answer}.`}
                     </p>
                     <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
                       <p className="text-body text-gray-700 leading-relaxed">
-                        <strong>{t('explanation')} :</strong> {lesson.quiz[currentQuiz].explanation}
+                        <strong>{t('explanation')} :</strong> {quizQuestion.explanation}
                       </p>
                     </div>
-                    {currentQuiz < lesson.quiz.length - 1 && (
-                      <Button variant="outline" size="sm" onClick={() => setCurrentQuiz(currentQuiz + 1)}>
+                    {quizIndex < quizTotal - 1 && (
+                      <Button variant="outline" size="sm" onClick={() => setCurrentQuiz(quizIndex + 1)}>
                         {t('nextQuestion')} <ChevronRight size={14} />
                       </Button>
                     )}

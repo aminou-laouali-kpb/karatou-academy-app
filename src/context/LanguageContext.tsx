@@ -1,16 +1,24 @@
 import { useState, useEffect, useMemo, useCallback, ReactNode } from 'react';
 import { Language, translations } from '../data/translations';
-import { LanguageContext } from './languageCore';
+import { LanguageContext, detectInitialLang } from './languageCore';
 
 const LANG_STORAGE_KEY = 'karatou.lang.v1';
-const SUPPORTED_LANGS: Language[] = ['fr', 'en', 'ha'];
+
+function readStoredValue(): string | null {
+  try {
+    return window.localStorage.getItem(LANG_STORAGE_KEY);
+  } catch {
+    // Blocked storage (private mode, site data disabled) must not blank the app.
+    return null;
+  }
+}
 
 function readStoredLang(): Language {
   if (typeof window === 'undefined') {
     return 'fr';
   }
-  const stored = window.localStorage.getItem(LANG_STORAGE_KEY) as Language | null;
-  return stored && SUPPORTED_LANGS.includes(stored) ? stored : 'fr';
+  const languages = typeof navigator !== 'undefined' ? navigator.languages || [navigator.language] : [];
+  return detectInitialLang(window.location.search, readStoredValue(), languages);
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -23,7 +31,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       document.documentElement.lang = lang;
     }
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+      try {
+        window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+      } catch {
+        // Not persisted: the language still applies for this visit.
+      }
     }
   }, [lang]);
 

@@ -96,10 +96,18 @@ export function EnterpriseMembers() {
     setShowInvite(false);
   };
 
-  const handleCreateScholarship = () => {
-    const scholarship = createScholarship();
+  const [creatingScholarship, setCreatingScholarship] = useState(false);
+  const [scholarshipFailed, setScholarshipFailed] = useState(false);
+  const handleCreateScholarship = async () => {
+    if (creatingScholarship) return;
+    setCreatingScholarship(true);
+    setScholarshipFailed(false);
+    const scholarship = await createScholarship();
+    setCreatingScholarship(false);
     if (scholarship) {
       setCreatedScholarship(scholarship.code);
+    } else {
+      setScholarshipFailed(true);
     }
   };
 
@@ -330,10 +338,15 @@ export function EnterpriseMembers() {
                 {scholarships.length} {t('scholarships').toLowerCase()} - {scholarships.filter((item) => item.status === 'claimed').length} {t('claimed').toLowerCase()} - {scholarships.filter((item) => item.status === 'pending').length} {t('available').toLowerCase()}
               </p>
             </div>
-            <Button variant="gold" size="sm" onClick={handleCreateScholarship} disabled={!canManageOrganization}>
+            <Button variant="gold" size="sm" onClick={() => void handleCreateScholarship()} disabled={!canManageOrganization}>
               <Gift size={16} /> {t('createScholarships')}
             </Button>
           </div>
+          {scholarshipFailed && (
+            <p role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
+              {t('scholarshipCreateFailed')}
+            </p>
+          )}
           {createdScholarship && (
             <div className="mb-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-body text-gold-600">
               <p>

@@ -9,6 +9,9 @@ import { SkipLink } from './components/SkipLink';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { isVerificationHost } from './lib/runtimeConfig';
 import { OfflineBanner } from './components/OfflineBanner';
+import { PublicLanguageBar } from './components/PublicLanguageBar';
+import { RouteFocus } from './components/RouteFocus';
+import { reloadOnceForStaleBuild } from './lib/chunkRecovery';
 // Landing and Login are the most common entry points — keep them eager for a
 // fast first paint. Everything else is code-split so first-time visitors don't
 // download the admin CMS, lesson player, and all lesson copy up front.
@@ -23,7 +26,14 @@ function lazyWithRetry<T extends ComponentType<unknown>>(factory: () => Promise<
       return await factory();
     } catch {
       await new Promise((r) => setTimeout(r, 800));
-      return factory();
+      try {
+        return await factory();
+      } catch (error) {
+        // Still failing: most likely a chunk from a previous deploy. Reload once
+        // to get the new shell; otherwise let the ErrorBoundary show the error.
+        if (reloadOnceForStaleBuild()) return new Promise<never>(() => {});
+        throw error;
+      }
     }
   });
 }
@@ -77,6 +87,7 @@ function App() {
         <AuthProvider>
           <LearningProvider>
             <SkipLink />
+            <RouteFocus />
             <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/" element={<RootEntry />} />
@@ -128,6 +139,7 @@ function App() {
                   </ProtectedRoute>
                 )}
               />
+              <Route path="/verify" element={<Verify />} />
               <Route path="/verify/:uid" element={<Verify />} />
               <Route path="/verify-attestation" element={<VerifyAttestation />} />
               <Route
@@ -197,6 +209,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             </Suspense>
+            <PublicLanguageBar />
             <OfflineBanner />
             <DemoBadge />
           </LearningProvider>

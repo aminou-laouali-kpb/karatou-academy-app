@@ -10,7 +10,7 @@ export default defineConfig({
   workers: 1,
   retries: 0,
   reporter: 'list',
-  use: { ...devices['Desktop Chrome'], baseURL, serviceWorkers: 'allow' },
+  use: { ...devices['Desktop Chrome'], locale: 'fr-FR', baseURL, serviceWorkers: 'allow' },
   webServer: {
     command: 'VITE_DEMO_ENABLED=true VITE_SUPABASE_URL= VITE_SUPABASE_ANON_KEY= npm run build -- --mode offline-check --outDir generated-artifacts/pwa && npm run preview -- --host 127.0.0.1 --port 4320 --strictPort --outDir generated-artifacts/pwa',
     url: baseURL,

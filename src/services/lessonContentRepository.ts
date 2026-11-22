@@ -5,7 +5,7 @@ import {
   parseLessonBundle,
   parseLessonContent,
 } from '../data/lessonContentSchema';
-import { loadAuthoredLesson } from '../data/localizedContent';
+import { hasAuthoredLesson, loadAuthoredLesson } from '../data/localizedContent';
 import { Language } from '../data/translations';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 
@@ -63,14 +63,25 @@ export async function resolveLessonContent(
   courseId: string,
   lang: Language
 ): Promise<LessonContent | null> {
-  try {
-    const fromDb = await fetchLessonContentFromDb(courseId, lang);
+  const fromDbRequest = fetchLessonContentFromDb(courseId, lang).catch(() => null);
+  // When the lesson ships with the app, the database is only an override (an
+  // edit made in /admin/lecons). Give it a short head start, then show the
+  // bundled copy instead of keeping a 2G learner on "Chargement…".
+  if (hasAuthoredLesson(moduleSlug, courseId)) {
+    const fromDb = await Promise.race([
+      fromDbRequest,
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), DB_OVERRIDE_BUDGET_MS)),
+    ]);
     if (fromDb) return fromDb;
-  } catch {
-    // fall through to the bundled registry
+    return loadAuthoredLesson(moduleSlug, courseId, lang);
   }
+  const fromDb = await fromDbRequest;
+  if (fromDb) return fromDb;
   return loadAuthoredLesson(moduleSlug, courseId, lang);
 }
+
+/** How long a bundled lesson waits for a possible database override. */
+const DB_OVERRIDE_BUDGET_MS = 3_000;
 
 /** Every language at once — the admin editor needs the whole bundle. */
 export async function fetchLessonBundle(courseId: string): Promise<LessonBundle> {

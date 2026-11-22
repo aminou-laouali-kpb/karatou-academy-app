@@ -23,13 +23,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      # Bundle and service-worker precache budgets (2G audience).
+      - run: node scripts/validate-release.mjs
 
   e2e:
     name: e2e (playwright)
@@ -40,7 +42,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
       # Cache Playwright browsers across runs.
@@ -57,6 +59,8 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
       - run: npm run test:e2e
+      # Production build with the service worker: a visited lesson must open offline.
+      - run: npm run test:e2e:pwa
       - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v4

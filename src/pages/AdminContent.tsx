@@ -54,7 +54,7 @@ const sampleJson = JSON.stringify(
         color: 'from-cyan-700 to-blue-500',
         lessons: 2,
         duration: '45 min',
-        level: 'Debutant',
+        level: 'Débutant',
         enrolled: 0,
         rating: 0,
         progress: 0,
@@ -118,7 +118,7 @@ function createEmptyModule(rubriqueId?: string): LearningModule {
     color: colors[0],
     lessons: 0,
     duration: '0 min',
-    level: 'Debutant',
+    level: 'Débutant',
     enrolled: 0,
     rating: 0,
     progress: 0,
@@ -539,6 +539,7 @@ export function AdminContent() {
                   value={newRubrique}
                   onChange={(event) => setNewRubrique(event.target.value)}
                   placeholder={t('cmsNewRubrique')}
+                  aria-label={t('cmsNewRubrique')}
                   className="min-w-0 flex-1 rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                 />
                 <Button variant="primary" size="sm" onClick={handleCreateRubrique}>
@@ -732,18 +733,21 @@ export function AdminContent() {
                         value={draft.translations?.[lang]?.title || ''}
                         onChange={(event) => patchTranslation(lang, { title: event.target.value })}
                         placeholder={`Titre ${lang.toUpperCase()}`}
+                        aria-label={`Titre ${lang.toUpperCase()}`}
                         className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <input
                         value={draft.translations?.[lang]?.subtitle || ''}
                         onChange={(event) => patchTranslation(lang, { subtitle: event.target.value })}
                         placeholder={`Sous-titre ${lang.toUpperCase()}`}
+                        aria-label={`Sous-titre ${lang.toUpperCase()}`}
                         className="w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <textarea
                         value={draft.translations?.[lang]?.description || ''}
                         onChange={(event) => patchTranslation(lang, { description: event.target.value })}
                         placeholder={`Description ${lang.toUpperCase()}`}
+                        aria-label={`Description ${lang.toUpperCase()}`}
                         className="h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                     </div>
@@ -774,17 +778,20 @@ export function AdminContent() {
                     </div>
                     <div className="grid md:grid-cols-[1fr_120px] gap-3">
                       <input
+                        aria-label={`${t('cmsLesson')} ${index + 1} — ${t('cmsTitleFr')}`}
                         value={course.title}
                         onChange={(event) => patchCourse(course.id, { title: event.target.value })}
                         className="rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                       <input
+                        aria-label={`${t('cmsLesson')} ${index + 1} — durée`}
                         value={course.duration}
                         onChange={(event) => patchCourse(course.id, { duration: event.target.value })}
                         className="rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
                       />
                     </div>
                     <textarea
+                      aria-label={`${t('cmsLesson')} ${index + 1} — ${t('cmsDescriptionFr')}`}
                       value={course.description}
                       onChange={(event) => patchCourse(course.id, { description: event.target.value })}
                       className="mt-3 h-20 w-full rounded-xl border border-gray-200 px-3 py-2 text-body outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
@@ -797,12 +804,14 @@ export function AdminContent() {
                             value={course.translations?.[lang]?.title || ''}
                             onChange={(event) => patchCourseTranslation(course.id, lang, { title: event.target.value })}
                             placeholder="Titre"
+                            aria-label={`${t('cmsLesson')} ${index + 1} — titre ${lang.toUpperCase()}`}
                             className="mb-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-body outline-none"
                           />
                           <input
                             value={course.translations?.[lang]?.description || ''}
                             onChange={(event) => patchCourseTranslation(course.id, lang, { description: event.target.value })}
                             placeholder="Description"
+                            aria-label={`${t('cmsLesson')} ${index + 1} — description ${lang.toUpperCase()}`}
                             className="w-full rounded-lg border border-gray-200 px-3 py-2 text-body outline-none"
                           />
                         </div>
@@ -826,6 +835,7 @@ export function AdminContent() {
                   <h2 className="font-semibold text-gray-900">{t('cmsImportJson')}</h2>
                 </div>
                 <textarea
+                  aria-label={t('cmsImportJson')}
                   value={jsonText}
                   onChange={(event) => setJsonText(event.target.value)}
                   className="h-72 w-full rounded-xl border border-gray-200 px-3 py-2 text-meta font-mono outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"

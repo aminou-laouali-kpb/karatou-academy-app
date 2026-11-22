@@ -18,13 +18,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Literata', 'Georgia', 'serif'],
-        body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Literata Variable', 'Literata', 'Georgia', 'serif'],
+        body: ['Inter Variable', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter Variable', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['DM Mono', 'monospace'],
         // Déprécié — alias de `font-heading`, conservé le temps que les pages
         // migrent. Pointe désormais sur Literata, plus sur Playfair Display.
-        playfair: ['Literata', 'Georgia', 'serif'],
+        playfair: ['Literata Variable', 'Literata', 'Georgia', 'serif'],
       },
       fontSize: {
         // `display-xl` et `display-lg` prolongent l'échelle du design system,
@@ -71,6 +71,9 @@ export default {
           500: '#E8960C',
           600: '#C47D0A',
           700: '#A06608',
+          // 800 : texte or sur fond or clair, au contraste AA (gold-600 sur
+          // gold-100 n'atteignait que 3:1).
+          800: '#7C4F05',
         },
         // Gris, sémantiques (emerald/amber/red) et identité décorative
         // (rose/cyan/orange) sont alignés sur le design system ; les nuances

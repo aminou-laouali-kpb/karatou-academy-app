@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AlertCircle, Ban, CheckCircle2, ShieldCheck, XCircle } from 'lucide-react';
@@ -5,7 +6,8 @@ import { Logo } from '../components/Logo';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { useLanguage } from '../hooks/useLanguage';
-import { verifyAttestation, CertificatePayload, VerificationResult } from '../services/attestationGenerator';
+import { verifyAttestation, VerificationResult } from '../services/attestationVerify';
+import type { AttestationPayload as CertificatePayload } from '../lib/attestationPayload';
 import { decodeAttestationPayload } from '../lib/attestationPayload';
 import { VERIFY_DISPLAY_HOST } from '../lib/verification';
 
@@ -14,7 +16,7 @@ const inputClass =
 
 export function VerifyAttestation() {
   const { hash } = useLocation();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [manual, setManual] = useState('');
   const [manualResult, setManualResult] = useState<VerificationResult | null>(null);
   const [hashResult, setHashResult] = useState<VerificationResult | null>(null);
@@ -68,7 +70,7 @@ export function VerifyAttestation() {
 
   const headerClass = isUnavailable ? 'bg-gray-100' : isValid ? 'bg-emerald-50' : isExpired ? 'bg-amber-50' : 'bg-red-50';
   const titleClass = isUnavailable ? 'text-gray-700' : isValid ? 'text-emerald-700' : isExpired ? 'text-amber-700' : 'text-red-700';
-  const bodyClass = isUnavailable ? 'text-gray-600' : isValid ? 'text-emerald-600' : isExpired ? 'text-amber-600' : 'text-red-600';
+  const bodyClass = isUnavailable ? 'text-gray-600' : isValid ? 'text-emerald-700' : isExpired ? 'text-amber-800' : 'text-red-700';
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -103,11 +105,11 @@ export function VerifyAttestation() {
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('issued')}</span>
-                  <span className="text-body text-gray-700">{cert.issuedAt}</span>
+                  <span className="text-body text-gray-700">{formatLongDate(cert.issuedAt, lang)}</span>
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('validUntil')}</span>
-                  <span className="text-body text-gray-700">{cert.expiresAt}</span>
+                  <span className="text-body text-gray-700">{formatLongDate(cert.expiresAt, lang)}</span>
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-body text-gray-500">{t('status')}</span>

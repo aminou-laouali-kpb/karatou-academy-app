@@ -1,3 +1,4 @@
+import { toEmbedUrl } from '../lib/videoUrl';
 import { ContentImportRecord, Course, LearningModule, Rubrique } from '../types';
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 
@@ -101,6 +102,15 @@ function mapRubrique(row: RubriqueRow): Rubrique {
   };
 }
 
+function sanitizeIntroVideo(value: LearningModule['introVideo'] | null | undefined): LearningModule['introVideo'] {
+  const result: Record<string, string> = {};
+  for (const [lang, url] of Object.entries(value || {})) {
+    const embed = toEmbedUrl(typeof url === 'string' ? url : '');
+    if (embed) result[lang] = embed;
+  }
+  return result as LearningModule['introVideo'];
+}
+
 function mapModule(row: ModuleRow, courses: Course[]): LearningModule {
   return {
     id: row.id,
@@ -122,7 +132,7 @@ function mapModule(row: ModuleRow, courses: Course[]): LearningModule {
     order: row.display_order,
     status: row.status,
     translations: row.translations || {},
-    introVideo: row.intro_video || {},
+    introVideo: sanitizeIntroVideo(row.intro_video),
     courses,
   };
 }
@@ -183,8 +193,8 @@ function moduleToRow(module: LearningModule) {
     translations: module.translations || {},
     // Envoyé seulement s'il a été renseigné : une ligne déjà en base garde sa vidéo,
     // et l'enregistrement fonctionne même avant la migration intro_video.
-    ...(module.introVideo && Object.keys(module.introVideo).length > 0
-      ? { intro_video: module.introVideo }
+    ...(module.introVideo && Object.keys(sanitizeIntroVideo(module.introVideo) || {}).length > 0
+      ? { intro_video: sanitizeIntroVideo(module.introVideo) }
       : {}),
   };
 }

@@ -1,3 +1,0 @@
--- No-op compatibility migration.
--- The existing Supabase project already has public.certificates/user_progress tables.
--- Karatou MVP learner tables are created in 20260612224606_namespaced_karatou_app_tables.sql.

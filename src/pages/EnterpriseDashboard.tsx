@@ -13,9 +13,17 @@ function redeemPath(code: string) {
   return `/redeem/${encodeURIComponent(code)}`;
 }
 
+function formatShortDate(iso: string, lang: string, formatter: Intl.DateTimeFormat) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '';
+  if (lang !== 'ha') return formatter.format(date);
+  const months = ['Jan', 'Fab', 'Mar', 'Afr', 'May', 'Yun', 'Yul', 'Agu', 'Sat', 'Okt', 'Nuw', 'Dis'];
+  return `${date.getDate()} ${months[date.getMonth()]}`;
+}
+
 export function EnterpriseDashboard() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { organization, organizations, members, scholarships, createScholarship } = useLearning();
   // Without a resolved organization the write would be refused by RLS, so the
   // action is disabled rather than failing silently after the click.
@@ -38,17 +46,31 @@ export function EnterpriseDashboard() {
   };
   const seatsTotal = Math.max(org.seatsTotal, seatsUsed, 1);
 
-  const activities = [
-    { text: t('activityCert'), time: t('twoHoursAgo'), icon: <GraduationCap size={14} /> },
-    { text: t('activityScholarship'), time: t('yesterday'), icon: <Gift size={14} /> },
-    { text: t('activityProgress'), time: t('twoDaysAgo'), icon: <TrendingUp size={14} /> },
-    { text: t('activityMembers'), time: t('thisWeekLabel'), icon: <Users size={14} /> },
-  ];
+  // Real activity only: the latest members with a completion or certificate
+  // (the feed used to show invented names and times to real sponsors).
+  const dateFormatter = new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'short' });
+  const activities = members
+    .filter((member) => member.lastActivityAt)
+    .sort((a, b) => String(b.lastActivityAt).localeCompare(String(a.lastActivityAt)))
+    .slice(0, 5)
+    .map((member) => ({
+      text: `${member.name} — ${member.status === 'certified' ? t('certified') : `${t('inProgress')} (${member.progress} %)`}`,
+      time: formatShortDate(member.lastActivityAt as string, lang, dateFormatter),
+      icon: member.status === 'certified' ? <GraduationCap size={14} /> : <TrendingUp size={14} />,
+    }));
 
-  const handleCreateScholarship = () => {
-    const scholarship = createScholarship();
+  const [creatingScholarship, setCreatingScholarship] = useState(false);
+  const [scholarshipFailed, setScholarshipFailed] = useState(false);
+  const handleCreateScholarship = async () => {
+    if (creatingScholarship) return;
+    setCreatingScholarship(true);
+    setScholarshipFailed(false);
+    const scholarship = await createScholarship();
+    setCreatingScholarship(false);
     if (scholarship) {
       setCreatedScholarship(scholarship.code);
+    } else {
+      setScholarshipFailed(true);
     }
   };
 
@@ -97,14 +119,12 @@ export function EnterpriseDashboard() {
             icon={<Users size={20} className="text-blue-500" />}
             value={members.length}
             label={t('activeMembers')}
-            trend={t('thisMonthPlus2')}
             iconBg="bg-blue-100"
           />
           <KpiCard
             icon={<GraduationCap size={20} className="text-gold-500" />}
             value={certifiedMembers}
             label={t('certificates')}
-            trend={t('thisMonthPlus5')}
             iconBg="bg-gold-100"
           />
           <KpiCard
@@ -112,7 +132,6 @@ export function EnterpriseDashboard() {
             value={completionRate}
             suffix="%"
             label={t('completionRate')}
-            trend={t('previousMonthPlus8')}
             iconBg="bg-emerald-100"
           />
           <KpiCard
@@ -135,6 +154,11 @@ export function EnterpriseDashboard() {
           <p className="text-meta text-gray-500 mt-3">
             {scholarships.filter((scholarship) => scholarship.status === 'pending').length} {t('scholarshipsAvailable')}
           </p>
+          {scholarshipFailed && (
+            <p role="alert" className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body text-red-700">
+              {t('scholarshipCreateFailed')}
+            </p>
+          )}
           {createdScholarship && (
             <div className="mt-4 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-body text-gold-700">
               <p>
@@ -159,6 +183,9 @@ export function EnterpriseDashboard() {
               <h2 className="font-semibold text-gray-900">{t('recentActivity')}</h2>
             </div>
             <div className="space-y-4">
+              {activities.length === 0 && (
+                <p className="text-body text-gray-500">{t('noActivityYet')}</p>
+              )}
               {activities.map((a, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0 text-blue-500">
@@ -180,7 +207,7 @@ export function EnterpriseDashboard() {
               <Button variant="primary" size="sm" className="w-full" onClick={() => navigate('/enterprise/members')}>
                 <UserPlus size={16} /> {t('inviteMember')}
               </Button>
-              <Button variant="gold" size="sm" className="w-full" onClick={handleCreateScholarship} disabled={!canManageOrganization}>
+              <Button variant="gold" size="sm" className="w-full" onClick={() => void handleCreateScholarship()} disabled={!canManageOrganization || creatingScholarship}>
                 <Gift size={16} /> {t('createScholarships')}
               </Button>
               <Button variant="outline" size="sm" className="w-full" onClick={exportReport}>

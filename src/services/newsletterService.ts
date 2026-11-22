@@ -147,13 +147,23 @@ export function deleteDraft(id: string): void {
   save(DRAFTS_KEY, getDrafts().filter((d) => d.id !== id));
 }
 
+/**
+ * Anyone can type a name in the public popup. A value starting with = + - @
+ * (or a tab / carriage return) runs as a formula when the admin opens the CSV
+ * in Excel or Sheets (e.g. =HYPERLINK to exfiltrate the row). Prefixing a quote
+ * keeps it as plain text.
+ */
+export function neutralizeSpreadsheetFormula(value: string): string {
+  return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+}
+
 export function exportSubscribersCSV(subs: NewsletterSubscriber[]): string {
   const header = ['Nom', 'Email', 'Telephone', 'Source', "Date d'inscription"]
     .map((h) => `"${h}"`)
     .join(',');
   const rows = subs.map((s) =>
     [s.name, s.email, s.phone ?? '', s.source, s.joinedAt.slice(0, 10)]
-      .map((v) => `"${String(v).replace(/"/g, '""')}"`)
+      .map((v) => `"${neutralizeSpreadsheetFormula(String(v)).replace(/"/g, '""')}"`)
       .join(','),
   );
   return `\uFEFF${[header, ...rows].join('\r\n')}`;

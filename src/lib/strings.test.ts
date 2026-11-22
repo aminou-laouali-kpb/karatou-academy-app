@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { slugify } from './strings';
+import { neutralizeSpreadsheetFormula } from '../services/newsletterService';
 
 describe('slugify', () => {
   it('lower-cases and strips accents', () => {
@@ -32,5 +33,15 @@ describe('slugify', () => {
   it('handles unicode/emoji by removing them', () => {
     // Emojis and CJK are dropped by the [^a-z0-9]+ replace.
     expect(slugify('Karatou 🎓 学院')).toBe('karatou');
+  });
+});
+
+
+describe('CSV export', () => {
+  it('neutralizes spreadsheet formulas typed into public forms', () => {
+    expect(neutralizeSpreadsheetFormula('=HYPERLINK("https://x.example")')).toBe('\'=HYPERLINK("https://x.example")');
+    expect(neutralizeSpreadsheetFormula('+33 6 12')).toBe("'+33 6 12");
+    expect(neutralizeSpreadsheetFormula('@SUM(A1)')).toBe("'@SUM(A1)");
+    expect(neutralizeSpreadsheetFormula('Aïcha Moussa')).toBe('Aïcha Moussa');
   });
 });

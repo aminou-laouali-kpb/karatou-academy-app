@@ -14,7 +14,7 @@ test.describe('Enterprise portal', () => {
 
     await expect(page.getByText('Bourse créée')).toBeVisible();
     // The new code is shown both as a label and inside the redeem URL.
-    await expect(page.getByText(/KA-SCH-PNUD-[A-Z0-9]{6}/).first()).toBeVisible();
+    await expect(page.getByText(/KA-SCH-[A-Z0-9]{1,6}-[A-Z2-9]{10}/).first()).toBeVisible();
   });
 });
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Clock, Users, Star, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Clock, CheckCircle2 } from 'lucide-react';
 import { ProgressBar } from './ProgressBar';
 import { Button } from './Button';
 import { LearningModule } from '../types';
@@ -52,14 +52,8 @@ export function ModuleCard({ module }: ModuleCardProps) {
           <span className="flex items-center gap-1">
             <Clock size={13} /> {localizedModule.duration}
           </span>
-          <span className="flex items-center gap-1">
-            <Users size={13} /> {localizedModule.enrolled}
-          </span>
-          {localizedModule.rating > 0 && (
-            <span className="flex items-center gap-1">
-              <Star size={13} className="text-gold-400" /> {localizedModule.rating}
-            </span>
-          )}
+          {/* Enrolment counts and star ratings are hidden: they were seed
+              values (1 240 learners, 4.8★), not measured figures. */}
         </div>
 
         {isInProgress && (

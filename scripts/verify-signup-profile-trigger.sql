@@ -1,5 +1,5 @@
 -- Vérifie, sur une base réelle, que le déclencheur d'inscription recopie bien
--- le nom, le pays ET le genre déclarés (migration 20260911104500_s08).
+-- le nom, le pays ET le genre déclarés (migration 20260911093924_s08).
 --
 --   psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f scripts/verify-signup-profile-trigger.sql
 --

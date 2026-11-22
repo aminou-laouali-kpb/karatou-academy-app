@@ -1,0 +1,10 @@
+# En-têtes de sécurité, au format Netlify / Cloudflare Pages (effectif si
+# l'application quitte l'hébergement statique Replit, comme public/_redirects).
+# Sur Replit, à reproduire dans la configuration de déploiement si elle le
+# permet : voir docs/go-live-runbook.md, section « En-têtes de sécurité ».
+/*
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

@@ -1,0 +1,18 @@
+# Configuration minimale de la CLI Supabase pour ce dépôt.
+# Elle fixe surtout `verify_jwt` par fonction : sans elle, un simple
+# `supabase functions deploy` remettrait verify_jwt = true et casserait la
+# vérification publique des attestations (QR scannés sans session).
+project_id = "karatou-academy-app"
+
+[functions.attestation-verify]
+verify_jwt = false
+
+[functions.attestation-sign]
+# La fonction vérifie elle-même le JWT et le rôle platform admin.
+verify_jwt = false
+
+[functions.admin-provision-enterprise-admin]
+verify_jwt = true
+
+[functions.admin-generate-lesson]
+verify_jwt = true

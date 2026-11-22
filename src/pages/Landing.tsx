@@ -6,6 +6,7 @@ import { Logo } from '../components/Logo';
 import { NewsletterPopup } from '../components/NewsletterPopup';
 import { ImpactStats } from '../components/ImpactStats';
 import { useLanguage } from '../hooks/useLanguage';
+import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { localizeModules } from '../data/localizedContent';
 import { GraduationCap, Globe, Building2, Check, Star } from 'lucide-react';
@@ -14,6 +15,7 @@ export function Landing() {
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
   const { modules } = useLearning();
+  const { user } = useAuth();
   const publishedModules = localizeModules(
     modules.filter((module) => module.status !== 'draft'),
     lang,
@@ -22,6 +24,7 @@ export function Landing() {
   return (
     <div className="min-h-screen">
       <MarketingNav />
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <NewsletterPopup />
 
       {/* Hero */}
@@ -39,7 +42,7 @@ export function Landing() {
             {t('heroSubtitle')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Button variant="primary" size="lg" onClick={() => navigate('/dashboard')}>
+            <Button variant="primary" size="lg" onClick={() => navigate(user ? '/dashboard' : '/register')}>
               {t('startFree')}
             </Button>
             <Button variant="outline" size="lg" onClick={() => document.getElementById('modules')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="border-white/30 text-white hover:bg-white/10">
@@ -185,19 +188,10 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Partners */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-eyebrow text-gray-500 mb-8">{t('trustedBy')}</p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {['PNUD', t('ministryEducation'), 'ONG Sahel Tech', t('universityNiamey'), 'Banque Sahel'].map((p) => (
-              <span key={p} className="bg-white border border-gray-200 text-gray-600 text-body font-medium px-6 py-2.5 rounded-full">
-                {p}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* No "they trust us" logos: the names shown were not partners. Real
+          partners can be listed here once they have agreed to it. */}
+
+      </main>
 
       {/* Footer */}
       <footer className="bg-blue-900 py-12 px-4">

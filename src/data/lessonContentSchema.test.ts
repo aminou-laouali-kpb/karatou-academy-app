@@ -11,7 +11,7 @@ const validBody = {
   lessonNumber: 1,
   title: 'Introduction à l’IA',
   objective: 'Comprendre ce qu’est l’IA.',
-  video: { fr: 'https://www.youtube.com/embed/abc', en: '', ha: '' },
+  video: { fr: 'https://www.youtube.com/embed/x6-rsUQzkHw', en: '', ha: '' },
   content: [{ title: 'Section 1', body: 'Corps de la section.' }],
   example: { title: 'Cas', challenge: 'Défi', solution: 'Solution', impact: 'Impact' },
   practice: { title: 'Exercice', instructions: ['Étape 1', 'Étape 2'], observation: 'À noter.' },
@@ -37,7 +37,7 @@ describe('parseLessonContent', () => {
     expect(parsed?.title).toBe('Introduction à l’IA');
     expect(parsed?.content).toHaveLength(1);
     expect(parsed?.quiz[0].options).toHaveLength(2);
-    expect(parsed?.video.fr).toBe('https://www.youtube.com/embed/abc');
+    expect(parsed?.video.fr).toBe('https://www.youtube.com/embed/x6-rsUQzkHw');
   });
 
   it('rejects non-objects and bodies with no usable core', () => {
@@ -55,6 +55,15 @@ describe('parseLessonContent', () => {
     });
     expect(parsed?.objective).toBe('');
     expect(parsed?.content).toHaveLength(1);
+  });
+
+  it('drops video URLs that are not YouTube (they end up in an iframe src)', () => {
+    const parsed = parseLessonContent({
+      title: 'Titre',
+      objective: 'But',
+      video: { fr: 'javascript:alert(document.cookie)', en: 'https://youtu.be/x6-rsUQzkHw', ha: 'https://evil.example/x' },
+    });
+    expect(parsed?.video).toEqual({ fr: '', en: 'https://www.youtube.com/embed/x6-rsUQzkHw', ha: '' });
   });
 
   it('fills missing optional blocks instead of throwing', () => {

@@ -1,3 +1,4 @@
+import { toEmbedUrl } from '../lib/videoUrl';
 import { GlossaryItem, LessonContent, QuizQuestion } from './lessonContent';
 import { Language } from './translations';
 
@@ -64,7 +65,9 @@ function parseGlossary(value: unknown): GlossaryItem[] {
 
 function parseVideo(value: unknown): LessonContent['video'] {
   const source = isRecord(value) ? value : {};
-  return { fr: str(source.fr), en: str(source.en), ha: str(source.ha) };
+  // Only YouTube links survive (see lib/videoUrl): a `javascript:` URL from the
+  // CMS or a JSON import would otherwise reach an <iframe src>.
+  return { fr: toEmbedUrl(str(source.fr)), en: toEmbedUrl(str(source.en)), ha: toEmbedUrl(str(source.ha)) };
 }
 
 /**

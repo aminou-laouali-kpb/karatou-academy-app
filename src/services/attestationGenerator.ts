@@ -86,16 +86,11 @@ async function attestationFunctionError(error: unknown): Promise<Error> {
   return new Error(initial);
 }
 
-/**
- * `unavailable` is deliberately distinct from `invalid`: an unreachable
- * verification service must never tell a holder their attestation is a forgery.
- */
-export type VerificationStatus = 'valid' | 'expired' | 'revoked' | 'invalid' | 'unavailable';
-
-export interface VerificationResult {
-  status: VerificationStatus;
-  payload?: CertificatePayload;
-}
+// Verification lives in a light module so the public QR page does not load
+// this file's PDF/Excel tooling. Re-exported for the admin tool and tests.
+export { verifyAttestation } from './attestationVerify';
+export type { VerificationStatus, VerificationResult } from './attestationVerify';
+import type { VerificationResult } from './attestationVerify';
 
 function signatureFor(payload: Pick<CertificatePayload, 'id' | 'name' | 'issuedAt' | 'expiresAt'>): string {
   const base = JSON.stringify({
@@ -107,27 +102,12 @@ function signatureFor(payload: Pick<CertificatePayload, 'id' | 'name' | 'issuedA
   return CryptoJS.HmacSHA256(base, SECRET).toString();
 }
 
-function verifyAttestationLocal(payload: CertificatePayload): VerificationResult {
+/** Demo-only verifier (no Supabase): checks the HMAC with the bundled demo secret. */
+export function verifyAttestationLocal(payload: CertificatePayload): VerificationResult {
   if (!payload?.id || !payload.signature) return { status: 'invalid' };
   if (signatureFor(payload) !== payload.signature) return { status: 'invalid' };
   const expired = new Date(`${payload.expiresAt}T23:59:59`).getTime() < Date.now();
   return { status: expired ? 'expired' : 'valid', payload };
-}
-
-/**
- * Verifies a payload. Server-side via the attestation-verify Edge Function when
- * Supabase is configured; local demo fallback otherwise.
- */
-export async function verifyAttestation(payload: CertificatePayload): Promise<VerificationResult> {
-  if (isSupabaseConfigured && supabase) {
-    const { data, error } = await supabase.functions.invoke('attestation-verify', { body: { payload } });
-    if (error || !data) return { status: 'unavailable' };
-    const result = data as VerificationResult;
-    return ['valid', 'expired', 'revoked', 'invalid'].includes(result.status)
-      ? result
-      : { status: 'unavailable' };
-  }
-  return verifyAttestationLocal(payload);
 }
 
 /** The QR encodes this URL: scanning opens the verifier with the signed payload. */

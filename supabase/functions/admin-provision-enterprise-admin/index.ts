@@ -65,10 +65,17 @@ Deno.serve(async (req) => {
       page += 1;
     }
 
+    // An existing account is NEVER taken over: its password, e-mail
+    // confirmation and profile stay as the owner set them (this call used to
+    // reset all three, so a typo or a phished admin session could lock out or
+    // impersonate any learner). It only gains the enterprise-admin role, and a
+    // platform admin is never demoted.
+    const existingRole = String((existing?.app_metadata as { role?: unknown } | undefined)?.role ?? '');
+    if (existing && (existingRole === 'platform_admin' || existingRole === 'admin')) {
+      return json({ error: 'this account is a platform admin and cannot be turned into an enterprise admin' }, 409);
+    }
     const result = existing
       ? await admin.auth.admin.updateUserById(existing.id, {
-          password, email_confirm: true,
-          user_metadata: { full_name: name, country: 'NE' },
           app_metadata: { ...(existing.app_metadata ?? {}), role: 'enterprise_admin' },
         })
       : await admin.auth.admin.createUser({
@@ -86,9 +93,10 @@ Deno.serve(async (req) => {
       // (student/admin/org_admin) — writing 'enterprise_admin' violated
       // profiles_role_check and made this whole call fail with a 500 after the
       // auth user had already been created.
+      // ignoreDuplicates: an existing person's name and country are theirs.
       admin.from('profiles').upsert(
         { id: newUser.id, full_name: name, country: 'NE' },
-        { onConflict: 'id' }
+        { onConflict: 'id', ignoreDuplicates: true }
       ),
       admin.from('karatou_org_memberships').upsert(
         { id: `membership-${newUser.id}`, organization_id: orgId, email, role: 'enterprise_admin', status: 'active' },
@@ -104,8 +112,11 @@ Deno.serve(async (req) => {
     ]);
     for (const r of upserts) if (r.error) throw r.error;
 
-    return json({ ok: true, userId: newUser.id, email, orgId, orgName: org.name, updated: Boolean(existing) }, 200);
+    // passwordUnchanged: the admin UI must not tell the operator that the
+    // password they typed is now valid for an existing account.
+    return json({ ok: true, userId: newUser.id, email, orgId, orgName: org.name, updated: Boolean(existing), passwordUnchanged: Boolean(existing) }, 200);
   } catch (e) {
-    return json({ error: e instanceof Error ? e.message : 'unexpected error' }, 500);
+    console.error('admin-provision-enterprise-admin failed', e);
+    return json({ error: 'provisioning failed' }, 500);
   }
 });

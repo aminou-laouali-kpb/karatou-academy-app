@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { certificates as seedCertificates, enterpriseData, modules as seedModules, rubriques as seedRubriques } from '../data/mockData';
 import { Certificate, ContentImportRecord, ContentMutationResult, DemoUser, EnterpriseMember, LearningModule, Organization, RedeemScholarshipResult, Rubrique, Scholarship } from '../types';
 import { LearningContext } from './learningCore';
@@ -17,7 +17,6 @@ import {
 import {
   issueCertificateRecord,
   loadLearnerActivity,
-  saveCompletedCourseRecord,
   saveCompletedCourseRecords,
 } from '../services/learningRepository';
 import {
@@ -25,8 +24,16 @@ import {
   redeemScholarshipRecord,
   saveEnterpriseMemberRecord,
   saveOrganizationRecord,
-  saveScholarshipRecord,
+  createScholarshipRecord,
 } from '../services/enterpriseRepository';
+import { generateScholarshipCode, scholarshipExpiry } from '../lib/scholarship';
+import {
+  acknowledgeCompletions,
+  enqueueCompletion,
+  groupByModule,
+  mergeCompletedCourses,
+  readOutbox,
+} from '../lib/progressOutbox';
 
 // Namespaced per mode so a demo-populated store can never be read in production.
 const LEARNING_STORAGE_KEY = isDemoEnabled ? 'karatou.learning.v6.demo' : 'karatou.learning.v6.prod';
@@ -41,6 +48,8 @@ interface StoredLearningState {
   organization: Organization | null;
   members: EnterpriseMember[];
   scholarships: Scholarship[];
+  /** Account the personal data (progress, certificates…) belongs to. */
+  ownerUserId?: string | null;
 }
 
 const initialCompletedCourses = seedModules.reduce<Record<string, string[]>>((acc, module) => {
@@ -183,9 +192,11 @@ function normalizeScholarshipCode(code: string) {
 }
 
 function isScholarshipExpired(scholarship: Scholarship) {
-  const expiry = scholarship.expiresAtDate || '2026-12-31';
-  return new Date(`${expiry}T23:59:59`).getTime() < Date.now();
+  // No date: the server is the authority (its RPC checks expires_at_date).
+  if (!scholarship.expiresAtDate) return false;
+  return new Date(`${scholarship.expiresAtDate}T23:59:59`).getTime() < Date.now();
 }
+
 
 function createRedeemResult(
   status: RedeemScholarshipResult['status'],
@@ -220,6 +231,44 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   // identity's RLS visibility (admins see drafts, learners do not).
   const [contentReloadKey, setContentReloadKey] = useState(0);
 
+  // Sends pending lesson completions in one bulk insert per module. Concurrent
+  // calls share the same in-flight run; failures keep the items for next time.
+  const flushInFlight = useRef<Promise<void> | null>(null);
+  const flushProgressOutbox = useCallback((ownerId: string): Promise<void> => {
+    if (getContentBackend() !== 'supabase') return Promise.resolve();
+    if (flushInFlight.current) return flushInFlight.current;
+    const run = (async () => {
+      const pending = readOutbox(ownerId);
+      for (const [moduleSlug, items] of Object.entries(groupByModule(pending))) {
+        try {
+          await saveCompletedCourseRecords(ownerId, moduleSlug, items);
+          acknowledgeCompletions(ownerId, items);
+        } catch (error) {
+          setContentSyncStatus(`Echec sync apprenant: ${error instanceof Error ? error.message : 'erreur inconnue'}`);
+        }
+      }
+    })().finally(() => {
+      flushInFlight.current = null;
+    });
+    flushInFlight.current = run;
+    return run;
+  }, []);
+
+  // Replay the outbox when the connection comes back or the app returns to the
+  // foreground (Android often kills the tab of a backgrounded browser).
+  useEffect(() => {
+    if (authMode !== 'supabase' || !userId) return;
+    const flush = () => {
+      if (document.visibilityState === 'visible') void flushProgressOutbox(userId);
+    };
+    window.addEventListener('online', flush);
+    document.addEventListener('visibilitychange', flush);
+    return () => {
+      window.removeEventListener('online', flush);
+      document.removeEventListener('visibilitychange', flush);
+    };
+  }, [authMode, userId, flushProgressOutbox]);
+
   // Per-user isolation: when the auth identity changes (login / logout / switch on
   // a shared device), drop the previous session's personal data. Real data reloads
   // via the snapshot effects below. Demo mode keeps its seed.
@@ -235,10 +284,16 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     if (lastUserIdRef.current === userId) {
       return;
     }
+    const previousUserId = lastUserIdRef.current;
     lastUserIdRef.current = userId;
     if (!isDemoEnabled) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on identity change
       setState((current) => {
+        // A hard refresh resolves the session undefined -> uuid after mount. That
+        // is the same person: keep their progress (it used to be wiped at every
+        // launch, losing completions not yet synced). Wipe only on logout or when
+        // another account takes over the device.
+        const sameOwner = !previousUserId && userId && current.ownerUserId === userId;
+        if (sameOwner) return current;
         const next: StoredLearningState = {
           ...emptyState,
           modules: current.modules
@@ -248,6 +303,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
               courses: module.courses.filter((course) => course.status !== 'draft'),
             })),
           rubriques: current.rubriques.filter((rubrique) => rubrique.status !== 'draft'),
+          ownerUserId: userId ?? null,
         };
         persistState(next);
         return next;
@@ -324,12 +380,15 @@ export function LearningProvider({ children }: { children: ReactNode }) {
         setState((current) => {
           const next = {
             ...current,
-            completedCourses: snapshot.completedCourses,
+            // Server progress ∪ completions still waiting in the outbox.
+            completedCourses: mergeCompletedCourses(snapshot.completedCourses, readOutbox(userId)),
             certificates: snapshot.certificates,
+            ownerUserId: userId,
           };
           persistState(next);
           return next;
         });
+        void flushProgressOutbox(userId);
       })
       .catch((error: Error) => {
         if (active) {
@@ -340,7 +399,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
-  }, [authMode, authReady, userId]);
+  }, [authMode, authReady, userId, flushProgressOutbox]);
 
   useEffect(() => {
     if (authMode !== 'supabase' || !authReady || !canAccessEnterprise(userRole)) {
@@ -441,16 +500,6 @@ export function LearningProvider({ children }: { children: ReactNode }) {
 
   const syncContent = (taskFactory: () => Promise<unknown>, successMessage: string) => {
     void runContentSync(taskFactory, successMessage);
-  };
-
-  const syncLearnerActivity = (task: Promise<unknown>, successMessage: string) => {
-    if (authMode !== 'supabase') {
-      return;
-    }
-
-    task
-      .then(() => setContentSyncStatus(successMessage))
-      .catch((error: Error) => setContentSyncStatus(`Echec sync apprenant: ${error.message}`));
   };
 
   const syncEnterprise = (task: Promise<unknown>, successMessage: string) => {
@@ -710,11 +759,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       };
     });
 
-    if (user) {
-      syncLearnerActivity(
-        saveCompletedCourseRecord(user.id, moduleSlug, courseId),
-        `Progression synchronisee: ${moduleSlug}`
-      );
+    if (user && authMode === 'supabase') {
+      // Written to the per-user outbox first, then sent: a failed or offline
+      // send is retried on reconnection instead of being lost.
+      enqueueCompletion(user.id, { moduleSlug, courseId, completedAt: new Date().toISOString() });
+      void flushProgressOutbox(user.id);
     }
 
     return nextIds;
@@ -744,6 +793,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     // and generates the UID). Direct client writes are blocked by RLS.
     if (authMode === 'supabase') {
       try {
+        await flushProgressOutbox(user.id);
         if (completedCourseIds && completedCourseIds.length > 0) {
           await saveCompletedCourseRecords(user.id, moduleSlug, completedCourseIds);
         }
@@ -919,6 +969,11 @@ export function LearningProvider({ children }: { children: ReactNode }) {
       }
     }
 
+    // Production never falls back to the demo rules: a code the server could
+    // not confirm is not redeemed.
+    if (authMode === 'supabase') {
+      return createRedeemResult('error', 'Activation de la bourse impossible.', normalizeScholarshipCode(code));
+    }
     return redeemLocalScholarship(code, user);
   };
 
@@ -944,29 +999,44 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     syncEnterprise(saveEnterpriseMemberRecord(member), `Membre synchronise: ${member.email}`);
   };
 
-  const createScholarship = () => {
+  const createScholarship = async (): Promise<Scholarship | null> => {
     // Falling back to the demo organization would mint a code that RLS refuses
     // to persist, leaving the admin with a reference that verifies nowhere.
     const organizationId = state.organization?.id || user?.orgId;
     if (!organizationId) {
       return null;
     }
-    const code = `KA-SCH-PNUD-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+
+    // Production: the server generates the code (within the seat limit) and
+    // only then is it shown — a code displayed but never saved used to give
+    // learners "invalid code" later.
+    if (authMode === 'supabase') {
+      try {
+        const created = await createScholarshipRecord(organizationId);
+        commit((current) => ({ ...current, scholarships: [created, ...current.scholarships] }));
+        return created;
+      } catch (error) {
+        setContentSyncStatus(`Echec creation bourse: ${error instanceof Error ? error.message : 'erreur inconnue'}`);
+        return null;
+      }
+    }
+
+    // The "PNUD" prefix and the 2026-12-31 expiry used to be hard-coded for
+    // every organization: all codes would have died on 2027-01-01.
+    const code = generateScholarshipCode(state.organization?.name || organizationId);
     const scholarship: Scholarship = {
       id: `scholarship-${Date.now()}`,
       organizationId,
       code,
       status: 'pending',
       claimedBy: null,
-      expiresAt: '31 dec 2026',
-      expiresAtDate: '2026-12-31',
+      ...scholarshipExpiry(),
     };
 
     commit((current) => ({
       ...current,
       scholarships: [scholarship, ...current.scholarships],
     }));
-    syncEnterprise(saveScholarshipRecord(scholarship), `Bourse synchronisee: ${scholarship.code}`);
 
     return scholarship;
   };

@@ -149,15 +149,17 @@
   body,
   #root {
     min-height: 100%;
-    overflow-x: hidden;
+    /* `clip`, pas `hidden` : `hidden` fait de ces éléments des conteneurs de
+       défilement, ce qui empêchait les en-têtes `sticky` de rester collés. */
+    overflow-x: clip;
     touch-action: pan-y pinch-zoom;
     -webkit-overflow-scrolling: touch;
   }
 
   html {
     scroll-behavior: auto;
-    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Literata', Georgia, serif;
+    --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Literata Variable', 'Literata', Georgia, serif;
   }
 
   body {

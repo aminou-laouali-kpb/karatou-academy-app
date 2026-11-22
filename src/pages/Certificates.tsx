@@ -1,3 +1,4 @@
+import { formatLongDate } from '../lib/dates';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
@@ -9,7 +10,6 @@ import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
 import { Certificate } from '../types';
-import { downloadCertificatePdf, formatCertificateDate } from '../services/certificatePdf';
 import { trackEvent } from '../lib/analytics';
 import { fetchOrganizationLogo } from '../services/enterpriseRepository';
 import { certificateVerifyUrl } from '../lib/verification';
@@ -35,10 +35,13 @@ export function Certificates() {
       getProgress(module.slug) >= 100 &&
       !activeCertificates.some((certificate) => certificate.moduleSlug === module.slug)
   );
-  const primaryCert = activeCertificates[0];
-  const primaryModuleTitle = primaryCert
-    ? localizedModules.find((module) => module.slug === primaryCert.moduleSlug)?.title || primaryCert.moduleName
-    : '';
+  // Every active certificate stays reachable: the hero card shows the selected
+  // one (the first by default) and a chooser lists the others.
+  const [selectedUid, setSelectedUid] = useState<string | null>(null);
+  const primaryCert = activeCertificates.find((certificate) => certificate.uid === selectedUid) ?? activeCertificates[0];
+  const moduleTitleFor = (certificate: Certificate) =>
+    localizedModules.find((module) => module.slug === certificate.moduleSlug)?.title || certificate.moduleName;
+  const primaryModuleTitle = primaryCert ? moduleTitleFor(primaryCert) : '';
 
   const [downloadingUid, setDownloadingUid] = useState<string | null>(null);
   const [downloadFailed, setDownloadFailed] = useState(false);
@@ -48,6 +51,9 @@ export function Certificates() {
     setDownloadFailed(false);
     setDownloadingUid(certificate.uid);
     try {
+      // pdf-lib + fontkit + the Noto subsets weigh ~500 kB gzip: load them on
+      // click, not when the page opens (2G learners mostly just look at it).
+      const { downloadCertificatePdf, formatCertificateDate } = await import('../services/certificatePdf');
       const verifyUrl = certificateVerifyUrl(certificate.uid);
       const sponsorLogoUrl = user?.orgId ? await fetchOrganizationLogo(user.orgId) : null;
       // Reformat the date in the active language (issuedAtIso preserves the
@@ -84,7 +90,7 @@ export function Certificates() {
     <div className="min-h-screen bg-gray-50">
       <StudentNav />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" tabIndex={-1} className="max-w-4xl mx-auto px-4 sm:px-6 py-8 focus:outline-none">
         <div className="mb-8">
           <h1 className="font-heading text-h1 text-gray-900">{t('certificatesTitle')}</h1>
           <p className="text-gray-500 mt-1">{t('certificatesSubtitle')}</p>
@@ -119,6 +125,31 @@ export function Certificates() {
           </div>
         ) : (
           <>
+            {activeCertificates.length > 1 && (
+              <div className="mb-4">
+                <p className="text-meta text-gray-500 mb-2">{t('yourCertificates')} ({activeCertificates.length})</p>
+                <div className="flex flex-wrap gap-2" role="group" aria-label={t('yourCertificates')}>
+                  {activeCertificates.map((certificate) => {
+                    const selected = certificate.uid === primaryCert.uid;
+                    return (
+                      <button
+                        key={certificate.uid}
+                        type="button"
+                        aria-pressed={selected}
+                        onClick={() => setSelectedUid(certificate.uid)}
+                        className={`min-h-[44px] rounded-xl border px-3 py-2 text-left text-body transition-colors ${
+                          selected
+                            ? 'border-blue-600 bg-blue-50 text-blue-900 font-semibold'
+                            : 'border-gray-200 bg-white text-gray-700 hover:border-blue-300'
+                        }`}
+                      >
+                        {moduleTitleFor(certificate)}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-2xl p-6 sm:p-8 mb-6 relative overflow-hidden">
               <div className="absolute top-4 right-4 w-12 h-12 bg-gold-400/20 rounded-full flex items-center justify-center">
                 <GraduationCap size={24} className="text-gold-400" />
@@ -141,11 +172,11 @@ export function Certificates() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('issued')}</p>
-                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.issuedAt}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{formatLongDate(primaryCert.issuedAtIso || primaryCert.issuedAt, lang)}</p>
                   </div>
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('validUntil')}</p>
-                    <p className="text-body text-white font-medium mt-0.5">{primaryCert.expiresAt}</p>
+                    <p className="text-body text-white font-medium mt-0.5">{formatLongDate(primaryCert.expiresAtIso || primaryCert.expiresAt, lang)}</p>
                   </div>
                   <div>
                     <p className="text-eyebrow text-gray-400">{t('status')}</p>
@@ -222,7 +253,19 @@ export function Certificates() {
                       <span className="text-meta text-gray-500">{progress}%</span>
                     </div>
                   </div>
-                  {certificate ? <Badge variant="green">{t('certified')}</Badge> : <Badge variant="gray">{t('inProgress')}</Badge>}
+                  {certificate ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedUid(certificate.uid);
+                        window.scrollTo({ top: 0 });
+                      }}
+                      className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                      aria-label={`${t('certified')} — ${module.title}`}
+                    >
+                      <Badge variant="green">{t('certified')}</Badge>
+                    </button>
+                  ) : <Badge variant="gray">{t('inProgress')}</Badge>}
                 </div>
               </div>
             );

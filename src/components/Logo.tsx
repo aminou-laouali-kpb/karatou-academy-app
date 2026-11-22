@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../hooks/useLanguage';
 
 export type LogoVariant = 'default' | 'dark' | 'compact';
 export type LogoSize = 'sm' | 'md' | 'lg';
@@ -45,16 +46,18 @@ const WORDMARK_SIZES: Record<LogoSize, string> = {
 };
 
 export function Logo({ variant = 'default', size = 'md', className = '' }: LogoProps) {
-  const navigate = useNavigate();
+  const { t } = useLanguage();
   const isDark = variant === 'dark';
   const primary = isDark ? 'text-white' : 'text-gray-900';
-  const accent = isDark ? 'text-blue-300' : 'text-blue-500';
+  // blue-600, not blue-500: 4.31:1 on white failed WCAG AA for this text.
+  const accent = isDark ? 'text-blue-300' : 'text-blue-600';
 
+  // A real link (it navigates). Its name is the visible wordmark; the compact
+  // variant has no text, so it gets a translated label instead.
   return (
-    <button
-      type="button"
-      onClick={() => navigate('/')}
-      aria-label="Karatou Academy — accueil"
+    <Link
+      to="/"
+      aria-label={variant === 'compact' ? `Karatou Academy — ${t('home')}` : undefined}
       className={`inline-flex items-center gap-2.5 rounded-lg transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${className}`}
     >
       <span
@@ -74,6 +77,6 @@ export function Logo({ variant = 'default', size = 'md', className = '' }: LogoP
           <span className={primary}>Karatou</span> <span className={accent}>Academy</span>
         </span>
       )}
-    </button>
+    </Link>
   );
 }
