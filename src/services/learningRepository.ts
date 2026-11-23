@@ -119,50 +119,48 @@ export async function loadLearnerActivity(userId: string): Promise<LearnerActivi
   };
 }
 
-export async function saveCompletedCourseRecord(userId: string, moduleSlug: string, courseId: string) {
-  if (!isSupabaseConfigured) return;
+export type QuizSubmissionStatus = 'passed' | 'failed' | 'mismatch' | 'rate_limited';
 
-  const { error } = await requireClient()
-    .from(TABLES.learnerProgress)
-    .upsert(
-      {
-        user_id: userId,
-        module_slug: moduleSlug,
-        course_id: courseId,
-        completed_at: new Date().toISOString(),
-      },
-      { onConflict: 'user_id,module_slug,course_id' }
-    );
-
-  if (error) throw error;
+export interface QuizSubmission {
+  moduleSlug: string;
+  courseId: string;
+  lang: string;
+  answers: string[];
+  completedAt?: string;
 }
 
 /**
- * One bulk insert for several completions. `ignoreDuplicates` keeps the date a
- * lesson was first completed (the previous N parallel upserts rewrote it), and
- * a single request is far more likely to get through a 2G link than N.
+ * The only way to complete a lesson: the server grades the answers against its
+ * own key (karatou_submit_quiz, >= 70 %) and records the completion itself.
+ * The browser can no longer write karatou_learner_progress.
  */
-export async function saveCompletedCourseRecords(
-  userId: string,
-  moduleSlug: string,
-  courses: Array<string | { courseId: string; completedAt?: string }>
-) {
-  if (!isSupabaseConfigured || courses.length === 0) return;
+export async function submitQuizRecord(submission: QuizSubmission): Promise<{
+  status: QuizSubmissionStatus;
+  correct: number;
+  total: number;
+} | null> {
+  if (!isSupabaseConfigured) return null;
 
-  const now = new Date().toISOString();
-  const rows = courses.map((course) => {
-    const item = typeof course === 'string' ? { courseId: course } : course;
-    return {
-      user_id: userId,
-      module_slug: moduleSlug,
-      course_id: item.courseId,
-      completed_at: item.completedAt || now,
-    };
+  const { data, error } = await requireClient().rpc('karatou_submit_quiz', {
+    input_module_slug: submission.moduleSlug,
+    input_course_id: submission.courseId,
+    input_lang: submission.lang,
+    input_answers: submission.answers,
+    input_completed_at: submission.completedAt ?? null,
   });
-  const { error } = await requireClient()
-    .from(TABLES.learnerProgress)
-    .upsert(rows, { onConflict: 'user_id,module_slug,course_id', ignoreDuplicates: true });
 
+  if (error) throw error;
+  const row = (Array.isArray(data) ? data[0] : data) as
+    | { status: QuizSubmissionStatus; correct: number; total: number }
+    | undefined;
+  if (!row) throw new Error('empty quiz result');
+  return row;
+}
+
+/** Platform admins only (checked by the server). */
+export async function revokeCertificateRecord(uid: string): Promise<void> {
+  if (!isSupabaseConfigured) return;
+  const { error } = await requireClient().rpc('karatou_revoke_certificate', { input_uid: uid });
   if (error) throw error;
 }
 

@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { certificates as seedCertificates, enterpriseData, modules as seedModules, rubriques as seedRubriques } from '../data/mockData';
 import { Certificate, ContentImportRecord, ContentMutationResult, DemoUser, EnterpriseMember, LearningModule, Organization, RedeemScholarshipResult, Rubrique, Scholarship } from '../types';
-import { LearningContext } from './learningCore';
+import { LearningContext, RejectedCompletion } from './learningCore';
 import { useAuth } from '../hooks/useAuth';
 import { canAccessEnterprise } from '../lib/roles';
 import { isDemoEnabled } from '../lib/demoMode';
@@ -17,7 +17,7 @@ import {
 import {
   issueCertificateRecord,
   loadLearnerActivity,
-  saveCompletedCourseRecords,
+  submitQuizRecord,
 } from '../services/learningRepository';
 import {
   loadEnterpriseSnapshot,
@@ -30,9 +30,9 @@ import { generateScholarshipCode, scholarshipExpiry } from '../lib/scholarship';
 import {
   acknowledgeCompletions,
   enqueueCompletion,
-  groupByModule,
   mergeCompletedCourses,
   readOutbox,
+  type PendingCompletion,
 } from '../lib/progressOutbox';
 
 // Namespaced per mode so a demo-populated store can never be read in production.
@@ -231,20 +231,59 @@ export function LearningProvider({ children }: { children: ReactNode }) {
   // identity's RLS visibility (admins see drafts, learners do not).
   const [contentReloadKey, setContentReloadKey] = useState(0);
 
-  // Sends pending lesson completions in one bulk insert per module. Concurrent
-  // calls share the same in-flight run; failures keep the items for next time.
+  // A completion the server refused (quiz graded below 70 %, or the app shows
+  // an older version of the quiz): the lesson is reopened and the player says why.
+  const [rejectedCompletion, setRejectedCompletion] = useState<RejectedCompletion | null>(null);
+
+  // Sends pending completions one by one to the server, which grades each quiz
+  // and records the lesson. Concurrent calls share the same in-flight run; a
+  // network failure keeps the items for next time.
   const flushInFlight = useRef<Promise<void> | null>(null);
   const flushProgressOutbox = useCallback((ownerId: string): Promise<void> => {
     if (getContentBackend() !== 'supabase') return Promise.resolve();
     if (flushInFlight.current) return flushInFlight.current;
+    const reopen = (item: PendingCompletion, status: RejectedCompletion['status']) => {
+      acknowledgeCompletions(ownerId, [item]);
+      setState((current) => {
+        const ids = current.completedCourses[item.moduleSlug] || [];
+        if (!ids.includes(item.courseId)) return current;
+        const next = {
+          ...current,
+          completedCourses: {
+            ...current.completedCourses,
+            [item.moduleSlug]: ids.filter((id) => id !== item.courseId),
+          },
+        };
+        persistState(next);
+        return next;
+      });
+      setRejectedCompletion({ moduleSlug: item.moduleSlug, courseId: item.courseId, status });
+    };
     const run = (async () => {
-      const pending = readOutbox(ownerId);
-      for (const [moduleSlug, items] of Object.entries(groupByModule(pending))) {
+      for (const item of readOutbox(ownerId)) {
         try {
-          await saveCompletedCourseRecords(ownerId, moduleSlug, items);
-          acknowledgeCompletions(ownerId, items);
+          const result = await submitQuizRecord({
+            moduleSlug: item.moduleSlug,
+            courseId: item.courseId,
+            lang: item.lang || 'fr',
+            answers: item.answers || [],
+            completedAt: item.completedAt,
+          });
+          if (!result || result.status === 'passed') {
+            acknowledgeCompletions(ownerId, [item]);
+          } else if (result.status === 'rate_limited') {
+            break;
+          } else {
+            reopen(item, result.status);
+          }
         } catch (error) {
+          if ((error as { code?: string } | null)?.code === 'P0002') {
+            // The lesson is no longer published: nothing to record.
+            reopen(item, 'mismatch');
+            continue;
+          }
           setContentSyncStatus(`Echec sync apprenant: ${error instanceof Error ? error.message : 'erreur inconnue'}`);
+          break;
         }
       }
     })().finally(() => {
@@ -740,7 +779,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     return Math.round((getCompletedCourseIds(moduleSlug).length / module.courses.length) * 100);
   };
 
-  const completeCourse = (moduleSlug: string, courseId: string) => {
+  const completeCourse = (moduleSlug: string, courseId: string, quiz?: { lang: string; answers: string[] }) => {
     const currentIds = state.completedCourses[moduleSlug] || [];
     const nextIds = currentIds.includes(courseId) ? currentIds : [...currentIds, courseId];
 
@@ -762,7 +801,16 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     if (user && authMode === 'supabase') {
       // Written to the per-user outbox first, then sent: a failed or offline
       // send is retried on reconnection instead of being lost.
-      enqueueCompletion(user.id, { moduleSlug, courseId, completedAt: new Date().toISOString() });
+      enqueueCompletion(user.id, {
+        moduleSlug,
+        courseId,
+        completedAt: new Date().toISOString(),
+        lang: quiz?.lang,
+        answers: quiz?.answers ?? [],
+      });
+      setRejectedCompletion((current) =>
+        current?.moduleSlug === moduleSlug && current.courseId === courseId ? null : current
+      );
       void flushProgressOutbox(user.id);
     }
 
@@ -771,8 +819,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
 
   const issueCertificate = async (
     user: DemoUser,
-    moduleSlug: string,
-    completedCourseIds?: string[]
+    moduleSlug: string
   ): Promise<Certificate | null> => {
     const module = state.modules.find((candidate) => candidate.slug === moduleSlug);
     if (!module) {
@@ -793,10 +840,8 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     // and generates the UID). Direct client writes are blocked by RLS.
     if (authMode === 'supabase') {
       try {
+        // The server only counts the lessons it graded itself.
         await flushProgressOutbox(user.id);
-        if (completedCourseIds && completedCourseIds.length > 0) {
-          await saveCompletedCourseRecords(user.id, moduleSlug, completedCourseIds);
-        }
         const issued = await issueCertificateRecord(moduleSlug);
         if (issued) {
           commit((current) => ({
@@ -1093,6 +1138,8 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     isCourseCompleted,
     getProgress,
     completeCourse,
+    rejectedCompletion,
+    clearRejectedCompletion: () => setRejectedCompletion(null),
     issueCertificate,
     getUserCertificates,
     addMember,

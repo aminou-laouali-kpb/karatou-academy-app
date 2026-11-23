@@ -1,5 +1,6 @@
 /**
- * Lesson completions waiting to reach the server ("outbox").
+ * Lesson completions waiting to reach the server ("outbox"), with the quiz
+ * answers the server grades before recording them.
  *
  * On a 2G link or offline, the single upsert sent when a learner finished a
  * lesson could fail; the completion then lived only in the in-memory state and
@@ -11,6 +12,10 @@ export interface PendingCompletion {
   moduleSlug: string;
   courseId: string;
   completedAt: string;
+  /** Language of the quiz the learner answered, and their answers in order:
+   * the server grades them (karatou_submit_quiz) before recording the lesson. */
+  lang?: string;
+  answers?: string[];
 }
 
 const KEY_PREFIX = 'karatou.progress.outbox.';
@@ -25,7 +30,10 @@ function isPendingCompletion(value: unknown): value is PendingCompletion {
     item &&
       typeof item.moduleSlug === 'string' &&
       typeof item.courseId === 'string' &&
-      typeof item.completedAt === 'string'
+      typeof item.completedAt === 'string' &&
+      (item.lang === undefined || typeof item.lang === 'string') &&
+      (item.answers === undefined ||
+        (Array.isArray(item.answers) && item.answers.every((answer) => typeof answer === 'string')))
   );
 }
 
@@ -55,11 +63,16 @@ export function enqueueCompletion(
   completion: PendingCompletion,
   storage: Storage | null = safeLocalStorage()
 ): PendingCompletion[] {
+  // One entry per lesson: a newer attempt replaces the queued one (it carries
+  // the answers the learner actually passed with).
   const items = readOutbox(userId, storage);
-  const exists = items.some(
-    (item) => item.moduleSlug === completion.moduleSlug && item.courseId === completion.courseId
-  );
-  const next = exists ? items : [...items, completion];
+  const sameLesson = (item: PendingCompletion) =>
+    item.moduleSlug === completion.moduleSlug && item.courseId === completion.courseId;
+  const earlier = items.find(sameLesson);
+  const next = [
+    ...items.filter((item) => !sameLesson(item)),
+    earlier ? { ...completion, completedAt: earlier.completedAt } : completion,
+  ];
   writeOutbox(userId, next, storage);
   return next;
 }
@@ -91,13 +104,6 @@ export function mergeCompletedCourses(
   return merged;
 }
 
-/** Groups pending completions per module for a bulk upsert. */
-export function groupByModule(items: PendingCompletion[]): Record<string, PendingCompletion[]> {
-  return items.reduce<Record<string, PendingCompletion[]>>((groups, item) => {
-    (groups[item.moduleSlug] ||= []).push(item);
-    return groups;
-  }, {});
-}
 
 function safeLocalStorage(): Storage | null {
   try {

@@ -12,7 +12,7 @@ vi.mock('../lib/supabaseClient', () => ({
 }));
 vi.mock('../lib/demoMode', () => ({ isDemoEnabled: false, parseDemoFlag: () => null }));
 
-import { saveCompletedCourseRecords } from './learningRepository';
+import { revokeCertificateRecord, submitQuizRecord } from './learningRepository';
 import { createScholarshipRecord, loadEnterpriseSnapshot, saveEnterpriseMemberRecord } from './enterpriseRepository';
 import { verifyAttestation } from './attestationVerify';
 
@@ -23,18 +23,31 @@ describe('Supabase mode: learner progress', () => {
     state.fake = createFakeSupabase();
   });
 
-  it('sends pending completions as ONE bulk insert that keeps the first completion date', async () => {
-    await saveCompletedCourseRecords('user-1', 'data-analysis', [
-      { courseId: 'd1', completedAt: '2026-11-20T08:00:00.000Z' },
-      'd2',
-    ]);
-    const calls = state.fake!.calls.filter((call) => call.target === 'karatou_learner_progress');
-    expect(calls).toHaveLength(1);
-    const upsert = calls[0].steps.find((step) => step.method === 'upsert')!;
-    const [rows, options] = upsert.args as [Array<Record<string, string>>, Record<string, unknown>];
-    expect(rows.map((row) => row.course_id)).toEqual(['d1', 'd2']);
-    expect(rows[0].completed_at).toBe('2026-11-20T08:00:00.000Z');
-    expect(options).toMatchObject({ onConflict: 'user_id,module_slug,course_id', ignoreDuplicates: true });
+  it('completes a lesson only through the server-graded quiz, never by writing the table', async () => {
+    state.fake = createFakeSupabase({
+      rpc: { karatou_submit_quiz: { data: [{ status: 'passed', correct: 4, total: 5 }] } },
+    });
+    const result = await submitQuizRecord({
+      moduleSlug: 'data-analysis',
+      courseId: 'd1',
+      lang: 'ha',
+      answers: ['B', 'C', 'A', 'D', 'A'],
+      completedAt: '2026-11-20T08:00:00.000Z',
+    });
+    expect(result).toEqual({ status: 'passed', correct: 4, total: 5 });
+    expect(state.fake!.calls.some((call) => call.kind === 'from')).toBe(false);
+    expect(state.fake!.calls[0].steps[0].args[0]).toEqual({
+      input_module_slug: 'data-analysis',
+      input_course_id: 'd1',
+      input_lang: 'ha',
+      input_answers: ['B', 'C', 'A', 'D', 'A'],
+      input_completed_at: '2026-11-20T08:00:00.000Z',
+    });
+  });
+
+  it('surfaces a server refusal to the caller', async () => {
+    state.fake = createFakeSupabase({ rpc: { karatou_revoke_certificate: { error: { code: '42501', message: 'forbidden' } } } });
+    await expect(revokeCertificateRecord('KA-2026-INT-ABC123')).rejects.toMatchObject({ code: '42501' });
   });
 });
 

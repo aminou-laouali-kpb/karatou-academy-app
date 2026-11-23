@@ -22,8 +22,11 @@ export interface LearningContextValue {
   getCompletedCourseIds: (moduleSlug: string) => string[];
   isCourseCompleted: (moduleSlug: string, courseId: string) => boolean;
   getProgress: (moduleSlug: string) => number;
-  completeCourse: (moduleSlug: string, courseId: string) => string[];
-  issueCertificate: (user: DemoUser, moduleSlug: string, completedCourseIds?: string[]) => Promise<Certificate | null>;
+  /** `quiz`: the learner's answers, graded by the server before the lesson counts. */
+  completeCourse: (moduleSlug: string, courseId: string, quiz?: { lang: string; answers: string[] }) => string[];
+  rejectedCompletion: RejectedCompletion | null;
+  clearRejectedCompletion: () => void;
+  issueCertificate: (user: DemoUser, moduleSlug: string) => Promise<Certificate | null>;
   getUserCertificates: (userId: string) => Certificate[];
   addMember: (payload: { name: string; email: string; role: EnterpriseMember['role'] }) => void;
   /** null when the session has no real organization to attach the code to. */
@@ -31,6 +34,13 @@ export interface LearningContextValue {
   createOrganization: (payload: { name: string; country?: string; industry?: string; seatsTotal?: number }) => Organization;
   redeemScholarship: (code: string) => Promise<RedeemScholarshipResult>;
   resetDemoData: () => void;
+}
+
+/** A lesson the server did not validate: quiz below 70 %, or an outdated quiz. */
+export interface RejectedCompletion {
+  moduleSlug: string;
+  courseId: string;
+  status: 'failed' | 'mismatch';
 }
 
 export const LearningContext = createContext<LearningContextValue | null>(null);

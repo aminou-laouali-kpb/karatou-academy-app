@@ -96,6 +96,25 @@ error and the manual editor keeps working.
 
 - Keep `id`/`lessonNumber` consistent with the course order.
 - The quiz `answer` must match an option `key` (e.g. `'B'`).
+- The quiz answers must be in the **same order in all three languages**: the
+  server keeps one answer key per lesson and grades every quiz itself
+  (`karatou_submit_quiz`) before a lesson counts.
+
+## After adding or changing a quiz (server grading)
+
+The server grades quizzes against `app_private.karatou_quiz_keys`, exported
+from the bundled lessons. `npm test` fails (`src/data/quizKeys.test.ts`) until
+the export is refreshed:
+
+```bash
+UPDATE_QUIZ_KEYS=1 npx vitest run src/data/quizKeys.test.ts
+node scripts/quiz-keys-sql.mjs > supabase/migrations/$(date -u +%Y%m%d%H%M%S)_quiz_keys_refresh.sql
+```
+
+Apply that migration **with** the deploy of the new lessons. Until it is
+applied, learners on the new version get "this quiz has been updated" and their
+completion waits on the device. Lessons published from `/admin/lecons` need
+nothing: a trigger refreshes their keys on save.
 - All three languages are required by the type; if a translation isn't ready
   yet, reuse the FR text as a temporary placeholder so the screen stays usable.
 - For many lessons, consider moving each module's content into its own file

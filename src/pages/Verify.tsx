@@ -7,7 +7,8 @@ import { Badge } from '../components/Badge';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
-import { fetchCertificateByUid } from '../services/learningRepository';
+import { fetchCertificateByUid, revokeCertificateRecord } from '../services/learningRepository';
+import { useAuth } from '../hooks/useAuth';
 import { isDemoEnabled } from '../lib/demoMode';
 import { certificateVerifyUrl, VERIFY_DISPLAY_HOST } from '../lib/verification';
 import { ShareCertificateButtons } from '../components/ShareCertificateButtons';
@@ -82,7 +83,10 @@ function CertificateVerdict({ uid }: { uid: string }) {
   // Bumped by "Try again" after a network failure.
   const [attempt, setAttempt] = useState(0);
   const { certificates, modules } = useLearning();
+  const { user } = useAuth();
   const { lang, t } = useLanguage();
+  const [revoking, setRevoking] = useState(false);
+  const [revokeFailed, setRevokeFailed] = useState(false);
   const normalizedUid = normalizeCertificateUid(uid);
   // Only trust local (demo seed) certificates in demo mode. In production, /verify is
   // authoritative on the server RPC so fabricated demo UIDs can never pass verification.
@@ -240,6 +244,36 @@ function CertificateVerdict({ uid }: { uid: string }) {
               <span className="text-body font-mono text-gray-700 text-right break-all">{displayUid}</span>
             </div>
           </div>
+
+          {/* CGU: Karatou may revoke a certificate obtained by fraud. The server
+              checks the platform-admin role; the button is only a shortcut. */}
+          {!isDemoEnabled && user?.role === 'platform_admin' && isValid && cert && (
+            <div className="border-t border-gray-100 px-6 py-4">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={revoking}
+                onClick={async () => {
+                  if (!window.confirm(t('revokeCertificateConfirm'))) return;
+                  setRevoking(true);
+                  setRevokeFailed(false);
+                  try {
+                    await revokeCertificateRecord(cert.uid);
+                    setAttempt((value) => value + 1);
+                  } catch {
+                    setRevokeFailed(true);
+                  } finally {
+                    setRevoking(false);
+                  }
+                }}
+              >
+                <Ban size={16} /> {t('revokeCertificate')}
+              </Button>
+              {revokeFailed && (
+                <p role="alert" className="text-meta text-red-700 mt-2">{t('revokeCertificateFailed')}</p>
+              )}
+            </div>
+          )}
 
           <div className="border-t border-gray-100 px-6 py-5 flex items-center gap-4">
             <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">

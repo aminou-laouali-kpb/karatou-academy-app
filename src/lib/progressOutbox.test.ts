@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   acknowledgeCompletions,
   enqueueCompletion,
-  groupByModule,
   mergeCompletedCourses,
   readOutbox,
 } from './progressOutbox';
@@ -62,13 +61,14 @@ describe('progress outbox', () => {
     expect(readOutbox('u1', storage)).toHaveLength(1);
   });
 
-  it('groups by module for one bulk insert each', () => {
-    const groups = groupByModule([
-      { moduleSlug: 'a', courseId: '1', completedAt: at },
-      { moduleSlug: 'b', courseId: '2', completedAt: at },
-      { moduleSlug: 'a', courseId: '3', completedAt: at },
+  it('keeps the quiz answers the server will grade, and the latest attempt wins', () => {
+    const storage = memoryStorage();
+    enqueueCompletion('u1', { moduleSlug: 'a', courseId: '1', completedAt: at }, storage);
+    enqueueCompletion('u1', { moduleSlug: 'a', courseId: '1', completedAt: at, lang: 'ha', answers: ['B', 'C'] }, storage);
+    expect(readOutbox('u1', storage)).toEqual([
+      { moduleSlug: 'a', courseId: '1', completedAt: at, lang: 'ha', answers: ['B', 'C'] },
     ]);
-    expect(Object.keys(groups)).toEqual(['a', 'b']);
-    expect(groups.a.map((item) => item.courseId)).toEqual(['1', '3']);
+    storage.setItem('karatou.progress.outbox.u1', JSON.stringify([{ moduleSlug: 'a', courseId: '1', completedAt: at, answers: [1] }]));
+    expect(readOutbox('u1', storage)).toEqual([]);
   });
 });

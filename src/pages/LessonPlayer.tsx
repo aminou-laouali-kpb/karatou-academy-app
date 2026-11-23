@@ -222,6 +222,8 @@ export function LessonPlayer() {
     isCourseCompleted,
     getProgress,
     completeCourse,
+    rejectedCompletion,
+    clearRejectedCompletion,
     issueCertificate,
     getUserCertificates,
   } = useLearning();
@@ -419,8 +421,8 @@ export function LessonPlayer() {
   );
   const currentDone = isCourseCompleted(module.slug, course.id);
   // A lesson is completed only once its quiz is passed: answering every
-  // question with at least QUIZ_PASS_RATIO correct. (Server-side grading is the
-  // next step; this already stops "5 clicks = certificate" in the app.)
+  // question with at least QUIZ_PASS_RATIO correct. The server grades the same
+  // answers again (karatou_submit_quiz) before recording the lesson.
   const quizTotal = lesson.quiz.length;
   const quizIndex = quizTotal > 0 ? Math.min(currentQuiz, quizTotal - 1) : 0;
   const quizQuestion = quizTotal > 0 ? lesson.quiz[quizIndex] : null;
@@ -436,6 +438,10 @@ export function LessonPlayer() {
     setQuizAnswers({});
     setQuizSubmitted({});
   };
+  const rejectedHere =
+    rejectedCompletion?.moduleSlug === module.slug && rejectedCompletion.courseId === course.id
+      ? rejectedCompletion
+      : null;
   const previousCourse = module.courses[courseIndex - 1];
   const nextCourse = module.courses[courseIndex + 1];
   // Rebuilt from the YouTube id: never pass an admin-supplied string to <iframe src>.
@@ -453,11 +459,16 @@ export function LessonPlayer() {
       return;
     }
 
-    const nextCompletedIds = completeCourse(module.slug, course.id);
+    // The answers go to the server, which grades them again before the lesson
+    // counts (the app's own grading above is only for immediate feedback).
+    const nextCompletedIds = completeCourse(module.slug, course.id, {
+      lang,
+      answers: lesson.quiz.map((_, index) => quizAnswers[index] ?? ''),
+    });
     const nextCompleted = new Set(nextCompletedIds);
 
     if (nextCompleted.size >= module.courses.length) {
-      const certificate = await issueCertificate(user, module.slug, nextCompletedIds);
+      const certificate = await issueCertificate(user, module.slug);
       if (certificate) {
         setIssuedUid(certificate.uid);
       }
@@ -669,6 +680,33 @@ export function LessonPlayer() {
                     </Button>
                   </div>
                 </div>
+              </div>
+            )}
+
+            {rejectedHere && (
+              <div role="alert" className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-900">
+                <p className="font-semibold">
+                  {rejectedHere.status === 'mismatch' ? t('quizOutdatedTitle') : t('quizRejectedTitle')}
+                </p>
+                <p className="text-body mt-1">
+                  {rejectedHere.status === 'mismatch' ? t('quizOutdatedBody') : t('quizRejectedBody')}
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-3"
+                  onClick={() => {
+                    if (rejectedHere.status === 'mismatch') {
+                      window.location.reload();
+                      return;
+                    }
+                    clearRejectedCompletion();
+                    retakeQuiz();
+                    setActiveTab('quiz');
+                  }}
+                >
+                  {rejectedHere.status === 'mismatch' ? t('reloadPage') : t('quizRetry')}
+                </Button>
               </div>
             )}
 
