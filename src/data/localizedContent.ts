@@ -612,6 +612,16 @@ const eagerLessons: Record<string, LessonBundle> = {
   'intelligence-artificielle/c1': lesson1ByLanguage,
 };
 
+/** Every bundled lesson, as `${moduleSlug}/${courseId}` — for the quiz answer-key export. */
+export const authoredLessonKeys: string[] = [...Object.keys(eagerLessons), ...Object.keys(authoredLessonLoaders)];
+
+/** The trilingual bundle of one lesson (throws if the chunk cannot load). */
+export async function loadAuthoredLessonBundle(key: string): Promise<LessonBundle | null> {
+  if (eagerLessons[key]) return eagerLessons[key];
+  const loader = authoredLessonLoaders[key];
+  return loader ? loader() : null;
+}
+
 /** True when real authored content exists for this course (eager or lazy). */
 export function hasAuthoredLesson(moduleSlug: string, courseId: string): boolean {
   const key = `${moduleSlug}/${courseId}`;

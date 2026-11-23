@@ -1,0 +1,376 @@
+{
+  "creer-agents-ia/ag1": [
+    "B",
+    "A",
+    "C",
+    "B",
+    "D"
+  ],
+  "creer-agents-ia/ag2": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "C"
+  ],
+  "creer-agents-ia/ag3": [
+    "B",
+    "A",
+    "D",
+    "C",
+    "B"
+  ],
+  "creer-agents-ia/ag4": [
+    "C",
+    "A",
+    "B",
+    "D",
+    "B"
+  ],
+  "creer-agents-ia/ag5": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "A"
+  ],
+  "creer-agents-ia/ag6": [
+    "B",
+    "D",
+    "A",
+    "C",
+    "D"
+  ],
+  "creer-agents-ia/ag7": [
+    "B",
+    "C",
+    "D",
+    "A",
+    "B"
+  ],
+  "creer-agents-ia/ag8": [
+    "C",
+    "A",
+    "B",
+    "C",
+    "B",
+    "A",
+    "D",
+    "B",
+    "A",
+    "D"
+  ],
+  "data-analysis/d1": [
+    "A",
+    "C",
+    "B",
+    "D",
+    "A"
+  ],
+  "data-analysis/d2": [
+    "B",
+    "C",
+    "B",
+    "B",
+    "A"
+  ],
+  "data-analysis/d3": [
+    "B",
+    "C",
+    "B",
+    "A",
+    "D"
+  ],
+  "data-analysis/d4": [
+    "A",
+    "B",
+    "C",
+    "B",
+    "C"
+  ],
+  "data-analysis/d5": [
+    "B",
+    "C",
+    "D",
+    "B",
+    "B"
+  ],
+  "data-analysis/d6": [
+    "B",
+    "C",
+    "B",
+    "A",
+    "D"
+  ],
+  "gestion-projet/p1": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "C"
+  ],
+  "gestion-projet/p2": [
+    "B",
+    "C",
+    "A",
+    "C",
+    "A"
+  ],
+  "gestion-projet/p3": [
+    "B",
+    "A",
+    "C",
+    "B",
+    "A"
+  ],
+  "gestion-projet/p4": [
+    "B",
+    "A",
+    "C",
+    "B",
+    "A"
+  ],
+  "gestion-projet/p5": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "A"
+  ],
+  "ia-administration/ad1": [
+    "C",
+    "A",
+    "B",
+    "D",
+    "B"
+  ],
+  "ia-administration/ad2": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "B"
+  ],
+  "ia-administration/ad3": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "B"
+  ],
+  "ia-administration/ad4": [
+    "B",
+    "C",
+    "D",
+    "A",
+    "B"
+  ],
+  "ia-administration/ad5": [
+    "C",
+    "B",
+    "C",
+    "A",
+    "D"
+  ],
+  "ia-expliquee-simplement/is1": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "C"
+  ],
+  "ia-expliquee-simplement/is2": [
+    "C",
+    "A",
+    "D",
+    "A",
+    "B"
+  ],
+  "ia-expliquee-simplement/is3": [
+    "C",
+    "A",
+    "D",
+    "B",
+    "A"
+  ],
+  "ia-expliquee-simplement/is4": [
+    "B",
+    "D",
+    "A",
+    "C",
+    "B"
+  ],
+  "ia-expliquee-simplement/is5": [
+    "B",
+    "A",
+    "C",
+    "D",
+    "B"
+  ],
+  "ia-expliquee-simplement/is6": [
+    "C",
+    "B",
+    "A",
+    "D",
+    "C"
+  ],
+  "ia-expliquee-simplement/is7": [
+    "C",
+    "A",
+    "D",
+    "B",
+    "B",
+    "A",
+    "D",
+    "C"
+  ],
+  "intelligence-artificielle/c1": [
+    "B",
+    "D",
+    "C",
+    "A",
+    "C"
+  ],
+  "intelligence-artificielle/c2": [
+    "B",
+    "C",
+    "C",
+    "D",
+    "B"
+  ],
+  "intelligence-artificielle/c3": [
+    "B",
+    "C",
+    "D",
+    "A",
+    "C"
+  ],
+  "intelligence-artificielle/c4": [
+    "C",
+    "D",
+    "B",
+    "A",
+    "C"
+  ],
+  "intelligence-artificielle/c5": [
+    "C",
+    "D",
+    "B",
+    "C",
+    "C"
+  ],
+  "intelligence-artificielle/c6": [
+    "B",
+    "C",
+    "C",
+    "C",
+    "B"
+  ],
+  "intelligence-artificielle/c7": [
+    "C",
+    "D",
+    "B",
+    "C",
+    "B"
+  ],
+  "intelligence-artificielle/c8": [
+    "B",
+    "B",
+    "C",
+    "D",
+    "B",
+    "B",
+    "C",
+    "B",
+    "C"
+  ],
+  "introduction-claude-ai/cl1": [
+    "B",
+    "B",
+    "C"
+  ],
+  "introduction-claude-ai/cl2": [
+    "B",
+    "B",
+    "C"
+  ],
+  "introduction-claude-ai/cl3": [
+    "B",
+    "B",
+    "B"
+  ],
+  "introduction-claude-ai/cl4": [
+    "B",
+    "B",
+    "B"
+  ],
+  "introduction-claude-ai/cl5": [
+    "B",
+    "C",
+    "B"
+  ],
+  "introduction-claude-ai/cl6": [
+    "B",
+    "B",
+    "A",
+    "B",
+    "B",
+    "B",
+    "B",
+    "B",
+    "C",
+    "B"
+  ],
+  "outils-ia-gratuits/og1": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "B"
+  ],
+  "outils-ia-gratuits/og2": [
+    "B",
+    "C",
+    "A",
+    "C",
+    "A"
+  ],
+  "outils-ia-gratuits/og3": [
+    "B",
+    "A",
+    "C",
+    "D",
+    "A"
+  ],
+  "outils-ia-gratuits/og4": [
+    "B",
+    "C",
+    "D",
+    "A",
+    "C"
+  ],
+  "outils-ia-gratuits/og5": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "C"
+  ],
+  "outils-ia-gratuits/og6": [
+    "B",
+    "D",
+    "A",
+    "C",
+    "B"
+  ],
+  "outils-ia-gratuits/og7": [
+    "B",
+    "C",
+    "A",
+    "D",
+    "B",
+    "D",
+    "A",
+    "C"
+  ]
+}
