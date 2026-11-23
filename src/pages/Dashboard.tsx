@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentNav } from '../layouts/StudentNav';
 import { ModuleCard } from '../components/ModuleCard';
@@ -9,6 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useLearning } from '../hooks/useLearning';
 import { useLanguage } from '../hooks/useLanguage';
 import { localizeModules } from '../data/localizedContent';
+import { fetchLearnerHome, levelProgressPercent, LearnerHome } from '../services/gamificationRepository';
 import { BookOpen, CheckCircle2, GraduationCap, Flame, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export function Dashboard() {
@@ -16,6 +17,21 @@ export function Dashboard() {
   const { user } = useAuth();
   const { lang, t } = useLanguage();
   const { modules, contentLoading, getProgress, getCompletedCourseIds, getUserCertificates } = useLearning();
+  // XP, level and streak computed by the database (karatou_get_learner_home).
+  // Null in demo mode or before the gamification migrations are applied: the
+  // dashboard then keeps its previous figures.
+  const [home, setHome] = useState<LearnerHome | null>(null);
+  const userId = user?.id;
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    fetchLearnerHome().then((result) => {
+      if (!cancelled) setHome(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
   const localizedModules = useMemo(
     () => localizeModules(modules.filter((module) => module.status !== 'draft'), lang),
     [modules, lang]
@@ -98,6 +114,17 @@ export function Dashboard() {
                 </div>
                 <span className="text-body font-semibold text-white">{activeModule.progress}%</span>
               </div>
+              {home && (
+                <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-2" data-testid="learner-level">
+                  <span className="text-body font-semibold text-white">
+                    {t('level')} {home.level}
+                  </span>
+                  <div className="w-24">
+                    <ProgressBar ariaLabel={t('levelProgress')} value={levelProgressPercent(home)} variant="gold" height="md" />
+                  </div>
+                  <span className="text-meta text-blue-100 tabular-nums">{home.totalXp} XP</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -122,15 +149,25 @@ export function Dashboard() {
             label={t('activeCertificates')}
             iconBg="bg-gold-100"
           />
-          {/* Real figure: the active course's progress (the "5-day streak"
-              shown here was a constant, displayed to every learner). */}
-          <KpiCard
-            icon={<Flame size={20} className="text-orange-500" />}
-            value={activeModule.progress}
-            suffix="%"
-            label={t('moduleProgress')}
-            iconBg="bg-orange-100"
-          />
+          {/* Real streak from the database (shared with the mobile app). Before
+              the gamification migrations, or in demo mode, the active
+              course's progress is shown instead (never an invented figure). */}
+          {home ? (
+            <KpiCard
+              icon={<Flame size={20} className="text-orange-500" />}
+              value={home.streak.current}
+              label={t('streakDays')}
+              iconBg="bg-orange-100"
+            />
+          ) : (
+            <KpiCard
+              icon={<Flame size={20} className="text-orange-500" />}
+              value={activeModule.progress}
+              suffix="%"
+              label={t('moduleProgress')}
+              iconBg="bg-orange-100"
+            />
+          )}
         </div>
 
         {/* Continue Learning */}
