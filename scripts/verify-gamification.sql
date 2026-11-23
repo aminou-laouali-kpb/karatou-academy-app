@@ -25,7 +25,8 @@
 --      (réservée à ses membres) ;
 --  10. révision Leitner idempotente ;
 --  11. clôture de semaine de ligue (promotions, relégations, badges) ;
---  12. isolation RLS et privilèges (anon, autre apprenant, écritures directes).
+--  12. isolation RLS et privilèges (anon, autre apprenant, écritures directes) ;
+--  13. suppression d'un compte (B5) : cascade sur toutes les tables.
 
 begin;
 
@@ -447,6 +448,19 @@ begin
     raise exception 'ÉCHEC : interactive_steps > 400 ko accepté';
   exception when check_violation then null;
   end;
+
+  -- ================= 13. suppression de compte (B5) : tout part en cascade ====
+  perform pg_temp.as_owner();
+  delete from auth.users where id = a;
+  perform pg_temp.ok(not exists (select 1 from public.karatou_learner_stats where user_id = a)
+    and not exists (select 1 from public.karatou_xp_events where user_id = a)
+    and not exists (select 1 from public.karatou_lesson_attempts where user_id = a)
+    and not exists (select 1 from public.karatou_daily_quests where user_id = a)
+    and not exists (select 1 from public.karatou_user_badges where user_id = a)
+    and not exists (select 1 from public.karatou_league_members where user_id = a)
+    and not exists (select 1 from public.karatou_review_items where user_id = a)
+    and not exists (select 1 from public.karatou_certificates where user_id = a),
+    'données de gamification restantes après suppression du compte');
 
   perform pg_temp.as_owner();
   raise notice 'gamification B2/B3/B4 : PASS';

@@ -16,3 +16,8 @@ verify_jwt = true
 
 [functions.admin-generate-lesson]
 verify_jwt = true
+
+[functions.delete-account]
+# La passerelle exige un JWT ; la fonction le revérifie (auth.getUser) et ne
+# supprime que l'utilisateur de ce jeton.
+verify_jwt = true
