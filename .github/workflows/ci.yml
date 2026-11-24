@@ -33,6 +33,33 @@ jobs:
       # Bundle and service-worker precache budgets (2G audience).
       - run: node scripts/validate-release.mjs
 
+  sql:
+    name: migrations · tests SQL (postgres jetable)
+    runs-on: ubuntu-latest
+    # Applique toutes les migrations sur un Postgres de service (aucun accès à
+    # Supabase) puis lance scripts/verify-gamification.sql,
+    # verify-certificate-fixes.sql et verify-cross-org-rls.sql.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/run-sql-tests.sh
+
   e2e:
     name: e2e (playwright)
     runs-on: ubuntu-latest
