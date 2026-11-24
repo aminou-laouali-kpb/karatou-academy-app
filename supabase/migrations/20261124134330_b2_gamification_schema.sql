@@ -3,8 +3,8 @@
 -- Tables partagées par le web et l'app mobile : XP, niveau, série, quêtes du
 -- jour, badges, ligues hebdomadaires, paquet de révision (Leitner), tentatives
 -- de leçon. Le client ne les écrit JAMAIS directement : tout passe par les
--- RPC SECURITY DEFINER de 20261124090200 et par les triggers de
--- 20261124090100, qui appellent un point d'entrée unique
+-- RPC SECURITY DEFINER de 20261124134627 et par les triggers de
+-- 20261124134441, qui appellent un point d'entrée unique
 -- (app_private.karatou_apply_xp).
 --
 -- Ordre d'application : 090000 (ce fichier) → 090100 (moteur) → 090200 (RPC)

@@ -1,7 +1,7 @@
 -- Non-régression des correctifs de certificats demandés par la fiche app
 -- mobile (§8.5) :
 --   B3 — karatou_issue_certificate ne compte que les leçons publiées d'un
---        module publié (corrigé par 20261123160000_server_quiz_grading.sql) ;
+--        module publié (corrigé par 20261124134222_server_quiz_grading.sql) ;
 --   B4 — karatou_verify_certificate ne renvoie plus user_id aux anonymes
 --        (corrigé par 20261122170000_b2b_member_stats_and_scholarship_hardening.sql).
 --
