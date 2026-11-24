@@ -1,6 +1,6 @@
 -- B2 : rattrapage de l'XP déjà « gagnée » avant la gamification.
 --
--- Les triggers de 20261124090100 ne créditent que les NOUVELLES leçons et les
+-- Les triggers de 20261124134441 ne créditent que les NOUVELLES leçons et les
 -- NOUVEAUX certificats. Sans ce rattrapage, un apprenant du web qui a déjà
 -- terminé 20 leçons repartirait du niveau 1. On crédite donc l'historique
 -- avec les mêmes références que les triggers, ce qui le rend idempotent

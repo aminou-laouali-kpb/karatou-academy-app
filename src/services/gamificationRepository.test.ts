@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { levelProgressPercent, parseLearnerHome } from './gamificationRepository';
 
-// Shape returned by public.karatou_get_learner_home() (migration 20261124090200).
+// Shape returned by public.karatou_get_learner_home() (migration 20261124134627).
 const rpcPayload = {
   stats: {
     total_xp: 180,

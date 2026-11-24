@@ -187,7 +187,7 @@ revoke all on function app_private.karatou_badges_json(uuid, text[]) from public
 -- }
 --
 -- La 1re complétion passe par la correction serveur du quiz
--- (public.karatou_submit_quiz, migration 20261123160000) : c'est elle qui
+-- (public.karatou_submit_quiz, migration 20261124134222) : c'est elle qui
 -- écrit karatou_learner_progress, ce qui déclenche les +20 XP. Une leçon déjà
 -- terminée (web ou mobile) est un « rejeu ».
 --
