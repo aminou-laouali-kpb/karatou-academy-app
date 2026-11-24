@@ -56,7 +56,7 @@ done
 echo "Migrations appliquées."
 
 # Les migrations doivent pouvoir être rejouées (supabase db push après un échec partiel).
-for file in "$root"/supabase/migrations/2026112409*.sql; do
+for file in "$root"/supabase/migrations/*_b2_*.sql; do
   psql -d "$db" -v ON_ERROR_STOP=1 -q -f "$file" > /dev/null 2>&1 \
     || { echo "Migration non rejouable : $(basename "$file")" >&2; exit 1; }
 done
